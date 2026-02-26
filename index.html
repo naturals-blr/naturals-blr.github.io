@@ -279,8 +279,9 @@ nav.scrolled{
 .store-tile{
   background:var(--dark);padding:40px 36px;
   position:relative;overflow:hidden;
-  transition:background 0.3s;display:block;
-  color:inherit;
+  transition:background 0.3s;display:flex;
+  flex-direction:column;justify-content:space-between;
+  color:inherit;min-height:300px;
 }
 .store-tile::before{
   content:'';
@@ -291,6 +292,8 @@ nav.scrolled{
 }
 .store-tile:hover{background:#161f19;}
 .store-tile:hover::before{transform:scaleX(1);}
+.store-tile-top{flex:1;}
+.store-tile-bottom{margin-top:24px;}
 .store-num{
   font-family:'Cormorant Garamond',serif;
   font-size:64px;color:rgba(255,255,255,0.04);
@@ -304,17 +307,23 @@ nav.scrolled{
 }
 .store-area-sub{
   font-size:10px;letter-spacing:2.5px;text-transform:uppercase;
-  color:var(--gold);font-weight:500;margin-bottom:20px;
+  color:var(--gold);font-weight:500;margin-bottom:16px;
 }
 .store-addr{
   font-size:12px;color:rgba(255,255,255,0.4);
-  line-height:1.7;font-weight:300;margin-bottom:20px;
+  line-height:1.7;font-weight:300;margin-bottom:16px;
 }
-.store-contact{display:flex;flex-direction:column;gap:6px;margin-bottom:24px;}
+.store-contact{
+  display:flex;flex-direction:column;gap:8px;
+  padding-top:16px;
+  border-top:1px solid rgba(255,255,255,0.06);
+  margin-bottom:16px;
+}
 .store-contact a{
   font-size:12px;color:rgba(255,255,255,0.5);
   display:flex;align-items:center;gap:8px;
   transition:color 0.3s;font-weight:300;
+  white-space:nowrap;
 }
 .store-contact a:hover{color:var(--gold);}
 .store-link{
@@ -670,76 +679,98 @@ footer{background:#080f0b;padding:80px 64px 32px;}
 <section class="stores-section" id="stores">
   <div class="label reveal">Our Locations</div>
   <h2 class="reveal">Five stores.<br><em>One city.</em><br>Your neighbourhood.</h2>
-  <div class="stores-grid">
+    <div class="stores-grid">
 
     <a href="stores/jpnagar.html" class="store-tile reveal">
-      <div class="store-num">01</div>
-      <div class="store-area-name">JP Nagar 5th Phase</div>
-      <div class="store-area-sub">South Bangalore · 560078</div>
-      <div class="store-addr">No. 305, Anand Onyx, 1st Floor<br>15th Cross, 100 Ft Ring Road</div>
-      <div class="store-contact">
+      <div class="store-tile-top">
+        <div class="store-num">01</div>
+        <div class="store-area-name">JP Nagar 5th Phase</div>
+        <div class="store-area-sub">South Bangalore · 560078</div>
+        <div class="store-addr">No. 305, Anand Onyx, 1st Floor<br>15th Cross, 100 Ft Ring Road</div>
+      </div>
+      <div class="store-tile-bottom">
+        <div class="store-contact">
         <a href="tel:+918041304444">📞 +91 80 4130 4444</a>
         <a href="https://wa.me/918792642299">💬 +91 87926 42299</a>
+        </div>
+        <div class="store-link">View Store & Book →</div>
       </div>
-      <div class="store-link">View Store & Book →</div>
     </a>
 
     <a href="stores/elements-mall.html" class="store-tile reveal">
-      <div class="store-num">02</div>
-      <div class="store-area-name">Elements Mall</div>
-      <div class="store-area-sub">Nagavara · 560077</div>
-      <div class="store-addr">#26, 3rd Floor, Elements Mall<br>100 Ft Thanisandra Main Road</div>
-      <div class="store-contact">
+      <div class="store-tile-top">
+        <div class="store-num">02</div>
+        <div class="store-area-name">Elements Mall</div>
+        <div class="store-area-sub">Nagavara · 560077</div>
+        <div class="store-addr">#26, 3rd Floor, Elements Mall<br>100 Ft Thanisandra Main Road</div>
+      </div>
+      <div class="store-tile-bottom">
+        <div class="store-contact">
         <a href="tel:+918046514422">📞 +91 80 4651 4422</a>
         <a href="https://wa.me/919901000017">💬 +91 99010 00017</a>
+        </div>
+        <div class="store-link">View Store & Book →</div>
       </div>
-      <div class="store-link">View Store & Book →</div>
     </a>
 
     <a href="stores/devasandra.html" class="store-tile reveal">
-      <div class="store-num">03</div>
-      <div class="store-area-name">Devasandra</div>
-      <div class="store-area-sub">KR Puram · 560036</div>
-      <div class="store-addr">#1,2,3 Maruthi Tower, 1st Floor<br>Devasandra Main Road, KR Puram</div>
-      <div class="store-contact">
-        <a href="https://wa.me/917259490009">💬 +91 72594 90009</a>
+      <div class="store-tile-top">
+        <div class="store-num">03</div>
+        <div class="store-area-name">Devasandra</div>
+        <div class="store-area-sub">KR Puram · 560036</div>
+        <div class="store-addr">#1,2,3 Maruthi Tower, 1st Floor<br>Devasandra Main Road, KR Puram</div>
       </div>
-      <div class="store-link">View Store & Book →</div>
+      <div class="store-tile-bottom">
+        <div class="store-contact">
+        <a href="https://wa.me/917259490009">💬 +91 72594 90009</a>
+        </div>
+        <div class="store-link">View Store & Book →</div>
+      </div>
     </a>
 
     <a href="stores/frazer-town.html" class="store-tile reveal">
-      <div class="store-num">04</div>
-      <div class="store-area-name">Frazer Town</div>
-      <div class="store-area-sub">Pulikeshi Nagar · 560005</div>
-      <div class="store-addr">No.94, 1st Floor, Mosque Road<br>Above Poorvika Mobile Store</div>
-      <div class="store-contact">
+      <div class="store-tile-top">
+        <div class="store-num">04</div>
+        <div class="store-area-name">Frazer Town</div>
+        <div class="store-area-sub">Pulikeshi Nagar · 560005</div>
+        <div class="store-addr">No.94, 1st Floor, Mosque Road<br>Above Poorvika Mobile Store</div>
+      </div>
+      <div class="store-tile-bottom">
+        <div class="store-contact">
         <a href="tel:+918040948040">📞 +91 80 4094 8040</a>
         <a href="https://wa.me/919945488040">💬 +91 99454 88040</a>
+        </div>
+        <div class="store-link">View Store & Book →</div>
       </div>
-      <div class="store-link">View Store & Book →</div>
     </a>
 
     <a href="stores/hennur.html" class="store-tile reveal">
-      <div class="store-num">05</div>
-      <div class="store-area-name">Hennur</div>
-      <div class="store-area-sub">Hennur Cross · 560043</div>
-      <div class="store-addr">#40/A, 40/C, 1st Floor<br>Above SBI Bank, Hennur Main Road</div>
-      <div class="store-contact">
-        <a href="https://wa.me/919606900069">💬 +91 96069 00069</a>
+      <div class="store-tile-top">
+        <div class="store-num">05</div>
+        <div class="store-area-name">Hennur</div>
+        <div class="store-area-sub">Hennur Cross · 560043</div>
+        <div class="store-addr">#40/A, 40/C, 1st Floor<br>Above SBI Bank, Hennur Main Road</div>
       </div>
-      <div class="store-link">View Store & Book →</div>
+      <div class="store-tile-bottom">
+        <div class="store-contact">
+        <a href="https://wa.me/919606900069">💬 +91 96069 00069</a>
+        </div>
+        <div class="store-link">View Store & Book →</div>
+      </div>
     </a>
 
-    <!-- CTA tile -->
-    <div class="store-tile reveal" style="background:#111f16;display:flex;flex-direction:column;justify-content:center;align-items:flex-start;">
-      <div style="font-family:'Cormorant Garamond',serif;font-size:32px;color:#fff;font-weight:300;margin-bottom:16px;line-height:1.2;">
-        Book at your<br><em style="color:var(--gold);">nearest store</em>
+    <div class="store-tile reveal" style="background:#111f16;justify-content:center;align-items:flex-start;">
+      <div>
+        <div style="font-family:'Cormorant Garamond',serif;font-size:32px;color:#fff;font-weight:300;margin-bottom:16px;line-height:1.2;">
+          Book at your<br><em style="color:var(--gold);">nearest store</em>
+        </div>
+        <p style="font-size:12px;color:rgba(255,255,255,0.4);font-weight:300;line-height:1.7;margin-bottom:28px;">Available 24/7 online — no phone call needed. Pick your service, choose your time, done.</p>
+        <a href="#book" class="btn-fill" style="font-size:10px;">Book Now →</a>
       </div>
-      <p style="font-size:12px;color:rgba(255,255,255,0.4);font-weight:300;line-height:1.7;margin-bottom:28px;">Available 24/7 online — no phone call needed. Pick your service, choose your time, done.</p>
-      <a href="#book" class="btn-fill" style="font-size:10px;">Book Now →</a>
     </div>
 
   </div>
+
 </section>
 
 <!-- BOOKING CTA -->
@@ -874,7 +905,7 @@ footer{background:#080f0b;padding:80px 64px 32px;}
     <div>
       <div class="footer-col-title">Connect</div>
       <ul class="footer-links">
-        <li><a href="mailto:sophiaaxon@gmail.com">Email Us</a></li>
+        <li><a href="/cdn-cgi/l/email-protection#8ffce0ffe7e6eeeef7e0e1cfe8e2eee6e3a1ece0e2">Email Us</a></li>
         <li><a href="https://wa.me/919741115349">WhatsApp</a></li>
         <li><a href="https://naturals.in" target="_blank">Naturals India</a></li>
         <li><a href="#book">Book Appointment</a></li>
@@ -887,7 +918,7 @@ footer{background:#080f0b;padding:80px 64px 32px;}
   </div>
 </footer>
 
-<script>
+<script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script>
 // Navbar scroll
 const nav = document.getElementById('navbar');
 window.addEventListener('scroll', () => {
@@ -914,11 +945,4 @@ function toggleMenu() {
   links.style.position = 'fixed';
   links.style.top = '64px';
   links.style.left = '0';
-  links.style.right = '0';
-  links.style.background = 'rgba(13,13,13,0.98)';
-  links.style.padding = '32px';
-  links.style.gap = '24px';
-}
-</script>
-</body>
-</html>
+  links.style.
