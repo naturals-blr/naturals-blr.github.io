@@ -1,0 +1,642 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="description" content="Naturals Salon & Spa Hennur — Premium salon in Hennur Cross · 560043. Book haircare, skincare, bodycare and bridal services.">
+<title>Naturals Hennur | Salon & Spa Bangalore</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400;1,600&family=Jost:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+:root{
+  --black:#0D0D0D;--dark:#111714;--green-deep:#1B4332;
+  --green-rich:#2D6A4F;--green-soft:#52B788;--green-pale:#D8F3DC;
+  --cream:#F8F4EE;--gold:#C9A84C;--gold-pale:#EDD9A3;
+  --white:#FFFFFF;--text:#1A1A1A;--text-mid:#555555;--text-light:#999999;
+}
+*{margin:0;padding:0;box-sizing:border-box;}
+html{scroll-behavior:smooth;}
+body{font-family:'Jost',sans-serif;background:var(--cream);color:var(--text);overflow-x:hidden;}
+img{display:block;width:100%;object-fit:cover;}
+a{text-decoration:none;color:inherit;}
+
+/* FLOAT BOOK */
+.float-book{
+  position:fixed;bottom:32px;right:32px;z-index:999;
+  background:var(--gold);color:var(--dark);
+  padding:14px 28px;border-radius:40px;
+  font-size:12px;font-weight:600;letter-spacing:2px;text-transform:uppercase;
+  box-shadow:0 8px 30px rgba(201,168,76,0.4);
+  transition:all 0.3s;display:flex;align-items:center;gap:8px;
+}
+.float-book:hover{background:var(--gold-pale);transform:translateY(-3px);}
+
+/* NAV */
+nav{
+  position:fixed;top:0;left:0;right:0;z-index:100;
+  padding:20px 64px;
+  background:rgba(13,13,13,0.95);
+  backdrop-filter:blur(20px);
+  display:flex;justify-content:space-between;align-items:center;
+  border-bottom:1px solid rgba(255,255,255,0.05);
+}
+.nav-logo{
+  font-family:'Cormorant Garamond',serif;
+  font-size:18px;font-weight:500;color:#fff;letter-spacing:2px;text-transform:uppercase;
+}
+.nav-logo span{color:var(--gold);font-style:italic;font-weight:300;}
+.nav-back{
+  color:rgba(255,255,255,0.6);font-size:11px;
+  letter-spacing:2px;text-transform:uppercase;
+  display:flex;align-items:center;gap:8px;
+  transition:color 0.3s;
+}
+.nav-back:hover{color:var(--gold);}
+.nav-book-btn{
+  background:var(--gold);color:var(--dark);
+  padding:10px 24px;font-size:11px;
+  letter-spacing:2px;text-transform:uppercase;font-weight:600;
+  transition:all 0.3s;
+}
+.nav-book-btn:hover{background:var(--gold-pale);}
+
+/* HERO */
+.hero{
+  height:100vh;min-height:650px;
+  position:relative;overflow:hidden;
+  display:flex;align-items:flex-end;
+}
+.hero-bg{
+  position:absolute;inset:0;
+  background:url('https://images.unsplash.com/photo-1621605815971-fbc98d665033?w=1800&q=85') center/cover no-repeat;
+  transition:transform 8s ease;
+}
+.hero:hover .hero-bg{transform:scale(1.03);}
+.hero-overlay{
+  position:absolute;inset:0;
+  background:linear-gradient(to top,rgba(0,0,0,0.9) 0%,rgba(0,0,0,0.4) 50%,rgba(0,0,0,0.2) 100%);
+}
+.hero-content{
+  position:relative;z-index:2;
+  padding:0 80px 72px;width:100%;
+}
+.hero-badge{
+  display:inline-flex;align-items:center;gap:12px;
+  font-size:9px;letter-spacing:5px;text-transform:uppercase;
+  color:var(--gold);font-weight:600;margin-bottom:20px;
+}
+.hero-badge::before{content:'';width:32px;height:1px;background:var(--gold);}
+.hero h1{
+  font-family:'Cormorant Garamond',serif;
+  font-size:clamp(52px,8vw,96px);
+  font-weight:300;color:#fff;
+  line-height:0.95;letter-spacing:-1px;
+  margin-bottom:20px;
+}
+.hero h1 em{font-style:italic;color:var(--gold);}
+.hero-sub{
+  font-size:13px;color:rgba(255,255,255,0.55);
+  letter-spacing:1px;font-weight:300;
+  margin-bottom:36px;
+}
+.hero-actions{display:flex;gap:12px;flex-wrap:wrap;}
+.btn-gold{
+  background:var(--gold);color:var(--dark);
+  padding:15px 36px;font-size:11px;
+  letter-spacing:2.5px;text-transform:uppercase;font-weight:600;
+  transition:all 0.3s;display:inline-block;
+}
+.btn-gold:hover{background:var(--gold-pale);transform:translateY(-2px);}
+.btn-ghost{
+  border:1px solid rgba(255,255,255,0.3);color:#fff;
+  padding:15px 36px;font-size:11px;
+  letter-spacing:2.5px;text-transform:uppercase;
+  transition:all 0.3s;display:inline-block;
+}
+.btn-ghost:hover{border-color:var(--gold);color:var(--gold);}
+
+/* QUICK INFO BAR */
+.info-bar{
+  background:var(--green-deep);
+  display:grid;grid-template-columns:repeat(4,1fr);
+}
+.info-bar-item{
+  padding:24px 28px;
+  display:flex;align-items:center;gap:12px;
+  border-right:1px solid rgba(255,255,255,0.08);
+}
+.info-bar-item:last-child{border-right:none;}
+.info-bar-icon{font-size:20px;flex-shrink:0;}
+.info-bar-label{font-size:9px;letter-spacing:2px;text-transform:uppercase;color:rgba(255,255,255,0.4);font-weight:600;margin-bottom:3px;}
+.info-bar-value{font-size:13px;color:#fff;font-weight:400;}
+.info-bar-value a{color:#fff;transition:color 0.3s;}
+.info-bar-value a:hover{color:var(--gold);}
+
+/* CONTENT GRID */
+.content-wrap{
+  display:grid;grid-template-columns:1fr 380px;
+  gap:0;max-width:100%;
+}
+.content-main{padding:72px 64px;}
+.content-sidebar{
+  background:#fff;
+  padding:0;position:sticky;top:65px;
+  height:calc(100vh - 65px);overflow-y:auto;
+}
+
+/* SECTION LABELS */
+.sec-label{
+  font-size:9px;letter-spacing:5px;text-transform:uppercase;
+  color:var(--gold);font-weight:600;margin-bottom:16px;
+  display:flex;align-items:center;gap:10px;
+}
+.sec-label::before{content:'';width:20px;height:1px;background:var(--gold);}
+.sec-title{
+  font-family:'Cormorant Garamond',serif;
+  font-size:clamp(32px,3.5vw,48px);font-weight:300;
+  color:var(--text);line-height:1.1;margin-bottom:20px;
+}
+.sec-title em{font-style:italic;color:var(--green-rich);}
+
+/* ABOUT SPLIT */
+.about-grid{
+  display:grid;grid-template-columns:1fr 1fr;
+  gap:48px;align-items:center;margin-bottom:72px;
+}
+.about-img-wrap{overflow:hidden;}
+.about-img-wrap img{height:420px;object-fit:cover;transition:transform 0.7s ease;}
+.about-img-wrap:hover img{transform:scale(1.04);}
+.about-body p{
+  font-size:14px;color:var(--text-mid);
+  line-height:1.9;font-weight:300;margin-bottom:14px;
+}
+
+/* SERVICES LIST */
+.services-divider{
+  background:var(--dark);padding:56px 64px;margin:0 -64px;
+}
+.services-divider .sec-label{color:var(--gold);}
+.services-divider .sec-title{color:#fff;}
+.services-divider .sec-title em{color:var(--green-soft);}
+.services-6grid{
+  display:grid;grid-template-columns:repeat(3,1fr);
+  gap:2px;margin-top:40px;
+}
+.service-item{
+  background:rgba(255,255,255,0.04);
+  padding:28px 24px;
+  border-bottom:2px solid transparent;
+  transition:all 0.3s;
+}
+.service-item:hover{
+  background:rgba(255,255,255,0.08);
+  border-bottom-color:var(--gold);
+}
+.svc-num{
+  font-family:'Cormorant Garamond',serif;
+  font-size:32px;color:rgba(255,255,255,0.06);
+  font-weight:300;line-height:1;margin-bottom:12px;
+}
+.svc-name{
+  font-family:'Cormorant Garamond',serif;
+  font-size:22px;color:#fff;font-weight:400;margin-bottom:8px;
+}
+.svc-items{
+  font-size:11px;color:rgba(255,255,255,0.4);
+  line-height:1.8;font-weight:300;
+}
+
+/* MAP */
+.map-section{margin-top:56px;margin-bottom:56px;}
+.map-wrap{overflow:hidden;position:relative;}
+.map-wrap iframe{display:block;border:none;width:100%;height:320px;filter:grayscale(15%);}
+
+/* CONTACT ROWS */
+.contact-row{
+  display:flex;align-items:center;gap:14px;
+  padding:14px 0;
+  border-bottom:1px solid rgba(0,0,0,0.06);
+  font-size:14px;color:var(--text-mid);
+  transition:color 0.3s;font-weight:300;
+}
+.contact-row:hover{color:var(--green-deep);}
+.contact-icon{font-size:18px;flex-shrink:0;}
+
+/* SIDEBAR */
+.sidebar-inner{padding:36px 28px;}
+.sidebar-store-name{
+  font-family:'Cormorant Garamond',serif;
+  font-size:28px;color:var(--text);font-weight:400;
+  line-height:1.1;margin-bottom:4px;
+}
+.sidebar-store-area{
+  font-size:10px;letter-spacing:2.5px;text-transform:uppercase;
+  color:var(--gold);font-weight:600;margin-bottom:24px;
+}
+.sidebar-divider{height:1px;background:rgba(0,0,0,0.07);margin:20px 0;}
+.sidebar-book-title{
+  font-family:'Cormorant Garamond',serif;
+  font-size:22px;color:var(--text);font-weight:400;margin-bottom:16px;
+}
+.s-btn{
+  display:block;text-align:center;
+  padding:14px 20px;font-size:11px;
+  letter-spacing:2px;text-transform:uppercase;font-weight:600;
+  margin-bottom:10px;transition:all 0.3s;
+}
+.s-btn-primary{background:var(--green-deep);color:#fff;}
+.s-btn-primary:hover{background:var(--green-rich);}
+.s-btn-whatsapp{background:#25D366;color:#fff;}
+.s-btn-whatsapp:hover{background:#1da851;}
+.s-btn-review{background:#FBBC04;color:var(--dark);}
+.s-btn-review:hover{background:#f0b400;}
+.s-btn-ghost{border:1px solid rgba(0,0,0,0.15);color:var(--text-mid);}
+.s-btn-ghost:hover{border-color:var(--green-deep);color:var(--green-deep);}
+.sidebar-hours{margin-top:4px;}
+.hours-row{
+  display:flex;justify-content:space-between;
+  padding:8px 0;border-bottom:1px solid rgba(0,0,0,0.05);
+  font-size:12px;color:var(--text-mid);font-weight:300;
+}
+.hours-day{color:var(--text);font-weight:500;}
+.sidebar-social{display:flex;gap:8px;margin-top:4px;}
+.soc-btn{
+  flex:1;padding:10px 8px;text-align:center;
+  font-size:10px;letter-spacing:1.5px;text-transform:uppercase;
+  font-weight:600;transition:all 0.3s;border:1px solid transparent;
+}
+.soc-insta{background:#f5e8f5;color:#8a2be2;}
+.soc-insta:hover{background:#ead0f0;}
+.soc-fb{background:#e8eef5;color:#1877F2;}
+.soc-fb:hover{background:#d0dff0;}
+
+/* BOOKING EMBED */
+.booking-section{
+  background:var(--cream);padding:72px 64px;
+  margin:0 -64px;
+}
+.booking-section .sec-label{color:var(--green-rich);}
+.booking-frame{
+  background:#fff;
+  box-shadow:0 4px 40px rgba(0,0,0,0.08);
+  overflow:hidden;margin-top:36px;
+}
+.booking-frame iframe{
+  display:block;border:none;width:100%;height:560px;
+}
+
+/* STORE NAV */
+.store-nav{
+  background:var(--dark);padding:36px 64px;
+  display:flex;justify-content:space-between;align-items:center;
+}
+.store-nav-link{
+  color:rgba(255,255,255,0.5);font-size:11px;
+  letter-spacing:2px;text-transform:uppercase;
+  display:flex;align-items:center;gap:10px;
+  transition:color 0.3s;
+}
+.store-nav-link:hover{color:var(--gold);}
+.store-nav-center{
+  font-family:'Cormorant Garamond',serif;
+  font-size:15px;color:rgba(255,255,255,0.25);
+}
+
+/* FOOTER */
+footer{
+  background:#080f0b;
+  padding:32px 64px;
+  display:flex;justify-content:space-between;align-items:center;
+  flex-wrap:wrap;gap:12px;
+}
+.footer-logo{
+  font-family:'Cormorant Garamond',serif;
+  font-size:18px;color:#fff;font-weight:400;
+}
+.footer-logo span{color:var(--gold);font-style:italic;}
+.footer-links-sm{display:flex;gap:24px;}
+.footer-links-sm a{
+  font-size:11px;color:rgba(255,255,255,0.3);
+  letter-spacing:1px;text-transform:uppercase;
+  transition:color 0.3s;
+}
+.footer-links-sm a:hover{color:rgba(255,255,255,0.7);}
+.footer-copy{font-size:11px;color:rgba(255,255,255,0.2);}
+
+
+/* ── SERVICES FROM GOOGLE SHEETS ── */
+#services-section{background:var(--dark);padding:72px 64px;margin:0;}
+#services-section .sec-label{color:var(--gold);}
+#services-section .sec-title{color:#fff;}
+#services-section .sec-title em{color:var(--green-soft);}
+#services-section p.sec-desc{font-size:14px;color:rgba(255,255,255,0.45);font-weight:300;margin-bottom:36px;line-height:1.7;}
+
+/* FILTER BAR */
+#services-filter{display:flex;flex-wrap:wrap;gap:8px;margin-bottom:48px;}
+.filter-btn{
+  background:rgba(255,255,255,0.05);
+  border:1px solid rgba(255,255,255,0.1);
+  color:rgba(255,255,255,0.5);
+  padding:10px 24px;font-size:11px;
+  letter-spacing:2px;text-transform:uppercase;
+  cursor:pointer;transition:all 0.3s;
+  font-family:'Jost',sans-serif;font-weight:500;
+}
+.filter-btn:hover{border-color:var(--gold);color:var(--gold);}
+.filter-btn.active{background:var(--gold);border-color:var(--gold);color:var(--dark);}
+
+/* LOADING */
+#services-loading{
+  color:rgba(255,255,255,0.3);
+  font-size:13px;letter-spacing:2px;
+  text-align:center;padding:48px 0;
+  font-style:italic;
+}
+
+/* CATEGORY */
+.svc-category{margin-bottom:56px;}
+.svc-cat-header{margin-bottom:24px;padding-bottom:16px;border-bottom:1px solid rgba(255,255,255,0.06);}
+.svc-cat-label{font-size:9px;letter-spacing:4px;text-transform:uppercase;color:rgba(255,255,255,0.25);font-weight:600;margin-bottom:6px;}
+.svc-cat-title{
+  font-family:'Cormorant Garamond',serif;
+  font-size:32px;color:#fff;font-weight:300;
+}
+
+/* SERVICE CARDS GRID */
+.svc-cards{
+  display:grid;
+  grid-template-columns:repeat(3,1fr);
+  gap:2px;
+}
+.svc-card{display:block;}
+.svc-card-inner{
+  background:rgba(255,255,255,0.03);
+  padding:28px 24px;height:100%;
+  border-bottom:2px solid transparent;
+  transition:all 0.3s;
+  display:flex;flex-direction:column;justify-content:space-between;
+  min-height:180px;
+}
+.svc-card-inner:hover{
+  background:rgba(255,255,255,0.07);
+  border-bottom-color:var(--gold);
+}
+.svc-card-name{
+  font-family:'Cormorant Garamond',serif;
+  font-size:20px;color:#fff;font-weight:400;
+  margin-bottom:8px;line-height:1.2;
+}
+.svc-card-desc{
+  font-size:12px;color:rgba(255,255,255,0.4);
+  line-height:1.7;font-weight:300;
+  margin-bottom:16px;flex:1;
+}
+.svc-card-bottom{
+  display:flex;justify-content:space-between;
+  align-items:flex-end;flex-wrap:wrap;gap:8px;
+}
+.svc-card-meta{display:flex;flex-wrap:wrap;gap:6px;}
+.meta-tag{
+  font-size:10px;color:rgba(255,255,255,0.35);
+  background:rgba(255,255,255,0.05);
+  padding:4px 10px;letter-spacing:0.5px;
+}
+.svc-card-price{text-align:right;}
+.price-regular{
+  font-family:'Cormorant Garamond',serif;
+  font-size:22px;color:var(--gold);font-weight:400;
+  display:block;line-height:1;
+}
+.price-member{
+  font-size:11px;color:var(--green-soft);
+  font-weight:500;display:block;margin-top:3px;
+  letter-spacing:0.5px;
+}
+
+@media(max-width:900px){
+  #services-section{padding:48px 24px;}
+  .svc-cards{grid-template-columns:1fr 1fr;}
+}
+@media(max-width:600px){
+  .svc-cards{grid-template-columns:1fr;}
+}
+
+/* REVEAL */
+.reveal{opacity:0;transform:translateY(24px);transition:opacity 0.7s ease,transform 0.7s ease;}
+.reveal.visible{opacity:1;transform:translateY(0);}
+
+/* MOBILE */
+@media(max-width:900px){
+  nav{padding:14px 20px;}
+  .nav-book-btn{display:none;}
+  .hero-content{padding:0 24px 48px;}
+  .info-bar{grid-template-columns:1fr 1fr;}
+  .content-wrap{grid-template-columns:1fr;}
+  .content-sidebar{position:static;height:auto;}
+  .content-main{padding:48px 24px;}
+  .about-grid{grid-template-columns:1fr;}
+  .services-divider{padding:48px 24px;margin:0 -24px;}
+  .services-6grid{grid-template-columns:1fr 1fr;}
+  .booking-section{padding:48px 24px;margin:0 -24px;}
+  .store-nav{padding:24px 20px;}
+  footer{padding:24px 20px;flex-direction:column;text-align:center;}
+  .float-book{bottom:20px;right:20px;}
+}
+</style>
+</head>
+<body>
+
+<a href="#book-section" class="float-book">✦ Book Now</a>
+
+<nav>
+  <a href="../index.html" class="nav-logo">Naturals <span>Salon & Spa</span></a>
+  <a href="../index.html#stores" class="nav-back">← All Locations</a>
+  <a href="#book-section" class="nav-book-btn">Book Appointment</a>
+</nav>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="hero-bg"></div>
+  <div class="hero-overlay"></div>
+  <div class="hero-content">
+    <div class="hero-badge">Store 05 of 5 · Bangalore</div>
+    <h1>Naturals<br><em>Hennur</em></h1>
+    <div class="hero-sub">Hennur Cross · 560043</div>
+    <div class="hero-actions">
+      <a href="#book-section" class="btn-gold">✦ Book Appointment</a>
+      <a href="https://wa.me/919606900069" target="_blank" class="btn-ghost">💬 WhatsApp Us</a>
+      <a href="https://g.page/Naturals-Hennur/" target="_blank" class="btn-ghost">📍 Directions</a>
+    </div>
+  </div>
+</section>
+
+<!-- INFO BAR -->
+<div class="info-bar">
+  <div class="info-bar-item">
+    <span class="info-bar-icon">📍</span>
+    <div>
+      <div class="info-bar-label">Address</div>
+      <div class="info-bar-value">#40/A, 40/C, 1st Floor, Above SBI Bank</div>
+    </div>
+  </div>
+  <div class="info-bar-item">
+    <span class="info-bar-icon">💬</span>
+    <div>
+      <div class="info-bar-label">WhatsApp</div>
+      <div class="info-bar-value"><a href="https://wa.me/919606900069">+91 96069 00069</a></div>
+    </div>
+  </div>
+  <div class="info-bar-item">
+    <span class="info-bar-icon">🕐</span>
+    <div>
+      <div class="info-bar-label">Hours</div>
+      <div class="info-bar-value">Mon–Sat 9AM–8PM</div>
+    </div>
+  </div>
+  <div class="info-bar-item">
+    <span class="info-bar-icon">📅</span>
+    <div>
+      <div class="info-bar-label">Booking</div>
+      <div class="info-bar-value"><a href="#book-section">Book Online Now</a></div>
+    </div>
+  </div>
+</div>
+
+<!-- MAIN CONTENT + SIDEBAR -->
+<div class="content-wrap">
+
+  <!-- MAIN -->
+  <div class="content-main">
+
+    <!-- ABOUT -->
+    <div class="about-grid reveal">
+      <div class="about-img-wrap">
+        <img src="https://images.unsplash.com/photo-1570172619644-dfd03ed5d881?w=900&q=85" alt="Naturals Hennur" loading="lazy">
+      </div>
+      <div class="about-body">
+        <div class="sec-label">Our Store</div>
+        <h2 class="sec-title">A premium<br>experience in<br><em>Hennur.</em></h2>
+        <p>Welcome to Naturals Salon & Spa Hennur — part of India's most trusted salon network with over 25 years of beauty expertise.</p>
+        <p>Our expert team of stylists and therapists are dedicated to delivering world-class services in a relaxed, luxurious environment. Every visit is personalised to you.</p>
+        <a href="#book-section" class="btn-gold" style="margin-top:24px;font-size:11px;">Book Your Visit →</a>
+      </div>
+    </div>
+
+
+    <!-- SERVICES — LIVE FROM GOOGLE SHEETS -->
+    <div id="services-section" class="reveal">
+      <div class="sec-label">What We Offer</div>
+      <h2 class="sec-title">Our <em>services</em></h2>
+      <p class="sec-desc">Services available at this location — updated live from our services database.</p>
+      <div id="services-filter"></div>
+      <div id="services-loading">Loading services...</div>
+      <div id="services-container"></div>
+    </div>
+
+    <!-- MAP -->
+    <div class="map-section reveal">
+      <div class="sec-label">Find Us</div>
+      <h2 class="sec-title">We're in <em>Hennur</em></h2>
+      <p style="font-size:14px;color:var(--text-mid);font-weight:300;margin-bottom:24px;line-height:1.7;">
+        #40/A, 40/C, 1st Floor, Above SBI Bank, Hennur Main Road, Hennur Cross, Hennur, Bangalore — 560043
+      </p>
+      <div class="map-wrap">
+        <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3886.5!2d77.6380!3d13.0510!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3bae17000000005%3A0x5!2sHennur!5e0!3m2!1sen!2sin!4v1" allowfullscreen loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+      </div>
+      <a href="https://g.page/Naturals-Hennur/" target="_blank" style="display:inline-flex;align-items:center;gap:8px;margin-top:14px;font-size:12px;color:var(--green-rich);font-weight:600;letter-spacing:1px;text-transform:uppercase;">
+        Open in Google Maps →
+      </a>
+    </div>
+
+    <!-- CONTACT -->
+    <div class="reveal" style="margin-top:56px;">
+      <div class="sec-label">Get In Touch</div>
+      <h2 class="sec-title">Contact <em>us</em></h2>
+      
+      <a href="https://wa.me/919606900069" target="_blank" class="contact-row">
+        <span class="contact-icon">💬</span><span>+91 96069 00069 (WhatsApp)</span>
+      </a>
+      <a href="/cdn-cgi/l/email-protection#7a141b0e0f081b1609121f14140f083a1d171b131654191517" class="contact-row">
+        <span class="contact-icon">📧</span><span><span class="__cf_email__" data-cfemail="513f30252423303d2239343f3f242311363c30383d7f323e3c">[email&#160;protected]</span></span>
+      </a>
+      <a href="https://g.page/Naturals-Hennur/" target="_blank" class="contact-row">
+        <span class="contact-icon">📍</span><span>#40/A, 40/C, 1st Floor, Above SBI Bank, Hennur Main Road, Hennur Cross</span>
+      </a>
+    </div>
+
+    <!-- BOOKING -->
+    <div class="booking-section reveal" id="book-section">
+      <div class="sec-label">Reserve Your Visit</div>
+      <h2 class="sec-title">Book an <em>appointment</em></h2>
+      <p style="font-size:14px;color:var(--text-mid);font-weight:300;line-height:1.8;">Choose your service, pick a time that works for you — available 24/7 online.</p>
+      <div class="booking-frame">
+        <iframe src="https://naturals-salon-hennur.setmore.com/" scrolling="yes" loading="lazy"></iframe>
+      </div>
+    </div>
+
+  </div>
+
+  <!-- SIDEBAR -->
+  <div class="content-sidebar">
+    <div class="sidebar-inner">
+      <div class="sidebar-store-name">Naturals<br>Hennur</div>
+      <div class="sidebar-store-area">Hennur Cross · 560043</div>
+
+      <div class="sidebar-book-title">Book Your Visit</div>
+      <a href="#book-section" class="s-btn s-btn-primary">📅 Book Appointment Online</a>
+      <a href="https://wa.me/919606900069" target="_blank" class="s-btn s-btn-whatsapp">💬 Book via WhatsApp</a>
+      <a href="https://g.page/Naturals-Hennur/review?rc/" target="_blank" class="s-btn s-btn-review">⭐ Leave a Google Review</a>
+      <a href="https://g.page/Naturals-Hennur/" target="_blank" class="s-btn s-btn-ghost">📍 Get Directions</a>
+
+      <div class="sidebar-divider"></div>
+
+      <div class="sec-label" style="font-size:9px;margin-bottom:14px;">Opening Hours</div>
+      <div class="sidebar-hours">
+        <div class="hours-row"><span class="hours-day">Monday – Friday</span><span>9:00 AM – 8:00 PM</span></div>
+        <div class="hours-row"><span class="hours-day">Saturday</span><span>9:00 AM – 8:00 PM</span></div>
+        <div class="hours-row"><span class="hours-day">Sunday</span><span>10:00 AM – 7:00 PM</span></div>
+      </div>
+
+      <div class="sidebar-divider"></div>
+
+      <div class="sec-label" style="font-size:9px;margin-bottom:14px;">Follow Our Store</div>
+      <div class="sidebar-social">
+        <a href="https://instagram.com/Naturals.Salon.Hennur/" target="_blank" class="soc-btn soc-insta">📸 Instagram</a>
+        <a href="https://facebook.com/Naturals.Salon.Hennur/" target="_blank" class="soc-btn soc-fb">👍 Facebook</a>
+      </div>
+
+      <div class="sidebar-divider"></div>
+
+      <div style="text-align:center;padding:8px 0;">
+        <div style="font-family:'Cormorant Garamond',serif;font-size:15px;color:var(--text-mid);font-weight:300;line-height:1.6;">
+          Part of India's largest<br>salon network
+        </div>
+        <div style="font-size:11px;color:var(--gold);letter-spacing:2px;text-transform:uppercase;font-weight:600;margin-top:6px;">
+          1000+ Salons · 25 Years
+        </div>
+      </div>
+    </div>
+  </div>
+
+</div>
+
+<!-- PREV / NEXT -->
+<div class="store-nav">
+  <a href="frazer-town.html" class="store-nav-link">← Frazer Town</a>
+  <div class="store-nav-center">All 5 Bangalore Locations</div>
+  <a href="jpnagar.html" class="store-nav-link">JP Nagar →</a>
+</div>
+
+<footer>
+  <div class="footer-logo">Naturals <span>Salon & Spa</span></div>
+  <div class="footer-links-sm">
+    <a href="../index.html">Home</a>
+    <a href="../index.html#stores">All Stores</a>
+    <a href="#book-section">Book</a>
+  </div>
+  <div class="footer-copy">© 2026 Naturals Salon & Spa, Bangalore</div>
+</footer>
+
+<script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script>
+const reveals = document.querySelectorAll('.reveal');
+const io = new IntersectionObserver((entries) => {
