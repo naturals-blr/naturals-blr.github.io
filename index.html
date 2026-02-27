@@ -105,16 +105,16 @@ nav.scrolled{background:rgba(17,23,20,0.97);backdrop-filter:blur(20px);border-bo
 .stores-sec>h2{font-family:'Cormorant Garamond',serif;font-size:clamp(38px,5vw,60px);font-weight:300;color:#fff;line-height:1.05;margin-bottom:52px;}
 .stores-sec>h2 em{font-style:italic;color:var(--green-soft);}
 .st-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:1px;background:rgba(255,255,255,0.04);}
-.st-tile{background:var(--dark);padding:36px 32px;position:relative;overflow:hidden;transition:background 0.3s;display:flex;flex-direction:column;justify-content:space-between;min-height:290px;color:#fff !important;}
+.st-tile{background:var(--dark);padding:36px 32px;position:relative;overflow:hidden;transition:background 0.3s;display:flex;flex-direction:column;justify-content:flex-start;gap:16px;color:#fff !important;}
 .st-tile::after{content:'';position:absolute;top:0;left:0;right:0;height:2px;background:linear-gradient(90deg,var(--green),var(--gold));transform:scaleX(0);transform-origin:left;transition:transform 0.4s;}
 .st-tile:hover{background:#161f19;}
 .st-tile:hover::after{transform:scaleX(1);}
 .st-n{font-family:'Cormorant Garamond',serif;font-size:60px;color:rgba(255,255,255,0.04);font-weight:300;position:absolute;top:16px;right:20px;line-height:1;}
-.st-top-area{flex:1;}
+.st-top-area{}
 .st-name{font-family:'Cormorant Garamond',serif;font-size:26px;color:#fff;font-weight:400;line-height:1.2;margin-bottom:5px;}
 .st-area{font-size:10px;letter-spacing:2.5px;text-transform:uppercase;color:var(--gold);font-weight:500;margin-bottom:14px;}
 .st-addr-txt{font-size:12px;color:rgba(255,255,255,0.38);line-height:1.7;font-weight:300;}
-.st-bottom-area{margin-top:18px;padding-top:14px;border-top:1px solid rgba(255,255,255,0.06);}
+.st-bottom-area{padding-top:14px;border-top:1px solid rgba(255,255,255,0.06);margin-top:0;}
 .st-contacts{display:flex;flex-direction:column;gap:6px;margin-bottom:8px;}
 .st-contacts a{font-size:12px;color:rgba(255,255,255,0.45);display:flex;align-items:center;gap:7px;transition:color 0.3s;font-weight:300;}
 .st-contacts a:hover{color:var(--gold);}
@@ -206,7 +206,7 @@ footer{background:#080f0b;padding:72px 60px 28px;}
 </head>
 <body>
 
-<a href="#book" class="float-book">✦ Book Now</a>
+<a href="#stores" class="float-book">✦ Our Stores</a>
 
 <nav id="nb">
   <a href="index.html" class="nav-logo">
@@ -217,7 +217,7 @@ footer{background:#080f0b;padding:72px 60px 28px;}
     <li><a href="services.html">Services</a></li>
     <li><a href="#stores">Locations</a></li>
     <li><a href="#reviews">Reviews</a></li>
-    <li><a href="#book" class="nav-book">Book Now</a></li>
+    <li><a href="#stores" class="nav-book">Our Stores</a></li>
   </ul>
   <div class="hamburger" onclick="document.getElementById('navLinks').classList.toggle('open')">
     <span></span><span></span><span></span>
@@ -233,7 +233,7 @@ footer{background:#080f0b;padding:72px 60px 28px;}
     <h1>Where Beauty<br><em>Finds Its</em><br>Home.</h1>
     <p class="hero-sub">Five locations across Bangalore · 25 years of excellence<br>Haircare · Skincare · Bodycare · Bridal</p>
     <div class="hero-btns">
-      <a href="#book" class="btn-gold">Book an Appointment</a>
+      <a href="#stores" class="btn-gold">Find Your Store</a>
       <a href="#stores" class="btn-outline">Find Your Store</a>
     </div>
   </div>
@@ -337,7 +337,7 @@ footer{background:#080f0b;padding:72px 60px 28px;}
       <div class="st-bottom-area">
         <div class="st-contacts">
           <a href="tel:+918792642299">📞 +91 87926 42299</a>
-          <a href="https://wa.me/918792642299">💬 WhatsApp</a>
+          <a href="https://wa.me/918792642299">WhatsApp</a>
         </div>
         <div class="st-landline">☎️ Landline: +91 80 4130 4444</div>
         <div class="st-arrow">View Store & Book →</div>
@@ -354,7 +354,7 @@ footer{background:#080f0b;padding:72px 60px 28px;}
       <div class="st-bottom-area">
         <div class="st-contacts">
           <a href="tel:+919901000017">📞 +91 99010 00017</a>
-          <a href="https://wa.me/919901000017">💬 WhatsApp</a>
+          <a href="https://wa.me/919901000017">WhatsApp</a>
         </div>
         <div class="st-landline">☎️ Landline: +91 80 4651 4422</div>
         <div class="st-arrow">View Store & Book →</div>
@@ -371,7 +371,7 @@ footer{background:#080f0b;padding:72px 60px 28px;}
       <div class="st-bottom-area">
         <div class="st-contacts">
           <a href="tel:+917259490009">📞 +91 72594 90009</a>
-          <a href="https://wa.me/917259490009">💬 WhatsApp</a>
+          <a href="https://wa.me/917259490009">WhatsApp</a>
         </div>
         <div class="st-arrow">View Store & Book →</div>
       </div>
@@ -387,7 +387,7 @@ footer{background:#080f0b;padding:72px 60px 28px;}
       <div class="st-bottom-area">
         <div class="st-contacts">
           <a href="tel:+919945488040">📞 +91 99454 88040</a>
-          <a href="https://wa.me/919945488040">💬 WhatsApp</a>
+          <a href="https://wa.me/919945488040">WhatsApp</a>
         </div>
         <div class="st-landline">☎️ Landline: +91 80 4094 8040</div>
         <div class="st-arrow">View Store & Book →</div>
@@ -404,7 +404,7 @@ footer{background:#080f0b;padding:72px 60px 28px;}
       <div class="st-bottom-area">
         <div class="st-contacts">
           <a href="tel:+919606900069">📞 +91 96069 00069</a>
-          <a href="https://wa.me/919606900069">💬 WhatsApp</a>
+          <a href="https://wa.me/919606900069">WhatsApp</a>
         </div>
         <div class="st-arrow">View Store & Book →</div>
       </div>
@@ -413,7 +413,7 @@ footer{background:#080f0b;padding:72px 60px 28px;}
     <div class="st-tile cta reveal">
       <h3>Book at your<br><em>nearest store</em></h3>
       <p>Available 24/7 online — no phone call needed.</p>
-      <a href="#book" class="btn-gold" style="font-size:10px;display:inline-block;">Book Now →</a>
+      <a href="#stores" class="btn-gold" style="font-size:10px;display:inline-block;">Find Store →</a>
     </div>
 
   </div>
@@ -426,7 +426,7 @@ footer{background:#080f0b;padding:72px 60px 28px;}
   <div class="fbleed-ov">
     <div>
       <h2>Every visit is<br>an <em>experience.</em></h2>
-      <a href="#book" class="btn-gold">Book Your Visit</a>
+      <a href="#stores" class="btn-gold">Choose Your Store</a>
     </div>
   </div>
 </div>

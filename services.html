@@ -139,7 +139,7 @@ footer{background:#080f0b;padding:28px 60px;display:flex;justify-content:space-b
   </a>
   <div class="nav-right">
     <a href="index.html" class="nav-back">&#8592; Back to Home</a>
-    <a href="index.html#book" class="nav-cta">Book Now</a>
+    <a href="index.html#stores" class="nav-cta">Book Now</a>
   </div>
 </nav>
 
@@ -165,8 +165,9 @@ footer{background:#080f0b;padding:28px 60px;display:flex;justify-content:space-b
     <div class="filter-row">
       <span class="filter-lbl filter-lbl-gender">Gender</span>
       <button class="f-btn-gender active" data-filter="gender" data-value="all" onclick="setFilter('gender','all',this)">All</button>
-      <button class="f-btn-gender" data-filter="gender" data-value="women" onclick="setFilter('gender','women',this)">Women</button>
-      <button class="f-btn-gender" data-filter="gender" data-value="men" onclick="setFilter('gender','men',this)">Men</button>
+      <button class="f-btn-gender" data-filter="gender" data-value="female" onclick="setFilter('gender','female',this)">Female</button>
+      <button class="f-btn-gender" data-filter="gender" data-value="male" onclick="setFilter('gender','male',this)">Male</button>
+      <button class="f-btn-gender" data-filter="gender" data-value="both" onclick="setFilter('gender','both',this)">Both</button>
     </div>
     <div class="filter-row" id="cat-filter-row">
       <span class="filter-lbl filter-lbl-cat">Category</span>
@@ -180,6 +181,11 @@ footer{background:#080f0b;padding:28px 60px;display:flex;justify-content:space-b
 <div class="results-bar">
   <div id="results-count">Loading services...</div>
   <div id="results-store"></div>
+</div>
+<!-- DEBUG PANEL — remove after testing -->
+<div id="debug-panel" style="background:#1a1a1a;color:#0f0;font-family:monospace;font-size:11px;padding:12px 60px;display:none;">
+  <strong style="color:#ff0;">DEBUG MODE</strong> &nbsp;
+  <span id="debug-info"></span>
 </div>
 
 <!-- SERVICES -->
@@ -207,7 +213,7 @@ footer{background:#080f0b;padding:28px 60px;display:flex;justify-content:space-b
   <div class="ft-row">
     <a href="index.html">Home</a>
     <a href="index.html#stores">All Stores</a>
-    <a href="index.html#book">Book</a>
+    <a href="index.html#stores">Book</a>
   </div>
   <div class="ft-copy">&copy; 2026 Naturals Salon &amp; Spa, Bangalore</div>
 </footer>
@@ -274,15 +280,32 @@ async function loadServices(){
     if(!rows.length){ loading.textContent='No services found.'; return; }
     allHeaders = rows[0].map(h=>h.trim());
     allData    = rows.slice(1).filter(r=>r.some(c=>c.trim()));
+
+    // DEBUG — show raw sheet info
+    const debugPanel = document.getElementById('debug-panel');
+    const debugInfo  = document.getElementById('debug-info');
+    debugPanel.style.display = 'block';
+    const iGenD  = hdridx(allHeaders, 'Gender');
+    const iCatD  = hdridx(allHeaders, 'Category');
+    const iN78   = hdridx(allHeaders, 'Store_N78');
+    const genderVals = [...new Set(allData.map(r=>(r[iGenD]||'').trim()))].filter(Boolean);
+    const catVals    = [...new Set(allData.map(r=>(r[iCatD]||'').trim()))].filter(Boolean);
+    const n78Vals    = [...new Set(allData.map(r=>(r[iN78] ||'').trim()))].filter(Boolean);
+    debugInfo.innerHTML =
+      'Rows: ' + allData.length +
+      ' | Headers: ' + allHeaders.join(', ') +
+      ' | Gender values: [' + genderVals.join(', ') + ']' +
+      ' | Categories: [' + catVals.join(', ') + ']' +
+      ' | Store_N78 values: [' + n78Vals.join(', ') + ']';
     // Build category filter buttons from actual data
-    const iCat = hdridx(allHeaders,'Category');
-    allCats = [...new Set(allData.map(r=>(r[iCat]||'Other').trim()))];
-    const catRow = document.getElementById('cat-filter-row');
-    allCats.forEach(cat=>{
-      const btn=document.createElement('button');
-      btn.textContent=cat; btn.className='f-btn-cat';
-      btn.dataset.filter='category'; btn.dataset.value=ci(cat);
-      btn.onclick=()=>setFilter('category',ci(cat),btn);
+    var iCatL = hdridx(allHeaders,'Category');
+    allCats = [...new Set(allData.map(function(r){ return (r[iCatL]||'Other').trim(); }))];
+    var catRow = document.getElementById('cat-filter-row');
+    allCats.forEach(function(cat) {
+      var btn = document.createElement('button');
+      btn.textContent = cat; btn.className = 'f-btn-cat';
+      btn.dataset.filter = 'category'; btn.dataset.value = ci(cat);
+      btn.onclick = function(){ setFilter('category', ci(cat), btn); };
       catRow.appendChild(btn);
     });
     loading.style.display='none';
@@ -294,121 +317,136 @@ async function loadServices(){
 }
 
 function renderServices(){
-  const container = document.getElementById('svc-container');
-  const empty     = document.getElementById('empty-state');
-  const countEl   = document.getElementById('results-count');
-  const storeEl   = document.getElementById('results-store');
-  container.innerHTML='';
+  var container = document.getElementById('svc-container');
+  var empty     = document.getElementById('empty-state');
+  var countEl   = document.getElementById('results-count');
+  var storeEl   = document.getElementById('results-store');
+  container.innerHTML = '';
 
-  const H     = allHeaders;
-  const iCat  = hdridx(H,'Category');
-  const iName = hdridx(H,'Service_Name');
-  const iDur  = hdridx(H,'Duration');
-  const iReg  = hdridx(H,'Regular_Cost');
-  const iMem  = hdridx(H,'Member_Cost');
-  const iGen  = hdridx(H,'Gender');
-  const iDesc = hdridx(H,'Description');
+  var H     = allHeaders;
+  var iCat  = hdridx(H, 'Category');
+  var iName = hdridx(H, 'Service_Name');
+  var iDur  = hdridx(H, 'Duration');
+  var iReg  = hdridx(H, 'Regular_Cost');
+  var iMem  = hdridx(H, 'Member_Cost');
+  var iGen  = hdridx(H, 'Gender');
+  var iDesc = hdridx(H, 'Description');
 
-  let filtered = allData.filter(r=>{
-    // store filter
-    if(activeFilters.store !== 'all'){
-      const colIdx = H.findIndex(h=>ci(h)===ci(activeFilters.store));
-      if(colIdx<0 || ci(r[colIdx]||'')<'yes') return false;
-      if(ci(r[colIdx]||'')==='no') return false;
-      if(ci(r[colIdx]||'')==='yes');
-      else return false;
+  // Normalise gender value to 'women'|'men'|'both'
+  function normGender(raw) {
+    var g = ci(raw);
+    if (g === 'female' || g === 'women' || g === 'f' || g === 'w') return 'women';
+    if (g === 'male'   || g === 'men'   || g === 'm')               return 'men';
+    return 'both'; // Both / Unisex / empty → treat as both
+  }
+
+  // Check if a store column value means "available"
+  function isYes(val) {
+    var v = ci(val);
+    return v === 'yes' || v === 'y' || v === 'true' || v === '1';
+  }
+
+  var filtered = allData.filter(function(r) {
+    // Store filter
+    if (activeFilters.store !== 'all') {
+      var colIdx = H.findIndex(function(h){ return ci(h) === ci(activeFilters.store); });
+      if (colIdx < 0) return false;
+      if (!isYes(r[colIdx])) return false;
     }
-    // gender filter
-    if(activeFilters.gender !== 'all'){
-      const g = ci(r[iGen]||'');
-      if(g !== activeFilters.gender && g !== 'both') return false;
+    // Gender filter
+    if (activeFilters.gender !== 'all') {
+      var ng = normGender(r[iGen] || '');
+      if (ng !== activeFilters.gender && ng !== 'both') return false;
     }
-    // category filter
-    if(activeFilters.category !== 'all'){
-      if(ci(r[iCat]||'') !== activeFilters.category) return false;
+    // Category filter
+    if (activeFilters.category !== 'all') {
+      if (ci(r[iCat] || '') !== ci(activeFilters.category)) return false;
     }
     return true;
   });
 
-  // Fix store filter — re-do cleanly
-  if(activeFilters.store !== 'all'){
-    const colIdx = H.findIndex(h=>ci(h)===ci(activeFilters.store));
-    filtered = allData.filter(r=>{
-      if(colIdx<0) return false;
-      if(ci(r[colIdx]||'')==='no' || !r[colIdx] ) return false;
-      const storeOk = ci(r[colIdx]||'')==='yes';
-      const genOk   = activeFilters.gender==='all' || ci(r[iGen]||'')==='both' || ci(r[iGen]||'')===activeFilters.gender;
-      const catOk   = activeFilters.category==='all' || ci(r[iCat]||'')===activeFilters.category;
-      return storeOk && genOk && catOk;
-    });
-  } else {
-    filtered = allData.filter(r=>{
-      const genOk = activeFilters.gender==='all' || ci(r[iGen]||'')==='both' || ci(r[iGen]||'')===activeFilters.gender;
-      const catOk = activeFilters.category==='all' || ci(r[iCat]||'')===activeFilters.category;
-      return genOk && catOk;
-    });
-  }
-
-  countEl.textContent = `${filtered.length} service${filtered.length!==1?'s':''} found`;
-  storeEl.textContent = activeFilters.store!=='all'
-    ? 'Showing: '+(STORE_NAMES[ci(activeFilters.store)]||activeFilters.store)
+  // Update results bar
+  countEl.textContent = filtered.length + ' service' + (filtered.length !== 1 ? 's' : '') + ' found';
+  storeEl.textContent = activeFilters.store !== 'all'
+    ? 'Showing: ' + (STORE_NAMES[ci(activeFilters.store)] || activeFilters.store)
     : 'All 5 Bangalore stores';
 
-  if(!filtered.length){ empty.style.display=''; return; }
-  empty.style.display='none';
+  if (!filtered.length) { empty.style.display = ''; return; }
+  empty.style.display = 'none';
 
   // Group by category
-  const cats={};
-  filtered.forEach(r=>{ const c=(r[iCat]||'Other').trim(); if(!cats[c]) cats[c]=[]; cats[c].push(r); });
+  var cats = {};
+  filtered.forEach(function(r) {
+    var c = (r[iCat] || 'Other').trim();
+    if (!cats[c]) cats[c] = [];
+    cats[c].push(r);
+  });
 
-  Object.entries(cats).forEach(([cat,svcs])=>{
-    const sec=document.createElement('div'); sec.className='cat-section'; sec.id='cat-'+ci(cat).replace(/\s+/g,'-');
-    const catImgSrc = CAT_IMAGES[ci(cat)] || '';
-    const catImgHtml = catImgSrc
-      ? `<div class="cat-img"><img src="${catImgSrc}" alt="${cat}" onerror="this.parentElement.style.display='none'"></div>`
+  Object.keys(cats).forEach(function(cat) {
+    var svcs = cats[cat];
+    var sec = document.createElement('div');
+    sec.className = 'cat-section';
+    sec.id = 'cat-' + ci(cat).replace(/\s+/g, '-');
+
+    var catImgSrc  = CAT_IMAGES[ci(cat)] || '';
+    var catImgHtml = catImgSrc
+      ? '<div class="cat-img"><img src="' + catImgSrc + '" alt="' + cat + '" onerror="this.parentElement.style.display='none'"></div>'
       : '';
-    sec.innerHTML=`
-      <div class="cat-header">
-        ${catImgHtml}
-        <div class="cat-name">${cat}</div>
-        <div class="cat-count">${svcs.length} service${svcs.length!==1?'s':''}</div>
-      </div>
-      <div class="svc-grid"></div>`;
+
+    sec.innerHTML =
+      '<div class="cat-header">' +
+        catImgHtml +
+        '<div class="cat-name">' + cat + '</div>' +
+        '<div class="cat-count">' + svcs.length + ' service' + (svcs.length !== 1 ? 's' : '') + '</div>' +
+      '</div>' +
+      '<div class="svc-grid"></div>';
     container.appendChild(sec);
-    const grid=sec.querySelector('.svc-grid');
-    svcs.forEach(r=>{
-      const name=(r[iName]||'').trim();
-      const dur =(r[iDur] ||'').trim();
-      const reg =(r[iReg] ||'').trim();
-      const mem =(r[iMem] ||'').trim();
-      const gen =(r[iGen] ||'').trim();
-      const desc=(r[iDesc]||'').trim();
-      const memHtml=(mem&&ci(mem)!=='-')?`<span class="price-mem">Members &#8377;${mem}</span>`:'';
-      const genClass=ci(gen)==='women'?'svc-tag-w':ci(gen)==='men'?'svc-tag-m':'svc-tag-b';
-      const card=document.createElement('div'); card.className='svc-card';
-      card.innerHTML=`
-        <div>
-          <div class="svc-card-name">${name}</div>
-          <div class="svc-card-desc">${desc}</div>
-        </div>
-        <div class="svc-card-foot">
-          <div class="svc-tags">
-            ${dur?`<span class="svc-tag">&#9201; ${dur}</span>`:''}
-            ${gen?`<span class="svc-tag ${genClass}">${genIcon(gen)} ${gen}</span>`:''}
-          </div>
-          <div class="price-col">
-            <span class="price-reg">&#8377;${reg}</span>${memHtml}
-          </div>
-        </div>`;
+
+    var grid = sec.querySelector('.svc-grid');
+    svcs.forEach(function(r) {
+      var name = (r[iName]||'').trim();
+      var dur  = (r[iDur] ||'').trim();
+      var reg  = (r[iReg] ||'').trim();
+      var mem  = (r[iMem] ||'').trim();
+      var gen  = (r[iGen] ||'').trim();
+      var desc = (r[iDesc]||'').trim();
+      var memHtml  = (mem && ci(mem) !== '-') ? '<span class="price-mem">Members &#8377;' + mem + '</span>' : '';
+      var ng       = normGender(gen);
+      var genClass = ng === 'women' ? 'svc-tag-w' : ng === 'men' ? 'svc-tag-m' : 'svc-tag-b';
+      var card = document.createElement('div');
+      card.className = 'svc-card';
+      card.innerHTML =
+        '<div>' +
+          '<div class="svc-card-name">' + name + '</div>' +
+          '<div class="svc-card-desc">' + desc + '</div>' +
+        '</div>' +
+        '<div class="svc-card-foot">' +
+          '<div class="svc-tags">' +
+            (dur ? '<span class="svc-tag">&#9201; ' + dur + '</span>' : '') +
+            (gen ? '<span class="svc-tag ' + genClass + '">' + genIcon(ng) + ' ' + gen + '</span>' : '') +
+          '</div>' +
+          '<div class="price-col">' +
+            '<span class="price-reg">&#8377;' + reg + '</span>' + memHtml +
+          '</div>' +
+        '</div>';
       grid.appendChild(card);
     });
   });
 }
 
+
 function setFilter(type, value, btn){
-  activeFilters[type]=value;
-  document.querySelectorAll(`[data-filter="${type}"]`).forEach(b=>b.classList.remove('active'));
+  activeFilters[type] = value;
+  // Deactivate all buttons of this type, activate clicked one
+  document.querySelectorAll('[data-filter="' + type + '"]').forEach(b => b.classList.remove('active'));
   btn.classList.add('active');
+  // When store changes, reset category to All
+  if (type === 'store') {
+    activeFilters.category = 'all';
+    document.querySelectorAll('[data-filter="category"]').forEach(b => b.classList.remove('active'));
+    const allCatBtn = document.querySelector('[data-filter="category"][data-value="all"]');
+    if (allCatBtn) allCatBtn.classList.add('active');
+  }
   renderServices();
 }
 
