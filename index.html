@@ -105,7 +105,7 @@ nav.scrolled{background:rgba(17,23,20,0.97);backdrop-filter:blur(20px);border-bo
 .stores-sec>h2{font-family:'Cormorant Garamond',serif;font-size:clamp(38px,5vw,60px);font-weight:300;color:#fff;line-height:1.05;margin-bottom:52px;}
 .stores-sec>h2 em{font-style:italic;color:var(--green-soft);}
 .st-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:1px;background:rgba(255,255,255,0.04);}
-.st-tile{background:var(--dark);padding:36px 32px;position:relative;overflow:hidden;transition:background 0.3s;display:flex;flex-direction:column;justify-content:space-between;min-height:290px;color:#fff;}
+.st-tile{background:var(--dark);padding:36px 32px;position:relative;overflow:hidden;transition:background 0.3s;display:flex;flex-direction:column;justify-content:space-between;min-height:290px;color:#fff !important;}
 .st-tile::after{content:'';position:absolute;top:0;left:0;right:0;height:2px;background:linear-gradient(90deg,var(--green),var(--gold));transform:scaleX(0);transform-origin:left;transition:transform 0.4s;}
 .st-tile:hover{background:#161f19;}
 .st-tile:hover::after{transform:scaleX(1);}
@@ -471,7 +471,6 @@ footer{background:#080f0b;padding:72px 60px 28px;}
       <div class="ft-social">
         <a href="https://instagram.com" title="Instagram">📸</a>
         <a href="https://facebook.com" title="Facebook">👍</a>
-        <a href="https://wa.me/919741115349" title="WhatsApp">💬</a>
       </div>
     </div>
     <div>
@@ -499,7 +498,6 @@ footer{background:#080f0b;padding:72px 60px 28px;}
       <div class="ft-col-title">Connect</div>
       <ul class="ft-links">
         <li><a href="/cdn-cgi/l/email-protection#790a160911101818011617391e14181015571a1614">Email Us</a></li>
-        <li><a href="https://wa.me/919741115349">WhatsApp</a></li>
         <li><a href="https://naturals.in" target="_blank">Naturals India</a></li>
         <li><a href="#book">Book Appointment</a></li>
       </ul>
@@ -511,6 +509,19 @@ footer{background:#080f0b;padding:72px 60px 28px;}
   </div>
 </footer>
 
-<script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script>
-window.addEventListener('scroll',()=>document.getElementById('nb').classList.toggle('scrolled',window.scrollY>60));
-const io=new IntersectionObserver((entries)=>{entries.forEach((e,i)=>{if(e.isIntersecting){setTimeout(()=>e.target.classList.add('visible'),i*90)
+<script>
+window.addEventListener('scroll', () => {
+  document.getElementById('nb').classList.toggle('scrolled', window.scrollY > 60);
+});
+const io = new IntersectionObserver((entries) => {
+  entries.forEach((e, i) => {
+    if (e.isIntersecting) {
+      setTimeout(() => e.target.classList.add('visible'), i * 90);
+      io.unobserve(e.target);
+    }
+  });
+}, { threshold: 0 });
+document.querySelectorAll('.reveal, .reveal-l').forEach(el => io.observe(el));
+</script>
+</body>
+</html>
