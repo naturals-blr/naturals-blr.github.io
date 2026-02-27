@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<meta name="description" content="Naturals Salon & Spa Frazer Town — Premium salon in Pulikeshi Nagar · 560005. Book haircare, skincare, bridal and more.">
+<meta name="description" content="Naturals Salon & Spa Frazer Town — Pulikeshi Nagar · 560005. Book haircare, skincare, bridal services online.">
 <title>Naturals Frazer Town | Salon & Spa Bangalore</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=Jost:wght@300;400;500;600&display=swap" rel="stylesheet">
@@ -19,195 +19,186 @@ body{font-family:'Jost',sans-serif;background:var(--cream);color:var(--text);ove
 img{display:block;width:100%;object-fit:cover;}
 a{text-decoration:none;color:inherit;}
 
-/* FLOAT */
 .float-book{position:fixed;bottom:28px;right:28px;z-index:999;background:var(--gold);color:var(--dark);padding:13px 26px;border-radius:40px;font-size:11px;font-weight:600;letter-spacing:2px;text-transform:uppercase;box-shadow:0 6px 28px rgba(201,168,76,0.45);transition:all 0.3s;display:flex;align-items:center;gap:8px;}
 .float-book:hover{background:var(--gold-pale);transform:translateY(-3px);}
 
-/* NAV */
 nav{position:fixed;top:0;left:0;right:0;z-index:200;padding:0 60px;height:70px;display:flex;justify-content:space-between;align-items:center;background:rgba(17,23,20,0.97);backdrop-filter:blur(20px);border-bottom:1px solid rgba(255,255,255,0.06);}
 .nav-logo{display:flex;align-items:center;gap:10px;}
 .nav-logo img{height:34px;width:auto;object-fit:contain;filter:brightness(0) invert(1);}
 .nav-logo-text{font-family:'Cormorant Garamond',serif;font-size:18px;font-weight:500;color:#fff;letter-spacing:1px;}
 .nav-logo-text span{color:var(--gold);font-style:italic;font-weight:300;}
 .nav-right{display:flex;align-items:center;gap:24px;}
-.nav-back{color:rgba(255,255,255,0.55);font-size:11px;letter-spacing:2px;text-transform:uppercase;transition:color 0.3s;}
+.nav-back{color:rgba(255,255,255,0.5);font-size:11px;letter-spacing:2px;text-transform:uppercase;transition:color 0.3s;}
 .nav-back:hover{color:var(--gold);}
-.nav-book-btn{background:var(--gold);color:var(--dark);padding:10px 22px;font-size:11px;letter-spacing:2px;text-transform:uppercase;font-weight:600;transition:all 0.3s;}
-.nav-book-btn:hover{background:var(--gold-pale);}
+.nav-cta{background:var(--gold);color:var(--dark);padding:10px 22px;font-size:11px;letter-spacing:2px;text-transform:uppercase;font-weight:600;transition:all 0.3s;}
+.nav-cta:hover{background:var(--gold-pale);}
 
-/* HERO */
 .hero{height:100vh;min-height:650px;position:relative;overflow:hidden;display:flex;align-items:flex-end;}
 .hero-bg{position:absolute;inset:0;background:url('../images/heroes/frazer-town.jpg') center/cover no-repeat,url('https://images.unsplash.com/photo-1487412947147-5cebf100ffc2?w=1800&q=85') center/cover no-repeat;transition:transform 8s ease;}
 .hero:hover .hero-bg{transform:scale(1.03);}
-.hero-ov{position:absolute;inset:0;background:linear-gradient(to top,rgba(17,23,20,0.92) 0%,rgba(17,23,20,0.35) 55%,rgba(17,23,20,0.15) 100%);}
+.hero-ov{position:absolute;inset:0;background:linear-gradient(to top,rgba(17,23,20,0.92) 0%,rgba(17,23,20,0.35) 55%,transparent 100%);}
 .hero-content{position:relative;z-index:2;padding:0 72px 64px;width:100%;}
 .hero-badge{display:inline-flex;align-items:center;gap:12px;font-size:9px;letter-spacing:5px;text-transform:uppercase;color:var(--gold);font-weight:600;margin-bottom:18px;}
 .hero-badge::before{content:'';width:28px;height:1px;background:var(--gold);}
-.hero h1{font-family:'Cormorant Garamond',serif;font-size:clamp(48px,8vw,92px);font-weight:300;color:#fff;line-height:0.95;letter-spacing:-1px;margin-bottom:18px;}
+.hero h1{font-family:'Cormorant Garamond',serif;font-size:clamp(46px,7vw,88px);font-weight:300;color:#fff;line-height:0.95;letter-spacing:-1px;margin-bottom:16px;}
 .hero h1 em{font-style:italic;color:var(--gold);}
-.hero-sub{font-size:13px;color:rgba(255,255,255,0.5);letter-spacing:1px;font-weight:300;margin-bottom:32px;}
+.hero-sub{font-size:13px;color:rgba(255,255,255,0.5);letter-spacing:1px;font-weight:300;margin-bottom:30px;}
 .hero-actions{display:flex;gap:12px;flex-wrap:wrap;}
-.btn-gold{background:var(--gold);color:var(--dark);padding:14px 34px;font-size:11px;letter-spacing:2.5px;text-transform:uppercase;font-weight:600;transition:all 0.3s;display:inline-block;}
+.btn-gold{background:var(--gold);color:var(--dark);padding:14px 32px;font-size:11px;letter-spacing:2.5px;text-transform:uppercase;font-weight:600;transition:all 0.3s;display:inline-flex;align-items:center;gap:8px;}
 .btn-gold:hover{background:var(--gold-pale);transform:translateY(-2px);}
-.btn-ghost{border:1px solid rgba(255,255,255,0.3);color:#fff;padding:14px 34px;font-size:11px;letter-spacing:2.5px;text-transform:uppercase;transition:all 0.3s;display:inline-block;}
+.btn-ghost{border:1px solid rgba(255,255,255,0.3);color:#fff;padding:14px 28px;font-size:11px;letter-spacing:2px;text-transform:uppercase;transition:all 0.3s;display:inline-flex;align-items:center;gap:8px;}
 .btn-ghost:hover{border-color:var(--gold);color:var(--gold);}
 
-/* INFO BAR */
 .info-bar{background:var(--green);display:grid;grid-template-columns:repeat(4,1fr);}
-.info-cell{padding:22px 28px;border-right:1px solid rgba(255,255,255,0.08);display:flex;align-items:flex-start;gap:12px;}
+.info-cell{padding:22px 24px;border-right:1px solid rgba(255,255,255,0.08);display:flex;align-items:flex-start;gap:12px;}
 .info-cell:last-child{border-right:none;}
 .info-icon{font-size:20px;flex-shrink:0;margin-top:2px;}
 .info-label{font-size:9px;letter-spacing:2.5px;text-transform:uppercase;color:rgba(255,255,255,0.4);font-weight:600;margin-bottom:5px;}
 .info-val{font-size:13px;color:#fff;font-weight:400;transition:color 0.3s;display:block;}
 .info-val:hover{color:var(--gold);}
-.info-val-sm{font-size:11px;color:rgba(255,255,255,0.5);display:block;margin-top:3px;font-weight:300;}
+.info-val-sm{font-size:11px;color:rgba(255,255,255,0.45);display:block;margin-top:3px;font-weight:300;}
+.info-icon-wa{flex-shrink:0;margin-top:2px;}
 
-/* LAYOUT */
-.page-wrap{display:grid;grid-template-columns:1fr 360px;min-height:100vh;}
+.page-wrap{display:grid;grid-template-columns:1fr 360px;}
 .main-col{padding:64px 60px;}
 .sidebar-col{background:#fff;border-left:1px solid rgba(0,0,0,0.06);position:sticky;top:70px;height:calc(100vh - 70px);overflow-y:auto;}
 
-/* LABELS */
 .lbl{font-size:9px;letter-spacing:5px;text-transform:uppercase;color:var(--gold);font-weight:600;margin-bottom:16px;display:flex;align-items:center;gap:12px;}
 .lbl::before{content:'';width:18px;height:1px;background:var(--gold);}
-.sec-title{font-family:'Cormorant Garamond',serif;font-size:clamp(30px,3.5vw,46px);font-weight:300;color:var(--text);line-height:1.1;margin-bottom:18px;}
+.sec-title{font-family:'Cormorant Garamond',serif;font-size:clamp(28px,3vw,44px);font-weight:300;color:var(--text);line-height:1.1;margin-bottom:16px;}
 .sec-title em{font-style:italic;color:var(--green-mid);}
 .sec-title-wh{color:#fff;}
 .sec-title-wh em{color:var(--green-soft);}
 
-/* ABOUT */
-.about-grid{display:grid;grid-template-columns:1fr 1fr;gap:44px;align-items:center;margin-bottom:64px;}
+.about-grid{display:grid;grid-template-columns:1fr 1fr;gap:44px;align-items:center;margin-bottom:60px;}
 .about-img-wrap{overflow:hidden;}
 .about-img-wrap img{height:400px;object-fit:cover;transition:transform 0.7s;}
 .about-img-wrap:hover img{transform:scale(1.04);}
 .about-p{font-size:14px;color:var(--text-mid);line-height:1.9;font-weight:300;margin-bottom:12px;}
 
-/* SERVICES — GOOGLE SHEETS LIVE */
-.services-block{background:var(--dark);padding:56px 60px;margin:0 -60px;}
-#svc-filter{display:flex;flex-wrap:wrap;gap:8px;margin-bottom:40px;}
-.f-btn{background:rgba(255,255,255,0.05);border:1px solid rgba(255,255,255,0.1);color:rgba(255,255,255,0.5);padding:9px 22px;font-size:11px;letter-spacing:2px;text-transform:uppercase;cursor:pointer;transition:all 0.3s;font-family:'Jost',sans-serif;font-weight:500;}
+.dark-block{background:var(--dark);padding:56px 60px;margin:0 -60px;}
+
+/* SERVICES */
+#svc-filter{display:flex;flex-wrap:wrap;gap:8px;margin-bottom:32px;}
+.f-btn{background:rgba(255,255,255,0.05);border:1px solid rgba(255,255,255,0.1);color:rgba(255,255,255,0.5);padding:8px 20px;font-size:11px;letter-spacing:2px;text-transform:uppercase;cursor:pointer;transition:all 0.3s;font-family:'Jost',sans-serif;font-weight:500;}
 .f-btn:hover{border-color:var(--gold);color:var(--gold);}
 .f-btn.active{background:var(--gold);border-color:var(--gold);color:var(--dark);}
-#svc-loading{color:rgba(255,255,255,0.3);font-size:13px;letter-spacing:2px;text-align:center;padding:48px 0;font-style:italic;}
-.svc-cat-sec{margin-bottom:48px;}
-.svc-cat-hdr{margin-bottom:20px;padding-bottom:14px;border-bottom:1px solid rgba(255,255,255,0.06);}
-.svc-cat-lbl{font-size:9px;letter-spacing:4px;text-transform:uppercase;color:rgba(255,255,255,0.25);font-weight:600;margin-bottom:5px;}
-.svc-cat-name{font-family:'Cormorant Garamond',serif;font-size:30px;color:#fff;font-weight:300;}
+.loading-msg{color:rgba(255,255,255,0.3);font-size:13px;text-align:center;padding:40px 0;font-style:italic;}
+.svc-cat-sec{margin-bottom:44px;}
+.svc-cat-hdr{margin-bottom:16px;padding-bottom:12px;border-bottom:1px solid rgba(255,255,255,0.06);}
+.svc-cat-lbl{font-size:9px;letter-spacing:4px;text-transform:uppercase;color:rgba(255,255,255,0.22);font-weight:600;margin-bottom:4px;}
+.svc-cat-name{font-family:'Cormorant Garamond',serif;font-size:28px;color:#fff;font-weight:300;}
 .svc-cards-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:2px;}
-.svc-item{background:rgba(255,255,255,0.03);padding:24px 20px;border-bottom:2px solid transparent;transition:all 0.3s;display:flex;flex-direction:column;justify-content:space-between;min-height:160px;}
+.svc-item{background:rgba(255,255,255,0.03);padding:22px 18px;border-bottom:2px solid transparent;transition:all 0.3s;display:flex;flex-direction:column;justify-content:space-between;min-height:150px;}
 .svc-item:hover{background:rgba(255,255,255,0.07);border-bottom-color:var(--gold);}
-.svc-item-name{font-family:'Cormorant Garamond',serif;font-size:19px;color:#fff;font-weight:400;margin-bottom:6px;line-height:1.2;}
-.svc-item-desc{font-size:12px;color:rgba(255,255,255,0.38);line-height:1.7;font-weight:300;flex:1;margin-bottom:12px;}
-.svc-item-bottom{display:flex;justify-content:space-between;align-items:flex-end;flex-wrap:wrap;gap:6px;}
+.svc-item-name{font-family:'Cormorant Garamond',serif;font-size:18px;color:#fff;font-weight:400;margin-bottom:6px;line-height:1.2;}
+.svc-item-desc{font-size:12px;color:rgba(255,255,255,0.35);line-height:1.7;font-weight:300;flex:1;margin-bottom:10px;}
+.svc-item-foot{display:flex;justify-content:space-between;align-items:flex-end;flex-wrap:wrap;gap:6px;}
 .svc-tags{display:flex;flex-wrap:wrap;gap:4px;}
-.svc-tag{font-size:10px;color:rgba(255,255,255,0.32);background:rgba(255,255,255,0.05);padding:3px 8px;}
-.svc-price-wrap{text-align:right;}
-.price-reg{font-family:'Cormorant Garamond',serif;font-size:21px;color:var(--gold);font-weight:400;display:block;line-height:1;}
+.svc-tag{font-size:10px;color:rgba(255,255,255,0.3);background:rgba(255,255,255,0.05);padding:3px 8px;}
+.price-reg{font-family:'Cormorant Garamond',serif;font-size:20px;color:var(--gold);font-weight:400;display:block;line-height:1;}
 .price-mem{font-size:11px;color:var(--green-soft);display:block;margin-top:2px;}
 
 /* OFFERS */
 .offers-block{margin-top:56px;margin-bottom:56px;}
-.offers-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:3px;margin-top:32px;}
-.offer-card{position:relative;overflow:hidden;height:280px;cursor:pointer;}
-.offer-card img{height:100%;object-fit:cover;transition:transform 0.6s;}
-.offer-card:hover img{transform:scale(1.06);}
-.offer-ov{position:absolute;inset:0;background:linear-gradient(to top,rgba(17,23,20,0.88) 0%,rgba(17,23,20,0.2) 60%,transparent 100%);transition:background 0.3s;}
-.offer-card:hover .offer-ov{background:linear-gradient(to top,rgba(27,67,50,0.92) 0%,rgba(27,67,50,0.3) 60%,transparent 100%);}
-.offer-info{position:absolute;bottom:0;left:0;right:0;padding:24px;}
-.offer-badge{display:inline-block;background:var(--gold);color:var(--dark);font-size:9px;letter-spacing:2px;text-transform:uppercase;font-weight:700;padding:4px 10px;margin-bottom:8px;}
-.offer-title{font-family:'Cormorant Garamond',serif;font-size:22px;color:#fff;font-weight:400;line-height:1.2;margin-bottom:4px;}
-.offer-valid{font-size:10px;color:rgba(255,255,255,0.5);letter-spacing:1px;}
+.offers-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:3px;margin-top:28px;}
+.offer-img-card{position:relative;overflow:hidden;height:260px;}
+.offer-img-card img{height:100%;object-fit:cover;transition:transform 0.6s;}
+.offer-img-card:hover img{transform:scale(1.05);}
+.offer-txt-card{background:#fff;padding:28px 24px;border-bottom:3px solid var(--gold);display:flex;flex-direction:column;justify-content:space-between;min-height:200px;}
+.offer-badge{display:inline-block;background:var(--gold);color:var(--dark);font-size:9px;letter-spacing:2px;text-transform:uppercase;font-weight:700;padding:4px 10px;margin-bottom:10px;align-self:flex-start;}
+.offer-title{font-family:'Cormorant Garamond',serif;font-size:22px;color:var(--text);font-weight:400;line-height:1.2;margin-bottom:8px;}
+.offer-details{font-size:13px;color:var(--text-mid);font-weight:300;line-height:1.7;flex:1;margin-bottom:12px;}
+.offer-valid{font-size:10px;color:var(--text-light);letter-spacing:1px;text-transform:uppercase;}
+.offers-empty{color:var(--text-light);font-size:13px;font-style:italic;padding:20px 0;}
 
 /* STYLISTS */
-.stylists-block{background:var(--dark);padding:56px 60px;margin:0 -60px;}
-.stylists-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:2px;margin-top:36px;}
-#stylists-loading{color:rgba(255,255,255,0.3);font-size:13px;letter-spacing:2px;text-align:center;padding:40px 0;font-style:italic;}
-.stylist-card{background:rgba(255,255,255,0.03);transition:background 0.3s;overflow:hidden;}
+.stylists-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:2px;margin-top:28px;}
+.stylist-card{background:rgba(255,255,255,0.03);overflow:hidden;transition:background 0.3s;}
 .stylist-card:hover{background:rgba(255,255,255,0.07);}
-.stylist-photo{height:220px;overflow:hidden;position:relative;}
+.stylist-photo{height:200px;overflow:hidden;}
 .stylist-photo img{height:100%;object-fit:cover;object-position:top center;transition:transform 0.6s;}
 .stylist-card:hover .stylist-photo img{transform:scale(1.04);}
-.stylist-info{padding:20px 18px;}
-.stylist-name{font-family:'Cormorant Garamond',serif;font-size:20px;color:#fff;font-weight:400;margin-bottom:4px;}
-.stylist-spec{font-size:11px;color:var(--gold);letter-spacing:1.5px;text-transform:uppercase;font-weight:600;margin-bottom:6px;}
-.stylist-exp{font-size:12px;color:rgba(255,255,255,0.35);font-weight:300;}
+.stylist-info{padding:18px 16px;}
+.stylist-name{font-family:'Cormorant Garamond',serif;font-size:19px;color:#fff;font-weight:400;margin-bottom:4px;}
+.stylist-spec{font-size:11px;color:var(--gold);letter-spacing:1.5px;text-transform:uppercase;font-weight:600;margin-bottom:5px;}
+.stylist-exp{font-size:12px;color:rgba(255,255,255,0.32);font-weight:300;}
 
 /* MAP + CONTACT */
 .map-block{margin-top:56px;}
-.map-frame{overflow:hidden;margin-top:24px;}
-.map-frame iframe{display:block;border:none;width:100%;height:300px;filter:grayscale(15%);}
-.map-link{display:inline-flex;align-items:center;gap:8px;margin-top:12px;font-size:12px;color:var(--green-mid);font-weight:600;letter-spacing:1px;text-transform:uppercase;transition:color 0.3s;}
+.map-frame iframe{display:block;border:none;width:100%;height:290px;filter:grayscale(10%);margin-top:20px;}
+.map-link{display:inline-flex;align-items:center;gap:8px;margin-top:12px;font-size:12px;color:var(--green-mid);font-weight:600;letter-spacing:1px;text-transform:uppercase;}
 .map-link:hover{color:var(--green-soft);}
-.contact-rows{margin-top:20px;}
-.c-row{display:flex;align-items:center;gap:14px;padding:14px 0;border-bottom:1px solid rgba(0,0,0,0.06);font-size:14px;color:var(--text-mid);font-weight:300;transition:color 0.3s;}
-.c-row:hover{color:var(--green);}
-.c-icon{font-size:18px;flex-shrink:0;}
-.c-landline{display:flex;align-items:center;gap:14px;padding:14px 0;border-bottom:1px solid rgba(0,0,0,0.06);font-size:13px;color:var(--text-light);font-weight:300;}
+.contact-rows{display:flex;flex-direction:column;margin-top:20px;}
+.contact-row{display:flex;align-items:center;gap:14px;padding:14px 0;border-bottom:1px solid rgba(0,0,0,0.06);}
+.contact-icon{font-size:20px;flex-shrink:0;display:flex;align-items:center;}
+.contact-detail{display:flex;flex-direction:column;gap:2px;}
+.contact-lbl{font-size:9px;letter-spacing:2px;text-transform:uppercase;color:var(--text-light);font-weight:600;}
+.contact-val{font-size:14px;color:var(--text-mid);font-weight:300;transition:color 0.3s;}
+.contact-val:hover{color:var(--green);}
 
 /* BOOKING */
-.booking-block{margin-top:56px;padding-top:56px;border-top:1px solid rgba(0,0,0,0.08);}
-.booking-widget-wrap{margin-top:32px;background:#fff;box-shadow:0 4px 40px rgba(0,0,0,0.08);overflow:hidden;}
-.setmore-btn-wrap{
-  display:flex;flex-direction:column;align-items:center;
-  gap:16px;padding:48px 32px;text-align:center;
-  background:linear-gradient(135deg,var(--dark) 0%,#1a2e22 100%);
-}
-.setmore-note{font-size:12px;color:rgba(255,255,255,0.35);font-weight:300;line-height:1.7;max-width:400px;}
+.booking-block{margin-top:56px;padding-top:52px;border-top:1px solid rgba(0,0,0,0.08);}
+.booking-box{background:linear-gradient(135deg,var(--dark) 0%,#1a2e22 100%);padding:52px 40px;text-align:center;margin-top:28px;}
+.booking-box h3{font-family:'Cormorant Garamond',serif;font-size:32px;color:#fff;font-weight:300;margin-bottom:10px;}
+.booking-box h3 em{font-style:italic;color:var(--gold);}
+.booking-box p{font-size:13px;color:rgba(255,255,255,0.4);font-weight:300;line-height:1.7;max-width:420px;margin:0 auto 28px;}
+.booking-links{display:flex;gap:12px;justify-content:center;flex-wrap:wrap;}
 
 /* SIDEBAR */
 .sb-inner{padding:32px 24px;}
-.sb-store-name{font-family:'Cormorant Garamond',serif;font-size:26px;color:var(--text);font-weight:400;line-height:1.1;margin-bottom:4px;}
-.sb-area{font-size:10px;letter-spacing:2.5px;text-transform:uppercase;color:var(--gold);font-weight:600;margin-bottom:22px;}
-.sb-divider{height:1px;background:rgba(0,0,0,0.07);margin:18px 0;}
-.sb-section-title{font-family:'Cormorant Garamond',serif;font-size:20px;color:var(--text);font-weight:400;margin-bottom:14px;}
-.sb-btn{display:block;text-align:center;padding:13px 18px;font-size:11px;letter-spacing:2px;text-transform:uppercase;font-weight:600;margin-bottom:8px;transition:all 0.3s;}
+.sb-name{font-family:'Cormorant Garamond',serif;font-size:24px;color:var(--text);font-weight:400;line-height:1.1;margin-bottom:4px;}
+.sb-area{font-size:10px;letter-spacing:2.5px;text-transform:uppercase;color:var(--gold);font-weight:600;margin-bottom:20px;}
+.sb-divider{height:1px;background:rgba(0,0,0,0.07);margin:16px 0;}
+.sb-sec{font-family:'Cormorant Garamond',serif;font-size:19px;color:var(--text);font-weight:400;margin-bottom:12px;}
+.sb-btn{display:flex;align-items:center;justify-content:center;gap:8px;text-align:center;padding:12px 16px;font-size:11px;letter-spacing:2px;text-transform:uppercase;font-weight:600;margin-bottom:8px;transition:all 0.3s;}
 .sb-primary{background:var(--green);color:#fff;}
 .sb-primary:hover{background:var(--green-mid);}
 .sb-wa{background:#25D366;color:#fff;}
 .sb-wa:hover{background:#1da851;}
 .sb-review{background:#FBBC04;color:var(--dark);}
 .sb-review:hover{background:#f0b400;}
-.sb-ghost{border:1px solid rgba(0,0,0,0.14);color:var(--text-mid);}
+.sb-ghost{border:1px solid rgba(0,0,0,0.13);color:var(--text-mid);}
 .sb-ghost:hover{border-color:var(--green);color:var(--green);}
-.sb-hours .h-row{display:flex;justify-content:space-between;padding:8px 0;border-bottom:1px solid rgba(0,0,0,0.05);font-size:12px;color:var(--text-mid);font-weight:300;}
-.sb-hours .h-day{color:var(--text);font-weight:500;}
+.sb-contact-row{display:flex;align-items:center;gap:10px;padding:8px 0;border-bottom:1px solid rgba(0,0,0,0.05);}
+.sb-contact-icon{font-size:16px;flex-shrink:0;display:flex;align-items:center;}
+.sb-contact-val{font-size:12px;color:var(--text-mid);font-weight:300;transition:color 0.3s;}
+.sb-contact-val:hover{color:var(--green);}
+.h-row{display:flex;justify-content:space-between;padding:7px 0;border-bottom:1px solid rgba(0,0,0,0.05);font-size:12px;color:var(--text-mid);font-weight:300;}
+.h-day{color:var(--text);font-weight:500;}
 .sb-social{display:flex;gap:8px;}
-.sb-soc{flex:1;padding:10px 6px;text-align:center;font-size:10px;letter-spacing:1.5px;text-transform:uppercase;font-weight:600;transition:all 0.3s;}
+.sb-soc{flex:1;padding:9px 6px;text-align:center;font-size:10px;letter-spacing:1.5px;text-transform:uppercase;font-weight:600;transition:all 0.3s;}
 .sb-insta{background:#f5e8f5;color:#8a2be2;}
 .sb-insta:hover{background:#ead0f0;}
 .sb-fb{background:#e8eef5;color:#1877F2;}
 .sb-fb:hover{background:#d0dff0;}
 
-/* PREV/NEXT */
-.store-nav{background:var(--dark);padding:32px 60px;display:flex;justify-content:space-between;align-items:center;}
-.sn-link{color:rgba(255,255,255,0.45);font-size:11px;letter-spacing:2px;text-transform:uppercase;display:flex;align-items:center;gap:10px;transition:color 0.3s;}
+.store-nav{background:var(--dark);padding:30px 60px;display:flex;justify-content:space-between;align-items:center;}
+.sn-link{color:rgba(255,255,255,0.4);font-size:11px;letter-spacing:2px;text-transform:uppercase;display:flex;align-items:center;gap:10px;transition:color 0.3s;}
 .sn-link:hover{color:var(--gold);}
-.sn-mid{font-family:'Cormorant Garamond',serif;font-size:14px;color:rgba(255,255,255,0.2);}
+.sn-mid{font-family:'Cormorant Garamond',serif;font-size:13px;color:rgba(255,255,255,0.18);}
 
-/* FOOTER */
-footer{background:#080f0b;padding:32px 60px;display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:12px;}
-.ft-logo-text{font-family:'Cormorant Garamond',serif;font-size:18px;color:#fff;font-weight:400;}
-.ft-logo-text span{color:var(--gold);font-style:italic;}
-.ft-links-row{display:flex;gap:24px;}
-.ft-links-row a{font-size:11px;color:rgba(255,255,255,0.3);letter-spacing:1px;text-transform:uppercase;transition:color 0.3s;}
-.ft-links-row a:hover{color:rgba(255,255,255,0.7);}
-.ft-copy{font-size:11px;color:rgba(255,255,255,0.2);}
+footer{background:#080f0b;padding:28px 60px;display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:12px;}
+.ft-text{font-family:'Cormorant Garamond',serif;font-size:18px;color:#fff;font-weight:400;}
+.ft-text span{color:var(--gold);font-style:italic;}
+.ft-row{display:flex;gap:24px;}
+.ft-row a{font-size:11px;color:rgba(255,255,255,0.3);letter-spacing:1px;text-transform:uppercase;transition:color 0.3s;}
+.ft-row a:hover{color:rgba(255,255,255,0.7);}
+.ft-copy{font-size:11px;color:rgba(255,255,255,0.18);}
 
-/* REVEAL */
 .reveal{opacity:0;transform:translateY(24px);transition:opacity 0.7s ease,transform 0.7s ease;}
 .reveal.visible{opacity:1;transform:translateY(0);}
 
-/* MOBILE */
 @media(max-width:960px){
   nav{padding:0 20px;height:60px;}
-  .nav-book-btn{display:none;}
+  .nav-cta{display:none;}
   .hero-content{padding:0 24px 44px;}
   .info-bar{grid-template-columns:1fr 1fr;}
   .page-wrap{grid-template-columns:1fr;}
   .sidebar-col{position:static;height:auto;border-left:none;border-top:1px solid rgba(0,0,0,0.06);}
-  .main-col{padding:44px 20px;}
+  .main-col{padding:40px 20px;}
   .about-grid{grid-template-columns:1fr;}
-  .services-block,.stylists-block{padding:44px 20px;margin:0 -20px;}
+  .dark-block{padding:44px 20px;margin:0 -20px;}
   .svc-cards-grid{grid-template-columns:1fr 1fr;}
   .stylists-grid{grid-template-columns:1fr 1fr;}
   .offers-grid{grid-template-columns:1fr 1fr;}
@@ -216,24 +207,24 @@ footer{background:#080f0b;padding:32px 60px;display:flex;justify-content:space-b
   .float-book{bottom:16px;right:16px;}
 }
 @media(max-width:600px){
-  .svc-cards-grid{grid-template-columns:1fr;}
+  .svc-cards-grid,.offers-grid{grid-template-columns:1fr;}
   .stylists-grid{grid-template-columns:1fr 1fr;}
-  .offers-grid{grid-template-columns:1fr;}
+  .info-bar{grid-template-columns:1fr;}
 }
 </style>
 </head>
 <body>
 
-<a href="#book-section" class="float-book">✦ Book Now</a>
+<a href="#book-section" class="float-book">&#10022; Book Now</a>
 
 <nav>
   <a href="../index.html" class="nav-logo">
     <img src="../images/naturals-logo.png" alt="Naturals" onerror="this.style.display='none'">
-    <div class="nav-logo-text">Naturals <span>Salon & Spa</span></div>
+    <div class="nav-logo-text">Naturals <span>Salon &amp; Spa</span></div>
   </a>
   <div class="nav-right">
-    <a href="../index.html#stores" class="nav-back">← All Locations</a>
-    <a href="#book-section" class="nav-book-btn">Book Appointment</a>
+    <a href="../index.html#stores" class="nav-back">&#8592; All Locations</a>
+    <a href="#book-section" class="nav-cta">Book Appointment</a>
   </div>
 </nav>
 
@@ -242,13 +233,13 @@ footer{background:#080f0b;padding:32px 60px;display:flex;justify-content:space-b
   <div class="hero-bg"></div>
   <div class="hero-ov"></div>
   <div class="hero-content">
-    <div class="hero-badge">Store 04 of 5 · Bangalore</div>
+    <div class="hero-badge">Store 04 of 5 &middot; Bangalore</div>
     <h1>Naturals<br><em>Frazer Town</em></h1>
     <div class="hero-sub">Pulikeshi Nagar · 560005</div>
     <div class="hero-actions">
-      <a href="#book-section" class="btn-gold">✦ Book Appointment</a>
-      <a href="https://wa.me/919945488040" target="_blank" class="btn-ghost">💬 WhatsApp</a>
-      <a href="https://g.page/Naturals-FrazerTown/" target="_blank" class="btn-ghost">📍 Directions</a>
+      <a href="#book-section" class="btn-gold">&#10022; Book Appointment</a>
+      <a href="https://wa.me/919945488040" target="_blank" class="btn-ghost"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="#25D366" width="18" height="18" style="flex-shrink:0"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg> WhatsApp Us</a>
+      <a href="https://g.page/Naturals-FrazerTown/" target="_blank" class="btn-ghost">&#128205; Directions</a>
     </div>
   </div>
 </section>
@@ -256,237 +247,231 @@ footer{background:#080f0b;padding:32px 60px;display:flex;justify-content:space-b
 <!-- INFO BAR -->
 <div class="info-bar">
   <div class="info-cell">
-    <span class="info-icon">📞</span>
+    <span class="info-icon">&#128222;</span>
     <div>
-      <div class="info-label">Mobile / Call</div>
+      <div class="info-label">Call Us</div>
       <a href="tel:919945488040" class="info-val">+91 99454 88040</a>
-      <a href="https://wa.me/919945488040" class="info-val-sm">💬 WhatsApp same number</a>
     </div>
   </div>
   <div class="info-cell">
-    <span class="info-icon">☎️</span>
+    <span class="info-icon-wa"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="#25D366" width="18" height="18" style="flex-shrink:0"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg></span>
+    <div>
+      <div class="info-label">WhatsApp</div>
+      <a href="https://wa.me/919945488040" class="info-val">+91 99454 88040</a>
+    </div>
+  </div>
+    <div class="info-cell">
+    <span class="info-icon">&#9742;</span>
     <div>
       <div class="info-label">Landline</div>
-      <a href="tel:918040948040" class="info-val">☎️ +91 80 4094 8040</a>
+      <a href="tel:918040948040" class="info-val">+91 80 4094 8040</a>
     </div>
   </div>
   <div class="info-cell">
-    <span class="info-icon">🕐</span>
+    <span class="info-icon">&#128197;</span>
     <div>
-      <div class="info-label">Hours</div>
-      <span class="info-val">Mon – Sat: 9AM – 8PM</span>
-      <span class="info-val-sm">Sun: 10AM – 7PM</span>
-    </div>
-  </div>
-  <div class="info-cell">
-    <span class="info-icon">📅</span>
-    <div>
-      <div class="info-label">Appointments</div>
-      <a href="#book-section" class="info-val">Book Online 24/7</a>
-      <span class="info-val-sm">No wait, instant confirm</span>
+      <div class="info-label">Book Online</div>
+      <a href="#book-section" class="info-val">Available 24/7</a>
+      <span class="info-val-sm">Instant confirmation</span>
     </div>
   </div>
 </div>
 
 <!-- MAIN + SIDEBAR -->
 <div class="page-wrap">
+<div class="main-col">
 
-  <!-- MAIN CONTENT -->
-  <div class="main-col">
-
-    <!-- ABOUT -->
-    <div class="about-grid reveal">
-      <div class="about-img-wrap">
-        <img src="../images/heroes/frazer-town.jpg"
-             alt="Naturals Frazer Town"
-             onerror="this.src='https://images.unsplash.com/photo-1487412947147-5cebf100ffc2?w=1800&q=85'">
-      </div>
-      <div>
-        <div class="lbl">Our Store</div>
-        <h2 class="sec-title">A premium<br>experience in<br><em>Frazer Town.</em></h2>
-        <p class="about-p">Welcome to Naturals Salon & Spa Frazer Town — part of India's most trusted salon network with over 25 years of beauty expertise.</p>
-        <p class="about-p">Our expert team of stylists and therapists deliver world-class services in a relaxed, luxurious setting. Every visit is personalised to you.</p>
-        <a href="#book-section" class="btn-gold" style="margin-top:20px;font-size:11px;">Book Your Visit →</a>
-      </div>
+  <!-- ABOUT -->
+  <div class="about-grid reveal">
+    <div class="about-img-wrap">
+      <img src="../images/heroes/frazer-town.jpg" alt="Naturals Frazer Town"
+           onerror="this.src='https://images.unsplash.com/photo-1487412947147-5cebf100ffc2?w=1800&q=85'">
     </div>
-
-    <!-- SERVICES — LIVE FROM GOOGLE SHEETS -->
-    <div class="services-block reveal">
-      <div class="lbl">What We Offer</div>
-      <h2 class="sec-title sec-title-wh">Our <em>services</em></h2>
-      <p style="font-size:14px;color:rgba(255,255,255,0.4);font-weight:300;margin-bottom:32px;line-height:1.7;">Live from our services database — updated whenever we update our sheet.</p>
-      <div id="svc-filter"></div>
-      <div id="svc-loading">Loading services...</div>
-      <div id="svc-container"></div>
+    <div>
+      <div class="lbl">Our Store</div>
+      <h2 class="sec-title">A premium experience<br>in <em>Frazer Town.</em></h2>
+      <p class="about-p">Welcome to Naturals Salon &amp; Spa Frazer Town — part of India's most trusted salon network with over 25 years of beauty expertise.</p>
+      <p class="about-p">Our expert team delivers world-class services in a relaxed, luxurious setting. Every visit is personalised to you.</p>
+      <a href="#book-section" class="btn-gold" style="margin-top:20px;font-size:11px;">Book Your Visit &#8594;</a>
     </div>
-
-    <!-- OFFERS -->
-    <div class="offers-block reveal">
-      <div class="lbl">Current Offers</div>
-      <h2 class="sec-title">Deals & <em>offers</em></h2>
-      <div class="offers-grid">
-        <div class="offer-card">
-          <img src="../images/offers/offer-1.jpg" alt="Offer"
-               onerror="this.src='https://images.unsplash.com/photo-1522337360788-8b13dee7a37e?w=600&q=80'">
-          <div class="offer-ov"></div>
-          <div class="offer-info">
-            <div class="offer-badge">20% Off</div>
-            <div class="offer-title">Hair Colour Package</div>
-            <div class="offer-valid">Valid till end of month</div>
-          </div>
-        </div>
-        <div class="offer-card">
-          <img src="../images/offers/offer-2.jpg" alt="Offer"
-               onerror="this.src='https://images.unsplash.com/photo-1570172619644-dfd03ed5d881?w=600&q=80'">
-          <div class="offer-ov"></div>
-          <div class="offer-info">
-            <div class="offer-badge">Combo Deal</div>
-            <div class="offer-title">Facial + Clean-up</div>
-            <div class="offer-valid">Weekday special offer</div>
-          </div>
-        </div>
-        <div class="offer-card">
-          <img src="../images/offers/offer-3.jpg" alt="Offer"
-               onerror="this.src='https://images.unsplash.com/photo-1519823551278-64ac92734fb1?w=600&q=80'">
-          <div class="offer-ov"></div>
-          <div class="offer-info">
-            <div class="offer-badge">Members Only</div>
-            <div class="offer-title">Spa Day Package</div>
-            <div class="offer-valid">Book in advance</div>
-          </div>
-        </div>
-      </div>
-      <p style="font-size:12px;color:var(--text-light);margin-top:16px;font-style:italic;">* Offers subject to availability. Contact store to confirm validity.</p>
-    </div>
-
-    <!-- STYLISTS — LIVE FROM GOOGLE SHEETS -->
-    <div class="stylists-block reveal">
-      <div class="lbl">Our Team</div>
-      <h2 class="sec-title sec-title-wh">Meet our <em>stylists</em></h2>
-      <div id="stylists-loading">Loading stylists...</div>
-      <div class="stylists-grid" id="stylists-container"></div>
-    </div>
-
-    <!-- MAP -->
-    <div class="map-block reveal">
-      <div class="lbl">Find Us</div>
-      <h2 class="sec-title">We're in <em>Frazer Town</em></h2>
-      <p class="about-p">No.94, 1st Floor, Mosque Road, Above Poorvika Mobile Store, Pulikeshi Nagar, Frazer Town, Bangalore — 560005</p>
-      <div class="map-frame">
-        <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3887.8!2d77.6140!3d12.9920!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0x0!2sFrazer+Town!5e0!3m2!1sen!2sin!4v1" allowfullscreen loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
-      </div>
-      <a href="https://g.page/Naturals-FrazerTown/" target="_blank" class="map-link">Open in Google Maps →</a>
-    </div>
-
-    <!-- CONTACT -->
-    <div style="margin-top:52px;" class="reveal">
-      <div class="lbl">Get In Touch</div>
-      <h2 class="sec-title">Contact <em>us</em></h2>
-      <div class="contact-rows">
-        <a href="tel:919945488040" class="c-row"><span class="c-icon">📞</span><span>+91 99454 88040 (Call + WhatsApp)</span></a>
-        <a href="https://wa.me/919945488040" target="_blank" class="c-row"><span class="c-icon">💬</span><span>WhatsApp: +91 99454 88040</span></a>
-        <div class="c-landline"><span class="c-icon">☎️</span><span>Landline: +91 80 4094 8040</span></div>
-        <a href="mailto:frazertown.naturals@gmail.com" class="c-row"><span class="c-icon">📧</span><span>frazertown.naturals@gmail.com</span></a>
-        <a href="https://g.page/Naturals-FrazerTown/" target="_blank" class="c-row"><span class="c-icon">📍</span><span>No.94, 1st Floor, Mosque Road, Above Poorvika Mobile Store, Pulikeshi Nagar</span></a>
-      </div>
-    </div>
-
-    <!-- BOOKING — SETMORE JS WIDGET -->
-    <div class="booking-block reveal" id="book-section">
-      <div class="lbl">Reserve Your Visit</div>
-      <h2 class="sec-title">Book an <em>appointment</em></h2>
-      <p class="about-p">Choose your service and pick a time — available 24/7 online.</p>
-      <div class="booking-widget-wrap">
-        <div class="setmore-btn-wrap">
-          <!-- Setmore JS Widget — official embed -->
-          <p class="setmore-note">Click below to open our booking calendar. Choose your service, pick a time, and confirm instantly.</p>
-          <a id="Setmore_button_iframe" style="float:none" href="https://naturals-salon-frazertown.setmore.com/" target="_blank">
-            <img border="none" src="https://storage.googleapis.com/full-assets/setmore/images/1.0/Settings/book-now-white.svg"
-                 alt="Book an appointment with Naturals Frazer Town using SetMore"
-                 style="height:56px;cursor:pointer;">
-          </a>
-          <script id="setmore_script" type="text/javascript"
-            src="https://storage.googleapis.com/fullintegration-live/webComponentAppListing/Container/setmoreIframe.js">
-          </script>
-          <p style="font-size:11px;color:rgba(255,255,255,0.2);margin-top:8px;letter-spacing:1px;">Powered by Setmore · Free online booking</p>
-        </div>
-      </div>
-    </div>
-
   </div>
 
-  <!-- SIDEBAR -->
-  <div class="sidebar-col">
-    <div class="sb-inner">
-      <div class="sb-store-name">Naturals<br>Frazer Town</div>
-      <div class="sb-area">Pulikeshi Nagar · 560005</div>
+  <!-- SERVICES -->
+  <div class="dark-block reveal">
+    <div class="lbl">What We Offer</div>
+    <h2 class="sec-title sec-title-wh">Our <em>services</em></h2>
+    <p style="font-size:13px;color:rgba(255,255,255,0.35);font-weight:300;margin-bottom:28px;line-height:1.7;">Live from our services database. Filter by gender below.</p>
+    <div id="svc-filter"></div>
+    <div id="svc-loading" class="loading-msg">Loading services...</div>
+    <div id="svc-container"></div>
+  </div>
 
-      <div class="sb-section-title">Book Your Visit</div>
-      <a href="#book-section" class="sb-btn sb-primary">📅 Book Online</a>
-      <a href="https://wa.me/919945488040" target="_blank" class="sb-btn sb-wa">💬 Book via WhatsApp</a>
-      <a href="https://g.page/Naturals-FrazerTown/review" target="_blank" class="sb-btn sb-review">⭐ Leave a Google Review</a>
-      <a href="https://g.page/Naturals-FrazerTown/" target="_blank" class="sb-btn sb-ghost">📍 Get Directions</a>
+  <!-- OFFERS -->
+  <div class="offers-block reveal">
+    <div class="lbl">Current Offers</div>
+    <h2 class="sec-title">Deals &amp; <em>offers</em></h2>
+    <div id="offers-loading" class="loading-msg" style="color:var(--text-light);">Loading offers...</div>
+    <div class="offers-grid" id="offers-container"></div>
+    <p id="offers-note" style="display:none;font-size:12px;color:var(--text-light);margin-top:14px;font-style:italic;">* Offers subject to availability. Contact store to confirm.</p>
+  </div>
 
-      <div class="sb-divider"></div>
+  <!-- STYLISTS -->
+  <div class="dark-block reveal">
+    <div class="lbl">Our Team</div>
+    <h2 class="sec-title sec-title-wh">Meet our <em>stylists</em></h2>
+    <div id="stylists-loading" class="loading-msg">Loading stylists...</div>
+    <div class="stylists-grid" id="stylists-container"></div>
+  </div>
 
-      <div class="lbl" style="font-size:9px;margin-bottom:12px;">Contact</div>
-      <div style="font-size:13px;color:var(--text-mid);display:flex;flex-direction:column;gap:8px;margin-bottom:8px;">
-        <a href="tel:919945488040" style="color:var(--text-mid);transition:color 0.3s;" onmouseover="this.style.color='var(--green)'" onmouseout="this.style.color='var(--text-mid)'">📞 +91 99454 88040</a>
-        <a href="tel:918040948040" style="color:var(--text-light);font-size:12px;">☎️ +91 80 4094 8040</a>
-        <a href="mailto:frazertown.naturals@gmail.com" style="color:var(--text-mid);font-size:12px;transition:color 0.3s;" onmouseover="this.style.color='var(--green)'" onmouseout="this.style.color='var(--text-mid)'"">📧 frazertown.naturals@gmail.com</a>
+  <!-- MAP -->
+  <div class="map-block reveal">
+    <div class="lbl">Find Us</div>
+    <h2 class="sec-title">We are in <em>Frazer Town</em></h2>
+    <p class="about-p">No.94, 1st Floor, Mosque Road, Above Poorvika Mobile Store, Pulikeshi Nagar, Frazer Town, Bangalore — 560005</p>
+    <div class="map-frame">
+      <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3887.8!2d77.6140!3d12.9920!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0x0!2sFrazer+Town!5e0!3m2!1sen!2sin!4v1" allowfullscreen loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+    </div>
+    <a href="https://g.page/Naturals-FrazerTown/" target="_blank" class="map-link">Open in Google Maps &#8594;</a>
+  </div>
+
+  <!-- CONTACT -->
+  <div style="margin-top:52px;" class="reveal">
+    <div class="lbl">Get In Touch</div>
+    <h2 class="sec-title">Contact <em>us</em></h2>
+    <div class="contact-rows">
+      <div class="contact-row">
+        <span class="contact-icon">&#128222;</span>
+        <div class="contact-detail">
+          <span class="contact-lbl">Call</span>
+          <a href="tel:919945488040" class="contact-val">+91 99454 88040</a>
+        </div>
       </div>
-
-      <div class="sb-divider"></div>
-
-      <div class="lbl" style="font-size:9px;margin-bottom:12px;">Opening Hours</div>
-      <div class="sb-hours">
-        <div class="h-row"><span class="h-day">Mon – Fri</span><span>9:00 AM – 8:00 PM</span></div>
-        <div class="h-row"><span class="h-day">Saturday</span><span>9:00 AM – 8:00 PM</span></div>
-        <div class="h-row"><span class="h-day">Sunday</span><span>10:00 AM – 7:00 PM</span></div>
+      <div class="contact-row">
+        <span class="contact-icon"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="#25D366" width="18" height="18" style="flex-shrink:0"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg></span>
+        <div class="contact-detail">
+          <span class="contact-lbl">WhatsApp</span>
+          <a href="https://wa.me/919945488040" target="_blank" class="contact-val">+91 99454 88040</a>
+        </div>
       </div>
-
-      <div class="sb-divider"></div>
-
-      <div class="lbl" style="font-size:9px;margin-bottom:12px;">Follow Our Store</div>
-      <div class="sb-social">
-        <a href="https://instagram.com/Naturals.Salon.FrazerTown" target="_blank" class="sb-soc sb-insta">📸 Instagram</a>
-        <a href="https://www.facebook.com/Naturals.Salon.FrazerTown" target="_blank" class="sb-soc sb-fb">👍 Facebook</a>
+            <div class="contact-row">
+        <span class="contact-icon">&#9742;</span>
+        <div class="contact-detail">
+          <span class="contact-lbl">Landline</span>
+          <a href="tel:918040948040" class="contact-val">+91 80 4094 8040</a>
+        </div>
       </div>
-
-      <div class="sb-divider"></div>
-      <div style="text-align:center;padding:8px 0;">
-        <div style="font-family:'Cormorant Garamond',serif;font-size:14px;color:var(--text-mid);font-weight:300;line-height:1.6;">Part of India's largest<br>salon network</div>
-        <div style="font-size:11px;color:var(--gold);letter-spacing:2px;text-transform:uppercase;font-weight:600;margin-top:5px;">1000+ Salons · 25 Years</div>
+      <div class="contact-row">
+        <span class="contact-icon">&#128231;</span>
+        <div class="contact-detail">
+          <span class="contact-lbl">Email</span>
+          <a href="mailto:frazertown.naturals@gmail.com" class="contact-val">frazertown.naturals@gmail.com</a>
+        </div>
+      </div>
+      <div class="contact-row">
+        <span class="contact-icon">&#128205;</span>
+        <div class="contact-detail">
+          <span class="contact-lbl">Address</span>
+          <a href="https://g.page/Naturals-FrazerTown/" target="_blank" class="contact-val">No.94, 1st Floor, Mosque Road, Above Poorvika Mobile Store, Pulikeshi Nagar</a>
+        </div>
       </div>
     </div>
   </div>
 
+  <!-- BOOKING -->
+  <div class="booking-block reveal" id="book-section">
+    <div class="lbl">Reserve Your Visit</div>
+    <h2 class="sec-title">Book an <em>appointment</em></h2>
+    <p class="about-p">Choose your service and pick a time — available 24/7 online. Instant confirmation.</p>
+    <div class="booking-box">
+      <h3>Ready to book at<br><em>Frazer Town?</em></h3>
+      <p>Our online booking is open around the clock. Pick your service, choose your stylist, and confirm in minutes.</p>
+      <div class="booking-links">
+        <a href="https://naturals-salon-frazertown.setmore.com/" target="_blank" class="btn-gold">&#128197; Book Appointment Online</a>
+        <a href="https://wa.me/919945488040" target="_blank" class="btn-ghost"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="#25D366" width="18" height="18" style="flex-shrink:0"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg> Book via WhatsApp</a>
+      </div>
+    </div>
+  </div>
+
+</div><!-- end main-col -->
+
+<!-- SIDEBAR -->
+<div class="sidebar-col">
+  <div class="sb-inner">
+    <div class="sb-name">Naturals Frazer Town</div>
+    <div class="sb-area">Pulikeshi Nagar · 560005</div>
+
+    <div class="sb-sec">Book Your Visit</div>
+    <a href="https://naturals-salon-frazertown.setmore.com/" target="_blank" class="sb-btn sb-primary">&#128197; Book Online Now</a>
+    <a href="https://wa.me/919945488040" target="_blank" class="sb-btn sb-wa"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="#25D366" width="18" height="18" style="flex-shrink:0"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg> Book via WhatsApp</a>
+    <a href="https://g.page/Naturals-FrazerTown/review" target="_blank" class="sb-btn sb-review">&#11088; Leave a Google Review</a>
+    <a href="https://g.page/Naturals-FrazerTown/" target="_blank" class="sb-btn sb-ghost">&#128205; Get Directions</a>
+
+    <div class="sb-divider"></div>
+    <div class="lbl" style="font-size:9px;margin-bottom:12px;">Contact</div>
+    <div class="sb-contact-row">
+      <span class="sb-contact-icon">&#128222;</span>
+      <a href="tel:919945488040" class="sb-contact-val">+91 99454 88040</a>
+    </div>
+    <div class="sb-contact-row">
+      <span class="sb-contact-icon"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="#25D366" width="18" height="18" style="flex-shrink:0"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg></span>
+      <a href="https://wa.me/919945488040" target="_blank" class="sb-contact-val">+91 99454 88040</a>
+    </div>
+        <div class="sb-contact-row">
+      <span class="sb-contact-icon">&#9742;</span>
+      <a href="tel:918040948040" class="sb-contact-val">+91 80 4094 8040</a>
+    </div>
+    <div class="sb-contact-row">
+      <span class="sb-contact-icon">&#128231;</span>
+      <a href="mailto:frazertown.naturals@gmail.com" class="sb-contact-val" style="font-size:11px;">frazertown.naturals@gmail.com</a>
+    </div>
+
+    <div class="sb-divider"></div>
+    <div class="lbl" style="font-size:9px;margin-bottom:12px;">Hours</div>
+    <div class="h-row"><span class="h-day">Mon &ndash; Fri</span><span>9:00 AM &ndash; 8:00 PM</span></div>
+    <div class="h-row"><span class="h-day">Saturday</span><span>9:00 AM &ndash; 8:00 PM</span></div>
+    <div class="h-row"><span class="h-day">Sunday</span><span>10:00 AM &ndash; 7:00 PM</span></div>
+
+    <div class="sb-divider"></div>
+    <div class="lbl" style="font-size:9px;margin-bottom:12px;">Follow Us</div>
+    <div class="sb-social">
+      <a href="https://instagram.com/Naturals.Salon.FrazerTown" target="_blank" class="sb-soc sb-insta">&#128248; Instagram</a>
+      <a href="https://www.facebook.com/Naturals.Salon.FrazerTown" target="_blank" class="sb-soc sb-fb">&#128077; Facebook</a>
+    </div>
+
+    <div class="sb-divider"></div>
+    <div style="text-align:center;padding:6px 0;">
+      <div style="font-family:'Cormorant Garamond',serif;font-size:13px;color:var(--text-mid);font-weight:300;line-height:1.6;">Part of India's largest salon network</div>
+      <div style="font-size:11px;color:var(--gold);letter-spacing:2px;text-transform:uppercase;font-weight:600;margin-top:4px;">1000+ Salons &middot; 25 Years</div>
+    </div>
+  </div>
+</div>
 </div><!-- end page-wrap -->
 
-<!-- PREV/NEXT -->
 <div class="store-nav">
-  <a href="devasandra.html" class="sn-link">← Devasandra</a>
+  <a href="devasandra.html" class="sn-link">&#8592; Devasandra</a>
   <div class="sn-mid">All 5 Bangalore Locations</div>
-  <a href="hennur.html" class="sn-link">Hennur →</a>
+  <a href="hennur.html" class="sn-link">Hennur &#8594;</a>
 </div>
 
 <footer>
-  <div class="ft-logo-text">Naturals <span>Salon & Spa</span></div>
-  <div class="ft-links-row">
+  <div class="ft-text">Naturals <span>Salon &amp; Spa</span></div>
+  <div class="ft-row">
     <a href="../index.html">Home</a>
-    <a href="../index.html#stores">All Stores</a>
     <a href="../services.html">Services</a>
+    <a href="../index.html#stores">All Stores</a>
     <a href="#book-section">Book</a>
   </div>
-  <div class="ft-copy">© 2026 Naturals Salon & Spa, Bangalore</div>
+  <div class="ft-copy">&copy; 2026 Naturals Salon &amp; Spa, Bangalore</div>
 </footer>
 
 <script>
-// ── SCROLL REVEAL ──
-const io=new IntersectionObserver((entries)=>{entries.forEach((e,i)=>{if(e.isIntersecting){setTimeout(()=>e.target.classList.add('visible'),i*80);io.unobserve(e.target);}})},{threshold:0.07});
-document.querySelectorAll('.reveal').forEach(el=>io.observe(el));
+const STORE_ID = 'Store_N05';
+const STORE_ID_SHORT = 'N05';
+const CSV_SERVICES = 'https://docs.google.com/spreadsheets/d/1wy0_josh4L-C0GXWNnRG8QEO9F8km5SMrDefemChFUo/gviz/tq?tqx=out:csv&sheet=services';
+const CSV_STYLISTS = 'https://docs.google.com/spreadsheets/d/1wy0_josh4L-C0GXWNnRG8QEO9F8km5SMrDefemChFUo/gviz/tq?tqx=out:csv&sheet=stylists';
+const CSV_OFFERS   = 'https://docs.google.com/spreadsheets/d/1wy0_josh4L-C0GXWNnRG8QEO9F8km5SMrDefemChFUo/gviz/tq?tqx=out:csv&sheet=offers';
 
-// ── CSV PARSER ──
+
 function parseCSV(text){
   const rows=[];
   const lines=text.split('\n');
@@ -504,130 +489,214 @@ function parseCSV(text){
   });
   return rows;
 }
+function ci(s){return (s||'').trim().toLowerCase();}
+function genIcon(g){return ci(g)==='women'?'♀':ci(g)==='men'?'♂':'⚥';}
 
-// ── LOAD SERVICES ──
-async function loadServices(){
-  const container=document.getElementById('svc-container');
-  const loading=document.getElementById('svc-loading');
-  try{
-    const res=await fetch('https://docs.google.com/spreadsheets/d/1wy0_josh4L-C0GXWNnRG8QEO9F8km5SMrDefemChFUo/gviz/tq?tqx=out:csv&sheet=services');
-    const text=await res.text();
-    const rows=parseCSV(text);
-    if(!rows.length){loading.textContent='No services found.';return;}
-    const H=rows[0].map(h=>h.trim());
-    const idx=n=>H.indexOf(n);
-    const iCat=idx('Category'),iName=idx('Service_Name'),iDur=idx('Duration');
-    const iReg=idx('Regular_Cost'),iMem=idx('Member_Cost'),iGen=idx('Gender');
-    const iStore=idx('Store_N05'),iDesc=idx('Description');
-    const data=rows.slice(1).filter(r=>(r[iStore]||'').trim().toLowerCase()==='yes');
-    if(!data.length){loading.textContent='Services coming soon for this location.';return;}
-    // Gender filters
-    const gens=['All',...new Set(data.map(r=>(r[iGen]||'Both').trim()))];
-    const filterEl=document.getElementById('svc-filter');
-    gens.forEach((g,i)=>{
-      const btn=document.createElement('button');
-      btn.textContent=g;btn.className='f-btn'+(i===0?' active':'');
-      btn.onclick=()=>{document.querySelectorAll('.f-btn').forEach(b=>b.classList.remove('active'));btn.classList.add('active');filterSvcs(g);};
+
+function hdridx(H, name) {
+  return H.findIndex(h => ci(h) === ci(name));
+}
+
+// ── SERVICES ──
+async function loadServices() {
+  const container = document.getElementById('svc-container');
+  const loading   = document.getElementById('svc-loading');
+  try {
+    const res  = await fetch(CSV_SERVICES);
+    const text = await res.text();
+    const rows = parseCSV(text);
+    if (!rows.length) { loading.textContent = 'No services found.'; return; }
+    const H = rows[0].map(h => h.trim());
+    const iCat   = hdridx(H,'Category');
+    const iName  = hdridx(H,'Service_Name');
+    const iDur   = hdridx(H,'Duration');
+    const iReg   = hdridx(H,'Regular_Cost');
+    const iMem   = hdridx(H,'Member_Cost');
+    const iGen   = hdridx(H,'Gender');
+    const iStore = hdridx(H, STORE_ID.replace('Store_','Store_'));
+    const iDesc  = hdridx(H,'Description');
+    // find store column case-insensitively
+    const storeColIdx = H.findIndex(h => ci(h) === ci(STORE_ID));
+    const data = rows.slice(1).filter(r => ci(r[storeColIdx] || '') === 'yes');
+    if (!data.length) { loading.textContent = 'Services coming soon for this location.'; return; }
+    // gender filter buttons from actual data
+    const gens = ['All', ...[...new Set(data.map(r => (r[iGen]||'').trim()).filter(Boolean))]];
+    const filterEl = document.getElementById('svc-filter');
+    gens.forEach((g, i) => {
+      const btn = document.createElement('button');
+      btn.textContent = g; btn.className = 'f-btn' + (i===0?' active':'');
+      btn.onclick = () => {
+        document.querySelectorAll('#svc-filter .f-btn').forEach(b => b.classList.remove('active'));
+        btn.classList.add('active'); filterSvcs(g);
+      };
       filterEl.appendChild(btn);
     });
-    // Group by category
-    const cats={};
-    data.forEach(r=>{const cat=(r[iCat]||'Other').trim();if(!cats[cat])cats[cat]=[];cats[cat].push(r);});
-    loading.style.display='none';
-    Object.entries(cats).forEach(([cat,svcs])=>{
-      const sec=document.createElement('div');
-      sec.className='svc-cat-sec';
-      sec.innerHTML=`<div class="svc-cat-hdr"><div class="svc-cat-lbl">Category</div><div class="svc-cat-name">${cat}</div></div><div class="svc-cards-grid" id="cat-${cat.replace(/\s+/g,'-')}"></div>`;
+    // group by category
+    const cats = {};
+    data.forEach(r => { const cat=(r[iCat]||'Other').trim(); if(!cats[cat]) cats[cat]=[]; cats[cat].push(r); });
+    loading.style.display = 'none';
+    Object.entries(cats).forEach(([cat, svcs]) => {
+      const sec = document.createElement('div'); sec.className='svc-cat-sec';
+      sec.innerHTML = `<div class="svc-cat-hdr"><div class="svc-cat-lbl">Category</div><div class="svc-cat-name">${cat}</div></div><div class="svc-cards-grid"></div>`;
       container.appendChild(sec);
-      const grid=sec.querySelector('.svc-cards-grid');
-      svcs.forEach(r=>{
-        const name=(r[iName]||'').trim(),dur=(r[iDur]||'').trim();
-        const reg=(r[iReg]||'').trim(),mem=(r[iMem]||'').trim();
-        const gen=(r[iGen]||'').trim(),desc=(r[iDesc]||'').trim();
-        const memHtml=mem&&mem!=='-'?`<span class="price-mem">Members ₹${mem}</span>`:'';
-        const card=document.createElement('div');
-        card.className='svc-item';card.dataset.gender=gen;
-        card.innerHTML=`
+      const grid = sec.querySelector('.svc-cards-grid');
+      svcs.forEach(r => {
+        const name = (r[iName]||'').trim();
+        const dur  = (r[iDur] ||'').trim();
+        const reg  = (r[iReg] ||'').trim();
+        const mem  = (r[iMem] ||'').trim();
+        const gen  = (r[iGen] ||'').trim();
+        const desc = (r[iDesc]||'').trim();
+        const memHtml = (mem && ci(mem)!=='-') ? `<span class="price-mem">Members &#8377;${mem}</span>` : '';
+        const card = document.createElement('div');
+        card.className='svc-item'; card.dataset.gender=ci(gen);
+        card.innerHTML = `
           <div>
             <div class="svc-item-name">${name}</div>
             <div class="svc-item-desc">${desc}</div>
           </div>
-          <div class="svc-item-bottom">
+          <div class="svc-item-foot">
             <div class="svc-tags">
-              ${dur?`<span class="svc-tag">⏱ ${dur}</span>`:''}
-              ${gen?`<span class="svc-tag">${genIcon(gen)} ${gen}</span>`:''}
+              ${dur ? `<span class="svc-tag">&#9201; ${dur}</span>` : ''}
+              ${gen ? `<span class="svc-tag">${genIcon(gen)} ${gen}</span>` : ''}
             </div>
-            <div class="svc-price-wrap">
-              <span class="price-reg">₹${reg}</span>
-              ${memHtml}
+            <div style="text-align:right">
+              <span class="price-reg">&#8377;${reg}</span>${memHtml}
             </div>
           </div>`;
         grid.appendChild(card);
       });
     });
-  }catch(e){loading.textContent='Unable to load services. Please try again later.';console.error(e);}
+  } catch(e) { loading.textContent='Unable to load services.'; console.error(e); }
 }
 
-function filterSvcs(g){
-  document.querySelectorAll('.svc-item').forEach(c=>{
-    const cg=c.dataset.gender||'Both';
-    c.style.display=(g==='All'||cg===g||cg==='Both')?'':'none';
+function filterSvcs(g) {
+  const isAll = ci(g) === 'all';
+  document.querySelectorAll('.svc-item').forEach(c => {
+    const cg = c.dataset.gender;
+    c.style.display = (isAll || cg === ci(g) || cg === 'both') ? '' : 'none';
   });
-  document.querySelectorAll('.svc-cat-sec').forEach(s=>{
-    const vis=[...s.querySelectorAll('.svc-item')].some(c=>c.style.display!=='none');
-    s.style.display=vis?'':'none';
+  document.querySelectorAll('.svc-cat-sec').forEach(sec => {
+    const hasVisible = [...sec.querySelectorAll('.svc-item')].some(c => c.style.display !== 'none');
+    sec.style.display = hasVisible ? '' : 'none';
   });
 }
 
-function genIcon(g){return g==='Women'?'♀':g==='Men'?'♂':'⚥';}
-
-// ── LOAD STYLISTS ──
-const STORE_ID='N05';
-async function loadStylists(){
-  const container=document.getElementById('stylists-container');
-  const loading=document.getElementById('stylists-loading');
-  try{
-    const res=await fetch('https://docs.google.com/spreadsheets/d/1wy0_josh4L-C0GXWNnRG8QEO9F8km5SMrDefemChFUo/gviz/tq?tqx=out:csv&sheet=stylists');
-    const text=await res.text();
-    const rows=parseCSV(text);
-    if(!rows.length){loading.style.display='none';return;}
-    const H=rows[0].map(h=>h.trim());
-    const iStore=H.indexOf('Store_ID'),iName=H.indexOf('Stylist_Name');
-    const iSpec=H.indexOf('Specialization'),iExp=H.indexOf('Experience');
-    const iActive=H.indexOf('Active');
-    const data=rows.slice(1).filter(r=>{
-      const storeMatch=(r[iStore]||'').trim().toUpperCase()===STORE_ID.toUpperCase();
-      const active=iActive<0||(r[iActive]||'').trim().toLowerCase()!=='no';
-      return storeMatch&&active;
-    });
-    if(!data.length){loading.style.display='none';return;}
+// ── OFFERS ──
+async function loadOffers() {
+  const container = document.getElementById('offers-container');
+  const loading   = document.getElementById('offers-loading');
+  const note      = document.getElementById('offers-note');
+  try {
+    const res  = await fetch(CSV_OFFERS);
+    const text = await res.text();
+    const rows = parseCSV(text);
+    if (!rows.length) { loading.style.display='none'; return; }
+    const H = rows[0].map(h => h.trim());
+    const iSt    = hdridx(H,'Store_ID');
+    const iTitle = hdridx(H,'Offer_Title');
+    const iDet   = hdridx(H,'Offer_Details');
+    const iTill  = hdridx(H,'Valid_till');
+    const iImgAv = hdridx(H,'Image_Available');
+    const iImgNm = hdridx(H,'Image_Name');
+    const data = rows.slice(1).filter(r => ci(r[iSt]) === ci(STORE_ID));
+    if (!data.length) { loading.style.display='none'; return; }
     loading.style.display='none';
-    data.forEach(r=>{
-      const name=(r[iName]||'').trim();
-      const spec=(r[iSpec]||'').trim();
-      const exp=(r[iExp]||'').trim();
-      if(!name)return;
-      // Build image filename: Store_N78_StylistName.jpg (spaces → no spaces, Title case)
-      const imgName=`Store_${STORE_ID}_${name.replace(/\s+/g,'')}.jpg`;
-      const card=document.createElement('div');
-      card.className='stylist-card';
-      card.innerHTML=`
+    note.style.display='block';
+    data.forEach(r => {
+      const title    = (r[iTitle]||'').trim();
+      const details  = (r[iDet] ||'').trim();
+      const till     = (r[iTill]||'').trim();
+      const imgAvail = ci(r[iImgAv]||'') === 'yes';
+      const imgName  = (r[iImgNm]||'').trim();
+      const card = document.createElement('div');
+      if (imgAvail && imgName) {
+        card.className = 'offer-img-card';
+        const safeTitle   = title.replace(/\/g,'\\').replace(/`/g,'\`');
+        const safeDetails = details.replace(/\/g,'\\').replace(/`/g,'\`');
+        card.innerHTML = `<img src="../images/offers/${imgName}.jpg" alt="${title}"
+          onerror="
+            this.parentElement.className='offer-txt-card';
+            this.parentElement.innerHTML=buildTxtCard('${safeTitle}','${safeDetails}','${till}');
+          ">`;
+      } else {
+        card.className = 'offer-txt-card';
+        card.innerHTML = buildTxtCard(title, details, till);
+      }
+      container.appendChild(card);
+    });
+  } catch(e) { loading.style.display='none'; console.error('Offers:',e); }
+}
+
+function buildTxtCard(title, details, till) {
+  return `<div><span class="offer-badge">Special Offer</span><div class="offer-title">${title}</div><div class="offer-details">${details}</div></div><div class="offer-valid">Valid till: ${till}</div>`;
+}
+
+// ── STYLISTS ──
+async function loadStylists() {
+  const container = document.getElementById('stylists-container');
+  const loading   = document.getElementById('stylists-loading');
+  try {
+    const res  = await fetch(CSV_STYLISTS);
+    const text = await res.text();
+    const rows = parseCSV(text);
+    if (!rows.length) { loading.style.display='none'; return; }
+    const H = rows[0].map(h => h.trim());
+    const iSt     = hdridx(H,'Store_ID');
+    const iName   = hdridx(H,'Stylist_Name');
+    const iSpec   = hdridx(H,'Specialization');
+    const iExp    = hdridx(H,'Experience');
+    const iPhoto  = hdridx(H,'Photo_Status');
+    const iActive = hdridx(H,'Active_Status');
+    const data = rows.slice(1).filter(r => {
+      const storeMatch = ci(r[iSt]) === ci(STORE_ID);
+      const active     = ci(r[iActive]||'yes') !== 'no';
+      return storeMatch && active;
+    });
+    if (!data.length) { loading.style.display='none'; return; }
+    loading.style.display='none';
+    data.forEach(r => {
+      const name    = (r[iName]||'').trim();
+      const spec    = (r[iSpec]||'').trim();
+      const expRaw  = (r[iExp] ||'').trim();
+      const exp     = expRaw ? expRaw + ' years' : '';
+      const photoYes= ci(r[iPhoto]||'') === 'yes';
+      const imgFile = photoYes
+        ? `Store_${STORE_ID_SHORT}_${name.replace(/\s+/g,'')}.jpg`
+        : 'default_stylist.jpg';
+      const card = document.createElement('div');
+      card.className = 'stylist-card';
+      card.innerHTML = `
         <div class="stylist-photo">
-          <img src="../images/stylists/${imgName}"
-               alt="${name}"
+          <img src="../images/stylists/${imgFile}" alt="${name}"
                onerror="this.src='../images/stylists/default_stylist.jpg'">
         </div>
         <div class="stylist-info">
           <div class="stylist-name">${name}</div>
-          ${spec?`<div class="stylist-spec">${spec}</div>`:''}
-          ${exp?`<div class="stylist-exp">${exp}</div>`:''}
+          ${spec ? `<div class="stylist-spec">${spec}</div>` : ''}
+          ${exp  ? `<div class="stylist-exp">${exp}</div>`  : ''}
         </div>`;
       container.appendChild(card);
     });
-  }catch(e){loading.style.display='none';console.error('Stylists error:',e);}
+  } catch(e) { loading.style.display='none'; console.error('Stylists:',e); }
 }
 
-document.addEventListener('DOMContentLoaded',()=>{loadServices();loadStylists();});
+// ── REVEAL ──
+const io = new IntersectionObserver((entries) => {
+  entries.forEach((e,i) => {
+    if (e.isIntersecting) {
+      setTimeout(() => e.target.classList.add('visible'), i*80);
+      io.unobserve(e.target);
+    }
+  });
+}, {threshold:0.07});
+document.querySelectorAll('.reveal').forEach(el => io.observe(el));
+
+document.addEventListener('DOMContentLoaded', () => {
+  loadServices();
+  loadOffers();
+  loadStylists();
+});
 </script>
 </body>
 </html>

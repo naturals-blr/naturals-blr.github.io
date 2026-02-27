@@ -4,7 +4,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <meta name="description" content="Naturals Salon & Spa — Full services menu with pricing across all 5 Bangalore locations.">
-<title>Services & Pricing | Naturals Salon & Spa Bangalore</title>
+<title>Services &amp; Pricing | Naturals Salon &amp; Spa Bangalore</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=Jost:wght@300;400;500;600&display=swap" rel="stylesheet">
 <style>
@@ -17,6 +17,7 @@
 html{scroll-behavior:smooth;}
 body{font-family:'Jost',sans-serif;background:var(--cream);color:var(--text);}
 a{text-decoration:none;color:inherit;}
+img{display:block;width:100%;object-fit:cover;}
 
 /* NAV */
 nav{position:fixed;top:0;left:0;right:0;z-index:200;padding:0 60px;height:70px;display:flex;justify-content:space-between;align-items:center;background:rgba(17,23,20,0.97);backdrop-filter:blur(20px);border-bottom:1px solid rgba(255,255,255,0.06);}
@@ -24,123 +25,104 @@ nav{position:fixed;top:0;left:0;right:0;z-index:200;padding:0 60px;height:70px;d
 .nav-logo img{height:34px;width:auto;object-fit:contain;filter:brightness(0) invert(1);}
 .nav-logo-text{font-family:'Cormorant Garamond',serif;font-size:18px;font-weight:500;color:#fff;letter-spacing:1px;}
 .nav-logo-text span{color:var(--gold);font-style:italic;font-weight:300;}
-.nav-back{color:rgba(255,255,255,0.55);font-size:11px;letter-spacing:2px;text-transform:uppercase;transition:color 0.3s;}
+.nav-right{display:flex;align-items:center;gap:24px;}
+.nav-back{color:rgba(255,255,255,0.5);font-size:11px;letter-spacing:2px;text-transform:uppercase;transition:color 0.3s;}
 .nav-back:hover{color:var(--gold);}
-.nav-book-btn{background:var(--gold);color:var(--dark);padding:10px 22px;font-size:11px;letter-spacing:2px;text-transform:uppercase;font-weight:600;transition:all 0.3s;}
-.nav-book-btn:hover{background:var(--gold-pale);}
+.nav-cta{background:var(--gold);color:var(--dark);padding:10px 22px;font-size:11px;letter-spacing:2px;text-transform:uppercase;font-weight:600;transition:all 0.3s;}
+.nav-cta:hover{background:var(--gold-pale);}
 
 /* PAGE HERO */
-.page-hero{
-  padding-top:70px;
-  background:var(--dark);
-  padding-bottom:0;
-}
-.page-hero-inner{
-  padding:64px 60px 56px;
-  border-bottom:1px solid rgba(255,255,255,0.06);
-}
+.page-hero{padding-top:70px;background:var(--dark);}
+.page-hero-inner{padding:60px 60px 0;}
 .lbl{font-size:9px;letter-spacing:5px;text-transform:uppercase;color:var(--gold);font-weight:600;margin-bottom:16px;display:flex;align-items:center;gap:12px;}
 .lbl::before{content:'';width:18px;height:1px;background:var(--gold);}
-.page-hero-inner h1{font-family:'Cormorant Garamond',serif;font-size:clamp(42px,6vw,80px);font-weight:300;color:#fff;line-height:0.95;margin-bottom:16px;}
+.page-hero-inner h1{font-family:'Cormorant Garamond',serif;font-size:clamp(42px,6vw,80px);font-weight:300;color:#fff;line-height:0.95;margin-bottom:14px;}
 .page-hero-inner h1 em{font-style:italic;color:var(--gold);}
-.page-hero-inner p{font-size:14px;color:rgba(255,255,255,0.45);font-weight:300;line-height:1.8;max-width:560px;}
+.page-hero-inner p{font-size:14px;color:rgba(255,255,255,0.42);font-weight:300;line-height:1.8;max-width:560px;padding-bottom:40px;}
 
-/* FILTERS BAR */
-.filters-bar{
-  background:var(--dark);
-  padding:24px 60px;
-  display:flex;align-items:center;gap:40px;flex-wrap:wrap;
-  position:sticky;top:70px;z-index:100;
-  border-bottom:1px solid rgba(255,255,255,0.06);
-}
-.filter-group{display:flex;align-items:center;gap:10px;flex-wrap:wrap;}
-.filter-group-lbl{font-size:9px;letter-spacing:3px;text-transform:uppercase;color:rgba(255,255,255,0.3);font-weight:600;white-space:nowrap;}
-.f-btn{background:rgba(255,255,255,0.05);border:1px solid rgba(255,255,255,0.1);color:rgba(255,255,255,0.5);padding:8px 18px;font-size:11px;letter-spacing:2px;text-transform:uppercase;cursor:pointer;transition:all 0.3s;font-family:'Jost',sans-serif;font-weight:500;}
-.f-btn:hover{border-color:var(--gold);color:var(--gold);}
-.f-btn.active{background:var(--gold);border-color:var(--gold);color:var(--dark);}
+/* FILTERS */
+.filters-wrap{background:var(--dark);padding:0 60px 28px;position:sticky;top:70px;z-index:100;border-bottom:1px solid rgba(255,255,255,0.06);}
+.filter-row{display:flex;align-items:center;gap:10px;flex-wrap:wrap;margin-bottom:10px;}
+.filter-row:last-child{margin-bottom:0;}
+.filter-lbl{font-size:9px;letter-spacing:3px;text-transform:uppercase;font-weight:600;white-space:nowrap;min-width:72px;}
+/* Store filter — green */
+.filter-lbl-store{color:#52B788;}
+.f-btn-store{background:rgba(82,183,136,0.08);border:1px solid rgba(82,183,136,0.2);color:rgba(255,255,255,0.45);padding:7px 16px;font-size:11px;letter-spacing:1.5px;text-transform:uppercase;cursor:pointer;transition:all 0.3s;font-family:'Jost',sans-serif;font-weight:500;}
+.f-btn-store:hover{border-color:#52B788;color:#52B788;}
+.f-btn-store.active{background:#1B4332;border-color:#52B788;color:#52B788;}
+/* Gender filter — gold */
+.filter-lbl-gender{color:var(--gold);}
+.f-btn-gender{background:rgba(201,168,76,0.07);border:1px solid rgba(201,168,76,0.2);color:rgba(255,255,255,0.45);padding:7px 16px;font-size:11px;letter-spacing:1.5px;text-transform:uppercase;cursor:pointer;transition:all 0.3s;font-family:'Jost',sans-serif;font-weight:500;}
+.f-btn-gender:hover{border-color:var(--gold);color:var(--gold);}
+.f-btn-gender.active{background:rgba(201,168,76,0.15);border-color:var(--gold);color:var(--gold);}
+/* Category filter — outline/white */
+.filter-lbl-cat{color:rgba(255,255,255,0.4);}
+.f-btn-cat{background:transparent;border:1px solid rgba(255,255,255,0.1);color:rgba(255,255,255,0.4);padding:7px 16px;font-size:11px;letter-spacing:1.5px;text-transform:uppercase;cursor:pointer;transition:all 0.3s;font-family:'Jost',sans-serif;font-weight:500;}
+.f-btn-cat:hover{border-color:rgba(255,255,255,0.4);color:rgba(255,255,255,0.8);}
+.f-btn-cat.active{background:rgba(255,255,255,0.1);border-color:rgba(255,255,255,0.5);color:#fff;}
 
-/* RESULTS INFO */
-.results-bar{
-  background:var(--cream);padding:20px 60px;
-  display:flex;align-items:center;justify-content:space-between;
-  border-bottom:1px solid rgba(0,0,0,0.06);
-}
+/* RESULTS BAR */
+.results-bar{background:var(--cream);padding:16px 60px;display:flex;align-items:center;justify-content:space-between;border-bottom:1px solid rgba(0,0,0,0.06);}
 #results-count{font-size:13px;color:var(--text-mid);font-weight:300;}
 #results-store{font-size:12px;color:var(--gold);font-weight:500;letter-spacing:1px;}
 
 /* MAIN */
 .services-main{padding:48px 60px;}
-#svc-loading{text-align:center;padding:80px 0;font-size:14px;color:var(--text-light);font-style:italic;letter-spacing:1px;}
+.loading-msg{text-align:center;padding:80px 0;font-size:14px;color:var(--text-light);font-style:italic;}
 
-/* CATEGORY SECTION */
-.cat-section{margin-bottom:56px;}
-.cat-header{
-  display:flex;align-items:baseline;gap:16px;
-  margin-bottom:24px;padding-bottom:16px;
-  border-bottom:2px solid rgba(0,0,0,0.06);
-}
-.cat-header-img{
-  width:48px;height:48px;border-radius:0;overflow:hidden;flex-shrink:0;
-}
-.cat-header-img img{height:100%;object-fit:cover;}
-.cat-name{font-family:'Cormorant Garamond',serif;font-size:36px;font-weight:300;color:var(--text);line-height:1;}
+/* CATEGORY */
+.cat-section{margin-bottom:52px;}
+.cat-header{display:flex;align-items:baseline;gap:16px;margin-bottom:20px;padding-bottom:14px;border-bottom:2px solid rgba(0,0,0,0.06);}
+.cat-img{width:44px;height:44px;overflow:hidden;flex-shrink:0;}
+.cat-img img{height:100%;object-fit:cover;}
+.cat-name{font-family:'Cormorant Garamond',serif;font-size:34px;font-weight:300;color:var(--text);line-height:1;}
 .cat-count{font-size:11px;color:var(--text-light);letter-spacing:2px;text-transform:uppercase;}
 
 /* SERVICE CARDS */
 .svc-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:2px;}
-.svc-card{
-  background:#fff;padding:24px 22px;
-  border-bottom:2px solid transparent;
-  transition:all 0.25s;
-  display:flex;flex-direction:column;justify-content:space-between;
-  min-height:170px;
-}
+.svc-card{background:#fff;padding:24px 22px;border-bottom:2px solid transparent;transition:all 0.25s;display:flex;flex-direction:column;justify-content:space-between;min-height:170px;}
 .svc-card:hover{background:#fafaf8;border-bottom-color:var(--gold);transform:translateY(-2px);box-shadow:0 4px 20px rgba(0,0,0,0.06);}
 .svc-card-name{font-family:'Cormorant Garamond',serif;font-size:20px;color:var(--text);font-weight:400;margin-bottom:7px;line-height:1.2;}
 .svc-card-desc{font-size:12px;color:var(--text-mid);line-height:1.7;font-weight:300;flex:1;margin-bottom:14px;}
 .svc-card-foot{display:flex;justify-content:space-between;align-items:flex-end;flex-wrap:wrap;gap:8px;}
 .svc-tags{display:flex;flex-wrap:wrap;gap:4px;}
 .svc-tag{font-size:10px;color:var(--text-light);background:rgba(0,0,0,0.04);padding:3px 8px;}
-.svc-tag.women{color:#a0522d;background:#fff5f0;}
-.svc-tag.men{color:#2a4a8a;background:#f0f4ff;}
-.svc-tag.both{color:var(--green-mid);background:var(--cream);}
+.svc-tag-w{color:#a0522d;background:#fff5f0;}
+.svc-tag-m{color:#2a4a8a;background:#f0f4ff;}
+.svc-tag-b{color:var(--green-mid);background:var(--cream);}
 .price-col{text-align:right;}
 .price-reg{font-family:'Cormorant Garamond',serif;font-size:22px;color:var(--gold);font-weight:400;display:block;line-height:1;}
 .price-mem{font-size:11px;color:var(--green-soft);display:block;margin-top:2px;font-weight:500;}
 
-/* STORE LEGEND */
-.store-legend{
-  background:var(--dark);padding:32px 60px;
-  display:flex;align-items:center;gap:32px;flex-wrap:wrap;
-  border-top:1px solid rgba(255,255,255,0.05);
-}
-.legend-lbl{font-size:9px;letter-spacing:3px;text-transform:uppercase;color:rgba(255,255,255,0.3);font-weight:600;}
-.legend-item{display:flex;align-items:center;gap:8px;font-size:12px;color:rgba(255,255,255,0.45);}
-.legend-dot{width:8px;height:8px;background:var(--gold);}
-
-/* EMPTY STATE */
+/* EMPTY */
 .empty-state{text-align:center;padding:80px 32px;color:var(--text-light);}
 .empty-state h3{font-family:'Cormorant Garamond',serif;font-size:32px;font-weight:300;margin-bottom:10px;}
-.empty-state p{font-size:14px;font-weight:300;}
+
+/* LEGEND */
+.legend-bar{background:var(--dark);padding:28px 60px;display:flex;align-items:center;gap:28px;flex-wrap:wrap;}
+.legend-lbl{font-size:9px;letter-spacing:3px;text-transform:uppercase;color:rgba(255,255,255,0.28);font-weight:600;}
+.legend-item{display:flex;align-items:center;gap:8px;font-size:12px;color:rgba(255,255,255,0.4);}
+.legend-dot{width:7px;height:7px;background:var(--gold);flex-shrink:0;}
 
 /* FOOTER */
-footer{background:#080f0b;padding:32px 60px;display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:12px;}
-.ft-logo-text{font-family:'Cormorant Garamond',serif;font-size:18px;color:#fff;font-weight:400;}
-.ft-logo-text span{color:var(--gold);font-style:italic;}
-.ft-links-row{display:flex;gap:24px;}
-.ft-links-row a{font-size:11px;color:rgba(255,255,255,0.3);letter-spacing:1px;text-transform:uppercase;transition:color 0.3s;}
-.ft-links-row a:hover{color:rgba(255,255,255,0.7);}
-.ft-copy{font-size:11px;color:rgba(255,255,255,0.2);}
+footer{background:#080f0b;padding:28px 60px;display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:12px;}
+.ft-text{font-family:'Cormorant Garamond',serif;font-size:18px;color:#fff;font-weight:400;}
+.ft-text span{color:var(--gold);font-style:italic;}
+.ft-row{display:flex;gap:24px;}
+.ft-row a{font-size:11px;color:rgba(255,255,255,0.3);letter-spacing:1px;text-transform:uppercase;transition:color 0.3s;}
+.ft-row a:hover{color:rgba(255,255,255,0.7);}
+.ft-copy{font-size:11px;color:rgba(255,255,255,0.18);}
 
 @media(max-width:900px){
   nav{padding:0 20px;height:60px;}
-  .nav-book-btn{display:none;}
-  .page-hero-inner{padding:48px 20px 40px;}
-  .filters-bar{padding:16px 20px;top:60px;gap:16px;}
-  .results-bar{padding:14px 20px;}
+  .nav-cta{display:none;}
+  .page-hero-inner{padding:44px 20px 0;}
+  .filters-wrap{padding:0 20px 20px;top:60px;}
+  .filter-row{gap:6px;}
+  .results-bar{padding:12px 20px;}
   .services-main{padding:32px 20px;}
   .svc-grid{grid-template-columns:1fr 1fr;}
-  .store-legend{padding:24px 20px;gap:16px;}
+  .legend-bar{padding:20px;}
   footer{padding:24px 20px;flex-direction:column;text-align:center;}
 }
 @media(max-width:600px){
@@ -150,40 +132,46 @@ footer{background:#080f0b;padding:32px 60px;display:flex;justify-content:space-b
 </head>
 <body>
 
-<!-- NAV -->
 <nav>
   <a href="index.html" class="nav-logo">
     <img src="images/naturals-logo.png" alt="Naturals" onerror="this.style.display='none'">
-    <div class="nav-logo-text">Naturals <span>Salon & Spa</span></div>
+    <div class="nav-logo-text">Naturals <span>Salon &amp; Spa</span></div>
   </a>
-  <a href="index.html" class="nav-back">← Back to Home</a>
-  <a href="index.html#book" class="nav-book-btn">Book Now</a>
+  <div class="nav-right">
+    <a href="index.html" class="nav-back">&#8592; Back to Home</a>
+    <a href="index.html#book" class="nav-cta">Book Now</a>
+  </div>
 </nav>
 
 <!-- PAGE HERO -->
 <div class="page-hero">
   <div class="page-hero-inner">
     <div class="lbl">Complete Menu</div>
-    <h1>Services &<br><em>Pricing</em></h1>
-    <p>Browse our full services menu — filter by store, category, or gender. Prices shown are per visit; members enjoy exclusive savings.</p>
+    <h1>Services &amp;<br><em>Pricing</em></h1>
+    <p>Browse our full services menu — filter by store, category, or gender. Member prices shown where available.</p>
   </div>
 
   <!-- FILTERS -->
-  <div class="filters-bar">
-    <div class="filter-group">
-      <span class="filter-group-lbl">Store</span>
-      <button class="f-btn active" data-filter="store" data-value="all" onclick="setFilter('store','all',this)">All Stores</button>
-      <button class="f-btn" data-filter="store" data-value="Store_N78" onclick="setFilter('store','Store_N78',this)">JP Nagar</button>
-      <button class="f-btn" data-filter="store" data-value="Store_N77" onclick="setFilter('store','Store_N77',this)">Elements Mall</button>
-      <button class="f-btn" data-filter="store" data-value="Store_N36" onclick="setFilter('store','Store_N36',this)">Devasandra</button>
-      <button class="f-btn" data-filter="store" data-value="Store_N05" onclick="setFilter('store','Store_N05',this)">Frazer Town</button>
-      <button class="f-btn" data-filter="store" data-value="Store_N43" onclick="setFilter('store','Hennur',this)">Hennur</button>
+  <div class="filters-wrap">
+    <div class="filter-row">
+      <span class="filter-lbl filter-lbl-store">Store</span>
+      <button class="f-btn-store active" data-filter="store" data-value="all" onclick="setFilter('store','all',this)">All Stores</button>
+      <button class="f-btn-store" data-filter="store" data-value="Store_N78" onclick="setFilter('store','Store_N78',this)">JP Nagar</button>
+      <button class="f-btn-store" data-filter="store" data-value="Store_N77" onclick="setFilter('store','Store_N77',this)">Elements Mall</button>
+      <button class="f-btn-store" data-filter="store" data-value="Store_N36" onclick="setFilter('store','Store_N36',this)">Devasandra</button>
+      <button class="f-btn-store" data-filter="store" data-value="Store_N05" onclick="setFilter('store','Store_N05',this)">Frazer Town</button>
+      <button class="f-btn-store" data-filter="store" data-value="Store_N43" onclick="setFilter('store','Store_N43',this)">Hennur</button>
     </div>
-    <div class="filter-group">
-      <span class="filter-group-lbl">Gender</span>
-      <button class="f-btn active" data-filter="gender" data-value="all" onclick="setFilter('gender','all',this)">All</button>
-      <button class="f-btn" data-filter="gender" data-value="Women" onclick="setFilter('gender','Women',this)">Women</button>
-      <button class="f-btn" data-filter="gender" data-value="Men" onclick="setFilter('gender','Men',this)">Men</button>
+    <div class="filter-row">
+      <span class="filter-lbl filter-lbl-gender">Gender</span>
+      <button class="f-btn-gender active" data-filter="gender" data-value="all" onclick="setFilter('gender','all',this)">All</button>
+      <button class="f-btn-gender" data-filter="gender" data-value="women" onclick="setFilter('gender','women',this)">Women</button>
+      <button class="f-btn-gender" data-filter="gender" data-value="men" onclick="setFilter('gender','men',this)">Men</button>
+    </div>
+    <div class="filter-row" id="cat-filter-row">
+      <span class="filter-lbl filter-lbl-cat">Category</span>
+      <button class="f-btn-cat active" data-filter="category" data-value="all" onclick="setFilter('category','all',this)">All</button>
+      <!-- populated dynamically from sheet -->
     </div>
   </div>
 </div>
@@ -194,9 +182,9 @@ footer{background:#080f0b;padding:32px 60px;display:flex;justify-content:space-b
   <div id="results-store"></div>
 </div>
 
-<!-- SERVICES MAIN -->
+<!-- SERVICES -->
 <main class="services-main">
-  <div id="svc-loading">Loading services from Google Sheets...</div>
+  <div id="svc-loading" class="loading-msg">Loading services from Google Sheets...</div>
   <div id="svc-container"></div>
   <div id="empty-state" class="empty-state" style="display:none;">
     <h3>No services found</h3>
@@ -204,62 +192,68 @@ footer{background:#080f0b;padding:32px 60px;display:flex;justify-content:space-b
   </div>
 </main>
 
-<!-- STORE LEGEND -->
-<div class="store-legend">
+<!-- LEGEND -->
+<div class="legend-bar">
   <span class="legend-lbl">Store Codes</span>
-  <span class="legend-item"><span class="legend-dot"></span>N78 — JP Nagar 5th Phase</span>
-  <span class="legend-item"><span class="legend-dot"></span>N77 — Elements Mall</span>
-  <span class="legend-item"><span class="legend-dot"></span>N36 — Devasandra</span>
-  <span class="legend-item"><span class="legend-dot"></span>N05 — Frazer Town</span>
-  <span class="legend-item"><span class="legend-dot"></span>N43 — Hennur</span>
+  <span class="legend-item"><span class="legend-dot"></span>N78 &mdash; JP Nagar 5th Phase</span>
+  <span class="legend-item"><span class="legend-dot"></span>N77 &mdash; Elements Mall</span>
+  <span class="legend-item"><span class="legend-dot"></span>N36 &mdash; Devasandra</span>
+  <span class="legend-item"><span class="legend-dot"></span>N05 &mdash; Frazer Town</span>
+  <span class="legend-item"><span class="legend-dot"></span>N43 &mdash; Hennur</span>
 </div>
 
-<!-- FOOTER -->
 <footer>
-  <div class="ft-logo-text">Naturals <span>Salon & Spa</span></div>
-  <div class="ft-links-row">
+  <div class="ft-text">Naturals <span>Salon &amp; Spa</span></div>
+  <div class="ft-row">
     <a href="index.html">Home</a>
     <a href="index.html#stores">All Stores</a>
     <a href="index.html#book">Book</a>
   </div>
-  <div class="ft-copy">© 2026 Naturals Salon & Spa, Bangalore</div>
+  <div class="ft-copy">&copy; 2026 Naturals Salon &amp; Spa, Bangalore</div>
 </footer>
 
 <script>
 const CSV_URL = "https://docs.google.com/spreadsheets/d/1wy0_josh4L-C0GXWNnRG8QEO9F8km5SMrDefemChFUo/gviz/tq?tqx=out:csv&sheet=services";
 
 const STORE_NAMES = {
-  'Store_N78':'JP Nagar 5th Phase',
-  'Store_N77':'Elements Mall',
-  'Store_N36':'Devasandra',
-  'Store_N05':'Frazer Town',
-  'Store_N43':'Hennur'
+  'store_n78':'JP Nagar 5th Phase',
+  'store_n77':'Elements Mall',
+  'store_n36':'Devasandra',
+  'store_n05':'Frazer Town',
+  'store_n43':'Hennur'
 };
 
 const CAT_IMAGES = {
-  'Haircare':    'images/services/haircare.jpg',
-  'Skincare':    'images/services/skincare.jpg',
-  'Bodycare':    'images/services/bodycare.jpg',
-  'Bridal':      'images/services/bridal.jpg',
-  'Mens':        'images/services/mens-grooming.jpg',
-  'Wellness':    'images/services/wellness.jpg',
+  'haircare':   'images/services/haircare.jpg',
+  'skincare':   'images/services/skincare.jpg',
+  'bodycare':   'images/services/bodycare.jpg',
+  'bridal':     'images/services/bridal.jpg',
+  'mens':       'images/services/mens-grooming.jpg',
+  "men's grooming": 'images/services/mens-grooming.jpg',
+  'wellness':   'images/services/wellness.jpg',
 };
 
-let allData = [];
-let allHeaders = [];
-let activeFilters = { store: 'all', gender: 'all' };
+const STORE_COLS = ['Store_N78','Store_N77','Store_N36','Store_N05','Store_N43'];
 
-function parseCSV(text) {
-  const rows = [];
-  const lines = text.split('\n');
-  lines.forEach(line => {
-    if (!line.trim()) return;
-    const cols = []; let cur = '', inQ = false;
-    for (let i = 0; i < line.length; i++) {
-      const ch = line[i];
-      if (ch === '"') { inQ = !inQ; }
-      else if (ch === ',' && !inQ) { cols.push(cur.trim()); cur = ''; }
-      else { cur += ch; }
+let allData    = [];
+let allHeaders = [];
+let allCats    = [];
+let activeFilters = { store:'all', gender:'all', category:'all' };
+
+function ci(s){ return (s||'').trim().toLowerCase(); }
+function genIcon(g){ return ci(g)==='women'?'&#9792;':ci(g)==='men'?'&#9794;':'&#9893;'; }
+
+function parseCSV(text){
+  const rows=[];
+  const lines=text.split('\n');
+  lines.forEach(line=>{
+    if(!line.trim())return;
+    const cols=[];let cur='',inQ=false;
+    for(let i=0;i<line.length;i++){
+      const ch=line[i];
+      if(ch==='"'){inQ=!inQ;}
+      else if(ch===','&&!inQ){cols.push(cur.trim());cur='';}
+      else{cur+=ch;}
     }
     cols.push(cur.trim());
     rows.push(cols);
@@ -267,129 +261,143 @@ function parseCSV(text) {
   return rows;
 }
 
-async function loadServices() {
+function hdridx(H, name){
+  return H.findIndex(h => ci(h) === ci(name));
+}
+
+async function loadServices(){
   const loading = document.getElementById('svc-loading');
-  try {
-    const res = await fetch(CSV_URL);
+  try{
+    const res  = await fetch(CSV_URL);
     const text = await res.text();
     const rows = parseCSV(text);
-    if (!rows.length) { loading.textContent = 'No services found.'; return; }
-    allHeaders = rows[0].map(h => h.trim());
-    allData = rows.slice(1).filter(r => r.some(c => c.trim()));
-    loading.style.display = 'none';
+    if(!rows.length){ loading.textContent='No services found.'; return; }
+    allHeaders = rows[0].map(h=>h.trim());
+    allData    = rows.slice(1).filter(r=>r.some(c=>c.trim()));
+    // Build category filter buttons from actual data
+    const iCat = hdridx(allHeaders,'Category');
+    allCats = [...new Set(allData.map(r=>(r[iCat]||'Other').trim()))];
+    const catRow = document.getElementById('cat-filter-row');
+    allCats.forEach(cat=>{
+      const btn=document.createElement('button');
+      btn.textContent=cat; btn.className='f-btn-cat';
+      btn.dataset.filter='category'; btn.dataset.value=ci(cat);
+      btn.onclick=()=>setFilter('category',ci(cat),btn);
+      catRow.appendChild(btn);
+    });
+    loading.style.display='none';
     renderServices();
-
-    // Handle URL params (e.g. services.html?cat=Haircare)
-    const params = new URLSearchParams(window.location.search);
-    if (params.get('cat')) {
-      // scroll to category
-      setTimeout(() => {
-        const el = document.getElementById('cat-' + params.get('cat'));
-        if (el) el.scrollIntoView({ behavior: 'smooth', block: 'start' });
-      }, 500);
-    }
-  } catch(e) {
-    loading.textContent = 'Unable to load services. Please check back later.';
+  }catch(e){
+    loading.textContent='Unable to load services. Please try again later.';
     console.error(e);
   }
 }
 
-function idx(n) { return allHeaders.indexOf(n); }
-
-function renderServices() {
+function renderServices(){
   const container = document.getElementById('svc-container');
-  const empty = document.getElementById('empty-state');
-  container.innerHTML = '';
+  const empty     = document.getElementById('empty-state');
+  const countEl   = document.getElementById('results-count');
+  const storeEl   = document.getElementById('results-store');
+  container.innerHTML='';
 
-  const iCat = idx('Category'), iName = idx('Service_Name'), iDur = idx('Duration');
-  const iReg = idx('Regular_Cost'), iMem = idx('Member_Cost'), iGen = idx('Gender');
-  const iDesc = idx('Description');
-  const storeCols = ['Store_N78','Store_N77','Store_N36','Store_N05','Store_N43'];
+  const H     = allHeaders;
+  const iCat  = hdridx(H,'Category');
+  const iName = hdridx(H,'Service_Name');
+  const iDur  = hdridx(H,'Duration');
+  const iReg  = hdridx(H,'Regular_Cost');
+  const iMem  = hdridx(H,'Member_Cost');
+  const iGen  = hdridx(H,'Gender');
+  const iDesc = hdridx(H,'Description');
 
-  // Filter data
-  let filtered = allData.filter(r => {
-    if (activeFilters.store !== 'all') {
-      const col = activeFilters.store;
-      const colIdx = idx(col);
-      if (colIdx < 0 || (r[colIdx]||'').trim().toLowerCase() !== 'yes') return false;
+  let filtered = allData.filter(r=>{
+    // store filter
+    if(activeFilters.store !== 'all'){
+      const colIdx = H.findIndex(h=>ci(h)===ci(activeFilters.store));
+      if(colIdx<0 || ci(r[colIdx]||'')<'yes') return false;
+      if(ci(r[colIdx]||'')==='no') return false;
+      if(ci(r[colIdx]||'')==='yes');
+      else return false;
     }
-    if (activeFilters.gender !== 'all') {
-      const g = (r[iGen]||'').trim();
-      if (g !== activeFilters.gender && g !== 'Both') return false;
+    // gender filter
+    if(activeFilters.gender !== 'all'){
+      const g = ci(r[iGen]||'');
+      if(g !== activeFilters.gender && g !== 'both') return false;
+    }
+    // category filter
+    if(activeFilters.category !== 'all'){
+      if(ci(r[iCat]||'') !== activeFilters.category) return false;
     }
     return true;
   });
 
-  // Update results bar
-  const countEl = document.getElementById('results-count');
-  const storeEl = document.getElementById('results-store');
-  countEl.textContent = `${filtered.length} service${filtered.length !== 1 ? 's' : ''} found`;
-  storeEl.textContent = activeFilters.store !== 'all'
-    ? `Showing: ${STORE_NAMES[activeFilters.store] || activeFilters.store}`
+  // Fix store filter — re-do cleanly
+  if(activeFilters.store !== 'all'){
+    const colIdx = H.findIndex(h=>ci(h)===ci(activeFilters.store));
+    filtered = allData.filter(r=>{
+      if(colIdx<0) return false;
+      if(ci(r[colIdx]||'')==='no' || !r[colIdx] ) return false;
+      const storeOk = ci(r[colIdx]||'')==='yes';
+      const genOk   = activeFilters.gender==='all' || ci(r[iGen]||'')==='both' || ci(r[iGen]||'')===activeFilters.gender;
+      const catOk   = activeFilters.category==='all' || ci(r[iCat]||'')===activeFilters.category;
+      return storeOk && genOk && catOk;
+    });
+  } else {
+    filtered = allData.filter(r=>{
+      const genOk = activeFilters.gender==='all' || ci(r[iGen]||'')==='both' || ci(r[iGen]||'')===activeFilters.gender;
+      const catOk = activeFilters.category==='all' || ci(r[iCat]||'')===activeFilters.category;
+      return genOk && catOk;
+    });
+  }
+
+  countEl.textContent = `${filtered.length} service${filtered.length!==1?'s':''} found`;
+  storeEl.textContent = activeFilters.store!=='all'
+    ? 'Showing: '+(STORE_NAMES[ci(activeFilters.store)]||activeFilters.store)
     : 'All 5 Bangalore stores';
 
-  if (!filtered.length) { empty.style.display = ''; return; }
-  empty.style.display = 'none';
+  if(!filtered.length){ empty.style.display=''; return; }
+  empty.style.display='none';
 
   // Group by category
-  const cats = {};
-  filtered.forEach(r => {
-    const cat = (r[iCat]||'Other').trim();
-    if (!cats[cat]) cats[cat] = [];
-    cats[cat].push(r);
-  });
+  const cats={};
+  filtered.forEach(r=>{ const c=(r[iCat]||'Other').trim(); if(!cats[c]) cats[c]=[]; cats[c].push(r); });
 
-  Object.entries(cats).forEach(([cat, svcs]) => {
-    const sec = document.createElement('div');
-    sec.className = 'cat-section';
-    sec.id = 'cat-' + cat;
-
-    const catImg = CAT_IMAGES[cat] || 'images/services/haircare.jpg';
-    sec.innerHTML = `
+  Object.entries(cats).forEach(([cat,svcs])=>{
+    const sec=document.createElement('div'); sec.className='cat-section'; sec.id='cat-'+ci(cat).replace(/\s+/g,'-');
+    const catImgSrc = CAT_IMAGES[ci(cat)] || '';
+    const catImgHtml = catImgSrc
+      ? `<div class="cat-img"><img src="${catImgSrc}" alt="${cat}" onerror="this.parentElement.style.display='none'"></div>`
+      : '';
+    sec.innerHTML=`
       <div class="cat-header">
-        <div class="cat-header-img">
-          <img src="${catImg}" alt="${cat}"
-               onerror="this.style.display='none'">
-        </div>
+        ${catImgHtml}
         <div class="cat-name">${cat}</div>
         <div class="cat-count">${svcs.length} service${svcs.length!==1?'s':''}</div>
       </div>
-      <div class="svc-grid" id="grid-${cat.replace(/\s+/g,'-')}"></div>`;
+      <div class="svc-grid"></div>`;
     container.appendChild(sec);
-
-    const grid = sec.querySelector('.svc-grid');
-    svcs.forEach(r => {
-      const name = (r[iName]||'').trim();
-      const dur  = (r[iDur]||'').trim();
-      const reg  = (r[iReg]||'').trim();
-      const mem  = (r[iMem]||'').trim();
-      const gen  = (r[iGen]||'').trim();
-      const desc = (r[iDesc]||'').trim();
-      const memHtml = mem && mem !== '-' ? `<span class="price-mem">Members ₹${mem}</span>` : '';
-      const genClass = gen === 'Women' ? 'women' : gen === 'Men' ? 'men' : 'both';
-
-      // Which stores carry this service
-      const storeLabels = storeCols
-        .filter(c => (r[idx(c)]||'').trim().toLowerCase() === 'yes')
-        .map(c => STORE_NAMES[c])
-        .join(' · ');
-
-      const card = document.createElement('div');
-      card.className = 'svc-card';
-      card.dataset.gender = gen;
-      card.innerHTML = `
+    const grid=sec.querySelector('.svc-grid');
+    svcs.forEach(r=>{
+      const name=(r[iName]||'').trim();
+      const dur =(r[iDur] ||'').trim();
+      const reg =(r[iReg] ||'').trim();
+      const mem =(r[iMem] ||'').trim();
+      const gen =(r[iGen] ||'').trim();
+      const desc=(r[iDesc]||'').trim();
+      const memHtml=(mem&&ci(mem)!=='-')?`<span class="price-mem">Members &#8377;${mem}</span>`:'';
+      const genClass=ci(gen)==='women'?'svc-tag-w':ci(gen)==='men'?'svc-tag-m':'svc-tag-b';
+      const card=document.createElement('div'); card.className='svc-card';
+      card.innerHTML=`
         <div>
           <div class="svc-card-name">${name}</div>
           <div class="svc-card-desc">${desc}</div>
         </div>
         <div class="svc-card-foot">
           <div class="svc-tags">
-            ${dur ? `<span class="svc-tag">⏱ ${dur}</span>` : ''}
-            ${gen ? `<span class="svc-tag ${genClass}">${genIcon(gen)} ${gen}</span>` : ''}
+            ${dur?`<span class="svc-tag">&#9201; ${dur}</span>`:''}
+            ${gen?`<span class="svc-tag ${genClass}">${genIcon(gen)} ${gen}</span>`:''}
           </div>
           <div class="price-col">
-            <span class="price-reg">₹${reg}</span>
-            ${memHtml}
+            <span class="price-reg">&#8377;${reg}</span>${memHtml}
           </div>
         </div>`;
       grid.appendChild(card);
@@ -397,14 +405,12 @@ function renderServices() {
   });
 }
 
-function setFilter(type, value, btn) {
-  activeFilters[type] = value;
-  document.querySelectorAll(`[data-filter="${type}"]`).forEach(b => b.classList.remove('active'));
+function setFilter(type, value, btn){
+  activeFilters[type]=value;
+  document.querySelectorAll(`[data-filter="${type}"]`).forEach(b=>b.classList.remove('active'));
   btn.classList.add('active');
   renderServices();
 }
-
-function genIcon(g) { return g === 'Women' ? '♀' : g === 'Men' ? '♂' : '⚥'; }
 
 document.addEventListener('DOMContentLoaded', loadServices);
 </script>
