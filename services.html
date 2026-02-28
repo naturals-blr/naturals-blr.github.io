@@ -128,6 +128,24 @@ footer{background:#080f0b;padding:28px 60px;display:flex;justify-content:space-b
 @media(max-width:600px){
   .svc-grid{grid-template-columns:1fr;}
 }
+/* ── FULL FOOTER ── */
+footer{background:#080f0b;}
+.ft-top{padding:60px 60px 40px;display:grid;grid-template-columns:2fr 1fr 1fr 1fr;gap:48px;border-bottom:1px solid rgba(255,255,255,0.06);}
+.ft-brand{font-family:'Cormorant Garamond',serif;font-size:28px;color:#fff;font-weight:300;margin-bottom:12px;}
+.ft-brand span{color:var(--gold);font-style:italic;}
+.ft-tagline{font-size:12px;color:rgba(255,255,255,0.3);font-weight:300;line-height:1.7;margin-bottom:20px;}
+.ft-socials{display:flex;gap:14px;}
+.ft-socials a{font-size:18px;transition:transform 0.3s;}
+.ft-socials a:hover{transform:scale(1.2);}
+.ft-col-title{font-size:9px;letter-spacing:3px;text-transform:uppercase;color:var(--gold);font-weight:600;margin-bottom:18px;}
+.ft-col ul{list-style:none;display:flex;flex-direction:column;gap:10px;}
+.ft-col ul a{font-size:12px;color:rgba(255,255,255,0.35);font-weight:300;transition:color 0.3s;}
+.ft-col ul a:hover{color:rgba(255,255,255,0.7);}
+.ft-bottom{padding:20px 60px;display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:8px;}
+.ft-copy{font-size:11px;color:rgba(255,255,255,0.18);}
+.ft-url{font-size:11px;color:rgba(255,255,255,0.2);letter-spacing:1px;}
+@media(max-width:960px){.ft-top{grid-template-columns:1fr 1fr;gap:32px;padding:40px 20px 28px;}.ft-bottom{padding:16px 20px;flex-direction:column;text-align:center;}}
+@media(max-width:600px){.ft-top{grid-template-columns:1fr;padding:32px 16px 24px;}}
 </style>
 </head>
 <body>
@@ -194,17 +212,66 @@ footer{background:#080f0b;padding:28px 60px;display:flex;justify-content:space-b
 
 
 <footer>
-  <div class="ft-text">Naturals <span>Salon &amp; Spa</span></div>
-  <div class="ft-row">
-    <a href="index.html">Home</a>
-    <a href="index.html#stores">All Stores</a>
-    <a href="index.html#stores">Book</a>
+<div class="ft-top">
+  <div>
+    <div class="ft-brand">Naturals <span>Salon &amp; Spa</span></div>
+    <div class="ft-tagline">India's most trusted salon network.<br>Premium beauty services across Bangalore.</div>
+    <div class="ft-socials"><a href="https://instagram.com" title="Instagram">&#128248;</a><a href="https://facebook.com" title="Facebook">&#128077;</a></div>
   </div>
-  <div class="ft-copy">&copy; 2026 Naturals Salon &amp; Spa, Bangalore</div>
+  <div class="ft-col"><div class="ft-col-title">Navigate</div><ul>
+    <li><a href="index.html#about">About</a></li>
+    <li><a href="services.html">Services</a></li>
+    <li><a href="index.html#stores">Our Stores</a></li>
+  </ul></div>
+  <div class="ft-col"><div class="ft-col-title">Locations</div><ul>
+    <li><a href="stores/jpnagar.html">JP Nagar 5th Phase</a></li>
+    <li><a href="stores/elements-mall.html">Elements Mall</a></li>
+    <li><a href="stores/devasandra.html">Devasandra</a></li>
+    <li><a href="stores/frazer-town.html">Frazer Town</a></li>
+    <li><a href="stores/hennur.html">Hennur</a></li>
+  </ul></div>
+  <div class="ft-col"><div class="ft-col-title">Connect</div><ul>
+    <li><a href="https://naturals.in" target="_blank">Naturals India</a></li>
+    <li><a href="index.html#book">Book Appointment</a></li>
+    <li><a href="services.html">All Services</a></li>
+  </ul></div>
+</div>
+<div class="ft-bottom">
+  <div class="ft-copy">&copy; 2026 Naturals Salon &amp; Spa, Bangalore. All rights reserved.</div>
+  <div class="ft-url">naturals-blr.github.io</div>
+</div>
 </footer>
 
 <script>
-const CSV_URL = "https://docs.google.com/spreadsheets/d/1wy0_josh4L-C0GXWNnRG8QEO9F8km5SMrDefemChFUo/gviz/tq?tqx=out:csv&sheet=services";
+// ── fetchSheet via JSONP (works from file:// and any origin) ──
+const SHEET_ID = '1wy0_josh4L-C0GXWNnRG8QEO9F8km5SMrDefemChFUo';
+function fetchSheet(sheetName) {
+  return new Promise(function(resolve, reject) {
+    var cbName = '_gsq_' + sheetName.replace(/[^a-z0-9]/gi,'_') + '_' + Date.now();
+    window[cbName] = function(data) {
+      try {
+        delete window[cbName];
+        if (script.parentNode) script.parentNode.removeChild(script);
+        var cols = data.table.cols.map(function(c) { return (c.label || '').trim(); });
+        var rows = [cols];
+        (data.table.rows || []).forEach(function(row) {
+          var r = (row.c || []).map(function(cell) {
+            return (cell && cell.v !== null && cell.v !== undefined) ? String(cell.v) : '';
+          });
+          rows.push(r);
+        });
+        resolve(rows);
+      } catch(e) { reject(e); }
+    };
+    var script = document.createElement('script');
+    script.onerror = function() { delete window[cbName]; reject(new Error('Failed: ' + sheetName)); };
+    script.src = 'https://docs.google.com/spreadsheets/d/' + SHEET_ID +
+                 '/gviz/tq?tqx=out:json;responseHandler:' + cbName +
+                 '&sheet=' + encodeURIComponent(sheetName);
+    document.head.appendChild(script);
+    setTimeout(function() { if(window[cbName]){delete window[cbName];reject(new Error('Timeout: '+sheetName));} }, 12000);
+  });
+}
 
 const STORE_NAMES = {
   'store_n78':'JP Nagar 5th Phase',
@@ -259,9 +326,7 @@ function hdridx(H, name){
 async function loadServices(){
   const loading = document.getElementById('svc-loading');
   try{
-    const res  = await fetch(CSV_URL);
-    const text = await res.text();
-    const rows = parseCSV(text);
+    const rows = await fetchSheet('services');
     if(!rows.length){ loading.textContent='No services found.'; return; }
     allHeaders = rows[0].map(h=>h.trim());
     allData    = rows.slice(1).filter(r=>r.some(c=>c.trim()));

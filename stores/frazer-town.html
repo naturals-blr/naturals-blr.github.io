@@ -177,6 +177,24 @@ footer{background:#080f0b;padding:28px 60px;display:flex;justify-content:space-b
   .stylists-grid{grid-template-columns:1fr 1fr;}
   .info-bar{grid-template-columns:1fr;}
 }
+/* ── FULL FOOTER ── */
+footer{background:#080f0b;}
+.ft-top{padding:60px 60px 40px;display:grid;grid-template-columns:2fr 1fr 1fr 1fr;gap:48px;border-bottom:1px solid rgba(255,255,255,0.06);}
+.ft-brand{font-family:'Cormorant Garamond',serif;font-size:28px;color:#fff;font-weight:300;margin-bottom:12px;}
+.ft-brand span{color:var(--gold);font-style:italic;}
+.ft-tagline{font-size:12px;color:rgba(255,255,255,0.3);font-weight:300;line-height:1.7;margin-bottom:20px;}
+.ft-socials{display:flex;gap:14px;}
+.ft-socials a{font-size:18px;transition:transform 0.3s;}
+.ft-socials a:hover{transform:scale(1.2);}
+.ft-col-title{font-size:9px;letter-spacing:3px;text-transform:uppercase;color:var(--gold);font-weight:600;margin-bottom:18px;}
+.ft-col ul{list-style:none;display:flex;flex-direction:column;gap:10px;}
+.ft-col ul a{font-size:12px;color:rgba(255,255,255,0.35);font-weight:300;transition:color 0.3s;}
+.ft-col ul a:hover{color:rgba(255,255,255,0.7);}
+.ft-bottom{padding:20px 60px;display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:8px;}
+.ft-copy{font-size:11px;color:rgba(255,255,255,0.18);}
+.ft-url{font-size:11px;color:rgba(255,255,255,0.2);letter-spacing:1px;}
+@media(max-width:960px){.ft-top{grid-template-columns:1fr 1fr;gap:32px;padding:40px 20px 28px;}.ft-bottom{padding:16px 20px;flex-direction:column;text-align:center;}}
+@media(max-width:600px){.ft-top{grid-template-columns:1fr;padding:32px 16px 24px;}}
 </style>
 </head>
 <body>
@@ -222,15 +240,15 @@ footer{background:#080f0b;padding:28px 60px;display:flex;justify-content:space-b
     <a href="https://wa.me/919945488040" class="info-val">+91 99454 88040</a></div>
   </div>
   <div class="info-cell">
-    <span class="info-icon">&#9742;</span>
-    <div><div class="info-label">Landline</div>
-    <a href="tel:918040948040" class="info-val">+91 80 4094 8040</a></div>
-  </div>
-  <div class="info-cell">
     <span class="info-icon">&#128197;</span>
     <div><div class="info-label">Book Online</div>
-    <a href="https://naturals-salon-frazertown.setmore.com/" target="_blank" class="info-val">Available 24/7</a>
-    <span class="info-val-sm">Opens booking page</span></div>
+    <a href="https://naturals-salon-frazertown.setmore.com/" target="_blank" class="info-val">Book Now</a>
+    <span class="info-val-sm">Available 24/7</span></div>
+  </div>
+  <div class="info-cell">
+    <span class="info-icon">&#128205;</span>
+    <div><div class="info-label">Address</div>
+    <a href="https://maps.google.com/?q=Naturals+Salon+Frazer+Town" target="_blank" class="info-val">No.94, 1st Floor, Mosque Road, Above Poorvika Mobile Store, Pulikeshi Nagar</a></div>
   </div>
 </div>
 
@@ -310,10 +328,6 @@ footer{background:#080f0b;padding:28px 60px;display:flex;justify-content:space-b
           <a href="tel:918040948040" class="contact-val">+91 80 4094 8040</a>
         </div>
       </div>
-      <div class="contact-row">
-        <span class="contact-icon">&#128231;</span>
-        <div class="contact-detail"><span class="contact-lbl">Email</span>
-          <a href="/cdn-cgi/l/email-protection#5f392d3e253a2d2b30283171313e2b2a2d3e332c1f38323e3633713c3032" class="contact-val"><span class="__cf_email__" data-cfemail="f3958192899681879c849ddd9d92878681929f80b3949e929a9fdd909c9e">[email&#160;protected]</span></a></div>
       </div>
       <div class="contact-row">
         <span class="contact-icon">&#128205;</span>
@@ -360,14 +374,6 @@ footer{background:#080f0b;padding:28px 60px;display:flex;justify-content:space-b
       <span class="sb-contact-icon"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="#25D366" width="18" height="18" style="flex-shrink:0"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg></span>
       <a href="https://wa.me/919945488040" target="_blank" class="sb-contact-val">+91 99454 88040</a>
     </div>
-        <div class="sb-contact-row">
-      <span class="sb-contact-icon">&#9742;</span>
-      <a href="tel:918040948040" class="sb-contact-val">+91 80 4094 8040</a>
-    </div>
-    <div class="sb-contact-row">
-      <span class="sb-contact-icon">&#128231;</span>
-      <a href="/cdn-cgi/l/email-protection#a0c6d2c1dac5d2d4cfd7ce8ecec1d4d5d2c1ccd3e0c7cdc1c9cc8ec3cfcd" class="sb-contact-val" style="font-size:11px;"><span class="__cf_email__" data-cfemail="afc9ddced5cadddbc0d8c181c1cedbdaddcec3dcefc8c2cec6c381ccc0c2">[email&#160;protected]</span></a>
-    </div>
     <div class="sb-divider"></div>
     <div class="lbl" style="font-size:9px;margin-bottom:12px;">Hours</div>
     <div class="h-row"><span class="h-day">Mon &ndash; Fri</span><span>10:00 AM &ndash; 8:00 PM</span></div>
@@ -395,23 +401,70 @@ footer{background:#080f0b;padding:28px 60px;display:flex;justify-content:space-b
 </div>
 
 <footer>
-  <div class="ft-text">Naturals <span>Salon &amp; Spa</span></div>
-  <div class="ft-row">
-    <a href="../index.html">Home</a>
-    <a href="../services.html">Services</a>
-    <a href="../index.html#stores">All Stores</a>
-    <a href="https://naturals-salon-frazertown.setmore.com/" target="_blank">Book</a>
+<div class="ft-top">
+  <div>
+    <div class="ft-brand">Naturals <span>Salon &amp; Spa</span></div>
+    <div class="ft-tagline">India's most trusted salon network.<br>Premium beauty services across Bangalore.</div>
+    <div class="ft-socials"><a href="https://instagram.com" title="Instagram">&#128248;</a><a href="https://facebook.com" title="Facebook">&#128077;</a></div>
   </div>
-  <div class="ft-copy">&copy; 2026 Naturals Salon &amp; Spa, Bangalore</div>
+  <div class="ft-col"><div class="ft-col-title">Navigate</div><ul>
+    <li><a href="../index.html#about">About</a></li>
+    <li><a href="../services.html">Services</a></li>
+    <li><a href="../index.html#stores">Our Stores</a></li>
+  </ul></div>
+  <div class="ft-col"><div class="ft-col-title">Locations</div><ul>
+    <li><a href="../stores/jpnagar.html">JP Nagar 5th Phase</a></li>
+    <li><a href="../stores/elements-mall.html">Elements Mall</a></li>
+    <li><a href="../stores/devasandra.html">Devasandra</a></li>
+    <li><a href="../stores/frazer-town.html">Frazer Town</a></li>
+    <li><a href="../stores/hennur.html">Hennur</a></li>
+  </ul></div>
+  <div class="ft-col"><div class="ft-col-title">Connect</div><ul>
+    <li><a href="https://naturals.in" target="_blank">Naturals India</a></li>
+    <li><a href="../index.html#book">Book Appointment</a></li>
+    <li><a href="../services.html">All Services</a></li>
+  </ul></div>
+</div>
+<div class="ft-bottom">
+  <div class="ft-copy">&copy; 2026 Naturals Salon &amp; Spa, Bangalore. All rights reserved.</div>
+  <div class="ft-url">naturals-blr.github.io</div>
+</div>
 </footer>
 
-<script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script>
+<script>
 (function() {
   var STORE_ID      = 'Store_N05';
+  // ── fetchSheet via JSONP (works from file:// and any origin) ──
+  var SHEET_ID = '1wy0_josh4L-C0GXWNnRG8QEO9F8km5SMrDefemChFUo';
+  function fetchSheet(sheetName) {
+    return new Promise(function(resolve, reject) {
+      var cbName = '_gsq_' + sheetName.replace(/[^a-z0-9]/gi,'_') + '_' + Date.now();
+      window[cbName] = function(data) {
+        try {
+          delete window[cbName];
+          if (script.parentNode) script.parentNode.removeChild(script);
+          var cols = data.table.cols.map(function(c) { return (c.label || '').trim(); });
+          var rows = [cols];
+          (data.table.rows || []).forEach(function(row) {
+            var r = (row.c || []).map(function(cell) {
+              return (cell && cell.v !== null && cell.v !== undefined) ? String(cell.v) : '';
+            });
+            rows.push(r);
+          });
+          resolve(rows);
+        } catch(e) { reject(e); }
+      };
+      var script = document.createElement('script');
+      script.onerror = function() { delete window[cbName]; reject(new Error('Failed: ' + sheetName)); };
+      script.src = 'https://docs.google.com/spreadsheets/d/' + SHEET_ID +
+                   '/gviz/tq?tqx=out:json;responseHandler:' + cbName +
+                   '&sheet=' + encodeURIComponent(sheetName);
+      document.head.appendChild(script);
+      setTimeout(function() { if(window[cbName]){delete window[cbName];reject(new Error('Timeout: '+sheetName));} }, 12000);
+    });
+  }
+
   var STORE_SHORT   = 'N05';
-  var CSV_SERVICES  = 'https://docs.google.com/spreadsheets/d/1wy0_josh4L-C0GXWNnRG8QEO9F8km5SMrDefemChFUo/gviz/tq?tqx=out:csv&sheet=services';
-  var CSV_STYLISTS  = 'https://docs.google.com/spreadsheets/d/1wy0_josh4L-C0GXWNnRG8QEO9F8km5SMrDefemChFUo/gviz/tq?tqx=out:csv&sheet=stylists';
-  var CSV_OFFERS    = 'https://docs.google.com/spreadsheets/d/1wy0_josh4L-C0GXWNnRG8QEO9F8km5SMrDefemChFUo/gviz/tq?tqx=out:csv&sheet=offers';
 
   function ci(s) { return (s || '').trim().toLowerCase(); }
 
@@ -460,11 +513,9 @@ footer{background:#080f0b;padding:28px 60px;display:flex;justify-content:space-b
     var container = document.getElementById('svc-container');
     var loading   = document.getElementById('svc-loading');
 
-    fetch(CSV_SERVICES)
-      .then(function(r) { return r.text(); })
-      .then(function(text) {
-        var rows = parseCSV(text);
-        if (!rows.length) { loading.textContent = 'No services found.'; return; }
+    fetchSheet('services').then(function(rows) {
+        var text = null; // rows already parsed
+        if (!rows || !rows.length) { loading.textContent = 'No services found.'; return; }
         var H = rows[0].map(function(h) { return h.trim(); });
         var data = rows.slice(1).filter(function(r) { return r.some(function(c) { return c.trim(); }); });
 
@@ -564,11 +615,9 @@ footer{background:#080f0b;padding:28px 60px;display:flex;justify-content:space-b
     var loading   = document.getElementById('offers-loading');
     var note      = document.getElementById('offers-note');
 
-    fetch(CSV_OFFERS)
-      .then(function(r) { return r.text(); })
-      .then(function(text) {
-        var rows = parseCSV(text);
-        if (!rows.length) { loading.style.display = 'none'; return; }
+    fetchSheet('offers').then(function(rows) {
+        var text = null;
+        if (!rows || !rows.length) { loading.style.display = 'none'; return; }
         var H      = rows[0].map(function(h) { return h.trim(); });
         var iSt    = hdridx(H, 'Store_ID');
         var iTitle = hdridx(H, 'Offer_Title');
@@ -614,11 +663,9 @@ footer{background:#080f0b;padding:28px 60px;display:flex;justify-content:space-b
     var container = document.getElementById('stylists-container');
     var loading   = document.getElementById('stylists-loading');
 
-    fetch(CSV_STYLISTS)
-      .then(function(r) { return r.text(); })
-      .then(function(text) {
-        var rows = parseCSV(text);
-        if (!rows.length) { loading.style.display = 'none'; return; }
+    fetchSheet('stylists').then(function(rows) {
+        var text = null;
+        if (!rows || !rows.length) { loading.style.display = 'none'; return; }
         var H       = rows[0].map(function(h) { return h.trim(); });
         var iSt     = hdridx(H, 'Store_ID');
         var iName   = hdridx(H, 'Stylist_Name');
