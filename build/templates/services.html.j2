@@ -1,12 +1,16 @@
-{% from "macros.j2" import full_footer, footer_css, wa_svg, theme_vars, theme_toggle, theme_init_script, button_css, btn_book, btn_wa, btn_call, btn_maps %}
+{% from "macros.j2" import full_footer, footer_css, wa_svg, theme_vars, theme_toggle, theme_init_script, button_css, btn_book, btn_wa, btn_call, btn_maps, store_indicator, store_picker_modal, sticky_mobile_bar, store_picker_js, hamburger_nav, tracking_head, tracking_body, stores_json %}
 <!DOCTYPE html>
 <html lang="en">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link rel="canonical" href="https://naturals-blr.github.io/services.html">
 <meta name="description" content="Naturals Salon &amp; Spa — Full services menu with pricing across all 5 Bangalore locations.">
 <title>Services &amp; Pricing | Naturals Salon &amp; Spa Bangalore</title>
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="Naturals Salon &amp; Spa Bangalore">
 <link rel="preconnect" href="https://fonts.googleapis.com">
+{{ tracking_head(gtm_id, pixel_id) }}
 <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=Jost:wght@300;400;500;600&display=swap" rel="stylesheet">
 <style>
 {{ theme_vars() }}
@@ -148,6 +152,7 @@ nav{position:fixed;top:0;left:0;right:0;z-index:200;padding:0 60px;height:70px;d
 {{ theme_init_script() }}
 </head>
 <body>
+{{ tracking_body(gtm_id) }}
 
 <nav>
   <a href="index.html" class="nav-logo">
@@ -155,8 +160,10 @@ nav{position:fixed;top:0;left:0;right:0;z-index:200;padding:0 60px;height:70px;d
     <div class="nav-logo-text">Naturals <span>Salon &amp; Spa</span></div>
   </a>
   <div class="nav-right">
+    {{ store_indicator() }}
     <a href="index.html" class="nav-back">&#8592; Back to Home</a>
     <a href="index.html#stores" class="nav-cta">Book Now</a>
+    {{ hamburger_nav('', 'services') }}
   </div>
 </nav>
 
@@ -450,6 +457,10 @@ document.addEventListener('DOMContentLoaded', function() {
   renderServices();
 });
 </script>
+{{ stores_json(stores, '') }}
+{{ store_picker_modal(stores, '') }}
+{{ sticky_mobile_bar('other') }}
+{{ store_picker_js() }}
 {{ theme_toggle() }}
 </body>
 </html>

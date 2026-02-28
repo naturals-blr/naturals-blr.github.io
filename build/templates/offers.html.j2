@@ -1,12 +1,16 @@
-{% from "macros.j2" import full_footer, footer_css, wa_svg, theme_vars, theme_toggle, theme_init_script, button_css, btn_book %}
+{% from "macros.j2" import full_footer, footer_css, wa_svg, theme_vars, theme_toggle, theme_init_script, button_css, btn_book, btn_wa, btn_call, btn_maps, store_indicator, store_picker_modal, sticky_mobile_bar, store_picker_js, hamburger_nav, tracking_head, tracking_body, stores_json %}
 <!DOCTYPE html>
 <html lang="en">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link rel="canonical" href="https://naturals-blr.github.io/offers.html">
 <meta name="description" content="Current offers and deals at Naturals Salon &amp; Spa Bangalore — exclusive discounts across all 5 locations.">
 <title>Offers &amp; Deals | Naturals Salon &amp; Spa Bangalore</title>
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="Naturals Salon &amp; Spa Bangalore">
 <link rel="preconnect" href="https://fonts.googleapis.com">
+{{ tracking_head(gtm_id, pixel_id) }}
 <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=Jost:wght@300;400;500;600&display=swap" rel="stylesheet">
 {{ theme_init_script() }}
 <style>
@@ -81,14 +85,17 @@ nav{position:fixed;top:0;left:0;right:0;z-index:200;padding:0 60px;height:70px;d
 </style>
 </head>
 <body>
+{{ tracking_body(gtm_id) }}
 <nav>
   <a href="index.html" class="nav-logo">
     <img src="images/naturals-logo.png" alt="Naturals" onerror="this.style.display='none'">
     <div class="nav-logo-text">Naturals <span>Salon &amp; Spa</span></div>
   </a>
   <div class="nav-right">
+    {{ store_indicator() }}
     <a href="index.html" class="nav-back">&#8592; Home</a>
     <a href="index.html#stores" class="nav-cta">Book Now</a>
+    {{ hamburger_nav('', 'offers') }}
   </div>
 </nav>
 

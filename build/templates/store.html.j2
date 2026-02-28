@@ -1,14 +1,45 @@
-{% from "macros.j2" import full_footer, footer_css, wa_svg, theme_vars, theme_toggle, theme_init_script, button_css, btn_book, btn_wa, btn_call, btn_maps %}
+{% from "macros.j2" import full_footer, footer_css, wa_svg, theme_vars, theme_toggle, theme_init_script, button_css, btn_book, btn_wa, btn_call, btn_maps, store_indicator, store_picker_modal, sticky_mobile_bar, store_picker_js, hamburger_nav, tracking_head, tracking_body, stores_json %}
 {% set s = store %}
 <!DOCTYPE html>
 <html lang="en">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<meta name="description" content="Naturals Salon &amp; Spa {{ s.Store_Name }}, {{ s.Area }}, Bangalore. Book appointments, view services, offers &amp; more.">
-<title>{{ s.Store_Name }} | Naturals Salon &amp; Spa Bangalore</title>
+<meta name="description" content="Visit Naturals Salon in {{ s.Area }} for hair spa, skin care, bridal and beauty services. Book online or call {{ s.Phone_Mobile }}.">
+<title>{{ s.Store_Name }} | Salon in {{ s.Area }} | Book Online</title>
+<link rel="canonical" href="https://naturals-blr.github.io/{{ s.Store_Page_URL }}">
+<meta property="og:title" content="{{ s.Store_Name }} | Naturals Salon &amp; Spa Bangalore">
+<meta property="og:description" content="Visit Naturals Salon in {{ s.Area }} for hair spa, skin care, bridal and beauty services. Book online or call {{ s.Phone_Mobile }}.">
+<meta property="og:type" content="business.business">
+<meta property="og:url" content="https://naturals-blr.github.io/{{ s.Store_Page_URL }}">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=Jost:wght@300;400;500;600&display=swap" rel="stylesheet">
+{{ tracking_head(gtm_id, pixel_id) }}
+<!-- JSON-LD Local Business Schema -->
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BeautySalon",
+  "name": "Naturals Salon & Spa {{ s.Store_Name }}",
+  "image": "https://naturals-blr.github.io/assets/stores/{{ s.Store_Page_URL | replace('stores/','') | replace('.html','') }}.jpg",
+  "telephone": "{{ s.Phone_Mobile }}",
+  "url": "https://naturals-blr.github.io/{{ s.Store_Page_URL }}",
+  "priceRange": "₹₹",
+  "address": {
+    "@type": "PostalAddress",
+    "streetAddress": "{{ s.Address_Full }}",
+    "addressLocality": "Bangalore",
+    "addressRegion": "Karnataka",
+    "postalCode": "{{ s.Pincode }}",
+    "addressCountry": "IN"
+  },
+  "geo": {
+    "@type": "GeoCoordinates",
+    "latitude": "{{ s.get('Latitude','12.9716') }}",
+    "longitude": "{{ s.get('Longitude','77.5946') }}"
+  }
+}
+</script>
 <style>
 {{ theme_vars() }}
 *{margin:0;padding:0;box-sizing:border-box;}
@@ -23,11 +54,12 @@ nav{position:fixed;top:0;left:0;right:0;z-index:200;padding:0 60px;height:70px;d
 .nav-logo img{height:34px;width:auto;filter:brightness(0) invert(1);}
 .nav-logo-text{font-family:'Cormorant Garamond',serif;font-size:18px;color:#fff;letter-spacing:1px;}
 .nav-logo-text span{color:var(--gold);font-style:italic;font-weight:300;}
-.nav-right{display:flex;align-items:center;gap:24px;}
+.nav-right{display:flex;align-items:center;gap:16px;}
 .nav-back{color:rgba(255,255,255,0.5);font-size:11px;letter-spacing:2px;text-transform:uppercase;transition:color 0.3s;}
 .nav-back:hover{color:var(--gold);}
 .nav-cta{background:var(--gold);color:var(--dark);padding:10px 22px;font-size:11px;letter-spacing:2px;text-transform:uppercase;font-weight:600;transition:all 0.3s;}
 .nav-cta:hover{background:var(--gold-pale);}
+@media(max-width:992px){.nav-back{display:none;}.nav-cta{display:none;}}
 
 /* HERO */
 .hero{height:70vh;min-height:500px;position:relative;display:flex;align-items:flex-end;overflow:hidden;}
@@ -188,14 +220,17 @@ a.contact-val:hover{color:var(--green);}
 </head>
 <body>
 
+{{ tracking_body(gtm_id) }}
 <nav>
-  <a href="../index.html" class="nav-logo">
-    <img src="../images/naturals-logo.png" alt="Naturals" onerror="this.style.display='none'">
+  <a href="../index.html" class="nav-logo" aria-label="Naturals Salon & Spa — Home">
+    <img src="../images/naturals-logo.png" alt="Naturals Salon" loading="lazy" onerror="this.style.display='none'">
     <div class="nav-logo-text">Naturals <span>Salon &amp; Spa</span></div>
   </a>
   <div class="nav-right">
-    <a href="../index.html#stores" class="nav-back">&#8592; All Locations</a>
-    <a href="{{ s.Appointment_URL }}" target="_blank" class="nav-cta">Book Now</a>
+    {{ store_indicator() }}
+    <a href="../index.html#our-stores" class="nav-back">&#8592; All Locations</a>
+    <a href="{{ s.Appointment_URL }}" target="_blank" class="nav-cta" aria-label="Book appointment at {{ s.Store_Name }}">Book Now</a>
+    {{ hamburger_nav('../', 'stores') }}
   </div>
 </nav>
 
@@ -209,7 +244,7 @@ a.contact-val:hover{color:var(--green);}
   <div class="hero-ov"></div>
   <div class="hero-content">
     <div class="hero-badge">Store {{ s.Hero_Number }} of {{ all_stores | length }} &middot; Bangalore</div>
-    <h1>Naturals<br><em>{{ s.Store_Name }}</em></h1>
+    <h1>Naturals<br><em>{{ s.Area }}</em></h1>
     <div class="hero-sub">{{ s.Area }} &middot; {{ s.Pincode }}</div>
     <!-- 3 actions only — Book, WhatsApp, Directions -->
     <div class="action-bar">
@@ -266,8 +301,12 @@ a.contact-val:hover{color:var(--green);}
     <div>
       <div class="lbl">Our Store</div>
       <h2 class="sec-title">A premium experience<br>in <em>{{ s.Store_Name }}.</em></h2>
-      <p class="about-p">Welcome to Naturals Salon &amp; Spa {{ s.Store_Name }} — part of India's most trusted salon network with over 25 years of beauty expertise.</p>
-      <p class="about-p">Our expert team delivers world-class services in a relaxed, luxurious setting. Every visit is personalised to you.</p>
+      {% if s.get('seo_intro') %}
+      <p class="about-p">{{ s.seo_intro }}</p>
+      {% else %}
+      <p class="about-p">Welcome to Naturals Salon &amp; Spa {{ s.Store_Name }} — your neighbourhood destination for premium hair, skin and beauty services in {{ s.Area }}, Bangalore. Part of India's most trusted salon network with over 25 years of expertise.</p>
+      <p class="about-p">Our expert stylists and therapists deliver world-class results in a relaxed, luxurious setting. Every visit is personalised to you — from precision haircuts and vibrant colour to rejuvenating facials and bridal packages.</p>
+      {% endif %}
       <a href="{{ s.Appointment_URL }}" target="_blank" class="btn-gold" style="margin-top:18px;font-size:11px;">Book Your Visit &#8594;</a>
     </div>
   </div>
@@ -419,13 +458,18 @@ a.contact-val:hover{color:var(--green);}
 </div>
 
 <div class="store-nav">
-  <a href="{{ prev_store.Store_Page_URL | replace('stores/','') }}" class="sn-link">&#8592; {{ prev_store.Store_Name }}</a>
-  <a href="../index.html#stores" class="sn-mid">All {{ all_stores | length }} Bangalore Locations</a>
-  <a href="{{ next_store.Store_Page_URL | replace('stores/','') }}" class="sn-link">{{ next_store.Store_Name }} &#8594;</a>
+  <a href="{{ prev_store.Store_Page_URL }}" class="sn-link">&#8592; {{ prev_store.Store_Name }}</a>
+  <a href="../index.html#our-stores" class="sn-mid">All {{ all_stores | length }} Bangalore Locations</a>
+  <a href="{{ next_store.Store_Page_URL }}" class="sn-link">{{ next_store.Store_Name }} &#8594;</a>
 </div>
 
 {{ full_footer('../', all_stores) }}
 
+{{ stores_json(all_stores, '../') }}
+{{ store_picker_modal(all_stores, '../') }}
+{{ sticky_mobile_bar('store', store) }}
+{{ store_picker_js() }}
+{{ theme_toggle() }}
 <script>
 var io = new IntersectionObserver(function(entries) {
   entries.forEach(function(e, i) {
@@ -437,6 +481,5 @@ var io = new IntersectionObserver(function(entries) {
 }, { threshold: 0 });
 document.querySelectorAll('.reveal').forEach(function(el) { io.observe(el); });
 </script>
-{{ theme_toggle() }}
 </body>
 </html>
