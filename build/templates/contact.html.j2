@@ -1,0 +1,190 @@
+{% from "macros.j2" import full_footer, footer_css, wa_svg, theme_vars, theme_toggle, theme_init_script, button_css, btn_book, btn_wa, btn_call, btn_maps, maps_pin %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="description" content="Contact Naturals Salon &amp; Spa Bangalore — find your nearest store, call, WhatsApp or send us a message.">
+<title>Contact Us | Naturals Salon &amp; Spa Bangalore</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=Jost:wght@300;400;500;600&display=swap" rel="stylesheet">
+{{ theme_init_script() }}
+<style>
+{{ theme_vars() }}
+*{margin:0;padding:0;box-sizing:border-box;}html{scroll-behavior:smooth;}
+body{font-family:'Jost',sans-serif;background:var(--cream);color:var(--text);}
+a{text-decoration:none;color:inherit;}img{display:block;width:100%;object-fit:cover;}
+nav{position:fixed;top:0;left:0;right:0;z-index:200;padding:0 60px;height:70px;display:flex;justify-content:space-between;align-items:center;background:var(--nav-bg);backdrop-filter:blur(20px);border-bottom:1px solid rgba(255,255,255,0.06);}
+.nav-logo{display:flex;align-items:center;gap:10px;}
+.nav-logo img{height:34px;width:auto;filter:brightness(0) invert(1);}
+.nav-logo-text{font-family:'Cormorant Garamond',serif;font-size:18px;color:#fff;letter-spacing:1px;}
+.nav-logo-text span{color:var(--gold);font-style:italic;font-weight:300;}
+.nav-right{display:flex;align-items:center;gap:24px;}
+.nav-back{color:rgba(255,255,255,0.5);font-size:11px;letter-spacing:2px;text-transform:uppercase;transition:color 0.3s;}
+.nav-back:hover{color:var(--gold);}
+.nav-cta{background:var(--gold);color:var(--dark);padding:10px 22px;font-size:11px;letter-spacing:2px;text-transform:uppercase;font-weight:600;transition:all 0.3s;}
+.nav-cta:hover{background:var(--gold-pale);}
+.page-hero{padding-top:70px;background:var(--dark);}
+.page-hero-inner{padding:60px 60px 60px;}
+.lbl{font-size:9px;letter-spacing:5px;text-transform:uppercase;color:var(--gold);font-weight:600;margin-bottom:16px;display:flex;align-items:center;gap:12px;}
+.lbl::before{content:'';width:18px;height:1px;background:var(--gold);}
+.page-hero-inner h1{font-family:'Cormorant Garamond',serif;font-size:clamp(42px,6vw,80px);font-weight:300;color:#fff;line-height:0.95;margin-bottom:14px;}
+.page-hero-inner h1 em{font-style:italic;color:var(--gold);}
+.page-hero-inner p{font-size:14px;color:rgba(255,255,255,0.42);font-weight:300;line-height:1.8;max-width:560px;}
+/* LAYOUT */
+.contact-wrap{max-width:1160px;margin:0 auto;padding:64px 60px;display:grid;grid-template-columns:1fr 420px;gap:64px;align-items:start;}
+/* FORM */
+.form-block{background:#fff;padding:40px;}
+.form-block h2{font-family:'Cormorant Garamond',serif;font-size:32px;font-weight:300;margin-bottom:6px;}
+.form-block h2 em{font-style:italic;color:var(--green-mid);}
+.form-sub{font-size:13px;color:var(--text-light);margin-bottom:28px;font-weight:300;}
+.form-row{display:grid;grid-template-columns:1fr 1fr;gap:16px;margin-bottom:16px;}
+.form-group{display:flex;flex-direction:column;gap:6px;margin-bottom:16px;}
+.form-group label{font-size:10px;letter-spacing:2px;text-transform:uppercase;font-weight:600;color:var(--text-mid);}
+.form-group input,.form-group select,.form-group textarea{
+  border:1px solid rgba(0,0,0,0.12);padding:11px 14px;font-size:13px;
+  font-family:'Jost',sans-serif;color:var(--text);background:var(--cream);
+  transition:border-color 0.3s;outline:none;
+}
+.form-group input:focus,.form-group select:focus,.form-group textarea:focus{border-color:var(--green-mid);}
+.form-group textarea{resize:vertical;min-height:100px;}
+.form-group select{appearance:none;background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8' viewBox='0 0 12 8'%3E%3Cpath fill='%23999' d='M1 1l5 5 5-5'/%3E%3C/svg%3E");background-repeat:no-repeat;background-position:right 14px center;}
+.form-req{font-size:10px;color:var(--text-light);margin-bottom:20px;}
+.form-submit{background:var(--gold);color:var(--dark);padding:14px 32px;font-size:11px;letter-spacing:2px;text-transform:uppercase;font-weight:700;border:none;cursor:pointer;font-family:'Jost',sans-serif;transition:all 0.3s;width:100%;}
+.form-submit:hover{background:var(--gold-pale);}
+.form-success{display:none;background:#f0fdf4;border:1px solid #86efac;padding:16px 20px;font-size:13px;color:#166534;margin-top:16px;text-align:center;}
+/* STORE CARDS */
+.stores-col h2{font-family:'Cormorant Garamond',serif;font-size:32px;font-weight:300;margin-bottom:6px;}
+.stores-col h2 em{font-style:italic;color:var(--green-mid);}
+.stores-col .form-sub{margin-bottom:20px;}
+.store-contact-card{background:#fff;padding:22px 24px;margin-bottom:3px;border-left:3px solid transparent;transition:border-color 0.3s;}
+.store-contact-card:hover{border-left-color:var(--gold);}
+.scc-name{font-family:'Cormorant Garamond',serif;font-size:20px;font-weight:400;margin-bottom:2px;}
+.scc-area{font-size:10px;color:var(--gold);letter-spacing:2px;text-transform:uppercase;margin-bottom:12px;}
+.scc-addr{font-size:12px;color:var(--text-light);margin-bottom:12px;line-height:1.6;}
+.scc-btns{display:flex;flex-wrap:wrap;gap:6px;}
+{{ button_css() }}
+{{ footer_css() }}
+@media(max-width:960px){
+  nav{padding:0 20px;height:60px;}
+  .page-hero-inner{padding:44px 20px 44px;}
+  .contact-wrap{grid-template-columns:1fr;padding:40px 20px;gap:40px;}
+  .form-row{grid-template-columns:1fr;}
+}
+</style>
+</head>
+<body>
+<nav>
+  <a href="index.html" class="nav-logo">
+    <img src="images/naturals-logo.png" alt="Naturals" onerror="this.style.display='none'">
+    <div class="nav-logo-text">Naturals <span>Salon &amp; Spa</span></div>
+  </a>
+  <div class="nav-right">
+    <a href="index.html" class="nav-back">&#8592; Home</a>
+    <a href="index.html#stores" class="nav-cta">Book Now</a>
+  </div>
+</nav>
+
+<div class="page-hero">
+  <div class="page-hero-inner">
+    <div class="lbl">Get In Touch</div>
+    <h1>Contact <em>Us</em></h1>
+    <p>Reach out to us — we'd love to hear from you. Find your nearest store below or send us a message.</p>
+  </div>
+</div>
+
+<div class="contact-wrap">
+  <!-- FORM -->
+  <div>
+    <div class="form-block">
+      <h2>Send us a <em>message</em></h2>
+      <div class="form-sub">We'll get back to you within 24 hours.</div>
+      <div class="form-row">
+        <div class="form-group">
+          <label>Full Name *</label>
+          <input type="text" id="f-name" placeholder="Your name" required>
+        </div>
+        <div class="form-group">
+          <label>Mobile Number *</label>
+          <input type="tel" id="f-phone" placeholder="+91 98765 43210" required>
+        </div>
+      </div>
+      <div class="form-group">
+        <label>Email Address</label>
+        <input type="email" id="f-email" placeholder="you@example.com">
+      </div>
+      <div class="form-group">
+        <label>Preferred Store</label>
+        <select id="f-store">
+          <option value="">— Select a store —</option>
+          {% for s in stores %}
+          <option value="{{ s.Store_Name }}">{{ s.Store_Name }}</option>
+          {% endfor %}
+        </select>
+      </div>
+      <div class="form-group">
+        <label>Service I'm Interested In</label>
+        <select id="f-service">
+          <option value="">— Select a service —</option>
+          <option>Hair Cut &amp; Styling</option>
+          <option>Hair Colouring &amp; Highlights</option>
+          <option>Hair Straightening / Smoothening</option>
+          <option>Keratin Service</option>
+          <option>Hair Spa</option>
+          <option>Facial</option>
+          <option>De-Tan / Clean Up</option>
+          <option>Manicure / Pedicure</option>
+          <option>Waxing &amp; Threading</option>
+          <option>Bridal Package</option>
+          <option>Men's Grooming</option>
+          <option>Other</option>
+        </select>
+      </div>
+      <div class="form-group">
+        <label>Message</label>
+        <textarea id="f-message" placeholder="Tell us how we can help..."></textarea>
+      </div>
+      <p class="form-req">* Required fields</p>
+      <button class="form-submit" onclick="submitForm()">Send Message &#8594;</button>
+      <div class="form-success" id="form-success">&#10003; Thank you! We've received your message and will get back to you within 24 hours.</div>
+    </div>
+  </div>
+
+  <!-- STORE CARDS -->
+  <div class="stores-col">
+    <h2>Our <em>stores</em></h2>
+    <div class="form-sub">Walk in or book online — we're open 7 days a week.</div>
+    {% for s in stores %}
+    <div class="store-contact-card">
+      <div class="scc-name">{{ s.Store_Name }}</div>
+      <div class="scc-area">{{ s.Area }} &middot; {{ s.Pincode }}</div>
+      <div class="scc-addr">&#128205; {{ s.Address_Full }}</div>
+      <div class="scc-btns">
+        {{ btn_call(s.Phone_Raw, s.Phone_Mobile) }}
+        {{ btn_wa(s.WhatsApp_Number, 'WhatsApp') }}
+        {{ btn_book(s.Appointment_URL, 'Book') }}
+        {{ btn_maps(s.Google_Maps_URL, 'Directions') }}
+      </div>
+    </div>
+    {% endfor %}
+  </div>
+</div>
+
+{{ full_footer('', stores) }}
+{{ theme_toggle() }}
+
+<script>
+function submitForm() {
+  var name    = document.getElementById('f-name').value.trim();
+  var phone   = document.getElementById('f-phone').value.trim();
+  if (!name || !phone) { alert('Please fill in your name and mobile number.'); return; }
+  // Dummy submission — shows thank you message
+  document.getElementById('form-success').style.display = 'block';
+  document.querySelector('.form-submit').disabled = true;
+  document.querySelector('.form-submit').textContent = 'Message Sent';
+  document.querySelector('.form-submit').style.opacity = '0.6';
+  window.scrollTo({top: document.querySelector('.form-success').offsetTop - 20, behavior:'smooth'});
+}
+</script>
+</body>
+</html>

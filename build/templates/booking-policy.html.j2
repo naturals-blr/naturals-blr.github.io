@@ -1,0 +1,182 @@
+{% from "macros.j2" import full_footer, footer_css, theme_vars, theme_toggle, theme_init_script, button_css, btn_book, btn_wa, btn_call %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="description" content="Booking Policy — Naturals Salon &amp; Spa Bangalore.">
+<title>Booking Policy | Naturals Salon &amp; Spa Bangalore</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=Jost:wght@300;400;500;600&display=swap" rel="stylesheet">
+{{ theme_init_script() }}
+<style>
+{{ theme_vars() }}
+*{margin:0;padding:0;box-sizing:border-box;}html{scroll-behavior:smooth;}
+body{font-family:'Jost',sans-serif;background:var(--cream);color:var(--text);}
+a{text-decoration:none;color:inherit;}
+nav{position:fixed;top:0;left:0;right:0;z-index:200;padding:0 60px;height:70px;display:flex;justify-content:space-between;align-items:center;background:var(--nav-bg);backdrop-filter:blur(20px);border-bottom:1px solid rgba(255,255,255,0.06);}
+.nav-logo{display:flex;align-items:center;gap:10px;}
+.nav-logo img{height:34px;width:auto;filter:brightness(0) invert(1);}
+.nav-logo-text{font-family:'Cormorant Garamond',serif;font-size:18px;color:#fff;letter-spacing:1px;}
+.nav-logo-text span{color:var(--gold);font-style:italic;font-weight:300;}
+.nav-right{display:flex;align-items:center;gap:24px;}
+.nav-back{color:rgba(255,255,255,0.5);font-size:11px;letter-spacing:2px;text-transform:uppercase;transition:color 0.3s;}
+.nav-back:hover{color:var(--gold);}
+.nav-cta{background:var(--gold);color:var(--dark);padding:10px 22px;font-size:11px;letter-spacing:2px;text-transform:uppercase;font-weight:600;}
+.page-hero{padding-top:70px;background:var(--dark);}
+.page-hero-inner{padding:60px 60px 60px;}
+.lbl{font-size:9px;letter-spacing:5px;text-transform:uppercase;color:var(--gold);font-weight:600;margin-bottom:16px;display:flex;align-items:center;gap:12px;}
+.lbl::before{content:'';width:18px;height:1px;background:var(--gold);}
+.page-hero-inner h1{font-family:'Cormorant Garamond',serif;font-size:clamp(36px,5vw,64px);font-weight:300;color:#fff;line-height:0.95;margin-bottom:14px;}
+.page-hero-inner h1 em{font-style:italic;color:var(--gold);}
+.page-hero-inner p{font-size:14px;color:rgba(255,255,255,0.42);font-weight:300;max-width:560px;}
+/* CONTENT */
+.policy-wrap{max-width:800px;margin:0 auto;padding:64px 60px;}
+.policy-section{margin-bottom:48px;}
+.policy-section h2{font-family:'Cormorant Garamond',serif;font-size:28px;font-weight:300;margin-bottom:16px;}
+.policy-section h2 em{font-style:italic;color:var(--green-mid);}
+.policy-section p{font-size:14px;color:var(--text-mid);line-height:1.9;font-weight:300;margin-bottom:12px;}
+.policy-highlight{background:#fff;border-left:3px solid var(--gold);padding:20px 24px;margin:20px 0;}
+.policy-highlight p{margin:0;font-size:14px;color:var(--text);font-weight:400;}
+/* HOW TO BOOK CARDS */
+.book-methods{display:grid;grid-template-columns:repeat(3,1fr);gap:3px;margin-top:20px;}
+.book-method{background:#fff;padding:24px 20px;text-align:center;}
+.book-method-icon{font-size:32px;margin-bottom:10px;}
+.book-method-title{font-family:'Cormorant Garamond',serif;font-size:18px;font-weight:400;margin-bottom:6px;}
+.book-method-desc{font-size:12px;color:var(--text-light);line-height:1.6;font-weight:300;margin-bottom:14px;}
+/* STEPS */
+.steps{display:flex;flex-direction:column;gap:3px;margin-top:20px;}
+.step{background:#fff;padding:20px 24px;display:flex;gap:20px;align-items:flex-start;}
+.step-num{font-family:'Cormorant Garamond',serif;font-size:36px;color:var(--gold);font-weight:300;line-height:1;flex-shrink:0;width:36px;}
+.step-body h3{font-family:'Cormorant Garamond',serif;font-size:18px;font-weight:400;margin-bottom:4px;}
+.step-body p{font-size:13px;color:var(--text-mid);line-height:1.7;font-weight:300;}
+/* FAQ */
+.faq-item{border-bottom:1px solid rgba(0,0,0,0.07);padding:18px 0;}
+.faq-q{font-size:14px;font-weight:600;color:var(--text);margin-bottom:8px;}
+.faq-a{font-size:13px;color:var(--text-mid);line-height:1.8;font-weight:300;}
+.last-updated{font-size:11px;color:var(--text-light);margin-top:40px;padding-top:20px;border-top:1px solid rgba(0,0,0,0.08);}
+{{ button_css() }}
+{{ footer_css() }}
+@media(max-width:768px){
+  nav{padding:0 20px;height:60px;}
+  .page-hero-inner{padding:44px 20px 44px;}
+  .policy-wrap{padding:40px 20px;}
+  .book-methods{grid-template-columns:1fr;}
+}
+</style>
+</head>
+<body>
+<nav>
+  <a href="index.html" class="nav-logo">
+    <img src="images/naturals-logo.png" alt="Naturals" onerror="this.style.display='none'">
+    <div class="nav-logo-text">Naturals <span>Salon &amp; Spa</span></div>
+  </a>
+  <div class="nav-right">
+    <a href="index.html" class="nav-back">&#8592; Home</a>
+    <a href="index.html#stores" class="nav-cta">Book Now</a>
+  </div>
+</nav>
+
+<div class="page-hero">
+  <div class="page-hero-inner">
+    <div class="lbl">Our Policies</div>
+    <h1>Booking <em>Policy</em></h1>
+    <p>Everything you need to know about booking, confirming, rescheduling, and walk-in appointments at Naturals Salon &amp; Spa Bangalore.</p>
+  </div>
+</div>
+
+<div class="policy-wrap">
+
+  <div class="policy-section">
+    <h2>How to <em>Book</em></h2>
+    <p>We offer multiple convenient ways to book your appointment. Choose whichever works best for you:</p>
+    <div class="book-methods">
+      <div class="book-method">
+        <div class="book-method-icon">&#128197;</div>
+        <div class="book-method-title">Book Online</div>
+        <div class="book-method-desc">Available 24/7 through our booking portal. Select your store, service, stylist, and preferred time slot.</div>
+        <a href="index.html#stores" class="btn-book" style="font-size:10px;padding:10px 16px;">Book Now</a>
+      </div>
+      <div class="book-method">
+        <div class="book-method-icon">&#128172;</div>
+        <div class="book-method-title">WhatsApp</div>
+        <div class="book-method-desc">Message your preferred store directly on WhatsApp. We'll confirm your slot within a few hours.</div>
+        <a href="contact.html" class="btn-wa" style="font-size:10px;padding:10px 16px;">Find Store</a>
+      </div>
+      <div class="book-method">
+        <div class="book-method-icon">&#128222;</div>
+        <div class="book-method-title">Call Us</div>
+        <div class="book-method-desc">Speak directly with our team. We're available during store hours, 7 days a week.</div>
+        <a href="contact.html" class="btn-call" style="font-size:10px;padding:10px 16px;">Find Number</a>
+      </div>
+    </div>
+  </div>
+
+  <div class="policy-section">
+    <h2>Booking <em>Process</em></h2>
+    <div class="steps">
+      <div class="step"><div class="step-num">1</div><div class="step-body"><h3>Choose Your Store &amp; Service</h3><p>Browse our services page to explore treatments and pricing. Select the store nearest to you.</p></div></div>
+      <div class="step"><div class="step-num">2</div><div class="step-body"><h3>Select Date, Time &amp; Stylist</h3><p>Pick an available time slot that suits you. You may request a preferred stylist, subject to availability.</p></div></div>
+      <div class="step"><div class="step-num">3</div><div class="step-body"><h3>Receive Confirmation</h3><p>You will receive a confirmation via SMS or WhatsApp with your appointment details. Please save this for reference.</p></div></div>
+      <div class="step"><div class="step-num">4</div><div class="step-body"><h3>Arrive &amp; Enjoy</h3><p>Please arrive 5–10 minutes before your scheduled time. Our team will be ready to welcome you.</p></div></div>
+    </div>
+  </div>
+
+  <div class="policy-section">
+    <h2>Confirmation &amp; <em>Reminders</em></h2>
+    <div class="policy-highlight">
+      <p>&#9989; All appointments are confirmed upon booking. You will receive an automated reminder 24 hours before your scheduled time.</p>
+    </div>
+    <p>If you do not receive a confirmation message within 2 hours of booking, please contact the store directly to verify your appointment.</p>
+  </div>
+
+  <div class="policy-section">
+    <h2>Rescheduling <em>Policy</em></h2>
+    <p>We understand schedules change. You may reschedule your appointment at no charge provided you give us at least <strong>24 hours' notice</strong>. To reschedule, use the same channel through which you originally booked — online portal, WhatsApp, or phone call.</p>
+    <p>Rescheduling requests made with less than 24 hours' notice are subject to availability and may not always be accommodated on the same day.</p>
+  </div>
+
+  <div class="policy-section">
+    <h2>Walk-in <em>Appointments</em></h2>
+    <p>Walk-ins are always welcome at all our Bangalore locations, subject to stylist availability. During peak hours (weekends and evenings), wait times may be longer. We recommend booking in advance to guarantee your preferred time and stylist.</p>
+    <div class="policy-highlight">
+      <p>&#128336; Store hours: Monday–Friday 10:00 AM – 8:00 PM &nbsp;|&nbsp; Saturday–Sunday 9:00 AM – 8:00 PM</p>
+    </div>
+  </div>
+
+  <div class="policy-section">
+    <h2>Group &amp; <em>Bridal Bookings</em></h2>
+    <p>For group bookings (3 or more people) or bridal packages, we request a minimum of <strong>48 hours' advance notice</strong> to ensure adequate staffing and preparation. Please contact your preferred store directly to discuss requirements and availability.</p>
+    <p>Bridal packages are subject to a separate booking agreement. A consultation appointment is recommended before finalising your bridal booking.</p>
+  </div>
+
+  <div class="policy-section">
+    <h2>Frequently Asked <em>Questions</em></h2>
+    <div class="faq-item">
+      <div class="faq-q">Can I request a specific stylist?</div>
+      <div class="faq-a">Yes, you may request a preferred stylist when booking. This is subject to their availability on your chosen date and time. We recommend booking in advance for popular stylists.</div>
+    </div>
+    <div class="faq-item">
+      <div class="faq-q">What if I arrive late?</div>
+      <div class="faq-a">If you arrive more than 15 minutes late, we may need to shorten your service or reschedule to avoid impacting other clients' appointments. Please call ahead if you are running late.</div>
+    </div>
+    <div class="faq-item">
+      <div class="faq-q">Is there a charge for cancellation?</div>
+      <div class="faq-a">Cancellations made with at least 24 hours' notice are free of charge. Please refer to our Cancellation Policy for full details.</div>
+    </div>
+    <div class="faq-item">
+      <div class="faq-q">Can I book for someone else?</div>
+      <div class="faq-a">Yes, you may book on behalf of a friend or family member. Please provide their name and contact number at the time of booking.</div>
+    </div>
+    <div class="faq-item">
+      <div class="faq-q">How do I know my booking is confirmed?</div>
+      <div class="faq-a">You will receive a confirmation message via SMS or WhatsApp within a short time of booking. If you don't receive one, please contact the store directly.</div>
+    </div>
+  </div>
+
+  <div class="last-updated">Last updated: February 2026 &nbsp;&middot;&nbsp; Questions? <a href="contact.html" style="color:var(--green-mid);">Contact us here</a> or see our <a href="cancellation-policy.html" style="color:var(--green-mid);">Cancellation Policy</a>.</div>
+</div>
+
+{{ full_footer('', stores) }}
+{{ theme_toggle() }}
+</body>
+</html>

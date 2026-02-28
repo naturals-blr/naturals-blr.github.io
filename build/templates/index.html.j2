@@ -1,4 +1,4 @@
-{% from "macros.j2" import full_footer, footer_css, wa_svg %}
+{% from "macros.j2" import full_footer, footer_css, wa_svg, theme_vars, theme_toggle, theme_init_script, button_css %}
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -9,18 +9,14 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=Jost:wght@300;400;500;600&display=swap" rel="stylesheet">
 <style>
-:root{
-  --dark:#111714;--green:#1B4332;--green-mid:#2D6A4F;--green-soft:#52B788;
-  --cream:#F8F4EE;--gold:#C9A84C;--gold-pale:#EDD9A3;
-  --text:#1A1A1A;--text-mid:#555;--text-light:#999;
-}
+{{ theme_vars() }}
 *{margin:0;padding:0;box-sizing:border-box;}
 html{scroll-behavior:smooth;}
 body{font-family:'Jost',sans-serif;background:var(--cream);color:var(--text);overflow-x:hidden;}
 img{display:block;width:100%;object-fit:cover;}
 a{text-decoration:none;color:inherit;}
 nav{position:fixed;top:0;left:0;right:0;z-index:200;height:70px;padding:0 60px;display:flex;justify-content:space-between;align-items:center;transition:background 0.4s;}
-nav.scrolled{background:rgba(17,23,20,0.97);backdrop-filter:blur(20px);border-bottom:1px solid rgba(255,255,255,0.06);}
+nav.scrolled{background:var(--nav-bg);backdrop-filter:blur(20px);border-bottom:1px solid rgba(255,255,255,0.06);}
 .nav-logo{display:flex;align-items:center;gap:10px;}
 .nav-logo img{height:34px;width:auto;filter:brightness(0) invert(1);}
 .nav-logo-text{font-family:'Cormorant Garamond',serif;font-size:18px;color:#fff;letter-spacing:1px;}
@@ -33,7 +29,7 @@ nav.scrolled{background:rgba(17,23,20,0.97);backdrop-filter:blur(20px);border-bo
 .hero{height:100vh;min-height:700px;position:relative;display:flex;align-items:center;justify-content:center;overflow:hidden;}
 .hero-bg{position:absolute;inset:0;}
 .hero-bg img{height:100%;object-fit:cover;}
-.hero-ov{position:absolute;inset:0;background:linear-gradient(135deg,rgba(17,23,20,0.88) 0%,rgba(17,23,20,0.45) 60%,rgba(17,23,20,0.2) 100%);}
+.hero-ov{position:absolute;inset:0;background:linear-gradient(135deg,var(--hero-tint) 0%,var(--hero-tint2) 60%,rgba(0,0,0,0.1) 100%);}
 .hero-inner{position:relative;z-index:2;text-align:center;padding:0 24px;}
 .hero-tag{display:inline-flex;align-items:center;gap:12px;font-size:9px;letter-spacing:5px;text-transform:uppercase;color:var(--gold);font-weight:600;margin-bottom:24px;}
 .hero-tag::before,.hero-tag::after{content:'';width:24px;height:1px;background:var(--gold);}
@@ -129,6 +125,7 @@ a.st-cv:hover{color:var(--green);}
 .rv-q{font-family:'Cormorant Garamond',serif;font-size:18px;color:var(--text);font-weight:400;line-height:1.6;margin-bottom:16px;font-style:italic;}
 .rv-name{font-size:11px;font-weight:600;color:var(--text);letter-spacing:1px;text-transform:uppercase;}
 .rv-store{font-size:10px;color:var(--gold);letter-spacing:1.5px;text-transform:uppercase;margin-top:2px;}
+{{ button_css() }}
 {{ footer_css() }}
 @media(max-width:960px){
   nav{padding:0 20px;height:60px;}
@@ -156,6 +153,7 @@ a.st-cv:hover{color:var(--green);}
   .book-store-btns{flex-direction:column;align-items:stretch;}
 }
 </style>
+{{ theme_init_script() }}
 </head>
 <body>
 
@@ -168,6 +166,8 @@ a.st-cv:hover{color:var(--green);}
     <li><a href="#about">About</a></li>
     <li><a href="services.html">Services</a></li>
     <li><a href="#stores">Locations</a></li>
+    <li><a href="offers.html">Offers</a></li>
+    <li><a href="contact.html">Contact Us</a></li>
     <li><a href="#stores" class="nav-book">Our Stores</a></li>
   </ul>
 </nav>
@@ -371,7 +371,7 @@ a.st-cv:hover{color:var(--green);}
   </div>
 </section>
 
-{{ full_footer('') }}
+{{ full_footer('', stores) }}
 
 <script>
 window.addEventListener('scroll', function() {
@@ -387,5 +387,6 @@ var io = new IntersectionObserver(function(entries) {
 }, { threshold: 0 });
 document.querySelectorAll('.reveal').forEach(function(el) { io.observe(el); });
 </script>
+{{ theme_toggle() }}
 </body>
 </html>

@@ -1,0 +1,178 @@
+{% from "macros.j2" import full_footer, footer_css, wa_svg, theme_vars, theme_toggle, theme_init_script, button_css, btn_book %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="description" content="Current offers and deals at Naturals Salon &amp; Spa Bangalore — exclusive discounts across all 5 locations.">
+<title>Offers &amp; Deals | Naturals Salon &amp; Spa Bangalore</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=Jost:wght@300;400;500;600&display=swap" rel="stylesheet">
+{{ theme_init_script() }}
+<style>
+{{ theme_vars() }}
+*{margin:0;padding:0;box-sizing:border-box;}html{scroll-behavior:smooth;}
+body{font-family:'Jost',sans-serif;background:var(--cream);color:var(--text);}
+a{text-decoration:none;color:inherit;}img{display:block;width:100%;object-fit:cover;}
+nav{position:fixed;top:0;left:0;right:0;z-index:200;padding:0 60px;height:70px;display:flex;justify-content:space-between;align-items:center;background:var(--nav-bg);backdrop-filter:blur(20px);border-bottom:1px solid rgba(255,255,255,0.06);}
+.nav-logo{display:flex;align-items:center;gap:10px;}
+.nav-logo img{height:34px;width:auto;filter:brightness(0) invert(1);}
+.nav-logo-text{font-family:'Cormorant Garamond',serif;font-size:18px;color:#fff;letter-spacing:1px;}
+.nav-logo-text span{color:var(--gold);font-style:italic;font-weight:300;}
+.nav-right{display:flex;align-items:center;gap:24px;}
+.nav-back{color:rgba(255,255,255,0.5);font-size:11px;letter-spacing:2px;text-transform:uppercase;transition:color 0.3s;}
+.nav-back:hover{color:var(--gold);}
+.nav-cta{background:var(--gold);color:var(--dark);padding:10px 22px;font-size:11px;letter-spacing:2px;text-transform:uppercase;font-weight:600;transition:all 0.3s;}
+.nav-cta:hover{background:var(--gold-pale);}
+.page-hero{padding-top:70px;background:var(--dark);}
+.page-hero-inner{padding:60px 60px 0;}
+.lbl{font-size:9px;letter-spacing:5px;text-transform:uppercase;color:var(--gold);font-weight:600;margin-bottom:16px;display:flex;align-items:center;gap:12px;}
+.lbl::before{content:'';width:18px;height:1px;background:var(--gold);}
+.page-hero-inner h1{font-family:'Cormorant Garamond',serif;font-size:clamp(42px,6vw,80px);font-weight:300;color:#fff;line-height:0.95;margin-bottom:14px;}
+.page-hero-inner h1 em{font-style:italic;color:var(--gold);}
+.page-hero-inner p{font-size:14px;color:rgba(255,255,255,0.42);font-weight:300;line-height:1.8;max-width:560px;padding-bottom:40px;}
+/* FILTER */
+.filter-bar{background:var(--filter-bg);padding:0 60px 22px;position:sticky;top:70px;z-index:100;border-bottom:1px solid rgba(255,255,255,0.06);}
+.filter-row{display:flex;align-items:center;gap:10px;flex-wrap:wrap;padding-top:18px;}
+.filter-lbl{font-size:9px;letter-spacing:3px;text-transform:uppercase;font-weight:600;color:#52B788;white-space:nowrap;min-width:60px;}
+.f-btn{background:rgba(82,183,136,0.08);border:1px solid rgba(82,183,136,0.2);color:rgba(255,255,255,0.45);padding:7px 16px;font-size:11px;letter-spacing:1.5px;text-transform:uppercase;cursor:pointer;transition:all 0.3s;font-family:'Jost',sans-serif;font-weight:500;}
+.f-btn:hover{border-color:#52B788;color:#52B788;}
+.f-btn.active{background:#1B4332;border-color:#52B788;color:#52B788;}
+[data-theme="naturals"] .f-btn.active{background:rgba(37,150,190,0.2);border-color:var(--green);color:var(--green);}
+/* RESULTS */
+.results-bar{background:var(--cream);padding:14px 60px;border-bottom:1px solid rgba(0,0,0,0.06);font-size:13px;color:var(--text-light);}
+/* MAIN */
+.offers-main{padding:48px 60px;}
+.store-group{margin-bottom:52px;}
+.store-group-hdr{display:flex;align-items:baseline;gap:16px;margin-bottom:20px;padding-bottom:12px;border-bottom:2px solid rgba(0,0,0,0.06);}
+.store-group-name{font-family:'Cormorant Garamond',serif;font-size:30px;font-weight:300;color:var(--text);}
+.store-group-count{font-size:11px;color:var(--text-light);letter-spacing:2px;text-transform:uppercase;}
+.offers-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:3px;}
+.offer-card{background:#fff;overflow:hidden;transition:box-shadow 0.25s;}
+.offer-card:hover{box-shadow:0 4px 24px rgba(0,0,0,0.09);}
+.offer-img{height:180px;overflow:hidden;position:relative;}
+.offer-img img{height:100%;object-fit:cover;transition:transform 6s ease;}
+.offer-card:hover .offer-img img{transform:scale(1.04);}
+.offer-img-placeholder{height:180px;background:linear-gradient(135deg,var(--dark) 0%,var(--green) 100%);display:flex;align-items:center;justify-content:center;font-size:48px;}
+.offer-body{padding:20px;}
+.offer-badge{font-size:9px;letter-spacing:3px;text-transform:uppercase;color:var(--gold);font-weight:600;margin-bottom:8px;}
+.offer-title{font-family:'Cormorant Garamond',serif;font-size:20px;font-weight:400;margin-bottom:6px;color:var(--text);line-height:1.2;}
+.offer-details{font-size:12px;color:var(--text-mid);line-height:1.7;font-weight:300;margin-bottom:12px;}
+.offer-footer{display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:8px;padding-top:10px;border-top:1px solid rgba(0,0,0,0.06);}
+.offer-valid{font-size:11px;color:var(--green-soft);font-weight:500;}
+.no-offers{text-align:center;padding:80px 32px;color:var(--text-light);}
+.no-offers h3{font-family:'Cormorant Garamond',serif;font-size:32px;font-weight:300;margin-bottom:10px;}
+/* SCROLL TOP */
+#scroll-top{position:fixed;bottom:32px;right:32px;z-index:500;width:44px;height:44px;background:var(--dark);border:1px solid rgba(255,255,255,0.15);color:rgba(255,255,255,0.7);font-size:18px;display:flex;align-items:center;justify-content:center;cursor:pointer;opacity:0;pointer-events:none;transform:translateY(12px);transition:opacity 0.3s,transform 0.3s,background 0.2s;}
+#scroll-top.visible{opacity:1;pointer-events:auto;transform:translateY(0);}
+#scroll-top:hover{background:var(--green);}
+{{ button_css() }}
+{{ footer_css() }}
+@media(max-width:900px){
+  nav{padding:0 20px;height:60px;}
+  .page-hero-inner{padding:44px 20px 0;}
+  .filter-bar{padding:0 20px 18px;top:60px;}
+  .results-bar{padding:12px 20px;}
+  .offers-main{padding:32px 20px;}
+  .offers-grid{grid-template-columns:1fr 1fr;}
+  #scroll-top{bottom:20px;right:20px;}
+}
+@media(max-width:600px){.offers-grid{grid-template-columns:1fr;}}
+</style>
+</head>
+<body>
+<nav>
+  <a href="index.html" class="nav-logo">
+    <img src="images/naturals-logo.png" alt="Naturals" onerror="this.style.display='none'">
+    <div class="nav-logo-text">Naturals <span>Salon &amp; Spa</span></div>
+  </a>
+  <div class="nav-right">
+    <a href="index.html" class="nav-back">&#8592; Home</a>
+    <a href="index.html#stores" class="nav-cta">Book Now</a>
+  </div>
+</nav>
+
+<div class="page-hero">
+  <div class="page-hero-inner">
+    <div class="lbl">Exclusive Deals</div>
+    <h1>Offers &amp;<br><em>Promotions</em></h1>
+    <p>Current deals across all our Bangalore locations. Filter by store to find offers near you.</p>
+  </div>
+</div>
+
+<div class="filter-bar">
+  <div class="filter-row">
+    <span class="filter-lbl">Store</span>
+    <button class="f-btn active" data-store="all" onclick="filterOffers('all',this)">All Stores</button>
+    {% for s in stores %}
+    <button class="f-btn" data-store="{{ s.Store_ID }}" onclick="filterOffers('{{ s.Store_ID }}',this)">{{ s.Store_Name }}</button>
+    {% endfor %}
+  </div>
+</div>
+
+<div class="results-bar" id="results-bar">Showing all active offers</div>
+
+<main class="offers-main" id="offers-main">
+{% for s in stores %}
+  {% set store_offers = offers_by_store[s.Store_ID] %}
+  {% if store_offers %}
+  <div class="store-group" data-store-group="{{ s.Store_ID }}">
+    <div class="store-group-hdr">
+      <div class="store-group-name">{{ s.Store_Name }}</div>
+      <div class="store-group-count">{{ store_offers | length }} offer{{ 's' if store_offers | length != 1 else '' }}</div>
+    </div>
+    <div class="offers-grid">
+    {% for offer in store_offers %}
+      <div class="offer-card">
+        <div class="offer-img-placeholder">&#127800;</div>
+        <div class="offer-body">
+          <div class="offer-badge">Special Offer</div>
+          <div class="offer-title">{{ offer.get('Offer_Title','') }}</div>
+          <div class="offer-details">{{ offer.get('Offer_Details','') }}</div>
+          <div class="offer-footer">
+            <span class="offer-valid">Valid till {{ offer.get('Valid_till','') }}</span>
+            {{ btn_book(s.Appointment_URL, 'Book Now') }}
+          </div>
+        </div>
+      </div>
+    {% endfor %}
+    </div>
+  </div>
+  {% endif %}
+{% endfor %}
+<div class="no-offers" id="no-offers" style="display:none;">
+  <h3>No active offers</h3>
+  <p>Check back soon — new deals are added regularly.</p>
+</div>
+</main>
+
+<button id="scroll-top" onclick="window.scrollTo({top:0,behavior:'smooth'})" title="Back to top">&#8593;</button>
+{{ full_footer('', stores) }}
+{{ theme_toggle() }}
+
+<script>
+function filterOffers(storeId, btn) {
+  document.querySelectorAll('.f-btn').forEach(function(b){ b.classList.remove('active'); });
+  btn.classList.add('active');
+  var groups = document.querySelectorAll('.store-group');
+  var visible = 0;
+  groups.forEach(function(g) {
+    var show = storeId === 'all' || g.dataset.storeGroup === storeId;
+    g.style.display = show ? '' : 'none';
+    if (show) visible++;
+  });
+  var bar = document.getElementById('results-bar');
+  var noOffers = document.getElementById('no-offers');
+  if (visible === 0) {
+    noOffers.style.display = '';
+    bar.textContent = 'No active offers for this store';
+  } else {
+    noOffers.style.display = 'none';
+    bar.textContent = storeId === 'all' ? 'Showing all active offers' : 'Showing offers for selected store';
+  }
+}
+var scrollBtn = document.getElementById('scroll-top');
+window.addEventListener('scroll', function(){ scrollBtn.classList.toggle('visible', window.scrollY > 320); }, {passive:true});
+</script>
+</body>
+</html>

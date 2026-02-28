@@ -1,4 +1,4 @@
-{% from "macros.j2" import full_footer, footer_css, wa_svg %}
+{% from "macros.j2" import full_footer, footer_css, wa_svg, theme_vars, theme_toggle, theme_init_script, button_css, btn_book, btn_wa, btn_call, btn_maps %}
 {% set s = store %}
 <!DOCTYPE html>
 <html lang="en">
@@ -10,11 +10,7 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=Jost:wght@300;400;500;600&display=swap" rel="stylesheet">
 <style>
-:root{
-  --dark:#111714;--green:#1B4332;--green-mid:#2D6A4F;--green-soft:#52B788;
-  --cream:#F8F4EE;--gold:#C9A84C;--gold-pale:#EDD9A3;
-  --text:#1A1A1A;--text-mid:#555;--text-light:#999;
-}
+{{ theme_vars() }}
 *{margin:0;padding:0;box-sizing:border-box;}
 html{scroll-behavior:smooth;}
 body{font-family:'Jost',sans-serif;background:var(--cream);color:var(--text);overflow-x:hidden;}
@@ -22,7 +18,7 @@ a{text-decoration:none;color:inherit;}
 img{display:block;width:100%;object-fit:cover;}
 
 /* NAV */
-nav{position:fixed;top:0;left:0;right:0;z-index:200;padding:0 60px;height:70px;display:flex;justify-content:space-between;align-items:center;background:rgba(17,23,20,0.97);backdrop-filter:blur(20px);border-bottom:1px solid rgba(255,255,255,0.06);}
+nav{position:fixed;top:0;left:0;right:0;z-index:200;padding:0 60px;height:70px;display:flex;justify-content:space-between;align-items:center;background:var(--nav-bg);backdrop-filter:blur(20px);border-bottom:1px solid rgba(255,255,255,0.06);}
 .nav-logo{display:flex;align-items:center;gap:10px;}
 .nav-logo img{height:34px;width:auto;filter:brightness(0) invert(1);}
 .nav-logo-text{font-family:'Cormorant Garamond',serif;font-size:18px;color:#fff;letter-spacing:1px;}
@@ -37,7 +33,7 @@ nav{position:fixed;top:0;left:0;right:0;z-index:200;padding:0 60px;height:70px;d
 .hero{height:70vh;min-height:500px;position:relative;display:flex;align-items:flex-end;overflow:hidden;}
 .hero-bg{position:absolute;inset:0;}
 .hero-bg img{height:100%;object-fit:cover;}
-.hero-ov{position:absolute;inset:0;background:linear-gradient(to top,rgba(17,23,20,0.92) 0%,rgba(17,23,20,0.3) 60%,rgba(17,23,20,0.1) 100%);}
+.hero-ov{position:absolute;inset:0;background:linear-gradient(to top,var(--hero-tint) 0%,var(--hero-tint2) 50%,rgba(0,0,0,0.1) 100%);}
 .hero-content{position:relative;z-index:2;padding:60px 60px 48px;width:100%;}
 .hero-badge{font-size:9px;letter-spacing:4px;text-transform:uppercase;color:var(--gold);font-weight:600;margin-bottom:12px;}
 .hero-content h1{font-family:'Cormorant Garamond',serif;font-size:clamp(36px,5vw,68px);font-weight:300;color:#fff;line-height:0.95;margin-bottom:12px;}
@@ -88,7 +84,7 @@ a.info-val:hover{color:var(--gold);}
 .svc-promo{position:relative;overflow:hidden;height:280px;display:block;margin-bottom:3px;}
 .svc-promo img{height:100%;object-fit:cover;transition:transform 7s ease;}
 .svc-promo:hover img{transform:scale(1.05);}
-.svc-promo-ov{position:absolute;inset:0;background:linear-gradient(135deg,rgba(17,23,20,0.82) 0%,rgba(27,67,50,0.65) 50%,rgba(17,23,20,0.4) 100%);transition:opacity 0.4s;}
+.svc-promo-ov{position:absolute;inset:0;background:linear-gradient(to top,var(--hero-tint) 0%,var(--hero-tint2) 50%,rgba(0,0,0,0.1) 100%);transition:opacity 0.4s;}
 .svc-promo:hover .svc-promo-ov{opacity:0.88;}
 .svc-promo-body{position:absolute;inset:0;display:flex;flex-direction:column;justify-content:center;padding:36px 40px;}
 .svc-promo-eyebrow{font-size:9px;letter-spacing:4px;text-transform:uppercase;color:var(--gold);font-weight:600;margin-bottom:10px;}
@@ -158,6 +154,7 @@ a.contact-val:hover{color:var(--green);}
 .sn-link:hover{color:var(--gold);}
 .sn-mid{font-size:10px;color:rgba(255,255,255,0.2);letter-spacing:2px;text-transform:uppercase;}
 
+{{ button_css() }}
 {{ footer_css() }}
 
 @media(max-width:1100px){
@@ -187,6 +184,7 @@ a.contact-val:hover{color:var(--green);}
   .sb-quick{grid-template-columns:1fr 1fr 1fr 1fr;}
 }
 </style>
+{{ theme_init_script() }}
 </head>
 <body>
 
@@ -426,7 +424,7 @@ a.contact-val:hover{color:var(--green);}
   <a href="{{ next_store.Store_Page_URL | replace('stores/','') }}" class="sn-link">{{ next_store.Store_Name }} &#8594;</a>
 </div>
 
-{{ full_footer('../') }}
+{{ full_footer('../', all_stores) }}
 
 <script>
 var io = new IntersectionObserver(function(entries) {
@@ -439,5 +437,6 @@ var io = new IntersectionObserver(function(entries) {
 }, { threshold: 0 });
 document.querySelectorAll('.reveal').forEach(function(el) { io.observe(el); });
 </script>
+{{ theme_toggle() }}
 </body>
 </html>

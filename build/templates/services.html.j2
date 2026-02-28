@@ -1,4 +1,4 @@
-{% from "macros.j2" import full_footer, footer_css, wa_svg %}
+{% from "macros.j2" import full_footer, footer_css, wa_svg, theme_vars, theme_toggle, theme_init_script, button_css, btn_book, btn_wa, btn_call, btn_maps %}
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -9,11 +9,7 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=Jost:wght@300;400;500;600&display=swap" rel="stylesheet">
 <style>
-:root{
-  --dark:#111714;--green:#1B4332;--green-mid:#2D6A4F;--green-soft:#52B788;
-  --cream:#F8F4EE;--gold:#C9A84C;--gold-pale:#EDD9A3;
-  --text:#1A1A1A;--text-mid:#555;--text-light:#999;
-}
+{{ theme_vars() }}
 *{margin:0;padding:0;box-sizing:border-box;}
 html{scroll-behavior:smooth;}
 body{font-family:'Jost',sans-serif;background:var(--cream);color:var(--text);}
@@ -21,7 +17,7 @@ a{text-decoration:none;color:inherit;}
 img{display:block;width:100%;object-fit:cover;}
 
 /* NAV */
-nav{position:fixed;top:0;left:0;right:0;z-index:200;padding:0 60px;height:70px;display:flex;justify-content:space-between;align-items:center;background:rgba(17,23,20,0.97);backdrop-filter:blur(20px);border-bottom:1px solid rgba(255,255,255,0.06);}
+nav{position:fixed;top:0;left:0;right:0;z-index:200;padding:0 60px;height:70px;display:flex;justify-content:space-between;align-items:center;background:var(--nav-bg);backdrop-filter:blur(20px);border-bottom:1px solid rgba(255,255,255,0.06);}
 .nav-logo{display:flex;align-items:center;gap:10px;}
 .nav-logo img{height:34px;width:auto;object-fit:contain;filter:brightness(0) invert(1);}
 .nav-logo-text{font-family:'Cormorant Garamond',serif;font-size:18px;font-weight:500;color:#fff;letter-spacing:1px;}
@@ -98,7 +94,7 @@ nav{position:fixed;top:0;left:0;right:0;z-index:200;padding:0 60px;height:70px;d
 .cat-count{font-size:11px;color:var(--text-light);letter-spacing:2px;text-transform:uppercase;}
 .svc-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:2px;}
 .svc-card{background:#fff;padding:24px 22px;border-bottom:2px solid transparent;transition:all 0.25s;display:flex;flex-direction:column;justify-content:space-between;min-height:170px;}
-.svc-card:hover{background:#fafaf8;border-bottom-color:var(--gold);transform:translateY(-2px);box-shadow:0 4px 20px rgba(0,0,0,0.06);}
+.svc-card:hover{background:#fafaf8;border-bottom-color:var(--card-hover-border);transform:translateY(-2px);box-shadow:0 4px 20px rgba(0,0,0,0.06);}
 .svc-card-name{font-family:'Cormorant Garamond',serif;font-size:20px;color:var(--text);font-weight:400;margin-bottom:7px;line-height:1.2;}
 .svc-card-desc{font-size:12px;color:var(--text-mid);line-height:1.7;font-weight:300;flex:1;margin-bottom:14px;}
 .svc-card-foot{display:flex;justify-content:space-between;align-items:flex-end;flex-wrap:wrap;gap:8px;}
@@ -130,6 +126,7 @@ nav{position:fixed;top:0;left:0;right:0;z-index:200;padding:0 60px;height:70px;d
 #scroll-top.visible{opacity:1;pointer-events:auto;transform:translateY(0);}
 #scroll-top:hover{background:var(--green);border-color:var(--green-soft);color:#fff;}
 
+{{ button_css() }}
 {{ footer_css() }}
 
 @media(max-width:900px){
@@ -148,6 +145,7 @@ nav{position:fixed;top:0;left:0;right:0;z-index:200;padding:0 60px;height:70px;d
   #cat-select{min-width:160px;}
 }
 </style>
+{{ theme_init_script() }}
 </head>
 <body>
 
@@ -183,9 +181,10 @@ nav{position:fixed;top:0;left:0;right:0;z-index:200;padding:0 60px;height:70px;d
     <!-- Row 2: Gender + Category dropdown on same line -->
     <div class="filter-row">
       <span class="filter-lbl filter-lbl-gender">Gender</span>
-      <button class="f-btn-gender" data-filter="gender" data-value="female" onclick="setFilter('gender','female',this)">Female</button>
-      <button class="f-btn-gender" data-filter="gender" data-value="male"   onclick="setFilter('gender','male',this)">Male</button>
-      <button class="f-btn-gender" data-filter="gender" data-value="both"   onclick="setFilter('gender','both',this)">Both</button>
+      <button class="f-btn-gender active" data-filter="gender" data-value="all"    onclick="setFilter('gender','all',this)">All</button>
+      <button class="f-btn-gender"        data-filter="gender" data-value="female" onclick="setFilter('gender','female',this)">Female</button>
+      <button class="f-btn-gender"        data-filter="gender" data-value="male"   onclick="setFilter('gender','male',this)">Male</button>
+      <button class="f-btn-gender"        data-filter="gender" data-value="unisex" onclick="setFilter('gender','unisex',this)">Unisex</button>
 
       <!-- Spacer + Category dropdown -->
       <span style="width:1px;height:20px;background:rgba(255,255,255,0.08);margin:0 8px;flex-shrink:0;"></span>
@@ -193,9 +192,6 @@ nav{position:fixed;top:0;left:0;right:0;z-index:200;padding:0 60px;height:70px;d
       <div class="cat-select-wrap">
         <select id="cat-select" onchange="setCatDropdown(this)">
           <option value="all">All Categories</option>
-          {% for cat in categories %}
-          <option value="{{ cat | lower }}">{{ cat }}</option>
-          {% endfor %}
         </select>
       </div>
     </div>
@@ -221,7 +217,7 @@ nav{position:fixed;top:0;left:0;right:0;z-index:200;padding:0 60px;height:70px;d
 <!-- SCROLL TO TOP -->
 <button id="scroll-top" onclick="window.scrollTo({top:0,behavior:'smooth'})" title="Back to top">&#8593;</button>
 
-{{ full_footer('') }}
+{{ full_footer('', stores) }}
 
 <script>
 // ── Baked-in data — no Google Sheets fetch ──
@@ -233,15 +229,18 @@ const STORE_NAMES = {
   {% endfor %}
 };
 
-let activeFilters = { store: 'all', gender: '', category: 'all' };
+// activeFilters.gender: 'all' | 'female' | 'male' | 'unisex'
+let activeFilters = { store: 'all', gender: 'all', category: 'all' };
 
 function ci(s) { return (s || '').trim().toLowerCase(); }
 
+// Maps raw sheet Gender value → normalised key
 function normGender(raw) {
   var g = ci(raw);
-  if (g === 'female' || g === 'women' || g === 'f' || g === 'w') return 'women';
-  if (g === 'male'   || g === 'men'   || g === 'm')              return 'men';
-  return 'both';
+  if (g === 'female' || g === 'women' || g === 'f' || g === 'w') return 'female';
+  if (g === 'male'   || g === 'men'   || g === 'm')              return 'male';
+  if (g === 'unisex' || g === 'both'  || g === 'u' || g === 'b') return 'unisex';
+  return 'unisex'; // fallback
 }
 
 function isYes(val) {
@@ -250,17 +249,60 @@ function isYes(val) {
 }
 
 function genIcon(g) {
-  return g === 'women' ? '&#9792;' : g === 'men' ? '&#9794;' : '&#9893;';
+  return g === 'female' ? '&#9792;' : g === 'male' ? '&#9794;' : '&#9893;';
+}
+
+// ── Returns rows matching current store + gender (ignores category) ──
+function getStoreGenderSubset() {
+  return ALL_DATA.filter(function(r) {
+    // Store filter
+    if (activeFilters.store !== 'all') {
+      if (!isYes(r[activeFilters.store])) return false;
+    }
+    // Gender filter
+    if (activeFilters.gender !== 'all') {
+      if (normGender(r['Gender'] || '') !== activeFilters.gender) return false;
+    }
+    return true;
+  });
+}
+
+// ── Rebuild category dropdown from current store+gender subset ──
+function rebuildCategoryDropdown(preserveValue) {
+  var subset = getStoreGenderSubset();
+  // Collect unique categories in order of appearance
+  var seen = [];
+  subset.forEach(function(r) {
+    var cat = (r['Category'] || 'Other').trim();
+    if (cat && seen.indexOf(cat) === -1) seen.push(cat);
+  });
+
+  var sel = document.getElementById('cat-select');
+  var prevVal = preserveValue ? sel.value : 'all';
+
+  sel.innerHTML = '<option value="all">All Categories</option>';
+  seen.forEach(function(cat) {
+    var opt = document.createElement('option');
+    opt.value = ci(cat);
+    opt.textContent = cat;
+    sel.appendChild(opt);
+  });
+
+  // Restore previous selection if it still exists, else reset to All
+  var stillExists = Array.from(sel.options).some(function(o) { return o.value === prevVal; });
+  sel.value = stillExists ? prevVal : 'all';
+  activeFilters.category = sel.value;
+  sel.classList.toggle('active', sel.value !== 'all');
 }
 
 // ── Category dropdown handler ──
 function setCatDropdown(sel) {
-  var val = sel.value;
-  activeFilters.category = val;
-  sel.classList.toggle('active', val !== 'all');
+  activeFilters.category = sel.value;
+  sel.classList.toggle('active', sel.value !== 'all');
   renderServices();
 }
 
+// ── Main render ──
 function renderServices() {
   var container = document.getElementById('svc-container');
   var empty     = document.getElementById('empty-state');
@@ -269,13 +311,15 @@ function renderServices() {
   container.innerHTML = '';
 
   var filtered = ALL_DATA.filter(function(r) {
+    // Store
     if (activeFilters.store !== 'all') {
       if (!isYes(r[activeFilters.store])) return false;
     }
-    if (activeFilters.gender !== '' && activeFilters.gender !== 'all') {
-      var ng = normGender(r['Gender'] || '');
-      if (ng !== normGender(activeFilters.gender) && ng !== 'both') return false;
+    // Gender — exact match only; 'all' shows everything
+    if (activeFilters.gender !== 'all') {
+      if (normGender(r['Gender'] || '') !== activeFilters.gender) return false;
     }
+    // Category
     if (activeFilters.category !== 'all') {
       if (ci(r['Category'] || '') !== activeFilters.category) return false;
     }
@@ -293,9 +337,9 @@ function renderServices() {
   // Group by category
   var cats = {};
   filtered.forEach(function(r) {
-    var c = (r['Category'] || 'Other').trim();
-    if (!cats[c]) cats[c] = [];
-    cats[c].push(r);
+    var cat = (r['Category'] || 'Other').trim();
+    if (!cats[cat]) cats[cat] = [];
+    cats[cat].push(r);
   });
 
   Object.keys(cats).forEach(function(cat) {
@@ -319,7 +363,7 @@ function renderServices() {
       var desc = (r['Description']  || '').trim();
       var memHtml  = (mem && ci(mem) !== '-') ? '<span class="price-mem">Members &#8377;' + mem + '</span>' : '';
       var ng       = normGender(gen);
-      var genClass = ng === 'women' ? 'svc-tag-w' : ng === 'men' ? 'svc-tag-m' : 'svc-tag-b';
+      var genClass = ng === 'female' ? 'svc-tag-w' : ng === 'male' ? 'svc-tag-m' : 'svc-tag-b';
       var card = document.createElement('div');
       card.className = 'svc-card';
       card.innerHTML =
@@ -337,24 +381,27 @@ function renderServices() {
   });
 }
 
+// ── setFilter — handles store, gender button clicks ──
 function setFilter(type, value, btn) {
-  // Gender toggles off if already active
-  if (type === 'gender' && activeFilters[type] === value) {
-    activeFilters[type] = '';
-    document.querySelectorAll('[data-filter="gender"]').forEach(function(b) { b.classList.remove('active'); });
-    renderServices();
-    return;
-  }
   activeFilters[type] = value;
+
+  // Update button active states
   document.querySelectorAll('[data-filter="' + type + '"]').forEach(function(b) { b.classList.remove('active'); });
   btn.classList.add('active');
-  // Changing store resets category dropdown to All
+
   if (type === 'store') {
-    activeFilters.category = 'all';
-    var sel = document.getElementById('cat-select');
-    if (sel) { sel.value = 'all'; sel.classList.remove('active'); }
+    // Store change: reset gender to All, rebuild categories, render
+    activeFilters.gender = 'all';
+    document.querySelectorAll('[data-filter="gender"]').forEach(function(b) {
+      b.classList.toggle('active', b.dataset.value === 'all');
+    });
+    rebuildCategoryDropdown(false);
+    renderServices();
+  } else if (type === 'gender') {
+    // Gender change: rebuild categories (reset to All), render
+    rebuildCategoryDropdown(false);
+    renderServices();
   }
-  renderServices();
 }
 
 // ── Scroll to top visibility ──
@@ -363,42 +410,46 @@ window.addEventListener('scroll', function() {
   scrollBtn.classList.toggle('visible', window.scrollY > 320);
 }, { passive: true });
 
-// ── URL params on load ──
+// ── Initialise on page load ──
 document.addEventListener('DOMContentLoaded', function() {
   var params      = new URLSearchParams(window.location.search);
   var storeParam  = (params.get('store')  || '').trim();
   var catParam    = (params.get('cat')    || '').trim().toLowerCase();
   var genderParam = (params.get('gender') || '').trim().toLowerCase();
 
+  // Apply store param
   if (storeParam) {
     activeFilters.store = storeParam;
-    var sBtn = document.querySelector('[data-filter="store"][data-value="' + storeParam + '"]');
-    if (sBtn) {
-      document.querySelectorAll('[data-filter="store"]').forEach(function(b) { b.classList.remove('active'); });
-      sBtn.classList.add('active');
-    }
+    document.querySelectorAll('[data-filter="store"]').forEach(function(b) {
+      b.classList.toggle('active', b.dataset.value === storeParam);
+    });
   }
-  if (genderParam) {
+
+  // Apply gender param
+  if (genderParam && ['all','female','male','unisex'].indexOf(genderParam) !== -1) {
     activeFilters.gender = genderParam;
-    var gBtn = document.querySelector('[data-filter="gender"][data-value="' + genderParam + '"]');
-    if (gBtn) gBtn.classList.add('active');
+    document.querySelectorAll('[data-filter="gender"]').forEach(function(b) {
+      b.classList.toggle('active', b.dataset.value === genderParam);
+    });
   }
+
+  // Build category dropdown based on store+gender state
+  rebuildCategoryDropdown(false);
+
+  // Apply category param after dropdown is built
   if (catParam) {
-    activeFilters.category = catParam;
     var sel = document.getElementById('cat-select');
-    if (sel) {
-      // Find matching option (case-insensitive)
-      for (var i = 0; i < sel.options.length; i++) {
-        if (ci(sel.options[i].value) === catParam) {
-          sel.selectedIndex = i;
-          sel.classList.add('active');
-          break;
-        }
-      }
+    var match = Array.from(sel.options).find(function(o) { return ci(o.value) === catParam; });
+    if (match) {
+      sel.value = match.value;
+      activeFilters.category = match.value;
+      sel.classList.add('active');
     }
   }
+
   renderServices();
 });
 </script>
+{{ theme_toggle() }}
 </body>
 </html>
