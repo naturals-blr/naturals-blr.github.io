@@ -156,8 +156,6 @@ footer{background:#080f0b;padding:28px 60px;display:flex;justify-content:space-b
 .ft-copy{font-size:11px;color:rgba(255,255,255,0.18);}
 .reveal{opacity:0;transform:translateY(24px);transition:opacity 0.7s ease,transform 0.7s ease;}
 .reveal.visible{opacity:1;transform:translateY(0);}
-/* DEBUG */
-.debug-bar{background:#1a1a1a;color:#0f0;font-family:monospace;font-size:11px;padding:10px 24px;display:none;word-break:break-all;}
 @media(max-width:960px){
   nav{padding:0 20px;height:60px;}.nav-cta{display:none;}
   .hero-content{padding:0 24px 44px;}
@@ -257,14 +255,13 @@ footer{background:#080f0b;padding:28px 60px;display:flex;justify-content:space-b
     <div class="lbl">What We Offer</div>
     <h2 class="sec-title sec-title-wh">Our <em>services</em></h2>
     <p style="font-size:13px;color:rgba(255,255,255,0.35);font-weight:300;margin-bottom:28px;line-height:1.7;">Live from our services database. Filter by gender below.</p>
-    <div class="debug-bar" id="svc-debug"></div>
-    <div class="svc-filter" id="svc-filter"></div>
+    <div class="svc-filter" id="svc-filter"><button class="f-btn" id="fgf" data-g="female" onclick="storeGenderFilter(this)">Female</button><button class="f-btn" id="fgm" data-g="male" onclick="storeGenderFilter(this)">Male</button><button class="f-btn" id="fgb" data-g="both" onclick="storeGenderFilter(this)">Both</button></div>
     <div id="svc-loading" class="loading-msg">Loading services...</div>
     <div id="svc-container"></div>
   </div>
 
   <!-- OFFERS -->
-  <div class="offers-block reveal">
+  <div class="offers-block reveal" id="offers-section" style="display:none">
     <div class="lbl">Current Offers</div>
     <h2 class="sec-title">Deals &amp; <em>offers</em></h2>
     <div id="offers-loading" style="font-size:13px;color:var(--text-light);font-style:italic;padding:20px 0;">Loading offers...</div>
@@ -274,10 +271,10 @@ footer{background:#080f0b;padding:28px 60px;display:flex;justify-content:space-b
 
   <!-- STYLISTS -->
   <div class="dark-block reveal">
-    <div class="lbl">Our Team</div>
+    <div id="stylists-section" style="display:none"><div class="lbl">Our Team</div>
     <h2 class="sec-title sec-title-wh">Meet our <em>stylists</em></h2>
     <div id="stylists-loading" class="loading-msg">Loading stylists...</div>
-    <div class="stylists-grid" id="stylists-container"></div>
+    <div class="stylists-grid" id="stylists-container"></div></div>
   </div>
 
   <!-- MAP -->
@@ -373,9 +370,9 @@ footer{background:#080f0b;padding:28px 60px;display:flex;justify-content:space-b
     </div>
     <div class="sb-divider"></div>
     <div class="lbl" style="font-size:9px;margin-bottom:12px;">Hours</div>
-    <div class="h-row"><span class="h-day">Mon &ndash; Fri</span><span>9:00 AM &ndash; 8:00 PM</span></div>
-    <div class="h-row"><span class="h-day">Saturday</span><span>9:00 AM &ndash; 8:00 PM</span></div>
-    <div class="h-row"><span class="h-day">Sunday</span><span>10:00 AM &ndash; 7:00 PM</span></div>
+    <div class="h-row"><span class="h-day">Mon &ndash; Fri</span><span>10:00 AM &ndash; 8:00 PM</span></div>
+    <div class="h-row"><span class="h-day">Saturday</span><span>10:00 AM &ndash; 8:00 PM</span></div>
+    <div class="h-row"><span class="h-day">Sunday</span><span>10:00 AM &ndash; 8:00 PM</span></div>
     <div class="sb-divider"></div>
     <div class="lbl" style="font-size:9px;margin-bottom:12px;">Follow Us</div>
     <div class="sb-social">
@@ -462,8 +459,6 @@ footer{background:#080f0b;padding:28px 60px;display:flex;justify-content:space-b
   function loadServices() {
     var container = document.getElementById('svc-container');
     var loading   = document.getElementById('svc-loading');
-    var filterEl  = document.getElementById('svc-filter');
-    var debugEl   = document.getElementById('svc-debug');
 
     fetch(CSV_SERVICES)
       .then(function(r) { return r.text(); })
@@ -482,15 +477,6 @@ footer{background:#080f0b;padding:28px 60px;display:flex;justify-content:space-b
         var iDesc  = hdridx(H, 'Description');
         var iStore = hdridx(H, STORE_ID);
 
-        // Debug — show raw values
-        var gVals = [];
-        var sVals = [];
-        data.forEach(function(r) {
-          var g = (r[iGen]||'').trim(); if (g && gVals.indexOf(g) === -1) gVals.push(g);
-          if (iStore >= 0) { var sv = (r[iStore]||'').trim(); if (sv && sVals.indexOf(sv) === -1) sVals.push(sv); }
-        });
-        debugEl.style.display = 'block';
-        debugEl.textContent = 'DEBUG | Rows:' + data.length + ' | StoreCol:"' + (H[iStore]||'NOT FOUND') + '"(idx:' + iStore + ') | StoreVals:[' + sVals.join(',') + '] | GenderVals:[' + gVals.join(',') + ']';
 
         // Filter this store's services
         var storeData = data.filter(function(r) {
@@ -503,24 +489,9 @@ footer{background:#080f0b;padding:28px 60px;display:flex;justify-content:space-b
           return;
         }
 
-        // Build gender filter from actual data
-        var gens = ['All'];
-        storeData.forEach(function(r) {
-          var g = (r[iGen]||'').trim();
-          if (g && gens.indexOf(g) === -1) gens.push(g); // raw label kept for display
-        });
-
-        gens.forEach(function(g, i) {
-          var btn = document.createElement('button');
-          btn.textContent = g;
-          btn.className = 'f-btn' + (i === 0 ? ' active' : '');
-          btn.onclick = function() {
-            document.querySelectorAll('#svc-filter .f-btn').forEach(function(b) { b.classList.remove('active'); });
-            btn.classList.add('active');
-            filterSvcs(g, storeData, iGen, iCat, iName, iDur, iReg, iMem, iDesc, container);
-          };
-          filterEl.appendChild(btn);
-        });
+        // Wire static gender filter buttons
+        window._storeData  = storeData;
+        window._svcParams  = {iGen:iGen,iCat:iCat,iName:iName,iDur:iDur,iReg:iReg,iMem:iMem,iDesc:iDesc,container:container};
 
         loading.style.display = 'none';
         renderSvcCards(storeData, iCat, iName, iDur, iReg, iMem, iGen, iDesc, container);
@@ -533,7 +504,8 @@ footer{background:#080f0b;padding:28px 60px;display:flex;justify-content:space-b
 
   function filterSvcs(g, data, iGen, iCat, iName, iDur, iReg, iMem, iDesc, container) {
     var isAll = ci(g) === 'all';
-    var filtered = isAll ? data : data.filter(function(r) {
+    var isAllOrEmpty = isAll || !g || g === '';
+    var filtered = isAllOrEmpty ? data : data.filter(function(r) {
       var rg = normGender(r[iGen] || '');
       return rg === normGender(g) || rg === 'both';
     });
@@ -608,6 +580,8 @@ footer{background:#080f0b;padding:28px 60px;display:flex;justify-content:space-b
         if (!data.length) { loading.style.display = 'none'; return; }
         loading.style.display = 'none';
         note.style.display = 'block';
+        var sec = document.getElementById('offers-section'); if (sec) sec.style.display = '';
+        document.getElementById('offers-section').style.display = '';
         data.forEach(function(r) {
           var title   = (r[iTitle]||'').trim();
           var details = (r[iDet] ||'').trim();
@@ -657,6 +631,8 @@ footer{background:#080f0b;padding:28px 60px;display:flex;justify-content:space-b
         });
         if (!data.length) { loading.style.display = 'none'; return; }
         loading.style.display = 'none';
+        var stylistSec = document.getElementById('stylists-section');
+        if (stylistSec) stylistSec.style.display = '';
         data.forEach(function(r) {
           var name    = (r[iName]||'').trim();
           var spec    = (r[iSpec]||'').trim();
@@ -697,6 +673,27 @@ footer{background:#080f0b;padding:28px 60px;display:flex;justify-content:space-b
   });
 
 })();
+
+  // Global gender filter handler for static buttons
+  function storeGenderFilter(btn) {
+    var active = btn.classList.contains('active');
+    document.querySelectorAll('#svc-filter .f-btn').forEach(function(b) { b.classList.remove('active'); });
+    if (!active) {
+      btn.classList.add('active');
+      var g = btn.getAttribute('data-g');
+      if (window._storeData && window._svcParams) {
+        var p = window._svcParams;
+        filterSvcs(g, window._storeData, p.iGen, p.iCat, p.iName, p.iDur, p.iReg, p.iMem, p.iDesc, p.container);
+      }
+    } else {
+      // Toggle off — show all
+      if (window._storeData && window._svcParams) {
+        var p = window._svcParams;
+        renderSvcCards(window._storeData, p.iCat, p.iName, p.iDur, p.iReg, p.iMem, p.iGen, p.iDesc, p.container);
+      }
+    }
+  }
+
 </script>
 </body>
 </html>

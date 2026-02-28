@@ -99,10 +99,10 @@ nav{position:fixed;top:0;left:0;right:0;z-index:200;padding:0 60px;height:70px;d
 .empty-state h3{font-family:'Cormorant Garamond',serif;font-size:32px;font-weight:300;margin-bottom:10px;}
 
 /* LEGEND */
-.legend-bar{background:var(--dark);padding:28px 60px;display:flex;align-items:center;gap:28px;flex-wrap:wrap;}
-.legend-lbl{font-size:9px;letter-spacing:3px;text-transform:uppercase;color:rgba(255,255,255,0.28);font-weight:600;}
-.legend-item{display:flex;align-items:center;gap:8px;font-size:12px;color:rgba(255,255,255,0.4);}
-.legend-dot{width:7px;height:7px;background:var(--gold);flex-shrink:0;}
+
+
+
+
 
 /* FOOTER */
 footer{background:#080f0b;padding:28px 60px;display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:12px;}
@@ -122,7 +122,7 @@ footer{background:#080f0b;padding:28px 60px;display:flex;justify-content:space-b
   .results-bar{padding:12px 20px;}
   .services-main{padding:32px 20px;}
   .svc-grid{grid-template-columns:1fr 1fr;}
-  .legend-bar{padding:20px;}
+  
   footer{padding:24px 20px;flex-direction:column;text-align:center;}
 }
 @media(max-width:600px){
@@ -164,7 +164,6 @@ footer{background:#080f0b;padding:28px 60px;display:flex;justify-content:space-b
     </div>
     <div class="filter-row">
       <span class="filter-lbl filter-lbl-gender">Gender</span>
-      <button class="f-btn-gender active" data-filter="gender" data-value="all" onclick="setFilter('gender','all',this)">All</button>
       <button class="f-btn-gender" data-filter="gender" data-value="female" onclick="setFilter('gender','female',this)">Female</button>
       <button class="f-btn-gender" data-filter="gender" data-value="male" onclick="setFilter('gender','male',this)">Male</button>
       <button class="f-btn-gender" data-filter="gender" data-value="both" onclick="setFilter('gender','both',this)">Both</button>
@@ -182,11 +181,6 @@ footer{background:#080f0b;padding:28px 60px;display:flex;justify-content:space-b
   <div id="results-count">Loading services...</div>
   <div id="results-store"></div>
 </div>
-<!-- DEBUG PANEL — remove after testing -->
-<div id="debug-panel" style="background:#1a1a1a;color:#0f0;font-family:monospace;font-size:11px;padding:12px 60px;display:none;">
-  <strong style="color:#ff0;">DEBUG MODE</strong> &nbsp;
-  <span id="debug-info"></span>
-</div>
 
 <!-- SERVICES -->
 <main class="services-main">
@@ -198,15 +192,6 @@ footer{background:#080f0b;padding:28px 60px;display:flex;justify-content:space-b
   </div>
 </main>
 
-<!-- LEGEND -->
-<div class="legend-bar">
-  <span class="legend-lbl">Store Codes</span>
-  <span class="legend-item"><span class="legend-dot"></span>N78 &mdash; JP Nagar 5th Phase</span>
-  <span class="legend-item"><span class="legend-dot"></span>N77 &mdash; Elements Mall</span>
-  <span class="legend-item"><span class="legend-dot"></span>N36 &mdash; Devasandra</span>
-  <span class="legend-item"><span class="legend-dot"></span>N05 &mdash; Frazer Town</span>
-  <span class="legend-item"><span class="legend-dot"></span>N43 &mdash; Hennur</span>
-</div>
 
 <footer>
   <div class="ft-text">Naturals <span>Salon &amp; Spa</span></div>
@@ -244,7 +229,7 @@ const STORE_COLS = ['Store_N78','Store_N77','Store_N36','Store_N05','Store_N43']
 let allData    = [];
 let allHeaders = [];
 let allCats    = [];
-let activeFilters = { store:'all', gender:'all', category:'all' };
+let activeFilters = { store:'all', gender:'', category:'all' };
 
 function ci(s){ return (s||'').trim().toLowerCase(); }
 function genIcon(g){ return ci(g)==='women'?'&#9792;':ci(g)==='men'?'&#9794;':'&#9893;'; }
@@ -281,22 +266,6 @@ async function loadServices(){
     allHeaders = rows[0].map(h=>h.trim());
     allData    = rows.slice(1).filter(r=>r.some(c=>c.trim()));
 
-    // DEBUG — show raw sheet info
-    const debugPanel = document.getElementById('debug-panel');
-    const debugInfo  = document.getElementById('debug-info');
-    debugPanel.style.display = 'block';
-    const iGenD  = hdridx(allHeaders, 'Gender');
-    const iCatD  = hdridx(allHeaders, 'Category');
-    const iN78   = hdridx(allHeaders, 'Store_N78');
-    const genderVals = [...new Set(allData.map(r=>(r[iGenD]||'').trim()))].filter(Boolean);
-    const catVals    = [...new Set(allData.map(r=>(r[iCatD]||'').trim()))].filter(Boolean);
-    const n78Vals    = [...new Set(allData.map(r=>(r[iN78] ||'').trim()))].filter(Boolean);
-    debugInfo.innerHTML =
-      'Rows: ' + allData.length +
-      ' | Headers: ' + allHeaders.join(', ') +
-      ' | Gender values: [' + genderVals.join(', ') + ']' +
-      ' | Categories: [' + catVals.join(', ') + ']' +
-      ' | Store_N78 values: [' + n78Vals.join(', ') + ']';
     // Build category filter buttons from actual data
     var iCatL = hdridx(allHeaders,'Category');
     allCats = [...new Set(allData.map(function(r){ return (r[iCatL]||'Other').trim(); }))];
@@ -309,6 +278,26 @@ async function loadServices(){
       catRow.appendChild(btn);
     });
     loading.style.display='none';
+
+    // ── URL PARAMS: pre-filter from ?cat= and ?gender= ──
+    var params = new URLSearchParams(window.location.search);
+    var catParam    = (params.get('cat')    || '').trim();
+    var genderParam = (params.get('gender') || '').trim().toLowerCase();
+
+    if (genderParam) {
+      activeFilters.gender = genderParam;
+      document.querySelectorAll('[data-filter="gender"]').forEach(function(b) {
+        b.classList.toggle('active', b.dataset.value === genderParam);
+      });
+    }
+    if (catParam) {
+      var catLower = catParam.toLowerCase();
+      activeFilters.category = catLower;
+      document.querySelectorAll('[data-filter="category"]').forEach(function(b) {
+        b.classList.toggle('active', b.dataset.value === catLower);
+      });
+    }
+
     renderServices();
   }catch(e){
     loading.textContent='Unable to load services. Please try again later.';
@@ -353,10 +342,10 @@ function renderServices(){
       if (colIdx < 0) return false;
       if (!isYes(r[colIdx])) return false;
     }
-    // Gender filter
-    if (activeFilters.gender !== 'all') {
+    // Gender filter — empty string means show all
+    if (activeFilters.gender !== '' && activeFilters.gender !== 'all') {
       var ng = normGender(r[iGen] || '');
-      if (ng !== activeFilters.gender && ng !== 'both') return false;
+      if (ng !== normGender(activeFilters.gender) && ng !== 'both') return false;
     }
     // Category filter
     if (activeFilters.category !== 'all') {
@@ -436,21 +425,45 @@ function renderServices(){
 
 
 function setFilter(type, value, btn){
+  // Toggle off if already active (for gender — acts as toggle)
+  if (type === 'gender' && activeFilters[type] === value) {
+    activeFilters[type] = '';
+    document.querySelectorAll('[data-filter="gender"]').forEach(function(b) { b.classList.remove('active'); });
+    renderServices();
+    return;
+  }
   activeFilters[type] = value;
-  // Deactivate all buttons of this type, activate clicked one
-  document.querySelectorAll('[data-filter="' + type + '"]').forEach(b => b.classList.remove('active'));
+  document.querySelectorAll('[data-filter="' + type + '"]').forEach(function(b) { b.classList.remove('active'); });
   btn.classList.add('active');
   // When store changes, reset category to All
   if (type === 'store') {
     activeFilters.category = 'all';
-    document.querySelectorAll('[data-filter="category"]').forEach(b => b.classList.remove('active'));
-    const allCatBtn = document.querySelector('[data-filter="category"][data-value="all"]');
+    document.querySelectorAll('[data-filter="category"]').forEach(function(b) { b.classList.remove('active'); });
+    var allCatBtn = document.querySelector('[data-filter="category"][data-value="all"]');
     if (allCatBtn) allCatBtn.classList.add('active');
   }
   renderServices();
 }
 
-document.addEventListener('DOMContentLoaded', loadServices);
+document.addEventListener('DOMContentLoaded', function() {
+  loadServices();
+  // Apply URL params after sheet loads (short delay to allow render)
+  setTimeout(function() {
+    var params  = new URLSearchParams(window.location.search);
+    var cat     = params.get('cat');
+    var gender  = params.get('gender');
+    if (gender) {
+      var gBtn = document.querySelector('[data-filter="gender"][data-value="' + gender.toLowerCase() + '"]');
+      if (gBtn) { setFilter('gender', gender.toLowerCase(), gBtn); }
+    }
+    if (cat) {
+      var catDecoded = decodeURIComponent(cat).toLowerCase();
+      document.querySelectorAll('[data-filter="category"]').forEach(function(btn) {
+        if (ci(btn.dataset.value || '') === catDecoded) { setFilter('category', btn.dataset.value, btn); }
+      });
+    }
+  }, 2000);
+});
 </script>
 </body>
 </html>
