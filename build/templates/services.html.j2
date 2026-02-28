@@ -19,6 +19,8 @@ html{scroll-behavior:smooth;}
 body{font-family:'Jost',sans-serif;background:var(--cream);color:var(--text);}
 a{text-decoration:none;color:inherit;}
 img{display:block;width:100%;object-fit:cover;}
+
+/* NAV */
 nav{position:fixed;top:0;left:0;right:0;z-index:200;padding:0 60px;height:70px;display:flex;justify-content:space-between;align-items:center;background:rgba(17,23,20,0.97);backdrop-filter:blur(20px);border-bottom:1px solid rgba(255,255,255,0.06);}
 .nav-logo{display:flex;align-items:center;gap:10px;}
 .nav-logo img{height:34px;width:auto;object-fit:contain;filter:brightness(0) invert(1);}
@@ -29,6 +31,8 @@ nav{position:fixed;top:0;left:0;right:0;z-index:200;padding:0 60px;height:70px;d
 .nav-back:hover{color:var(--gold);}
 .nav-cta{background:var(--gold);color:var(--dark);padding:10px 22px;font-size:11px;letter-spacing:2px;text-transform:uppercase;font-weight:600;transition:all 0.3s;}
 .nav-cta:hover{background:var(--gold-pale);}
+
+/* PAGE HERO */
 .page-hero{padding-top:70px;background:var(--dark);}
 .page-hero-inner{padding:60px 60px 0;}
 .lbl{font-size:9px;letter-spacing:5px;text-transform:uppercase;color:var(--gold);font-weight:600;margin-bottom:16px;display:flex;align-items:center;gap:12px;}
@@ -36,25 +40,57 @@ nav{position:fixed;top:0;left:0;right:0;z-index:200;padding:0 60px;height:70px;d
 .page-hero-inner h1{font-family:'Cormorant Garamond',serif;font-size:clamp(42px,6vw,80px);font-weight:300;color:#fff;line-height:0.95;margin-bottom:14px;}
 .page-hero-inner h1 em{font-style:italic;color:var(--gold);}
 .page-hero-inner p{font-size:14px;color:rgba(255,255,255,0.42);font-weight:300;line-height:1.8;max-width:560px;padding-bottom:40px;}
-.filters-wrap{background:var(--dark);padding:0 60px 28px;position:sticky;top:70px;z-index:100;border-bottom:1px solid rgba(255,255,255,0.06);}
+
+/* FILTERS */
+.filters-wrap{background:var(--dark);padding:0 60px 22px;position:sticky;top:70px;z-index:100;border-bottom:1px solid rgba(255,255,255,0.06);}
 .filter-row{display:flex;align-items:center;gap:10px;flex-wrap:wrap;margin-bottom:10px;}
 .filter-row:last-child{margin-bottom:0;}
 .filter-lbl{font-size:9px;letter-spacing:3px;text-transform:uppercase;font-weight:600;white-space:nowrap;min-width:72px;}
+
+/* Store buttons — green */
 .filter-lbl-store{color:#52B788;}
 .f-btn-store{background:rgba(82,183,136,0.08);border:1px solid rgba(82,183,136,0.2);color:rgba(255,255,255,0.45);padding:7px 16px;font-size:11px;letter-spacing:1.5px;text-transform:uppercase;cursor:pointer;transition:all 0.3s;font-family:'Jost',sans-serif;font-weight:500;}
 .f-btn-store:hover{border-color:#52B788;color:#52B788;}
 .f-btn-store.active{background:#1B4332;border-color:#52B788;color:#52B788;}
+
+/* Gender buttons — gold */
 .filter-lbl-gender{color:var(--gold);}
 .f-btn-gender{background:rgba(201,168,76,0.07);border:1px solid rgba(201,168,76,0.2);color:rgba(255,255,255,0.45);padding:7px 16px;font-size:11px;letter-spacing:1.5px;text-transform:uppercase;cursor:pointer;transition:all 0.3s;font-family:'Jost',sans-serif;font-weight:500;}
 .f-btn-gender:hover{border-color:var(--gold);color:var(--gold);}
 .f-btn-gender.active{background:rgba(201,168,76,0.15);border-color:var(--gold);color:var(--gold);}
+
+/* ── CATEGORY DROPDOWN ── */
 .filter-lbl-cat{color:rgba(255,255,255,0.4);}
-.f-btn-cat{background:transparent;border:1px solid rgba(255,255,255,0.1);color:rgba(255,255,255,0.4);padding:7px 16px;font-size:11px;letter-spacing:1.5px;text-transform:uppercase;cursor:pointer;transition:all 0.3s;font-family:'Jost',sans-serif;font-weight:500;}
-.f-btn-cat:hover{border-color:rgba(255,255,255,0.4);color:rgba(255,255,255,0.8);}
-.f-btn-cat.active{background:rgba(255,255,255,0.1);border-color:rgba(255,255,255,0.5);color:#fff;}
-.results-bar{background:var(--cream);padding:16px 60px;display:flex;align-items:center;justify-content:space-between;border-bottom:1px solid rgba(0,0,0,0.06);}
+.cat-select-wrap{position:relative;display:inline-flex;align-items:center;}
+.cat-select-wrap::after{
+  content:'▾';
+  position:absolute;right:14px;top:50%;transform:translateY(-50%);
+  color:rgba(255,255,255,0.4);font-size:11px;pointer-events:none;
+  transition:color 0.3s;
+}
+.cat-select-wrap:focus-within::after{color:var(--gold);}
+#cat-select{
+  appearance:none;-webkit-appearance:none;
+  background:rgba(255,255,255,0.05);
+  border:1px solid rgba(255,255,255,0.12);
+  color:rgba(255,255,255,0.6);
+  padding:7px 38px 7px 16px;
+  font-size:11px;letter-spacing:1.5px;text-transform:uppercase;
+  font-family:'Jost',sans-serif;font-weight:500;
+  cursor:pointer;transition:all 0.3s;
+  min-width:200px;
+}
+#cat-select:hover{border-color:rgba(255,255,255,0.35);color:#fff;}
+#cat-select:focus{outline:none;border-color:var(--gold);color:var(--gold);}
+#cat-select.active{border-color:rgba(255,255,255,0.5);color:#fff;background:rgba(255,255,255,0.1);}
+#cat-select option{background:#1a2620;color:#fff;letter-spacing:0;text-transform:none;font-size:13px;}
+
+/* RESULTS BAR */
+.results-bar{background:var(--cream);padding:14px 60px;display:flex;align-items:center;justify-content:space-between;border-bottom:1px solid rgba(0,0,0,0.06);}
 #results-count{font-size:13px;color:var(--text-mid);font-weight:300;}
 #results-store{font-size:12px;color:var(--gold);font-weight:500;letter-spacing:1px;}
+
+/* MAIN */
 .services-main{padding:48px 60px;}
 .cat-section{margin-bottom:52px;}
 .cat-header{display:flex;align-items:baseline;gap:16px;margin-bottom:20px;padding-bottom:14px;border-bottom:2px solid rgba(0,0,0,0.06);}
@@ -76,19 +112,40 @@ nav{position:fixed;top:0;left:0;right:0;z-index:200;padding:0 60px;height:70px;d
 .price-mem{font-size:11px;color:var(--green-soft);display:block;margin-top:2px;font-weight:500;}
 .empty-state{text-align:center;padding:80px 32px;color:var(--text-light);}
 .empty-state h3{font-family:'Cormorant Garamond',serif;font-size:32px;font-weight:300;margin-bottom:10px;}
+
+/* ── SCROLL TO TOP BUTTON ── */
+#scroll-top{
+  position:fixed;bottom:32px;right:32px;z-index:500;
+  width:44px;height:44px;
+  background:var(--dark);
+  border:1px solid rgba(255,255,255,0.15);
+  color:rgba(255,255,255,0.7);
+  font-size:18px;line-height:1;
+  display:flex;align-items:center;justify-content:center;
+  cursor:pointer;
+  opacity:0;pointer-events:none;
+  transform:translateY(12px);
+  transition:opacity 0.3s ease,transform 0.3s ease,background 0.2s,border-color 0.2s;
+}
+#scroll-top.visible{opacity:1;pointer-events:auto;transform:translateY(0);}
+#scroll-top:hover{background:var(--green);border-color:var(--green-soft);color:#fff;}
+
 {{ footer_css() }}
+
 @media(max-width:900px){
   nav{padding:0 20px;height:60px;}
   .nav-cta{display:none;}
   .page-hero-inner{padding:44px 20px 0;}
-  .filters-wrap{padding:0 20px 20px;top:60px;}
+  .filters-wrap{padding:0 20px 18px;top:60px;}
   .filter-row{gap:6px;}
   .results-bar{padding:12px 20px;}
   .services-main{padding:32px 20px;}
   .svc-grid{grid-template-columns:1fr 1fr;}
+  #scroll-top{bottom:20px;right:20px;width:40px;height:40px;font-size:16px;}
 }
 @media(max-width:600px){
   .svc-grid{grid-template-columns:1fr;}
+  #cat-select{min-width:160px;}
 }
 </style>
 </head>
@@ -113,6 +170,8 @@ nav{position:fixed;top:0;left:0;right:0;z-index:200;padding:0 60px;height:70px;d
   </div>
 
   <div class="filters-wrap">
+
+    <!-- Row 1: Store -->
     <div class="filter-row">
       <span class="filter-lbl filter-lbl-store">Store</span>
       <button class="f-btn-store active" data-filter="store" data-value="all" onclick="setFilter('store','all',this)">All Stores</button>
@@ -120,27 +179,37 @@ nav{position:fixed;top:0;left:0;right:0;z-index:200;padding:0 60px;height:70px;d
       <button class="f-btn-store" data-filter="store" data-value="{{ store.Store_ID }}" onclick="setFilter('store','{{ store.Store_ID }}',this)">{{ store.Store_Name }}</button>
       {% endfor %}
     </div>
+
+    <!-- Row 2: Gender + Category dropdown on same line -->
     <div class="filter-row">
       <span class="filter-lbl filter-lbl-gender">Gender</span>
       <button class="f-btn-gender" data-filter="gender" data-value="female" onclick="setFilter('gender','female',this)">Female</button>
       <button class="f-btn-gender" data-filter="gender" data-value="male"   onclick="setFilter('gender','male',this)">Male</button>
       <button class="f-btn-gender" data-filter="gender" data-value="both"   onclick="setFilter('gender','both',this)">Both</button>
+
+      <!-- Spacer + Category dropdown -->
+      <span style="width:1px;height:20px;background:rgba(255,255,255,0.08);margin:0 8px;flex-shrink:0;"></span>
+      <span class="filter-lbl filter-lbl-cat" style="min-width:auto;">Category</span>
+      <div class="cat-select-wrap">
+        <select id="cat-select" onchange="setCatDropdown(this)">
+          <option value="all">All Categories</option>
+          {% for cat in categories %}
+          <option value="{{ cat | lower }}">{{ cat }}</option>
+          {% endfor %}
+        </select>
+      </div>
     </div>
-    <div class="filter-row" id="cat-filter-row">
-      <span class="filter-lbl filter-lbl-cat">Category</span>
-      <button class="f-btn-cat active" data-filter="category" data-value="all" onclick="setFilter('category','all',this)">All</button>
-      {% for cat in categories %}
-      <button class="f-btn-cat" data-filter="category" data-value="{{ cat | lower }}" onclick="setFilter('category','{{ cat | lower }}',this)">{{ cat }}</button>
-      {% endfor %}
-    </div>
+
   </div>
 </div>
 
+<!-- RESULTS BAR -->
 <div class="results-bar">
-  <div id="results-count">{{ services_json | length }} services</div>
+  <div id="results-count">Loading...</div>
   <div id="results-store">All 5 Bangalore stores</div>
 </div>
 
+<!-- SERVICES -->
 <main class="services-main">
   <div id="svc-container"></div>
   <div id="empty-state" class="empty-state" style="display:none;">
@@ -149,10 +218,13 @@ nav{position:fixed;top:0;left:0;right:0;z-index:200;padding:0 60px;height:70px;d
   </div>
 </main>
 
+<!-- SCROLL TO TOP -->
+<button id="scroll-top" onclick="window.scrollTo({top:0,behavior:'smooth'})" title="Back to top">&#8593;</button>
+
 {{ full_footer('') }}
 
 <script>
-// ── Baked-in data — no Google Sheets fetch needed ──
+// ── Baked-in data — no Google Sheets fetch ──
 const ALL_DATA = {{ services_json }};
 
 const STORE_NAMES = {
@@ -181,6 +253,14 @@ function genIcon(g) {
   return g === 'women' ? '&#9792;' : g === 'men' ? '&#9794;' : '&#9893;';
 }
 
+// ── Category dropdown handler ──
+function setCatDropdown(sel) {
+  var val = sel.value;
+  activeFilters.category = val;
+  sel.classList.toggle('active', val !== 'all');
+  renderServices();
+}
+
 function renderServices() {
   var container = document.getElementById('svc-container');
   var empty     = document.getElementById('empty-state');
@@ -205,11 +285,12 @@ function renderServices() {
   countEl.textContent = filtered.length + ' service' + (filtered.length !== 1 ? 's' : '') + ' found';
   storeEl.textContent = activeFilters.store !== 'all'
     ? 'Showing: ' + (STORE_NAMES[ci(activeFilters.store)] || activeFilters.store)
-    : 'All 5 Bangalore stores';
+    : 'All {{ stores | length }} Bangalore stores';
 
   if (!filtered.length) { empty.style.display = ''; return; }
   empty.style.display = 'none';
 
+  // Group by category
   var cats = {};
   filtered.forEach(function(r) {
     var c = (r['Category'] || 'Other').trim();
@@ -257,6 +338,7 @@ function renderServices() {
 }
 
 function setFilter(type, value, btn) {
+  // Gender toggles off if already active
   if (type === 'gender' && activeFilters[type] === value) {
     activeFilters[type] = '';
     document.querySelectorAll('[data-filter="gender"]').forEach(function(b) { b.classList.remove('active'); });
@@ -266,20 +348,36 @@ function setFilter(type, value, btn) {
   activeFilters[type] = value;
   document.querySelectorAll('[data-filter="' + type + '"]').forEach(function(b) { b.classList.remove('active'); });
   btn.classList.add('active');
+  // Changing store resets category dropdown to All
   if (type === 'store') {
     activeFilters.category = 'all';
-    document.querySelectorAll('[data-filter="category"]').forEach(function(b) { b.classList.remove('active'); });
-    var allCatBtn = document.querySelector('[data-filter="category"][data-value="all"]');
-    if (allCatBtn) allCatBtn.classList.add('active');
+    var sel = document.getElementById('cat-select');
+    if (sel) { sel.value = 'all'; sel.classList.remove('active'); }
   }
   renderServices();
 }
 
+// ── Scroll to top visibility ──
+var scrollBtn = document.getElementById('scroll-top');
+window.addEventListener('scroll', function() {
+  scrollBtn.classList.toggle('visible', window.scrollY > 320);
+}, { passive: true });
+
+// ── URL params on load ──
 document.addEventListener('DOMContentLoaded', function() {
   var params      = new URLSearchParams(window.location.search);
+  var storeParam  = (params.get('store')  || '').trim();
   var catParam    = (params.get('cat')    || '').trim().toLowerCase();
   var genderParam = (params.get('gender') || '').trim().toLowerCase();
 
+  if (storeParam) {
+    activeFilters.store = storeParam;
+    var sBtn = document.querySelector('[data-filter="store"][data-value="' + storeParam + '"]');
+    if (sBtn) {
+      document.querySelectorAll('[data-filter="store"]').forEach(function(b) { b.classList.remove('active'); });
+      sBtn.classList.add('active');
+    }
+  }
   if (genderParam) {
     activeFilters.gender = genderParam;
     var gBtn = document.querySelector('[data-filter="gender"][data-value="' + genderParam + '"]');
@@ -287,9 +385,17 @@ document.addEventListener('DOMContentLoaded', function() {
   }
   if (catParam) {
     activeFilters.category = catParam;
-    document.querySelectorAll('[data-filter="category"]').forEach(function(b) {
-      if (ci(b.dataset.value || '') === catParam) b.classList.add('active');
-    });
+    var sel = document.getElementById('cat-select');
+    if (sel) {
+      // Find matching option (case-insensitive)
+      for (var i = 0; i < sel.options.length; i++) {
+        if (ci(sel.options[i].value) === catParam) {
+          sel.selectedIndex = i;
+          sel.classList.add('active');
+          break;
+        }
+      }
+    }
   }
   renderServices();
 });

@@ -76,14 +76,12 @@ def build_index(stores, env):
 # ── Build services.html ───────────────────────────────────────────────────────
 
 def build_services(services, stores, env):
-    # Collect unique categories (in order of first appearance)
     seen_cats = []
     for svc in services:
         cat = svc.get("Category", "Other").strip()
         if cat and cat not in seen_cats:
             seen_cats.append(cat)
 
-    # Embed services as JSON inside the page
     services_json = json.dumps(services, ensure_ascii=False)
 
     tmpl = env.get_template("services.html.j2")
@@ -100,29 +98,25 @@ def build_services(services, stores, env):
 
 # ── Build store pages ─────────────────────────────────────────────────────────
 
-def build_store(store, all_services, all_offers, all_stylists, stores, env):
+def build_store(store, all_services, all_offers, all_stylists, active_stores, env):
     store_id = store["Store_ID"]
 
     # Filter services available at this store
-    svc_list = [
-        s for s in all_services
-        if is_yes(s.get(store_id, ""))
-    ]
+    svc_list = [s for s in all_services if is_yes(s.get(store_id, ""))]
 
     # Filter offers and stylists for this store
-    offers   = [o for o in all_offers   if o.get("Store_ID", "").strip() == store_id]
+    offers   = [o for o in all_offers if o.get("Store_ID", "").strip() == store_id]
     stylists = [
         s for s in all_stylists
         if s.get("Store_ID", "").strip() == store_id
         and str(s.get("Active_Status", "yes")).strip().lower() != "no"
     ]
 
-    # Build prev/next store links for bottom nav
-    idx       = next((i for i, s in enumerate(stores) if s["Store_ID"] == store_id), 0)
-    prev_store = stores[(idx - 1) % len(stores)]
-    next_store = stores[(idx + 1) % len(stores)]
+    # prev/next use only active stores so nav stays within active ones
+    idx        = next((i for i, s in enumerate(active_stores) if s["Store_ID"] == store_id), 0)
+    prev_store = active_stores[(idx - 1) % len(active_stores)]
+    next_store = active_stores[(idx + 1) % len(active_stores)]
 
-    # Embed services as JSON (per-store subset)
     svc_json = json.dumps(svc_list, ensure_ascii=False)
 
     tmpl = env.get_template("store.html.j2")
@@ -134,7 +128,7 @@ def build_store(store, all_services, all_offers, all_stylists, stores, env):
         stylists=stylists,
         prev_store=prev_store,
         next_store=next_store,
-        all_stores=stores,
+        all_stores=active_stores,
     )
 
     slug = store.get("Store_Page_URL", "").replace("stores/", "").replace(".html", "")
@@ -153,7 +147,6 @@ def build_store(store, all_services, all_offers, all_stylists, stores, env):
 def main():
     print("Naturals Build — fetching Google Sheets data...")
 
-    # Fetch all sheets
     try:
         store_details = fetch_sheet("store_details")
         services_data = fetch_sheet("services")
@@ -163,34 +156,38 @@ def main():
         print(f"ERROR fetching sheets: {e}")
         sys.exit(1)
 
-    # Sort stores in defined order
+    # Build store list in defined order
     store_map = {s["Store_ID"]: s for s in store_details if s.get("Store_ID")}
-    stores    = [store_map[sid] for sid in STORE_ORDER if sid in store_map]
+    all_stores = [store_map[sid] for sid in STORE_ORDER if sid in store_map]
 
-    if not stores:
-        print("ERROR: No stores found in store_details sheet.")
+    # ── Active_Status filter — only Yes stores appear on the website ──
+    active_stores = [s for s in all_stores if is_yes(s.get("Active_Status", "yes"))]
+
+    if not active_stores:
+        print("ERROR: No active stores found in store_details sheet.")
         sys.exit(1)
 
-    print(f"  Loaded {len(stores)} stores, {len(services_data)} services, "
-          f"{len(offers_data)} offers, {len(stylists_data)} stylists")
+    inactive = [s["Store_Name"] for s in all_stores if not is_yes(s.get("Active_Status", "yes"))]
+    if inactive:
+        print(f"  Skipping inactive stores: {', '.join(inactive)}")
 
-    # Set up Jinja2
+    print(f"  Active stores: {len(active_stores)} | Services: {len(services_data)} | "
+          f"Offers: {len(offers_data)} | Stylists: {len(stylists_data)}")
+
     env = Environment(
         loader=FileSystemLoader(TMPL_DIR),
-        autoescape=False,          # HTML templates — we control escaping manually
+        autoescape=False,
         trim_blocks=True,
         lstrip_blocks=True,
     )
-
-    # Register helpers as template globals
     env.globals["is_yes"]      = is_yes
     env.globals["norm_gender"] = norm_gender
 
     print("Building pages...")
-    build_index(stores, env)
-    build_services(services_data, stores, env)
-    for store in stores:
-        build_store(store, services_data, offers_data, stylists_data, stores, env)
+    build_index(active_stores, env)
+    build_services(services_data, active_stores, env)
+    for store in active_stores:
+        build_store(store, services_data, offers_data, stylists_data, active_stores, env)
 
     print("Build complete.")
 
