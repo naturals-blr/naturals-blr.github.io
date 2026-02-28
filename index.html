@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<meta name="description" content="Naturals Salon & Spa Bangalore — 5 locations. Haircare, skincare, bridal & more. Book online.">
+<meta name="description" content="Naturals Salon &amp; Spa Bangalore — 5 locations. Haircare, skincare, bridal &amp; more. Book online.">
 <title>Naturals Salon &amp; Spa | Bangalore</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=Jost:wght@300;400;500;600&display=swap" rel="stylesheet">
@@ -18,8 +18,6 @@ html{scroll-behavior:smooth;}
 body{font-family:'Jost',sans-serif;background:var(--cream);color:var(--text);overflow-x:hidden;}
 img{display:block;width:100%;object-fit:cover;}
 a{text-decoration:none;color:inherit;}
-
-/* ── NAV ── */
 nav{position:fixed;top:0;left:0;right:0;z-index:200;height:70px;padding:0 60px;display:flex;justify-content:space-between;align-items:center;transition:background 0.4s;}
 nav.scrolled{background:rgba(17,23,20,0.97);backdrop-filter:blur(20px);border-bottom:1px solid rgba(255,255,255,0.06);}
 .nav-logo{display:flex;align-items:center;gap:10px;}
@@ -31,8 +29,6 @@ nav.scrolled{background:rgba(17,23,20,0.97);backdrop-filter:blur(20px);border-bo
 .nav-links a:hover{color:var(--gold);}
 .nav-book{background:var(--gold)!important;color:var(--dark)!important;padding:10px 22px;font-weight:600;}
 .nav-book:hover{background:var(--gold-pale)!important;}
-
-/* ── HERO ── */
 .hero{height:100vh;min-height:700px;position:relative;display:flex;align-items:center;justify-content:center;overflow:hidden;}
 .hero-bg{position:absolute;inset:0;}
 .hero-bg img{height:100%;object-fit:cover;}
@@ -51,8 +47,6 @@ nav.scrolled{background:rgba(17,23,20,0.97);backdrop-filter:blur(20px);border-bo
 .hero-scroll{position:absolute;bottom:36px;left:50%;transform:translateX(-50%);display:flex;flex-direction:column;align-items:center;gap:8px;}
 .hero-scroll span{font-size:9px;letter-spacing:3px;text-transform:uppercase;color:rgba(255,255,255,0.3);}
 .hero-scroll-line{width:1px;height:40px;background:linear-gradient(to bottom,rgba(255,255,255,0.3),transparent);}
-
-/* ── SHARED ── */
 .lbl{font-size:9px;letter-spacing:5px;text-transform:uppercase;color:var(--gold);font-weight:600;margin-bottom:16px;display:flex;align-items:center;gap:12px;}
 .lbl::before{content:'';width:18px;height:1px;background:var(--gold);}
 .sec-hdr{text-align:center;max-width:600px;margin:0 auto 48px;}
@@ -63,8 +57,6 @@ nav.scrolled{background:rgba(17,23,20,0.97);backdrop-filter:blur(20px);border-bo
 .sec-hdr p{font-size:14px;color:var(--text-mid);font-weight:300;line-height:1.8;}
 .reveal{opacity:0;transform:translateY(24px);transition:opacity 0.7s ease,transform 0.7s ease;}
 .reveal.visible{opacity:1;transform:translateY(0);}
-
-/* ── ABOUT ── */
 .about-wrap{display:grid;grid-template-columns:1fr 1fr;min-height:560px;}
 .about-img-col{overflow:hidden;min-height:480px;}
 .about-img-col img{height:100%;object-fit:cover;transition:transform 8s ease;}
@@ -77,8 +69,6 @@ nav.scrolled{background:rgba(17,23,20,0.97);backdrop-filter:blur(20px);border-bo
 .about-stats{display:grid;grid-template-columns:1fr 1fr 1fr;gap:24px;margin-top:32px;padding-top:32px;border-top:1px solid rgba(255,255,255,0.08);}
 .stat-num{font-family:'Cormorant Garamond',serif;font-size:36px;color:var(--gold);font-weight:300;line-height:1;}
 .stat-lbl{font-size:10px;color:rgba(255,255,255,0.3);letter-spacing:2px;text-transform:uppercase;margin-top:4px;}
-
-/* ── SERVICES ── */
 .services-sec{padding:100px 60px;background:var(--cream);}
 .svc-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:3px;margin-bottom:40px;}
 .svc-card{position:relative;overflow:hidden;height:340px;display:block;cursor:pointer;}
@@ -91,8 +81,7 @@ nav.scrolled{background:rgba(17,23,20,0.97);backdrop-filter:blur(20px);border-bo
 .svc-title{font-family:'Cormorant Garamond',serif;font-size:24px;color:#fff;font-weight:400;line-height:1.1;margin-bottom:6px;}
 .svc-sub{font-size:11px;color:rgba(255,255,255,0.5);font-weight:300;line-height:1.6;}
 .view-all{text-align:center;}
-
-/* ── STORES ── */
+/* STORES */
 .stores-sec{padding:100px 60px;background:var(--dark);}
 .stores-sec .sec-hdr h2{color:#fff;}
 .stores-sec .sec-hdr h2 em{color:var(--green-soft);}
@@ -103,6 +92,8 @@ nav.scrolled{background:rgba(17,23,20,0.97);backdrop-filter:blur(20px);border-bo
 .st-head{background:var(--dark);padding:18px 28px;display:flex;align-items:center;gap:16px;border-bottom:2px solid var(--green);}
 .st-num{font-family:'Cormorant Garamond',serif;font-size:32px;color:rgba(255,255,255,0.15);font-weight:300;line-height:1;flex-shrink:0;width:40px;}
 .st-name{font-family:'Cormorant Garamond',serif;font-size:21px;color:#fff;font-weight:400;line-height:1.1;}
+.st-name-link{text-decoration:none;color:#fff;transition:color 0.2s;}
+.st-name-link:hover{color:var(--gold-pale);}
 .st-area{font-size:9px;letter-spacing:2.5px;text-transform:uppercase;color:var(--gold);font-weight:600;margin-top:3px;}
 .st-body{padding:18px 28px;}
 .st-addr{font-size:12px;color:var(--text-light);margin-bottom:14px;line-height:1.6;display:flex;align-items:flex-start;gap:6px;}
@@ -117,15 +108,11 @@ a.st-cv:hover{color:var(--green);}
 .st-book:hover{background:var(--gold-pale);}
 .st-view{border:1px solid rgba(0,0,0,0.15);color:var(--text-mid);padding:9px 18px;font-size:10px;letter-spacing:2px;text-transform:uppercase;font-weight:600;transition:all 0.3s;display:inline-flex;align-items:center;gap:6px;}
 .st-view:hover{border-color:var(--green);color:var(--green);}
-
-/* ── FULLBLEED ── */
 .fbleed{height:55vh;min-height:380px;position:relative;overflow:hidden;}
 .fbleed img{height:100%;object-fit:cover;}
 .fbleed-ov{position:absolute;inset:0;background:rgba(17,23,20,0.65);display:flex;align-items:center;justify-content:center;text-align:center;}
 .fbleed-ov h2{font-family:'Cormorant Garamond',serif;font-size:clamp(36px,5vw,64px);color:#fff;font-weight:300;line-height:1.05;margin-bottom:28px;}
 .fbleed-ov h2 em{color:var(--gold);font-style:italic;}
-
-/* ── BOOK CTA ── */
 .book-sec{background:var(--green);padding:80px 60px;text-align:center;}
 .book-sec h2{font-family:'Cormorant Garamond',serif;font-size:clamp(32px,4vw,52px);color:#fff;font-weight:300;margin-bottom:14px;}
 .book-sec h2 em{font-style:italic;color:var(--gold);}
@@ -134,8 +121,6 @@ a.st-cv:hover{color:var(--green);}
 .st-btn{background:rgba(255,255,255,0.08);border:1px solid rgba(255,255,255,0.15);color:rgba(255,255,255,0.7);padding:12px 20px;font-size:11px;letter-spacing:1.5px;text-transform:uppercase;transition:all 0.3s;display:inline-flex;align-items:center;gap:8px;}
 .st-btn:hover{background:rgba(255,255,255,0.15);border-color:var(--gold);color:var(--gold);}
 .st-btn small{font-size:9px;color:rgba(255,255,255,0.35);letter-spacing:1px;}
-
-/* ── REVIEWS ── */
 .reviews-sec{padding:100px 60px;background:var(--cream);overflow:hidden;}
 .rv-track{display:flex;gap:3px;flex-wrap:wrap;}
 .rv-card{background:#fff;padding:32px 28px;flex:1;min-width:260px;max-width:360px;}
@@ -143,8 +128,6 @@ a.st-cv:hover{color:var(--green);}
 .rv-q{font-family:'Cormorant Garamond',serif;font-size:18px;color:var(--text);font-weight:400;line-height:1.6;margin-bottom:16px;font-style:italic;}
 .rv-name{font-size:11px;font-weight:600;color:var(--text);letter-spacing:1px;text-transform:uppercase;}
 .rv-store{font-size:10px;color:var(--gold);letter-spacing:1.5px;text-transform:uppercase;margin-top:2px;}
-
-/* ── FOOTER ── */
 footer{background:#080f0b;}
 .ft-top{padding:60px 60px 40px;display:grid;grid-template-columns:2fr 1fr 1fr 1fr;gap:48px;border-bottom:1px solid rgba(255,255,255,0.06);}
 .ft-brand{font-family:'Cormorant Garamond',serif;font-size:28px;color:#fff;font-weight:300;margin-bottom:12px;}
@@ -160,8 +143,9 @@ footer{background:#080f0b;}
 .ft-bottom{padding:20px 60px;display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:8px;}
 .ft-copy{font-size:11px;color:rgba(255,255,255,0.18);}
 .ft-url{font-size:11px;color:rgba(255,255,255,0.2);letter-spacing:1px;}
+@media(max-width:960px){.ft-top{grid-template-columns:1fr 1fr;gap:32px;padding:40px 20px 28px;}.ft-bottom{padding:16px 20px;flex-direction:column;text-align:center;}}
+@media(max-width:600px){.ft-top{grid-template-columns:1fr;padding:32px 16px 24px;}}
 
-/* ── MOBILE ── */
 @media(max-width:960px){
   nav{padding:0 20px;height:60px;}
   .about-wrap{grid-template-columns:1fr;}
@@ -177,8 +161,6 @@ footer{background:#080f0b;}
   .book-sec{padding:60px 20px;}
   .reviews-sec{padding:60px 20px;}
   .rv-card{min-width:100%;max-width:100%;}
-  .ft-top{grid-template-columns:1fr 1fr;gap:32px;padding:40px 20px 28px;}
-  .ft-bottom{padding:16px 20px;flex-direction:column;text-align:center;}
 }
 @media(max-width:600px){
   nav{padding:0 16px;}
@@ -188,11 +170,7 @@ footer{background:#080f0b;}
   .svc-card{height:220px;}
   .st-contacts{grid-template-columns:1fr;}
   .book-store-btns{flex-direction:column;align-items:stretch;}
-  .ft-top{grid-template-columns:1fr;padding:32px 16px 24px;}
 }
-
-.st-name-link{text-decoration:none;color:#fff;transition:color 0.2s;}
-.st-name-link:hover{color:var(--gold-pale);}
 </style>
 </head>
 <body>
@@ -220,7 +198,7 @@ footer{background:#080f0b;}
   <div class="hero-inner">
     <div class="hero-tag">Bangalore's Premium Salon Network</div>
     <h1>Beauty that<br><em>moves you.</em></h1>
-    <div class="hero-sub">5 locations · Expert stylists · World-class services</div>
+    <div class="hero-sub">5 locations &middot; Expert stylists &middot; World-class services</div>
     <div class="hero-btns">
       <a href="#stores" class="btn-gold">&#10022; Find Your Store</a>
       <a href="services.html" class="btn-outline">View Services</a>
@@ -333,12 +311,11 @@ footer{background:#080f0b;}
     <p>Walk in or book online — premium beauty services at your doorstep across Bangalore.</p>
   </div>
   <div class="st-list">
-
     <div class="st-tile reveal">
       <div class="st-head">
-        <div class="st-num">01</div>
+        <div class="st-num">1</div>
         <div>
-          <a href="stores/jpnagar.html" class="st-name st-name-link">JP Nagar 5th Phase</a>
+          <a href="" class="st-name st-name-link">JP Nagar 5th Phase</a>
           <div class="st-area">South Bangalore &middot; 560078</div>
         </div>
       </div>
@@ -347,29 +324,29 @@ footer{background:#080f0b;}
         <div class="st-contacts">
           <div class="st-contact-row">
             <span class="st-ci">&#128222;</span>
-            <div><div class="st-cl">Call</div><a href="tel:918792642299" class="st-cv">+91 87926 42299</a></div>
+            <div><div class="st-cl">Call</div><a href="tel:" class="st-cv">918792642299</a></div>
           </div>
           <div class="st-contact-row">
-            <span class="st-ci"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="#25D366" width="15" height="15"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg></span>
-            <div><div class="st-cl">WhatsApp</div><a href="https://wa.me/918792642299" target="_blank" class="st-cv">+91 87926 42299</a></div>
+            <span class="st-ci"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="#25D366" width="15" height="15" style="flex-shrink:0"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+</span>
+            <div><div class="st-cl">WhatsApp</div><a href="https://wa.me/918792642299" target="_blank" class="st-cv">918792642299</a></div>
           </div>
           <div class="st-contact-row">
             <span class="st-ci">&#9742;</span>
-            <div><div class="st-cl">Landline</div><a href="tel:918041304444" class="st-cv">+91 80 4130 4444</a></div>
+            <div><div class="st-cl">Landline</div><a href="tel:" class="st-cv">918041304444</a></div>
           </div>
         </div>
         <div class="st-actions">
           <a href="https://naturals-salon-jpnagar5phase.setmore.com/" target="_blank" class="st-book">&#128197; Book Appointment</a>
-          <a href="stores/jpnagar.html" class="st-view">View Store &#8594;</a>
+          <a href="" class="st-view">View Store &#8594;</a>
         </div>
       </div>
     </div>
-
     <div class="st-tile reveal">
       <div class="st-head">
-        <div class="st-num">02</div>
+        <div class="st-num">2</div>
         <div>
-          <a href="stores/elements-mall.html" class="st-name st-name-link">Elements Mall</a>
+          <a href="" class="st-name st-name-link">Elements Mall</a>
           <div class="st-area">Nagavara &middot; 560077</div>
         </div>
       </div>
@@ -378,29 +355,29 @@ footer{background:#080f0b;}
         <div class="st-contacts">
           <div class="st-contact-row">
             <span class="st-ci">&#128222;</span>
-            <div><div class="st-cl">Call</div><a href="tel:919901000017" class="st-cv">+91 99010 00017</a></div>
+            <div><div class="st-cl">Call</div><a href="tel:" class="st-cv">919901000017</a></div>
           </div>
           <div class="st-contact-row">
-            <span class="st-ci"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="#25D366" width="15" height="15"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg></span>
-            <div><div class="st-cl">WhatsApp</div><a href="https://wa.me/919901000017" target="_blank" class="st-cv">+91 99010 00017</a></div>
+            <span class="st-ci"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="#25D366" width="15" height="15" style="flex-shrink:0"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+</span>
+            <div><div class="st-cl">WhatsApp</div><a href="https://wa.me/919901000017" target="_blank" class="st-cv">919901000017</a></div>
           </div>
           <div class="st-contact-row">
             <span class="st-ci">&#9742;</span>
-            <div><div class="st-cl">Landline</div><a href="tel:918046514422" class="st-cv">+91 80 4651 4422</a></div>
+            <div><div class="st-cl">Landline</div><a href="tel:" class="st-cv">918046514422</a></div>
           </div>
         </div>
         <div class="st-actions">
           <a href="https://naturals-salon-elementsmall.setmore.com/" target="_blank" class="st-book">&#128197; Book Appointment</a>
-          <a href="stores/elements-mall.html" class="st-view">View Store &#8594;</a>
+          <a href="" class="st-view">View Store &#8594;</a>
         </div>
       </div>
     </div>
-
     <div class="st-tile reveal">
       <div class="st-head">
-        <div class="st-num">03</div>
+        <div class="st-num">3</div>
         <div>
-          <a href="stores/devasandra.html" class="st-name st-name-link">Devasandra</a>
+          <a href="" class="st-name st-name-link">Devasandra</a>
           <div class="st-area">KR Puram &middot; 560036</div>
         </div>
       </div>
@@ -409,25 +386,25 @@ footer{background:#080f0b;}
         <div class="st-contacts">
           <div class="st-contact-row">
             <span class="st-ci">&#128222;</span>
-            <div><div class="st-cl">Call</div><a href="tel:917259490009" class="st-cv">+91 72594 90009</a></div>
+            <div><div class="st-cl">Call</div><a href="tel:" class="st-cv">917259490009</a></div>
           </div>
           <div class="st-contact-row">
-            <span class="st-ci"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="#25D366" width="15" height="15"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg></span>
-            <div><div class="st-cl">WhatsApp</div><a href="https://wa.me/917259490009" target="_blank" class="st-cv">+91 72594 90009</a></div>
+            <span class="st-ci"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="#25D366" width="15" height="15" style="flex-shrink:0"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+</span>
+            <div><div class="st-cl">WhatsApp</div><a href="https://wa.me/917259490009" target="_blank" class="st-cv">917259490009</a></div>
           </div>
         </div>
         <div class="st-actions">
           <a href="https://naturals-salon-devasandra.setmore.com/" target="_blank" class="st-book">&#128197; Book Appointment</a>
-          <a href="stores/devasandra.html" class="st-view">View Store &#8594;</a>
+          <a href="" class="st-view">View Store &#8594;</a>
         </div>
       </div>
     </div>
-
     <div class="st-tile reveal">
       <div class="st-head">
-        <div class="st-num">04</div>
+        <div class="st-num">4</div>
         <div>
-          <a href="stores/frazer-town.html" class="st-name st-name-link">Frazer Town</a>
+          <a href="" class="st-name st-name-link">Frazer Town</a>
           <div class="st-area">Pulikeshi Nagar &middot; 560005</div>
         </div>
       </div>
@@ -436,29 +413,29 @@ footer{background:#080f0b;}
         <div class="st-contacts">
           <div class="st-contact-row">
             <span class="st-ci">&#128222;</span>
-            <div><div class="st-cl">Call</div><a href="tel:919945488040" class="st-cv">+91 99454 88040</a></div>
+            <div><div class="st-cl">Call</div><a href="tel:" class="st-cv">919945488040</a></div>
           </div>
           <div class="st-contact-row">
-            <span class="st-ci"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="#25D366" width="15" height="15"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg></span>
-            <div><div class="st-cl">WhatsApp</div><a href="https://wa.me/919945488040" target="_blank" class="st-cv">+91 99454 88040</a></div>
+            <span class="st-ci"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="#25D366" width="15" height="15" style="flex-shrink:0"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+</span>
+            <div><div class="st-cl">WhatsApp</div><a href="https://wa.me/919945488040" target="_blank" class="st-cv">919945488040</a></div>
           </div>
           <div class="st-contact-row">
             <span class="st-ci">&#9742;</span>
-            <div><div class="st-cl">Landline</div><a href="tel:918040948040" class="st-cv">+91 80 4094 8040</a></div>
+            <div><div class="st-cl">Landline</div><a href="tel:" class="st-cv">918040948040</a></div>
           </div>
         </div>
         <div class="st-actions">
           <a href="https://naturals-salon-frazertown.setmore.com/" target="_blank" class="st-book">&#128197; Book Appointment</a>
-          <a href="stores/frazer-town.html" class="st-view">View Store &#8594;</a>
+          <a href="" class="st-view">View Store &#8594;</a>
         </div>
       </div>
     </div>
-
     <div class="st-tile reveal">
       <div class="st-head">
-        <div class="st-num">05</div>
+        <div class="st-num">5</div>
         <div>
-          <a href="stores/hennur.html" class="st-name st-name-link">Hennur</a>
+          <a href="" class="st-name st-name-link">Hennur</a>
           <div class="st-area">Hennur Cross &middot; 560043</div>
         </div>
       </div>
@@ -467,20 +444,20 @@ footer{background:#080f0b;}
         <div class="st-contacts">
           <div class="st-contact-row">
             <span class="st-ci">&#128222;</span>
-            <div><div class="st-cl">Call</div><a href="tel:919606900069" class="st-cv">+91 96069 00069</a></div>
+            <div><div class="st-cl">Call</div><a href="tel:" class="st-cv">919606900069</a></div>
           </div>
           <div class="st-contact-row">
-            <span class="st-ci"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="#25D366" width="15" height="15"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg></span>
-            <div><div class="st-cl">WhatsApp</div><a href="https://wa.me/919606900069" target="_blank" class="st-cv">+91 96069 00069</a></div>
+            <span class="st-ci"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="#25D366" width="15" height="15" style="flex-shrink:0"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+</span>
+            <div><div class="st-cl">WhatsApp</div><a href="https://wa.me/919606900069" target="_blank" class="st-cv">919606900069</a></div>
           </div>
         </div>
         <div class="st-actions">
           <a href="https://naturals-salon-hennur.setmore.com/" target="_blank" class="st-book">&#128197; Book Appointment</a>
-          <a href="stores/hennur.html" class="st-view">View Store &#8594;</a>
+          <a href="" class="st-view">View Store &#8594;</a>
         </div>
       </div>
     </div>
-
   </div>
 </section>
 
@@ -525,50 +502,49 @@ footer{background:#080f0b;}
   </div>
 </section>
 
-<!-- FOOTER -->
 <footer>
-  <div class="ft-top">
-    <div class="ft-brand-col">
-      <div class="ft-brand">Naturals <span>Salon &amp; Spa</span></div>
-      <div class="ft-tagline">India's most trusted salon network.<br>Premium beauty services across Bangalore.</div>
-      <div class="ft-socials">
-        <a href="https://instagram.com" title="Instagram">&#128248;</a>
-        <a href="https://facebook.com" title="Facebook">&#128077;</a>
-      </div>
-    </div>
-    <div class="ft-col">
-      <div class="ft-col-title">Navigate</div>
-      <ul>
-        <li><a href="#about">About</a></li>
-        <li><a href="services.html">Services</a></li>
-        <li><a href="#stores">Our Stores</a></li>
-        <li><a href="#reviews">Reviews</a></li>
-      </ul>
-    </div>
-    <div class="ft-col">
-      <div class="ft-col-title">Locations</div>
-      <ul>
-        <li><a href="stores/jpnagar.html">JP Nagar 5th Phase</a></li>
-        <li><a href="stores/elements-mall.html">Elements Mall</a></li>
-        <li><a href="stores/devasandra.html">Devasandra</a></li>
-        <li><a href="stores/frazer-town.html">Frazer Town</a></li>
-        <li><a href="stores/hennur.html">Hennur</a></li>
-      </ul>
-    </div>
-    <div class="ft-col">
-      <div class="ft-col-title">Connect</div>
-      <ul>
-        <li><a href="https://naturals.in" target="_blank">Naturals India</a></li>
-        <li><a href="#book">Book Appointment</a></li>
-        <li><a href="services.html">All Services</a></li>
-      </ul>
+<div class="ft-top">
+  <div>
+    <div class="ft-brand">Naturals <span>Salon &amp; Spa</span></div>
+    <div class="ft-tagline">India's most trusted salon network.<br>Premium beauty services across Bangalore.</div>
+    <div class="ft-socials">
+      <a href="https://instagram.com" title="Instagram">&#128248;</a>
+      <a href="https://facebook.com"  title="Facebook">&#128077;</a>
     </div>
   </div>
-  <div class="ft-bottom">
-    <div class="ft-copy">&copy; 2026 Naturals Salon &amp; Spa, Bangalore. All rights reserved.</div>
-    <div class="ft-url">naturals-blr.github.io</div>
+  <div class="ft-col">
+    <div class="ft-col-title">Navigate</div>
+    <ul>
+      <li><a href="index.html#about">About</a></li>
+      <li><a href="services.html">Services</a></li>
+      <li><a href="index.html#stores">Our Stores</a></li>
+    </ul>
   </div>
+  <div class="ft-col">
+    <div class="ft-col-title">Locations</div>
+    <ul>
+      <li><a href="stores/jpnagar.html">JP Nagar 5th Phase</a></li>
+      <li><a href="stores/elements-mall.html">Elements Mall</a></li>
+      <li><a href="stores/devasandra.html">Devasandra</a></li>
+      <li><a href="stores/frazer-town.html">Frazer Town</a></li>
+      <li><a href="stores/hennur.html">Hennur</a></li>
+    </ul>
+  </div>
+  <div class="ft-col">
+    <div class="ft-col-title">Connect</div>
+    <ul>
+      <li><a href="https://naturals.in" target="_blank">Naturals India</a></li>
+      <li><a href="index.html#book">Book Appointment</a></li>
+      <li><a href="services.html">All Services</a></li>
+    </ul>
+  </div>
+</div>
+<div class="ft-bottom">
+  <div class="ft-copy">&copy; 2026 Naturals Salon &amp; Spa, Bangalore. All rights reserved.</div>
+  <div class="ft-url">naturals-blr.github.io</div>
+</div>
 </footer>
+
 
 <script>
 window.addEventListener('scroll', function() {
