@@ -1,0 +1,543 @@
+{% from "macros.j2" import full_footer, footer_css, wa_svg %}
+{% set s = store %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="description" content="Naturals Salon &amp; Spa {{ s.Store_Name }}, {{ s.Area }}, Bangalore. Book appointments, view services, offers &amp; more.">
+<title>{{ s.Store_Name }} | Naturals Salon &amp; Spa Bangalore</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=Jost:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+:root{
+  --dark:#111714;--green:#1B4332;--green-mid:#2D6A4F;--green-soft:#52B788;
+  --cream:#F8F4EE;--gold:#C9A84C;--gold-pale:#EDD9A3;
+  --text:#1A1A1A;--text-mid:#555;--text-light:#999;
+}
+*{margin:0;padding:0;box-sizing:border-box;}
+html{scroll-behavior:smooth;}
+body{font-family:'Jost',sans-serif;background:var(--cream);color:var(--text);overflow-x:hidden;}
+a{text-decoration:none;color:inherit;}
+img{display:block;width:100%;object-fit:cover;}
+nav{position:fixed;top:0;left:0;right:0;z-index:200;padding:0 60px;height:70px;display:flex;justify-content:space-between;align-items:center;background:rgba(17,23,20,0.97);backdrop-filter:blur(20px);border-bottom:1px solid rgba(255,255,255,0.06);}
+.nav-logo{display:flex;align-items:center;gap:10px;}
+.nav-logo img{height:34px;width:auto;filter:brightness(0) invert(1);}
+.nav-logo-text{font-family:'Cormorant Garamond',serif;font-size:18px;color:#fff;letter-spacing:1px;}
+.nav-logo-text span{color:var(--gold);font-style:italic;font-weight:300;}
+.nav-right{display:flex;align-items:center;gap:24px;}
+.nav-back{color:rgba(255,255,255,0.5);font-size:11px;letter-spacing:2px;text-transform:uppercase;transition:color 0.3s;}
+.nav-back:hover{color:var(--gold);}
+.nav-cta{background:var(--gold);color:var(--dark);padding:10px 22px;font-size:11px;letter-spacing:2px;text-transform:uppercase;font-weight:600;transition:all 0.3s;}
+.nav-cta:hover{background:var(--gold-pale);}
+/* HERO */
+.hero{height:70vh;min-height:500px;position:relative;display:flex;align-items:flex-end;overflow:hidden;}
+.hero-bg{position:absolute;inset:0;}
+.hero-bg img{height:100%;object-fit:cover;}
+.hero-ov{position:absolute;inset:0;background:linear-gradient(to top,rgba(17,23,20,0.92) 0%,rgba(17,23,20,0.3) 60%,rgba(17,23,20,0.1) 100%);}
+.hero-content{position:relative;z-index:2;padding:60px 60px 48px;width:100%;}
+.hero-badge{font-size:9px;letter-spacing:4px;text-transform:uppercase;color:var(--gold);font-weight:600;margin-bottom:12px;}
+.hero-content h1{font-family:'Cormorant Garamond',serif;font-size:clamp(36px,5vw,68px);font-weight:300;color:#fff;line-height:0.95;margin-bottom:12px;}
+.hero-content h1 em{font-style:italic;color:var(--gold);}
+.hero-sub{font-size:13px;color:rgba(255,255,255,0.45);font-weight:300;margin-bottom:28px;}
+.hero-actions{display:flex;gap:12px;flex-wrap:wrap;}
+.btn-gold{background:var(--gold);color:var(--dark);padding:13px 28px;font-size:11px;letter-spacing:2px;text-transform:uppercase;font-weight:700;transition:all 0.3s;display:inline-flex;align-items:center;gap:8px;}
+.btn-gold:hover{background:var(--gold-pale);}
+.btn-ghost{border:1px solid rgba(255,255,255,0.3);color:rgba(255,255,255,0.7);padding:13px 22px;font-size:11px;letter-spacing:2px;text-transform:uppercase;transition:all 0.3s;display:inline-flex;align-items:center;gap:8px;}
+.btn-ghost:hover{border-color:var(--gold);color:var(--gold);}
+/* INFO BAR */
+.info-bar{display:grid;grid-template-columns:repeat(4,1fr);background:var(--dark);border-top:1px solid rgba(255,255,255,0.06);}
+.info-cell{padding:22px 24px;border-right:1px solid rgba(255,255,255,0.08);display:flex;align-items:flex-start;gap:12px;}
+.info-cell:last-child{border-right:none;}
+.info-icon{font-size:20px;flex-shrink:0;margin-top:2px;display:flex;align-items:center;}
+.info-label{font-size:9px;letter-spacing:2.5px;text-transform:uppercase;color:rgba(255,255,255,0.35);font-weight:600;margin-bottom:4px;}
+.info-val{font-size:14px;color:#fff;font-weight:400;display:block;transition:color 0.2s;}
+a.info-val:hover{color:var(--gold);}
+.info-val-sm{font-size:11px;color:rgba(255,255,255,0.3);display:block;margin-top:2px;}
+/* LAYOUT */
+.page-wrap{display:grid;grid-template-columns:1fr 340px;gap:0;align-items:start;max-width:1200px;margin:0 auto;padding:60px 60px;}
+.main-col{padding-right:48px;}
+.sidebar-col{}
+/* SHARED */
+.lbl{font-size:9px;letter-spacing:5px;text-transform:uppercase;color:var(--gold);font-weight:600;margin-bottom:16px;display:flex;align-items:center;gap:12px;}
+.lbl::before{content:'';width:18px;height:1px;background:var(--gold);}
+.sec-title{font-family:'Cormorant Garamond',serif;font-size:clamp(28px,3vw,42px);font-weight:300;line-height:1.05;margin-bottom:20px;}
+.sec-title em{font-style:italic;color:var(--green-mid);}
+.sec-title-wh{color:#fff;}
+.sec-title-wh em{color:var(--green-soft);}
+.reveal{opacity:0;transform:translateY(20px);transition:opacity 0.6s ease,transform 0.6s ease;}
+.reveal.visible{opacity:1;transform:translateY(0);}
+/* ABOUT GRID */
+.about-grid{display:grid;grid-template-columns:1fr 1fr;gap:32px;margin-bottom:52px;align-items:center;}
+.about-img-wrap{overflow:hidden;height:340px;}
+.about-img-wrap img{height:100%;object-fit:cover;transition:transform 6s ease;}
+.about-img-wrap:hover img{transform:scale(1.04);}
+.about-p{font-size:14px;color:var(--text-mid);line-height:1.9;font-weight:300;margin-bottom:12px;}
+/* DARK BLOCK (services) */
+.dark-block{background:var(--dark);padding:40px;margin-bottom:3px;}
+/* SERVICES */
+.svc-filter{display:flex;flex-wrap:wrap;gap:8px;margin-bottom:28px;}
+.f-btn{background:rgba(255,255,255,0.05);border:1px solid rgba(255,255,255,0.1);color:rgba(255,255,255,0.5);padding:8px 20px;font-size:11px;letter-spacing:2px;text-transform:uppercase;cursor:pointer;transition:all 0.3s;font-family:'Jost',sans-serif;font-weight:500;}
+.f-btn:hover{border-color:var(--gold);color:var(--gold);}
+.f-btn.active{background:var(--gold);border-color:var(--gold);color:var(--dark);}
+.loading-msg{font-size:13px;color:rgba(255,255,255,0.3);font-style:italic;padding:20px 0;}
+.svc-cat-sec{margin-bottom:36px;}
+.svc-cat-hdr{margin-bottom:14px;padding-bottom:10px;border-bottom:1px solid rgba(255,255,255,0.08);}
+.svc-cat-lbl{font-size:9px;letter-spacing:3px;text-transform:uppercase;color:rgba(255,255,255,0.3);font-weight:600;margin-bottom:4px;}
+.svc-cat-name{font-family:'Cormorant Garamond',serif;font-size:24px;color:#fff;font-weight:300;}
+.svc-cards-grid{display:grid;grid-template-columns:1fr 1fr;gap:2px;}
+.svc-item{background:rgba(255,255,255,0.04);padding:18px 16px;border-bottom:2px solid transparent;transition:all 0.2s;display:flex;flex-direction:column;justify-content:space-between;min-height:130px;}
+.svc-item:hover{background:rgba(255,255,255,0.07);border-bottom-color:var(--gold);}
+.svc-item-name{font-family:'Cormorant Garamond',serif;font-size:17px;color:#fff;font-weight:400;margin-bottom:6px;line-height:1.2;}
+.svc-item-desc{font-size:11px;color:rgba(255,255,255,0.35);line-height:1.6;font-weight:300;flex:1;margin-bottom:10px;}
+.svc-item-foot{display:flex;justify-content:space-between;align-items:flex-end;flex-wrap:wrap;gap:6px;}
+.svc-tags{display:flex;flex-wrap:wrap;gap:4px;}
+.svc-tag{font-size:10px;color:rgba(255,255,255,0.3);background:rgba(255,255,255,0.05);padding:3px 8px;}
+.price-reg{font-family:'Cormorant Garamond',serif;font-size:20px;color:var(--gold);font-weight:400;}
+.price-mem{font-size:11px;color:var(--green-soft);display:block;margin-top:2px;font-weight:500;}
+/* OFFERS */
+.offers-block{padding:40px 0;margin-bottom:3px;}
+.offers-grid{display:grid;grid-template-columns:1fr 1fr;gap:3px;}
+.offer-txt-card{background:var(--dark);padding:28px;position:relative;}
+.offer-img-card{overflow:hidden;}
+.offer-img-card img{height:220px;object-fit:cover;}
+.offer-badge{font-size:9px;letter-spacing:3px;text-transform:uppercase;color:var(--gold);font-weight:600;display:block;margin-bottom:10px;}
+.offer-title{font-family:'Cormorant Garamond',serif;font-size:22px;color:#fff;font-weight:300;margin-bottom:8px;}
+.offer-details{font-size:13px;color:rgba(255,255,255,0.4);line-height:1.7;font-weight:300;margin-bottom:12px;}
+.offer-valid{font-size:11px;color:var(--gold);letter-spacing:1px;}
+/* BOOKING */
+.booking-block{background:var(--green);padding:40px;margin-bottom:3px;}
+.booking-btns{display:flex;flex-direction:column;gap:10px;margin-top:20px;}
+.book-btn-primary{background:var(--gold);color:var(--dark);padding:14px 24px;font-size:11px;letter-spacing:2px;text-transform:uppercase;font-weight:700;transition:all 0.3s;display:flex;align-items:center;gap:10px;}
+.book-btn-primary:hover{background:var(--gold-pale);}
+.book-btn-wa{background:rgba(37,211,102,0.15);border:1px solid rgba(37,211,102,0.3);color:#fff;padding:13px 22px;font-size:11px;letter-spacing:2px;text-transform:uppercase;font-weight:600;transition:all 0.3s;display:flex;align-items:center;gap:10px;}
+.book-btn-wa:hover{background:rgba(37,211,102,0.25);}
+/* STYLISTS */
+.stylists-section{padding:40px 0;}
+.stylists-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:3px;margin-top:20px;}
+.stylist-card{background:#fff;overflow:hidden;}
+.stylist-photo{height:200px;overflow:hidden;}
+.stylist-photo img{height:100%;object-fit:cover;}
+.stylist-info{padding:16px;}
+.stylist-name{font-family:'Cormorant Garamond',serif;font-size:18px;color:var(--text);font-weight:400;margin-bottom:4px;}
+.stylist-spec{font-size:11px;color:var(--gold);letter-spacing:1px;text-transform:uppercase;margin-bottom:3px;}
+.stylist-exp{font-size:11px;color:var(--text-light);}
+/* CONTACTS */
+.contact-block{background:#fff;padding:40px;margin-bottom:3px;}
+.contact-rows{display:flex;flex-direction:column;margin-top:20px;}
+.contact-row{display:flex;align-items:center;gap:14px;padding:14px 0;border-bottom:1px solid rgba(0,0,0,0.06);}
+.contact-icon{font-size:20px;flex-shrink:0;width:24px;display:flex;align-items:center;}
+.contact-detail{flex:1;}
+.contact-lbl{font-size:9px;letter-spacing:2px;text-transform:uppercase;color:var(--text-light);font-weight:600;margin-bottom:3px;}
+.contact-val{font-size:14px;color:var(--text-mid);font-weight:300;transition:color 0.3s;}
+a.contact-val:hover{color:var(--green);}
+/* SIDEBAR */
+.sb-inner{background:#fff;padding:28px;position:sticky;top:90px;}
+.sb-name{font-family:'Cormorant Garamond',serif;font-size:22px;color:var(--text);font-weight:400;margin-bottom:4px;}
+.sb-area{font-size:10px;color:var(--gold);letter-spacing:2px;text-transform:uppercase;margin-bottom:20px;}
+.sb-sec{font-size:9px;letter-spacing:3px;text-transform:uppercase;color:var(--text-light);font-weight:600;margin-bottom:12px;}
+.sb-btn{display:flex;align-items:center;gap:10px;padding:12px 16px;font-size:11px;letter-spacing:1.5px;text-transform:uppercase;font-weight:600;margin-bottom:8px;transition:all 0.3s;cursor:pointer;}
+.sb-primary{background:var(--gold);color:var(--dark);}
+.sb-primary:hover{background:var(--gold-pale);}
+.sb-wa{background:rgba(37,211,102,0.1);border:1px solid rgba(37,211,102,0.25);color:var(--text);}
+.sb-wa:hover{background:rgba(37,211,102,0.18);}
+.sb-review{background:var(--cream);border:1px solid rgba(0,0,0,0.08);color:var(--text);}
+.sb-review:hover{border-color:var(--gold);}
+.sb-ghost{border:1px solid rgba(0,0,0,0.12);color:var(--text-mid);}
+.sb-ghost:hover{border-color:var(--green);color:var(--green);}
+.sb-divider{height:1px;background:rgba(0,0,0,0.06);margin:18px 0;}
+.sb-contact-row{display:flex;align-items:center;gap:10px;padding:8px 0;border-bottom:1px solid rgba(0,0,0,0.05);}
+.sb-contact-icon{font-size:16px;flex-shrink:0;width:22px;display:flex;align-items:center;}
+.sb-contact-val{font-size:12px;color:var(--text-mid);font-weight:300;transition:color 0.3s;}
+a.sb-contact-val:hover{color:var(--green);}
+.h-row{display:flex;justify-content:space-between;font-size:12px;color:var(--text-mid);padding:6px 0;border-bottom:1px solid rgba(0,0,0,0.04);}
+.h-day{font-weight:500;color:var(--text);}
+.sb-social{display:flex;flex-direction:column;gap:8px;}
+.sb-soc{display:flex;align-items:center;gap:8px;font-size:12px;color:var(--text-mid);padding:8px 12px;border:1px solid rgba(0,0,0,0.08);transition:all 0.3s;}
+.sb-insta:hover{border-color:#E1306C;color:#E1306C;}
+.sb-fb:hover{border-color:#1877F2;color:#1877F2;}
+/* STORE NAV */
+.store-nav{background:var(--dark);padding:20px 60px;display:flex;justify-content:space-between;align-items:center;border-top:1px solid rgba(255,255,255,0.06);}
+.sn-link{font-size:11px;letter-spacing:2px;text-transform:uppercase;color:rgba(255,255,255,0.45);transition:color 0.3s;}
+.sn-link:hover{color:var(--gold);}
+.sn-mid{font-size:10px;color:rgba(255,255,255,0.2);letter-spacing:2px;text-transform:uppercase;}
+{{ footer_css() }}
+@media(max-width:1100px){
+  .page-wrap{grid-template-columns:1fr;padding:40px 40px;}
+  .main-col{padding-right:0;}
+  .sb-inner{position:static;}
+  .sidebar-col{margin-top:40px;}
+}
+@media(max-width:768px){
+  nav{padding:0 20px;height:60px;}
+  .nav-cta{display:none;}
+  .hero-content{padding:40px 20px 36px;}
+  .info-bar{grid-template-columns:1fr 1fr;}
+  .info-cell{padding:16px 18px;}
+  .about-grid{grid-template-columns:1fr;}
+  .svc-cards-grid{grid-template-columns:1fr;}
+  .offers-grid{grid-template-columns:1fr;}
+  .stylists-grid{grid-template-columns:1fr 1fr;}
+  .page-wrap{padding:32px 20px;}
+  .store-nav{padding:16px 20px;}
+}
+@media(max-width:480px){
+  .info-bar{grid-template-columns:1fr;}
+  .stylists-grid{grid-template-columns:1fr;}
+  .hero-actions{flex-direction:column;}
+}
+</style>
+</head>
+<body>
+
+<nav>
+  <a href="../index.html" class="nav-logo">
+    <img src="../images/naturals-logo.png" alt="Naturals" onerror="this.style.display='none'">
+    <div class="nav-logo-text">Naturals <span>Salon &amp; Spa</span></div>
+  </a>
+  <div class="nav-right">
+    <a href="../index.html#stores" class="nav-back">&#8592; All Locations</a>
+    <a href="{{ s.Appointment_URL }}" target="_blank" class="nav-cta">Book Now</a>
+  </div>
+</nav>
+
+<section class="hero">
+  <div class="hero-bg">
+    <img src="../images/heroes/{{ s.Store_Page_URL | replace('stores/','') | replace('.html','') }}.jpg"
+         alt="Naturals {{ s.Store_Name }}"
+         onerror="this.src='https://images.unsplash.com/photo-1522337360788-8b13dee7a37e?w=1800&q=85'">
+  </div>
+  <div class="hero-ov"></div>
+  <div class="hero-content">
+    <div class="hero-badge">Store {{ s.Hero_Number }} of 5 &middot; Bangalore</div>
+    <h1>Naturals<br><em>{{ s.Store_Name }}</em></h1>
+    <div class="hero-sub">{{ s.Area }} &middot; {{ s.Pincode }}</div>
+    <div class="hero-actions">
+      <a href="{{ s.Appointment_URL }}" target="_blank" class="btn-gold">&#10022; Book Appointment</a>
+      <a href="https://wa.me/{{ s.WhatsApp_Number }}" target="_blank" class="btn-ghost">{{ wa_svg(18) }} WhatsApp Us</a>
+      <a href="{{ s.Google_Maps_URL }}" target="_blank" class="btn-ghost">&#128205; Directions</a>
+    </div>
+  </div>
+</section>
+
+<div class="info-bar">
+  <div class="info-cell">
+    <span class="info-icon">&#128222;</span>
+    <div>
+      <div class="info-label">Call Us</div>
+      <a href="tel:{{ s.Phone_Raw }}" class="info-val">{{ s.Phone_Mobile }}</a>
+    </div>
+  </div>
+  <div class="info-cell">
+    <span class="info-icon">{{ wa_svg(20) }}</span>
+    <div>
+      <div class="info-label">WhatsApp</div>
+      <a href="https://wa.me/{{ s.WhatsApp_Number }}" class="info-val">{{ s.Phone_Mobile }}</a>
+    </div>
+  </div>
+  <div class="info-cell">
+    <span class="info-icon">&#128197;</span>
+    <div>
+      <div class="info-label">Book Online</div>
+      <a href="{{ s.Appointment_URL }}" target="_blank" class="info-val">Book Now</a>
+      <span class="info-val-sm">Available 24/7</span>
+    </div>
+  </div>
+  <div class="info-cell">
+    <span class="info-icon">&#128205;</span>
+    <div>
+      <div class="info-label">Address</div>
+      <a href="{{ s.Google_Maps_URL }}" target="_blank" class="info-val">{{ s.Address_Full }}</a>
+    </div>
+  </div>
+</div>
+
+<div class="page-wrap">
+<div class="main-col">
+
+  <div class="about-grid reveal">
+    <div class="about-img-wrap">
+      <img src="../images/heroes/{{ s.Store_Page_URL | replace('stores/','') | replace('.html','') }}.jpg"
+           alt="Naturals {{ s.Store_Name }}"
+           onerror="this.src='https://images.unsplash.com/photo-1560066984-138dadb4c035?w=900&q=85'">
+    </div>
+    <div>
+      <div class="lbl">Our Store</div>
+      <h2 class="sec-title">A premium experience<br>in <em>{{ s.Store_Name }}.</em></h2>
+      <p class="about-p">Welcome to Naturals Salon &amp; Spa {{ s.Store_Name }} — part of India's most trusted salon network with over 25 years of beauty expertise.</p>
+      <p class="about-p">Our expert team delivers world-class services in a relaxed, luxurious setting. Every visit is personalised to you.</p>
+      <a href="{{ s.Appointment_URL }}" target="_blank" class="btn-gold" style="margin-top:20px;font-size:11px;">Book Your Visit &#8594;</a>
+    </div>
+  </div>
+
+  <!-- SERVICES -->
+  <div class="dark-block reveal">
+    <div class="lbl">What We Offer</div>
+    <h2 class="sec-title sec-title-wh">Our <em>services</em></h2>
+    <p style="font-size:13px;color:rgba(255,255,255,0.35);font-weight:300;margin-bottom:28px;line-height:1.7;">Filter by gender below.</p>
+    <div class="svc-filter" id="svc-filter">
+      <button class="f-btn" data-g="female" onclick="storeGenderFilter(this)">Female</button>
+      <button class="f-btn" data-g="male"   onclick="storeGenderFilter(this)">Male</button>
+      <button class="f-btn" data-g="both"   onclick="storeGenderFilter(this)">Both</button>
+    </div>
+    <div id="svc-container"></div>
+  </div>
+
+  <!-- OFFERS -->
+  {% if offers %}
+  <div class="offers-block reveal" id="offers-section">
+    <div class="lbl">Current Offers</div>
+    <h2 class="sec-title">Deals &amp; <em>offers</em></h2>
+    <div class="offers-grid">
+    {% for offer in offers %}
+      {% if offer.get('Image_Available','').strip().lower() == 'yes' and offer.get('Image_Name','').strip() %}
+      <div class="offer-img-card">
+        <img src="../images/offers/{{ offer.Image_Name }}.jpg" alt="{{ offer.Offer_Title }}"
+             onerror="this.parentElement.className='offer-txt-card';this.parentElement.innerHTML=buildTxtCard('{{ offer.Offer_Title }}','{{ offer.Offer_Details }}','{{ offer.Valid_till }}')">
+      </div>
+      {% else %}
+      <div class="offer-txt-card">
+        <span class="offer-badge">Special Offer</span>
+        <div class="offer-title">{{ offer.Offer_Title }}</div>
+        <div class="offer-details">{{ offer.Offer_Details }}</div>
+        <div class="offer-valid">Valid till: {{ offer.Valid_till }}</div>
+      </div>
+      {% endif %}
+    {% endfor %}
+    </div>
+    <p style="font-size:12px;color:var(--text-light);margin-top:14px;font-style:italic;">* Offers subject to availability. Contact store to confirm.</p>
+  </div>
+  {% endif %}
+
+  <!-- BOOKING -->
+  <div class="booking-block reveal" id="book-section">
+    <div class="lbl">Reserve Your Visit</div>
+    <h2 class="sec-title sec-title-wh">Book an <em>appointment</em></h2>
+    <p class="about-p" style="color:rgba(255,255,255,0.5);">Available 24/7 online — instant confirmation.</p>
+    <div class="booking-btns">
+      <a href="{{ s.Appointment_URL }}" target="_blank" class="book-btn-primary">&#128197; Book Online Now</a>
+      <a href="https://wa.me/{{ s.WhatsApp_Number }}" target="_blank" class="book-btn-wa">{{ wa_svg(18) }} Book via WhatsApp</a>
+    </div>
+  </div>
+
+  <!-- STYLISTS -->
+  {% if stylists %}
+  <div class="stylists-section reveal" id="stylists-section">
+    <div class="lbl">Our Team</div>
+    <h2 class="sec-title">Meet our <em>stylists</em></h2>
+    <div class="stylists-grid">
+    {% for stylist in stylists %}
+      <div class="stylist-card">
+        <div class="stylist-photo">
+          {% if stylist.get('Photo_Status','').strip().lower() == 'yes' %}
+          <img src="../images/stylists/{{ s.Store_ID }}_{{ stylist.Stylist_Name | replace(' ','') }}.jpg"
+               alt="{{ stylist.Stylist_Name }}"
+               onerror="this.src='../images/stylists/default_stylist.jpg'">
+          {% else %}
+          <img src="../images/stylists/default_stylist.jpg" alt="{{ stylist.Stylist_Name }}">
+          {% endif %}
+        </div>
+        <div class="stylist-info">
+          <div class="stylist-name">{{ stylist.Stylist_Name }}</div>
+          {% if stylist.get('Specialization','').strip() %}
+          <div class="stylist-spec">{{ stylist.Specialization }}</div>
+          {% endif %}
+          {% if stylist.get('Experience','').strip() %}
+          <div class="stylist-exp">{{ stylist.Experience }} years experience</div>
+          {% endif %}
+        </div>
+      </div>
+    {% endfor %}
+    </div>
+  </div>
+  {% endif %}
+
+  <!-- CONTACTS -->
+  <div class="contact-block reveal">
+    <div class="lbl">Get In Touch</div>
+    <h2 class="sec-title">Contact <em>us</em></h2>
+    <div class="contact-rows">
+      <div class="contact-row">
+        <span class="contact-icon">&#128222;</span>
+        <div class="contact-detail">
+          <div class="contact-lbl">Call</div>
+          <a href="tel:{{ s.Phone_Raw }}" class="contact-val">{{ s.Phone_Mobile }}</a>
+        </div>
+      </div>
+      <div class="contact-row">
+        <span class="contact-icon">{{ wa_svg(18) }}</span>
+        <div class="contact-detail">
+          <div class="contact-lbl">WhatsApp</div>
+          <a href="https://wa.me/{{ s.WhatsApp_Number }}" target="_blank" class="contact-val">{{ s.Phone_Mobile }}</a>
+        </div>
+      </div>
+      {% if s.Landline %}
+      <div class="contact-row">
+        <span class="contact-icon">&#9742;</span>
+        <div class="contact-detail">
+          <div class="contact-lbl">Landline</div>
+          <a href="tel:{{ s.Landline_Raw }}" class="contact-val">{{ s.Landline }}</a>
+        </div>
+      </div>
+      {% endif %}
+      <div class="contact-row">
+        <span class="contact-icon">&#128205;</span>
+        <div class="contact-detail">
+          <div class="contact-lbl">Address</div>
+          <a href="{{ s.Google_Maps_URL }}" target="_blank" class="contact-val">{{ s.Address_Full }}</a>
+        </div>
+      </div>
+    </div>
+  </div>
+
+</div>
+
+<!-- SIDEBAR -->
+<div class="sidebar-col">
+  <div class="sb-inner">
+    <div class="sb-name">Naturals {{ s.Store_Name }}</div>
+    <div class="sb-area">{{ s.Area }} &middot; {{ s.Pincode }}</div>
+    <div class="sb-sec">Book Your Visit</div>
+    <a href="{{ s.Appointment_URL }}" target="_blank" class="sb-btn sb-primary">&#128197; Book Online Now</a>
+    <a href="https://wa.me/{{ s.WhatsApp_Number }}" target="_blank" class="sb-btn sb-wa">{{ wa_svg(18) }} Book via WhatsApp</a>
+    <a href="{{ s.Google_Review_URL }}" target="_blank" class="sb-btn sb-review">&#11088; Leave a Google Review</a>
+    <a href="{{ s.Google_Maps_URL }}" target="_blank" class="sb-btn sb-ghost">&#128205; Get Directions</a>
+    <div class="sb-divider"></div>
+    <div class="lbl" style="font-size:9px;margin-bottom:12px;">Contact</div>
+    <div class="sb-contact-row">
+      <span class="sb-contact-icon">&#128222;</span>
+      <a href="tel:{{ s.Phone_Raw }}" class="sb-contact-val">{{ s.Phone_Mobile }}</a>
+    </div>
+    <div class="sb-contact-row">
+      <span class="sb-contact-icon">{{ wa_svg(16) }}</span>
+      <a href="https://wa.me/{{ s.WhatsApp_Number }}" target="_blank" class="sb-contact-val">{{ s.Phone_Mobile }}</a>
+    </div>
+    {% if s.Landline %}
+    <div class="sb-contact-row">
+      <span class="sb-contact-icon">&#9742;</span>
+      <a href="tel:{{ s.Landline_Raw }}" class="sb-contact-val">{{ s.Landline }}</a>
+    </div>
+    {% endif %}
+    <div class="sb-divider"></div>
+    <div class="lbl" style="font-size:9px;margin-bottom:12px;">Hours</div>
+    <div class="h-row"><span class="h-day">Mon &ndash; Fri</span><span>{{ s.Mon_Fri_Hours }}</span></div>
+    <div class="h-row"><span class="h-day">Saturday</span><span>{{ s.Saturday_Hours }}</span></div>
+    <div class="h-row"><span class="h-day">Sunday</span><span>{{ s.Sunday_Hours }}</span></div>
+    <div class="sb-divider"></div>
+    <div class="lbl" style="font-size:9px;margin-bottom:12px;">Follow Us</div>
+    <div class="sb-social">
+      {% if s.Instagram_URL and s.Instagram_URL != 'https://instagram.com/' %}
+      <a href="{{ s.Instagram_URL }}" target="_blank" class="sb-soc sb-insta">&#128248; Instagram</a>
+      {% endif %}
+      {% if s.Facebook_URL and s.Facebook_URL != 'https://facebook.com/' %}
+      <a href="{{ s.Facebook_URL }}" target="_blank" class="sb-soc sb-fb">&#128077; Facebook</a>
+      {% endif %}
+    </div>
+  </div>
+</div>
+</div>
+
+<div class="store-nav">
+  <a href="{{ prev_store.Store_Page_URL | replace('stores/','') }}" class="sn-link">&#8592; {{ prev_store.Store_Name }}</a>
+  <a href="../index.html#stores" class="sn-mid">All 5 Bangalore Locations</a>
+  <a href="{{ next_store.Store_Page_URL | replace('stores/','') }}" class="sn-link">{{ next_store.Store_Name }} &#8594;</a>
+</div>
+
+{{ full_footer('../') }}
+
+<script>
+// ── Baked-in services data for this store ──
+const STORE_SERVICES = {{ services_json }};
+
+function ci(s) { return (s || '').trim().toLowerCase(); }
+
+function normGender(raw) {
+  var g = ci(raw);
+  if (g === 'female' || g === 'women' || g === 'f' || g === 'w') return 'women';
+  if (g === 'male'   || g === 'men'   || g === 'm')              return 'men';
+  return 'both';
+}
+
+function genIcon(g) {
+  return g === 'women' ? '&#9792;' : g === 'men' ? '&#9794;' : '&#9893;';
+}
+
+function renderSvcCards(data, container) {
+  container.innerHTML = '';
+  if (!data.length) {
+    container.innerHTML = '<p style="color:rgba(255,255,255,0.3);font-style:italic;padding:24px 0;">No services found for this filter.</p>';
+    return;
+  }
+  var cats = {};
+  data.forEach(function(r) {
+    var cat = (r['Category'] || 'Other').trim();
+    if (!cats[cat]) cats[cat] = [];
+    cats[cat].push(r);
+  });
+  Object.keys(cats).forEach(function(cat) {
+    var svcs = cats[cat];
+    var sec  = document.createElement('div');
+    sec.className = 'svc-cat-sec';
+    sec.innerHTML = '<div class="svc-cat-hdr"><div class="svc-cat-lbl">Category</div><div class="svc-cat-name">' + cat + '</div></div><div class="svc-cards-grid"></div>';
+    container.appendChild(sec);
+    var grid = sec.querySelector('.svc-cards-grid');
+    svcs.forEach(function(r) {
+      var name = (r['Service_Name'] || '').trim();
+      var dur  = (r['Duration']     || '').trim();
+      var reg  = (r['Regular_Cost'] || '').trim();
+      var mem  = (r['Member_Cost']  || '').trim();
+      var gen  = (r['Gender']       || '').trim();
+      var desc = (r['Description']  || '').trim();
+      var memHtml = (mem && ci(mem) !== '-') ? '<span class="price-mem">Members &#8377;' + mem + '</span>' : '';
+      var ng = normGender(gen);
+      var card = document.createElement('div');
+      card.className = 'svc-item';
+      card.innerHTML =
+        '<div><div class="svc-item-name">' + name + '</div><div class="svc-item-desc">' + desc + '</div></div>' +
+        '<div class="svc-item-foot">' +
+          '<div class="svc-tags">' +
+            (dur ? '<span class="svc-tag">&#9201; ' + dur + '</span>' : '') +
+            (gen ? '<span class="svc-tag">' + genIcon(ng) + ' ' + gen + '</span>' : '') +
+          '</div>' +
+          '<div style="text-align:right"><span class="price-reg">&#8377;' + reg + '</span>' + memHtml + '</div>' +
+        '</div>';
+      grid.appendChild(card);
+    });
+  });
+}
+
+function storeGenderFilter(btn) {
+  var active = btn.classList.contains('active');
+  document.querySelectorAll('#svc-filter .f-btn').forEach(function(b) { b.classList.remove('active'); });
+  var container = document.getElementById('svc-container');
+  if (!active) {
+    btn.classList.add('active');
+    var g = btn.getAttribute('data-g');
+    var filtered = STORE_SERVICES.filter(function(r) {
+      var ng = normGender(r['Gender'] || '');
+      return ng === normGender(g) || ng === 'both';
+    });
+    renderSvcCards(filtered, container);
+  } else {
+    renderSvcCards(STORE_SERVICES, container);
+  }
+}
+
+// Reveal animation
+var io = new IntersectionObserver(function(entries) {
+  entries.forEach(function(e, i) {
+    if (e.isIntersecting) {
+      setTimeout(function() { e.target.classList.add('visible'); }, i * 80);
+      io.unobserve(e.target);
+    }
+  });
+}, { threshold: 0 });
+document.querySelectorAll('.reveal').forEach(function(el) { io.observe(el); });
+
+// Render services on load
+document.addEventListener('DOMContentLoaded', function() {
+  renderSvcCards(STORE_SERVICES, document.getElementById('svc-container'));
+});
+</script>
+</body>
+</html>

@@ -1,0 +1,298 @@
+{% from "macros.j2" import full_footer, footer_css, wa_svg %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="description" content="Naturals Salon &amp; Spa — Full services menu with pricing across all 5 Bangalore locations.">
+<title>Services &amp; Pricing | Naturals Salon &amp; Spa Bangalore</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=Jost:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+:root{
+  --dark:#111714;--green:#1B4332;--green-mid:#2D6A4F;--green-soft:#52B788;
+  --cream:#F8F4EE;--gold:#C9A84C;--gold-pale:#EDD9A3;
+  --text:#1A1A1A;--text-mid:#555;--text-light:#999;
+}
+*{margin:0;padding:0;box-sizing:border-box;}
+html{scroll-behavior:smooth;}
+body{font-family:'Jost',sans-serif;background:var(--cream);color:var(--text);}
+a{text-decoration:none;color:inherit;}
+img{display:block;width:100%;object-fit:cover;}
+nav{position:fixed;top:0;left:0;right:0;z-index:200;padding:0 60px;height:70px;display:flex;justify-content:space-between;align-items:center;background:rgba(17,23,20,0.97);backdrop-filter:blur(20px);border-bottom:1px solid rgba(255,255,255,0.06);}
+.nav-logo{display:flex;align-items:center;gap:10px;}
+.nav-logo img{height:34px;width:auto;object-fit:contain;filter:brightness(0) invert(1);}
+.nav-logo-text{font-family:'Cormorant Garamond',serif;font-size:18px;font-weight:500;color:#fff;letter-spacing:1px;}
+.nav-logo-text span{color:var(--gold);font-style:italic;font-weight:300;}
+.nav-right{display:flex;align-items:center;gap:24px;}
+.nav-back{color:rgba(255,255,255,0.5);font-size:11px;letter-spacing:2px;text-transform:uppercase;transition:color 0.3s;}
+.nav-back:hover{color:var(--gold);}
+.nav-cta{background:var(--gold);color:var(--dark);padding:10px 22px;font-size:11px;letter-spacing:2px;text-transform:uppercase;font-weight:600;transition:all 0.3s;}
+.nav-cta:hover{background:var(--gold-pale);}
+.page-hero{padding-top:70px;background:var(--dark);}
+.page-hero-inner{padding:60px 60px 0;}
+.lbl{font-size:9px;letter-spacing:5px;text-transform:uppercase;color:var(--gold);font-weight:600;margin-bottom:16px;display:flex;align-items:center;gap:12px;}
+.lbl::before{content:'';width:18px;height:1px;background:var(--gold);}
+.page-hero-inner h1{font-family:'Cormorant Garamond',serif;font-size:clamp(42px,6vw,80px);font-weight:300;color:#fff;line-height:0.95;margin-bottom:14px;}
+.page-hero-inner h1 em{font-style:italic;color:var(--gold);}
+.page-hero-inner p{font-size:14px;color:rgba(255,255,255,0.42);font-weight:300;line-height:1.8;max-width:560px;padding-bottom:40px;}
+.filters-wrap{background:var(--dark);padding:0 60px 28px;position:sticky;top:70px;z-index:100;border-bottom:1px solid rgba(255,255,255,0.06);}
+.filter-row{display:flex;align-items:center;gap:10px;flex-wrap:wrap;margin-bottom:10px;}
+.filter-row:last-child{margin-bottom:0;}
+.filter-lbl{font-size:9px;letter-spacing:3px;text-transform:uppercase;font-weight:600;white-space:nowrap;min-width:72px;}
+.filter-lbl-store{color:#52B788;}
+.f-btn-store{background:rgba(82,183,136,0.08);border:1px solid rgba(82,183,136,0.2);color:rgba(255,255,255,0.45);padding:7px 16px;font-size:11px;letter-spacing:1.5px;text-transform:uppercase;cursor:pointer;transition:all 0.3s;font-family:'Jost',sans-serif;font-weight:500;}
+.f-btn-store:hover{border-color:#52B788;color:#52B788;}
+.f-btn-store.active{background:#1B4332;border-color:#52B788;color:#52B788;}
+.filter-lbl-gender{color:var(--gold);}
+.f-btn-gender{background:rgba(201,168,76,0.07);border:1px solid rgba(201,168,76,0.2);color:rgba(255,255,255,0.45);padding:7px 16px;font-size:11px;letter-spacing:1.5px;text-transform:uppercase;cursor:pointer;transition:all 0.3s;font-family:'Jost',sans-serif;font-weight:500;}
+.f-btn-gender:hover{border-color:var(--gold);color:var(--gold);}
+.f-btn-gender.active{background:rgba(201,168,76,0.15);border-color:var(--gold);color:var(--gold);}
+.filter-lbl-cat{color:rgba(255,255,255,0.4);}
+.f-btn-cat{background:transparent;border:1px solid rgba(255,255,255,0.1);color:rgba(255,255,255,0.4);padding:7px 16px;font-size:11px;letter-spacing:1.5px;text-transform:uppercase;cursor:pointer;transition:all 0.3s;font-family:'Jost',sans-serif;font-weight:500;}
+.f-btn-cat:hover{border-color:rgba(255,255,255,0.4);color:rgba(255,255,255,0.8);}
+.f-btn-cat.active{background:rgba(255,255,255,0.1);border-color:rgba(255,255,255,0.5);color:#fff;}
+.results-bar{background:var(--cream);padding:16px 60px;display:flex;align-items:center;justify-content:space-between;border-bottom:1px solid rgba(0,0,0,0.06);}
+#results-count{font-size:13px;color:var(--text-mid);font-weight:300;}
+#results-store{font-size:12px;color:var(--gold);font-weight:500;letter-spacing:1px;}
+.services-main{padding:48px 60px;}
+.cat-section{margin-bottom:52px;}
+.cat-header{display:flex;align-items:baseline;gap:16px;margin-bottom:20px;padding-bottom:14px;border-bottom:2px solid rgba(0,0,0,0.06);}
+.cat-name{font-family:'Cormorant Garamond',serif;font-size:34px;font-weight:300;color:var(--text);line-height:1;}
+.cat-count{font-size:11px;color:var(--text-light);letter-spacing:2px;text-transform:uppercase;}
+.svc-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:2px;}
+.svc-card{background:#fff;padding:24px 22px;border-bottom:2px solid transparent;transition:all 0.25s;display:flex;flex-direction:column;justify-content:space-between;min-height:170px;}
+.svc-card:hover{background:#fafaf8;border-bottom-color:var(--gold);transform:translateY(-2px);box-shadow:0 4px 20px rgba(0,0,0,0.06);}
+.svc-card-name{font-family:'Cormorant Garamond',serif;font-size:20px;color:var(--text);font-weight:400;margin-bottom:7px;line-height:1.2;}
+.svc-card-desc{font-size:12px;color:var(--text-mid);line-height:1.7;font-weight:300;flex:1;margin-bottom:14px;}
+.svc-card-foot{display:flex;justify-content:space-between;align-items:flex-end;flex-wrap:wrap;gap:8px;}
+.svc-tags{display:flex;flex-wrap:wrap;gap:4px;}
+.svc-tag{font-size:10px;color:var(--text-light);background:rgba(0,0,0,0.04);padding:3px 8px;}
+.svc-tag-w{color:#a0522d;background:#fff5f0;}
+.svc-tag-m{color:#2a4a8a;background:#f0f4ff;}
+.svc-tag-b{color:var(--green-mid);background:var(--cream);}
+.price-col{text-align:right;}
+.price-reg{font-family:'Cormorant Garamond',serif;font-size:22px;color:var(--gold);font-weight:400;display:block;line-height:1;}
+.price-mem{font-size:11px;color:var(--green-soft);display:block;margin-top:2px;font-weight:500;}
+.empty-state{text-align:center;padding:80px 32px;color:var(--text-light);}
+.empty-state h3{font-family:'Cormorant Garamond',serif;font-size:32px;font-weight:300;margin-bottom:10px;}
+{{ footer_css() }}
+@media(max-width:900px){
+  nav{padding:0 20px;height:60px;}
+  .nav-cta{display:none;}
+  .page-hero-inner{padding:44px 20px 0;}
+  .filters-wrap{padding:0 20px 20px;top:60px;}
+  .filter-row{gap:6px;}
+  .results-bar{padding:12px 20px;}
+  .services-main{padding:32px 20px;}
+  .svc-grid{grid-template-columns:1fr 1fr;}
+}
+@media(max-width:600px){
+  .svc-grid{grid-template-columns:1fr;}
+}
+</style>
+</head>
+<body>
+
+<nav>
+  <a href="index.html" class="nav-logo">
+    <img src="images/naturals-logo.png" alt="Naturals" onerror="this.style.display='none'">
+    <div class="nav-logo-text">Naturals <span>Salon &amp; Spa</span></div>
+  </a>
+  <div class="nav-right">
+    <a href="index.html" class="nav-back">&#8592; Back to Home</a>
+    <a href="index.html#stores" class="nav-cta">Book Now</a>
+  </div>
+</nav>
+
+<div class="page-hero">
+  <div class="page-hero-inner">
+    <div class="lbl">Complete Menu</div>
+    <h1>Services &amp;<br><em>Pricing</em></h1>
+    <p>Browse our full services menu — filter by store, category, or gender. Member prices shown where available.</p>
+  </div>
+
+  <div class="filters-wrap">
+    <div class="filter-row">
+      <span class="filter-lbl filter-lbl-store">Store</span>
+      <button class="f-btn-store active" data-filter="store" data-value="all" onclick="setFilter('store','all',this)">All Stores</button>
+      {% for store in stores %}
+      <button class="f-btn-store" data-filter="store" data-value="{{ store.Store_ID }}" onclick="setFilter('store','{{ store.Store_ID }}',this)">{{ store.Store_Name }}</button>
+      {% endfor %}
+    </div>
+    <div class="filter-row">
+      <span class="filter-lbl filter-lbl-gender">Gender</span>
+      <button class="f-btn-gender" data-filter="gender" data-value="female" onclick="setFilter('gender','female',this)">Female</button>
+      <button class="f-btn-gender" data-filter="gender" data-value="male"   onclick="setFilter('gender','male',this)">Male</button>
+      <button class="f-btn-gender" data-filter="gender" data-value="both"   onclick="setFilter('gender','both',this)">Both</button>
+    </div>
+    <div class="filter-row" id="cat-filter-row">
+      <span class="filter-lbl filter-lbl-cat">Category</span>
+      <button class="f-btn-cat active" data-filter="category" data-value="all" onclick="setFilter('category','all',this)">All</button>
+      {% for cat in categories %}
+      <button class="f-btn-cat" data-filter="category" data-value="{{ cat | lower }}" onclick="setFilter('category','{{ cat | lower }}',this)">{{ cat }}</button>
+      {% endfor %}
+    </div>
+  </div>
+</div>
+
+<div class="results-bar">
+  <div id="results-count">{{ services_json | length }} services</div>
+  <div id="results-store">All 5 Bangalore stores</div>
+</div>
+
+<main class="services-main">
+  <div id="svc-container"></div>
+  <div id="empty-state" class="empty-state" style="display:none;">
+    <h3>No services found</h3>
+    <p>Try adjusting your filters above.</p>
+  </div>
+</main>
+
+{{ full_footer('') }}
+
+<script>
+// ── Baked-in data — no Google Sheets fetch needed ──
+const ALL_DATA = {{ services_json }};
+
+const STORE_NAMES = {
+  {% for store in stores %}
+  '{{ store.Store_ID | lower }}': '{{ store.Store_Name }}',
+  {% endfor %}
+};
+
+let activeFilters = { store: 'all', gender: '', category: 'all' };
+
+function ci(s) { return (s || '').trim().toLowerCase(); }
+
+function normGender(raw) {
+  var g = ci(raw);
+  if (g === 'female' || g === 'women' || g === 'f' || g === 'w') return 'women';
+  if (g === 'male'   || g === 'men'   || g === 'm')              return 'men';
+  return 'both';
+}
+
+function isYes(val) {
+  var v = ci(val);
+  return v === 'yes' || v === 'y' || v === 'true' || v === '1';
+}
+
+function genIcon(g) {
+  return g === 'women' ? '&#9792;' : g === 'men' ? '&#9794;' : '&#9893;';
+}
+
+function renderServices() {
+  var container = document.getElementById('svc-container');
+  var empty     = document.getElementById('empty-state');
+  var countEl   = document.getElementById('results-count');
+  var storeEl   = document.getElementById('results-store');
+  container.innerHTML = '';
+
+  var filtered = ALL_DATA.filter(function(r) {
+    if (activeFilters.store !== 'all') {
+      if (!isYes(r[activeFilters.store])) return false;
+    }
+    if (activeFilters.gender !== '' && activeFilters.gender !== 'all') {
+      var ng = normGender(r['Gender'] || '');
+      if (ng !== normGender(activeFilters.gender) && ng !== 'both') return false;
+    }
+    if (activeFilters.category !== 'all') {
+      if (ci(r['Category'] || '') !== activeFilters.category) return false;
+    }
+    return true;
+  });
+
+  countEl.textContent = filtered.length + ' service' + (filtered.length !== 1 ? 's' : '') + ' found';
+  storeEl.textContent = activeFilters.store !== 'all'
+    ? 'Showing: ' + (STORE_NAMES[ci(activeFilters.store)] || activeFilters.store)
+    : 'All 5 Bangalore stores';
+
+  if (!filtered.length) { empty.style.display = ''; return; }
+  empty.style.display = 'none';
+
+  var cats = {};
+  filtered.forEach(function(r) {
+    var c = (r['Category'] || 'Other').trim();
+    if (!cats[c]) cats[c] = [];
+    cats[c].push(r);
+  });
+
+  Object.keys(cats).forEach(function(cat) {
+    var svcs = cats[cat];
+    var sec  = document.createElement('div');
+    sec.className = 'cat-section';
+    sec.innerHTML =
+      '<div class="cat-header">' +
+        '<div class="cat-name">' + cat + '</div>' +
+        '<div class="cat-count">' + svcs.length + ' service' + (svcs.length !== 1 ? 's' : '') + '</div>' +
+      '</div><div class="svc-grid"></div>';
+    container.appendChild(sec);
+
+    var grid = sec.querySelector('.svc-grid');
+    svcs.forEach(function(r) {
+      var name = (r['Service_Name'] || '').trim();
+      var dur  = (r['Duration']     || '').trim();
+      var reg  = (r['Regular_Cost'] || '').trim();
+      var mem  = (r['Member_Cost']  || '').trim();
+      var gen  = (r['Gender']       || '').trim();
+      var desc = (r['Description']  || '').trim();
+      var memHtml  = (mem && ci(mem) !== '-') ? '<span class="price-mem">Members &#8377;' + mem + '</span>' : '';
+      var ng       = normGender(gen);
+      var genClass = ng === 'women' ? 'svc-tag-w' : ng === 'men' ? 'svc-tag-m' : 'svc-tag-b';
+      var card = document.createElement('div');
+      card.className = 'svc-card';
+      card.innerHTML =
+        '<div><div class="svc-card-name">' + name + '</div>' +
+        '<div class="svc-card-desc">' + desc + '</div></div>' +
+        '<div class="svc-card-foot">' +
+          '<div class="svc-tags">' +
+            (dur ? '<span class="svc-tag">&#9201; ' + dur + '</span>' : '') +
+            (gen ? '<span class="svc-tag ' + genClass + '">' + genIcon(ng) + ' ' + gen + '</span>' : '') +
+          '</div>' +
+          '<div class="price-col"><span class="price-reg">&#8377;' + reg + '</span>' + memHtml + '</div>' +
+        '</div>';
+      grid.appendChild(card);
+    });
+  });
+}
+
+function setFilter(type, value, btn) {
+  if (type === 'gender' && activeFilters[type] === value) {
+    activeFilters[type] = '';
+    document.querySelectorAll('[data-filter="gender"]').forEach(function(b) { b.classList.remove('active'); });
+    renderServices();
+    return;
+  }
+  activeFilters[type] = value;
+  document.querySelectorAll('[data-filter="' + type + '"]').forEach(function(b) { b.classList.remove('active'); });
+  btn.classList.add('active');
+  if (type === 'store') {
+    activeFilters.category = 'all';
+    document.querySelectorAll('[data-filter="category"]').forEach(function(b) { b.classList.remove('active'); });
+    var allCatBtn = document.querySelector('[data-filter="category"][data-value="all"]');
+    if (allCatBtn) allCatBtn.classList.add('active');
+  }
+  renderServices();
+}
+
+document.addEventListener('DOMContentLoaded', function() {
+  var params      = new URLSearchParams(window.location.search);
+  var catParam    = (params.get('cat')    || '').trim().toLowerCase();
+  var genderParam = (params.get('gender') || '').trim().toLowerCase();
+
+  if (genderParam) {
+    activeFilters.gender = genderParam;
+    var gBtn = document.querySelector('[data-filter="gender"][data-value="' + genderParam + '"]');
+    if (gBtn) gBtn.classList.add('active');
+  }
+  if (catParam) {
+    activeFilters.category = catParam;
+    document.querySelectorAll('[data-filter="category"]').forEach(function(b) {
+      if (ci(b.dataset.value || '') === catParam) b.classList.add('active');
+    });
+  }
+  renderServices();
+});
+</script>
+</body>
+</html>

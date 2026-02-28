@@ -1,0 +1,391 @@
+{% from "macros.j2" import full_footer, footer_css, wa_svg %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="description" content="Naturals Salon &amp; Spa Bangalore — 5 locations. Haircare, skincare, bridal &amp; more. Book online.">
+<title>Naturals Salon &amp; Spa | Bangalore</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=Jost:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+:root{
+  --dark:#111714;--green:#1B4332;--green-mid:#2D6A4F;--green-soft:#52B788;
+  --cream:#F8F4EE;--gold:#C9A84C;--gold-pale:#EDD9A3;
+  --text:#1A1A1A;--text-mid:#555;--text-light:#999;
+}
+*{margin:0;padding:0;box-sizing:border-box;}
+html{scroll-behavior:smooth;}
+body{font-family:'Jost',sans-serif;background:var(--cream);color:var(--text);overflow-x:hidden;}
+img{display:block;width:100%;object-fit:cover;}
+a{text-decoration:none;color:inherit;}
+nav{position:fixed;top:0;left:0;right:0;z-index:200;height:70px;padding:0 60px;display:flex;justify-content:space-between;align-items:center;transition:background 0.4s;}
+nav.scrolled{background:rgba(17,23,20,0.97);backdrop-filter:blur(20px);border-bottom:1px solid rgba(255,255,255,0.06);}
+.nav-logo{display:flex;align-items:center;gap:10px;}
+.nav-logo img{height:34px;width:auto;filter:brightness(0) invert(1);}
+.nav-logo-text{font-family:'Cormorant Garamond',serif;font-size:18px;color:#fff;letter-spacing:1px;}
+.nav-logo-text span{color:var(--gold);font-style:italic;font-weight:300;}
+.nav-links{display:flex;align-items:center;gap:32px;list-style:none;}
+.nav-links a{font-size:11px;letter-spacing:2px;text-transform:uppercase;color:rgba(255,255,255,0.6);transition:color 0.3s;}
+.nav-links a:hover{color:var(--gold);}
+.nav-book{background:var(--gold)!important;color:var(--dark)!important;padding:10px 22px;font-weight:600;}
+.nav-book:hover{background:var(--gold-pale)!important;}
+.hero{height:100vh;min-height:700px;position:relative;display:flex;align-items:center;justify-content:center;overflow:hidden;}
+.hero-bg{position:absolute;inset:0;}
+.hero-bg img{height:100%;object-fit:cover;}
+.hero-ov{position:absolute;inset:0;background:linear-gradient(135deg,rgba(17,23,20,0.88) 0%,rgba(17,23,20,0.45) 60%,rgba(17,23,20,0.2) 100%);}
+.hero-inner{position:relative;z-index:2;text-align:center;padding:0 24px;}
+.hero-tag{display:inline-flex;align-items:center;gap:12px;font-size:9px;letter-spacing:5px;text-transform:uppercase;color:var(--gold);font-weight:600;margin-bottom:24px;}
+.hero-tag::before,.hero-tag::after{content:'';width:24px;height:1px;background:var(--gold);}
+.hero h1{font-family:'Cormorant Garamond',serif;font-size:clamp(52px,8vw,100px);font-weight:300;color:#fff;line-height:0.92;letter-spacing:-2px;margin-bottom:24px;}
+.hero h1 em{font-style:italic;color:var(--gold);}
+.hero-sub{font-size:14px;color:rgba(255,255,255,0.5);font-weight:300;letter-spacing:1px;margin-bottom:40px;}
+.hero-btns{display:flex;gap:14px;justify-content:center;flex-wrap:wrap;}
+.btn-gold{background:var(--gold);color:var(--dark);padding:15px 36px;font-size:11px;letter-spacing:2.5px;text-transform:uppercase;font-weight:700;transition:all 0.3s;display:inline-flex;align-items:center;gap:8px;}
+.btn-gold:hover{background:var(--gold-pale);transform:translateY(-2px);}
+.btn-outline{border:1px solid rgba(255,255,255,0.3);color:#fff;padding:15px 36px;font-size:11px;letter-spacing:2.5px;text-transform:uppercase;transition:all 0.3s;display:inline-flex;align-items:center;gap:8px;}
+.btn-outline:hover{border-color:var(--gold);color:var(--gold);}
+.hero-scroll{position:absolute;bottom:36px;left:50%;transform:translateX(-50%);display:flex;flex-direction:column;align-items:center;gap:8px;}
+.hero-scroll span{font-size:9px;letter-spacing:3px;text-transform:uppercase;color:rgba(255,255,255,0.3);}
+.hero-scroll-line{width:1px;height:40px;background:linear-gradient(to bottom,rgba(255,255,255,0.3),transparent);}
+.lbl{font-size:9px;letter-spacing:5px;text-transform:uppercase;color:var(--gold);font-weight:600;margin-bottom:16px;display:flex;align-items:center;gap:12px;}
+.lbl::before{content:'';width:18px;height:1px;background:var(--gold);}
+.sec-hdr{text-align:center;max-width:600px;margin:0 auto 48px;}
+.sec-hdr .lbl{justify-content:center;}
+.sec-hdr .lbl::before{display:none;}
+.sec-hdr h2{font-family:'Cormorant Garamond',serif;font-size:clamp(36px,5vw,60px);font-weight:300;line-height:1;margin-bottom:16px;}
+.sec-hdr h2 em{font-style:italic;color:var(--green-mid);}
+.sec-hdr p{font-size:14px;color:var(--text-mid);font-weight:300;line-height:1.8;}
+.reveal{opacity:0;transform:translateY(24px);transition:opacity 0.7s ease,transform 0.7s ease;}
+.reveal.visible{opacity:1;transform:translateY(0);}
+.about-wrap{display:grid;grid-template-columns:1fr 1fr;min-height:560px;}
+.about-img-col{overflow:hidden;min-height:480px;}
+.about-img-col img{height:100%;object-fit:cover;transition:transform 8s ease;}
+.about-img-col:hover img{transform:scale(1.04);}
+.about-text-col{background:var(--dark);padding:80px 68px;display:flex;flex-direction:column;justify-content:center;}
+.about-text-col .lbl{color:var(--gold);}
+.about-text-col h2{font-family:'Cormorant Garamond',serif;font-size:clamp(32px,4vw,52px);font-weight:300;color:#fff;line-height:1.05;margin-bottom:20px;}
+.about-text-col h2 em{font-style:italic;color:var(--green-soft);}
+.about-text-col p{font-size:14px;color:rgba(255,255,255,0.45);line-height:1.9;font-weight:300;margin-bottom:12px;}
+.about-stats{display:grid;grid-template-columns:1fr 1fr 1fr;gap:24px;margin-top:32px;padding-top:32px;border-top:1px solid rgba(255,255,255,0.08);}
+.stat-num{font-family:'Cormorant Garamond',serif;font-size:36px;color:var(--gold);font-weight:300;line-height:1;}
+.stat-lbl{font-size:10px;color:rgba(255,255,255,0.3);letter-spacing:2px;text-transform:uppercase;margin-top:4px;}
+.services-sec{padding:100px 60px;background:var(--cream);}
+.svc-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:3px;margin-bottom:40px;}
+.svc-card{position:relative;overflow:hidden;height:340px;display:block;cursor:pointer;}
+.svc-card img{height:100%;object-fit:cover;transition:transform 0.7s ease;}
+.svc-card:hover img{transform:scale(1.06);}
+.svc-ov{position:absolute;inset:0;background:linear-gradient(to top,rgba(17,23,20,0.88) 0%,rgba(17,23,20,0.2) 60%,transparent 100%);transition:opacity 0.3s;}
+.svc-card:hover .svc-ov{opacity:0.85;}
+.svc-info{position:absolute;bottom:0;left:0;right:0;padding:24px 22px;}
+.svc-cat-lbl{font-size:9px;letter-spacing:3px;text-transform:uppercase;color:var(--gold);font-weight:600;margin-bottom:6px;}
+.svc-title{font-family:'Cormorant Garamond',serif;font-size:24px;color:#fff;font-weight:400;line-height:1.1;margin-bottom:6px;}
+.svc-sub{font-size:11px;color:rgba(255,255,255,0.5);font-weight:300;line-height:1.6;}
+.view-all{text-align:center;}
+/* STORES */
+.stores-sec{padding:100px 60px;background:var(--dark);}
+.stores-sec .sec-hdr h2{color:#fff;}
+.stores-sec .sec-hdr h2 em{color:var(--green-soft);}
+.stores-sec .sec-hdr p{color:rgba(255,255,255,0.4);}
+.st-list{display:flex;flex-direction:column;gap:2px;max-width:820px;margin:0 auto;}
+.st-tile{background:#fff;overflow:hidden;transition:box-shadow 0.3s;}
+.st-tile:hover{box-shadow:0 8px 40px rgba(0,0,0,0.25);}
+.st-head{background:var(--dark);padding:18px 28px;display:flex;align-items:center;gap:16px;border-bottom:2px solid var(--green);}
+.st-num{font-family:'Cormorant Garamond',serif;font-size:32px;color:rgba(255,255,255,0.15);font-weight:300;line-height:1;flex-shrink:0;width:40px;}
+.st-name{font-family:'Cormorant Garamond',serif;font-size:21px;color:#fff;font-weight:400;line-height:1.1;}
+.st-name-link{text-decoration:none;color:#fff;transition:color 0.2s;}
+.st-name-link:hover{color:var(--gold-pale);}
+.st-area{font-size:9px;letter-spacing:2.5px;text-transform:uppercase;color:var(--gold);font-weight:600;margin-top:3px;}
+.st-body{padding:18px 28px;}
+.st-addr{font-size:12px;color:var(--text-light);margin-bottom:14px;line-height:1.6;display:flex;align-items:flex-start;gap:6px;}
+.st-contacts{display:grid;grid-template-columns:1fr 1fr;gap:8px 16px;margin-bottom:16px;}
+.st-contact-row{display:flex;align-items:flex-start;gap:8px;}
+.st-ci{font-size:15px;flex-shrink:0;margin-top:2px;display:flex;align-items:center;line-height:1;}
+.st-cl{font-size:9px;letter-spacing:2px;text-transform:uppercase;color:var(--text-light);font-weight:600;margin-bottom:2px;}
+.st-cv{font-size:13px;color:var(--text);font-weight:500;display:block;transition:color 0.2s;}
+a.st-cv:hover{color:var(--green);}
+.st-actions{display:flex;gap:8px;flex-wrap:wrap;padding-top:14px;border-top:1px solid rgba(0,0,0,0.07);}
+.st-book{background:var(--gold);color:var(--dark);padding:9px 20px;font-size:10px;letter-spacing:2px;text-transform:uppercase;font-weight:700;transition:all 0.3s;display:inline-flex;align-items:center;gap:6px;}
+.st-book:hover{background:var(--gold-pale);}
+.st-view{border:1px solid rgba(0,0,0,0.15);color:var(--text-mid);padding:9px 18px;font-size:10px;letter-spacing:2px;text-transform:uppercase;font-weight:600;transition:all 0.3s;display:inline-flex;align-items:center;gap:6px;}
+.st-view:hover{border-color:var(--green);color:var(--green);}
+.fbleed{height:55vh;min-height:380px;position:relative;overflow:hidden;}
+.fbleed img{height:100%;object-fit:cover;}
+.fbleed-ov{position:absolute;inset:0;background:rgba(17,23,20,0.65);display:flex;align-items:center;justify-content:center;text-align:center;}
+.fbleed-ov h2{font-family:'Cormorant Garamond',serif;font-size:clamp(36px,5vw,64px);color:#fff;font-weight:300;line-height:1.05;margin-bottom:28px;}
+.fbleed-ov h2 em{color:var(--gold);font-style:italic;}
+.book-sec{background:var(--green);padding:80px 60px;text-align:center;}
+.book-sec h2{font-family:'Cormorant Garamond',serif;font-size:clamp(32px,4vw,52px);color:#fff;font-weight:300;margin-bottom:14px;}
+.book-sec h2 em{font-style:italic;color:var(--gold);}
+.book-sec p{font-size:14px;color:rgba(255,255,255,0.5);font-weight:300;margin-bottom:32px;}
+.book-store-btns{display:flex;flex-wrap:wrap;gap:10px;justify-content:center;margin-bottom:32px;}
+.st-btn{background:rgba(255,255,255,0.08);border:1px solid rgba(255,255,255,0.15);color:rgba(255,255,255,0.7);padding:12px 20px;font-size:11px;letter-spacing:1.5px;text-transform:uppercase;transition:all 0.3s;display:inline-flex;align-items:center;gap:8px;}
+.st-btn:hover{background:rgba(255,255,255,0.15);border-color:var(--gold);color:var(--gold);}
+.st-btn small{font-size:9px;color:rgba(255,255,255,0.35);letter-spacing:1px;}
+.reviews-sec{padding:100px 60px;background:var(--cream);overflow:hidden;}
+.rv-track{display:flex;gap:3px;flex-wrap:wrap;}
+.rv-card{background:#fff;padding:32px 28px;flex:1;min-width:260px;max-width:360px;}
+.rv-stars{color:var(--gold);font-size:14px;margin-bottom:12px;}
+.rv-q{font-family:'Cormorant Garamond',serif;font-size:18px;color:var(--text);font-weight:400;line-height:1.6;margin-bottom:16px;font-style:italic;}
+.rv-name{font-size:11px;font-weight:600;color:var(--text);letter-spacing:1px;text-transform:uppercase;}
+.rv-store{font-size:10px;color:var(--gold);letter-spacing:1.5px;text-transform:uppercase;margin-top:2px;}
+{{ footer_css() }}
+@media(max-width:960px){
+  nav{padding:0 20px;height:60px;}
+  .about-wrap{grid-template-columns:1fr;}
+  .about-img-col{min-height:300px;}
+  .about-text-col{padding:48px 24px;}
+  .services-sec{padding:60px 20px;}
+  .svc-grid{grid-template-columns:1fr 1fr;gap:2px;}
+  .svc-card{height:260px;}
+  .stores-sec{padding:60px 20px;}
+  .st-body{padding:16px 20px;}
+  .st-head{padding:16px 20px;}
+  .st-contacts{grid-template-columns:1fr;}
+  .book-sec{padding:60px 20px;}
+  .reviews-sec{padding:60px 20px;}
+  .rv-card{min-width:100%;max-width:100%;}
+}
+@media(max-width:600px){
+  nav{padding:0 16px;}
+  .nav-links{display:none;}
+  .hero h1{font-size:clamp(40px,10vw,60px);}
+  .svc-grid{grid-template-columns:1fr;}
+  .svc-card{height:220px;}
+  .st-contacts{grid-template-columns:1fr;}
+  .book-store-btns{flex-direction:column;align-items:stretch;}
+}
+</style>
+</head>
+<body>
+
+<nav id="nb">
+  <a href="index.html" class="nav-logo">
+    <img src="images/naturals-logo.png" alt="Naturals" onerror="this.style.display='none'">
+    <div class="nav-logo-text">Naturals <span>Salon &amp; Spa</span></div>
+  </a>
+  <ul class="nav-links">
+    <li><a href="#about">About</a></li>
+    <li><a href="services.html">Services</a></li>
+    <li><a href="#stores">Locations</a></li>
+    <li><a href="#stores" class="nav-book">Our Stores</a></li>
+  </ul>
+</nav>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="hero-bg">
+    <img src="images/heroes/home.jpg" alt="Naturals Salon"
+         onerror="this.src='https://images.unsplash.com/photo-1522337360788-8b13dee7a37e?w=1800&q=85'">
+  </div>
+  <div class="hero-ov"></div>
+  <div class="hero-inner">
+    <div class="hero-tag">Bangalore's Premium Salon Network</div>
+    <h1>Beauty that<br><em>moves you.</em></h1>
+    <div class="hero-sub">5 locations &middot; Expert stylists &middot; World-class services</div>
+    <div class="hero-btns">
+      <a href="#stores" class="btn-gold">&#10022; Find Your Store</a>
+      <a href="services.html" class="btn-outline">View Services</a>
+    </div>
+  </div>
+  <div class="hero-scroll">
+    <span>Scroll</span>
+    <div class="hero-scroll-line"></div>
+  </div>
+</section>
+
+<!-- ABOUT -->
+<section class="about-wrap" id="about">
+  <div class="about-img-col">
+    <img src="images/about.jpg" alt="Naturals Salon Interior"
+         onerror="this.src='https://images.unsplash.com/photo-1560066984-138dadb4c035?w=900&q=85'">
+  </div>
+  <div class="about-text-col">
+    <div class="lbl">Our Story</div>
+    <h2 class="reveal">25 years of<br><em>beautiful</em> expertise.</h2>
+    <p class="reveal">Naturals Salon &amp; Spa is India's most trusted salon network — built on a passion for excellence, craft, and genuine care for every client.</p>
+    <p class="reveal">Across our 5 Bangalore locations, we bring world-class beauty services to your neighbourhood. Every stylist, every product, every visit — crafted to perfection.</p>
+    <div class="about-stats reveal">
+      <div><div class="stat-num">25+</div><div class="stat-lbl">Years</div></div>
+      <div><div class="stat-num">5</div><div class="stat-lbl">Locations</div></div>
+      <div><div class="stat-num">1000+</div><div class="stat-lbl">Salons India</div></div>
+    </div>
+  </div>
+</section>
+
+<!-- SERVICES -->
+<section class="services-sec" id="services">
+  <div class="sec-hdr reveal">
+    <div class="lbl">What We Offer</div>
+    <h2>Services crafted<br>for <em>every you.</em></h2>
+    <p>From precision cuts to bridal transformations — world-class beauty at every visit.</p>
+  </div>
+  <div class="svc-grid">
+    <a href="services.html?cat=HAIR+STYLING+-+FEMALE&gender=female" class="svc-card reveal">
+      <img src="images/services/haircare.jpg" alt="Hair Styling"
+           onerror="this.src='https://images.unsplash.com/photo-1562322140-8baeececf3df?w=700&q=80'">
+      <div class="svc-ov"></div>
+      <div class="svc-info">
+        <div class="svc-cat-lbl">01 &middot; Female</div>
+        <div class="svc-title">Hair Styling</div>
+        <div class="svc-sub">Haircut &amp; Blow Dry &middot; Ironing &middot; Tongs &middot; Updo</div>
+      </div>
+    </a>
+    <a href="services.html?cat=FACIAL&gender=female" class="svc-card reveal">
+      <img src="images/services/skincare.jpg" alt="Facial"
+           onerror="this.src='https://images.unsplash.com/photo-1570172619644-dfd03ed5d881?w=700&q=80'">
+      <div class="svc-ov"></div>
+      <div class="svc-info">
+        <div class="svc-cat-lbl">02 &middot; Female</div>
+        <div class="svc-title">Facial</div>
+        <div class="svc-sub">Classic &middot; Luxury &middot; Anti-Ageing &middot; Brightening &middot; Gold</div>
+      </div>
+    </a>
+    <a href="services.html?cat=COLOURING+AND+HIGHLIGHTS&gender=female" class="svc-card reveal">
+      <img src="images/services/colour.jpg" alt="Colouring"
+           onerror="this.src='https://images.unsplash.com/photo-1522337360788-8b13dee7a37e?w=700&q=80'">
+      <div class="svc-ov"></div>
+      <div class="svc-info">
+        <div class="svc-cat-lbl">03 &middot; Female</div>
+        <div class="svc-title">Colouring &amp; Highlights</div>
+        <div class="svc-sub">Global &middot; Highlights &middot; Balayage &middot; Ombre &middot; Root Touch-Up</div>
+      </div>
+    </a>
+    <a href="services.html?cat=MENICURE+%2F+PEDICURE&gender=female" class="svc-card reveal">
+      <img src="images/services/nails.jpg" alt="Manicure Pedicure"
+           onerror="this.src='https://images.unsplash.com/photo-1604654894610-df63bc536371?w=700&q=80'">
+      <div class="svc-ov"></div>
+      <div class="svc-info">
+        <div class="svc-cat-lbl">04 &middot; Female</div>
+        <div class="svc-title">Manicure &amp; Pedicure</div>
+        <div class="svc-sub">Classic &middot; Spa &middot; Gel &middot; French &middot; Nail Art &middot; Paraffin</div>
+      </div>
+    </a>
+    <a href="services.html?cat=HAIR+STYLING+-+MENS&gender=male" class="svc-card reveal">
+      <img src="images/services/mens-grooming.jpg" alt="Mens Hair Styling"
+           onerror="this.src='https://images.unsplash.com/photo-1621605815971-fbc98d665033?w=700&q=80'">
+      <div class="svc-ov"></div>
+      <div class="svc-info">
+        <div class="svc-cat-lbl">05 &middot; Male</div>
+        <div class="svc-title">Men's Hair Styling</div>
+        <div class="svc-sub">Haircut &middot; Beard Trim &middot; Shave &middot; Head Massage</div>
+      </div>
+    </a>
+    <a href="services.html?cat=MENS+-+COLOURING&gender=male" class="svc-card reveal">
+      <img src="images/services/mens-colour.jpg" alt="Mens Colouring"
+           onerror="this.src='https://images.unsplash.com/photo-1503951914875-452162b0f3f1?w=700&q=80'">
+      <div class="svc-ov"></div>
+      <div class="svc-info">
+        <div class="svc-cat-lbl">06 &middot; Male</div>
+        <div class="svc-title">Men's Colouring</div>
+        <div class="svc-sub">Global Colour &middot; Highlights &middot; Root Touch-Up &middot; Beard Colour</div>
+      </div>
+    </a>
+  </div>
+  <div class="view-all reveal">
+    <a href="services.html" class="btn-gold" style="font-size:11px;">View All Services &amp; Pricing &#8594;</a>
+  </div>
+</section>
+
+<!-- STORES -->
+<section class="stores-sec" id="stores">
+  <div class="sec-hdr reveal">
+    <div class="lbl">Our Locations</div>
+    <h2>Five stores.<br><em>One city.</em><br>Your neighbourhood.</h2>
+    <p>Walk in or book online — premium beauty services at your doorstep across Bangalore.</p>
+  </div>
+  <div class="st-list">
+  {% for store in stores %}
+    <div class="st-tile reveal">
+      <div class="st-head">
+        <div class="st-num">{{ store.Hero_Number }}</div>
+        <div>
+          <a href="{{ store.Store_Page_URL }}" class="st-name st-name-link">{{ store.Store_Name }}</a>
+          <div class="st-area">{{ store.Area }} &middot; {{ store.Pincode }}</div>
+        </div>
+      </div>
+      <div class="st-body">
+        <div class="st-addr">&#128205; {{ store.Address_Full }}</div>
+        <div class="st-contacts">
+          <div class="st-contact-row">
+            <span class="st-ci">&#128222;</span>
+            <div><div class="st-cl">Call</div><a href="tel:{{ store.Phone_Raw }}" class="st-cv">{{ store.Phone_Mobile }}</a></div>
+          </div>
+          <div class="st-contact-row">
+            <span class="st-ci">{{ wa_svg(15) }}</span>
+            <div><div class="st-cl">WhatsApp</div><a href="https://wa.me/{{ store.WhatsApp_Number }}" target="_blank" class="st-cv">{{ store.Phone_Mobile }}</a></div>
+          </div>
+          {% if store.Landline %}
+          <div class="st-contact-row">
+            <span class="st-ci">&#9742;</span>
+            <div><div class="st-cl">Landline</div><a href="tel:{{ store.Landline_Raw }}" class="st-cv">{{ store.Landline }}</a></div>
+          </div>
+          {% endif %}
+        </div>
+        <div class="st-actions">
+          <a href="{{ store.Appointment_URL }}" target="_blank" class="st-book">&#128197; Book Appointment</a>
+          <a href="{{ store.Store_Page_URL }}" class="st-view">View Store &#8594;</a>
+        </div>
+      </div>
+    </div>
+  {% endfor %}
+  </div>
+</section>
+
+<!-- FULL BLEED -->
+<div class="fbleed">
+  <img src="images/heroes/fullbleed.jpg" alt="Salon"
+       onerror="this.src='https://images.unsplash.com/photo-1605497788044-5a32c7078486?w=1800&q=80'">
+  <div class="fbleed-ov">
+    <div>
+      <h2>Every visit is<br>an <em>experience.</em></h2>
+      <a href="#stores" class="btn-gold">Choose Your Store</a>
+    </div>
+  </div>
+</div>
+
+<!-- BOOK CTA -->
+<section class="book-sec" id="book">
+  <h2>Book at your<br><em>nearest store.</em></h2>
+  <p>Available 24/7 online — choose your store and confirm in minutes.</p>
+  <div class="book-store-btns">
+  {% for store in stores %}
+    <a href="{{ store.Appointment_URL }}" target="_blank" class="st-btn">&#128205; {{ store.Store_Name }} <small>{{ store.Pincode }}</small></a>
+  {% endfor %}
+  </div>
+  <a href="services.html" class="btn-gold" style="font-size:11px;">View All Services &amp; Pricing &#8594;</a>
+</section>
+
+<!-- REVIEWS -->
+<section class="reviews-sec" id="reviews">
+  <div class="sec-hdr reveal">
+    <div class="lbl">Client Love</div>
+    <h2>What our guests<br><em>say about us.</em></h2>
+  </div>
+  <div class="rv-track">
+    <div class="rv-card reveal"><div class="rv-stars">&#9733;&#9733;&#9733;&#9733;&#9733;</div><div class="rv-q">&ldquo;The haircut was perfect &mdash; they took time to understand exactly what I wanted. Calming and luxurious ambience.&rdquo;</div><div class="rv-name">Priya S.</div><div class="rv-store">JP Nagar 5th Phase</div></div>
+    <div class="rv-card reveal"><div class="rv-stars">&#9733;&#9733;&#9733;&#9733;&#9733;</div><div class="rv-q">&ldquo;Amazing experience! Staff was friendly and professional. I&rsquo;ve tried many salons in Bangalore &mdash; Naturals is another level.&rdquo;</div><div class="rv-name">Rahul M.</div><div class="rv-store">Elements Mall</div></div>
+    <div class="rv-card reveal"><div class="rv-stars">&#9733;&#9733;&#9733;&#9733;&#9733;</div><div class="rv-q">&ldquo;My bridal package was absolutely flawless. I felt like royalty on my wedding day. Thank you Naturals!&rdquo;</div><div class="rv-name">Anjali K.</div><div class="rv-store">Frazer Town</div></div>
+    <div class="rv-card reveal"><div class="rv-stars">&#9733;&#9733;&#9733;&#9733;&#9733;</div><div class="rv-q">&ldquo;The facial was divine &mdash; my skin has never looked better. Products are clearly premium quality.&rdquo;</div><div class="rv-name">Deepa R.</div><div class="rv-store">Hennur</div></div>
+    <div class="rv-card reveal"><div class="rv-stars">&#9733;&#9733;&#9733;&#9733;&#9733;</div><div class="rv-q">&ldquo;Best keratin treatment in Bangalore. Hair is silky smooth and results lasted longer than any other salon.&rdquo;</div><div class="rv-name">Kavitha N.</div><div class="rv-store">Devasandra</div></div>
+  </div>
+</section>
+
+{{ full_footer('') }}
+
+<script>
+window.addEventListener('scroll', function() {
+  document.getElementById('nb').classList.toggle('scrolled', window.scrollY > 60);
+});
+var io = new IntersectionObserver(function(entries) {
+  entries.forEach(function(e, i) {
+    if (e.isIntersecting) {
+      setTimeout(function() { e.target.classList.add('visible'); }, i * 90);
+      io.unobserve(e.target);
+    }
+  });
+}, { threshold: 0 });
+document.querySelectorAll('.reveal').forEach(function(el) { io.observe(el); });
+</script>
+</body>
+</html>
