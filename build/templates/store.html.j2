@@ -1,4 +1,4 @@
-{% from "macros.j2" import full_footer, footer_css, wa_svg, fb_svg, ig_svg, social_icons, global_mobile_css, social_icons_css, theme_vars, theme_toggle, theme_init_script, button_css, btn_book, btn_wa, btn_call, btn_maps, store_indicator, store_picker_modal, sticky_mobile_bar, store_picker_js, hamburger_nav, tracking_head, tracking_body, stores_json %}
+{% from "macros.j2" import full_footer, footer_css, wa_svg, fb_svg, ig_svg, social_icons, global_mobile_css, theme_vars, theme_toggle, theme_init_script, button_css, btn_book, btn_wa, btn_call, btn_maps, store_indicator, store_picker_modal, sticky_mobile_bar, store_picker_js, hamburger_nav, tracking_head, tracking_body, stores_json %}
 {% set s = store %}
 <!DOCTYPE html>
 <html lang="en">
@@ -64,10 +64,6 @@ img{display:block;width:100%;object-fit:cover;}
 
 /* ── ACTION BAR — single row of 3 clean buttons ── */
 .action-bar{display:flex;gap:10px;flex-wrap:wrap;}
-.ab-primary{background:var(--gold);color:var(--dark);padding:13px 26px;font-size:11px;letter-spacing:2px;text-transform:uppercase;font-weight:700;transition:all 0.3s;display:inline-flex;align-items:center;gap:8px;white-space:nowrap;}
-.ab-primary:hover{background:var(--gold-pale);transform:translateY(-1px);}
-.ab-ghost{border:1px solid rgba(255,255,255,0.28);color:rgba(255,255,255,0.75);padding:13px 22px;font-size:11px;letter-spacing:2px;text-transform:uppercase;transition:all 0.3s;display:inline-flex;align-items:center;gap:8px;white-space:nowrap;}
-.ab-ghost:hover{border-color:var(--gold);color:var(--gold);}
 
 /* INFO BAR — 4 cells */
 .info-bar{display:grid;grid-template-columns:repeat(4,1fr);background:var(--dark);border-top:1px solid rgba(255,255,255,0.06);}
@@ -153,8 +149,6 @@ a.contact-val:hover{color:var(--green);}
 .sb-name{font-family:'Cormorant Garamond',serif;font-size:20px;color:var(--text);font-weight:400;margin-bottom:3px;}
 .sb-area{font-size:10px;color:var(--gold);letter-spacing:2px;text-transform:uppercase;margin-bottom:20px;}
 /* Single prominent book button */
-.sb-book-main{display:flex;align-items:center;justify-content:center;gap:10px;background:var(--gold);color:var(--dark);padding:14px;font-size:11px;letter-spacing:2px;text-transform:uppercase;font-weight:700;transition:all 0.3s;width:100%;margin-bottom:8px;}
-.sb-book-main:hover{background:var(--gold-pale);}
 /* Compact secondary links row */
 .sb-quick{display:grid;grid-template-columns:1fr 1fr;gap:6px;margin-bottom:20px;}
 .sb-ql{display:flex;flex-direction:column;align-items:center;justify-content:center;gap:4px;padding:10px 6px;border:1px solid rgba(0,0,0,0.09);color:var(--text-mid);font-size:9px;letter-spacing:1.5px;text-transform:uppercase;font-weight:600;transition:all 0.3s;text-align:center;}
@@ -178,7 +172,6 @@ a.contact-val:hover{color:var(--green);}
 
 {{ button_css() }}
 {{ footer_css() }}
-{{ social_icons_css() }}
 
 @media(max-width:1100px){
   .page-wrap{grid-template-columns:1fr;padding:40px 40px;}
@@ -233,9 +226,9 @@ a.contact-val:hover{color:var(--green);}
     <div class="hero-sub">{{ s.Area }} &middot; {{ s.Pincode }} &middot; <a href="tel:{{ s.Phone_Tel }}" style="color:rgba(255,255,255,0.55);">{{ s.Phone_Display }}</a></div>
     <!-- 3 actions only — Book, WhatsApp, Directions -->
     <div class="action-bar">
-      <a href="{{ s.Appointment_URL }}" target="_blank" class="ab-primary">&#128197; Book Appointment</a>
-      <a href="https://wa.me/{{ s.WhatsApp_Number }}" target="_blank" class="ab-ghost">{{ wa_svg(16) }} WhatsApp</a>
-      <a href="{{ s.Google_Maps_URL }}" target="_blank" class="ab-ghost">&#128205; Directions</a>
+      <a href="{{ s.Appointment_URL }}" target="_blank" class="btn-book">&#128197; Book Appointment</a>
+      <a href="https://wa.me/{{ s.WhatsApp_Number }}" target="_blank" class="btn-wa">{{ wa_svg(16) }} WhatsApp</a>
+      <a href="{{ s.Google_Maps_URL }}" target="_blank" class="btn-maps">&#128205; Directions</a>
     </div>
   </div>
 </section>
@@ -292,7 +285,7 @@ a.contact-val:hover{color:var(--green);}
       <p class="about-p">Welcome to Naturals Salon &amp; Spa {{ s.Store_Name }} — your neighbourhood destination for premium hair, skin and beauty services in {{ s.Area }}, Bangalore. Part of India's most trusted salon network with over 25 years of expertise.</p>
       <p class="about-p">Our expert stylists and therapists deliver world-class results in a relaxed, luxurious setting. Every visit is personalised to you — from precision haircuts and vibrant colour to rejuvenating facials and bridal packages.</p>
       {% endif %}
-      <a href="{{ s.Appointment_URL }}" target="_blank" class="btn-gold" style="margin-top:18px;font-size:11px;">Book Your Visit &#8594;</a>
+      <a href="{{ s.Appointment_URL }}" target="_blank" class="btn-book" style="margin-top:18px;font-size:11px;">Book Your Visit &#8594;</a>
     </div>
   </div>
 
@@ -338,8 +331,10 @@ a.contact-val:hover{color:var(--green);}
     {% for stylist in stylists %}
       <div class="stylist-card">
         <div class="stylist-photo">
-          <img src="../images/stylists/default_stylist.jpg" alt="{{ stylist.get('Stylist_Name','') }}"
-               onerror="this.src='https://images.unsplash.com/photo-1605497788044-5a32c7078486?w=400&q=80'">
+          {% set stylist_slug = stylist.get('Stylist_Name','') | lower | replace(' ','_') | replace("'",'') %}
+          <img src="../images/stylists/{{ stylist_slug }}.png"
+               alt="{{ stylist.get('Stylist_Name','') }}"
+               onerror="this.onerror=null;this.src='../images/stylists/stylist_default.png'">
         </div>
         <div class="stylist-info">
           <div class="stylist-name">{{ stylist.get('Stylist_Name','') }}</div>
@@ -402,9 +397,8 @@ a.contact-val:hover{color:var(--green);}
     <div class="sb-name">Naturals {{ s.Store_Name }}</div>
     <div class="sb-area">{{ s.Area }} &middot; {{ s.Pincode }}</div>
 
-    <a href="{{ s.Appointment_URL }}" target="_blank" class="sb-book-main">&#128197; Book Appointment</a>
+    <a href="{{ s.Appointment_URL }}" target="_blank" class="btn-book" style="width:100%;justify-content:center;margin-bottom:12px;">&#128197; Book Appointment</a>
 
-    {{ social_icons(s, 18) }}
 
     <!-- 4 compact quick-links: WhatsApp · Directions · Review · Services -->
     <div class="sb-quick">
@@ -428,18 +422,7 @@ a.contact-val:hover{color:var(--green);}
     <div class="h-row"><span class="h-day">Saturday</span><span>{{ s.Saturday_Hours }}</span></div>
     <div class="h-row"><span class="h-day">Sunday</span><span>{{ s.Sunday_Hours }}</span></div>
 
-    {% if (s.Instagram_URL and s.Instagram_URL != 'https://instagram.com/') or (s.Facebook_URL and s.Facebook_URL != 'https://facebook.com/') %}
-    <div class="sb-divider"></div>
-    <div class="sb-sec">Follow Us</div>
-    <div class="sb-social">
-      {% if s.Instagram_URL and s.Instagram_URL != 'https://instagram.com/' %}
-      <a href="{{ s.Instagram_URL }}" target="_blank" class="sb-soc sb-insta">&#128248; Instagram</a>
-      {% endif %}
-      {% if s.Facebook_URL and s.Facebook_URL != 'https://facebook.com/' %}
-      <a href="{{ s.Facebook_URL }}" target="_blank" class="sb-soc sb-fb">&#128077; Facebook</a>
-      {% endif %}
-    </div>
-    {% endif %}
+
   </div>
 </div>
 </div>

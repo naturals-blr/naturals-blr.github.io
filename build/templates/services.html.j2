@@ -1,4 +1,4 @@
-{% from "macros.j2" import global_mobile_css, full_footer, footer_css, wa_svg, theme_vars, theme_toggle, theme_init_script, button_css, btn_book, btn_wa, btn_call, btn_maps, store_indicator, store_picker_modal, sticky_mobile_bar, store_picker_js, hamburger_nav, tracking_head, tracking_body, stores_json, fb_svg, ig_svg, social_icons, social_icons_css %}
+{% from "macros.j2" import global_mobile_css, full_footer, footer_css, wa_svg, theme_vars, theme_toggle, theme_init_script, button_css, btn_book, btn_wa, btn_call, btn_maps, store_indicator, store_picker_modal, sticky_mobile_bar, store_picker_js, hamburger_nav, tracking_head, tracking_body, stores_json, fb_svg, ig_svg, social_icons %}
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -122,9 +122,7 @@ img{display:block;width:100%;object-fit:cover;}
 }
 @media(max-width:600px){
   .filter-lbl{display:none;}
-  .cat-filter-scroll{flex-wrap:nowrap;overflow-x:auto;-webkit-overflow-scrolling:touch;padding-bottom:4px;}
-  .cat-filter-scroll::-webkit-scrollbar{height:2px;}
-  .cat-filter-scroll::-webkit-scrollbar-thumb{background:rgba(255,255,255,0.15);border-radius:1px;}
+  .cat-filter-scroll{flex-wrap:wrap;}
   .svc-grid{grid-template-columns:1fr;}
   img{max-width:100%;height:auto;}
   body{padding-bottom:62px;}
