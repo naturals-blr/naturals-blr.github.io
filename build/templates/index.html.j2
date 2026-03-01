@@ -1,4 +1,4 @@
-{% from "macros.j2" import full_footer, footer_css, wa_svg, theme_vars, theme_toggle,
+{% from "macros.j2" import full_footer, footer_css, wa_svg, fb_svg, ig_svg, social_icons, social_icons_css, theme_vars, theme_toggle,
    theme_init_script, button_css, store_indicator, store_picker_modal,
    sticky_mobile_bar, store_picker_js, hamburger_nav, tracking_head, tracking_body, stores_json %}
 <!DOCTYPE html>
@@ -9,6 +9,23 @@
 <meta name="description" content="Naturals Salon &amp; Spa Bangalore — 5 locations across JP Nagar, Elements Mall, Devasandra, Frazer Town &amp; Hennur. Expert hair, skin &amp; bridal services. Book online.">
 <title>Naturals Salon &amp; Spa | Bangalore — 5 Locations</title>
 <link rel="canonical" href="https://naturals-blr.github.io/index.html">
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "Organization",
+  "name": "Naturals Salon & Spa Bangalore",
+  "url": "https://naturals-blr.github.io/",
+  "logo": "https://naturals-blr.github.io/images/naturals-logo.png",
+  "description": "Premium hair, skin and beauty salon with 5 locations across Bangalore.",
+  "areaServed": "Bangalore",
+  "aggregateRating": {
+    "@type": "AggregateRating",
+    "ratingValue": "4.8",
+    "reviewCount": "5",
+    "bestRating": "5"
+  }
+}
+</script>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=Jost:wght@300;400;500;600&display=swap" rel="stylesheet">
 {{ theme_init_script() }}
@@ -21,20 +38,7 @@ body{font-family:'Jost',sans-serif;background:var(--cream);color:var(--text);ove
 img{display:block;width:100%;object-fit:cover;}
 a{text-decoration:none;color:inherit;}
 
-/* ── NAV ── */
-nav{position:fixed;top:0;left:0;right:0;z-index:200;height:70px;padding:0 60px;display:flex;justify-content:space-between;align-items:center;transition:background 0.4s;}
-nav.scrolled{background:var(--nav-bg);backdrop-filter:blur(20px);border-bottom:1px solid rgba(255,255,255,0.06);}
-.nav-left{display:flex;align-items:center;gap:20px;}
-.nav-logo{display:flex;align-items:center;gap:10px;}
-.nav-logo img{height:34px;width:auto;filter:brightness(0) invert(1);}
-.nav-logo-text{font-family:'Cormorant Garamond',serif;font-size:18px;color:#fff;letter-spacing:1px;}
-.nav-logo-text span{color:var(--gold);font-style:italic;font-weight:300;}
-.nav-center{display:flex;align-items:center;gap:28px;list-style:none;}
-.nav-center a{font-size:11px;letter-spacing:2px;text-transform:uppercase;color:rgba(255,255,255,0.6);transition:color 0.3s;}
-.nav-center a:hover{color:var(--gold);}
-.nav-right{display:flex;align-items:center;gap:16px;}
-.nav-book{background:var(--gold);color:var(--dark)!important;padding:10px 22px;font-size:11px;letter-spacing:2px;text-transform:uppercase;font-weight:700;transition:all 0.3s;}
-.nav-book:hover{background:var(--gold-pale)!important;}
+/* nav handled by partials/header.j2 */
 
 /* ── HERO ── */
 .hero{height:100vh;min-height:700px;position:relative;display:flex;align-items:center;justify-content:center;overflow:hidden;}
@@ -74,9 +78,9 @@ nav.scrolled{background:var(--nav-bg);backdrop-filter:blur(20px);border-bottom:1
 .stores-sec .sec-hdr h2 em{color:var(--green-soft);}
 .stores-sec .sec-hdr p{color:rgba(255,255,255,0.4);}
 .st-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:3px;max-width:1100px;margin:0 auto;}
-.st-card{background:#fff;overflow:hidden;transition:transform 0.3s,box-shadow 0.3s;display:flex;flex-direction:column;}
+.st-card{background:#fff;overflow:hidden;transition:transform 0.3s,box-shadow 0.3s;display:flex;flex-direction:column;border:1px solid rgba(0,0,0,0.08);border-radius:10px;box-shadow:0 2px 12px rgba(0,0,0,0.07);min-height:300px;}
 .st-card:hover{transform:translateY(-4px);box-shadow:0 12px 48px rgba(0,0,0,0.3);}
-.st-card-head{background:var(--dark);padding:20px 22px;border-bottom:2px solid var(--green);}
+.st-card-head{background:var(--dark);padding:20px 22px;border-bottom:2px solid var(--green);border-radius:10px 10px 0 0;}
 [data-theme="naturals"] .st-card-head{border-bottom-color:var(--green-mid);}
 .st-card-num{font-family:'Cormorant Garamond',serif;font-size:13px;color:rgba(255,255,255,0.2);letter-spacing:3px;margin-bottom:4px;}
 .st-card-name{font-family:'Cormorant Garamond',serif;font-size:20px;color:#fff;font-weight:400;line-height:1.1;}
@@ -93,11 +97,16 @@ nav.scrolled{background:var(--nav-bg);backdrop-filter:blur(20px);border-bottom:1
 /* ── SERVICES ── */
 .services-sec{padding:100px 60px;background:var(--cream);}
 .svc-cats-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:3px;margin-bottom:48px;}
-.svc-cat-card{background:#fff;padding:32px 28px;border-bottom:3px solid transparent;transition:all 0.3s;cursor:pointer;}
-.svc-cat-card:hover{border-bottom-color:var(--gold);transform:translateY(-3px);box-shadow:0 8px 32px rgba(0,0,0,0.08);}
-.svc-cat-icon{font-size:32px;margin-bottom:14px;display:block;}
-.svc-cat-name{font-family:'Cormorant Garamond',serif;font-size:22px;font-weight:400;color:var(--text);margin-bottom:8px;line-height:1.1;}
-.svc-cat-desc{font-size:12px;color:var(--text-mid);line-height:1.7;font-weight:300;}
+.svc-cat-card{background:#fff;overflow:hidden;border-radius:8px;border:1px solid rgba(0,0,0,0.07);transition:all 0.3s;cursor:pointer;display:flex;flex-direction:column;}
+.svc-cat-card:hover{transform:translateY(-4px);box-shadow:0 12px 36px rgba(0,0,0,0.1);border-color:var(--gold);}
+.svc-cat-img{height:180px;overflow:hidden;flex-shrink:0;}
+.svc-cat-img img{width:100%;height:100%;object-fit:cover;transition:transform 0.6s ease;}
+.svc-cat-card:hover .svc-cat-img img{transform:scale(1.05);}
+.svc-cat-body{padding:20px 22px 24px;display:flex;flex-direction:column;flex:1;}
+.svc-cat-icon{font-size:22px;margin-bottom:8px;display:block;}
+.svc-cat-name{font-family:'Cormorant Garamond',serif;font-size:20px;font-weight:400;color:var(--text);margin-bottom:6px;line-height:1.1;}
+.svc-cat-desc{font-size:12px;color:var(--text-mid);line-height:1.7;font-weight:300;flex:1;}
+.svc-cat-price{margin-top:12px;font-size:13px;font-weight:600;color:var(--green-mid);letter-spacing:0.5px;}
 
 /* ── OFFERS ── */
 .offers-sec{padding:80px 60px;background:var(--dark);}
@@ -137,6 +146,7 @@ nav.scrolled{background:var(--nav-bg);backdrop-filter:blur(20px);border-bottom:1
 
 {{ button_css() }}
 {{ footer_css() }}
+{{ social_icons_css() }}
 
 @media(max-width:992px){
   nav{padding:0 20px;height:60px;}
@@ -163,26 +173,9 @@ nav.scrolled{background:var(--nav-bg);backdrop-filter:blur(20px);border-bottom:1
 <body>
 {{ tracking_body(gtm_id) }}
 
-<!-- ── NAV ── -->
-<nav id="nb">
-  <div class="nav-left">
-    <a href="index.html" class="nav-logo" aria-label="Naturals Salon & Spa — Home">
-      <img src="images/naturals-logo.png" alt="Naturals Salon" loading="lazy">
-      <div class="nav-logo-text">Naturals <span>Salon &amp; Spa</span></div>
-    </a>
-  </div>
-  <ul class="nav-center" role="navigation" aria-label="Main navigation">
-    <li><a href="services.html">Services</a></li>
-    <li><a href="offers.html">Offers</a></li>
-    <li><a href="#our-stores">Stores</a></li>
-    <li><a href="contact.html">Contact Us</a></li>
-  </ul>
-  <div class="nav-right">
-    {{ store_indicator() }}
-    <a href="#our-stores" class="nav-book" aria-label="Book appointment">Book Now</a>
-    {{ hamburger_nav('', 'home') }}
-  </div>
-</nav>
+{% set base_path = '' %}
+{% set active_page = 'home' %}
+{% include "partials/header.j2" %}
 
 <!-- ── HERO ── -->
 <section class="hero" aria-label="Hero">
@@ -242,37 +235,31 @@ nav.scrolled{background:var(--nav-bg);backdrop-filter:blur(20px);border-bottom:1
     <h2>Services crafted<br>for <em>every you.</em></h2>
     <p>From precision cuts to bridal transformations — world-class beauty at every visit.</p>
   </div>
+  {%- set svc_data = [
+    {'name': 'Haircuts & Styling',       'icon': '&#9984;', 'href': 'services.html?gender=female',                          'img': 'images/services/haircare.jpg',    'img_fb': 'https://images.unsplash.com/photo-1562322140-8baeececf3df?w=600&q=80', 'desc': 'Precision cuts, blowouts, irons and occasion styling by our senior stylists.'},
+    {'name': 'Hair Colour & Highlights',  'icon': '&#127752;','href': 'services.html?gender=female&cat=colouring',           'img': 'images/services/colour.jpg',      'img_fb': 'https://images.unsplash.com/photo-1522337360788-8b13dee7a37e?w=600&q=80', 'desc': 'Global colour, balayage, highlights and ombre with premium products.'},
+    {'name': 'Hair Spa & Treatments',     'icon': '&#127774;','href': 'services.html?gender=female&cat=hair+spa',             'img': 'images/services/hairspa.jpg',     'img_fb': 'https://images.unsplash.com/photo-1560066984-138dadb4c035?w=600&q=80', 'desc': 'Keratin, smoothening and deep conditioning to restore shine and strength.'},
+    {'name': 'Skin Care & Facials',       'icon': '&#10024;',  'href': 'services.html?gender=female&cat=facial',              'img': 'images/services/skincare.jpg',    'img_fb': 'https://images.unsplash.com/photo-1570172619644-dfd03ed5d881?w=600&q=80', 'desc': 'Classic, luxury and anti-ageing facials for radiant, healthy skin.'},
+    {'name': 'Bridal & Makeup',           'icon': '&#128141;','href': 'services.html?gender=female&cat=bridal',              'img': 'images/services/bridal.jpg',      'img_fb': 'https://images.unsplash.com/photo-1595476108010-b4d1f102b1b1?w=600&q=80', 'desc': 'Complete bridal packages — hair, skin prep, makeup and styling.'},
+    {'name': "Men's Grooming",            'icon': '&#9988;',  'href': 'services.html?gender=male',                           'img': 'images/services/mens-grooming.jpg','img_fb': 'https://images.unsplash.com/photo-1621605815971-fbc98d665033?w=600&q=80', 'desc': 'Haircuts, beard trims, shaves and facials — done right.'}
+  ] -%}
   <div class="svc-cats-grid">
-    <a href="services.html?gender=female" class="svc-cat-card reveal" aria-label="Haircuts and Styling services">
-      <span class="svc-cat-icon" aria-hidden="true">&#9984;</span>
-      <div class="svc-cat-name">Haircuts &amp; Styling</div>
-      <div class="svc-cat-desc">Precision cuts, blowouts, irons, updo and occasion styling crafted to your face shape and lifestyle by our senior stylists.</div>
+    {% for svc in svc_data %}
+    <a href="{{ svc.href }}" class="svc-cat-card reveal" aria-label="{{ svc.name }} services">
+      <div class="svc-cat-img">
+        <img src="{{ svc.img }}" alt="{{ svc.name }}" loading="lazy"
+             onerror="this.src='{{ svc.img_fb }}'">
+      </div>
+      <div class="svc-cat-body">
+        <span class="svc-cat-icon" aria-hidden="true">{{ svc.icon }}</span>
+        <div class="svc-cat-name">{{ svc.name }}</div>
+        <div class="svc-cat-desc">{{ svc.desc }}</div>
+        {% if min_prices.get(svc.name) %}
+        <div class="svc-cat-price">from &#8377;{{ min_prices[svc.name] }}</div>
+        {% endif %}
+      </div>
     </a>
-    <a href="services.html?gender=female&cat=colouring+and+highlights" class="svc-cat-card reveal" aria-label="Hair Colour and Highlights services">
-      <span class="svc-cat-icon" aria-hidden="true">&#127752;</span>
-      <div class="svc-cat-name">Hair Colour &amp; Highlights</div>
-      <div class="svc-cat-desc">Global colour, balayage, highlights, ombre and root touch-up using premium products for long-lasting, vibrant results.</div>
-    </a>
-    <a href="services.html?gender=female&cat=hair+spa" class="svc-cat-card reveal" aria-label="Hair Spa and Treatments services">
-      <span class="svc-cat-icon" aria-hidden="true">&#127774;</span>
-      <div class="svc-cat-name">Hair Spa &amp; Treatments</div>
-      <div class="svc-cat-desc">Keratin, smoothening, deep conditioning and scalp treatments to restore shine, strength and health to every hair type.</div>
-    </a>
-    <a href="services.html?gender=female&cat=facial" class="svc-cat-card reveal" aria-label="Skin Care and Facials services">
-      <span class="svc-cat-icon" aria-hidden="true">&#10024;</span>
-      <div class="svc-cat-name">Skin Care &amp; Facials</div>
-      <div class="svc-cat-desc">Classic, luxury, anti-ageing and brightening facials plus de-tan and advanced skin treatments for radiant, healthy skin.</div>
-    </a>
-    <a href="services.html?gender=female&cat=bridal" class="svc-cat-card reveal" aria-label="Bridal and Makeup services">
-      <span class="svc-cat-icon" aria-hidden="true">&#128141;</span>
-      <div class="svc-cat-name">Bridal &amp; Makeup</div>
-      <div class="svc-cat-desc">Complete bridal packages — hair, skin prep, makeup and styling for your most important day. Consultations available.</div>
-    </a>
-    <a href="services.html?gender=male" class="svc-cat-card reveal" aria-label="Men's Grooming services">
-      <span class="svc-cat-icon" aria-hidden="true">&#9988;</span>
-      <div class="svc-cat-name">Men's Grooming</div>
-      <div class="svc-cat-desc">Haircuts, beard trims, shaves, head massages, facials and skin care — everything for the modern man, done right.</div>
-    </a>
+    {% endfor %}
   </div>
   <div class="view-all reveal" style="text-align:center;">
     <a href="services.html" class="btn-gold" aria-label="View all services and pricing">View Full Services &amp; Pricing &#8594;</a>
@@ -294,13 +281,8 @@ nav.scrolled{background:var(--nav-bg);backdrop-filter:blur(20px);border-bottom:1
       <div class="hoc-title">{{ offer.get('Offer_Title','') }}</div>
       <div class="hoc-details">{{ offer.get('Offer_Details','') }}</div>
       <div class="hoc-meta">
-        <div>
-          <div class="hoc-store">{% if offer_store %}{{ offer_store.Store_Name }}{% endif %}</div>
-          <div class="hoc-valid">Valid till {{ offer.get('Valid_till','') }}</div>
-        </div>
-        {% if offer_store %}
-        <a href="{{ offer_store.Appointment_URL }}" target="_blank" class="hoc-book" aria-label="Book for {{ offer.get('Offer_Title','') }}">&#128197; Book</a>
-        {% endif %}
+        <div class="hoc-store">{% if offer_store %}{{ offer_store.Store_Name }}{% endif %}</div>
+        <div class="hoc-valid">Valid till {{ offer.get('Valid_till','') }}</div>
       </div>
     </div>
   {% else %}
@@ -352,9 +334,7 @@ nav.scrolled{background:var(--nav-bg);backdrop-filter:blur(20px);border-bottom:1
 
 <script>
 /* Nav scroll effect */
-window.addEventListener('scroll',function(){
-  document.getElementById('nb').classList.toggle('scrolled',window.scrollY>60);
-},{passive:true});
+/* scroll handled by partials/header.j2 */
 
 /* Intersection observer for reveal */
 var io=new IntersectionObserver(function(entries){

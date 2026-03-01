@@ -102,7 +102,22 @@ window.NATURALS_BASE   = '{{ base_path }}';
     <li><a href="{{ base_path }}index.html" {% if active_page=='home' %}class="drawer-active"{% endif %}>Home</a></li>
     <li><a href="{{ base_path }}services.html" {% if active_page=='services' %}class="drawer-active"{% endif %}>Services</a></li>
     <li><a href="{{ base_path }}offers.html" {% if active_page=='offers' %}class="drawer-active"{% endif %}>Offers</a></li>
-    <li><a href="{{ base_path }}index.html#our-stores" {% if active_page=='stores' %}class="drawer-active"{% endif %}>Our Stores</a></li>
+    <li class="drawer-has-sub">
+      <button class="drawer-sub-btn{% if active_page=='stores' %} drawer-active{% endif %}"
+              onclick="toggleDrawerSub(this)" aria-expanded="false">
+        Our Stores <span class="drawer-sub-caret">&#9662;</span>
+      </button>
+      <ul class="drawer-sub">
+        {% set _stores = all_stores if all_stores is defined else stores %}
+        {% for s in _stores %}
+        <li>
+          <a href="{{ base_path }}{{ s.Store_Page_URL }}" onclick="closeDrawer()">
+            {{ s.Store_Name }}<small>{{ s.Area }}</small>
+          </a>
+        </li>
+        {% endfor %}
+      </ul>
+    </li>
     <li><a href="{{ base_path }}contact.html" {% if active_page=='contact' %}class="drawer-active"{% endif %}>Contact Us</a></li>
   </ul>
   <div class="drawer-cta">
@@ -117,8 +132,8 @@ window.NATURALS_BASE   = '{{ base_path }}';
 #hamburger.open span:nth-child(3){transform:translateY(-9px) rotate(-45deg);}
 #nav-overlay{display:none;position:fixed;inset:0;background:rgba(0,0,0,0.55);z-index:400;backdrop-filter:blur(2px);}
 #nav-overlay.show{display:block;}
-#nav-drawer{position:fixed;top:0;right:-320px;width:300px;height:100%;background:var(--dark);z-index:500;padding:0;transition:right 0.35s cubic-bezier(0.4,0,0.2,1);display:flex;flex-direction:column;box-shadow:-8px 0 40px rgba(0,0,0,0.4);}
-[data-theme="naturals"] #nav-drawer{background:#12032a;}
+#nav-drawer{position:fixed;top:0;right:-320px;width:300px;height:100%;background:var(--dark);z-index:500;padding:0;transition:right 0.35s cubic-bezier(0.4,0,0.2,1);display:flex;flex-direction:column;box-shadow:-8px 0 40px rgba(0,0,0,0.4);overflow-y:auto;}
+[data-theme='naturals'] #nav-drawer{background:#12032a;}
 #nav-drawer.open{right:0;}
 #drawer-close{position:absolute;top:18px;right:20px;background:none;border:none;color:rgba(255,255,255,0.5);font-size:20px;cursor:pointer;padding:8px;transition:color 0.2s;line-height:1;}
 #drawer-close:hover{color:#fff;}
@@ -126,16 +141,24 @@ window.NATURALS_BASE   = '{{ base_path }}';
 .drawer-brand{font-family:'Cormorant Garamond',serif;font-size:20px;color:#fff;font-weight:300;}
 .drawer-brand span{color:var(--gold);font-style:italic;}
 .drawer-links{list-style:none;padding:16px 0;flex:1;}
-.drawer-links li a{display:block;padding:14px 28px;font-size:13px;letter-spacing:2px;text-transform:uppercase;color:rgba(255,255,255,0.55);font-weight:500;transition:all 0.2s;border-left:2px solid transparent;}
-.drawer-links li a:hover,.drawer-links li a.drawer-active{color:#fff;border-left-color:var(--gold);background:rgba(255,255,255,0.04);}
-.drawer-cta{padding:20px 28px;border-top:1px solid rgba(255,255,255,0.07);}
-.drawer-book-btn{display:flex;align-items:center;justify-content:center;gap:8px;background:var(--gold);color:var(--dark);padding:14px;font-size:11px;letter-spacing:2px;text-transform:uppercase;font-weight:700;text-decoration:none;transition:all 0.3s;}
+.drawer-links li a,.drawer-sub-btn{display:block;padding:14px 28px;font-size:12px;letter-spacing:2px;text-transform:uppercase;color:rgba(255,255,255,0.55);font-weight:500;transition:all 0.2s;border-left:2px solid transparent;text-decoration:none;width:100%;text-align:left;background:none;border-top:none;border-right:none;border-bottom:none;cursor:pointer;font-family:'Jost',sans-serif;}
+.drawer-links li a:hover,.drawer-links li a.drawer-active,.drawer-sub-btn:hover,.drawer-sub-btn.drawer-active{color:#fff;border-left-color:var(--gold);background:rgba(255,255,255,0.04);}
+.drawer-sub-btn{display:flex;justify-content:space-between;align-items:center;}
+.drawer-sub-caret{font-size:9px;transition:transform 0.2s;opacity:0.5;}
+.drawer-sub-btn.open .drawer-sub-caret{transform:rotate(180deg);}
+.drawer-sub{list-style:none;max-height:0;overflow:hidden;transition:max-height 0.3s ease;background:rgba(0,0,0,0.2);}
+.drawer-sub.open{max-height:400px;}
+.drawer-sub li a{padding:10px 28px 10px 38px;font-size:11px;letter-spacing:1.5px;display:flex;flex-direction:column;gap:2px;}
+.drawer-sub li a small{font-size:9px;color:rgba(255,255,255,0.3);letter-spacing:1px;text-transform:uppercase;}
+.drawer-cta{padding:20px 28px;border-top:1px solid rgba(255,255,255,0.07);margin-top:auto;}
+.drawer-book-btn{display:flex;align-items:center;justify-content:center;gap:8px;background:var(--gold);color:var(--dark);padding:14px;font-size:11px;letter-spacing:2px;text-transform:uppercase;font-weight:700;text-decoration:none;transition:all 0.3s;border-radius:6px;}
 .drawer-book-btn:hover{background:var(--gold-pale);}
-@media(max-width:992px){ #hamburger{display:flex;}}
+@media(max-width:1024px){ #hamburger{display:flex;}}
 </style>
 <script>
 function openDrawer(){document.getElementById('nav-drawer').classList.add('open');document.getElementById('nav-overlay').classList.add('show');document.getElementById('hamburger').classList.add('open');document.getElementById('hamburger').setAttribute('aria-expanded','true');document.body.style.overflow='hidden';}
 function closeDrawer(){document.getElementById('nav-drawer').classList.remove('open');document.getElementById('nav-overlay').classList.remove('show');document.getElementById('hamburger').classList.remove('open');document.getElementById('hamburger').setAttribute('aria-expanded','false');document.body.style.overflow='';}
+function toggleDrawerSub(btn){var sub=btn.nextElementSibling;var isOpen=sub.classList.contains('open');sub.classList.toggle('open',!isOpen);btn.classList.toggle('open',!isOpen);btn.setAttribute('aria-expanded',!isOpen?'true':'false');}
 document.getElementById('hamburger').addEventListener('click',function(){this.classList.contains('open')?closeDrawer():openDrawer();});
 document.addEventListener('keydown',function(e){if(e.key==='Escape')closeDrawer();});
 </script>
@@ -339,13 +362,13 @@ document.addEventListener('DOMContentLoaded',function(){
 
 {# Button CSS #}
 {% macro button_css() %}
-.btn-book{background:#1A73E8;color:#fff;padding:12px 22px;font-size:11px;letter-spacing:1.5px;text-transform:uppercase;font-weight:600;display:inline-flex;align-items:center;gap:8px;transition:all 0.3s;border-radius:2px;white-space:nowrap;text-decoration:none;}
+.btn-book{background:#1A73E8;color:#fff;padding:12px 22px;font-size:11px;letter-spacing:1.5px;text-transform:uppercase;font-weight:600;display:inline-flex;align-items:center;gap:8px;transition:all 0.3s;border-radius:6px;white-space:nowrap;text-decoration:none;}
 .btn-book:hover{background:#1557B0;transform:translateY(-1px);}
-.btn-wa{background:#25D366;color:#fff;padding:12px 22px;font-size:11px;letter-spacing:1.5px;text-transform:uppercase;font-weight:600;display:inline-flex;align-items:center;gap:8px;transition:all 0.3s;border-radius:2px;white-space:nowrap;text-decoration:none;}
+.btn-wa{background:#25D366;color:#fff;padding:12px 22px;font-size:11px;letter-spacing:1.5px;text-transform:uppercase;font-weight:600;display:inline-flex;align-items:center;gap:8px;transition:all 0.3s;border-radius:6px;white-space:nowrap;text-decoration:none;}
 .btn-wa:hover{background:#1da851;transform:translateY(-1px);}
-.btn-call{background:#5F6368;color:#fff;padding:12px 22px;font-size:11px;letter-spacing:1.5px;text-transform:uppercase;font-weight:600;display:inline-flex;align-items:center;gap:8px;transition:all 0.3s;border-radius:2px;white-space:nowrap;text-decoration:none;}
+.btn-call{background:#5F6368;color:#fff;padding:12px 22px;font-size:11px;letter-spacing:1.5px;text-transform:uppercase;font-weight:600;display:inline-flex;align-items:center;gap:8px;transition:all 0.3s;border-radius:6px;white-space:nowrap;text-decoration:none;}
 .btn-call:hover{background:#474c52;transform:translateY(-1px);}
-.btn-maps{background:#fff;color:#3C4043;border:1px solid #dadce0;padding:11px 18px;font-size:11px;letter-spacing:1px;text-transform:uppercase;font-weight:600;display:inline-flex;align-items:center;gap:7px;transition:all 0.3s;border-radius:2px;white-space:nowrap;text-decoration:none;}
+.btn-maps{background:#fff;color:#3C4043;border:1px solid #dadce0;padding:11px 18px;font-size:11px;letter-spacing:1px;text-transform:uppercase;font-weight:600;display:inline-flex;align-items:center;gap:7px;transition:all 0.3s;border-radius:6px;white-space:nowrap;text-decoration:none;}
 .btn-maps:hover{background:#f8f9fa;box-shadow:0 1px 6px rgba(60,64,67,0.2);}
 .btn-gold{background:var(--gold);color:var(--dark);padding:12px 24px;font-size:11px;letter-spacing:2px;text-transform:uppercase;font-weight:700;display:inline-flex;align-items:center;gap:8px;transition:all 0.3s;text-decoration:none;}
 .btn-gold:hover{background:var(--gold-pale);transform:translateY(-1px);}
@@ -424,6 +447,48 @@ footer{background:#080f0b;}
 .ft-url{font-size:11px;color:rgba(255,255,255,0.18);letter-spacing:1px;}
 @media(max-width:960px){.ft-top{grid-template-columns:1fr 1fr;gap:28px;padding:36px 20px 24px;}.ft-bottom{padding:14px 20px;flex-direction:column;text-align:center;}}
 @media(max-width:600px){.ft-top{grid-template-columns:1fr;padding:28px 16px 20px;}}
+{% endmacro %}
+
+
+{# ── SOCIAL SVG ICONS ── #}
+{% macro fb_svg(size=18) %}
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="{{ size }}" height="{{ size }}" fill="#1877F2" aria-hidden="true" style="flex-shrink:0"><path d="M24 12.073C24 5.405 18.627 0 12 0S0 5.405 0 12.073C0 18.1 4.388 23.094 10.125 24v-8.437H7.078v-3.49h3.047V9.41c0-3.025 1.792-4.697 4.533-4.697 1.313 0 2.686.236 2.686.236v2.97h-1.513c-1.491 0-1.956.93-1.956 1.883v2.271h3.328l-.532 3.49h-2.796V24C19.612 23.094 24 18.1 24 12.073z"/></svg>
+{% endmacro %}
+
+{% macro ig_svg(size=18) %}
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="{{ size }}" height="{{ size }}" aria-hidden="true" style="flex-shrink:0"><defs><linearGradient id="ig-grad" x1="0%" y1="100%" x2="100%" y2="0%"><stop offset="0%" stop-color="#FFDC80"/><stop offset="25%" stop-color="#FCAF45"/><stop offset="50%" stop-color="#F77737"/><stop offset="75%" stop-color="#C13584"/><stop offset="100%" stop-color="#833AB4"/></linearGradient></defs><path fill="url(#ig-grad)" d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zM12 0C8.741 0 8.333.014 7.053.072 2.695.272.273 2.69.073 7.052.014 8.333 0 8.741 0 12c0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98C8.333 23.986 8.741 24 12 24c3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98C15.668.014 15.259 0 12 0zm0 5.838a6.162 6.162 0 100 12.324 6.162 6.162 0 000-12.324zM12 16a4 4 0 110-8 4 4 0 010 8zm6.406-11.845a1.44 1.44 0 100 2.881 1.44 1.44 0 000-2.881z"/></svg>
+{% endmacro %}
+
+{% macro social_icons(store, size=20) %}
+<div class="social-icons">
+  {% if store.get('WhatsApp_Number') %}
+  <a href="https://wa.me/{{ store.WhatsApp_Number }}" target="_blank" rel="noopener"
+     class="soc-icon soc-wa" aria-label="WhatsApp {{ store.Store_Name }}">
+    {{ wa_svg(size) }}
+  </a>
+  {% endif %}
+  {% if store.get('Facebook_URL') and store.Facebook_URL not in ('', 'https://facebook.com/', 'https://facebook.com') %}
+  <a href="{{ store.Facebook_URL }}" target="_blank" rel="noopener"
+     class="soc-icon soc-fb" aria-label="{{ store.Store_Name }} on Facebook">
+    {{ fb_svg(size) }}
+  </a>
+  {% endif %}
+  {% if store.get('Instagram_URL') and store.Instagram_URL not in ('', 'https://instagram.com/', 'https://instagram.com') %}
+  <a href="{{ store.Instagram_URL }}" target="_blank" rel="noopener"
+     class="soc-icon soc-ig" aria-label="{{ store.Store_Name }} on Instagram">
+    {{ ig_svg(size) }}
+  </a>
+  {% endif %}
+</div>
+{% endmacro %}
+
+{% macro social_icons_css() %}
+.social-icons{display:flex;gap:10px;align-items:center;}
+.soc-icon{display:inline-flex;align-items:center;justify-content:center;width:36px;height:36px;border-radius:8px;background:rgba(255,255,255,0.06);border:1px solid rgba(255,255,255,0.1);transition:all 0.25s;text-decoration:none;}
+.soc-icon:hover{transform:translateY(-2px);background:rgba(255,255,255,0.12);}
+.soc-wa:hover{border-color:#25D366;box-shadow:0 4px 12px rgba(37,211,102,0.25);}
+.soc-fb:hover{border-color:#1877F2;box-shadow:0 4px 12px rgba(24,119,242,0.25);}
+.soc-ig:hover{border-color:#C13584;box-shadow:0 4px 12px rgba(193,53,132,0.25);}
 {% endmacro %}
 
 {# WhatsApp SVG #}

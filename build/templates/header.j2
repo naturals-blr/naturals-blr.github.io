@@ -1,0 +1,108 @@
+{#
+  Global header partial.
+  Caller must have imported from macros.j2: store_indicator, hamburger_nav
+  Caller must set template vars: base_path, active_page
+  Caller must pass: stores (or all_stores for store pages)
+#}
+<header id="site-header"{% if active_page != 'home' %} data-solid="true"{% endif %}>
+  <div class="hdr-inner">
+
+    <a href="{{ base_path }}index.html" class="hdr-logo" aria-label="Naturals Salon & Spa — Home">
+      <img src="{{ base_path }}images/naturals-logo.png" alt="Naturals Salon & Spa"
+           loading="lazy" onerror="this.style.display='none'">
+      <div class="hdr-logo-text">Naturals <span>Salon &amp; Spa</span></div>
+    </a>
+
+    <div class="hdr-right">
+      <nav class="hdr-nav" aria-label="Main navigation">
+        <a href="{{ base_path }}index.html"
+           class="hdr-link{% if active_page=='home' %} hdr-active{% endif %}">Home</a>
+        <a href="{{ base_path }}services.html"
+           class="hdr-link{% if active_page=='services' %} hdr-active{% endif %}">Services</a>
+        <a href="{{ base_path }}offers.html"
+           class="hdr-link{% if active_page=='offers' %} hdr-active{% endif %}">Offers</a>
+
+        <div class="hdr-dd" id="stores-dd">
+          <button class="hdr-link hdr-dd-btn{% if active_page=='stores' %} hdr-active{% endif %}"
+                  aria-haspopup="true" aria-expanded="false" id="stores-dd-btn">
+            Our Stores <span class="hdr-caret" aria-hidden="true">&#9662;</span>
+          </button>
+          <div class="hdr-dd-menu" role="menu">
+            {% set _stores = all_stores if all_stores is defined else stores %}
+            {% for s in _stores %}
+            <a href="{{ base_path }}{{ s.Store_Page_URL }}" class="hdr-dd-item" role="menuitem">
+              <span class="hdr-dd-name">{{ s.Store_Name }}</span>
+              <span class="hdr-dd-area">{{ s.Area }}</span>
+            </a>
+            {% endfor %}
+          </div>
+        </div>
+
+        <a href="{{ base_path }}contact.html"
+           class="hdr-link{% if active_page=='contact' %} hdr-active{% endif %}">Contact Us</a>
+      </nav>
+
+      {{ store_indicator() }}
+      <a href="{{ base_path }}index.html#our-stores" class="hdr-cta">Book Now</a>
+      {{ hamburger_nav(base_path, active_page) }}
+    </div>
+  </div>
+</header>
+
+<style>
+#site-header{position:fixed;top:0;left:0;right:0;z-index:200;height:70px;transition:background 0.35s,box-shadow 0.35s;}
+#site-header.hdr-scrolled,#site-header.hdr-solid{background:var(--nav-bg);backdrop-filter:blur(20px);-webkit-backdrop-filter:blur(20px);box-shadow:0 1px 0 rgba(255,255,255,0.07);}
+.hdr-inner{height:70px;padding:0 52px;display:flex;align-items:center;justify-content:space-between;max-width:1380px;margin:0 auto;}
+.hdr-logo{display:flex;align-items:center;gap:10px;text-decoration:none;flex-shrink:0;}
+.hdr-logo img{height:32px;width:auto;filter:brightness(0) invert(1);}
+.hdr-logo-text{font-family:'Cormorant Garamond',serif;font-size:18px;color:#fff;letter-spacing:1px;white-space:nowrap;}
+.hdr-logo-text span{color:var(--gold);font-style:italic;font-weight:300;}
+.hdr-right{display:flex;align-items:center;gap:16px;}
+.hdr-nav{display:flex;align-items:center;gap:2px;}
+.hdr-link{font-size:11px;letter-spacing:2px;text-transform:uppercase;font-weight:500;color:rgba(255,255,255,0.6);padding:8px 11px;text-decoration:none;transition:color 0.2s;background:none;border:none;cursor:pointer;font-family:'Jost',sans-serif;white-space:nowrap;line-height:1;}
+.hdr-link:hover,.hdr-active{color:var(--gold)!important;}
+/* Dropdown */
+.hdr-dd{position:relative;}
+.hdr-dd-btn{display:flex;align-items:center;gap:5px;}
+.hdr-caret{font-size:8px;transition:transform 0.2s;display:inline-block;opacity:0.6;}
+.hdr-dd.open .hdr-caret{transform:rotate(180deg);}
+.hdr-dd-menu{display:none;position:absolute;top:calc(100% + 10px);left:50%;transform:translateX(-50%);min-width:230px;background:var(--dark);border:1px solid rgba(255,255,255,0.1);box-shadow:0 12px 40px rgba(0,0,0,0.45);z-index:300;padding:6px 0;}
+[data-theme='naturals'] .hdr-dd-menu{background:#12032a;}
+.hdr-dd.open .hdr-dd-menu{display:block;animation:ddFade 0.15s ease;}
+@keyframes ddFade{from{opacity:0;transform:translateX(-50%) translateY(-4px);}to{opacity:1;transform:translateX(-50%) translateY(0);}}
+.hdr-dd-item{display:flex;flex-direction:column;padding:10px 18px;text-decoration:none;transition:background 0.15s;border-left:2px solid transparent;}
+.hdr-dd-item:hover{background:rgba(255,255,255,0.05);border-left-color:var(--gold);}
+.hdr-dd-name{font-size:12px;color:#fff;font-weight:500;}
+.hdr-dd-area{font-size:10px;color:rgba(255,255,255,0.35);letter-spacing:1px;margin-top:2px;}
+/* Book CTA */
+.hdr-cta{background:var(--gold);color:var(--dark);padding:9px 20px;font-size:10px;letter-spacing:2px;text-transform:uppercase;font-weight:700;text-decoration:none;white-space:nowrap;border-radius:6px;transition:all 0.25s;flex-shrink:0;}
+.hdr-cta:hover{background:var(--gold-pale);}
+@media(max-width:1024px){
+  .hdr-inner{padding:0 20px;}
+  .hdr-nav{display:none;}
+  .hdr-cta{display:none;}
+  #store-indicator{display:none!important;}
+}
+</style>
+
+<script>
+(function(){
+  var hdr = document.getElementById('site-header');
+  if(!hdr) return;
+  if(hdr.dataset.solid==='true') hdr.classList.add('hdr-solid');
+  window.addEventListener('scroll',function(){
+    if(hdr.dataset.solid!=='true') hdr.classList.toggle('hdr-scrolled',window.scrollY>60);
+  },{passive:true});
+  var dd=document.getElementById('stores-dd');
+  var btn=document.getElementById('stores-dd-btn');
+  if(!dd||!btn) return;
+  var isTouch=false;
+  window.addEventListener('touchstart',function(){isTouch=true;},{once:true,passive:true});
+  var t;
+  dd.addEventListener('mouseenter',function(){if(isTouch)return;clearTimeout(t);dd.classList.add('open');btn.setAttribute('aria-expanded','true');});
+  dd.addEventListener('mouseleave',function(){if(isTouch)return;t=setTimeout(function(){dd.classList.remove('open');btn.setAttribute('aria-expanded','false');},180);});
+  btn.addEventListener('click',function(e){e.preventDefault();var o=dd.classList.toggle('open');btn.setAttribute('aria-expanded',o?'true':'false');});
+  document.addEventListener('click',function(e){if(!dd.contains(e.target)){dd.classList.remove('open');btn.setAttribute('aria-expanded','false');}});
+  document.addEventListener('keydown',function(e){if(e.key==='Escape'){dd.classList.remove('open');btn.setAttribute('aria-expanded','false');}});
+})();
+</script>

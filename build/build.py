@@ -1,11 +1,10 @@
 #!/usr/bin/env python3
 """
 Naturals Salon & Spa — Static Site Builder
-Fetches data from Google Sheets and generates static HTML.
 Run: python build/build.py
 """
 
-import json, os, sys, requests
+import json, os, re, sys, requests
 from datetime import datetime
 from jinja2 import Environment, FileSystemLoader
 
@@ -19,10 +18,19 @@ STORES_DIR = os.path.join(ROOT_DIR, "stores")
 
 STORE_ORDER = ["Store_N78", "Store_N77", "Store_N36", "Store_N05", "Store_N43"]
 
-# ── Tracking IDs — set here, used as Jinja2 globals ──
-# Leave empty strings until real IDs are obtained
-GTM_ID    = ""   # e.g. "GTM-XXXXXXX"
-PIXEL_ID  = ""   # e.g. "1234567890123"
+GTM_ID   = ""   # e.g. "GTM-XXXXXXX"
+PIXEL_ID = ""   # e.g. "1234567890123"
+
+# Homepage service categories → sheet category name fragment (lowercase, partial match)
+# Order matches the 6 cards on the homepage
+HOME_SERVICE_CATS = [
+    ("Haircuts & Styling",       ["hair styling - female", "hair styling female"]),
+    ("Hair Colour & Highlights", ["colouring", "highlights"]),
+    ("Hair Spa & Treatments",    ["hair spa", "keratin", "smoothening", "treatment"]),
+    ("Skin Care & Facials",      ["facial", "skin care", "de-tan", "cleanup"]),
+    ("Bridal & Makeup",          ["bridal", "makeup", "mehendi"]),
+    ("Men's Grooming",           ["hair styling - men", "mens", "men's"]),
+]
 
 # ── Fetch ─────────────────────────────────────────────────────────────────────
 
@@ -48,6 +56,47 @@ def parse_csv(text):
     return rows
 
 
+# ── Phone helpers ──────────────────────────────────────────────────────────────
+
+def normalise_phone(raw):
+    """
+    raw = '918792642299'  (12 digits, starts with 91)
+    display  → '+91 87926 42299'
+    tel      → '+918792642299'
+    wa       → '918792642299'  (wa.me wants no +)
+    """
+    digits = re.sub(r'\D', '', str(raw))
+    if not digits:
+        return raw, raw, raw  # display, tel, wa
+    # Strip leading 91 if 12 digits
+    if len(digits) == 12 and digits.startswith('91'):
+        local = digits[2:]   # 10 digits
+    elif len(digits) == 10:
+        local = digits
+    else:
+        local = digits[-10:] if len(digits) > 10 else digits
+    # Format: +91 XXXXX XXXXX
+    display = f"+91 {local[:5]} {local[5:]}"
+    tel     = f"+91{local}"
+    wa      = f"91{local}"
+    return display, tel, wa
+
+
+def enrich_store_phones(store):
+    """Add Phone_Display, Phone_Tel, WhatsApp_Number normalised from Phone_Raw."""
+    raw = store.get('Phone_Raw', store.get('Phone_Mobile', ''))
+    display, tel, wa = normalise_phone(raw)
+    store['Phone_Display'] = display
+    store['Phone_Tel']     = tel
+    store['WhatsApp_Number'] = wa
+    # Also normalise Landline if present
+    if store.get('Landline_Raw'):
+        ld, lt, _ = normalise_phone(store['Landline_Raw'])
+        store['Landline_Display'] = ld
+        store['Landline_Tel']     = lt
+    return store
+
+
 # ── Helpers ───────────────────────────────────────────────────────────────────
 
 def is_yes(val):
@@ -62,11 +111,13 @@ def norm_gender(raw):
 
 
 def parse_expiry(val):
-    """Parse 13-Mar-2026 → datetime. Returns None if unparseable."""
-    try:
-        return datetime.strptime(val.strip(), "%d-%b-%Y")
-    except (ValueError, AttributeError):
-        return None
+    """Parse 13-Mar-2026 → datetime."""
+    for fmt in ("%d-%b-%Y", "%d/%m/%Y", "%Y-%m-%d"):
+        try:
+            return datetime.strptime(val.strip(), fmt)
+        except (ValueError, AttributeError):
+            pass
+    return None
 
 
 def is_offer_active(valid_till_str):
@@ -77,24 +128,15 @@ def is_offer_active(valid_till_str):
 
 
 def get_featured_offers(all_offers, active_stores, n=3):
-    """
-    Returns up to n active offers with nearest expiry date.
-    Offers without expiry date are placed last.
-    Only includes offers for active stores.
-    """
     store_ids = {s["Store_ID"] for s in active_stores}
     active = [
         o for o in all_offers
         if o.get("Store_ID", "").strip() in store_ids
         and is_offer_active(o.get("Valid_till", ""))
     ]
-
     def sort_key(o):
         dt = parse_expiry(o.get("Valid_till", ""))
-        if dt is None:
-            return datetime(9999, 12, 31)
-        return dt
-
+        return dt if dt else datetime(9999, 12, 31)
     active.sort(key=sort_key)
     return active[:n]
 
@@ -109,19 +151,81 @@ def build_offers_by_store(all_offers, active_stores):
     return result
 
 
+def parse_price(val):
+    """Extract numeric price from strings like '₹500', '500', '500.00'."""
+    if not val:
+        return None
+    digits = re.sub(r'[^\d.]', '', str(val))
+    try:
+        return float(digits)
+    except ValueError:
+        return None
+
+
+def get_min_prices(services):
+    """
+    Returns dict: { display_category_name: min_price_int }
+    for the 6 homepage categories.
+    """
+    result = {}
+    for display_name, keywords in HOME_SERVICE_CATS:
+        min_p = None
+        for svc in services:
+            cat = svc.get('Category', '').lower()
+            matched = any(kw in cat for kw in keywords)
+            if not matched:
+                continue
+            for price_field in ('Regular_Cost', 'Price', 'Cost', 'MRP'):
+                p = parse_price(svc.get(price_field, ''))
+                if p and p > 0:
+                    if min_p is None or p < min_p:
+                        min_p = p
+                    break
+        result[display_name] = int(min_p) if min_p else None
+    return result
+
+
+# ── HTML minification ─────────────────────────────────────────────────────────
+
+def minify_html(html):
+    """
+    Lightweight HTML minification:
+    - Collapse multiple blank lines to one
+    - Strip leading whitespace from lines
+    - Remove HTML comments (preserve IE conditionals <!--[if)
+    """
+    # Remove non-IE HTML comments
+    html = re.sub(r'<!--(?!\[if).*?-->', '', html, flags=re.DOTALL)
+    # Collapse runs of blank lines (3+ → 1)
+    html = re.sub(r'\n{3,}', '\n\n', html)
+    # Strip leading whitespace from each line (keeps indented code readable
+    # but removes large indents from template rendering)
+    lines = []
+    for line in html.split('\n'):
+        stripped = line.lstrip()
+        lines.append(stripped)
+    html = '\n'.join(lines)
+    # Collapse multiple spaces inside tags (not inside <pre> or <script>)
+    html = re.sub(r'[ \t]{2,}', ' ', html)
+    return html.strip()
+
+
 # ── Page writers ──────────────────────────────────────────────────────────────
 
 def write(path, html):
     os.makedirs(os.path.dirname(path), exist_ok=True)
+    html = minify_html(html)
     with open(path, "w", encoding="utf-8") as f:
         f.write(html)
-    print(f"  Written: {os.path.relpath(path, ROOT_DIR)}")
+    size_kb = len(html.encode()) / 1024
+    print(f"  Written: {os.path.relpath(path, ROOT_DIR)} ({size_kb:.1f} KB)")
 
 
-def build_index(stores, featured_offers, env):
+def build_index(stores, featured_offers, min_prices, env):
     html = env.get_template("index.html.j2").render(
         stores=stores,
         featured_offers=featured_offers,
+        min_prices=min_prices,
     )
     write(os.path.join(ROOT_DIR, "index.html"), html)
 
@@ -132,9 +236,8 @@ def build_services(services, stores, env):
         cat = svc.get("Category", "Other").strip()
         if cat and cat not in seen_cats:
             seen_cats.append(cat)
-    services_json = json.dumps(services, ensure_ascii=False)
     html = env.get_template("services.html.j2").render(
-        services_json=services_json,
+        services_json=json.dumps(services, ensure_ascii=False),
         categories=seen_cats,
         stores=stores,
     )
@@ -144,20 +247,19 @@ def build_services(services, stores, env):
 def build_store(store, all_services, all_offers, all_stylists, active_stores, env):
     store_id = store["Store_ID"]
     svc_list = [s for s in all_services if is_yes(s.get(store_id, ""))]
-    offers   = [o for o in all_offers if o.get("Store_ID", "").strip() == store_id and is_offer_active(o.get("Valid_till",""))]
-    stylists = [
-        s for s in all_stylists
-        if s.get("Store_ID", "").strip() == store_id
-        and str(s.get("Active_Status", "yes")).strip().lower() != "no"
-    ]
+    offers   = [o for o in all_offers
+                if o.get("Store_ID", "").strip() == store_id
+                and is_offer_active(o.get("Valid_till", ""))]
+    stylists = [s for s in all_stylists
+                if s.get("Store_ID", "").strip() == store_id
+                and str(s.get("Active_Status", "yes")).strip().lower() != "no"]
     idx        = next((i for i, s in enumerate(active_stores) if s["Store_ID"] == store_id), 0)
     prev_store = active_stores[(idx - 1) % len(active_stores)]
     next_store = active_stores[(idx + 1) % len(active_stores)]
-    svc_json   = json.dumps(svc_list, ensure_ascii=False)
 
     html = env.get_template("store.html.j2").render(
         store=store,
-        services_json=svc_json,
+        services_json=json.dumps(svc_list, ensure_ascii=False),
         services=svc_list,
         offers=offers,
         stylists=stylists,
@@ -177,11 +279,10 @@ def build_contact(stores, env):
 
 
 def build_offers_page(stores, offers_by_store, env):
-    total = sum(len(v) for v in offers_by_store.values())
     html = env.get_template("offers.html.j2").render(
         stores=stores,
         offers_by_store=offers_by_store,
-        total_offers=total,
+        total_offers=sum(len(v) for v in offers_by_store.values()),
     )
     write(os.path.join(ROOT_DIR, "offers.html"), html)
 
@@ -219,20 +320,22 @@ def main():
         print("ERROR: No active stores found.")
         sys.exit(1)
 
+    # Enrich phone numbers for all active stores
+    active_stores = [enrich_store_phones(s) for s in active_stores]
+
     inactive = [s.get("Store_Name", s["Store_ID"]) for s in all_stores
                 if not is_yes(s.get("Active_Status", "yes"))]
     if inactive:
-        print(f"  Skipping inactive stores: {', '.join(inactive)}")
+        print(f"  Skipping inactive: {', '.join(inactive)}")
 
     featured_offers = get_featured_offers(offers_data, active_stores, n=3)
     offers_by_store = build_offers_by_store(offers_data, active_stores)
-    active_offer_count = sum(len(v) for v in offers_by_store.values())
+    min_prices      = get_min_prices(services_data)
 
-    print(f"  Active stores: {len(active_stores)} | "
-          f"Services: {len(services_data)} | "
-          f"Active offers: {active_offer_count} | "
-          f"Featured: {len(featured_offers)} | "
-          f"Stylists: {len(stylists_data)}")
+    print(f"  Active stores: {len(active_stores)} | Services: {len(services_data)} | "
+          f"Active offers: {sum(len(v) for v in offers_by_store.values())} | "
+          f"Featured: {len(featured_offers)} | Stylists: {len(stylists_data)}")
+    print(f"  Min prices: { {k: v for k, v in min_prices.items() if v} }")
 
     # Jinja2 env
     env = Environment(
@@ -247,7 +350,7 @@ def main():
     env.globals["pixel_id"]    = PIXEL_ID
 
     print("Building pages...")
-    build_index(active_stores, featured_offers, env)
+    build_index(active_stores, featured_offers, min_prices, env)
     build_services(services_data, active_stores, env)
     for store in active_stores:
         build_store(store, services_data, offers_data, stylists_data, active_stores, env)
@@ -256,12 +359,10 @@ def main():
     build_cancellation_policy(active_stores, env)
     build_booking_policy(active_stores, env)
 
-    total_pages = 2 + len(active_stores) + 4
-    print(f"\n✅ Build complete — {total_pages} pages generated.")
-    if not GTM_ID:
-        print("  ⚠  GTM_ID is empty — tracking not active. Set GTM_ID in build.py when ready.")
-    if not PIXEL_ID:
-        print("  ⚠  PIXEL_ID is empty — Meta Pixel not active. Set PIXEL_ID in build.py when ready.")
+    total = 2 + len(active_stores) + 4
+    print(f"\n✅ Build complete — {total} pages generated.")
+    if not GTM_ID:   print("  ⚠  GTM_ID empty — set in build.py when ready.")
+    if not PIXEL_ID: print("  ⚠  PIXEL_ID empty — set in build.py when ready.")
 
 
 if __name__ == "__main__":

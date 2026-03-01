@@ -1,4 +1,4 @@
-{% from "macros.j2" import full_footer, footer_css, wa_svg, theme_vars, theme_toggle, theme_init_script, button_css, btn_book, btn_wa, btn_call, btn_maps, store_indicator, store_picker_modal, sticky_mobile_bar, store_picker_js, hamburger_nav, tracking_head, tracking_body, stores_json %}
+{% from "macros.j2" import full_footer, footer_css, wa_svg, fb_svg, ig_svg, social_icons, social_icons_css, theme_vars, theme_toggle, theme_init_script, button_css, btn_book, btn_wa, btn_call, btn_maps, store_indicator, store_picker_modal, sticky_mobile_bar, store_picker_js, hamburger_nav, tracking_head, tracking_body, stores_json %}
 {% set s = store %}
 <!DOCTYPE html>
 <html lang="en">
@@ -48,18 +48,7 @@ body{font-family:'Jost',sans-serif;background:var(--cream);color:var(--text);ove
 a{text-decoration:none;color:inherit;}
 img{display:block;width:100%;object-fit:cover;}
 
-/* NAV */
-nav{position:fixed;top:0;left:0;right:0;z-index:200;padding:0 60px;height:70px;display:flex;justify-content:space-between;align-items:center;background:var(--nav-bg);backdrop-filter:blur(20px);border-bottom:1px solid rgba(255,255,255,0.06);}
-.nav-logo{display:flex;align-items:center;gap:10px;}
-.nav-logo img{height:34px;width:auto;filter:brightness(0) invert(1);}
-.nav-logo-text{font-family:'Cormorant Garamond',serif;font-size:18px;color:#fff;letter-spacing:1px;}
-.nav-logo-text span{color:var(--gold);font-style:italic;font-weight:300;}
-.nav-right{display:flex;align-items:center;gap:16px;}
-.nav-back{color:rgba(255,255,255,0.5);font-size:11px;letter-spacing:2px;text-transform:uppercase;transition:color 0.3s;}
-.nav-back:hover{color:var(--gold);}
-.nav-cta{background:var(--gold);color:var(--dark);padding:10px 22px;font-size:11px;letter-spacing:2px;text-transform:uppercase;font-weight:600;transition:all 0.3s;}
-.nav-cta:hover{background:var(--gold-pale);}
-@media(max-width:992px){.nav-back{display:none;}.nav-cta{display:none;}}
+/* nav handled by partials/header.j2 */
 
 /* HERO */
 .hero{height:70vh;min-height:500px;position:relative;display:flex;align-items:flex-end;overflow:hidden;}
@@ -188,6 +177,7 @@ a.contact-val:hover{color:var(--green);}
 
 {{ button_css() }}
 {{ footer_css() }}
+{{ social_icons_css() }}
 
 @media(max-width:1100px){
   .page-wrap{grid-template-columns:1fr;padding:40px 40px;}
@@ -221,18 +211,9 @@ a.contact-val:hover{color:var(--green);}
 <body>
 
 {{ tracking_body(gtm_id) }}
-<nav>
-  <a href="../index.html" class="nav-logo" aria-label="Naturals Salon & Spa — Home">
-    <img src="../images/naturals-logo.png" alt="Naturals Salon" loading="lazy" onerror="this.style.display='none'">
-    <div class="nav-logo-text">Naturals <span>Salon &amp; Spa</span></div>
-  </a>
-  <div class="nav-right">
-    {{ store_indicator() }}
-    <a href="../index.html#our-stores" class="nav-back">&#8592; All Locations</a>
-    <a href="{{ s.Appointment_URL }}" target="_blank" class="nav-cta" aria-label="Book appointment at {{ s.Store_Name }}">Book Now</a>
-    {{ hamburger_nav('../', 'stores') }}
-  </div>
-</nav>
+{% set base_path = '../' %}
+{% set active_page = 'stores' %}
+{% include "partials/header.j2" %}
 
 <!-- HERO -->
 <section class="hero">
@@ -245,7 +226,7 @@ a.contact-val:hover{color:var(--green);}
   <div class="hero-content">
     <div class="hero-badge">Store {{ s.Hero_Number }} of {{ all_stores | length }} &middot; Bangalore</div>
     <h1>Naturals<br><em>{{ s.Area }}</em></h1>
-    <div class="hero-sub">{{ s.Area }} &middot; {{ s.Pincode }}</div>
+    <div class="hero-sub">{{ s.Area }} &middot; {{ s.Pincode }} &middot; <a href="tel:{{ s.Phone_Tel }}" style="color:rgba(255,255,255,0.55);">{{ s.Phone_Display }}</a></div>
     <!-- 3 actions only — Book, WhatsApp, Directions -->
     <div class="action-bar">
       <a href="{{ s.Appointment_URL }}" target="_blank" class="ab-primary">&#128197; Book Appointment</a>
@@ -261,14 +242,14 @@ a.contact-val:hover{color:var(--green);}
     <span class="info-icon">&#128222;</span>
     <div>
       <div class="info-label">Call Us</div>
-      <a href="tel:{{ s.Phone_Raw }}" class="info-val">{{ s.Phone_Mobile }}</a>
+      <a href="tel:{{ s.Phone_Tel }}" class="info-val">{{ s.Phone_Display }}</a>
     </div>
   </div>
   <div class="info-cell">
     <span class="info-icon">{{ wa_svg(18) }}</span>
     <div>
       <div class="info-label">WhatsApp</div>
-      <a href="https://wa.me/{{ s.WhatsApp_Number }}" class="info-val">{{ s.Phone_Mobile }}</a>
+      <a href="https://wa.me/{{ s.WhatsApp_Number }}" class="info-val">{{ s.Phone_Display }}</a>
     </div>
   </div>
   <div class="info-cell">
@@ -380,14 +361,14 @@ a.contact-val:hover{color:var(--green);}
         <span class="contact-icon">&#128222;</span>
         <div class="contact-detail">
           <div class="contact-lbl">Call</div>
-          <a href="tel:{{ s.Phone_Raw }}" class="contact-val">{{ s.Phone_Mobile }}</a>
+          <a href="tel:{{ s.Phone_Tel }}" class="contact-val">{{ s.Phone_Display }}</a>
         </div>
       </div>
       <div class="contact-row">
         <span class="contact-icon">{{ wa_svg(18) }}</span>
         <div class="contact-detail">
           <div class="contact-lbl">WhatsApp</div>
-          <a href="https://wa.me/{{ s.WhatsApp_Number }}" target="_blank" class="contact-val">{{ s.Phone_Mobile }}</a>
+          <a href="https://wa.me/{{ s.WhatsApp_Number }}" target="_blank" class="contact-val">{{ s.Phone_Display }}</a>
         </div>
       </div>
       {% if s.Landline %}
@@ -418,6 +399,8 @@ a.contact-val:hover{color:var(--green);}
     <div class="sb-area">{{ s.Area }} &middot; {{ s.Pincode }}</div>
 
     <a href="{{ s.Appointment_URL }}" target="_blank" class="sb-book-main">&#128197; Book Appointment</a>
+
+    {{ social_icons(s, 18) }}
 
     <!-- 4 compact quick-links: WhatsApp · Directions · Review · Services -->
     <div class="sb-quick">
@@ -458,9 +441,9 @@ a.contact-val:hover{color:var(--green);}
 </div>
 
 <div class="store-nav">
-  <a href="{{ prev_store.Store_Page_URL }}" class="sn-link">&#8592; {{ prev_store.Store_Name }}</a>
+  <a href="{{ prev_store.Store_Page_URL | replace('stores/','') }}" class="sn-link">&#8592; {{ prev_store.Store_Name }}</a>
   <a href="../index.html#our-stores" class="sn-mid">All {{ all_stores | length }} Bangalore Locations</a>
-  <a href="{{ next_store.Store_Page_URL }}" class="sn-link">{{ next_store.Store_Name }} &#8594;</a>
+  <a href="{{ next_store.Store_Page_URL | replace('stores/','') }}" class="sn-link">{{ next_store.Store_Name }} &#8594;</a>
 </div>
 
 {{ full_footer('../', all_stores) }}

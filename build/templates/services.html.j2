@@ -1,4 +1,4 @@
-{% from "macros.j2" import full_footer, footer_css, wa_svg, theme_vars, theme_toggle, theme_init_script, button_css, btn_book, btn_wa, btn_call, btn_maps, store_indicator, store_picker_modal, sticky_mobile_bar, store_picker_js, hamburger_nav, tracking_head, tracking_body, stores_json %}
+{% from "macros.j2" import full_footer, footer_css, wa_svg, theme_vars, theme_toggle, theme_init_script, button_css, btn_book, btn_wa, btn_call, btn_maps, store_indicator, store_picker_modal, sticky_mobile_bar, store_picker_js, hamburger_nav, tracking_head, tracking_body, stores_json, fb_svg, ig_svg, social_icons, social_icons_css %}
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -154,18 +154,10 @@ nav{position:fixed;top:0;left:0;right:0;z-index:200;padding:0 60px;height:70px;d
 <body>
 {{ tracking_body(gtm_id) }}
 
-<nav>
-  <a href="index.html" class="nav-logo">
-    <img src="images/naturals-logo.png" alt="Naturals" onerror="this.style.display='none'">
-    <div class="nav-logo-text">Naturals <span>Salon &amp; Spa</span></div>
-  </a>
-  <div class="nav-right">
-    {{ store_indicator() }}
-    <a href="index.html" class="nav-back">&#8592; Back to Home</a>
-    <a href="index.html#stores" class="nav-cta">Book Now</a>
-    {{ hamburger_nav('', 'services') }}
-  </div>
-</nav>
+
+{% set base_path = '' %}
+{% set active_page = 'services' %}
+{% include "partials/header.j2" %}
 
 <div class="page-hero">
   <div class="page-hero-inner">
