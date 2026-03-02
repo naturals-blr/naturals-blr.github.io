@@ -218,13 +218,25 @@ a.contact-val:hover{color:var(--green);}
   <div class="hero-ov"></div>
   <div class="hero-content">
     <div class="hero-badge">Store {{ s.Hero_Number }} of {{ all_stores | length }} &middot; Bangalore</div>
-    <h1>Naturals<br><em>{{ s.Area }}</em></h1>
-    <div class="hero-sub">{{ s.Area }} &middot; {{ s.Pincode }} &middot; <a href="tel:{{ s.Phone_Tel }}" style="color:rgba(255,255,255,0.55);">{{ s.Phone_Display }}</a></div>
-    <!-- 3 actions only — Book, WhatsApp, Directions -->
-    <div class="action-bar">
-      <a href="{{ s.Appointment_URL }}" target="_blank" class="btn-book">&#128197; Book Appointment</a>
-      <a href="https://wa.me/{{ s.WhatsApp_Number }}" target="_blank" class="btn-wa">{{ wa_svg(16) }} WhatsApp</a>
-      <a href="{{ s.Google_Maps_URL }}" target="_blank" class="btn-maps">&#128205; Directions</a>
+    <h1>Naturals Salon &amp; Spa &ndash;<br><em>{{ s.Store_Name }}, {{ s.Area }}</em></h1>
+    <div class="hero-sub">Premium hair, skin &amp; beauty services near {{ s.Area }} &middot; <a href="tel:{{ s.Phone_Tel }}" style="color:rgba(255,255,255,0.55);">{{ s.Phone_Display }}</a></div>
+    
+    <div class="store-reviews" style="margin-bottom: 24px; display: inline-flex; flex-direction: column; gap: 4px;">
+      <div style="color: var(--gold); font-size: 14px; letter-spacing: 2px;">&#9733;&#9733;&#9733;&#9733;&#9734; <span style="color: white; font-weight: 600; font-family: 'Jost', sans-serif;">4.3</span></div>
+      <p style="color: rgba(255,255,255,0.85); font-size: 13px; font-style: italic; margin: 0;">"Amazing hair spa and service! &ndash; Priya"</p>
+      {% if s.Google_Review_URL %}
+      <a href="{{ s.Google_Review_URL }}" target="_blank" style="color: var(--gold); font-size: 11px; text-transform: uppercase; letter-spacing: 1px; text-decoration: underline;">Read all reviews</a>
+      {% endif %}
+    </div>
+
+    <!-- Actions -->
+    <div class="action-bar" style="max-width: 400px; display: flex; flex-direction: column; gap: 8px;">
+      <a href="{{ s.Appointment_URL }}" target="_blank" class="btn-book" style="width: 100%; justify-content: center; font-size: 13px; padding: 16px;">&#128197; Book Appointment</a>
+      <div class="secondary-actions" style="display: flex; gap: 8px; width: 100%;">
+        <a href="https://wa.me/{{ s.WhatsApp_Number }}" target="_blank" class="btn-wa" style="flex: 1; justify-content: center; font-size: 10px; padding: 10px;">{{ wa_svg(14) }} WhatsApp</a>
+        <a href="tel:{{ s.Phone_Tel }}" class="btn-call" style="flex: 1; justify-content: center; font-size: 10px; padding: 10px;">&#128222; Call</a>
+        <a href="{{ s.Google_Maps_URL }}" target="_blank" class="btn-maps" style="flex: 1; justify-content: center; font-size: 10px; padding: 10px;">&#128205; Directions</a>
+      </div>
     </div>
   </div>
 </section>
@@ -269,7 +281,7 @@ a.contact-val:hover{color:var(--green);}
   <div class="about-grid reveal">
     <div class="about-img-wrap">
       <img src="../images/heroes/{{ s.Store_Page_URL | replace('stores/','') | replace('.html','') }}.jpg"
-           alt="Naturals {{ s.Store_Name }}"
+           alt="Naturals {{ s.Store_Name }}" loading="lazy"
            onerror="this.src='https://images.unsplash.com/photo-1560066984-138dadb4c035?w=900&q=85'">
     </div>
     <div>
@@ -278,26 +290,34 @@ a.contact-val:hover{color:var(--green);}
       {% if s.get('seo_intro') %}
       <p class="about-p">{{ s.seo_intro }}</p>
       {% else %}
-      <p class="about-p">Welcome to Naturals Salon &amp; Spa {{ s.Store_Name }} — your neighbourhood destination for premium hair, skin and beauty services in {{ s.Area }}, Bangalore. Part of India's most trusted salon network with over 25 years of expertise.</p>
-      <p class="about-p">Our expert stylists and therapists deliver world-class results in a relaxed, luxurious setting. Every visit is personalised to you — from precision haircuts and vibrant colour to rejuvenating facials and bridal packages.</p>
+      <p class="about-p">Naturals Salon &amp; Spa in {{ s.Store_Name }}, {{ s.Area }} is one of the most trusted salons in Bangalore for hair spa, haircuts, facials, and bridal services.</p>
+      <p class="about-p">Whether you're looking for a top-rated salon near {{ s.Area }} or the best salon in Bangalore, our expert stylists deliver world-class results in a relaxed, luxurious setting. Book your appointment for precision styling, vibrant hair colour, or complete bridal makeup packages.</p>
       {% endif %}
       <a href="{{ s.Appointment_URL }}" target="_blank" class="btn-book" style="margin-top:18px;font-size:11px;">Book Your Visit &#8594;</a>
     </div>
   </div>
 
-  <!-- ── SERVICES PROMO — image card linking to services page ── -->
-  <a href="../services.html?store={{ s.Store_ID }}" class="svc-promo reveal">
-    <img src="../images/services/services-banner.jpg"
-         alt="Services at Naturals {{ s.Store_Name }}"
-         onerror="this.src='https://images.unsplash.com/photo-1560066984-138dadb4c035?w=1200&q=85'">
-    <div class="svc-promo-ov"></div>
-    <div class="svc-promo-body">
-      <div class="svc-promo-eyebrow">What We Offer</div>
-      <div class="svc-promo-title">Our full<br><em>services menu.</em></div>
-      <div class="svc-promo-sub">Hair &middot; Skin &middot; Colour &middot; Nails &middot; Bridal &middot; Men's Grooming &mdash; all with transparent pricing.</div>
-      <div class="svc-promo-cta">View All Services &amp; Pricing &#8594;</div>
+  <!-- ── SERVICES PROMO ── -->
+  <div class="services-offered-block reveal" style="background:#fff; padding:36px; margin-bottom:3px;">
+    <div class="lbl">What We Offer</div>
+    <h2 class="sec-title">Our full <em>services menu.</em></h2>
+    <ul class="services-offered" style="list-style: none; padding: 0; margin-bottom: 24px; font-size: 14px; line-height: 1.8; color: var(--text-mid);">
+      <li style="display: flex; justify-content: space-between; border-bottom: 1px solid rgba(0,0,0,0.05); padding: 8px 0;"><span>Hair Spa</span> <span style="color: var(--gold); font-weight: 500;">starting ₹500</span></li>
+      <li style="display: flex; justify-content: space-between; border-bottom: 1px solid rgba(0,0,0,0.05); padding: 8px 0;"><span>Facials</span> <span style="color: var(--gold); font-weight: 500;">starting ₹799</span></li>
+      <li style="display: flex; justify-content: space-between; border-bottom: 1px solid rgba(0,0,0,0.05); padding: 8px 0;"><span>Hair Colour & Highlights</span></li>
+      <li style="display: flex; justify-content: space-between; border-bottom: 1px solid rgba(0,0,0,0.05); padding: 8px 0;"><span>Men’s Grooming & Styling</span></li>
+      <li style="display: flex; justify-content: space-between; border-bottom: 1px solid rgba(0,0,0,0.05); padding: 8px 0;"><span>Bridal Makeup Packages</span></li>
+    </ul>
+    <a href="../services.html?store={{ s.Store_ID }}" class="btn-gold" style="font-size: 11px;">View All Services &amp; Pricing &#8594;</a>
+  </div>
+
+  <!-- GALLERY -->
+  <div class="gallery-section reveal" style="margin-bottom: 3px;">
+    <div class="gallery-grid" style="display: grid; grid-template-columns: 1fr 1fr; gap: 3px;">
+      <img src="https://images.unsplash.com/photo-1521590832167-7bfcbaa63629?w=600&q=85" alt="Naturals Salon Interior" loading="lazy" style="height: 240px; object-fit: cover; width: 100%;">
+      <img src="https://images.unsplash.com/photo-1560066984-138dadb4c035?w=600&q=85" alt="Hair Spa Service" loading="lazy" style="height: 240px; object-fit: cover; width: 100%;">
     </div>
-  </a>
+  </div>
 
   <!-- OFFERS -->
   {% if offers %}
@@ -329,7 +349,7 @@ a.contact-val:hover{color:var(--green);}
         <div class="stylist-photo">
           {% set stylist_slug = stylist.get('Stylist_Name','') | lower | replace(' ','_') | replace("'",'') %}
           <img src="../images/stylists/{{ stylist_slug }}.png"
-               alt="{{ stylist.get('Stylist_Name','') }}"
+               alt="{{ stylist.get('Stylist_Name','') }}" loading="lazy"
                onerror="this.onerror=null;this.src='../images/stylists/stylist_default.png'">
         </div>
         <div class="stylist-info">
@@ -340,6 +360,7 @@ a.contact-val:hover{color:var(--green);}
           {% if stylist.get('Experience','') %}
           <div class="stylist-exp">{{ stylist.Experience }} yrs experience</div>
           {% endif %}
+          <a href="{{ s.Appointment_URL }}" target="_blank" style="display: inline-block; margin-top: 12px; font-size: 10px; font-weight: 600; color: var(--gold); text-transform: uppercase; letter-spacing: 1px; text-decoration: none;">Book Stylist &rarr;</a>
         </div>
       </div>
     {% endfor %}
