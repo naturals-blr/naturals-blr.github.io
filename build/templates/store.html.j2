@@ -143,6 +143,21 @@ a.contact-val:hover{color:var(--green);}
 .stylist-spec{font-size:10px;color:var(--gold);letter-spacing:1px;text-transform:uppercase;margin-bottom:2px;}
 .stylist-exp{font-size:11px;color:var(--text-light);}
 
+/* BOTTOM SOCIAL & REVIEW BLOCKS */
+.bottom-links-wrap{padding:60px 0;}
+.bl-section{margin-bottom:48px;}
+.bl-section:last-child{margin-bottom:0;}
+.bl-hdr{font-family:'Cormorant Garamond',serif;font-size:26px;color:var(--text);font-weight:400;margin-bottom:20px;text-align:center;}
+.bl-hdr em{font-style:italic;color:var(--gold);}
+.bl-social-row{display:flex;justify-content:center;gap:20px;flex-wrap:wrap;}
+.bl-soc-link{display:flex;align-items:center;gap:12px;padding:12px 24px;border:1px solid rgba(0,0,0,0.12);border-radius:6px;color:var(--text-mid);font-size:11px;letter-spacing:1.5px;text-transform:uppercase;font-weight:600;transition:all 0.3s;text-decoration:none;min-width:180px;justify-content:center;background:#fff;}
+.bl-soc-link:hover{transform:translateY(-2px);box-shadow:0 6px 16px rgba(0,0,0,0.06);}
+.bl-soc-ig:hover{border-color:#E1306C;color:#E1306C;}
+.bl-soc-fb:hover{border-color:#1877F2;color:#1877F2;}
+.bl-review-wrap{display:flex;justify-content:center;}
+.bl-btn-review{display:inline-flex;align-items:center;gap:10px;background:var(--gold);color:var(--dark);padding:16px 32px;font-size:12px;letter-spacing:2px;text-transform:uppercase;font-weight:700;transition:all 0.3s;border-radius:6px;text-decoration:none;box-shadow:0 4px 12px rgba(201,168,76,0.25);}
+.bl-btn-review:hover{background:var(--gold-pale);transform:translateY(-2px);box-shadow:0 8px 20px rgba(201,168,76,0.4);}
+
 /* ── SIDEBAR — clean, minimal, no repeated buttons ── */
 .sb-inner{background:#fff;padding:28px;position:sticky;top:86px;}
 .sb-name{font-family:'Cormorant Garamond',serif;font-size:20px;color:var(--text);font-weight:400;margin-bottom:3px;}
@@ -442,6 +457,38 @@ a.contact-val:hover{color:var(--green);}
 
   </div>
 </div>
+</div>
+
+<!-- ── BOTTOM SOCIAL & REVIEW COMPONENT ── -->
+<div class="bottom-links-wrap page-wrap" style="padding-top:20px; padding-bottom:60px; grid-template-columns:1fr;">
+  
+  <div class="bl-section reveal">
+    <div class="bl-hdr">Follow <em>us</em></div>
+    <div class="bl-social-row">
+      {% if s.get('Instagram_URL') and s.Instagram_URL not in ('', 'https://instagram.com/', 'https://instagram.com') %}
+      <a href="{{ s.Instagram_URL }}" target="_blank" class="bl-soc-link bl-soc-ig">
+        {{ ig_svg(20) }} Instagram
+      </a>
+      {% endif %}
+      {% if s.get('Facebook_URL') and s.Facebook_URL not in ('', 'https://facebook.com/', 'https://facebook.com') %}
+      <a href="{{ s.Facebook_URL }}" target="_blank" class="bl-soc-link bl-soc-fb">
+        {{ fb_svg(20) }} Facebook
+      </a>
+      {% endif %}
+    </div>
+  </div>
+
+  {% if s.Google_Review_URL %}
+  <div class="bl-section reveal">
+    <div class="bl-hdr">Rate &amp; <em>Review</em></div>
+    <div class="bl-review-wrap">
+      <a href="{{ s.Google_Review_URL }}" target="_blank" class="bl-btn-review">
+        <span style="font-size:16px;line-height:1;">&#11088;</span> Rate Us on Google
+      </a>
+    </div>
+  </div>
+  {% endif %}
+
 </div>
 
 <div class="store-nav">

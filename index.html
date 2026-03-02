@@ -429,8 +429,8 @@ loading="eager">
 <h1>Beauty that<br><em>moves you.</em></h1>
 <p class="hero-sub">5 locations &middot; Expert stylists &middot; World-class services</p>
 <div class="hero-btns">
-<a href="#our-stores" class="btn-hero-primary" aria-label="Book appointment — choose your store">&#128197; Book Appointment</a>
-<a href="#our-stores" class="btn-hero-secondary" aria-label="Choose your store">&#128205; Choose Your Store</a>
+<button onclick="openStorePicker()" class="btn-hero-primary" aria-label="Book appointment — choose your store">&#128197; Book Appointment</button>
+<button onclick="openStorePicker()" class="btn-hero-secondary" aria-label="Choose your store">&#128205; Choose Your Store</button>
 </div>
 </div>
 <div class="hero-scroll" aria-hidden="true">
@@ -773,7 +773,6 @@ window.NATURALS_BASE = '';
 <div class="spm-card-info">
 <div class="spm-card-name">JP Nagar 5th Phase</div>
 <div class="spm-card-area">South Bangalore &middot; 560078</div>
-<div class="spm-card-addr">1st Floor, Anand Onyx, No 305, 15th Cross Rd, near Outer Ring Road, 5th Phase, J P Nagar Phase 5, J. P. Nagar, Bengaluru, Karnataka 560078, India</div>
 </div>
 <div class="spm-card-cta">Select &#8594;</div>
 </div>
@@ -782,7 +781,6 @@ window.NATURALS_BASE = '';
 <div class="spm-card-info">
 <div class="spm-card-name">Elements Mall</div>
 <div class="spm-card-area">Nagavara &middot; 560077</div>
-<div class="spm-card-addr">Shop No 26, 3rd Floor, Elements Mall, 100 Ft Rd, near Manyata Tech Park Road, MS Ramaiah North City, Manayata Tech Park, Nagavara, Bengaluru, Karnataka 560077, India</div>
 </div>
 <div class="spm-card-cta">Select &#8594;</div>
 </div>
@@ -791,7 +789,6 @@ window.NATURALS_BASE = '';
 <div class="spm-card-info">
 <div class="spm-card-name">Devasandra</div>
 <div class="spm-card-area">KR Puram &middot; 560036</div>
-<div class="spm-card-addr">2,3, 1st Floor, Maruthi Tower, No. 1, Devasandra Main Rd, opp. Lulu's Bakery, Basavanapura, KRPuram, Bengaluru, Karnataka 560036, India</div>
 </div>
 <div class="spm-card-cta">Select &#8594;</div>
 </div>
@@ -800,7 +797,6 @@ window.NATURALS_BASE = '';
 <div class="spm-card-info">
 <div class="spm-card-name">Frazer Town</div>
 <div class="spm-card-area">Pulikeshi Nagar &middot; 560005</div>
-<div class="spm-card-addr">1st floor, No.94, Mosque Rd, above Poorvika Mobile Store, Cleveland Town, Frazer Town, Bengaluru, Karnataka 560005, India</div>
 </div>
 <div class="spm-card-cta">Select &#8594;</div>
 </div>
@@ -809,7 +805,6 @@ window.NATURALS_BASE = '';
 <div class="spm-card-info">
 <div class="spm-card-name">Hennur</div>
 <div class="spm-card-area">Hennur Cross &middot; 560043</div>
-<div class="spm-card-addr">1st Floor, No 40/A, 40/C, Main Road, above SBI Bank, Hennur Gardens, Bengaluru, Karnataka 560043, India</div>
 </div>
 <div class="spm-card-cta">Select &#8594;</div>
 </div>
@@ -985,13 +980,6 @@ io.unobserve(e.target);
 },{threshold:0});
 document.querySelectorAll('.reveal').forEach(function(el){io.observe(el);});
 
-/* Hero Book Appointment → open store picker on mobile, scroll to stores on desktop */
-document.querySelector('.btn-hero-primary').addEventListener('click',function(e){
-if(window.innerWidth<=992){
-e.preventDefault();
-openStorePicker();
-}
-});
 </script>
 </body>
 </html>
