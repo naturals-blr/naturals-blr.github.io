@@ -416,43 +416,6 @@ a.contact-val:hover{color:var(--green);}
     </div>
   </div>
 
-  <!-- 8. CONTACTS -->
-  <div class="contact-block reveal">
-    <div class="lbl">Get In Touch</div>
-    <h2 class="sec-title">Contact <em>us</em></h2>
-    <div class="contact-rows">
-      <div class="contact-row">
-        <span class="contact-icon">&#128222;</span>
-        <div class="contact-detail">
-          <div class="contact-lbl">Call</div>
-          <a href="tel:{{ s.Phone_Tel }}" class="contact-val">{{ s.Phone_Display }}</a>
-        </div>
-      </div>
-      <div class="contact-row">
-        <span class="contact-icon">{{ wa_svg(18) }}</span>
-        <div class="contact-detail">
-          <div class="contact-lbl">WhatsApp</div>
-          <a href="https://wa.me/{{ s.WhatsApp_Number }}" target="_blank" class="contact-val">{{ s.Phone_Display }}</a>
-        </div>
-      </div>
-      {% if s.Landline %}
-      <div class="contact-row">
-        <span class="contact-icon">&#9742;</span>
-        <div class="contact-detail">
-          <div class="contact-lbl">Landline</div>
-          <a href="tel:{{ s.Landline_Raw }}" class="contact-val">{{ s.Landline }}</a>
-        </div>
-      </div>
-      {% endif %}
-      <div class="contact-row">
-        <span class="contact-icon">&#128205;</span>
-        <div class="contact-detail">
-          <div class="contact-lbl">Address</div>
-          <a href="{{ s.Google_Maps_URL }}" target="_blank" class="contact-val">{{ s.Address_Full }}</a>
-        </div>
-      </div>
-    </div>
-  </div>
 
 </div>
 

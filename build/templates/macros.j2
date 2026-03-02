@@ -286,13 +286,15 @@ document.addEventListener('click',function(e){
   if (saved && saved.id) {
     applyStickyStore(saved);
   } else {
-    /* No store saved — all 4 buttons open store picker */
+    /* No store saved — all 4 buttons open store picker. Use wrapper so
+       openStorePicker resolves at click-time (it's defined by store_picker_js). */
     ['sb-book','sb-wa','sb-call','sb-maps'].forEach(function(id){
       var el = document.getElementById(id);
       if (!el) return;
+      var handler = function(e){ e.preventDefault(); openStorePicker(); };
       el.tagName === 'BUTTON'
-        ? el.addEventListener('click', openStorePicker)
-        : (el.href='javascript:void(0)', el.addEventListener('click', openStorePicker));
+        ? el.addEventListener('click', handler)
+        : (el.href='javascript:void(0)', el.addEventListener('click', handler));
     });
   }
   {% endif %}
@@ -337,6 +339,17 @@ function selectStore(id,name,book,wa,call,maps,pageUrl){
     var base = window.NATURALS_BASE || '';
     window.location.href = base + pageUrl;
   }
+}
+/* storePickerThen: direct action from homepage store cards — no modal needed */
+function storePickerThen(id,name,book,wa,call,maps,pageUrl,action){
+  var sd = {id:id,name:name,book:book,wa:wa,call:call,maps:maps,pageUrl:pageUrl};
+  localStorage.setItem('naturals-store',JSON.stringify(sd));
+  if (typeof window._applyStickyStore === 'function') window._applyStickyStore(sd);
+  showStoreIndicator(name);
+  if (action === 'book') { window.open(book, '_blank'); }
+  else if (action === 'wa') { window.open('https://wa.me/' + wa, '_blank'); }
+  else if (action === 'call') { window.location.href = 'tel:' + call; }
+  else if (action === 'maps') { window.open(maps, '_blank'); }
 }
 function showStoreIndicator(name){
   var ind = document.getElementById('store-indicator');

@@ -1,9 +1,9 @@
 {#
   Global header partial.
-  Caller must have imported from macros.j2: store_indicator, hamburger_nav
   Caller must set template vars: base_path, active_page
   Caller must pass: stores (or all_stores for store pages)
 #}
+{% from "macros.j2" import hamburger_nav, store_indicator, wa_svg %}
 <header id="site-header"{% if active_page != 'home' %} data-solid="true"{% endif %}>
   <div class="hdr-inner">
 
