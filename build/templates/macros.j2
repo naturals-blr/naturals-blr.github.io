@@ -333,6 +333,10 @@ function selectStore(id,name,book,wa,call,maps,pageUrl){
   closeStorePicker();
   if (typeof window._applyStickyStore === 'function') window._applyStickyStore(sd);
   showStoreIndicator(name);
+  if (pageUrl) {
+    var base = window.NATURALS_BASE || '';
+    window.location.href = base + pageUrl;
+  }
 }
 function showStoreIndicator(name){
   var ind = document.getElementById('store-indicator');
