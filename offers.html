@@ -133,7 +133,6 @@ loading="lazy"
 onerror="this.style.display='none'">
 </a>
 
-
 <button id="hamburger" aria-label="Menu" aria-expanded="false" aria-controls="drawer">
 <span class="hb-line"></span>
 <span class="hb-line"></span>
@@ -144,20 +143,7 @@ onerror="this.style.display='none'">
 
 <nav id="drawer" aria-label="Site menu">
 
-<div class="drawer-top">
-<div class="drawer-brand">
-<div class="db-title">Naturals</div>
-<div class="db-sub">Salon &amp; Spa — Bangalore</div>
-</div>
-
-<a class="drawer-cta" href="index.html#our-stores" aria-label="Book appointment">
-&#128197; Book Appointment
-</a>
-</div>
-
 <div class="drawer-section">
-<div class="drawer-title">Menu</div>
-
 <a class="drawer-link " href="index.html">Home</a>
 <a class="drawer-link " href="services.html">Services</a>
 <a class="drawer-link is-active" href="offers.html">Offers</a>
@@ -170,28 +156,11 @@ onerror="this.style.display='none'">
 <div class="drawer-section">
 <div class="drawer-title">Our Stores</div>
 
-<div class="drawer-stores">
-<a class="store-link" href="stores/jpnagar.html">
-<span class="store-name">JP Nagar 5th Phase</span>
-<span class="store-meta">South Bangalore · 560078</span>
-</a>
-<a class="store-link" href="stores/elements-mall.html">
-<span class="store-name">Elements Mall</span>
-<span class="store-meta">Nagavara · 560077</span>
-</a>
-<a class="store-link" href="stores/devasandra.html">
-<span class="store-name">Devasandra</span>
-<span class="store-meta">KR Puram · 560036</span>
-</a>
-<a class="store-link" href="stores/frazer-town.html">
-<span class="store-name">Frazer Town</span>
-<span class="store-meta">Pulikeshi Nagar · 560005</span>
-</a>
-<a class="store-link" href="stores/hennur.html">
-<span class="store-name">Hennur</span>
-<span class="store-meta">Hennur Cross · 560043</span>
-</a>
-</div>
+<a class="store-link" href="stores/jpnagar.html">JP Nagar 5th Phase</a>
+<a class="store-link" href="stores/elements-mall.html">Elements Mall</a>
+<a class="store-link" href="stores/devasandra.html">Devasandra</a>
+<a class="store-link" href="stores/frazer-town.html">Frazer Town</a>
+<a class="store-link" href="stores/hennur.html">Hennur</a>
 </div>
 
 </nav>
@@ -207,103 +176,39 @@ margin:5px 0;
 transition:0.3s;
 }
 
-/* Drawer */
+/* Overlay */
+#drawer-overlay{
+position:fixed;
+inset:0;
+background:rgba(0,0,0,0.55);
+backdrop-filter:blur(4px);
+opacity:0;
+pointer-events:none;
+transition:opacity 0.25s ease;
+z-index:10000;
+}
+
+/* Drawer (mobile-first compact) */
 #drawer{
 position:fixed;
 top:0;
-right:-380px;
-width:min(360px, 92vw);
+right:-340px;
+width:min(320px, 92vw);
 height:100%;
 background:var(--dark);
-padding:22px 20px 22px;
+padding:86px 16px 16px; /* compact, still clears header */
 display:flex;
 flex-direction:column;
-gap:18px;
+gap:10px;
 transition:right 0.35s ease;
 z-index:10001;
-overflow:hidden;
-box-shadow:-24px 0 80px rgba(0,0,0,0.55);
+overflow-y:auto; /* will only scroll if absolutely needed */
 }
-
-.drawer-top{
-padding:10px 8px 14px;
-border-bottom:1px solid rgba(255,255,255,0.08);
-}
-
-.drawer-brand{
-margin-bottom:12px;
-}
-.db-title{
-font-family:'Cormorant Garamond',serif;
-font-size:28px;
-font-weight:300;
-letter-spacing:-0.5px;
-color:#fff;
-line-height:1;
-}
-.db-sub{
-font-size:10px;
-letter-spacing:2.5px;
-text-transform:uppercase;
-color:rgba(255,255,255,0.38);
-margin-top:6px;
-}
-
-.drawer-cta{
-display:flex;
-align-items:center;
-justify-content:center;
-gap:8px;
-background:var(--gold);
-color:var(--dark);
-text-decoration:none;
-font-size:11px;
-letter-spacing:2px;
-text-transform:uppercase;
-font-weight:700;
-padding:12px 14px;
-border-radius:10px;
-transition:transform .2s ease, filter .2s ease;
-}
-.drawer-cta:hover{ transform:translateY(-1px); filter:brightness(1.03); }
 
 .drawer-section{
-padding:0 8px;
-overflow:auto;
-}
-
-.drawer-title{
-font-size:10px;
-letter-spacing:3px;
-text-transform:uppercase;
-color:rgba(255,255,255,0.35);
-margin:14px 0 10px;
-}
-
-.drawer-link{
 display:flex;
-align-items:center;
-justify-content:space-between;
-color:#fff;
-text-decoration:none;
-font-size:13px;
-letter-spacing:1.6px;
-text-transform:uppercase;
-padding:12px 12px;
-border-radius:10px;
-background:rgba(255,255,255,0.04);
-border:1px solid rgba(255,255,255,0.07);
-transition:background .2s ease, border-color .2s ease, transform .2s ease;
-margin-bottom:10px;
-}
-.drawer-link:hover{
-background:rgba(255,255,255,0.07);
-border-color:rgba(255,255,255,0.14);
-transform:translateY(-1px);
-}
-.drawer-link.is-active{
-border-color:rgba(201,168,76,0.65);
-box-shadow:0 0 0 1px rgba(201,168,76,0.20) inset;
+flex-direction:column;
+gap:8px; /* tighter */
 }
 
 .drawer-divider{
@@ -312,54 +217,53 @@ background:rgba(255,255,255,0.08);
 margin:2px 0;
 }
 
-/* Store list */
-.drawer-stores{
-display:flex;
-flex-direction:column;
-gap:10px;
-padding-bottom:10px;
+.drawer-title{
+font-size:10px;
+letter-spacing:2.5px;
+text-transform:uppercase;
+color:rgba(255,255,255,0.38);
+margin:4px 0 2px;
 }
 
+/* One-line simple links */
+.drawer-link,
 .store-link{
 display:block;
+color:rgba(255,255,255,0.92);
 text-decoration:none;
-padding:12px 12px;
-border-radius:12px;
-background:rgba(255,255,255,0.035);
-border:1px solid rgba(255,255,255,0.07);
-transition:background .2s ease, border-color .2s ease, transform .2s ease;
-}
-.store-link:hover{
-background:rgba(255,255,255,0.06);
-border-color:rgba(201,168,76,0.35);
-transform:translateY(-1px);
-}
-.store-name{
-display:block;
-color:#fff;
-font-size:13px;
-letter-spacing:1px;
+font-size:12px;
+letter-spacing:1.4px;
 text-transform:uppercase;
-}
-.store-meta{
-display:block;
-margin-top:5px;
-font-size:10px;
-letter-spacing:1.5px;
-text-transform:uppercase;
-color:rgba(255,255,255,0.35);
+padding:9px 10px;
+border-radius:10px;
+background:rgba(255,255,255,0.04);
+border:1px solid rgba(255,255,255,0.06);
+white-space:nowrap;
+overflow:hidden;
+text-overflow:ellipsis;
+line-height:1.1;
 }
 
-/* Overlay */
-#drawer-overlay{
-position:fixed;
-inset:0;
-background:rgba(0,0,0,0.6);
-backdrop-filter:blur(6px);
-opacity:0;
-pointer-events:none;
-transition:opacity 0.25s ease;
-z-index:10000;
+.drawer-link:hover,
+.store-link:hover{
+background:rgba(255,255,255,0.07);
+border-color:rgba(255,255,255,0.12);
+}
+
+.drawer-link.is-active{
+border-color:rgba(201,168,76,0.60);
+box-shadow:0 0 0 1px rgba(201,168,76,0.18) inset;
+}
+
+/* Desktop/tablet can breathe a bit */
+@media (min-width: 992px){
+#drawer{
+width:360px;
+padding:100px 22px 22px;
+gap:14px;
+}
+.drawer-section{ gap:10px; }
+.drawer-link,.store-link{ font-size:13px; padding:10px 12px; }
 }
 
 /* Open state */
@@ -401,11 +305,12 @@ e.stopPropagation();
 toggle();
 });
 }
+
 if(overlay){
 overlay.addEventListener('click', closeDrawer);
 }
 
-/* Close when clicking a link inside the drawer */
+/* Close when clicking any link in drawer */
 if(drawer){
 drawer.addEventListener('click', function(e){
 var a = e.target.closest('a');
@@ -413,7 +318,6 @@ if(a) closeDrawer();
 });
 }
 
-/* Escape to close */
 document.addEventListener('keydown', function(e){
 if(e.key === 'Escape') closeDrawer();
 });
