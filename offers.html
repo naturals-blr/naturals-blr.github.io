@@ -6,8 +6,19 @@
 <link rel="canonical" href="https://naturals-blr.github.io/offers.html">
 <meta name="description" content="Current offers and deals at Naturals Salon &amp; Spa Bangalore — exclusive discounts across all 5 locations.">
 <title>Offers &amp; Deals | Naturals Salon &amp; Spa Bangalore</title>
+
 <meta property="og:type" content="website">
 <meta property="og:site_name" content="Naturals Salon &amp; Spa Bangalore">
+<meta property="og:title" content="Offers &amp; Deals | Naturals Salon &amp; Spa Bangalore">
+<meta property="og:description" content="Exclusive discounts across all 5 Bangalore locations. Filter by store to find offers near you.">
+<meta property="og:url" content="https://naturals-blr.github.io/offers.html">
+<meta property="og:image" content="https://naturals-blr.github.io/images/heroes/offers.jpg">
+
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Offers &amp; Deals | Naturals Salon &amp; Spa Bangalore">
+<meta name="twitter:description" content="Exclusive discounts across all 5 Bangalore locations.">
+<meta name="twitter:image" content="https://naturals-blr.github.io/images/heroes/offers.jpg">
+
 <link rel="preconnect" href="https://fonts.googleapis.com">
 
 <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=Jost:wght@300;400;500;600&display=swap" rel="stylesheet">
@@ -35,48 +46,114 @@
 body{font-family:'Jost',sans-serif;background:var(--cream);color:var(--text);}
 a{text-decoration:none;color:inherit;}img{display:block;width:100%;object-fit:cover;}
 
+/* HERO */
 .page-hero{padding-top:70px;background:var(--dark);}
-.page-hero-inner{padding:60px 60px 0;}
+.page-hero-inner{padding:34px 60px 0;max-width:1280px;margin:0 auto;}
 .lbl{font-size:9px;letter-spacing:5px;text-transform:uppercase;color:var(--gold);font-weight:600;margin-bottom:16px;display:flex;align-items:center;gap:12px;}
 .lbl::before{content:'';width:18px;height:1px;background:var(--gold);}
-.page-hero-inner h1{font-family:'Cormorant Garamond',serif;font-size:clamp(42px,6vw,80px);font-weight:300;color:#fff;line-height:0.95;margin-bottom:14px;}
-.page-hero-inner h1 em{font-style:italic;color:var(--gold);}
-.page-hero-inner p{font-size:14px;color:rgba(255,255,255,0.42);font-weight:300;line-height:1.8;max-width:560px;padding-bottom:40px;}
+.page-hero-grid{display:grid;grid-template-columns:1.1fr 0.9fr;gap:28px;align-items:end;padding-bottom:26px;}
+.page-hero-copy h1{font-family:'Cormorant Garamond',serif;font-size:clamp(42px,6vw,80px);font-weight:300;color:#fff;line-height:0.95;margin-bottom:14px;}
+.page-hero-copy h1 em{font-style:italic;color:var(--gold);}
+.page-hero-copy p{font-size:14px;color:rgba(255,255,255,0.42);font-weight:300;line-height:1.8;max-width:560px;}
+.page-hero-media{border:1px solid rgba(255,255,255,0.10);overflow:hidden;border-radius:12px;box-shadow:0 18px 60px rgba(0,0,0,0.35);}
+.page-hero-media img{height:240px;width:100%;object-fit:cover;opacity:0.92;}
+
 /* FILTER */
-.filter-bar{background:var(--filter-bg);padding:0 60px 22px;position:sticky;top:70px;z-index:100;border-bottom:1px solid rgba(255,255,255,0.06);}
-.filter-row{display:flex;align-items:center;gap:10px;flex-wrap:wrap;padding-top:18px;}
+.filter-bar{background:var(--filter-bg);padding:0 60px 18px;position:sticky;top:70px;z-index:100;border-bottom:1px solid rgba(255,255,255,0.06);}
+.filter-row{display:flex;align-items:center;gap:10px;flex-wrap:wrap;padding-top:16px;}
 .filter-lbl{font-size:9px;letter-spacing:3px;text-transform:uppercase;font-weight:600;color:#52B788;white-space:nowrap;min-width:60px;}
-.f-btn{background:rgba(82,183,136,0.08);border:1px solid rgba(82,183,136,0.2);color:rgba(255,255,255,0.45);padding:7px 16px;font-size:11px;letter-spacing:1.5px;text-transform:uppercase;cursor:pointer;transition:all 0.3s;font-family:'Jost',sans-serif;font-weight:500;}
+.f-btn{background:rgba(82,183,136,0.08);border:1px solid rgba(82,183,136,0.2);color:rgba(255,255,255,0.45);padding:7px 16px;font-size:11px;letter-spacing:1.5px;text-transform:uppercase;cursor:pointer;transition:all 0.3s;font-family:'Jost',sans-serif;font-weight:500;border-radius:999px;}
 .f-btn:hover{border-color:#52B788;color:#52B788;}
 .f-btn.active{background:#1B4332;border-color:#52B788;color:#52B788;}
 [data-theme="naturals"] .f-btn.active{background:rgba(37,150,190,0.2);border-color:var(--green);color:var(--green);}
+
 /* RESULTS */
 .results-bar{background:var(--cream);padding:14px 60px;border-bottom:1px solid rgba(0,0,0,0.06);font-size:13px;color:var(--text-light);}
+
 /* MAIN */
-.offers-main{padding:48px 60px;}
+.offers-main{padding:40px 60px;max-width:1280px;margin:0 auto;}
 .store-group{margin-bottom:52px;}
 .store-group-hdr{display:flex;align-items:baseline;gap:16px;margin-bottom:20px;padding-bottom:12px;border-bottom:2px solid rgba(0,0,0,0.06);}
 .store-group-name{font-family:'Cormorant Garamond',serif;font-size:30px;font-weight:300;color:var(--text);}
 .store-group-count{font-size:11px;color:var(--text-light);letter-spacing:2px;text-transform:uppercase;}
-.offers-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:3px;}
-.offer-card{background:#fff;overflow:hidden;transition:box-shadow 0.25s;}
-.offer-card:hover{box-shadow:0 4px 24px rgba(0,0,0,0.09);}
-.offer-img{height:180px;overflow:hidden;position:relative;}
-.offer-img img{height:100%;object-fit:cover;transition:transform 6s ease;}
-.offer-card:hover .offer-img img{transform:scale(1.04);}
-.offer-img-placeholder{height:180px;background:linear-gradient(135deg,var(--dark) 0%,var(--green) 100%);display:flex;align-items:center;justify-content:center;font-size:48px;}
-.offer-body{padding:20px;}
+
+.offers-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;}
+.offer-card{background:#fff;overflow:hidden;transition:box-shadow 0.25s,transform 0.25s;border:1px solid rgba(0,0,0,0.06);border-radius:12px;display:flex;flex-direction:column;min-height:318px;}
+.offer-card:hover{box-shadow:0 10px 40px rgba(0,0,0,0.10);transform:translateY(-2px);}
+
+.offer-media{height:180px;overflow:hidden;position:relative;background:rgba(0,0,0,0.02);}
+.offer-media img{height:100%;width:100%;object-fit:cover;transition:transform 6s ease;}
+.offer-card:hover .offer-media img{transform:scale(1.04);}
+
+.offer-media.noimg{
+background:linear-gradient(135deg,var(--dark) 0%, var(--green) 55%, rgba(0,0,0,0.15) 100%);
+display:flex;align-items:flex-end;justify-content:flex-start;
+padding:16px;
+}
+[data-theme="naturals"] .offer-media.noimg{
+background:linear-gradient(135deg,#1A0533 0%, var(--green-mid) 60%, rgba(0,0,0,0.10) 100%);
+}
+.offer-noimg-title{
+font-family:'Cormorant Garamond',serif;
+font-size:22px;font-weight:300;line-height:1.1;color:#fff;
+text-shadow:0 6px 22px rgba(0,0,0,0.45);
+}
+.offer-noimg-chip{
+position:absolute;top:14px;left:14px;
+font-size:9px;letter-spacing:2.5px;text-transform:uppercase;
+background:rgba(255,255,255,0.12);
+border:1px solid rgba(255,255,255,0.18);
+color:rgba(255,255,255,0.75);
+padding:6px 10px;border-radius:999px;
+backdrop-filter:blur(10px);
+}
+
+.offer-body{padding:18px 18px 16px;display:flex;flex-direction:column;flex:1;}
 .offer-badge{font-size:9px;letter-spacing:3px;text-transform:uppercase;color:var(--gold);font-weight:600;margin-bottom:8px;}
 .offer-title{font-family:'Cormorant Garamond',serif;font-size:20px;font-weight:400;margin-bottom:6px;color:var(--text);line-height:1.2;}
-.offer-details{font-size:12px;color:var(--text-mid);line-height:1.7;font-weight:300;margin-bottom:12px;}
-.offer-footer{display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:8px;padding-top:10px;border-top:1px solid rgba(0,0,0,0.06);}
-.offer-valid{font-size:11px;color:var(--green-soft);font-weight:500;}
+
+.offer-details-wrap{margin-bottom:12px;}
+.offer-details{
+font-size:12px;color:var(--text-mid);line-height:1.7;font-weight:300;
+display:-webkit-box;-webkit-line-clamp:1;-webkit-box-orient:vertical;overflow:hidden;
+}
+.offer-details.expanded{-webkit-line-clamp:unset;display:block;}
+.offer-more{
+display:inline-block;margin-top:6px;
+font-size:10px;letter-spacing:1.5px;text-transform:uppercase;
+color:var(--green-mid);font-weight:600;cursor:pointer;
+opacity:0.9;
+}
+.offer-more:hover{opacity:1;text-decoration:underline;}
+
+.offer-footer{display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:10px;padding-top:10px;border-top:1px solid rgba(0,0,0,0.06);margin-top:auto;}
+.offer-valid{font-size:11px;color:var(--green-soft);font-weight:500;white-space:nowrap;}
+
+/* Icon buttons (no text) */
+.offer-actions{display:flex;align-items:center;gap:8px;}
+.icon-btn{
+width:40px;height:38px;border-radius:10px;
+display:inline-flex;align-items:center;justify-content:center;
+text-decoration:none;border:1px solid rgba(0,0,0,0.08);
+transition:transform 0.18s, box-shadow 0.18s, opacity 0.18s;
+}
+.icon-btn:hover{transform:translateY(-1px);box-shadow:0 10px 22px rgba(0,0,0,0.10);}
+.icon-btn svg{width:18px;height:18px;display:block;}
+.icon-book{background:#1A73E8;color:#fff;border-color:rgba(26,115,232,0.22);}
+.icon-book:hover{opacity:0.95;}
+.icon-wa{background:#25D366;color:#fff;border-color:rgba(37,211,102,0.22);}
+.icon-wa:hover{opacity:0.95;}
+.icon-call{background:#5F6368;color:#fff;border-color:rgba(95,99,104,0.22);}
+.icon-call:hover{opacity:0.95;}
+
 .no-offers{text-align:center;padding:80px 32px;color:var(--text-light);}
 .no-offers h3{font-family:'Cormorant Garamond',serif;font-size:32px;font-weight:300;margin-bottom:10px;}
+
 /* SCROLL TOP */
-#scroll-top{position:fixed;bottom:32px;right:32px;z-index:500;width:44px;height:44px;background:var(--dark);border:1px solid rgba(255,255,255,0.15);color:rgba(255,255,255,0.7);font-size:18px;display:flex;align-items:center;justify-content:center;cursor:pointer;opacity:0;pointer-events:none;transform:translateY(12px);transition:opacity 0.3s,transform 0.3s,background 0.2s;}
+#scroll-top{position:fixed;bottom:32px;right:32px;z-index:500;width:44px;height:44px;background:var(--dark);border:1px solid rgba(255,255,255,0.15);color:rgba(255,255,255,0.7);font-size:18px;display:flex;align-items:center;justify-content:center;cursor:pointer;opacity:0;pointer-events:none;transform:translateY(12px);transition:opacity 0.3s,transform 0.3s,background 0.2s;border-radius:12px;}
 #scroll-top.visible{opacity:1;pointer-events:auto;transform:translateY(0);}
 #scroll-top:hover{background:var(--green);}
+
 .btn-book{background:#1A73E8;color:#fff;padding:13px 22px;min-height:48px;font-size:11px;letter-spacing:1.5px;text-transform:uppercase;font-weight:600;display:inline-flex;align-items:center;gap:8px;transition:all 0.3s;border-radius:6px;white-space:nowrap;text-decoration:none;}
 .btn-book:hover{background:#1557B0;transform:translateY(-1px);}
 .btn-wa{background:#25D366;color:#fff;padding:13px 22px;min-height:48px;font-size:11px;letter-spacing:1.5px;text-transform:uppercase;font-weight:600;display:inline-flex;align-items:center;gap:8px;transition:all 0.3s;border-radius:6px;white-space:nowrap;text-decoration:none;}
@@ -99,7 +176,6 @@ footer{background:#080f0b;}
 .ft-brand{font-family:'Cormorant Garamond',serif;font-size:28px;color:#fff;font-weight:300;margin-bottom:10px;}
 .ft-brand span{color:var(--gold);font-style:italic;}
 .ft-tagline{font-size:12px;color:rgba(255,255,255,0.28);font-weight:300;line-height:1.7;margin-bottom:18px;}
-
 .ft-col-title{font-size:9px;letter-spacing:3px;text-transform:uppercase;color:var(--gold);font-weight:600;margin-bottom:16px;}
 .ft-col ul{list-style:none;display:flex;flex-direction:column;gap:9px;}
 .ft-col ul a{font-size:12px;color:rgba(255,255,255,0.32);font-weight:300;transition:color 0.3s;text-decoration:none;}
@@ -111,16 +187,23 @@ footer{background:#080f0b;}
 @media(max-width:600px){.ft-top{grid-template-columns:1fr;padding:28px 16px 20px;}}
 
 @media(max-width:900px){
-.page-hero-inner{padding:44px 20px 0;}
-.filter-bar{padding:0 20px 18px;top:60px;}
+.page-hero-inner{padding:28px 20px 0;}
+.page-hero-grid{grid-template-columns:1fr;gap:18px;}
+.page-hero-media img{height:190px;}
+.filter-bar{padding:0 20px 16px;top:60px;}
 .results-bar{padding:12px 20px;}
-.offers-main{padding:32px 20px;}
+.offers-main{padding:28px 20px;}
 .offers-grid{grid-template-columns:1fr 1fr;}
 #scroll-top{bottom:20px;right:20px;}
 }
-@media(max-width:600px){.offers-grid{grid-template-columns:1fr;}}
+@media(max-width:600px){
+.offers-grid{grid-template-columns:1fr;}
+.filter-row{gap:8px;}
+.f-btn{padding:6px 12px;font-size:10px;}
+}
 </style>
 </head>
+
 <body>
 
 <header id="site-header">
@@ -142,7 +225,6 @@ onerror="this.style.display='none'">
 <div id="drawer-overlay" aria-hidden="true"></div>
 
 <nav id="drawer" aria-label="Site menu">
-
 <div class="drawer-section">
 <a class="drawer-link " href="index.html">Home</a>
 <a class="drawer-link " href="services.html">Services</a>
@@ -162,7 +244,6 @@ onerror="this.style.display='none'">
 <a class="store-link" href="stores/frazer-town.html">Frazer Town</a>
 <a class="store-link" href="stores/hennur.html">Hennur</a>
 </div>
-
 </nav>
 
 <style>
@@ -196,19 +277,19 @@ right:-340px;
 width:min(320px, 92vw);
 height:100%;
 background:var(--dark);
-padding:86px 16px 16px; /* compact, still clears header */
+padding:86px 14px 14px;
 display:flex;
 flex-direction:column;
 gap:10px;
 transition:right 0.35s ease;
 z-index:10001;
-overflow-y:auto; /* will only scroll if absolutely needed */
+overflow-y:auto;
 }
 
 .drawer-section{
 display:flex;
 flex-direction:column;
-gap:8px; /* tighter */
+gap:8px;
 }
 
 .drawer-divider{
@@ -253,17 +334,6 @@ border-color:rgba(255,255,255,0.12);
 .drawer-link.is-active{
 border-color:rgba(201,168,76,0.60);
 box-shadow:0 0 0 1px rgba(201,168,76,0.18) inset;
-}
-
-/* Desktop/tablet can breathe a bit */
-@media (min-width: 992px){
-#drawer{
-width:360px;
-padding:100px 22px 22px;
-gap:14px;
-}
-.drawer-section{ gap:10px; }
-.drawer-link,.store-link{ font-size:13px; padding:10px 12px; }
 }
 
 /* Open state */
@@ -378,9 +448,20 @@ padding-top:78px;
 </style>
 <div class="page-hero">
 <div class="page-hero-inner">
+<div class="page-hero-grid">
+<div class="page-hero-copy">
 <div class="lbl">Exclusive Deals</div>
 <h1>Offers &amp;<br><em>Promotions</em></h1>
 <p>Current deals across all our Bangalore locations. Filter by store to find offers near you.</p>
+</div>
+<div class="page-hero-media" aria-label="Offers hero image">
+<img
+src="images/heroes/offers.jpg"
+alt="Naturals Salon &amp; Spa Bangalore offers"
+loading="eager"
+onerror="this.onerror=null;this.src='https://source.unsplash.com/1600x900/?spa,salon,beauty';">
+</div>
+</div>
 </div>
 </div>
 
@@ -404,17 +485,55 @@ padding-top:78px;
 <div class="store-group-name">JP Nagar 5th Phase</div>
 <div class="store-group-count">1 offer</div>
 </div>
+
 <div class="offers-grid">
-<div class="offer-card">
-<div class="offer-img-placeholder">&#127800;</div>
+<div class="offer-card" data-offer-store="Store_N78">
+<div class="offer-media noimg" aria-label="Offer highlight tile">
+<div class="offer-noimg-chip">Limited</div>
+<div class="offer-noimg-title">Pay 20000, Get 30000</div>
+</div>
+
 <div class="offer-body">
 <div class="offer-badge">Special Offer</div>
 <div class="offer-title">Pay 20000, Get 30000</div>
-<div class="offer-details"></div>
+
+<div class="offer-details-wrap">
+<div class="offer-details" id="d-Store_N78-1"></div>
+</div>
+
 <div class="offer-footer">
 <span class="offer-valid">Valid till 13-Mar-2026</span>
-<a href="https://naturals-salon-jpnagar5phase.setmore.com/" target="_blank" class="btn-book " aria-label="Book Now">&#128197; Book Now</a>
 
+<div class="offer-actions" aria-label="Offer actions">
+<a class="icon-btn icon-book"
+href="https://naturals-salon-jpnagar5phase.setmore.com/"
+target="_blank" rel="noopener"
+aria-label="Book appointment at JP Nagar 5th Phase"
+title="Book appointment">
+<svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+<path d="M7 2a1 1 0 0 1 1 1v1h8V3a1 1 0 1 1 2 0v1h1.5A2.5 2.5 0 0 1 22 6.5v14A2.5 2.5 0 0 1 19.5 23h-15A2.5 2.5 0 0 1 2 20.5v-14A2.5 2.5 0 0 1 4.5 4H6V3a1 1 0 0 1 1-1Zm12.5 8H4.5v10.5c0 .276.224.5.5.5h14c.276 0 .5-.224.5-.5V10ZM6 6H4.5a.5.5 0 0 0-.5.5V8h16V6.5a.5.5 0 0 0-.5-.5H18v1a1 1 0 1 1-2 0V6H8v1a1 1 0 1 1-2 0V6Z"/>
+</svg>
+</a>
+
+<a class="icon-btn icon-wa"
+href="https://wa.me/918792642299"
+target="_blank" rel="noopener"
+aria-label="WhatsApp JP Nagar 5th Phase"
+title="WhatsApp">
+<svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+<path d="M20.52 3.48A11.78 11.78 0 0 0 12.05 0C5.5 0 .16 5.33.16 11.89c0 2.09.55 4.14 1.59 5.94L0 24l6.31-1.65a11.9 11.9 0 0 0 5.74 1.46h.01c6.55 0 11.88-5.33 11.89-11.89a11.8 11.8 0 0 0-3.43-8.44ZM12.06 21.8h-.01a9.84 9.84 0 0 1-5.02-1.38l-.36-.21-3.75.98 1-3.65-.23-.37a9.87 9.87 0 0 1-1.51-5.26c0-5.45 4.44-9.89 9.89-9.89a9.82 9.82 0 0 1 6.99 2.9 9.86 9.86 0 0 1 2.9 7c0 5.45-4.44 9.88-9.9 9.88Zm5.74-7.85c-.31-.16-1.83-.9-2.11-1-.28-.1-.49-.16-.7.16-.2.31-.8 1-1 1.2-.18.2-.36.22-.67.07-.31-.16-1.3-.48-2.48-1.54-.92-.81-1.54-1.82-1.72-2.13-.18-.31-.02-.48.13-.63.14-.14.31-.36.47-.54.16-.18.2-.31.31-.51.1-.2.05-.39-.02-.54-.08-.16-.7-1.7-.96-2.33-.25-.6-.5-.52-.7-.53-.18 0-.38 0-.59 0-.2 0-.54.07-.82.39-.28.31-1.08 1.05-1.08 2.56 0 1.5 1.11 2.96 1.26 3.16.15.2 2.18 3.31 5.27 4.65.74.32 1.31.51 1.76.65.74.24 1.41.2 1.94.12.6-.09 1.83-.74 2.09-1.46.26-.72.26-1.33.18-1.46-.08-.12-.28-.2-.59-.36Z"/>
+</svg>
+</a>
+
+<a class="icon-btn icon-call"
+href="tel:+918792642299"
+aria-label="Call JP Nagar 5th Phase"
+title="Call">
+<svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+<path d="M6.62 10.79a15.05 15.05 0 0 0 6.59 6.59l2.2-2.2a1 1 0 0 1 1.01-.24c1.12.37 2.33.57 3.58.57a1 1 0 0 1 1 1V21a1 1 0 0 1-1 1C10.07 22 2 13.93 2 4a1 1 0 0 1 1-1h3.5a1 1 0 0 1 1 1c0 1.25.2 2.46.57 3.58a1 1 0 0 1-.25 1.01l-2.2 2.2Z"/>
+</svg>
+</a>
+</div>
 </div>
 </div>
 </div>
@@ -425,17 +544,55 @@ padding-top:78px;
 <div class="store-group-name">Elements Mall</div>
 <div class="store-group-count">1 offer</div>
 </div>
+
 <div class="offers-grid">
-<div class="offer-card">
-<div class="offer-img-placeholder">&#127800;</div>
+<div class="offer-card" data-offer-store="Store_N77">
+<div class="offer-media noimg" aria-label="Offer highlight tile">
+<div class="offer-noimg-chip">Limited</div>
+<div class="offer-noimg-title">Pay 20000, Get 30000</div>
+</div>
+
 <div class="offer-body">
 <div class="offer-badge">Special Offer</div>
 <div class="offer-title">Pay 20000, Get 30000</div>
-<div class="offer-details"></div>
+
+<div class="offer-details-wrap">
+<div class="offer-details" id="d-Store_N77-1"></div>
+</div>
+
 <div class="offer-footer">
 <span class="offer-valid">Valid till 13-Mar-2026</span>
-<a href="https://naturals-salon-elementsmall.setmore.com/" target="_blank" class="btn-book " aria-label="Book Now">&#128197; Book Now</a>
 
+<div class="offer-actions" aria-label="Offer actions">
+<a class="icon-btn icon-book"
+href="https://naturals-salon-elementsmall.setmore.com/"
+target="_blank" rel="noopener"
+aria-label="Book appointment at Elements Mall"
+title="Book appointment">
+<svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+<path d="M7 2a1 1 0 0 1 1 1v1h8V3a1 1 0 1 1 2 0v1h1.5A2.5 2.5 0 0 1 22 6.5v14A2.5 2.5 0 0 1 19.5 23h-15A2.5 2.5 0 0 1 2 20.5v-14A2.5 2.5 0 0 1 4.5 4H6V3a1 1 0 0 1 1-1Zm12.5 8H4.5v10.5c0 .276.224.5.5.5h14c.276 0 .5-.224.5-.5V10ZM6 6H4.5a.5.5 0 0 0-.5.5V8h16V6.5a.5.5 0 0 0-.5-.5H18v1a1 1 0 1 1-2 0V6H8v1a1 1 0 1 1-2 0V6Z"/>
+</svg>
+</a>
+
+<a class="icon-btn icon-wa"
+href="https://wa.me/919901000017"
+target="_blank" rel="noopener"
+aria-label="WhatsApp Elements Mall"
+title="WhatsApp">
+<svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+<path d="M20.52 3.48A11.78 11.78 0 0 0 12.05 0C5.5 0 .16 5.33.16 11.89c0 2.09.55 4.14 1.59 5.94L0 24l6.31-1.65a11.9 11.9 0 0 0 5.74 1.46h.01c6.55 0 11.88-5.33 11.89-11.89a11.8 11.8 0 0 0-3.43-8.44ZM12.06 21.8h-.01a9.84 9.84 0 0 1-5.02-1.38l-.36-.21-3.75.98 1-3.65-.23-.37a9.87 9.87 0 0 1-1.51-5.26c0-5.45 4.44-9.89 9.89-9.89a9.82 9.82 0 0 1 6.99 2.9 9.86 9.86 0 0 1 2.9 7c0 5.45-4.44 9.88-9.9 9.88Zm5.74-7.85c-.31-.16-1.83-.9-2.11-1-.28-.1-.49-.16-.7.16-.2.31-.8 1-1 1.2-.18.2-.36.22-.67.07-.31-.16-1.3-.48-2.48-1.54-.92-.81-1.54-1.82-1.72-2.13-.18-.31-.02-.48.13-.63.14-.14.31-.36.47-.54.16-.18.2-.31.31-.51.1-.2.05-.39-.02-.54-.08-.16-.7-1.7-.96-2.33-.25-.6-.5-.52-.7-.53-.18 0-.38 0-.59 0-.2 0-.54.07-.82.39-.28.31-1.08 1.05-1.08 2.56 0 1.5 1.11 2.96 1.26 3.16.15.2 2.18 3.31 5.27 4.65.74.32 1.31.51 1.76.65.74.24 1.41.2 1.94.12.6-.09 1.83-.74 2.09-1.46.26-.72.26-1.33.18-1.46-.08-.12-.28-.2-.59-.36Z"/>
+</svg>
+</a>
+
+<a class="icon-btn icon-call"
+href="tel:+919901000017"
+aria-label="Call Elements Mall"
+title="Call">
+<svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+<path d="M6.62 10.79a15.05 15.05 0 0 0 6.59 6.59l2.2-2.2a1 1 0 0 1 1.01-.24c1.12.37 2.33.57 3.58.57a1 1 0 0 1 1 1V21a1 1 0 0 1-1 1C10.07 22 2 13.93 2 4a1 1 0 0 1 1-1h3.5a1 1 0 0 1 1 1c0 1.25.2 2.46.57 3.58a1 1 0 0 1-.25 1.01l-2.2 2.2Z"/>
+</svg>
+</a>
+</div>
 </div>
 </div>
 </div>
@@ -446,17 +603,55 @@ padding-top:78px;
 <div class="store-group-name">Devasandra</div>
 <div class="store-group-count">1 offer</div>
 </div>
+
 <div class="offers-grid">
-<div class="offer-card">
-<div class="offer-img-placeholder">&#127800;</div>
+<div class="offer-card" data-offer-store="Store_N36">
+<div class="offer-media noimg" aria-label="Offer highlight tile">
+<div class="offer-noimg-chip">Limited</div>
+<div class="offer-noimg-title">Pay 20000, Get 30000</div>
+</div>
+
 <div class="offer-body">
 <div class="offer-badge">Special Offer</div>
 <div class="offer-title">Pay 20000, Get 30000</div>
-<div class="offer-details"></div>
+
+<div class="offer-details-wrap">
+<div class="offer-details" id="d-Store_N36-1"></div>
+</div>
+
 <div class="offer-footer">
 <span class="offer-valid">Valid till 13-Mar-2026</span>
-<a href="https://naturals-salon-devasandra.setmore.com/" target="_blank" class="btn-book " aria-label="Book Now">&#128197; Book Now</a>
 
+<div class="offer-actions" aria-label="Offer actions">
+<a class="icon-btn icon-book"
+href="https://naturals-salon-devasandra.setmore.com/"
+target="_blank" rel="noopener"
+aria-label="Book appointment at Devasandra"
+title="Book appointment">
+<svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+<path d="M7 2a1 1 0 0 1 1 1v1h8V3a1 1 0 1 1 2 0v1h1.5A2.5 2.5 0 0 1 22 6.5v14A2.5 2.5 0 0 1 19.5 23h-15A2.5 2.5 0 0 1 2 20.5v-14A2.5 2.5 0 0 1 4.5 4H6V3a1 1 0 0 1 1-1Zm12.5 8H4.5v10.5c0 .276.224.5.5.5h14c.276 0 .5-.224.5-.5V10ZM6 6H4.5a.5.5 0 0 0-.5.5V8h16V6.5a.5.5 0 0 0-.5-.5H18v1a1 1 0 1 1-2 0V6H8v1a1 1 0 1 1-2 0V6Z"/>
+</svg>
+</a>
+
+<a class="icon-btn icon-wa"
+href="https://wa.me/917259490009"
+target="_blank" rel="noopener"
+aria-label="WhatsApp Devasandra"
+title="WhatsApp">
+<svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+<path d="M20.52 3.48A11.78 11.78 0 0 0 12.05 0C5.5 0 .16 5.33.16 11.89c0 2.09.55 4.14 1.59 5.94L0 24l6.31-1.65a11.9 11.9 0 0 0 5.74 1.46h.01c6.55 0 11.88-5.33 11.89-11.89a11.8 11.8 0 0 0-3.43-8.44ZM12.06 21.8h-.01a9.84 9.84 0 0 1-5.02-1.38l-.36-.21-3.75.98 1-3.65-.23-.37a9.87 9.87 0 0 1-1.51-5.26c0-5.45 4.44-9.89 9.89-9.89a9.82 9.82 0 0 1 6.99 2.9 9.86 9.86 0 0 1 2.9 7c0 5.45-4.44 9.88-9.9 9.88Zm5.74-7.85c-.31-.16-1.83-.9-2.11-1-.28-.1-.49-.16-.7.16-.2.31-.8 1-1 1.2-.18.2-.36.22-.67.07-.31-.16-1.3-.48-2.48-1.54-.92-.81-1.54-1.82-1.72-2.13-.18-.31-.02-.48.13-.63.14-.14.31-.36.47-.54.16-.18.2-.31.31-.51.1-.2.05-.39-.02-.54-.08-.16-.7-1.7-.96-2.33-.25-.6-.5-.52-.7-.53-.18 0-.38 0-.59 0-.2 0-.54.07-.82.39-.28.31-1.08 1.05-1.08 2.56 0 1.5 1.11 2.96 1.26 3.16.15.2 2.18 3.31 5.27 4.65.74.32 1.31.51 1.76.65.74.24 1.41.2 1.94.12.6-.09 1.83-.74 2.09-1.46.26-.72.26-1.33.18-1.46-.08-.12-.28-.2-.59-.36Z"/>
+</svg>
+</a>
+
+<a class="icon-btn icon-call"
+href="tel:+917259490009"
+aria-label="Call Devasandra"
+title="Call">
+<svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+<path d="M6.62 10.79a15.05 15.05 0 0 0 6.59 6.59l2.2-2.2a1 1 0 0 1 1.01-.24c1.12.37 2.33.57 3.58.57a1 1 0 0 1 1 1V21a1 1 0 0 1-1 1C10.07 22 2 13.93 2 4a1 1 0 0 1 1-1h3.5a1 1 0 0 1 1 1c0 1.25.2 2.46.57 3.58a1 1 0 0 1-.25 1.01l-2.2 2.2Z"/>
+</svg>
+</a>
+</div>
 </div>
 </div>
 </div>
@@ -467,17 +662,55 @@ padding-top:78px;
 <div class="store-group-name">Frazer Town</div>
 <div class="store-group-count">1 offer</div>
 </div>
+
 <div class="offers-grid">
-<div class="offer-card">
-<div class="offer-img-placeholder">&#127800;</div>
+<div class="offer-card" data-offer-store="Store_N05">
+<div class="offer-media noimg" aria-label="Offer highlight tile">
+<div class="offer-noimg-chip">Limited</div>
+<div class="offer-noimg-title">Pay 20000, Get 30000</div>
+</div>
+
 <div class="offer-body">
 <div class="offer-badge">Special Offer</div>
 <div class="offer-title">Pay 20000, Get 30000</div>
-<div class="offer-details"></div>
+
+<div class="offer-details-wrap">
+<div class="offer-details" id="d-Store_N05-1"></div>
+</div>
+
 <div class="offer-footer">
 <span class="offer-valid">Valid till 13-Mar-2026</span>
-<a href="https://naturals-salon-frazertown.setmore.com/" target="_blank" class="btn-book " aria-label="Book Now">&#128197; Book Now</a>
 
+<div class="offer-actions" aria-label="Offer actions">
+<a class="icon-btn icon-book"
+href="https://naturals-salon-frazertown.setmore.com/"
+target="_blank" rel="noopener"
+aria-label="Book appointment at Frazer Town"
+title="Book appointment">
+<svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+<path d="M7 2a1 1 0 0 1 1 1v1h8V3a1 1 0 1 1 2 0v1h1.5A2.5 2.5 0 0 1 22 6.5v14A2.5 2.5 0 0 1 19.5 23h-15A2.5 2.5 0 0 1 2 20.5v-14A2.5 2.5 0 0 1 4.5 4H6V3a1 1 0 0 1 1-1Zm12.5 8H4.5v10.5c0 .276.224.5.5.5h14c.276 0 .5-.224.5-.5V10ZM6 6H4.5a.5.5 0 0 0-.5.5V8h16V6.5a.5.5 0 0 0-.5-.5H18v1a1 1 0 1 1-2 0V6H8v1a1 1 0 1 1-2 0V6Z"/>
+</svg>
+</a>
+
+<a class="icon-btn icon-wa"
+href="https://wa.me/919945488040"
+target="_blank" rel="noopener"
+aria-label="WhatsApp Frazer Town"
+title="WhatsApp">
+<svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+<path d="M20.52 3.48A11.78 11.78 0 0 0 12.05 0C5.5 0 .16 5.33.16 11.89c0 2.09.55 4.14 1.59 5.94L0 24l6.31-1.65a11.9 11.9 0 0 0 5.74 1.46h.01c6.55 0 11.88-5.33 11.89-11.89a11.8 11.8 0 0 0-3.43-8.44ZM12.06 21.8h-.01a9.84 9.84 0 0 1-5.02-1.38l-.36-.21-3.75.98 1-3.65-.23-.37a9.87 9.87 0 0 1-1.51-5.26c0-5.45 4.44-9.89 9.89-9.89a9.82 9.82 0 0 1 6.99 2.9 9.86 9.86 0 0 1 2.9 7c0 5.45-4.44 9.88-9.9 9.88Zm5.74-7.85c-.31-.16-1.83-.9-2.11-1-.28-.1-.49-.16-.7.16-.2.31-.8 1-1 1.2-.18.2-.36.22-.67.07-.31-.16-1.3-.48-2.48-1.54-.92-.81-1.54-1.82-1.72-2.13-.18-.31-.02-.48.13-.63.14-.14.31-.36.47-.54.16-.18.2-.31.31-.51.1-.2.05-.39-.02-.54-.08-.16-.7-1.7-.96-2.33-.25-.6-.5-.52-.7-.53-.18 0-.38 0-.59 0-.2 0-.54.07-.82.39-.28.31-1.08 1.05-1.08 2.56 0 1.5 1.11 2.96 1.26 3.16.15.2 2.18 3.31 5.27 4.65.74.32 1.31.51 1.76.65.74.24 1.41.2 1.94.12.6-.09 1.83-.74 2.09-1.46.26-.72.26-1.33.18-1.46-.08-.12-.28-.2-.59-.36Z"/>
+</svg>
+</a>
+
+<a class="icon-btn icon-call"
+href="tel:+919945488040"
+aria-label="Call Frazer Town"
+title="Call">
+<svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+<path d="M6.62 10.79a15.05 15.05 0 0 0 6.59 6.59l2.2-2.2a1 1 0 0 1 1.01-.24c1.12.37 2.33.57 3.58.57a1 1 0 0 1 1 1V21a1 1 0 0 1-1 1C10.07 22 2 13.93 2 4a1 1 0 0 1 1-1h3.5a1 1 0 0 1 1 1c0 1.25.2 2.46.57 3.58a1 1 0 0 1-.25 1.01l-2.2 2.2Z"/>
+</svg>
+</a>
+</div>
 </div>
 </div>
 </div>
@@ -488,22 +721,61 @@ padding-top:78px;
 <div class="store-group-name">Hennur</div>
 <div class="store-group-count">1 offer</div>
 </div>
+
 <div class="offers-grid">
-<div class="offer-card">
-<div class="offer-img-placeholder">&#127800;</div>
+<div class="offer-card" data-offer-store="Store_N43">
+<div class="offer-media noimg" aria-label="Offer highlight tile">
+<div class="offer-noimg-chip">Limited</div>
+<div class="offer-noimg-title">Pay 20000, Get 30000</div>
+</div>
+
 <div class="offer-body">
 <div class="offer-badge">Special Offer</div>
 <div class="offer-title">Pay 20000, Get 30000</div>
-<div class="offer-details"></div>
+
+<div class="offer-details-wrap">
+<div class="offer-details" id="d-Store_N43-1"></div>
+</div>
+
 <div class="offer-footer">
 <span class="offer-valid">Valid till 13-Mar-2026</span>
-<a href="https://naturals-salon-hennur.setmore.com/" target="_blank" class="btn-book " aria-label="Book Now">&#128197; Book Now</a>
 
+<div class="offer-actions" aria-label="Offer actions">
+<a class="icon-btn icon-book"
+href="https://naturals-salon-hennur.setmore.com/"
+target="_blank" rel="noopener"
+aria-label="Book appointment at Hennur"
+title="Book appointment">
+<svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+<path d="M7 2a1 1 0 0 1 1 1v1h8V3a1 1 0 1 1 2 0v1h1.5A2.5 2.5 0 0 1 22 6.5v14A2.5 2.5 0 0 1 19.5 23h-15A2.5 2.5 0 0 1 2 20.5v-14A2.5 2.5 0 0 1 4.5 4H6V3a1 1 0 0 1 1-1Zm12.5 8H4.5v10.5c0 .276.224.5.5.5h14c.276 0 .5-.224.5-.5V10ZM6 6H4.5a.5.5 0 0 0-.5.5V8h16V6.5a.5.5 0 0 0-.5-.5H18v1a1 1 0 1 1-2 0V6H8v1a1 1 0 1 1-2 0V6Z"/>
+</svg>
+</a>
+
+<a class="icon-btn icon-wa"
+href="https://wa.me/919606900069"
+target="_blank" rel="noopener"
+aria-label="WhatsApp Hennur"
+title="WhatsApp">
+<svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+<path d="M20.52 3.48A11.78 11.78 0 0 0 12.05 0C5.5 0 .16 5.33.16 11.89c0 2.09.55 4.14 1.59 5.94L0 24l6.31-1.65a11.9 11.9 0 0 0 5.74 1.46h.01c6.55 0 11.88-5.33 11.89-11.89a11.8 11.8 0 0 0-3.43-8.44ZM12.06 21.8h-.01a9.84 9.84 0 0 1-5.02-1.38l-.36-.21-3.75.98 1-3.65-.23-.37a9.87 9.87 0 0 1-1.51-5.26c0-5.45 4.44-9.89 9.89-9.89a9.82 9.82 0 0 1 6.99 2.9 9.86 9.86 0 0 1 2.9 7c0 5.45-4.44 9.88-9.9 9.88Zm5.74-7.85c-.31-.16-1.83-.9-2.11-1-.28-.1-.49-.16-.7.16-.2.31-.8 1-1 1.2-.18.2-.36.22-.67.07-.31-.16-1.3-.48-2.48-1.54-.92-.81-1.54-1.82-1.72-2.13-.18-.31-.02-.48.13-.63.14-.14.31-.36.47-.54.16-.18.2-.31.31-.51.1-.2.05-.39-.02-.54-.08-.16-.7-1.7-.96-2.33-.25-.6-.5-.52-.7-.53-.18 0-.38 0-.59 0-.2 0-.54.07-.82.39-.28.31-1.08 1.05-1.08 2.56 0 1.5 1.11 2.96 1.26 3.16.15.2 2.18 3.31 5.27 4.65.74.32 1.31.51 1.76.65.74.24 1.41.2 1.94.12.6-.09 1.83-.74 2.09-1.46.26-.72.26-1.33.18-1.46-.08-.12-.28-.2-.59-.36Z"/>
+</svg>
+</a>
+
+<a class="icon-btn icon-call"
+href="tel:+919606900069"
+aria-label="Call Hennur"
+title="Call">
+<svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+<path d="M6.62 10.79a15.05 15.05 0 0 0 6.59 6.59l2.2-2.2a1 1 0 0 1 1.01-.24c1.12.37 2.33.57 3.58.57a1 1 0 0 1 1 1V21a1 1 0 0 1-1 1C10.07 22 2 13.93 2 4a1 1 0 0 1 1-1h3.5a1 1 0 0 1 1 1c0 1.25.2 2.46.57 3.58a1 1 0 0 1-.25 1.01l-2.2 2.2Z"/>
+</svg>
+</a>
 </div>
 </div>
 </div>
 </div>
 </div>
+</div>
+
 <div class="no-offers" id="no-offers" style="display:none;">
 <h3>No active offers</h3>
 <p>Check back soon — new deals are added regularly.</p>
@@ -511,12 +783,12 @@ padding-top:78px;
 </main>
 
 <button id="scroll-top" onclick="window.scrollTo({top:0,behavior:'smooth'})" title="Back to top">&#8593;</button>
+
 <footer>
 <div class="ft-top">
 <div class="ft-brand-col">
 <div class="ft-brand">Naturals <span>Salon &amp; Spa</span></div>
 <div class="ft-tagline">India's most trusted salon network.<br>Premium beauty services across Bangalore.</div>
-
 </div>
 <div class="ft-col">
 <div class="ft-col-title">Explore</div>
@@ -586,28 +858,51 @@ if(nt)nt.classList.toggle('active',saved==='naturals');
 </script>
 
 <script>
+function toggleDetails(id, el){
+var d = document.getElementById(id);
+if (!d) return;
+var isExpanded = d.classList.toggle('expanded');
+el.textContent = isExpanded ? 'Less' : 'More';
+}
+
 function filterOffers(storeId, btn) {
 document.querySelectorAll('.f-btn').forEach(function(b){ b.classList.remove('active'); });
 btn.classList.add('active');
+
 var groups = document.querySelectorAll('.store-group');
-var visible = 0;
+var visibleGroups = 0;
+var visibleOffers = 0;
+
 groups.forEach(function(g) {
 var show = storeId === 'all' || g.dataset.storeGroup === storeId;
 g.style.display = show ? '' : 'none';
-if (show) visible++;
+if (show) {
+visibleGroups++;
+visibleOffers += g.querySelectorAll('.offer-card').length;
+}
 });
+
 var bar = document.getElementById('results-bar');
 var noOffers = document.getElementById('no-offers');
-if (visible === 0) {
+
+if (visibleOffers === 0) {
 noOffers.style.display = '';
 bar.textContent = 'No active offers for this store';
 } else {
 noOffers.style.display = 'none';
-bar.textContent = storeId === 'all' ? 'Showing all active offers' : 'Showing offers for selected store';
+if (storeId === 'all') {
+bar.textContent = 'Showing ' + visibleOffers + ' active offer' + (visibleOffers !== 1 ? 's' : '') + ' across all stores';
+} else {
+bar.textContent = 'Showing ' + visibleOffers + ' active offer' + (visibleOffers !== 1 ? 's' : '') + ' for selected store';
 }
 }
+}
+
 var scrollBtn = document.getElementById('scroll-top');
-window.addEventListener('scroll', function(){ scrollBtn.classList.toggle('visible', window.scrollY > 320); }, {passive:true});
+window.addEventListener('scroll', function(){
+scrollBtn.classList.toggle('visible', window.scrollY > 320);
+}, {passive:true});
 </script>
+
 </body>
 </html>
