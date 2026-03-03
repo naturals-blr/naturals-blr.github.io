@@ -81,15 +81,11 @@ transition:border-color 0.3s;outline:none;
 .btn-wa:hover{background:#1da851;transform:translateY(-1px);}
 .btn-call{background:#5F6368;color:#fff;padding:13px 22px;min-height:48px;font-size:11px;letter-spacing:1.5px;text-transform:uppercase;font-weight:600;display:inline-flex;align-items:center;gap:8px;transition:all 0.3s;border-radius:6px;white-space:nowrap;text-decoration:none;}
 .btn-call:hover{background:#474c52;transform:translateY(-1px);}
-.btn-maps{background:#D93025;color:#fff;border:none;padding:13px 18px;min-height:48px;font-size:11px;letter-spacing:1px;text-transform:uppercase;font-weight:600;display:inline-flex;align-items:center;gap:7px;transition:all 0.3s;border-radius:6px;white-space:nowrap;text-decoration:none;}
-.btn-maps:hover{background:#b71c1c;transform:translateY(-1px);}
 .btn-gold{background:var(--gold);color:var(--dark);padding:12px 24px;font-size:11px;letter-spacing:2px;text-transform:uppercase;font-weight:700;display:inline-flex;align-items:center;gap:8px;transition:all 0.3s;text-decoration:none;}
 .btn-gold:hover{background:var(--gold-pale);transform:translateY(-1px);}
 .btn-ghost{border:1px solid rgba(255,255,255,0.28);color:rgba(255,255,255,0.75);padding:12px 20px;font-size:11px;letter-spacing:2px;text-transform:uppercase;display:inline-flex;align-items:center;gap:8px;transition:all 0.3s;text-decoration:none;}
 .btn-ghost:hover{border-color:var(--gold);color:var(--gold);}
-@media(max-width:480px){
-.btn-book,.btn-wa,.btn-call,.btn-maps{font-size:10px;padding:13px 14px;}
-}
+@media(max-width:480px){.btn-book,.btn-wa,.btn-call{font-size:10px;padding:13px 14px;}}
 
 footer{background:#080f0b;}
 [data-theme="naturals"] footer{background:#0D0120;}
@@ -97,6 +93,7 @@ footer{background:#080f0b;}
 .ft-brand{font-family:'Cormorant Garamond',serif;font-size:28px;color:#fff;font-weight:300;margin-bottom:10px;}
 .ft-brand span{color:var(--gold);font-style:italic;}
 .ft-tagline{font-size:12px;color:rgba(255,255,255,0.28);font-weight:300;line-height:1.7;margin-bottom:18px;}
+
 .ft-col-title{font-size:9px;letter-spacing:3px;text-transform:uppercase;color:var(--gold);font-weight:600;margin-bottom:16px;}
 .ft-col ul{list-style:none;display:flex;flex-direction:column;gap:9px;}
 .ft-col ul a{font-size:12px;color:rgba(255,255,255,0.32);font-weight:300;transition:color 0.3s;text-decoration:none;}
@@ -135,6 +132,7 @@ onerror="this.style.display='none'">
 <div id="drawer-overlay" aria-hidden="true"></div>
 
 <nav id="drawer" aria-label="Site menu">
+
 <div class="drawer-section">
 <a class="drawer-link " href="index.html">Home</a>
 <a class="drawer-link " href="services.html">Services</a>
@@ -154,110 +152,39 @@ onerror="this.style.display='none'">
 <a class="store-link" href="stores/frazer-town.html">Frazer Town</a>
 <a class="store-link" href="stores/hennur.html">Hennur</a>
 </div>
+
 </nav>
 
 <style>
-/* Hamburger icon */
-.hb-line{
-display:block;
-width:22px;
-height:2px;
-background:#fff;
-margin:5px 0;
-transition:0.3s;
-}
-
-/* Overlay */
-#drawer-overlay{
-position:fixed;
-inset:0;
-background:rgba(0,0,0,0.55);
-backdrop-filter:blur(4px);
-opacity:0;
-pointer-events:none;
-transition:opacity 0.25s ease;
-z-index:10000;
-}
-
-/* Drawer (mobile-first compact) */
+.hb-line{display:block;width:22px;height:2px;background:#fff;margin:5px 0;transition:0.3s;}
+#drawer-overlay{position:fixed;inset:0;background:rgba(0,0,0,0.55);backdrop-filter:blur(4px);opacity:0;pointer-events:none;transition:opacity 0.25s ease;z-index:10000;}
 #drawer{
-position:fixed;
-top:0;
-right:-340px;
-width:min(320px, 92vw);
-height:100%;
-background:var(--dark);
-padding:86px 14px 14px;
-display:flex;
-flex-direction:column;
-gap:10px;
-transition:right 0.35s ease;
-z-index:10001;
-overflow-y:auto;
+position:fixed;top:0;right:-340px;width:min(320px, 92vw);height:100%;
+background:var(--dark);padding:86px 16px 16px;display:flex;flex-direction:column;
+gap:10px;transition:right 0.35s ease;z-index:10001;overflow-y:auto;
 }
+.drawer-section{display:flex;flex-direction:column;gap:8px;}
+.drawer-divider{height:1px;background:rgba(255,255,255,0.08);margin:2px 0;}
+.drawer-title{font-size:10px;letter-spacing:2.5px;text-transform:uppercase;color:rgba(255,255,255,0.38);margin:4px 0 2px;}
 
-.drawer-section{
-display:flex;
-flex-direction:column;
-gap:8px;
+.drawer-link,.store-link{
+display:block;color:rgba(255,255,255,0.92);text-decoration:none;font-size:12px;letter-spacing:1.4px;
+text-transform:uppercase;padding:9px 10px;border-radius:10px;background:rgba(255,255,255,0.04);
+border:1px solid rgba(255,255,255,0.06);white-space:nowrap;overflow:hidden;text-overflow:ellipsis;line-height:1.1;
 }
+.drawer-link:hover,.store-link:hover{background:rgba(255,255,255,0.07);border-color:rgba(255,255,255,0.12);}
+.drawer-link.is-active{border-color:rgba(201,168,76,0.60);box-shadow:0 0 0 1px rgba(201,168,76,0.18) inset;}
 
-.drawer-divider{
-height:1px;
-background:rgba(255,255,255,0.08);
-margin:2px 0;
+@media (min-width: 992px){
+#drawer{width:360px;padding:100px 22px 22px;gap:14px;}
+.drawer-section{gap:10px;}
+.drawer-link,.store-link{font-size:13px;padding:10px 12px;}
 }
-
-.drawer-title{
-font-size:10px;
-letter-spacing:2.5px;
-text-transform:uppercase;
-color:rgba(255,255,255,0.38);
-margin:4px 0 2px;
-}
-
-/* One-line simple links */
-.drawer-link,
-.store-link{
-display:block;
-color:rgba(255,255,255,0.92);
-text-decoration:none;
-font-size:12px;
-letter-spacing:1.4px;
-text-transform:uppercase;
-padding:9px 10px;
-border-radius:10px;
-background:rgba(255,255,255,0.04);
-border:1px solid rgba(255,255,255,0.06);
-white-space:nowrap;
-overflow:hidden;
-text-overflow:ellipsis;
-line-height:1.1;
-}
-
-.drawer-link:hover,
-.store-link:hover{
-background:rgba(255,255,255,0.07);
-border-color:rgba(255,255,255,0.12);
-}
-
-.drawer-link.is-active{
-border-color:rgba(201,168,76,0.60);
-box-shadow:0 0 0 1px rgba(201,168,76,0.18) inset;
-}
-
-/* Open state */
-.drawer-open #drawer{ right:0; }
-.drawer-open #drawer-overlay{ opacity:1; pointer-events:auto; }
-
-/* Animate hamburger */
-.drawer-open #hamburger .hb-line:nth-child(1){
-transform:rotate(45deg) translate(5px,5px);
-}
-.drawer-open #hamburger .hb-line:nth-child(2){ opacity:0; }
-.drawer-open #hamburger .hb-line:nth-child(3){
-transform:rotate(-45deg) translate(6px,-6px);
-}
+.drawer-open #drawer{right:0;}
+.drawer-open #drawer-overlay{opacity:1;pointer-events:auto;}
+.drawer-open #hamburger .hb-line:nth-child(1){transform:rotate(45deg) translate(5px,5px);}
+.drawer-open #hamburger .hb-line:nth-child(2){opacity:0;}
+.drawer-open #hamburger .hb-line:nth-child(3){transform:rotate(-45deg) translate(6px,-6px);}
 </style>
 
 <script>
@@ -267,40 +194,19 @@ var hamburger = document.getElementById('hamburger');
 var overlay = document.getElementById('drawer-overlay');
 var drawer = document.getElementById('drawer');
 
-function openDrawer(){
-body.classList.add('drawer-open');
-if(hamburger) hamburger.setAttribute('aria-expanded','true');
-}
-function closeDrawer(){
-body.classList.remove('drawer-open');
-if(hamburger) hamburger.setAttribute('aria-expanded','false');
-}
-function toggle(){
-body.classList.contains('drawer-open') ? closeDrawer() : openDrawer();
-}
+function openDrawer(){ body.classList.add('drawer-open'); if(hamburger) hamburger.setAttribute('aria-expanded','true'); }
+function closeDrawer(){ body.classList.remove('drawer-open'); if(hamburger) hamburger.setAttribute('aria-expanded','false'); }
+function toggle(){ body.classList.contains('drawer-open') ? closeDrawer() : openDrawer(); }
 
-if(hamburger){
-hamburger.addEventListener('click', function(e){
-e.stopPropagation();
-toggle();
-});
-}
-
-if(overlay){
-overlay.addEventListener('click', closeDrawer);
-}
-
-/* Close when clicking any link in drawer */
+if(hamburger){ hamburger.addEventListener('click', function(e){ e.stopPropagation(); toggle(); }); }
+if(overlay){ overlay.addEventListener('click', closeDrawer); }
 if(drawer){
 drawer.addEventListener('click', function(e){
 var a = e.target.closest('a');
 if(a) closeDrawer();
 });
 }
-
-document.addEventListener('keydown', function(e){
-if(e.key === 'Escape') closeDrawer();
-});
+document.addEventListener('keydown', function(e){ if(e.key === 'Escape') closeDrawer(); });
 })();
 </script>
 
@@ -530,6 +436,7 @@ Directions
 <div class="ft-brand-col">
 <div class="ft-brand">Naturals <span>Salon &amp; Spa</span></div>
 <div class="ft-tagline">India's most trusted salon network.<br>Premium beauty services across Bangalore.</div>
+
 </div>
 <div class="ft-col">
 <div class="ft-col-title">Explore</div>
