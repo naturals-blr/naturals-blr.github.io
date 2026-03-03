@@ -133,11 +133,11 @@ transition:opacity 0.3s ease,transform 0.3s ease,background 0.2s,border-color 0.
 #scroll-top.visible{opacity:1;pointer-events:auto;transform:translateY(0);}
 #scroll-top:hover{background:var(--green);border-color:var(--green-soft);color:#fff;}
 
-.btn-book{background:#1A73E8;color:#fff;padding:12px 22px;font-size:11px;letter-spacing:1.5px;text-transform:uppercase;font-weight:600;display:inline-flex;align-items:center;gap:8px;transition:all 0.3s;border-radius:6px;white-space:nowrap;text-decoration:none;}
+.btn-book{background:#1A73E8;color:#fff;padding:13px 22px;min-height:48px;font-size:11px;letter-spacing:1.5px;text-transform:uppercase;font-weight:600;display:inline-flex;align-items:center;gap:8px;transition:all 0.3s;border-radius:6px;white-space:nowrap;text-decoration:none;}
 .btn-book:hover{background:#1557B0;transform:translateY(-1px);}
-.btn-wa{background:#25D366;color:#fff;padding:12px 22px;font-size:11px;letter-spacing:1.5px;text-transform:uppercase;font-weight:600;display:inline-flex;align-items:center;gap:8px;transition:all 0.3s;border-radius:6px;white-space:nowrap;text-decoration:none;}
+.btn-wa{background:#25D366;color:#fff;padding:13px 22px;min-height:48px;font-size:11px;letter-spacing:1.5px;text-transform:uppercase;font-weight:600;display:inline-flex;align-items:center;gap:8px;transition:all 0.3s;border-radius:6px;white-space:nowrap;text-decoration:none;}
 .btn-wa:hover{background:#1da851;transform:translateY(-1px);}
-.btn-call{background:#5F6368;color:#fff;padding:12px 22px;font-size:11px;letter-spacing:1.5px;text-transform:uppercase;font-weight:600;display:inline-flex;align-items:center;gap:8px;transition:all 0.3s;border-radius:6px;white-space:nowrap;text-decoration:none;}
+.btn-call{background:#5F6368;color:#fff;padding:13px 22px;min-height:48px;font-size:11px;letter-spacing:1.5px;text-transform:uppercase;font-weight:600;display:inline-flex;align-items:center;gap:8px;transition:all 0.3s;border-radius:6px;white-space:nowrap;text-decoration:none;}
 .btn-call:hover{background:#474c52;transform:translateY(-1px);}
 .btn-maps{background:#D93025;color:#fff;border:none;padding:13px 18px;min-height:48px;font-size:11px;letter-spacing:1px;text-transform:uppercase;font-weight:600;display:inline-flex;align-items:center;gap:7px;transition:all 0.3s;border-radius:6px;white-space:nowrap;text-decoration:none;}
 .btn-maps:hover{background:#b71c1c;transform:translateY(-1px);}
@@ -145,6 +145,9 @@ transition:opacity 0.3s ease,transform 0.3s ease,background 0.2s,border-color 0.
 .btn-gold:hover{background:var(--gold-pale);transform:translateY(-1px);}
 .btn-ghost{border:1px solid rgba(255,255,255,0.28);color:rgba(255,255,255,0.75);padding:12px 20px;font-size:11px;letter-spacing:2px;text-transform:uppercase;display:inline-flex;align-items:center;gap:8px;transition:all 0.3s;text-decoration:none;}
 .btn-ghost:hover{border-color:var(--gold);color:var(--gold);}
+@media(max-width:480px){
+.btn-book,.btn-wa,.btn-call,.btn-maps{font-size:10px;padding:13px 14px;}
+}
 
 footer{background:#080f0b;}
 [data-theme="naturals"] footer{background:#0D0120;}
@@ -303,22 +306,54 @@ Our Stores <span class="drawer-sub-caret">&#9662;</span>
 .drawer-sub li a{padding:10px 28px 10px 38px;font-size:11px;letter-spacing:1.5px;display:flex;flex-direction:column;gap:2px;}
 .drawer-sub li a small{font-size:9px;color:rgba(255,255,255,0.3);letter-spacing:1px;text-transform:uppercase;}
 .drawer-cta{padding:20px 28px;border-top:1px solid rgba(255,255,255,0.07);margin-top:auto;}
-.drawer-book-btn{display:flex;align-items:center;justify-content:center;gap:8px;background:#1A73E8;color:#fff;padding:14px;font-size:11px;letter-spacing:2px;text-transform:uppercase;font-weight:700;text-decoration:none;transition:all 0.3s;border-radius:6px;}
-.drawer-book-btn:hover{background:#1557B0;}
+.drawer-book-btn{display:flex;align-items:center;justify-content:center;gap:8px;background:var(--gold);color:var(--dark);padding:14px;font-size:11px;letter-spacing:2px;text-transform:uppercase;font-weight:700;text-decoration:none;transition:all 0.3s;border-radius:6px;}
+.drawer-book-btn:hover{background:var(--gold-pale);}
 @media(max-width:1024px){ #hamburger{display:flex;}}
 </style>
 <script>
-function openDrawer(){var d=document.getElementById('nav-drawer'),o=document.getElementById('nav-overlay'),h=document.getElementById('hamburger');if(!d||!o||!h)return;d.classList.add('open');o.classList.add('show');h.classList.add('open');h.setAttribute('aria-expanded','true');document.body.style.overflow='hidden';}
-function closeDrawer(){var d=document.getElementById('nav-drawer'),o=document.getElementById('nav-overlay'),h=document.getElementById('hamburger');if(!d||!o||!h)return;d.classList.remove('open');o.classList.remove('show');h.classList.remove('open');h.setAttribute('aria-expanded','false');document.body.style.overflow='';}
-function toggleDrawerSub(btn){var sub=btn.nextElementSibling;var isOpen=sub.classList.contains('open');sub.classList.toggle('open',!isOpen);btn.classList.toggle('open',!isOpen);btn.setAttribute('aria-expanded',!isOpen?'true':'false');}
-(function(){var h=document.getElementById('hamburger');if(h)h.addEventListener('click',function(){this.classList.contains('open')?closeDrawer():openDrawer();});})();
-document.addEventListener('keydown',function(e){if(e.key==='Escape')closeDrawer();});
-/* Close drawer when any internal link is tapped (handles same-page anchors too) */
-document.addEventListener('click',function(e){
-var a=e.target.closest('a[href]');
-if(a&&document.getElementById('nav-drawer')&&document.getElementById('nav-drawer').classList.contains('open')){
-closeDrawer();
+function openDrawer(){
+var d=document.getElementById('nav-drawer'),o=document.getElementById('nav-overlay'),h=document.getElementById('hamburger');
+if(!d||!o||!h)return;
+d.classList.add('open');o.classList.add('show');h.classList.add('open');
+h.setAttribute('aria-expanded','true');document.body.style.overflow='hidden';
 }
+function closeDrawer(){
+var d=document.getElementById('nav-drawer'),o=document.getElementById('nav-overlay'),h=document.getElementById('hamburger');
+if(!d||!o||!h)return;
+d.classList.remove('open');o.classList.remove('show');h.classList.remove('open');
+h.setAttribute('aria-expanded','false');document.body.style.overflow='';
+}
+function toggleDrawerSub(btn){
+var sub=btn.nextElementSibling;
+var isOpen=sub.classList.contains('open');
+sub.classList.toggle('open',!isOpen);
+btn.classList.toggle('open',!isOpen);
+btn.setAttribute('aria-expanded',!isOpen?'true':'false');
+}
+/* Attach hamburger click listener — use DOMContentLoaded to guarantee
+the element exists regardless of where in the page this script runs */
+document.addEventListener('DOMContentLoaded',function(){
+var h=document.getElementById('hamburger');
+if(h){
+h.addEventListener('click',function(e){
+e.stopPropagation();
+this.classList.contains('open')?closeDrawer():openDrawer();
+});
+}
+/* Close drawer on Escape */
+document.addEventListener('keydown',function(e){if(e.key==='Escape')closeDrawer();});
+/* Close drawer when a nav link inside the drawer is tapped.
+We scope to #nav-drawer only — avoids swallowing page-level link clicks */
+var drawer=document.getElementById('nav-drawer');
+if(drawer){
+drawer.addEventListener('click',function(e){
+var a=e.target.closest('a[href]');
+if(a) closeDrawer();
+});
+}
+/* Close drawer when clicking the overlay background */
+var overlay=document.getElementById('nav-overlay');
+if(overlay) overlay.addEventListener('click',closeDrawer);
 });
 </script>
 
@@ -359,6 +394,26 @@ closeDrawer();
 .hdr-nav{display:none;}
 .hdr-cta{display:none;}
 #store-indicator{display:none!important;}
+}
+/* Hamburger always visible — subtle bg ensures contrast on transparent hero header */
+#hamburger{
+background:rgba(0,0,0,0.28);
+border-radius:6px;
+padding:8px 7px;
+width:40px;height:36px;
+backdrop-filter:blur(4px);
+-webkit-backdrop-filter:blur(4px);
+transition:background 0.25s;
+}
+#hamburger:hover{background:rgba(0,0,0,0.5);}
+/* Once header has dark bg, strip the extra pill styling */
+#site-header.hdr-scrolled #hamburger,
+#site-header.hdr-solid #hamburger{
+background:transparent;
+padding:0;
+width:28px;height:20px;
+backdrop-filter:none;
+-webkit-backdrop-filter:none;
 }
 </style>
 
@@ -452,7 +507,7 @@ document.addEventListener('keydown',function(e){if(e.key==='Escape'){dd.classLis
 <li><a href="services.html">Services &amp; Pricing</a></li>
 <li><a href="offers.html">Offers</a></li>
 <li><a href="contact.html">Contact Us</a></li>
-<li><a href="index.html#about">About</a></li>
+<li><a href="about.html">About Us</a></li>
 </ul>
 </div>
 <div class="ft-col">
@@ -727,43 +782,48 @@ window.NATURALS_BASE = '';
 <button class="spm-close" onclick="closeStorePicker()" aria-label="Close">&#10005;</button>
 </div>
 <div class="spm-cards">
-<div class="spm-card" onclick="selectStore('Store_N78','JP Nagar 5th Phase','https://naturals-salon-jpnagar5phase.setmore.com/','918792642299','','https://g.page/Naturals_JPNagar5thPhase/','stores/jpnagar.html')" role="button" tabindex="0">
+<div class="spm-card" onclick="selectStore('Store_N78','JP Nagar 5th Phase','https://naturals-salon-jpnagar5phase.setmore.com/','918792642299','+918792642299','https://g.page/Naturals_JPNagar5thPhase/','stores/jpnagar.html')" role="button" tabindex="0">
 <div class="spm-card-num">1</div>
 <div class="spm-card-info">
 <div class="spm-card-name">JP Nagar 5th Phase</div>
 <div class="spm-card-area">South Bangalore &middot; 560078</div>
+<div class="spm-card-addr">1st Floor, Anand Onyx, No 305, 15th Cross Rd, near Outer Ring Road, 5th Phase, J P Nagar Phase 5, J. P. Nagar, Bengaluru, Karnataka 560078, India</div>
 </div>
 <div class="spm-card-cta">Select &#8594;</div>
 </div>
-<div class="spm-card" onclick="selectStore('Store_N77','Elements Mall','https://naturals-salon-elementsmall.setmore.com/','919901000017','','https://maps.google.com/?q=Naturals+Salon+Elements+Mall','stores/elements-mall.html')" role="button" tabindex="0">
+<div class="spm-card" onclick="selectStore('Store_N77','Elements Mall','https://naturals-salon-elementsmall.setmore.com/','919901000017','+919901000017','https://maps.google.com/?q=Naturals+Salon+Elements+Mall','stores/elements-mall.html')" role="button" tabindex="0">
 <div class="spm-card-num">2</div>
 <div class="spm-card-info">
 <div class="spm-card-name">Elements Mall</div>
 <div class="spm-card-area">Nagavara &middot; 560077</div>
+<div class="spm-card-addr">Shop No 26, 3rd Floor, Elements Mall, 100 Ft Rd, near Manyata Tech Park Road, MS Ramaiah North City, Manayata Tech Park, Nagavara, Bengaluru, Karnataka 560077, India</div>
 </div>
 <div class="spm-card-cta">Select &#8594;</div>
 </div>
-<div class="spm-card" onclick="selectStore('Store_N36','Devasandra','https://naturals-salon-devasandra.setmore.com/','917259490009','','https://maps.google.com/?q=Naturals+Salon+Devasandra','stores/devasandra.html')" role="button" tabindex="0">
+<div class="spm-card" onclick="selectStore('Store_N36','Devasandra','https://naturals-salon-devasandra.setmore.com/','917259490009','+917259490009','https://maps.google.com/?q=Naturals+Salon+Devasandra','stores/devasandra.html')" role="button" tabindex="0">
 <div class="spm-card-num">3</div>
 <div class="spm-card-info">
 <div class="spm-card-name">Devasandra</div>
 <div class="spm-card-area">KR Puram &middot; 560036</div>
+<div class="spm-card-addr">2,3, 1st Floor, Maruthi Tower, No. 1, Devasandra Main Rd, opp. Lulu's Bakery, Basavanapura, KRPuram, Bengaluru, Karnataka 560036, India</div>
 </div>
 <div class="spm-card-cta">Select &#8594;</div>
 </div>
-<div class="spm-card" onclick="selectStore('Store_N05','Frazer Town','https://naturals-salon-frazertown.setmore.com/','919945488040','','https://maps.google.com/?q=Naturals+Salon+Frazer+Town','stores/frazer-town.html')" role="button" tabindex="0">
+<div class="spm-card" onclick="selectStore('Store_N05','Frazer Town','https://naturals-salon-frazertown.setmore.com/','919945488040','+919945488040','https://maps.google.com/?q=Naturals+Salon+Frazer+Town','stores/frazer-town.html')" role="button" tabindex="0">
 <div class="spm-card-num">4</div>
 <div class="spm-card-info">
 <div class="spm-card-name">Frazer Town</div>
 <div class="spm-card-area">Pulikeshi Nagar &middot; 560005</div>
+<div class="spm-card-addr">1st floor, No.94, Mosque Rd, above Poorvika Mobile Store, Cleveland Town, Frazer Town, Bengaluru, Karnataka 560005, India</div>
 </div>
 <div class="spm-card-cta">Select &#8594;</div>
 </div>
-<div class="spm-card" onclick="selectStore('Store_N43','Hennur','https://naturals-salon-hennur.setmore.com/','919606900069','','https://maps.google.com/?q=Naturals+Salon+Hennur','stores/hennur.html')" role="button" tabindex="0">
+<div class="spm-card" onclick="selectStore('Store_N43','Hennur','https://naturals-salon-hennur.setmore.com/','919606900069','+919606900069','https://maps.google.com/?q=Naturals+Salon+Hennur','stores/hennur.html')" role="button" tabindex="0">
 <div class="spm-card-num">5</div>
 <div class="spm-card-info">
 <div class="spm-card-name">Hennur</div>
 <div class="spm-card-area">Hennur Cross &middot; 560043</div>
+<div class="spm-card-addr">1st Floor, No 40/A, 40/C, Main Road, above SBI Bank, Hennur Gardens, Bengaluru, Karnataka 560043, India</div>
 </div>
 <div class="spm-card-cta">Select &#8594;</div>
 </div>
@@ -802,25 +862,23 @@ window.NATURALS_BASE = '';
 </style>
 
 <div id="sticky-bar">
-<button class="sb-btn" id="sb-book" aria-label="Book appointment">&#128197; Book Now</button>
-<a class="sb-btn" id="sb-wa" aria-label="WhatsApp us"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" width="16" height="16" style="flex-shrink:0" aria-hidden="true"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
-WhatsApp</a>
-<a class="sb-btn" id="sb-call" aria-label="Call us">&#128222; Call</a>
-<a class="sb-btn" id="sb-maps" aria-label="Get directions">&#128205; Directions</a>
+<button class="sb-btn sb-primary" id="sb-book" aria-label="Book appointment">&#128197; Book</button>
+<a class="sb-btn sb-secondary" id="sb-wa" aria-label="WhatsApp us"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="#25D366" width="16" height="16" style="flex-shrink:0" aria-hidden="true"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+Chat</a>
+<a class="sb-btn sb-secondary" id="sb-call" aria-label="Call us">&#128222; Call</a>
+<a class="sb-btn sb-secondary" id="sb-maps" aria-label="Get directions">&#128205; Directions</a>
 </div>
 <style>
 #sticky-bar{display:none;position:fixed;bottom:0;left:0;right:0;height:62px;z-index:9999;background:var(--dark);border-top:1px solid rgba(255,255,255,0.1);grid-template-columns:repeat(4,1fr);}
 [data-theme="naturals"] #sticky-bar{background:#1A0533;}
 @media(max-width:992px){ #sticky-bar{display:grid;}}
-.sb-btn{display:flex;flex-direction:column;align-items:center;justify-content:center;gap:3px;font-family:'Jost',sans-serif;font-size:9px;letter-spacing:1.5px;text-transform:uppercase;font-weight:600;border:none;cursor:pointer;transition:all 0.2s;text-decoration:none;min-height:44px;padding:0 4px;color:#fff;}
-#sb-book{background:#1A73E8;}
-#sb-book:hover,#sb-book:active{background:#1557B0;}
-#sb-wa{background:#25D366;}
-#sb-wa:hover,#sb-wa:active{background:#1da851;}
-#sb-call{background:#5F6368;}
-#sb-call:hover,#sb-call:active{background:#474c52;}
-#sb-maps{background:#D93025;}
-#sb-maps:hover,#sb-maps:active{background:#b71c1c;}
+.sb-btn{display:flex;flex-direction:column;align-items:center;justify-content:center;gap:3px;font-family:'Jost',sans-serif;font-size:9px;letter-spacing:1.5px;text-transform:uppercase;font-weight:600;border:none;cursor:pointer;transition:all 0.2s;text-decoration:none;min-height:44px;padding:0 4px;}
+.sb-primary{background:var(--gold);color:var(--dark);}
+.sb-primary:hover,.sb-primary:active{background:var(--gold-pale);}
+.sb-secondary{background:transparent;color:rgba(255,255,255,0.7);}
+.sb-secondary:hover,.sb-secondary:active{color:#fff;background:rgba(255,255,255,0.07);}
+#sb-wa{color:#25D366;}
+#sb-wa:hover,#sb-wa:active{color:#1da851;}
 </style>
 <script>
 (function(){
@@ -830,15 +888,13 @@ try { saved = JSON.parse(localStorage.getItem('naturals-store')); } catch(e){}
 if (saved && saved.id) {
 applyStickyStore(saved);
 } else {
-/* No store saved — all 4 buttons open store picker. Use wrapper so
-openStorePicker resolves at click-time (it's defined by store_picker_js). */
+/* No store saved — all 4 buttons open store picker */
 ['sb-book','sb-wa','sb-call','sb-maps'].forEach(function(id){
 var el = document.getElementById(id);
 if (!el) return;
-var handler = function(e){ e.preventDefault(); openStorePicker(); };
 el.tagName === 'BUTTON'
-? el.addEventListener('click', handler)
-: (el.href='javascript:void(0)', el.addEventListener('click', handler));
+? el.addEventListener('click', openStorePicker)
+: (el.href='javascript:void(0)', el.addEventListener('click', openStorePicker));
 });
 }
 
@@ -875,21 +931,6 @@ localStorage.setItem('naturals-store',JSON.stringify(sd));
 closeStorePicker();
 if (typeof window._applyStickyStore === 'function') window._applyStickyStore(sd);
 showStoreIndicator(name);
-if (pageUrl) {
-var base = window.NATURALS_BASE || '';
-window.location.href = base + pageUrl;
-}
-}
-/* storePickerThen: direct action from homepage store cards — no modal needed */
-function storePickerThen(id,name,book,wa,call,maps,pageUrl,action){
-var sd = {id:id,name:name,book:book,wa:wa,call:call,maps:maps,pageUrl:pageUrl};
-localStorage.setItem('naturals-store',JSON.stringify(sd));
-if (typeof window._applyStickyStore === 'function') window._applyStickyStore(sd);
-showStoreIndicator(name);
-if (action === 'book') { window.open(book, '_blank'); }
-else if (action === 'wa') { window.open('https://wa.me/' + wa, '_blank'); }
-else if (action === 'call') { window.location.href = 'tel:' + call; }
-else if (action === 'maps') { window.open(maps, '_blank'); }
 }
 function showStoreIndicator(name){
 var ind = document.getElementById('store-indicator');

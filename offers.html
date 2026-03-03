@@ -77,11 +77,11 @@ a{text-decoration:none;color:inherit;}img{display:block;width:100%;object-fit:co
 #scroll-top{position:fixed;bottom:32px;right:32px;z-index:500;width:44px;height:44px;background:var(--dark);border:1px solid rgba(255,255,255,0.15);color:rgba(255,255,255,0.7);font-size:18px;display:flex;align-items:center;justify-content:center;cursor:pointer;opacity:0;pointer-events:none;transform:translateY(12px);transition:opacity 0.3s,transform 0.3s,background 0.2s;}
 #scroll-top.visible{opacity:1;pointer-events:auto;transform:translateY(0);}
 #scroll-top:hover{background:var(--green);}
-.btn-book{background:#1A73E8;color:#fff;padding:12px 22px;font-size:11px;letter-spacing:1.5px;text-transform:uppercase;font-weight:600;display:inline-flex;align-items:center;gap:8px;transition:all 0.3s;border-radius:6px;white-space:nowrap;text-decoration:none;}
+.btn-book{background:#1A73E8;color:#fff;padding:13px 22px;min-height:48px;font-size:11px;letter-spacing:1.5px;text-transform:uppercase;font-weight:600;display:inline-flex;align-items:center;gap:8px;transition:all 0.3s;border-radius:6px;white-space:nowrap;text-decoration:none;}
 .btn-book:hover{background:#1557B0;transform:translateY(-1px);}
-.btn-wa{background:#25D366;color:#fff;padding:12px 22px;font-size:11px;letter-spacing:1.5px;text-transform:uppercase;font-weight:600;display:inline-flex;align-items:center;gap:8px;transition:all 0.3s;border-radius:6px;white-space:nowrap;text-decoration:none;}
+.btn-wa{background:#25D366;color:#fff;padding:13px 22px;min-height:48px;font-size:11px;letter-spacing:1.5px;text-transform:uppercase;font-weight:600;display:inline-flex;align-items:center;gap:8px;transition:all 0.3s;border-radius:6px;white-space:nowrap;text-decoration:none;}
 .btn-wa:hover{background:#1da851;transform:translateY(-1px);}
-.btn-call{background:#5F6368;color:#fff;padding:12px 22px;font-size:11px;letter-spacing:1.5px;text-transform:uppercase;font-weight:600;display:inline-flex;align-items:center;gap:8px;transition:all 0.3s;border-radius:6px;white-space:nowrap;text-decoration:none;}
+.btn-call{background:#5F6368;color:#fff;padding:13px 22px;min-height:48px;font-size:11px;letter-spacing:1.5px;text-transform:uppercase;font-weight:600;display:inline-flex;align-items:center;gap:8px;transition:all 0.3s;border-radius:6px;white-space:nowrap;text-decoration:none;}
 .btn-call:hover{background:#474c52;transform:translateY(-1px);}
 .btn-maps{background:#D93025;color:#fff;border:none;padding:13px 18px;min-height:48px;font-size:11px;letter-spacing:1px;text-transform:uppercase;font-weight:600;display:inline-flex;align-items:center;gap:7px;transition:all 0.3s;border-radius:6px;white-space:nowrap;text-decoration:none;}
 .btn-maps:hover{background:#b71c1c;transform:translateY(-1px);}
@@ -89,6 +89,9 @@ a{text-decoration:none;color:inherit;}img{display:block;width:100%;object-fit:co
 .btn-gold:hover{background:var(--gold-pale);transform:translateY(-1px);}
 .btn-ghost{border:1px solid rgba(255,255,255,0.28);color:rgba(255,255,255,0.75);padding:12px 20px;font-size:11px;letter-spacing:2px;text-transform:uppercase;display:inline-flex;align-items:center;gap:8px;transition:all 0.3s;text-decoration:none;}
 .btn-ghost:hover{border-color:var(--gold);color:var(--gold);}
+@media(max-width:480px){
+.btn-book,.btn-wa,.btn-call,.btn-maps{font-size:10px;padding:13px 14px;}
+}
 
 footer{background:#080f0b;}
 [data-theme="naturals"] footer{background:#0D0120;}
@@ -239,22 +242,54 @@ Our Stores <span class="drawer-sub-caret">&#9662;</span>
 .drawer-sub li a{padding:10px 28px 10px 38px;font-size:11px;letter-spacing:1.5px;display:flex;flex-direction:column;gap:2px;}
 .drawer-sub li a small{font-size:9px;color:rgba(255,255,255,0.3);letter-spacing:1px;text-transform:uppercase;}
 .drawer-cta{padding:20px 28px;border-top:1px solid rgba(255,255,255,0.07);margin-top:auto;}
-.drawer-book-btn{display:flex;align-items:center;justify-content:center;gap:8px;background:#1A73E8;color:#fff;padding:14px;font-size:11px;letter-spacing:2px;text-transform:uppercase;font-weight:700;text-decoration:none;transition:all 0.3s;border-radius:6px;}
-.drawer-book-btn:hover{background:#1557B0;}
+.drawer-book-btn{display:flex;align-items:center;justify-content:center;gap:8px;background:var(--gold);color:var(--dark);padding:14px;font-size:11px;letter-spacing:2px;text-transform:uppercase;font-weight:700;text-decoration:none;transition:all 0.3s;border-radius:6px;}
+.drawer-book-btn:hover{background:var(--gold-pale);}
 @media(max-width:1024px){ #hamburger{display:flex;}}
 </style>
 <script>
-function openDrawer(){var d=document.getElementById('nav-drawer'),o=document.getElementById('nav-overlay'),h=document.getElementById('hamburger');if(!d||!o||!h)return;d.classList.add('open');o.classList.add('show');h.classList.add('open');h.setAttribute('aria-expanded','true');document.body.style.overflow='hidden';}
-function closeDrawer(){var d=document.getElementById('nav-drawer'),o=document.getElementById('nav-overlay'),h=document.getElementById('hamburger');if(!d||!o||!h)return;d.classList.remove('open');o.classList.remove('show');h.classList.remove('open');h.setAttribute('aria-expanded','false');document.body.style.overflow='';}
-function toggleDrawerSub(btn){var sub=btn.nextElementSibling;var isOpen=sub.classList.contains('open');sub.classList.toggle('open',!isOpen);btn.classList.toggle('open',!isOpen);btn.setAttribute('aria-expanded',!isOpen?'true':'false');}
-(function(){var h=document.getElementById('hamburger');if(h)h.addEventListener('click',function(){this.classList.contains('open')?closeDrawer():openDrawer();});})();
-document.addEventListener('keydown',function(e){if(e.key==='Escape')closeDrawer();});
-/* Close drawer when any internal link is tapped (handles same-page anchors too) */
-document.addEventListener('click',function(e){
-var a=e.target.closest('a[href]');
-if(a&&document.getElementById('nav-drawer')&&document.getElementById('nav-drawer').classList.contains('open')){
-closeDrawer();
+function openDrawer(){
+var d=document.getElementById('nav-drawer'),o=document.getElementById('nav-overlay'),h=document.getElementById('hamburger');
+if(!d||!o||!h)return;
+d.classList.add('open');o.classList.add('show');h.classList.add('open');
+h.setAttribute('aria-expanded','true');document.body.style.overflow='hidden';
 }
+function closeDrawer(){
+var d=document.getElementById('nav-drawer'),o=document.getElementById('nav-overlay'),h=document.getElementById('hamburger');
+if(!d||!o||!h)return;
+d.classList.remove('open');o.classList.remove('show');h.classList.remove('open');
+h.setAttribute('aria-expanded','false');document.body.style.overflow='';
+}
+function toggleDrawerSub(btn){
+var sub=btn.nextElementSibling;
+var isOpen=sub.classList.contains('open');
+sub.classList.toggle('open',!isOpen);
+btn.classList.toggle('open',!isOpen);
+btn.setAttribute('aria-expanded',!isOpen?'true':'false');
+}
+/* Attach hamburger click listener — use DOMContentLoaded to guarantee
+the element exists regardless of where in the page this script runs */
+document.addEventListener('DOMContentLoaded',function(){
+var h=document.getElementById('hamburger');
+if(h){
+h.addEventListener('click',function(e){
+e.stopPropagation();
+this.classList.contains('open')?closeDrawer():openDrawer();
+});
+}
+/* Close drawer on Escape */
+document.addEventListener('keydown',function(e){if(e.key==='Escape')closeDrawer();});
+/* Close drawer when a nav link inside the drawer is tapped.
+We scope to #nav-drawer only — avoids swallowing page-level link clicks */
+var drawer=document.getElementById('nav-drawer');
+if(drawer){
+drawer.addEventListener('click',function(e){
+var a=e.target.closest('a[href]');
+if(a) closeDrawer();
+});
+}
+/* Close drawer when clicking the overlay background */
+var overlay=document.getElementById('nav-overlay');
+if(overlay) overlay.addEventListener('click',closeDrawer);
 });
 </script>
 
@@ -295,6 +330,26 @@ closeDrawer();
 .hdr-nav{display:none;}
 .hdr-cta{display:none;}
 #store-indicator{display:none!important;}
+}
+/* Hamburger always visible — subtle bg ensures contrast on transparent hero header */
+#hamburger{
+background:rgba(0,0,0,0.28);
+border-radius:6px;
+padding:8px 7px;
+width:40px;height:36px;
+backdrop-filter:blur(4px);
+-webkit-backdrop-filter:blur(4px);
+transition:background 0.25s;
+}
+#hamburger:hover{background:rgba(0,0,0,0.5);}
+/* Once header has dark bg, strip the extra pill styling */
+#site-header.hdr-scrolled #hamburger,
+#site-header.hdr-solid #hamburger{
+background:transparent;
+padding:0;
+width:28px;height:20px;
+backdrop-filter:none;
+-webkit-backdrop-filter:none;
 }
 </style>
 
@@ -467,7 +522,7 @@ document.addEventListener('keydown',function(e){if(e.key==='Escape'){dd.classLis
 <li><a href="services.html">Services &amp; Pricing</a></li>
 <li><a href="offers.html">Offers</a></li>
 <li><a href="contact.html">Contact Us</a></li>
-<li><a href="index.html#about">About</a></li>
+<li><a href="about.html">About Us</a></li>
 </ul>
 </div>
 <div class="ft-col">
