@@ -92,6 +92,7 @@ loading="lazy"
 onerror="this.style.display='none'">
 </a>
 
+
 <button id="hamburger" aria-label="Menu">
 <span class="hb-line"></span>
 <span class="hb-line"></span>
@@ -101,27 +102,30 @@ onerror="this.style.display='none'">
 <div id="drawer-overlay"></div>
 
 <nav id="drawer">
+
+<div class="drawer-section">
 <a href="index.html">Home</a>
 <a href="services.html">Services</a>
 <a href="offers.html">Offers</a>
 <a href="contact.html">Contact</a>
+</div>
 
 <div class="drawer-divider"></div>
 
-<div class="drawer-divider"></div>
+<div class="drawer-section">
+<div class="drawer-title">Our Stores</div>
 
-<a href="index.html#our-stores" class="drawer-cta">
-Book Appointment
-</a>
+</div>
+
 </nav>
 
 <style>
 .hb-line{
 display:block;
-width:20px;
+width:22px;
 height:2px;
 background:#fff;
-margin:4px 0;
+margin:5px 0;
 transition:0.3s;
 }
 
@@ -129,48 +133,57 @@ transition:0.3s;
 #drawer{
 position:fixed;
 top:0;
-right:-320px;
-width:300px;
+right:-340px;
+width:320px;
 height:100%;
 background:var(--dark);
-padding:90px 30px 40px;
+padding:100px 30px 40px;
+display:flex;
+flex-direction:column;
+gap:28px;
+transition:right 0.35s ease;
+z-index:10001;
+overflow-y:auto;
+}
+
+.drawer-section{
 display:flex;
 flex-direction:column;
 gap:18px;
-transition:right 0.35s ease;
-z-index:10001;
 }
 
 #drawer a{
 color:#fff;
 text-decoration:none;
 font-size:14px;
-letter-spacing:1px;
+letter-spacing:1.5px;
 text-transform:uppercase;
+transition:opacity 0.2s ease;
+}
+
+#drawer a:hover{
+opacity:0.7;
+}
+
+.drawer-title{
+font-size:11px;
+letter-spacing:3px;
+text-transform:uppercase;
+color:var(--gold);
+margin-bottom:8px;
 }
 
 .drawer-divider{
 height:1px;
 background:rgba(255,255,255,0.1);
-margin:10px 0;
-}
-
-.drawer-cta{
-background:var(--gold);
-color:var(--dark) !important;
-padding:10px 16px;
-border-radius:6px;
-text-align:center;
-font-weight:600;
 }
 
 /* Overlay */
 #drawer-overlay{
 position:fixed;
 inset:0;
-background:rgba(0,0,0,0.5);
+background:rgba(0,0,0,0.6);
 backdrop-filter:blur(4px);
--webkit-backdrop-filter:blur(4px);
 opacity:0;
 pointer-events:none;
 transition:opacity 0.3s;
@@ -209,8 +222,13 @@ function toggle(){
 body.classList.toggle('drawer-open');
 }
 
+if(hamburger){
 hamburger.addEventListener('click', toggle);
+}
+
+if(overlay){
 overlay.addEventListener('click', toggle);
+}
 })();
 </script>
 
@@ -223,21 +241,15 @@ position:fixed;
 top:0;
 left:0;
 right:0;
-height:70px;
+height:78px;
+background:var(--nav-bg); /* ALWAYS dark */
 z-index:9999;
-transition:background 0.35s ease, backdrop-filter 0.35s ease;
-}
-
-#site-header.hdr-scrolled{
-background:var(--nav-bg);
-backdrop-filter:blur(20px);
--webkit-backdrop-filter:blur(20px);
 box-shadow:0 1px 0 rgba(255,255,255,0.07);
 }
 
 .hdr-inner{
-height:70px;
-padding:0 28px;
+height:78px;
+padding:0 32px;
 display:flex;
 align-items:center;
 justify-content:space-between;
@@ -246,7 +258,7 @@ margin:0 auto;
 }
 
 .hdr-logo img{
-height:32px;
+height:44px; /* Bigger logo */
 width:auto;
 filter:brightness(0) invert(1);
 }
@@ -254,38 +266,24 @@ filter:brightness(0) invert(1);
 /* Hamburger */
 #hamburger{
 position:relative;
-z-index:10000;
-background:rgba(0,0,0,0.28);
+z-index:10002;
+background:rgba(255,255,255,0.08);
 border-radius:6px;
-padding:8px 7px;
-width:40px;
-height:36px;
-backdrop-filter:blur(4px);
--webkit-backdrop-filter:blur(4px);
-transition:background 0.25s ease;
+padding:9px 8px;
+width:42px;
+height:38px;
 cursor:pointer;
+transition:background 0.25s ease;
 }
 
 #hamburger:hover{
-background:rgba(0,0,0,0.5);
+background:rgba(255,255,255,0.18);
 }
 
-/* Offset page for fixed header */
 body{
-padding-top:70px;
+padding-top:78px;
 }
 </style>
-
-<script>
-(function(){
-var hdr = document.getElementById('site-header');
-if(!hdr) return;
-
-window.addEventListener('scroll',function(){
-hdr.classList.toggle('hdr-scrolled',window.scrollY>60);
-},{passive:true});
-})();
-</script>
 <div class="page-hero">
 <div class="page-hero-inner">
 <div class="lbl">Our Policies</div>
