@@ -42,9 +42,9 @@ a{text-decoration:none;color:inherit;}
 .hero-inner{position:relative;z-index:2;text-align:center;padding:0 24px;max-width:800px;}
 .hero-tag{display:inline-flex;align-items:center;gap:12px;font-size:9px;letter-spacing:5px;text-transform:uppercase;color:var(--gold);font-weight:600;margin-bottom:24px;}
 .hero-tag::before,.hero-tag::after{content:'';width:24px;height:1px;background:var(--gold);}
-.hero h1{font-family:'Cormorant Garamond',serif;font-size:clamp(52px,8vw,100px);font-weight:300;color:#fff;line-height:0.92;letter-spacing:-2px;margin-bottom:20px;}
+.hero h1{font-family:'Cormorant Garamond',serif;font-size:clamp(36px,5vw,68px);font-weight:300;color:#fff;line-height:0.95;margin-bottom:16px;}
 .hero h1 em{font-style:italic;color:var(--gold);}
-.hero-sub{font-size:14px;color:rgba(255,255,255,0.5);font-weight:300;letter-spacing:1px;margin-bottom:40px;}
+.hero-sub{font-size:14px;color:rgba(255,255,255,0.7);font-weight:300;line-height:1.8;max-width:650px;margin:0 auto 40px;}
 .hero-btns{display:flex;gap:14px;justify-content:center;flex-wrap:wrap;}
 .btn-hero-primary{background:#1A73E8;color:#fff;padding:16px 36px;font-size:11px;letter-spacing:2.5px;text-transform:uppercase;font-weight:700;transition:all 0.3s;display:inline-flex;align-items:center;gap:8px;border-radius:10px;}
 .btn-hero-primary:hover{background:#1557B0;transform:translateY(-2px);}
@@ -149,6 +149,9 @@ transition:all 0.2s;border-radius:10px;background:#fff;text-decoration:none;
 .hoc-store a:hover{color:var(--gold);}
 .hoc-valid{font-size:11px;color:var(--green-soft);font-weight:700;}
 
+.offer-more{display:inline-flex;gap:6px;align-items:center;font-size:11px;color:var(--green-soft);cursor:pointer;margin-top:-6px;margin-bottom:12px;font-weight:600;}
+.offer-more:hover{text-decoration:underline;}
+
 .offers-view-all{text-align:center;}
 
 /* IMAGE-ONLY MODAL (gallery for featured offers) */
@@ -231,7 +234,7 @@ footer{background:#080f0b;}
 .stores-sec,.services-sec,.offers-sec,.reviews-sec{padding:60px 20px;}
 }
 @media(max-width:600px){
-.hero h1{font-size:clamp(40px,10vw,60px);}
+.hero h1{font-size:clamp(32px,8vw,48px);}
 .hero-btns{flex-direction:column;align-items:center;}
 .st-grid{grid-template-columns:1fr;}
 .svc-cats-grid{grid-template-columns:1fr;}
@@ -799,7 +802,7 @@ loading="lazy">
 <div class="hoc-badge">Special Offer</div>
 <div class="hoc-title">Pay 20000, Get 30000</div>
 <div class="hoc-details">Customer First Offer by Naturals Salon. Get ₹30,000 worth of salon services with easy EMI at ₹2,000 per month for 9 months. Valid for 1 year at 950+ Naturals salons, shareable with 4 family members. Limited to 100 customers. T&C apply.</div>
-<div class="offer-more" onclick="openDetailsModal(this)" role="button" tabindex="0" style="color:var(--green-soft);font-size:11px;cursor:pointer;margin-top:-8px;margin-bottom:12px;font-weight:600;">Read more →</div>
+<div class="offer-more" onclick="openDetailsModal(this)" role="button" tabindex="0">Read more <span>&rarr;</span></div>
 <div class="hoc-meta">
 <div class="hoc-store">
 <a href="stores/jpnagar.html">JP Nagar 5th Phase</a>
@@ -823,7 +826,7 @@ loading="lazy">
 <div class="hoc-badge">Special Offer</div>
 <div class="hoc-title">Pay 20000, Get 30000</div>
 <div class="hoc-details">Customer First Offer by Naturals Salon. Get ₹30,000 worth of salon services with easy EMI at ₹2,000 per month for 9 months. Valid for 1 year at 950+ Naturals salons, shareable with 4 family members. Limited to 100 customers. T&C apply.</div>
-<div class="offer-more" onclick="openDetailsModal(this)" role="button" tabindex="0" style="color:var(--green-soft);font-size:11px;cursor:pointer;margin-top:-8px;margin-bottom:12px;font-weight:600;">Read more →</div>
+<div class="offer-more" onclick="openDetailsModal(this)" role="button" tabindex="0">Read more <span>&rarr;</span></div>
 <div class="hoc-meta">
 <div class="hoc-store">
 <a href="stores/elements-mall.html">Elements Mall</a>
@@ -847,7 +850,7 @@ loading="lazy">
 <div class="hoc-badge">Special Offer</div>
 <div class="hoc-title">Pay 20000, Get 30000</div>
 <div class="hoc-details">Customer First Offer by Naturals Salon. Get ₹30,000 worth of salon services with easy EMI at ₹2,000 per month for 9 months. Valid for 1 year at 950+ Naturals salons, shareable with 4 family members. Limited to 100 customers. T&C apply.</div>
-<div class="offer-more" onclick="openDetailsModal(this)" role="button" tabindex="0" style="color:var(--green-soft);font-size:11px;cursor:pointer;margin-top:-8px;margin-bottom:12px;font-weight:600;">Read more →</div>
+<div class="offer-more" onclick="openDetailsModal(this)" role="button" tabindex="0">Read more <span>&rarr;</span></div>
 <div class="hoc-meta">
 <div class="hoc-store">
 <a href="stores/devasandra.html">Devasandra</a>
