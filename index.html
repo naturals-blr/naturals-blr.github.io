@@ -443,6 +443,7 @@ height:78px;
 background:var(--nav-bg); /* ALWAYS dark */
 z-index:9999;
 box-shadow:0 1px 0 rgba(255,255,255,0.07);
+overflow:hidden;
 }
 
 .hdr-inner{
@@ -453,9 +454,11 @@ align-items:center;
 justify-content:space-between;
 max-width:1380px;
 margin:0 auto;
+width:100%;
+min-width:0;
 }
 
-.hdr-logo{display:flex;align-items:center;gap:10px;}
+.hdr-logo{display:flex;align-items:center;gap:10px;flex-shrink:0;}
 .hdr-logo img{
 height:68px !important;
 width:auto !important;

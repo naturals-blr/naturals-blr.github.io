@@ -424,6 +424,7 @@ height:78px;
 background:var(--nav-bg); /* ALWAYS dark */
 z-index:9999;
 box-shadow:0 1px 0 rgba(255,255,255,0.07);
+overflow:hidden;
 }
 
 .hdr-inner{
@@ -434,9 +435,11 @@ align-items:center;
 justify-content:space-between;
 max-width:1380px;
 margin:0 auto;
+width:100%;
+min-width:0;
 }
 
-.hdr-logo{display:flex;align-items:center;gap:10px;}
+.hdr-logo{display:flex;align-items:center;gap:10px;flex-shrink:0;}
 .hdr-logo img{
 height:68px !important;
 width:auto !important;
@@ -1583,7 +1586,7 @@ else img.style.display='none';
 <script>
 /* Ribbons: urgent (<7 days) / NEW (<7 days since Valid_From) */
 (function(){
-var now = "2026-03-05T01:30:32.218964+05:30" ? new Date("2026-03-05T01:30:32.218964+05:30") : new Date();
+var now = "2026-03-05T04:30:24.928890+05:30" ? new Date("2026-03-05T04:30:24.928890+05:30") : new Date();
 function daysBetween(a,b){ return Math.floor((b.getTime()-a.getTime())/86400000); }
 var NEW_DAYS=7;
 
