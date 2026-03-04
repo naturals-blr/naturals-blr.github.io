@@ -113,10 +113,8 @@ img{display:block;width:100%;object-fit:cover;}
 .hero-sub{font-size:13px;color:rgba(255,255,255,0.45);font-weight:300;margin-bottom:28px;}
 
 /* ACTION BAR */
-.action-bar{display:flex;gap:10px;flex-wrap:wrap;}
-.hero-actions{max-width:420px;display:flex;flex-direction:column;gap:10px;}
-.hero-actions .secondary-actions{display:flex;gap:8px;width:100%;}
-.hero-actions .secondary-actions a{flex:1;justify-content:center;font-size:10px;padding:10px;}
+.hero-cta-row{display:flex;gap:8px;flex-wrap:wrap;max-width:520px;}
+.hero-cta-row a{flex:1;justify-content:center !important;font-size:10px !important;padding:10px 12px !important;min-height:44px !important;letter-spacing:1.2px !important;}
 
 /* INFO BAR */
 .info-bar{display:grid;grid-template-columns:repeat(4,1fr);background:var(--dark);border-top:1px solid rgba(255,255,255,0.06);}
@@ -170,8 +168,8 @@ a.info-val:hover{color:var(--gold);}
 .stylists-section{padding:36px 0;}
 .stylists-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:3px;margin-top:18px;}
 .stylist-card{background:#fff;overflow:hidden;}
-.stylist-photo{height:180px;overflow:hidden;}
-.stylist-photo img{height:100%;object-fit:cover;}
+.stylist-photo{width:110px;height:110px;border-radius:50%;overflow:hidden;margin:20px auto 0;border:3px solid var(--gold);}
+.stylist-photo img{width:100%;height:100%;object-fit:cover;object-position:top;}
 .stylist-info{padding:14px;}
 .stylist-name{font-family:'Cormorant Garamond',serif;font-size:17px;color:var(--text);font-weight:400;margin-bottom:3px;}
 .stylist-spec{font-size:10px;color:var(--gold);letter-spacing:1px;text-transform:uppercase;margin-bottom:2px;}
@@ -434,13 +432,13 @@ margin:0 auto;
 
 .hdr-logo{display:flex;align-items:center;gap:10px;}
 .hdr-logo img{
-height:52px !important; /* Bigger logo */
+height:68px !important;
 width:auto !important;
-max-height:52px;
+max-height:68px;
 filter:brightness(0) invert(1);
 }
 @media(max-width:768px){
-.hdr-logo img{height:46px !important; max-height:46px;}
+.hdr-logo img{height:56px !important; max-height:56px;}
 }
 
 /* Hamburger (new look) */
@@ -515,28 +513,27 @@ Premium hair, skin &amp; beauty services near KR Puram
 &middot; <a href="tel:+917259490009" style="color:rgba(255,255,255,0.55);">+91 72594 90009</a>
 </div>
 
-<div class="hero-actions">
+<div class="hero-cta-row">
 <a class="btn-book " href="https://naturals-salon-devasandra.setmore.com/" target="_blank" rel="noopener">Book Now</a>
 
-<div class="secondary-actions">
 <a class="btn-wa " href="https://wa.me/917259490009" target="_blank" rel="noopener"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="#25D366" width="18" height="18" style="flex-shrink:0" aria-hidden="true"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
 WhatsApp</a>
 
-<a class="btn-call " href="tel:+917259490009">Call</a>
+<a class="btn-call " href="tel:+917259490009">Call Us</a>
 
 <a class="btn-maps " href="https://maps.google.com/?q=Naturals+Salon+Devasandra" target="_blank" rel="noopener">Directions</a>
 
-</div>
 </div>
 </div>
 </section>
 
 <div class="info-bar">
 <div class="info-cell">
-<span class="info-icon">&#128222;</span>
+<span class="info-icon">&#128197;</span>
 <div>
-<div class="info-label">Call Us</div>
-<a href="tel:+917259490009" class="info-val">+91 72594 90009</a>
+<div class="info-label">Book Online</div>
+<a href="https://naturals-salon-devasandra.setmore.com/" target="_blank" class="info-val">Book Now</a>
+<span class="info-val-sm">Available 24/7</span>
 </div>
 </div>
 <div class="info-cell">
@@ -548,18 +545,17 @@ WhatsApp</a>
 </div>
 </div>
 <div class="info-cell">
-<span class="info-icon">&#128197;</span>
+<span class="info-icon">&#128222;</span>
 <div>
-<div class="info-label">Book Online</div>
-<a href="https://naturals-salon-devasandra.setmore.com/" target="_blank" class="info-val">Book Now</a>
-<span class="info-val-sm">Available 24/7</span>
+<div class="info-label">Call Us</div>
+<a href="tel:+917259490009" class="info-val">+91 72594 90009</a>
 </div>
 </div>
-<div class="info-cell">
+<div class="info-cell" style="min-width:0;">
 <span class="info-icon">&#128205;</span>
-<div>
+<div style="min-width:0;overflow:hidden;">
 <div class="info-label">Address</div>
-<a href="https://maps.google.com/?q=Naturals+Salon+Devasandra" target="_blank" class="info-val">2,3, 1st Floor, Maruthi Tower, No. 1, Devasandra Main Rd, opp. Lulu's Bakery, Basavanapura, KRPuram, Bengaluru, Karnataka 560036, India</a>
+<a href="https://maps.google.com/?q=Naturals+Salon+Devasandra" target="_blank" class="info-val" style="white-space:nowrap;overflow:hidden;text-overflow:ellipsis;">2,3, 1st Floor, Maruthi Tower, No. 1, Devasandra Main Rd, opp. Lulu's Bakery, Basavanapura, KRPuram, Bengaluru, Karnataka 560036, India</a>
 </div>
 </div>
 </div>
@@ -689,32 +685,15 @@ Facebook
 
 <div class="sidebar-col">
 <div class="sb-inner">
-<div class="sb-name">Naturals Devasandra</div>
-<div class="sb-area">KR Puram &middot; 560036</div>
-
-<a class="btn-book sb-bookwide" href="https://naturals-salon-devasandra.setmore.com/" target="_blank" rel="noopener">Book Appointment</a>
-
-<div class="sb-quick">
-<a href="https://wa.me/917259490009" target="_blank" class="sb-ql sb-ql-wa">
-<span><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="#25D366" width="16" height="16" style="flex-shrink:0" aria-hidden="true"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
-</span>WhatsApp
-</a>
-<a href="https://maps.google.com/?q=Naturals+Salon+Devasandra" target="_blank" class="sb-ql">
-<span>&#128205;</span>Directions
-</a>
-<a href="https://g.page/r/CRJ1lK0dw1n5EAg/review" target="_blank" class="sb-ql">
-<span>&#11088;</span>Review
-</a>
-<a href="../services.html?store=Store_N36" class="sb-ql">
-<span>&#128203;</span>Services
-</a>
-</div>
-
-<div class="sb-divider"></div>
 <div class="sb-sec">Hours</div>
 <div class="h-row"><span class="h-day">Mon &ndash; Fri</span><span>10:00 AM – 8:00 PM</span></div>
 <div class="h-row"><span class="h-day">Saturday</span><span>10:00 AM – 8:00 PM</span></div>
 <div class="h-row"><span class="h-day">Sunday</span><span>10:00 AM – 8:00 PM</span></div>
+
+<div class="sb-divider"></div>
+<a href="https://g.page/r/CRJ1lK0dw1n5EAg/review" target="_blank" class="bl-btn-review" style="display:flex;width:100%;justify-content:center;box-sizing:border-box;margin-bottom:4px;">
+<span style="font-size:16px;line-height:1;">&#11088;</span> Rate Us on Google
+</a>
 
 <div class="sb-divider"></div>
 <div class="sb-sec">Social</div>
