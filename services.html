@@ -69,17 +69,14 @@ a{text-decoration:none;color:inherit;}
 img{display:block;width:100%;object-fit:cover;}
 
 /* FILTERS */
-.filters-wrap{background:var(--filter-bg);padding:0 60px;position:sticky;top:70px;z-index:100;border-bottom:1px solid rgba(255,255,255,0.06);}
-.filter-row{display:flex;align-items:center;gap:16px;padding:16px 0;flex-wrap:wrap;width:100%;}
-.filter-group{display:flex;align-items:center;gap:8px;flex-wrap:wrap;}
+.filters-wrap{background:var(--filter-bg);padding:0 60px;position:sticky;top:70px;z-index:100;border-bottom:1px solid rgba(255,255,255,0.06);overflow-x:hidden;}
+.filter-row{display:flex;align-items:center;gap:16px;padding:16px 0;flex-wrap:nowrap;width:100%;min-width:0;}
+.filter-group{display:flex;align-items:center;gap:8px;flex-wrap:nowrap;min-width:0;}
+.filter-group.store-group{flex:1 1 auto;min-width:200px;}
+.filter-group.gender-group{flex:0 0 auto;min-width:180px;}
+.filter-group.cat-group{flex:0 0 auto;min-width:200px;}
+.filter-group.sort-group{flex:0 0 auto;min-width:80px;}
 .filter-lbl{font-size:10px;letter-spacing:2px;text-transform:uppercase;font-weight:600;white-space:nowrap;margin-right:4px;}
-
-/* Unified Button Style */
-.f-btn{background:rgba(255,255,255,0.03);border:1px solid rgba(255,255,255,0.1);color:rgba(255,255,255,0.4);padding:6px 14px;font-size:11px;letter-spacing:1px;text-transform:uppercase;cursor:pointer;transition:all 0.25s;font-family:'Jost',sans-serif;font-weight:500;border-radius:10px;}
-.f-btn:hover{border-color:rgba(255,255,255,0.3);color:#fff;}
-.f-btn.active{background:var(--gold);border-color:var(--gold);color:var(--dark);font-weight:600;}
-[data-theme="naturals"] .f-btn.active{background:var(--green-mid);border-color:var(--green-mid);color:#fff;}
-
 .filter-lbl-store{color:var(--green-soft);}
 .filter-lbl-gender{color:var(--gold);}
 .filter-lbl-cat{color:rgba(255,255,255,0.3);}
@@ -101,18 +98,23 @@ appearance:none;background:rgba(255,255,255,0.05);border:1px solid rgba(255,255,
 #cat-select.active{background:rgba(255,255,255,0.08);border-color:rgba(255,255,255,0.4);color:#fff;}
 #cat-select option{background:var(--dark);color:#fff;}
 
+/* Unified Button Style */
+.f-btn{background:rgba(255,255,255,0.03);border:1px solid rgba(255,255,255,0.1);color:rgba(255,255,255,0.4);padding:6px 14px;font-size:11px;letter-spacing:1px;text-transform:uppercase;cursor:pointer;transition:all 0.25s;font-family:'Jost',sans-serif;font-weight:500;border-radius:10px;}
+.f-btn:hover{border-color:rgba(255,255,255,0.3);color:#fff;}
+.f-btn.active{background:var(--gold);border-color:var(--gold);color:var(--dark);font-weight:600;}
+[data-theme="naturals"] .f-btn.active{background:var(--green-mid);border-color:var(--green-mid);color:#fff;}
+
 /* PRICE SORT BUTTONS */
-.sort-wrap{margin-left:auto;display:flex;align-items:center;}
 .price-sort-btn{
-background:rgba(255,255,255,0.05);border:1px solid rgba(255,255,255,0.12);
-color:rgba(255,255,255,0.7);padding:6px 12px;font-size:11px;letter-spacing:1px;
+background:rgba(139, 92, 246, 0.15);border:1px solid rgba(139, 92, 246, 0.3);
+color:rgba(139, 92, 246, 0.9);padding:6px 12px;font-size:11px;letter-spacing:1px;
 text-transform:uppercase;font-family:'Jost',sans-serif;font-weight:500;cursor:pointer;
 transition:all 0.3s;border-radius:10px;display:flex;align-items:center;gap:6px;
 min-width:80px;justify-content:center;
 }
-.price-sort-btn:hover{border-color:rgba(255,255,255,0.3);color:#fff;}
-.price-sort-btn.active{background:var(--gold);border-color:var(--gold);color:var(--dark);font-weight:600;}
-[data-theme="naturals"] .price-sort-btn.active{background:var(--green-mid);border-color:var(--green-mid);color:#fff;}
+.price-sort-btn:hover{border-color:rgba(139, 92, 246, 0.6);color:#8B5CF6;background:rgba(139, 92, 246, 0.25);}
+.price-sort-btn.active{background:rgba(139, 92, 246, 0.9);border-color:#8B5CF6;color:#fff;font-weight:600;}
+[data-theme="naturals"] .price-sort-btn.active{background:rgba(139, 92, 246, 0.8);border-color:#8B5CF6;color:#fff;}
 .price-sort-btn .rupee{font-size:12px;font-weight:600;}
 .price-sort-btn .sort-icon{font-size:10px;transition:transform 0.2s;}
 .price-sort-btn.desc .sort-icon{transform:rotate(180deg);}
@@ -208,16 +210,31 @@ footer{background:#080f0b;}
 @media(max-width:900px){
 .page-hero-inner{padding:44px 20px 0;}
 .filters-wrap{padding:0 20px 18px;top:60px;}
-.filter-row{gap:6px;}
-.results-bar{padding:12px 20px;}
+.filter-row{gap:12px;}
+.filter-group.store-group{min-width:160px;}
+.filter-group.gender-group{min-width:140px;}
+.filter-group.cat-group{min-width:160px;}
+.filter-group.sort-group{min-width:70px;}
+#store-select, #cat-select{min-width:140px;}
 .svc-grid{grid-template-columns:1fr 1fr;}
 #scroll-top{bottom:20px;right:20px;width:40px;height:40px;font-size:16px;}
 }
 @media(max-width:600px){
+.filters-wrap{padding:0 16px 18px;}
+.filter-row{gap:8px;flex-wrap:wrap;}
+.filter-group.store-group{flex:1 1 100%;min-width:auto;}
+.filter-group.gender-group{flex:1 1 100%;min-width:auto;}
+.filter-group.cat-group{flex:1 1 100%;min-width:auto;}
+.filter-group.sort-group{flex:0 0 auto;min-width:70px;}
+#store-select, #cat-select{min-width:100%;}
 .filter-lbl{display:none;}
 .cat-filter-scroll{flex-wrap:wrap;}
 .svc-grid{grid-template-columns:1fr;}
-#cat-select{min-width:160px;}
+}
+@media(max-width:480px){
+.filters-wrap{padding:0 12px 18px;}
+.filter-row{gap:6px;}
+.filter-group{gap:6px;}
 }
 </style>
 <script>(function(){var t=localStorage.getItem('naturals-theme')||'luxury';document.documentElement.setAttribute('data-theme',t);})();</script>
@@ -505,10 +522,10 @@ loading="eager">
 
 <div class="filters-wrap">
 <div class="filter-row">
-<div class="filter-group">
+<div class="filter-group store-group">
 <span class="filter-lbl filter-lbl-store">Store</span>
 <div class="cat-select-wrap">
-<select id="store-select" onchange="setStoreFilter(this)">
+<select id="store-select" onchange="setStoreDropdown(this)">
 <option value="all">All Stores</option>
 <option value="Store_N78">JP Nagar 5th Phase</option>
 <option value="Store_N77">Elements Mall</option>
@@ -519,14 +536,14 @@ loading="eager">
 </div>
 </div>
 
-<div class="filter-group">
+<div class="filter-group gender-group">
 <span class="filter-lbl filter-lbl-gender">Gender</span>
 <button class="f-btn active" data-filter="gender" data-value="all" onclick="setFilter('gender','all',this)">All</button>
 <button class="f-btn" data-filter="gender" data-value="female" onclick="setFilter('gender','female',this)">Female</button>
 <button class="f-btn" data-filter="gender" data-value="male" onclick="setFilter('gender','male',this)">Male</button>
 </div>
 
-<div class="filter-group">
+<div class="filter-group cat-group">
 <span class="filter-lbl filter-lbl-cat">Category</span>
 <div class="cat-select-wrap">
 <select id="cat-select" onchange="setCatDropdown(this)">
@@ -535,12 +552,11 @@ loading="eager">
 </div>
 </div>
 
-<div class="sort-wrap">
+<div class="filter-group sort-group">
 <button id="price-sort-btn" class="price-sort-btn" onclick="handlePriceSort()">
 <span class="rupee">₹</span>
 <span class="sort-icon">⇅</span>
 </button>
-</div>
 </div>
 </div>
 </div>

@@ -80,8 +80,8 @@ a{text-decoration:none;color:inherit;}img{display:block;width:100%;object-fit:co
 
 /* FILTER BAR */
 .filter-bar{background:var(--filter-bg);padding:0 60px;position:sticky;top:70px;z-index:100;border-bottom:1px solid rgba(255,255,255,0.06);overflow-x:hidden;}
-.filter-row{display:flex;align-items:center;gap:14px;padding:16px 0;width:100%;min-width:0;flex-wrap:nowrap;}
-.filter-group{display:flex;align-items:center;gap:8px;flex-wrap:wrap;min-width:0;}
+.filter-row{display:flex;align-items:center;gap:16px;padding:16px 0;width:100%;min-width:0;flex-wrap:nowrap;}
+.filter-group{display:flex;align-items:center;gap:8px;flex-wrap:nowrap;min-width:0;}
 .filter-group.store-group{flex:1 1 auto;min-width:200px;}
 .filter-group.sort-group{flex:0 0 auto;min-width:160px;}
 .filter-lbl{font-size:10px;letter-spacing:2px;text-transform:uppercase;font-weight:600;color:var(--green-soft);white-space:nowrap;margin-right:4px;}
@@ -1606,7 +1606,7 @@ else img.style.display='none';
 <script>
 /* Ribbons: urgent (<7 days) / NEW (<7 days since Valid_From) */
 (function(){
-var now = "2026-03-05T04:53:24.252054+05:30" ? new Date("2026-03-05T04:53:24.252054+05:30") : new Date();
+var now = "2026-03-05T05:03:54.588251+05:30" ? new Date("2026-03-05T05:03:54.588251+05:30") : new Date();
 function daysBetween(a,b){ return Math.floor((b.getTime()-a.getTime())/86400000); }
 var NEW_DAYS=7;
 
