@@ -1,3 +1,4 @@
+"
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -35,13 +36,12 @@
 body{font-family:'Jost',sans-serif;background:var(--cream);color:var(--text);}
 a{text-decoration:none;color:inherit;}img{display:block;width:100%;object-fit:cover;}
 
-.page-hero{padding-top:70px;background:var(--dark);}
-.page-hero-inner{padding:60px 60px 60px;}
-.lbl{font-size:9px;letter-spacing:5px;text-transform:uppercase;color:var(--gold);font-weight:600;margin-bottom:16px;display:flex;align-items:center;gap:12px;}
-.lbl::before{content:'';width:18px;height:1px;background:var(--gold);}
-.page-hero-inner h1{font-family:'Cormorant Garamond',serif;font-size:clamp(42px,6vw,80px);font-weight:300;color:#fff;line-height:0.95;margin-bottom:14px;}
-.page-hero-inner h1 em{font-style:italic;color:var(--gold);}
-.page-hero-inner p{font-size:14px;color:rgba(255,255,255,0.42);font-weight:300;line-height:1.8;max-width:560px;}
+/* HERO */
+.page-hero{background:var(--dark);position:relative;overflow:hidden;}
+.page-hero-bg{position:absolute;inset:0;}
+.page-hero-bg img{width:100%;height:100%;object-fit:cover;filter:saturate(1.05);}
+.page-hero-ov{position:absolute;inset:0;background:linear-gradient(135deg,var(--hero-tint) 0%,var(--hero-tint2) 60%,rgba(0,0,0,0.12) 100%);}
+.page-hero-inner{position:relative;z-index:2;padding:60px 60px 60px;}
 /* LAYOUT */
 .contact-wrap{max-width:1160px;margin:0 auto;padding:64px 60px;display:grid;grid-template-columns:1fr 420px;gap:64px;align-items:start;}
 /* FORM */
@@ -336,7 +336,7 @@ filter:brightness(0) invert(1);
 @media(max-width:768px){
 #site-header, .hdr-inner{height:58px;}
 .hdr-inner{padding:0 16px;}
-.hdr-logo img{height:42px !important; max-height:42px;}
+.hdr-logo img{height:48px !important; max-height:48px;}
 }
 
 /* Hamburger (new look) */
@@ -398,6 +398,14 @@ body{padding-top:58px;}
 }
 </style>
 <div class="page-hero">
+<div class="page-hero-bg">
+<img class="hero-resolver-img" 
+data-slug="contact" 
+data-fallback="https://images.unsplash.com/photo-1534536281715-e28d76689b4d?w=1800&q=85"
+alt="Contact <em>Us</em>"
+loading="eager">
+</div>
+<div class="page-hero-ov"></div>
 <div class="page-hero-inner">
 <div class="lbl">Get In Touch</div>
 <h1>Contact <em>Us</em></h1>
@@ -881,8 +889,13 @@ else bar.classList.remove('is-visible');
 }, { threshold: 0 });
 
 var target = document.querySelector('.hero-btns, .hero-cta-wrap, .page-hero-inner');
-if(target) observer.observe(target);
-else bar.classList.add('is-visible'); /* Fallback if no hero buttons found */
+var isHomeOrStore = bar.getAttribute('data-page-type') === 'homepage' || bar.getAttribute('data-page-type') === 'store';
+
+if(target && isHomeOrStore){
+observer.observe(target);
+} else {
+bar.classList.add('is-visible'); /* Show on load for other pages */
+}
 } else if (bar) {
 bar.classList.add('is-visible'); /* Legacy fallback */
 }
@@ -1003,6 +1016,34 @@ if(nt)nt.classList.toggle('active',saved==='naturals');
 })();
 </script>
 
+<script>
+(function(){
+var EXT=['.jpg','.jpeg','.png'];
+document.querySelectorAll('img.hero-resolver-img').forEach(function(img){
+var slug = img.getAttribute('data-slug');
+var fallback = img.getAttribute('data-fallback');
+if(!slug) return;
+
+var i=0;
+var base = 'images/heroes/' + slug;
+img.src = base + EXT[i];
+
+img.onerror = function(){
+i++;
+if(i < EXT.length) {
+img.src = base + EXT[i];
+} else if(fallback) {
+img.src = fallback;
+img.onerror = null;
+} else {
+img.style.display = 'none';
+}
+};
+});
+})();
+</script>
+
+</body>
 <script>
 function submitForm() {
 var name = document.getElementById('f-name').value.trim();

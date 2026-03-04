@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<meta name="description" content="Naturals Salon &amp; Spa Bangalore — 5 locations across JP Nagar, Elements Mall, Devasandra, Frazer Town &amp; Hennur. Expert hair, skin &amp; bridal services. Book online.">
+<meta name="description" content="Naturals Salon &amp; Spa Bangalore — 5 locations across South Bangalore, Nagavara, KR Puram, Pulikeshi Nagar, Hennur Cross. Expert hair, skin &amp; bridal services. Book online.">
 <title>Naturals Salon &amp; Spa | Bangalore — 5 Locations</title>
 <link rel="canonical" href="https://naturals-blr.github.io/index.html">
 <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -195,18 +195,26 @@ footer{background:#080f0b;}
 @media(max-width:960px){.ft-top{grid-template-columns:1fr 1fr;gap:28px;padding:36px 20px 24px;}.ft-bottom{padding:14px 20px;flex-direction:column;text-align:center;}}
 @media(max-width:600px){.ft-top{grid-template-columns:1fr;padding:28px 16px 20px;}}
 
-/* REVIEWS */
-.reviews-sec{padding:100px 60px;background:var(--cream);}
-.rev-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:20px;max-width:1200px;margin:0 auto;}
-.rev-card{background:#fff;padding:32px;border-radius:20px;border:1px solid rgba(0,0,0,0.06);box-shadow:0 10px 30px rgba(0,0,0,0.04);display:flex;flex-direction:column;gap:16px;transition:transform 0.3s;}
-.rev-card:hover{transform:translateY(-5px);}
-.rev-stars{color:var(--gold);font-size:14px;display:flex;gap:3px;}
-.rev-text{font-size:14px;color:var(--text-mid);line-height:1.7;font-style:italic;flex:1;}
-.rev-user{display:flex;align-items:center;gap:12px;}
-.rev-user-img{width:40px;height:40px;border-radius:50%;background:var(--green);color:#fff;display:flex;align-items:center;justify-content:center;font-weight:600;font-size:14px;text-transform:uppercase;}
+<style>
+.rev-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:24px;max-width:1200px;margin:0 auto;}
+.rev-card{background:#fff;padding:32px;border-radius:24px;border:1px solid rgba(0,0,0,0.06);box-shadow:0 10px 40px rgba(0,0,0,0.04);display:flex;flex-direction:column;gap:18px;transition:all 0.3s ease;position:relative;}
+.rev-card:hover{transform:translateY(-6px);box-shadow:0 20px 60px rgba(0,0,0,0.08);border-color:var(--gold);}
+.rev-stars{color:var(--gold);font-size:14px;display:flex;gap:4px;letter-spacing:1px;}
+.rev-text{font-size:15px;color:var(--text-mid);line-height:1.75;font-style:italic;flex:1;font-weight:300;}
+.rev-user{display:flex;align-items:center;gap:14px;border-top:1px solid rgba(0,0,0,0.04);padding-top:16px;}
+.rev-user-img{width:42px;height:42px;border-radius:50%;background:var(--green);color:#fff;display:flex;align-items:center;justify-content:center;font-weight:600;font-size:14px;text-transform:uppercase;box-shadow:0 4px 12px rgba(0,0,0,0.1);}
 .rev-user-info{display:flex;flex-direction:column;}
-.rev-name{font-size:14px;font-weight:600;color:var(--text);}
-.rev-store{font-size:11px;color:var(--gold);text-transform:uppercase;letter-spacing:1px;}
+.rev-name{font-size:14px;font-weight:600;color:var(--text);letter-spacing:0.5px;}
+.rev-store{font-size:10px;color:var(--gold);text-transform:uppercase;letter-spacing:2px;font-weight:600;margin-top:2px;}
+
+@media(max-width:992px){
+.rev-grid{grid-template-columns:1fr 1fr;gap:20px;}
+}
+@media(max-width:640px){
+.rev-grid{grid-template-columns:1fr;}
+.rev-card{padding:24px;}
+}
+</style>
 
 @media(max-width:992px){
 .st-grid{grid-template-columns:1fr 1fr;}
@@ -422,7 +430,7 @@ filter:brightness(0) invert(1);
 @media(max-width:768px){
 #site-header, .hdr-inner{height:58px;}
 .hdr-inner{padding:0 16px;}
-.hdr-logo img{height:42px !important; max-height:42px;}
+.hdr-logo img{height:48px !important; max-height:48px;}
 }
 
 /* Hamburger (new look) */
@@ -506,7 +514,7 @@ Choose Your Store</button>
 <section class="stores-sec" id="our-stores" aria-label="Our store locations">
 <div class="sec-hdr reveal">
 <div class="lbl">Our Locations</div>
-<h2>Five stores.<br><em>One city.</em></h2>
+<h2>5 stores.<br><em>One city.</em></h2>
 <p>Walk in or book online — premium beauty services across Bangalore.</p>
 </div>
 
@@ -784,6 +792,7 @@ loading="lazy">
 <div class="hoc-badge">Special Offer</div>
 <div class="hoc-title">Pay 20000, Get 30000</div>
 <div class="hoc-details">Customer First Offer by Naturals Salon. Get ₹30,000 worth of salon services with easy EMI at ₹2,000 per month for 9 months. Valid for 1 year at 950+ Naturals salons, shareable with 4 family members. Limited to 100 customers. T&C apply.</div>
+<div class="offer-more" onclick="openDetailsModal(this)" role="button" tabindex="0" style="color:var(--green-soft);font-size:11px;cursor:pointer;margin-top:-8px;margin-bottom:12px;font-weight:600;">Read more →</div>
 <div class="hoc-meta">
 <div class="hoc-store">
 <a href="stores/jpnagar.html">JP Nagar 5th Phase</a>
@@ -807,6 +816,7 @@ loading="lazy">
 <div class="hoc-badge">Special Offer</div>
 <div class="hoc-title">Pay 20000, Get 30000</div>
 <div class="hoc-details">Customer First Offer by Naturals Salon. Get ₹30,000 worth of salon services with easy EMI at ₹2,000 per month for 9 months. Valid for 1 year at 950+ Naturals salons, shareable with 4 family members. Limited to 100 customers. T&C apply.</div>
+<div class="offer-more" onclick="openDetailsModal(this)" role="button" tabindex="0" style="color:var(--green-soft);font-size:11px;cursor:pointer;margin-top:-8px;margin-bottom:12px;font-weight:600;">Read more →</div>
 <div class="hoc-meta">
 <div class="hoc-store">
 <a href="stores/elements-mall.html">Elements Mall</a>
@@ -830,6 +840,7 @@ loading="lazy">
 <div class="hoc-badge">Special Offer</div>
 <div class="hoc-title">Pay 20000, Get 30000</div>
 <div class="hoc-details">Customer First Offer by Naturals Salon. Get ₹30,000 worth of salon services with easy EMI at ₹2,000 per month for 9 months. Valid for 1 year at 950+ Naturals salons, shareable with 4 family members. Limited to 100 customers. T&C apply.</div>
+<div class="offer-more" onclick="openDetailsModal(this)" role="button" tabindex="0" style="color:var(--green-soft);font-size:11px;cursor:pointer;margin-top:-8px;margin-bottom:12px;font-weight:600;">Read more →</div>
 <div class="hoc-meta">
 <div class="hoc-store">
 <a href="stores/devasandra.html">Devasandra</a>
@@ -845,7 +856,7 @@ loading="lazy">
 </div>
 </section>
 
-<section class="reviews-sec" id="testimonials" aria-label="Customer reviews">
+<section class="reviews-sec" id="testimonials" aria-label="Customer reviews" style="padding:100px 60px;">
 <div class="sec-hdr reveal">
 <div class="lbl">Social Proof</div>
 <h2>Grateful <em>stories.</em></h2>
@@ -865,6 +876,7 @@ loading="lazy">
 </div>
 </div>
 </div>
+
 <div class="rev-card reveal">
 <div class="rev-stars">
 ★★★★★ </div>
@@ -877,6 +889,7 @@ loading="lazy">
 </div>
 </div>
 </div>
+
 <div class="rev-card reveal">
 <div class="rev-stars">
 ★★★★★ </div>
@@ -889,6 +902,7 @@ loading="lazy">
 </div>
 </div>
 </div>
+
 <div class="rev-card reveal">
 <div class="rev-stars">
 ★★★★★ </div>
@@ -901,6 +915,7 @@ loading="lazy">
 </div>
 </div>
 </div>
+
 <div class="rev-card reveal">
 <div class="rev-stars">
 ★★★★★ </div>
@@ -913,6 +928,7 @@ loading="lazy">
 </div>
 </div>
 </div>
+
 <div class="rev-card reveal">
 <div class="rev-stars">
 ★★★★★ </div>
@@ -925,6 +941,7 @@ loading="lazy">
 </div>
 </div>
 </div>
+
 </div>
 </section>
 
@@ -1203,8 +1220,13 @@ else bar.classList.remove('is-visible');
 }, { threshold: 0 });
 
 var target = document.querySelector('.hero-btns, .hero-cta-wrap, .page-hero-inner');
-if(target) observer.observe(target);
-else bar.classList.add('is-visible'); /* Fallback if no hero buttons found */
+var isHomeOrStore = bar.getAttribute('data-page-type') === 'homepage' || bar.getAttribute('data-page-type') === 'store';
+
+if(target && isHomeOrStore){
+observer.observe(target);
+} else {
+bar.classList.add('is-visible'); /* Show on load for other pages */
+}
 } else if (bar) {
 bar.classList.add('is-visible'); /* Legacy fallback */
 }
@@ -1323,6 +1345,39 @@ if(lx)lx.classList.toggle('active',saved==='luxury');
 if(nt)nt.classList.toggle('active',saved==='naturals');
 });
 })();
+</script>
+
+<div id="details-overlay" onclick="closeDetailsModal()" style="position:fixed;inset:0;background:rgba(0,0,0,0.6);backdrop-filter:blur(4px);z-index:11000;display:none;"></div>
+<div id="details-modal" role="dialog" aria-modal="true" aria-label="Offer details" style="position:fixed;top:50%;left:50%;transform:translate(-50%,-50%);width:92%;max-width:620px;max-height:84vh;overflow:auto;background:var(--cream);z-index:11001;display:none;border-radius:14px;box-shadow:0 24px 80px rgba(0,0,0,0.45);">
+<div class="dm-head" style="background:var(--dark);padding:20px 22px;position:sticky;top:0;">
+<div class="dm-title" id="dm-title" style="font-family:'Cormorant Garamond',serif;font-size:24px;font-weight:300;color:#fff;line-height:1.1;margin-bottom:4px;"></div>
+<div class="dm-meta" id="dm-meta" style="font-size:10px;letter-spacing:2px;text-transform:uppercase;color:rgba(255,255,255,0.38);"></div>
+<button class="dm-close" onclick="closeDetailsModal()" aria-label="Close" style="position:absolute;top:14px;right:14px;width:40px;height:40px;border-radius:10px;background:rgba(255,255,255,0.10);border:1px solid rgba(255,255,255,0.18);color:#fff;font-size:20px;cursor:pointer;">×</button>
+</div>
+<div class="dm-body" style="padding:18px 22px;">
+<p id="dm-body" style="font-size:13px;color:var(--text-mid);line-height:1.85;font-weight:300;white-space:pre-wrap;"></p>
+</div>
+</div>
+
+<script>
+function openDetailsModal(el){
+var card=el.closest('.hoc'); if(!card) return;
+var title=card.getAttribute('data-offer-title') || 'Offer';
+var store=(card.querySelector('.hoc-store a')||{}).textContent || '';
+var valid=(card.querySelector('.hoc-valid')||{}).textContent || '';
+var details=(card.querySelector('.hoc-details')||{}).textContent || '';
+document.getElementById('dm-title').textContent=title;
+document.getElementById('dm-meta').textContent=(store?store+' • ':'')+valid;
+document.getElementById('dm-body').textContent=details;
+document.getElementById('details-overlay').style.display='block';
+document.getElementById('details-modal').style.display='block';
+document.body.style.overflow='hidden';
+}
+function closeDetailsModal(){
+document.getElementById('details-overlay').style.display='none';
+document.getElementById('details-modal').style.display='none';
+document.body.style.overflow='';
+}
 </script>
 
 <div id="ho-img-overlay" onclick="closeHomeOfferModal()"></div>

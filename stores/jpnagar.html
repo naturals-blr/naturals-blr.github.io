@@ -211,12 +211,26 @@ display:flex;align-items:center;justify-content:center;
 .stylist-spec{font-size:10px;color:var(--gold);letter-spacing:1px;text-transform:uppercase;margin-bottom:2px;}
 .stylist-exp{font-size:11px;color:var(--text-light);}
 
-/* REVIEWS */
-.reviews-block{background:#fff;padding:36px;margin-bottom:3px;}
-.review-quote{border-left:3px solid var(--gold);padding:14px 20px;background:var(--cream);}
-.review-stars{color:var(--gold);font-size:13px;letter-spacing:1px;margin-bottom:6px;}
-.review-text{font-family:'Cormorant Garamond',serif;font-size:17px;font-style:italic;color:var(--text);line-height:1.6;margin-bottom:6px;}
-.review-by{font-size:11px;color:var(--text-light);letter-spacing:1px;text-transform:uppercase;}
+<style>
+.rev-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:24px;max-width:1200px;margin:0 auto;}
+.rev-card{background:#fff;padding:32px;border-radius:24px;border:1px solid rgba(0,0,0,0.06);box-shadow:0 10px 40px rgba(0,0,0,0.04);display:flex;flex-direction:column;gap:18px;transition:all 0.3s ease;position:relative;}
+.rev-card:hover{transform:translateY(-6px);box-shadow:0 20px 60px rgba(0,0,0,0.08);border-color:var(--gold);}
+.rev-stars{color:var(--gold);font-size:14px;display:flex;gap:4px;letter-spacing:1px;}
+.rev-text{font-size:15px;color:var(--text-mid);line-height:1.75;font-style:italic;flex:1;font-weight:300;}
+.rev-user{display:flex;align-items:center;gap:14px;border-top:1px solid rgba(0,0,0,0.04);padding-top:16px;}
+.rev-user-img{width:42px;height:42px;border-radius:50%;background:var(--green);color:#fff;display:flex;align-items:center;justify-content:center;font-weight:600;font-size:14px;text-transform:uppercase;box-shadow:0 4px 12px rgba(0,0,0,0.1);}
+.rev-user-info{display:flex;flex-direction:column;}
+.rev-name{font-size:14px;font-weight:600;color:var(--text);letter-spacing:0.5px;}
+.rev-store{font-size:10px;color:var(--gold);text-transform:uppercase;letter-spacing:2px;font-weight:600;margin-top:2px;}
+
+@media(max-width:992px){
+.rev-grid{grid-template-columns:1fr 1fr;gap:20px;}
+}
+@media(max-width:640px){
+.rev-grid{grid-template-columns:1fr;}
+.rev-card{padding:24px;}
+}
+</style>
 
 /* FOLLOW */
 .follow-block{padding:36px 0;text-align:center;}
@@ -476,7 +490,7 @@ filter:brightness(0) invert(1);
 @media(max-width:768px){
 #site-header, .hdr-inner{height:58px;}
 .hdr-inner{padding:0 16px;}
-.hdr-logo img{height:42px !important; max-height:42px;}
+.hdr-logo img{height:48px !important; max-height:48px;}
 }
 
 /* Hamburger (new look) */
@@ -729,22 +743,34 @@ onerror="this.onerror=null;this.src='../images/stylists/stylist_default.png'">
 </div>
 
 
-<div class="reviews-block reveal">
+<div class="reviews-block reveal" style="background:#fff;padding:36px;margin-bottom:3px;">
 <div class="lbl">Client Love</div>
 <h2 class="sec-title">What clients <em>say about us</em></h2>
-<div style="display:flex;flex-direction:column;gap:16px;margin-bottom:24px;">
-<div class="review-quote">
-<div class="review-stars">
+<div class="rev-grid" style="grid-template-columns:1fr;gap:16px;margin-bottom:24px;">
+<div class="rev-card reveal">
+<div class="rev-stars">
 ★★★★★ </div>
-<p class="review-text">&ldquo;I have visited the place today and got my hair cut done …and mine was curly hair I really got the best output I can have and it’s done by Gufran … do check it if you really need a good hair treatment&rdquo;</p>
-<span class="review-by">&#8212; Lasyasree Maddukuri</span>
+<div class="rev-text">"I have visited the place today and got my hair cut done …and mine was curly hair I really got the best output I can have and it’s done by Gufran … do check it if you really need a good hair treatment"</div>
+<div class="rev-user">
+<div class="rev-user-img">L</div>
+<div class="rev-user-info">
+<div class="rev-name">Lasyasree Maddukuri</div>
 </div>
-<div class="review-quote">
-<div class="review-stars">
+</div>
+</div>
+
+<div class="rev-card reveal">
+<div class="rev-stars">
 ★★★★★ </div>
-<p class="review-text">&ldquo;I'm soo happy with Natural salon haircut and thank you so much wodrafull extent job THYAGARAJ sir, now onwards i will visit every time and I will haircut with Thyagaraja sir...&rdquo;</p>
-<span class="review-by">&#8212; Yallappa Madar</span>
+<div class="rev-text">"I'm soo happy with Natural salon haircut and thank you so much wodrafull extent job THYAGARAJ sir, now onwards i will visit every time and I will haircut with Thyagaraja sir..."</div>
+<div class="rev-user">
+<div class="rev-user-img">Y</div>
+<div class="rev-user-info">
+<div class="rev-name">Yallappa Madar</div>
 </div>
+</div>
+</div>
+
 </div>
 <a href="https://g.page/Naturals_JPNagar5thPhase/review?rc/" target="_blank" class="bl-btn-review">
 <span style="font-size:16px;line-height:1;">&#11088;</span> Rate Us on Google
@@ -1065,8 +1091,13 @@ else bar.classList.remove('is-visible');
 }, { threshold: 0 });
 
 var target = document.querySelector('.hero-btns, .hero-cta-wrap, .page-hero-inner');
-if(target) observer.observe(target);
-else bar.classList.add('is-visible'); /* Fallback if no hero buttons found */
+var isHomeOrStore = bar.getAttribute('data-page-type') === 'homepage' || bar.getAttribute('data-page-type') === 'store';
+
+if(target && isHomeOrStore){
+observer.observe(target);
+} else {
+bar.classList.add('is-visible'); /* Show on load for other pages */
+}
 } else if (bar) {
 bar.classList.add('is-visible'); /* Legacy fallback */
 }
