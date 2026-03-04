@@ -98,6 +98,11 @@ text-decoration:none;color:#fff;font-size:18px;
 .st-btn-maps{background:#D93025;border-color:rgba(217,48,37,0.45);}
 .st-btn-ig{background:#fff;border-color:rgba(225,48,108,0.25);}
 .st-btn-fb{background:#fff;border-color:rgba(24,119,242,0.30);}
+.st-btn svg{width:18px;height:18px;display:block;}
+.st-btn-book svg{fill:#fff;}
+.st-btn-wa svg{fill:#fff;}
+.st-btn-call svg{fill:#fff;}
+.st-btn-maps svg{fill:#fff;}
 .st-btn-ph{background:transparent;border:none;pointer-events:none;visibility:hidden;}
 .st-info-row{display:flex;justify-content:center;}
 .st-view-btn{
@@ -997,16 +1002,34 @@ applyStoreModalScrollRule();
 <button class="sb-btn" id="sb-maps" aria-label="Get directions" title="Directions">&#128205;</button>
 </div>
 <style>
-#sticky-bar{display:none;position:fixed;bottom:0;left:0;right:0;height:62px;z-index:9999;background:var(--dark);border-top:1px solid rgba(255,255,255,0.1);grid-template-columns:repeat(4,1fr);}
-[data-theme="naturals"] #sticky-bar{background:#1A0533;}
+#sticky-bar{
+display:none;position:fixed;bottom:0;left:0;right:0;
+height:76px;z-index:9999;
+background:rgba(8,15,11,0.94);backdrop-filter:blur(12px);
+border-top:1px solid rgba(255,255,255,0.08);
+grid-template-columns:repeat(4,1fr);
+gap:10px;padding:12px 14px;
+transform:translateY(100%);
+transition:transform 0.45s cubic-bezier(0.165, 0.84, 0.44, 1);
+}
+#sticky-bar.is-visible{transform:translateY(0);}
+[data-theme="naturals"] #sticky-bar{background:rgba(21,5,44,0.94);}
 @media(max-width:992px){ #sticky-bar{display:grid;} }
-.sb-btn{display:flex;flex-direction:column;align-items:center;justify-content:center;gap:3px;font-family:'Jost',sans-serif;font-size:10px;letter-spacing:1.5px;text-transform:uppercase;font-weight:700;border:none;cursor:pointer;transition:all 0.2s;text-decoration:none;min-height:44px;padding:0 4px;color:#fff;}
+
+.sb-btn{
+display:flex;flex-direction:column;align-items:center;justify-content:center;gap:3px;
+font-family:'Jost',sans-serif;font-size:9px;letter-spacing:1px;text-transform:uppercase;font-weight:700;
+border:none;cursor:pointer;transition:all 0.2s;text-decoration:none;
+height:100%;border-radius:12px;padding:0 4px;color:#fff;
+box-shadow:0 4px 10px rgba(0,0,0,0.18);
+}
+.sb-btn svg{width:16px;height:16px;}
 .sb-btn svg path{fill:#fff !important;}
-#sb-book{background:#1A73E8;}
-#sb-wa{background:#25D366;}
-#sb-call{background:#5F6368;}
-#sb-maps{background:#D93025;}
-.sb-btn:active{filter:brightness(0.9);transform:translateY(1px);}
+#sb-book{background:#1A73E8;border:1px solid rgba(255,255,255,0.1);}
+#sb-wa{background:#25D366;border:1px solid rgba(255,255,255,0.1);}
+#sb-call{background:#5F6368;border:1px solid rgba(255,255,255,0.1);}
+#sb-maps{background:#D93025;border:1px solid rgba(255,255,255,0.1);}
+.sb-btn:active{filter:brightness(0.9);transform:scale(0.96);}
 </style>
 
 <script>
@@ -1040,6 +1063,23 @@ bookBtn && bookBtn.addEventListener('click', function(){ openPickerFor('book'); 
 waBtn && waBtn.addEventListener('click', function(){ openPickerFor('wa'); });
 callBtn && callBtn.addEventListener('click', function(){ openPickerFor('call'); });
 mapsBtn && mapsBtn.addEventListener('click', function(){ openPickerFor('maps'); });
+
+/* Visibility Toggle logic */
+var bar = document.getElementById('sticky-bar');
+if(bar && 'IntersectionObserver' in window){
+var observer = new IntersectionObserver(function(entries) {
+entries.forEach(function(entry) {
+if(!entry.isIntersecting) bar.classList.add('is-visible');
+else bar.classList.remove('is-visible');
+});
+}, { threshold: 0 });
+
+var target = document.querySelector('.hero-btns, .hero-cta-wrap');
+if(target) observer.observe(target);
+else bar.classList.add('is-visible'); /* Fallback if no hero buttons found */
+} else if (bar) {
+bar.classList.add('is-visible'); /* Legacy fallback */
+}
 })();
 </script>
 
