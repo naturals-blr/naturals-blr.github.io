@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Careers at Naturals Salon & Spa – All Locations</title>
+    <meta name="description" content="Explore career opportunities at Naturals Salon & Spa in All Locations. Join our team of beauty professionals and grow your career in the salon industry.">
+    <link rel="canonical" href="https://naturals-blr.github.io/careers/all-locations/">
+</head>
+<body>
+    <header>
+        <nav>
+            <a href="https://naturals-blr.github.io/">Home</a>
+            <a href="https://naturals-blr.github.io/careers/">Careers</a>
+        </nav>
+    </header>
+
+    <main>
+        <h1>Careers at Naturals Salon & Spa – All Locations</h1>
+        
+        <p>Join the team at Naturals Salon & Spa in All Locations and build your career in the beauty industry. We offer exciting opportunities for passionate professionals.</p>
+
+        <section class="store-filter">
+            <h2>Filter by Location</h2>
+            <div class="filter-controls">
+                <select id="store-filter" onchange="filterJobs()">
+                    <option value="">All Locations</option>
+                    
+                </select>
+            </div>
+        </section>
+
+        <section class="jobs-list">
+            <h2>Available Positions in All Locations</h2>
+            
+                <p>No current openings in All Locations. Check back soon or explore other locations.</p>
+            
+        </section>
+    </main>
+
+    <footer>
+        <p>&copy; 2024 Naturals Salon & Spa. All rights reserved.</p>
+    </footer>
+
+    <script>
+        function filterJobs() {
+            const storeFilter = document.getElementById('store-filter').value;
+            const jobCards = document.querySelectorAll('.job-card');
+            
+            jobCards.forEach(card => {
+                if (storeFilter === '' || card.dataset.store === storeFilter) {
+                    card.style.display = 'block';
+                } else {
+                    card.style.display = 'none';
+                }
+            });
+        }
+    </script>
+</body>
+</html>
