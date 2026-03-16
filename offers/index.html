@@ -1508,12 +1508,15 @@ bar.classList.add('is-visible'); /* Legacy fallback */
 <div class="ft-brand">Naturals <span>Salon &amp; Spa</span></div>
 <div class="ft-tagline">India's most trusted salon network.<br>Premium beauty services across Bangalore.</div>
 </div>
+
+
+
 <div class="ft-col">
 <div class="ft-col-title">Explore</div>
 <ul>
 <li><a href="/services/">Services &amp; Pricing</a></li>
 <li><a href="/offers/">Offers</a></li>
-<li><a href="/careers/bangalore/">Careers</a></li>
+<li><a href="/careers/">Careers</a></li>
 <li><a href="/contact/">Contact Us</a></li>
 <li><a href="/about/">About Us</a></li>
 </ul>
@@ -1521,11 +1524,6 @@ bar.classList.add('is-visible'); /* Legacy fallback */
 <div class="ft-col">
 <div class="ft-col-title">Locations</div>
 <ul>
-<li><a href="/stores/bangalore/jp-nagar-5th-phase/">JP Nagar 5th Phase</a></li>
-<li><a href="/stores/bangalore/elements-mall/">Elements Mall</a></li>
-<li><a href="/stores/bangalore/devasandra/">Devasandra</a></li>
-<li><a href="/stores/bangalore/frazer-town/">Frazer Town</a></li>
-<li><a href="/stores/bangalore/hennur/">Hennur</a></li>
 </ul>
 </div>
 <div class="ft-col">
@@ -1543,7 +1541,26 @@ bar.classList.add('is-visible'); /* Legacy fallback */
 </div>
 </footer>
 
-<div id="theme-pill" title="Switch theme">
+<style>
+.ft-top{display:grid;grid-template-columns:2fr 1fr 1fr 1fr;gap:48px;padding:60px 0;background:var(--dark);color:rgba(255,255,255,0.9);max-width:1200px;margin:0 auto;}
+.ft-brand-col{display:flex;flex-direction:column;gap:12px;}
+.ft-brand{font-size:28px;font-weight:700;color:var(--gold);line-height:1.2;}
+.ft-tagline{font-size:14px;line-height:1.6;color:rgba(255,255,255,0.7);max-width:320px;}
+.ft-col{display:flex;flex-direction:column;gap:16px;}
+.ft-col-title{font-size:12px;letter-spacing:2.5px;text-transform:uppercase;color:var(--gold);font-weight:600;}
+.ft-col ul{list-style:none;padding:0;margin:0;display:flex;flex-direction:column;gap:12px;}
+.ft-col li{margin:0;}
+.ft-col a{color:rgba(255,255,255,0.8);text-decoration:none;font-size:14px;transition:color 0.2s;}
+.ft-col a:hover{color:var(--gold);}
+.ft-bottom{display:flex;justify-content:space-between;align-items:center;padding:24px 0;border-top:1px solid rgba(255,255,255,0.1);max-width:1200px;margin:0 auto;}
+.ft-copy{font-size:14px;color:rgba(255,255,255,0.6);}
+.ft-url{font-size:14px;color:rgba(255,255,255,0.6);}
+
+@media(max-width:768px){
+.ft-top{grid-template-columns:1fr;gap:32px;padding:40px 20px;}
+.ft-bottom{flex-direction:column;gap:12px;text-align:center;padding:20px;}
+}
+</style><div id="theme-pill" title="Switch theme">
 <button id="tp-luxury" class="tp-btn active" onclick="setTheme('luxury')">&#9728; Luxury</button>
 <button id="tp-naturals" class="tp-btn" onclick="setTheme('naturals')">&#9680; Naturals</button>
 </div>
@@ -1607,7 +1624,7 @@ else img.style.display='none';
 <script>
 /* Ribbons: urgent (<7 days) / NEW (<7 days since Valid_From) */
 (function(){
-var now = "2026-03-17T05:13:07.588676+05:30" ? new Date("2026-03-17T05:13:07.588676+05:30") : new Date();
+var now = "2026-03-17T05:18:46.629849+05:30" ? new Date("2026-03-17T05:18:46.629849+05:30") : new Date();
 function daysBetween(a,b){ return Math.floor((b.getTime()-a.getTime())/86400000); }
 var NEW_DAYS=7;
 

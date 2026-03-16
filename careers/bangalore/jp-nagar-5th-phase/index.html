@@ -645,6 +645,8 @@ body{
     </main>
 
     
+
+
 <footer>
 <div class="ft-top">
   <div class="ft-brand-col">
@@ -652,17 +654,22 @@ body{
     <div class="ft-tagline">India's most trusted salon network.<br>Premium beauty services across Bangalore.</div>
   </div>
   
+  
+  
+  
+  
+  
+  
+  
+    
+  
+  
+  
   <div class="ft-col">
     <div class="ft-col-title">Explore</div>
     <ul>
       <li><a href="https://naturals-blr.github.io/services/">Services &amp; Pricing</a></li>
       <li><a href="https://naturals-blr.github.io/offers/">Offers</a></li>
-      
-      
-      
-        
-      
-      
       <li><a href="https://naturals-blr.github.io/careers/bangalore/">Careers</a></li>
       <li><a href="https://naturals-blr.github.io/contact/">Contact Us</a></li>
       <li><a href="https://naturals-blr.github.io/about/">About Us</a></li>
@@ -699,6 +706,26 @@ body{
 </div>
 </footer>
 
+<style>
+.ft-top{display:grid;grid-template-columns:2fr 1fr 1fr 1fr;gap:48px;padding:60px 0;background:var(--dark);color:rgba(255,255,255,0.9);max-width:1200px;margin:0 auto;}
+.ft-brand-col{display:flex;flex-direction:column;gap:12px;}
+.ft-brand{font-size:28px;font-weight:700;color:var(--gold);line-height:1.2;}
+.ft-tagline{font-size:14px;line-height:1.6;color:rgba(255,255,255,0.7);max-width:320px;}
+.ft-col{display:flex;flex-direction:column;gap:16px;}
+.ft-col-title{font-size:12px;letter-spacing:2.5px;text-transform:uppercase;color:var(--gold);font-weight:600;}
+.ft-col ul{list-style:none;padding:0;margin:0;display:flex;flex-direction:column;gap:12px;}
+.ft-col li{margin:0;}
+.ft-col a{color:rgba(255,255,255,0.8);text-decoration:none;font-size:14px;transition:color 0.2s;}
+.ft-col a:hover{color:var(--gold);}
+.ft-bottom{display:flex;justify-content:space-between;align-items:center;padding:24px 0;border-top:1px solid rgba(255,255,255,0.1);max-width:1200px;margin:0 auto;}
+.ft-copy{font-size:14px;color:rgba(255,255,255,0.6);}
+.ft-url{font-size:14px;color:rgba(255,255,255,0.6);}
+
+@media(max-width:768px){
+  .ft-top{grid-template-columns:1fr;gap:32px;padding:40px 20px;}
+  .ft-bottom{flex-direction:column;gap:12px;text-align:center;padding:20px;}
+}
+</style>
 
     
     
