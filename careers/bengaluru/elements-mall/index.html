@@ -3,9 +3,9 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Jobs in Bengaluru – Naturals Salon & Spa Careers</title>
-    <meta name="description" content="Explore job opportunities at Naturals Salon & Spa in Bengaluru. Join our team and build your career in the beauty industry.">
-    <link rel="canonical" href="https://naturals-blr.github.io/careers/bengaluru/">
+    <title>Jobs at Elements Mall – Naturals Salon & Spa Careers</title>
+    <meta name="description" content="Explore job opportunities at Elements Mall in Bengaluru. Join our team and build your career in the beauty industry.">
+    <link rel="canonical" href="https://naturals-blr.github.io/careers/bengaluru/elements-mall/">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=Jost:wght@300;400;500;600&display=swap" rel="stylesheet">
     
@@ -95,71 +95,35 @@ h3, .h3{font-family:'Cormorant Garamond',serif;font-size:clamp(20px,2.5vw,24px);
         *{margin:0;padding:0;box-sizing:border-box;}
         body{font-family:'Jost',sans-serif;background:var(--cream);color:var(--text);overflow-x:hidden;}
         .container { max-width: 1200px; margin: 0 auto; padding: 20px; }
-        h1 { font-size: 2.5rem; margin-bottom: 20px; color: var(--text); }
 
         /* ── Hero ── */
-        .careers-hero{position:relative;border-radius:18px;overflow:hidden;min-height:280px;display:flex;align-items:flex-end;margin:10px 0 30px;}
+        .careers-hero{position:relative;border-radius:18px;overflow:hidden;min-height:220px;display:flex;align-items:flex-end;margin:10px 0 30px;}
         .careers-hero-bg{position:absolute;inset:0;}
         .careers-hero-bg img{width:100%;height:100%;object-fit:cover;}
         .careers-hero-ov{position:absolute;inset:0;background:linear-gradient(135deg,var(--hero-tint) 0%,var(--hero-tint2) 60%,rgba(0,0,0,0.12) 100%);}
         .careers-hero-inner{position:relative;z-index:2;padding:28px 24px;max-width:820px;color:#fff;}
-        .careers-hero-inner h1{color:#fff;margin:0 0 10px;}
-        .careers-hero-inner p{margin:0;color:rgba(255,255,255,0.78);max-width:720px;}
+        .careers-hero-inner h1{color:#fff;margin:0 0 8px;font-size:2rem;}
+        .careers-hero-inner p{margin:0;color:rgba(255,255,255,0.78);max-width:620px;}
         .careers-hero-inner .lbl{font-size:0.78rem;letter-spacing:0.12em;text-transform:uppercase;color:rgba(255,255,255,0.65);margin-bottom:8px;}
+        .back-link{display:inline-flex;align-items:center;gap:6px;color:rgba(255,255,255,0.85);text-decoration:none;font-size:0.9rem;margin-bottom:14px;}
+        .back-link:hover{color:#fff;}
 
-        /* ── Store Filters ── */
-        .store-filters {
+        /* ── Store Info ── */
+        .store-info {
             margin-bottom: 40px;
             padding: 30px;
             background: var(--cream);
             border-radius: 12px;
             box-shadow: 0 2px 10px rgba(0,0,0,0.1);
         }
-        .store-filters h2 { font-size: 1.5rem; margin-bottom: 20px; color: var(--text); }
-        .filter-buttons {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
-            gap: 15px;
-            margin-top: 20px;
-        }
-        .filter-btn {
-            position: relative;
-            padding: 15px 20px;
-            background: linear-gradient(135deg, var(--green) 0%, var(--green-mid) 60%, var(--green-soft) 100%);
-            color: white;
-            border: none;
-            border-radius: 8px;
-            cursor: pointer;
-            font-size: 1rem;
-            font-weight: 500;
-            text-decoration: none;
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-            gap: 10px;
-            text-align: left;
-            transition: all 0.3s ease;
-        }
-        .filter-btn:hover { transform: translateY(-2px); box-shadow: 0 4px 15px rgba(123,47,190,0.3); }
-        .filter-btn .store-name { flex: 1; }
-        .job-badge {
-            display: inline-flex;
-            align-items: center;
-            justify-content: center;
-            min-width: 24px;
-            height: 24px;
-            padding: 0 7px;
-            background: rgba(255,255,255,0.25);
-            border-radius: 12px;
-            font-size: 0.75rem;
-            font-weight: 600;
-            white-space: nowrap;
-            flex-shrink: 0;
-        }
-        .job-badge.empty { background: rgba(255,255,255,0.12); opacity: 0.7; }
+        .store-info h2 { font-size: 1.5rem; margin-bottom: 15px; color: var(--text); }
+        .store-info p { margin-bottom: 8px; color: var(--text); }
+        .store-info a { color: var(--green); text-decoration: none; }
+        .store-info a:hover { text-decoration: underline; }
 
-        /* ── Job Cards ── */
+        /* ── Jobs ── */
         .jobs-list { margin-top: 40px; }
+        .jobs-list h2 { font-size: 1.8rem; margin-bottom: 30px; color: var(--text); }
         .job-card {
             background: var(--cream);
             border-radius: 12px;
@@ -179,6 +143,10 @@ h3, .h3{font-family:'Cormorant Garamond',serif;font-size:clamp(20px,2.5vw,24px);
             border-radius: 20px;
             font-size: 0.85rem;
         }
+        .job-details { margin-bottom: 20px; }
+        .job-details p { margin-bottom: 10px; color: var(--text); }
+
+        /* ── Buttons ── */
         .btn-primary {
             background: linear-gradient(135deg, var(--green) 0%, var(--green-mid) 60%, var(--green-soft) 100%);
             color: white;
@@ -192,47 +160,58 @@ h3, .h3{font-family:'Cormorant Garamond',serif;font-size:clamp(20px,2.5vw,24px);
             transition: all 0.3s ease;
         }
         .btn-primary:hover { transform: translateY(-1px); box-shadow: 0 4px 12px rgba(123,47,190,0.3); }
+        .btn-secondary {
+            background: transparent;
+            color: var(--green);
+            padding: 12px 24px;
+            border: 2px solid var(--green);
+            border-radius: 6px;
+            cursor: pointer;
+            font-weight: 500;
+            text-decoration: none;
+            display: inline-block;
+            transition: all 0.3s ease;
+        }
+        .btn-secondary:hover { background: var(--green); color: white; }
 
-        /* ── No Jobs ── */
-        .no-jobs {
+        /* ── No Jobs (professional) ── */
+        .no-jobs-wrapper {
             text-align: center;
-            padding: 60px 20px;
+            padding: 70px 30px;
             background: var(--cream);
-            border-radius: 12px;
-            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+            border-radius: 16px;
+            box-shadow: 0 2px 16px rgba(0,0,0,0.08);
+            border: 1px solid rgba(0,0,0,0.06);
         }
-        .no-jobs .no-jobs-icon { font-size: 3rem; margin-bottom: 16px; }
-        .no-jobs h3 { font-size: 1.5rem; margin-bottom: 12px; color: var(--text); }
-        .no-jobs p { color: var(--text); opacity: 0.7; margin-bottom: 24px; max-width: 480px; margin-left: auto; margin-right: auto; }
-
-        /* ── Why Join / Process ── */
-        .why-join-us, .application-process { margin-top: 60px; }
-        .why-join-us h2, .application-process h2 { font-size: 1.8rem; margin-bottom: 30px; color: var(--text); }
-        .benefits-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 20px; }
-        .benefit-card {
-            background: var(--cream);
-            border-radius: 12px;
-            padding: 24px;
-            box-shadow: 0 2px 10px rgba(0,0,0,0.08);
+        .no-jobs-icon { font-size: 3.5rem; margin-bottom: 20px; display: block; }
+        .no-jobs-wrapper h3 {
+            font-size: 1.6rem;
+            color: var(--text);
+            margin-bottom: 14px;
+            font-family: 'Cormorant Garamond', serif;
+            font-weight: 600;
         }
-        .benefit-card h3 { font-size: 1.1rem; margin-bottom: 10px; color: var(--text); }
-        .benefit-card p { color: var(--text); opacity: 0.75; font-size: 0.95rem; }
-        .process-steps { display: flex; flex-direction: column; gap: 20px; }
-        .step { display: flex; gap: 20px; align-items: flex-start; }
-        .step-number {
-            width: 40px; height: 40px; border-radius: 50%; flex-shrink: 0;
-            background: linear-gradient(135deg, var(--green) 0%, var(--green-mid) 100%);
-            color: white; display: flex; align-items: center; justify-content: center;
-            font-weight: 700; font-size: 1rem;
+        .no-jobs-wrapper p {
+            color: var(--text);
+            opacity: 0.65;
+            font-size: 1rem;
+            line-height: 1.7;
+            max-width: 480px;
+            margin: 0 auto 32px;
         }
-        .step-content h3 { font-size: 1.1rem; margin-bottom: 6px; color: var(--text); }
-        .step-content p { color: var(--text); opacity: 0.75; font-size: 0.95rem; }
+        .no-jobs-actions { display: flex; gap: 16px; justify-content: center; flex-wrap: wrap; }
+        .no-jobs-note {
+            margin-top: 28px;
+            font-size: 0.85rem;
+            color: var(--text);
+            opacity: 0.45;
+        }
 
         @media (max-width: 768px) {
             .container { padding: 15px; }
-            .filter-buttons { grid-template-columns: 1fr; }
             .job-header { flex-direction: column; align-items: flex-start; }
-            h1 { font-size: 2rem; }
+            .careers-hero-inner h1 { font-size: 1.6rem; }
+            .no-jobs-actions { flex-direction: column; align-items: center; }
         }
     </style>
 </head>
@@ -530,177 +509,60 @@ body{
         <section class="careers-hero">
             <div class="careers-hero-bg">
                 <img src="https://naturals-blr.github.io/images/heroes/home.jpg"
-                     alt="Naturals Salon & Spa careers in Bengaluru"
+                     alt="Careers at Elements Mall – Naturals Salon & Spa"
                      loading="eager"
                      onerror="this.style.display='none'">
             </div>
             <div class="careers-hero-ov"></div>
             <div class="careers-hero-inner">
-                <div class="lbl">Careers</div>
-                <h1>Careers in Bengaluru</h1>
-                <p>Join the team at Naturals Salon &amp; Spa and build your career in the beauty industry. Explore openings across our stores in Bengaluru.</p>
+                <a href="https://naturals-blr.github.io/careers/bengaluru/" class="back-link">← All Bengaluru Jobs</a>
+                <div class="lbl">Careers · Bengaluru</div>
+                <h1>Elements Mall</h1>
+                <p>Nagavara, Bengaluru</p>
             </div>
         </section>
 
-        <section class="store-filters">
-            <h2>Filter by Store</h2>
-            <div class="filter-buttons">
-                
-                <a href="https://naturals-blr.github.io/careers/bengaluru/jp-nagar-5th-phase/" class="filter-btn">
-                    <span class="store-name">JP Nagar 5th Phase</span>
-                    
-                        <span class="job-badge">3 jobs</span>
-                    
-                </a>
-                
-                <a href="https://naturals-blr.github.io/careers/bengaluru/elements-mall/" class="filter-btn">
-                    <span class="store-name">Elements Mall</span>
-                    
-                        <span class="job-badge empty">0 jobs</span>
-                    
-                </a>
-                
-                <a href="https://naturals-blr.github.io/careers/bengaluru/devasandra/" class="filter-btn">
-                    <span class="store-name">Devasandra</span>
-                    
-                        <span class="job-badge empty">0 jobs</span>
-                    
-                </a>
-                
-                <a href="https://naturals-blr.github.io/careers/bengaluru/frazer-town/" class="filter-btn">
-                    <span class="store-name">Frazer Town</span>
-                    
-                        <span class="job-badge empty">0 jobs</span>
-                    
-                </a>
-                
-                <a href="https://naturals-blr.github.io/careers/bengaluru/hennur/" class="filter-btn">
-                    <span class="store-name">Hennur</span>
-                    
-                        <span class="job-badge empty">0 jobs</span>
-                    
-                </a>
-                
-            </div>
-        </section>
+        <div class="store-info">
+            <h2>About This Store</h2>
+            <p><strong>Location:</strong> Nagavara, Bengaluru</p>
+            
+            <p><strong>Address:</strong> Shop No 26, 3rd Floor, Elements Mall, 100 Ft Rd, near Manyata Tech Park Road, MS Ramaiah North City, Manayata Tech Park, Nagavara, Bengaluru, Karnataka 560077, India</p>
+            
+            
+            <p><strong>Phone:</strong> <a href="tel:+919901000017">+919901000017</a></p>
+            
+            
+            <p><strong>Email:</strong> <a href="mailto:naturalsnagavara@gmail.com">naturalsnagavara@gmail.com</a></p>
+            
+            
+            <p><strong>Hours:</strong> 10:00 AM – 9:00 PM</p>
+            
+        </div>
 
         <section class="jobs-list">
+            <h2>Current Openings</h2>
             
-                
-                <div class="job-card">
-                    <div class="job-header">
-                        <div>
-                            <h3 class="job-title">Senior Unisex Stylist</h3>
-                            <div class="job-meta">
-                                <span class="meta-item">Full-Time</span>
-                                <span class="meta-item">1 vacancy</span>
-                                
-                            </div>
-                        </div>
+                <div class="no-jobs-wrapper">
+                    <span class="no-jobs-icon">🌿</span>
+                    <h3>No Open Positions Right Now</h3>
+                    <p>
+                        We currently don't have any active vacancies at Elements Mall,
+                        but our team is always growing. We'd love to hear from talented professionals —
+                        check back soon or explore openings at other stores in Bengaluru.
+                    </p>
+                    <div class="no-jobs-actions">
+                        <a href="https://naturals-blr.github.io/careers/bengaluru/" class="btn-primary">
+                            View All Bengaluru Jobs
+                        </a>
+                        
+                        <a href="tel:+919901000017" class="btn-secondary">
+                            📞 Call This Store
+                        </a>
+                        
                     </div>
-                    
-                    <p>We are looking for an experienced Senior Unisex Stylist who is passionate about hair, styling, and client satisfaction. The ideal candidate should be confident in delivering advanced hair services...</p>
-                    
-                    <div style="margin-top: 20px;">
-                        <a href="https://naturals-blr.github.io/careers/bengaluru/jp-nagar-5th-phase/senior-unisex-stylist/" class="btn-primary">View Details</a>
-                    </div>
+                    <p class="no-jobs-note">Walk-in enquiries are always welcome at the salon.</p>
                 </div>
-                
-                <div class="job-card">
-                    <div class="job-header">
-                        <div>
-                            <h3 class="job-title">Female All-Rounder</h3>
-                            <div class="job-meta">
-                                <span class="meta-item">Full-Time</span>
-                                <span class="meta-item">1 vacancy</span>
-                                
-                            </div>
-                        </div>
-                    </div>
-                    
-                    <p>We are seeking a skilled Female All-Rounder who can confidently handle multiple beauty services and deliver consistent, high-quality experiences to clients. This role is ideal for professionals...</p>
-                    
-                    <div style="margin-top: 20px;">
-                        <a href="https://naturals-blr.github.io/careers/bengaluru/jp-nagar-5th-phase/female-all-rounder/" class="btn-primary">View Details</a>
-                    </div>
-                </div>
-                
-                <div class="job-card">
-                    <div class="job-header">
-                        <div>
-                            <h3 class="job-title">Male All-Rounder</h3>
-                            <div class="job-meta">
-                                <span class="meta-item">Full-Time</span>
-                                <span class="meta-item">1 vacancy</span>
-                                
-                            </div>
-                        </div>
-                    </div>
-                    
-                    <p>We are hiring a Male All-Rounder who is proficient in men’s grooming services and basic salon treatments. The ideal candidate should be customer-focused, technically skilled, and committed to...</p>
-                    
-                    <div style="margin-top: 20px;">
-                        <a href="https://naturals-blr.github.io/careers/bengaluru/jp-nagar-5th-phase/male-all-rounder/" class="btn-primary">View Details</a>
-                    </div>
-                </div>
-                
             
-        </section>
-
-        <section class="why-join-us">
-            <h2>Why Join Naturals?</h2>
-            <div class="benefits-grid">
-                <div class="benefit-card">
-                    <h3>🎓 Training &amp; Development</h3>
-                    <p>Ongoing education and skill development programs to advance your career.</p>
-                </div>
-                <div class="benefit-card">
-                    <h3>🏢 Career Growth</h3>
-                    <p>Clear career progression paths with opportunities for advancement into senior roles.</p>
-                </div>
-                <div class="benefit-card">
-                    <h3>💰 Competitive Compensation</h3>
-                    <p>Industry-leading salaries, performance incentives, and comprehensive benefits.</p>
-                </div>
-                <div class="benefit-card">
-                    <h3>🤝 Team Environment</h3>
-                    <p>Supportive team culture with experienced mentors and collaborative work environment.</p>
-                </div>
-            </div>
-        </section>
-
-        <section class="application-process">
-            <h2>Application Process</h2>
-            <div class="process-steps">
-                <div class="step">
-                    <div class="step-number">1</div>
-                    <div class="step-content">
-                        <h3>Browse Opportunities</h3>
-                        <p>Explore available positions across our stores and find the perfect match for your skills.</p>
-                    </div>
-                </div>
-                <div class="step">
-                    <div class="step-number">2</div>
-                    <div class="step-content">
-                        <h3>Review Details</h3>
-                        <p>Open a job listing to see responsibilities, requirements, salary details, and interview information.</p>
-                    </div>
-                </div>
-                <div class="step">
-                    <div class="step-number">3</div>
-                    <div class="step-content">
-                        <h3>Apply</h3>
-                        <p>Use the contact details on the job page to call, WhatsApp, or email our hiring team.</p>
-                    </div>
-                </div>
-                <div class="step">
-                    <div class="step-number">4</div>
-                    <div class="step-content">
-                        <h3>Interview &amp; Join</h3>
-                        <p>Meet with our team and start your journey with Naturals.</p>
-                    </div>
-                </div>
-            </div>
         </section>
     </main>
 
@@ -747,8 +609,8 @@ body{
   <div class="ft-col">
     <div class="ft-col-title">Policies</div>
     <ul>
-      <li><a href="../booking-policy.html">Booking Policy</a></li>
-      <li><a href="../cancellation-policy.html">Cancellation Policy</a></li>
+      <li><a href="../../booking-policy.html">Booking Policy</a></li>
+      <li><a href="../../cancellation-policy.html">Cancellation Policy</a></li>
       <li><a href="https://naturals.in" target="_blank" rel="noopener">Naturals India &#8599;</a></li>
     </ul>
   </div>
