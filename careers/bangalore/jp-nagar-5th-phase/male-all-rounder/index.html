@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
     
-    <title>Male All-Rounder Job in JP Nagar 5th Phase, Bangalore | Naturals Salon Careers</title>
+    <title>Male All-Rounder Job in JP Nagar 5th Phase, Bangalore | Naturals Salon Join Our Team</title>
     <meta name="robots" content="index, follow">
     
 
@@ -69,7 +69,7 @@
       "@type": "BreadcrumbList",
       "itemListElement": [
         { "@type": "ListItem", "position": 1, "name": "Home",    "item": "https://naturals-blr.github.io/" },
-        { "@type": "ListItem", "position": 2, "name": "Careers", "item": "https://naturals-blr.github.io/careers/bangalore/" },
+        { "@type": "ListItem", "position": 2, "name": "Join Our Team", "item": "https://naturals-blr.github.io/careers/bangalore/" },
         { "@type": "ListItem", "position": 3, "name": "JP Nagar 5th Phase", "item": "https://naturals-blr.github.io/careers/bangalore/jp-nagar-5th-phase/" },
         { "@type": "ListItem", "position": 4, "name": "Male All-Rounder", "item": "https://naturals-blr.github.io/careers/bangalore/jp-nagar-5th-phase/male-all-rounder/" }
       ]
@@ -438,6 +438,19 @@ h3, .h3{font-family:'Cormorant Garamond',serif;font-size:clamp(20px,2.5vw,24px);
     onclick="document.body.classList.remove('drawer-open');document.getElementById('hamburger')?.setAttribute('aria-expanded','false');">×</button>
 </div>
 
+
+<div class="drawer-theme-section">
+  <div class="drawer-theme-label">CHOOSE THEME</div>
+  <div class="drawer-theme-swatches">
+    <button class="theme-swatch theme-luxury" onclick="setTheme('luxury')" aria-label="Switch to Luxury theme" data-theme="luxury">
+      <span class="swatch-circle"></span>
+    </button>
+    <button class="theme-swatch theme-naturals" onclick="setTheme('naturals')" aria-label="Switch to Naturals theme" data-theme="naturals">
+      <span class="swatch-circle"></span>
+    </button>
+  </div>
+</div>
+
   
   
 
@@ -451,9 +464,9 @@ h3, .h3{font-family:'Cormorant Garamond',serif;font-size:clamp(20px,2.5vw,24px);
 
   
   <div class="drawer-section">
-    <a class="drawer-link " href="https://naturals-blr.github.io/" aria-label="Naturals Salon & Spa — Home">Home</a>
-    <a class="drawer-link " href="https://naturals-blr.github.io/services/" aria-label="View all salon services">Services</a>
-    <a class="drawer-link " href="https://naturals-blr.github.io/offers/" aria-label="View current salon offers and promotions">Offers</a>
+    <a class="drawer-link " href="https://naturals-blr.github.io/" aria-label="Naturals Salon & Spa — Home">HOME</a>
+    <a class="drawer-link " href="https://naturals-blr.github.io/services/" aria-label="View all salon services">SERVICES</a>
+    <a class="drawer-link " href="https://naturals-blr.github.io/offers/" aria-label="View current salon offers and promotions">OFFERS</a>
     
     
     <div class="drawer-stores-section">
@@ -488,14 +501,14 @@ h3, .h3{font-family:'Cormorant Garamond',serif;font-size:clamp(20px,2.5vw,24px);
       </div>
     </div>
     
-    <a class="drawer-link is-active" href="https://naturals-blr.github.io/careers/bangalore/" aria-label="View job openings and career opportunities">Careers</a>
-    <a class="drawer-link " href="https://naturals-blr.github.io/about/" aria-label="Learn about Naturals Salon & Spa">About</a>
+    <a class="drawer-link is-active" href="https://naturals-blr.github.io/careers/bangalore/" aria-label="Join our team and view career opportunities">JOIN OUR TEAM</a>
+    <a class="drawer-link " href="https://naturals-blr.github.io/about/" aria-label="Learn about Naturals Salon & Spa">ABOUT</a>
   </div>
 
   
   <div class="drawer-cta-section">
     <button class="drawer-cta-btn" onclick="window._naturalsPendingAction='book'; openStorePicker();" aria-label="Select store and book appointment">
-      BOOK NOW
+      BOOK APPOINTMENT
     </button>
   </div>
 </nav>
@@ -566,6 +579,7 @@ h3, .h3{font-family:'Cormorant Garamond',serif;font-size:clamp(20px,2.5vw,24px);
   white-space:nowrap;overflow:hidden;text-overflow:ellipsis;line-height:1.1;
   transition:background 0.2s,border-color 0.2s,transform 0.2s;
   font-weight:600; /* Primary menu items - font-weight: 600 */
+  margin-bottom:6px; /* Consistent vertical spacing */
 }
 .drawer-link:hover,.store-link:hover{
   background:rgba(255,255,255,0.07);
@@ -577,12 +591,13 @@ h3, .h3{font-family:'Cormorant Garamond',serif;font-size:clamp(20px,2.5vw,24px);
   box-shadow:0 0 0 1px rgba(201,168,76,0.18) inset;
 }
 
-/* Careers high priority styling */
+/* Careers high priority styling - JOIN OUR TEAM */
 .drawer-link[href*="careers"]{
-  border:1px solid #D4AF37; /* Gold border for Careers */
+  color:var(--gold, #D4AF37); /* Gold text color from theme */
+  border:1px solid rgba(255,255,255,0.06); /* Same as other primary links */
 }
 .drawer-link[href*="careers"].is-active{
-  border-color:#D4AF37;
+  border-color:var(--gold, rgba(201,168,76,0.60)); /* Active state from theme */
   box-shadow:0 0 0 1px rgba(212,175,55,0.18) inset;
 }
 
@@ -591,6 +606,66 @@ h3, .h3{font-family:'Cormorant Garamond',serif;font-size:clamp(20px,2.5vw,24px);
 .drawer-open #hamburger .hb-line:nth-child(1){transform:rotate(45deg) translate(5px,5px);}
 .drawer-open #hamburger .hb-line:nth-child(2){opacity:0;}
 .drawer-open #hamburger .hb-line:nth-child(3){transform:rotate(-45deg) translate(6px,-6px);}
+
+/* ── THEME TOGGLE SECTION ── */
+.drawer-theme-section{
+  padding:16px 16px 12px;
+  border-bottom:1px solid rgba(255,255,255,0.08);
+  text-align:center;
+}
+
+.drawer-theme-label{
+  font-size:9px;
+  color:rgba(255,255,255,0.4);
+  letter-spacing:1px;
+  text-transform:uppercase;
+  margin-bottom:10px;
+  font-weight:400;
+}
+
+.drawer-theme-swatches{
+  display:flex;
+  justify-content:center;
+  gap:12px;
+  align-items:center;
+}
+
+.theme-swatch{
+  background:transparent;
+  border:none;
+  padding:0;
+  cursor:pointer;
+  border-radius:50%;
+  transition:all 0.2s ease;
+  position:relative;
+}
+
+.swatch-circle{
+  display:block;
+  width:24px;
+  height:24px;
+  border-radius:50%;
+  transition:all 0.2s ease;
+  border:2px solid transparent;
+}
+
+.theme-luxury .swatch-circle{
+  background:var(--gold, #D4AF37); /* Brand gold from theme */
+}
+
+.theme-naturals .swatch-circle{
+  background:#F5F5F5; /* Off-white */
+}
+
+/* Active state - gold border/glow */
+.theme-swatch.active .swatch-circle{
+  border-color:var(--gold, #D4AF37);
+  box-shadow:0 0 0 2px rgba(212,175,55,0.2), 0 0 8px rgba(212,175,55,0.3);
+}
+
+.theme-swatch:hover .swatch-circle{
+  transform:scale(1.1);
+}
 
 /* ── STORES SECTION STYLES ── */
 .drawer-stores-section{
@@ -644,7 +719,7 @@ h3, .h3{font-family:'Cormorant Garamond',serif;font-size:clamp(20px,2.5vw,24px);
 
 /* Active state for store pages - gold text color */
 .drawer-store-link.active .drawer-store-name{
-  color:#D4AF37; /* Gold color for active store text */
+  color:var(--gold, #D4AF37); /* Gold color from theme */
   font-weight:500;
 }
 
@@ -670,8 +745,8 @@ h3, .h3{font-family:'Cormorant Garamond',serif;font-size:clamp(20px,2.5vw,24px);
 .drawer-cta-btn{
   display:block;
   width:100%;
-  padding:14px 20px;
-  background:linear-gradient(135deg, #D4AF37 0%, #C9A84C 50%, #B8943A 100%); /* Brand gold gradient */
+  padding:14px 28px; /* Increased horizontal padding for longer text */
+  background:linear-gradient(135deg, var(--gold, #D4AF37) 0%, #C9A84C 50%, #B8943A 100%); /* Brand gold gradient from theme */
   color:#000000;
   text-decoration:none;
   font-size:13px;
@@ -1001,8 +1076,43 @@ var hamburger = document.getElementById('hamburger');
 if(hamburger){
   hamburger.addEventListener('click', function(){
     setTimeout(setActiveStoreState, 100); // Small delay for drawer animation
+    setTimeout(updateThemeSwatches, 50); // Update theme swatches when drawer opens
   });
 }
+
+/* Theme toggle functionality */
+function setTheme(themeName){
+  document.body.setAttribute('data-theme', themeName);
+  localStorage.setItem('naturals-theme', themeName);
+  updateThemeSwatches();
+}
+
+function updateThemeSwatches(){
+  try{
+    var currentTheme = document.body.getAttribute('data-theme') || 'luxury';
+    var swatches = document.querySelectorAll('.theme-swatch');
+    
+    swatches.forEach(function(swatch){
+      swatch.classList.remove('active');
+      if(swatch.getAttribute('data-theme') === currentTheme){
+        swatch.classList.add('active');
+      }
+    });
+  }catch(e){}
+}
+
+/* Set default theme to Luxury for new visitors */
+(function(){
+  var savedTheme = localStorage.getItem('naturals-theme');
+  if(!savedTheme){
+    savedTheme = 'luxury'; // Default to Luxury theme
+    localStorage.setItem('naturals-theme', savedTheme);
+  }
+  if(savedTheme){
+    document.body.setAttribute('data-theme', savedTheme);
+  }
+  updateThemeSwatches();
+})();
 
 document.addEventListener('keydown',function(e){ if(e.key==='Escape') closeStorePicker(); });
 document.addEventListener('DOMContentLoaded',function(){
@@ -1129,7 +1239,7 @@ body{
         <div class="careers-hero-ov"></div>
         <div class="careers-hero-inner">
             
-            <div class="lbl">Careers · JP Nagar 5th Phase</div>
+            <div class="lbl">Join Our Team · JP Nagar 5th Phase</div>
             <h1><em>Male All-Rounder</em> at Naturals Salon &amp; Spa, JP Nagar 5th Phase</h1>
             <p class="hero-sub">JP Nagar 5th Phase · JP Nagar 5th Phase, Bangalore</p>
         </div>
@@ -1139,7 +1249,7 @@ body{
     <div class="meta-bar">
         <nav class="breadcrumbs" aria-label="Breadcrumb">
             <a href="https://naturals-blr.github.io/">Home</a><span class="sep">›</span>
-            <a href="https://naturals-blr.github.io/careers/bangalore/">Careers</a><span class="sep">›</span>
+            <a href="https://naturals-blr.github.io/careers/bangalore/">Join Our Team</a><span class="sep">›</span>
             <a href="https://naturals-blr.github.io/careers/bangalore/">Bangalore</a><span class="sep">›</span>
             <a href="https://naturals-blr.github.io/careers/bangalore/jp-nagar-5th-phase/">JP Nagar 5th Phase</a><span class="sep">›</span>
             <span class="current">Male All-Rounder</span>
