@@ -318,6 +318,7 @@ background:rgba(255,255,255,0.04);
 border:1px solid rgba(255,255,255,0.06);
 white-space:nowrap;overflow:hidden;text-overflow:ellipsis;line-height:1.1;
 transition:background 0.2s,border-color 0.2s,transform 0.2s;
+font-weight:600; /* Primary menu items - font-weight: 600 */
 }
 .drawer-link:hover,.store-link:hover{
 background:rgba(255,255,255,0.07);
@@ -327,6 +328,15 @@ transform:translateY(-1px);
 .drawer-link.is-active{
 border-color:rgba(201,168,76,0.60);
 box-shadow:0 0 0 1px rgba(201,168,76,0.18) inset;
+}
+
+/* Careers high priority styling */
+.drawer-link[href*="careers"]{
+border:1px solid #D4AF37; /* Gold border for Careers */
+}
+.drawer-link[href*="careers"].is-active{
+border-color:#D4AF37;
+box-shadow:0 0 0 1px rgba(212,175,55,0.18) inset;
 }
 
 .drawer-open #drawer{right:0;}
@@ -376,9 +386,10 @@ gap:12px;
 padding:12px 16px;
 color:rgba(255,255,255,0.88);
 text-decoration:none;
-font-size:13px;
-letter-spacing:0.6px;
-font-weight:500;
+font-size:11px; /* Smaller than primary menu (12px) */
+letter-spacing:1px; /* Premium tracking */
+text-transform:uppercase; /* Elite uppercase styling */
+font-weight:400; /* Store names - font-weight: 400 */
 border-radius:8px;
 transition:all 0.2s ease;
 border-left:3px solid transparent;
@@ -392,31 +403,42 @@ border-left-color:rgba(201,168,76,0.5);
 transform:translateX(3px);
 }
 
+/* Active state for store pages - gold pin icon */
+.drawer-store-link.active .drawer-store-icon{
+color:#D4AF37; /* Gold color for active store pin */
+opacity:1;
+}
+
 .drawer-store-icon{
 font-size:14px;
 opacity:0.7;
 min-width:18px;
+transition:color 0.2s ease;
 }
 
 .drawer-store-name{
 white-space:nowrap;
 overflow:hidden;
 text-overflow:ellipsis;
-font-weight:500;
+font-weight:400;
 }
 
 /* ── BOOK NOW CTA STYLES ── */
 .drawer-cta-section{
+position:sticky;
+bottom:0;
 margin-top:16px;
-padding-top:16px;
+padding:16px;
+background:var(--dark);
 border-top:1px solid rgba(255,255,255,0.08);
+backdrop-filter:blur(8px);
 }
 
 .drawer-cta-btn{
 display:block;
 width:100%;
 padding:14px 20px;
-background:#C9A84C; /* Brand's Gold hex code */
+background:linear-gradient(135deg, #D4AF37 0%, #C9A84C 50%, #B8943A 100%); /* Brand gold gradient */
 color:#000000;
 text-decoration:none;
 font-size:13px;
@@ -426,13 +448,20 @@ text-transform:uppercase;
 border-radius:12px;
 text-align:center;
 transition:all 0.2s ease;
-box-shadow:0 4px 12px rgba(201,168,76,0.25);
+box-shadow:0 4px 12px rgba(212,175,55,0.25);
+border:1px solid rgba(212,175,55,0.3);
 }
 
 .drawer-cta-btn:hover{
-background:#B8943A; /* Darker gold on hover */
+background:linear-gradient(135deg, #B8943A 0%, #C9A84C 50%, #A67C26 100%); /* Darker gold gradient on hover */
 transform:translateY(-1px);
-box-shadow:0 6px 16px rgba(201,168,76,0.35);
+box-shadow:0 6px 16px rgba(212,175,55,0.35);
+border-color:rgba(212,175,55,0.4);
+}
+
+.drawer-cta-btn:active{
+transform:translateY(0);
+box-shadow:0 2px 8px rgba(212,175,55,0.25);
 }
 
 /* ── RESPONSIVE OPTIMIZATIONS ── */
@@ -695,13 +724,39 @@ window.location.href = pageUrl;
 function storePickerThen(id,name,book,wa,call,maps,pageUrl,action){
 var sd={id:id,name:name,book:book,wa:wa,call:call,maps:maps,pageUrl:pageUrl};
 localStorage.setItem('naturals-store',JSON.stringify(sd));
-if(typeof window._applyStickyStore==='function') window._applyStickyStore(sd);
+closeStorePicker();
+if(action==='book' && book) window.open(book,'_blank');
+if(action==='wa' && wa) window.open('https://wa.me/'+wa,'_blank');
+if(action==='call' && call) window.location.href='tel:'+call;
+if(action==='maps' && maps) window.open(maps,'_blank');
+}
 
-if(action==='book' && book) return window.open(book,'_blank');
-if(action==='wa' && wa) return window.open('https://wa.me/' + wa,'_blank');
-if(action==='call' && call) return window.location.href='tel:' + call;
-if(action==='maps' && maps) return window.open(maps,'_blank');
-if(action==='info' && pageUrl) return window.location.href=pageUrl;
+/* Set active state for store pages */
+function setActiveStoreState(){
+try{
+var currentPath = window.location.pathname;
+var storeLinks = document.querySelectorAll('.drawer-store-link');
+
+storeLinks.forEach(function(link){
+var href = link.getAttribute('href');
+if(href && currentPath.includes(href.replace(/^\//, ''))){
+link.classList.add('active');
+} else {
+link.classList.remove('active');
+}
+});
+}catch(e){}
+}
+
+/* Run on page load and when drawer opens */
+document.addEventListener('DOMContentLoaded', setActiveStoreState);
+
+/* Also run when hamburger is clicked (drawer opens) */
+var hamburger = document.getElementById('hamburger');
+if(hamburger){
+hamburger.addEventListener('click', function(){
+setTimeout(setActiveStoreState, 100); // Small delay for drawer animation
+});
 }
 
 document.addEventListener('keydown',function(e){ if(e.key==='Escape') closeStorePicker(); });
@@ -1492,13 +1547,39 @@ window.location.href = pageUrl;
 function storePickerThen(id,name,book,wa,call,maps,pageUrl,action){
 var sd={id:id,name:name,book:book,wa:wa,call:call,maps:maps,pageUrl:pageUrl};
 localStorage.setItem('naturals-store',JSON.stringify(sd));
-if(typeof window._applyStickyStore==='function') window._applyStickyStore(sd);
+closeStorePicker();
+if(action==='book' && book) window.open(book,'_blank');
+if(action==='wa' && wa) window.open('https://wa.me/'+wa,'_blank');
+if(action==='call' && call) window.location.href='tel:'+call;
+if(action==='maps' && maps) window.open(maps,'_blank');
+}
 
-if(action==='book' && book) return window.open(book,'_blank');
-if(action==='wa' && wa) return window.open('https://wa.me/' + wa,'_blank');
-if(action==='call' && call) return window.location.href='tel:' + call;
-if(action==='maps' && maps) return window.open(maps,'_blank');
-if(action==='info' && pageUrl) return window.location.href=pageUrl;
+/* Set active state for store pages */
+function setActiveStoreState(){
+try{
+var currentPath = window.location.pathname;
+var storeLinks = document.querySelectorAll('.drawer-store-link');
+
+storeLinks.forEach(function(link){
+var href = link.getAttribute('href');
+if(href && currentPath.includes(href.replace(/^\//, ''))){
+link.classList.add('active');
+} else {
+link.classList.remove('active');
+}
+});
+}catch(e){}
+}
+
+/* Run on page load and when drawer opens */
+document.addEventListener('DOMContentLoaded', setActiveStoreState);
+
+/* Also run when hamburger is clicked (drawer opens) */
+var hamburger = document.getElementById('hamburger');
+if(hamburger){
+hamburger.addEventListener('click', function(){
+setTimeout(setActiveStoreState, 100); // Small delay for drawer animation
+});
 }
 
 document.addEventListener('keydown',function(e){ if(e.key==='Escape') closeStorePicker(); });
