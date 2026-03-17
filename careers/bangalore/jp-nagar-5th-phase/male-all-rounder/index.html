@@ -321,6 +321,25 @@ h3, .h3{font-family:'Cormorant Garamond',serif;font-size:clamp(20px,2.5vw,24px);
             display: inline-flex;
             text-align: center;
         }
+
+        /* Self-contained apply buttons — not dependent on button_css() macro */
+        .apply-btn {
+            display: inline-flex; align-items: center; justify-content: center;
+            gap: 8px; flex: 1; min-width: 140px;
+            padding: 14px 20px; min-height: 48px;
+            border-radius: 6px; border: none; cursor: pointer;
+            font-family: 'Jost', sans-serif; font-size: 11px;
+            font-weight: 600; letter-spacing: 1.5px; text-transform: uppercase;
+            text-decoration: none; transition: all 0.25s; white-space: nowrap;
+        }
+        .apply-btn-call {
+            background: #5F6368; color: #fff;
+        }
+        .apply-btn-call:hover { background: #474c52; transform: translateY(-1px); }
+        .apply-btn-wa {
+            background: #25D366; color: #fff;
+        }
+        .apply-btn-wa:hover { background: #1da851; transform: translateY(-1px); }
         /* Email button — full width, less dominant than phone */
         .apply-email-btn {
             display: flex; align-items: center; justify-content: center; gap: 8px;
@@ -361,11 +380,8 @@ h3, .h3{font-family:'Cormorant Garamond',serif;font-size:clamp(20px,2.5vw,24px);
         }
         [data-theme="naturals"] .sticky-cta { background: #1A0533; }
         .sticky-cta-inner { display: flex; gap: 10px; }
-        .sticky-cta-inner .btn-call,
-        .sticky-cta-inner .btn-wa {
+        .sticky-cta-inner .apply-btn {
             flex: 1;
-            justify-content: center;
-            display: inline-flex;
             font-size: 11px !important;
             padding: 12px 10px !important;
             min-height: 44px !important;
@@ -385,8 +401,7 @@ h3, .h3{font-family:'Cormorant Garamond',serif;font-size:clamp(20px,2.5vw,24px);
         @media (max-width: 480px) {
             .ww-grid { grid-template-columns: 1fr; }
             .apply-primary-cta { flex-direction: column; }
-            .apply-primary-cta .btn-call,
-            .apply-primary-cta .btn-wa { flex: none; width: 100%; }
+            .apply-primary-cta .apply-btn { flex: none; width: 100%; }
         }
     </style>
 </head>
