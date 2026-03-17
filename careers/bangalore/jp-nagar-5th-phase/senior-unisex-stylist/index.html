@@ -313,8 +313,12 @@ h3, .h3{font-family:'Cormorant Garamond',serif;font-size:clamp(20px,2.5vw,24px);
         .apply-primary-cta {
             display: flex; gap: 12px; flex-wrap: wrap; margin-bottom: 20px;
         }
-        .apply-primary-cta a {
-            flex: 1; min-width: 140px; justify-content: center !important;
+        .apply-primary-cta .btn-call,
+        .apply-primary-cta .btn-wa {
+            flex: 1;
+            min-width: 140px;
+            justify-content: center;
+            display: inline-flex;
             text-align: center;
         }
         /* Email button — full width, less dominant than phone */
@@ -347,17 +351,7 @@ h3, .h3{font-family:'Cormorant Garamond',serif;font-size:clamp(20px,2.5vw,24px);
         .maps-btn { display: inline-flex; align-items: center; gap: 6px; margin-top: 12px; color: var(--gold); font-size: 12px; letter-spacing: 1px; text-transform: uppercase; font-weight: 600; transition: color 0.2s; }
         .maps-btn:hover { color: var(--green); }
 
-        /* ── LOCATION (simple, below apply) ── */
-        .location-simple {
-            display: flex; align-items: flex-start; gap: 14px;
-            padding: 20px 24px; background: #fff; border-radius: 12px;
-            border: 1px solid rgba(0,0,0,0.06); box-shadow: 0 2px 8px rgba(0,0,0,0.04);
-        }
-        .location-simple .loc-icon { font-size: 1.4rem; flex-shrink: 0; margin-top: 2px; }
-        .location-simple .loc-text { font-size: 13px; color: var(--text-mid); line-height: 1.7; }
-        .location-simple .loc-text strong { color: var(--text); display: block; font-size: 14px; margin-bottom: 4px; }
-        .location-simple .loc-maps { display: inline-flex; align-items: center; gap: 6px; margin-top: 8px; color: var(--gold); font-size: 11px; letter-spacing: 1px; text-transform: uppercase; font-weight: 600; transition: color 0.2s; }
-        .location-simple .loc-maps:hover { color: var(--green); }
+
 
         /* ── Sticky CTA — Call + WhatsApp ── */
         .sticky-cta {
@@ -367,7 +361,16 @@ h3, .h3{font-family:'Cormorant Garamond',serif;font-size:clamp(20px,2.5vw,24px);
         }
         [data-theme="naturals"] .sticky-cta { background: #1A0533; }
         .sticky-cta-inner { display: flex; gap: 10px; }
-        .sticky-cta-inner a { flex: 1; justify-content: center !important; text-align: center; font-size: 11px !important; padding: 12px 10px !important; min-height: 44px !important; letter-spacing: 1px !important; }
+        .sticky-cta-inner .btn-call,
+        .sticky-cta-inner .btn-wa {
+            flex: 1;
+            justify-content: center;
+            display: inline-flex;
+            font-size: 11px !important;
+            padding: 12px 10px !important;
+            min-height: 44px !important;
+            letter-spacing: 1px !important;
+        }
         @media (max-width: 992px) { .sticky-cta { display: block; } }
 
         @media (max-width: 768px) {
@@ -382,7 +385,8 @@ h3, .h3{font-family:'Cormorant Garamond',serif;font-size:clamp(20px,2.5vw,24px);
         @media (max-width: 480px) {
             .ww-grid { grid-template-columns: 1fr; }
             .apply-primary-cta { flex-direction: column; }
-            .apply-primary-cta a { flex: none; width: 100%; }
+            .apply-primary-cta .btn-call,
+            .apply-primary-cta .btn-wa { flex: none; width: 100%; }
         }
     </style>
 </head>
@@ -861,22 +865,7 @@ body{
 
             
 
-            
-            
-            <div class="location-simple">
-                <div class="loc-icon">📍</div>
-                <div class="loc-text">
-                    <strong>JP Nagar 5th Phase, , Bangalore</strong>
-                    
-                    
-                    
-                    <a href="https://g.page/Naturals_JPNagar5thPhase/" target="_blank" rel="noopener" class="loc-maps">
-                        📌 View on Google Maps →
-                    </a>
-                    
-                </div>
-            </div>
-            
+
 
         </main>
     </div>
