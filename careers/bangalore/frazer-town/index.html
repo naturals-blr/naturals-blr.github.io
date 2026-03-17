@@ -281,35 +281,29 @@ h3, .h3{font-family:'Cormorant Garamond',serif;font-size:clamp(20px,2.5vw,24px);
     
     <div class="drawer-stores-section">
       <div class="drawer-stores-header">
-        <span class="drawer-stores-icon">📍</span>
-        <span class="drawer-stores-title">Our Stores</span>
+        <span class="drawer-stores-title">OUR STORES</span>
       </div>
       
       <div class="drawer-stores-list">
         
           
             <a class="drawer-store-link" href="https://naturals-blr.github.io/stores/bangalore/jp-nagar-5th-phase/" aria-label="Visit Naturals Salon JP Nagar 5th Phase">
-              <span class="drawer-store-icon">📍</span>
               <span class="drawer-store-name">JP Nagar 5th Phase</span>
             </a>
           
             <a class="drawer-store-link" href="https://naturals-blr.github.io/stores/bangalore/elements-mall/" aria-label="Visit Naturals Salon Elements Mall">
-              <span class="drawer-store-icon">📍</span>
               <span class="drawer-store-name">Elements Mall</span>
             </a>
           
             <a class="drawer-store-link" href="https://naturals-blr.github.io/stores/bangalore/devasandra/" aria-label="Visit Naturals Salon Devasandra">
-              <span class="drawer-store-icon">📍</span>
               <span class="drawer-store-name">Devasandra</span>
             </a>
           
             <a class="drawer-store-link" href="https://naturals-blr.github.io/stores/bangalore/frazer-town/" aria-label="Visit Naturals Salon Frazer Town">
-              <span class="drawer-store-icon">📍</span>
               <span class="drawer-store-name">Frazer Town</span>
             </a>
           
             <a class="drawer-store-link" href="https://naturals-blr.github.io/stores/bangalore/hennur/" aria-label="Visit Naturals Salon Hennur">
-              <span class="drawer-store-icon">📍</span>
               <span class="drawer-store-name">Hennur</span>
             </a>
           
@@ -433,14 +427,8 @@ h3, .h3{font-family:'Cormorant Garamond',serif;font-size:clamp(20px,2.5vw,24px);
 .drawer-stores-header{
   display:flex;
   align-items:center;
-  gap:10px;
   padding:14px 16px 8px;
   border-bottom:1px solid rgba(255,255,255,0.08);
-}
-
-.drawer-stores-icon{
-  font-size:16px;
-  opacity:0.8;
 }
 
 .drawer-stores-title{
@@ -456,16 +444,14 @@ h3, .h3{font-family:'Cormorant Garamond',serif;font-size:clamp(20px,2.5vw,24px);
 }
 
 .drawer-store-link{
-  display:flex;
-  align-items:center;
-  gap:12px;
-  padding:12px 16px;
+  display:block;
+  padding:12px 16px 12px 36px; /* 20px indentation (16px + 20px) */
   color:rgba(255,255,255,0.88);
   text-decoration:none;
-  font-size:11px; /* Smaller than primary menu (12px) */
-  letter-spacing:1px; /* Premium tracking */
-  text-transform:uppercase; /* Elite uppercase styling */
-  font-weight:400; /* Store names - font-weight: 400 */
+  font-size:11px;
+  letter-spacing:0.08rem; /* Elite tracking */
+  text-transform:uppercase; /* ALL CAPS */
+  font-weight:400; /* Lighter than primary menu */
   border-radius:8px;
   transition:all 0.2s ease;
   border-left:3px solid transparent;
@@ -479,17 +465,10 @@ h3, .h3{font-family:'Cormorant Garamond',serif;font-size:clamp(20px,2.5vw,24px);
   transform:translateX(3px);
 }
 
-/* Active state for store pages - gold pin icon */
-.drawer-store-link.active .drawer-store-icon{
-  color:#D4AF37; /* Gold color for active store pin */
-  opacity:1;
-}
-
-.drawer-store-icon{
-  font-size:14px;
-  opacity:0.7;
-  min-width:18px;
-  transition:color 0.2s ease;
+/* Active state for store pages - gold text color */
+.drawer-store-link.active .drawer-store-name{
+  color:#D4AF37; /* Gold color for active store text */
+  font-weight:500;
 }
 
 .drawer-store-name{
@@ -497,6 +476,7 @@ h3, .h3{font-family:'Cormorant Garamond',serif;font-size:clamp(20px,2.5vw,24px);
   overflow:hidden;
   text-overflow:ellipsis;
   font-weight:400;
+  transition:color 0.2s ease;
 }
 
 /* ── BOOK NOW CTA STYLES ── */
