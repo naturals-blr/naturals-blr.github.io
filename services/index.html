@@ -273,16 +273,13 @@ onclick="document.body.classList.remove('drawer-open');document.getElementById('
 <a class="drawer-link is-active" href="/services/" aria-label="View all salon services">Services</a>
 <a class="drawer-link " href="/offers/" aria-label="View current salon offers and promotions">Offers</a>
 
-<div class="drawer-nested-section">
-<button class="drawer-nested-toggle" onclick="this.parentElement.classList.toggle('expanded')" aria-label="Toggle store locations" aria-expanded="false">
-<span class="drawer-nested-header">
-<span class="drawer-nested-icon">📍</span>
-<span class="drawer-nested-title">Our Stores</span>
-<span class="drawer-nested-arrow">▼</span>
-</span>
-</button>
+<div class="drawer-stores-section">
+<div class="drawer-stores-header">
+<span class="drawer-stores-icon">📍</span>
+<span class="drawer-stores-title">Our Stores</span>
+</div>
 
-<div class="drawer-nested-content">
+<div class="drawer-stores-list">
 <a class="drawer-store-link" href="/stores/bangalore/jp-nagar-5th-phase/" aria-label="Visit Naturals Salon JP Nagar 5th Phase">
 <span class="drawer-store-icon">📍</span>
 <span class="drawer-store-name">JP Nagar 5th Phase</span>
@@ -311,7 +308,7 @@ onclick="document.body.classList.remove('drawer-open');document.getElementById('
 </div>
 
 <div class="drawer-cta-section">
-<button class="drawer-cta-btn" onclick="openStorePicker()" aria-label="Select store and book appointment">
+<button class="drawer-cta-btn" onclick="window._naturalsPendingAction='book'; openStorePicker();" aria-label="Select store and book appointment">
 BOOK NOW
 </button>
 </div>
@@ -399,104 +396,74 @@ box-shadow:0 0 0 1px rgba(201,168,76,0.18) inset;
 .drawer-open #hamburger .hb-line:nth-child(2){opacity:0;}
 .drawer-open #hamburger .hb-line:nth-child(3){transform:rotate(-45deg) translate(6px,-6px);}
 
-/* ── NESTED NAVIGATION STYLES ── */
-.drawer-nested-section{
-margin-top:8px;
+/* ── STORES SECTION STYLES ── */
+.drawer-stores-section{
+margin-top:12px;
 border-radius:12px;
-background:rgba(255,255,255,0.02);
-border:1px solid rgba(255,255,255,0.04);
+background:rgba(255,255,255,0.03);
+border:1px solid rgba(255,255,255,0.06);
 overflow:hidden;
 }
 
-.drawer-nested-toggle{
-width:100%;
+.drawer-stores-header{
 display:flex;
 align-items:center;
-justify-content:space-between;
-padding:12px 14px;
-background:transparent;
-border:none;
-color:rgba(255,255,255,0.78);
-font-size:11px;
+gap:10px;
+padding:14px 16px 8px;
+border-bottom:1px solid rgba(255,255,255,0.08);
+}
+
+.drawer-stores-icon{
+font-size:16px;
+opacity:0.8;
+}
+
+.drawer-stores-title{
+color:rgba(255,255,255,0.95);
+font-size:12px;
+font-weight:600;
 letter-spacing:1.2px;
 text-transform:uppercase;
-cursor:pointer;
-transition:all 0.2s ease;
 }
 
-.drawer-nested-toggle:hover{
-background:rgba(255,255,255,0.06);
-}
-
-.drawer-nested-header{
-display:flex;
-align-items:center;
-gap:8px;
-}
-
-.drawer-nested-icon{
-font-size:14px;
-opacity:0.7;
-}
-
-.drawer-nested-title{
-color:rgba(255,255,255,0.92);
-font-weight:500;
-}
-
-.drawer-nested-arrow{
-margin-left:auto;
-font-size:10px;
-transition:transform 0.2s ease;
-}
-
-.drawer-nested-section.expanded .drawer-nested-arrow{
-transform:rotate(180deg);
-}
-
-.drawer-nested-content{
-max-height:0;
-overflow:hidden;
-transition:max-height 0.3s ease;
-}
-
-.drawer-nested-section.expanded .drawer-nested-content{
-max-height:300px;
-margin-top:8px;
+.drawer-stores-list{
+padding:8px 0;
 }
 
 .drawer-store-link{
 display:flex;
 align-items:center;
-gap:10px;
-padding:10px 14px;
-color:rgba(255,255,255,0.85);
+gap:12px;
+padding:12px 16px;
+color:rgba(255,255,255,0.88);
 text-decoration:none;
-font-size:11px;
-letter-spacing:0.8px;
+font-size:13px;
+letter-spacing:0.6px;
+font-weight:500;
 border-radius:8px;
 transition:all 0.2s ease;
-border-left:2px solid transparent;
+border-left:3px solid transparent;
+margin:2px 8px;
 }
 
 .drawer-store-link:hover{
-background:rgba(255,255,255,0.06);
-color:rgba(255,255,255,0.95);
-border-left-color:rgba(201,168,76,0.4);
-transform:translateX(2px);
+background:rgba(255,255,255,0.08);
+color:rgba(255,255,255,0.98);
+border-left-color:rgba(201,168,76,0.5);
+transform:translateX(3px);
 }
 
 .drawer-store-icon{
-font-size:12px;
-opacity:0.6;
-min-width:16px;
+font-size:14px;
+opacity:0.7;
+min-width:18px;
 }
 
 .drawer-store-name{
 white-space:nowrap;
 overflow:hidden;
 text-overflow:ellipsis;
-font-weight:400;
+font-weight:500;
 }
 
 /* ── BOOK NOW CTA STYLES ── */
@@ -774,7 +741,11 @@ localStorage.setItem('naturals-store',JSON.stringify(sd));
 closeStorePicker();
 if(typeof window._applyStickyStore==='function') window._applyStickyStore(sd);
 
-if(typeof window._naturalsPerformPendingAction==='function' && window._naturalsPendingAction){
+// Handle pending booking action
+if(typeof window._naturalsPendingAction==='string' && window._naturalsPendingAction==='book' && book){
+window.open(book,'_blank');
+window._naturalsPendingAction=null;
+} else if(typeof window._naturalsPerformPendingAction==='function' && window._naturalsPendingAction){
 window._naturalsPerformPendingAction(sd);
 } else if(pageUrl) {
 window.location.href = pageUrl;
@@ -1699,7 +1670,11 @@ localStorage.setItem('naturals-store',JSON.stringify(sd));
 closeStorePicker();
 if(typeof window._applyStickyStore==='function') window._applyStickyStore(sd);
 
-if(typeof window._naturalsPerformPendingAction==='function' && window._naturalsPendingAction){
+// Handle pending booking action
+if(typeof window._naturalsPendingAction==='string' && window._naturalsPendingAction==='book' && book){
+window.open(book,'_blank');
+window._naturalsPendingAction=null;
+} else if(typeof window._naturalsPerformPendingAction==='function' && window._naturalsPendingAction){
 window._naturalsPerformPendingAction(sd);
 } else if(pageUrl) {
 window.location.href = pageUrl;
