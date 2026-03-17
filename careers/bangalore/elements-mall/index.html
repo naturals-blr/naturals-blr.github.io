@@ -465,25 +465,25 @@ h3, .h3{font-family:'Cormorant Garamond',serif;font-size:clamp(20px,2.5vw,24px);
 
 .swatch-circle{
   display:block;
-  width:24px;
-  height:24px;
+  width:28px;
+  height:28px;
   border-radius:50%;
   transition:all 0.2s ease;
   border:2px solid transparent;
 }
 
 .theme-luxury .swatch-circle{
-  background:var(--gold, #D4AF37); /* Brand gold from theme */
+  background:#D4AF37; /* Gold for Luxury theme */
 }
 
 .theme-naturals .swatch-circle{
-  background:#F5F5F5; /* Off-white */
+  background:#4B2C60; /* Brand purple for Naturals theme */
 }
 
-/* Active state - gold border/glow */
+/* Active state - white border */
 .theme-swatch.active .swatch-circle{
-  border-color:var(--gold, #D4AF37);
-  box-shadow:0 0 0 2px rgba(212,175,55,0.2), 0 0 8px rgba(212,175,55,0.3);
+  border:2px solid #FFFFFF; /* White border for active theme */
+  box-shadow:0 0 0 1px rgba(255,255,255,0.3), 0 0 8px rgba(255,255,255,0.15);
 }
 
 .theme-swatch:hover .swatch-circle{
@@ -903,10 +903,16 @@ if(hamburger){
   });
 }
 
-/* Theme toggle functionality */
+/* Theme toggle functionality - Global State Management */
 function setTheme(themeName){
+  // Apply to document for immediate effect
+  document.documentElement.setAttribute('data-theme', themeName);
   document.body.setAttribute('data-theme', themeName);
+  
+  // Persist in localStorage for global state
   localStorage.setItem('naturals-theme', themeName);
+  
+  // Update visual state
   updateThemeSwatches();
 }
 
@@ -924,17 +930,26 @@ function updateThemeSwatches(){
   }catch(e){}
 }
 
-/* Set default theme to Luxury for new visitors */
+/* Set default theme to Luxury for new visitors - Global State */
 (function(){
   var savedTheme = localStorage.getItem('naturals-theme');
   if(!savedTheme){
-    savedTheme = 'luxury'; // Default to Luxury theme
+    savedTheme = 'luxury'; // Default to Luxury theme for premium identity
     localStorage.setItem('naturals-theme', savedTheme);
   }
+  
+  // Apply to both documentElement and body for global consistency
   if(savedTheme){
+    document.documentElement.setAttribute('data-theme', savedTheme);
     document.body.setAttribute('data-theme', savedTheme);
   }
-  updateThemeSwatches();
+  
+  // Update visual state when DOM is ready
+  if(document.readyState === 'loading'){
+    document.addEventListener('DOMContentLoaded', updateThemeSwatches);
+  } else {
+    updateThemeSwatches();
+  }
 })();
 
 document.addEventListener('keydown',function(e){ if(e.key==='Escape') closeStorePicker(); });
