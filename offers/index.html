@@ -1541,14 +1541,15 @@ bar.classList.add('is-visible'); /* Legacy fallback */
 </ul>
 </div>
 
-</div><div class="ft-bottom">
+</div>
+<div class="ft-bottom">
 <div class="ft-copy">&copy; 2026 Naturals Salon &amp; Spa, Bangalore. All rights reserved.</div>
 <div class="ft-url">naturals-blr.github.io</div>
 </div>
 </footer>
 
 <style>
-/* ── Footer shell: full viewport width, dark background ── */
+/* ── Footer shell: full viewport width, always dark ─────────────── */
 footer {
 background: #080f0b;
 width: 100%;
@@ -1556,23 +1557,20 @@ display: block;
 }
 [data-theme="naturals"] footer { background: #0D0120; }
 
-/* ── ft-top: content grid, constrained + padded ── */
+/* ── ft-top: 4-col grid, padding mirrors page gutters (60px) ────── */
 .ft-top {
 padding: 60px 60px 40px;
 display: grid;
 grid-template-columns: 2fr 1fr 1fr 1fr;
 gap: 48px;
 border-bottom: 1px solid rgba(255,255,255,0.07);
-max-width: 1380px;
-margin: 0 auto;
-box-sizing: border-box;
+/* No max-width — fills full footer width like all other page sections */
 }
 
-/* ── Brand column ── */
+/* ── Brand column ───────────────────────────────────────────────── */
 .ft-brand-col {
 display: flex;
 flex-direction: column;
-gap: 10px;
 }
 .ft-brand {
 font-family: 'Cormorant Garamond', serif;
@@ -1589,8 +1587,8 @@ font-weight: 300;
 line-height: 1.7;
 }
 
-/* ── Nav columns ── */
-.ft-col { display: flex; flex-direction: column; gap: 0; }
+/* ── Nav columns ────────────────────────────────────────────────── */
+.ft-col { display: flex; flex-direction: column; }
 .ft-col-title {
 font-size: 9px;
 letter-spacing: 3px;
@@ -1613,14 +1611,16 @@ color: rgba(255,255,255,0.32);
 font-weight: 300;
 text-decoration: none;
 transition: color 0.3s;
+/* Truncate long store names gracefully */
 display: block;
 white-space: nowrap;
 overflow: hidden;
 text-overflow: ellipsis;
+max-width: 160px;
 }
 .ft-col ul a:hover { color: rgba(255,255,255,0.72); }
 
-/* ── Bottom bar ── */
+/* ── Bottom bar: same 60px gutter as ft-top ─────────────────────── */
 .ft-bottom {
 padding: 18px 60px;
 display: flex;
@@ -1628,14 +1628,11 @@ justify-content: space-between;
 align-items: center;
 flex-wrap: wrap;
 gap: 8px;
-max-width: 1380px;
-margin: 0 auto;
-box-sizing: border-box;
 }
 .ft-copy { font-size: 11px; color: rgba(255,255,255,0.16); }
 .ft-url { font-size: 11px; color: rgba(255,255,255,0.18); letter-spacing: 1px; }
 
-/* ── Responsive ── */
+/* ── Responsive ─────────────────────────────────────────────────── */
 @media (max-width: 960px) {
 .ft-top {
 grid-template-columns: 1fr 1fr;
@@ -1653,6 +1650,7 @@ text-align: center;
 grid-template-columns: 1fr;
 padding: 28px 16px 20px;
 }
+.ft-col ul a { max-width: 100%; }
 }
 </style><div id="theme-pill" title="Switch theme">
 <button id="tp-luxury" class="tp-btn active" onclick="setTheme('luxury')">&#9728; Luxury</button>
@@ -1718,7 +1716,7 @@ else img.style.display='none';
 <script>
 /* Ribbons: urgent (<7 days) / NEW (<7 days since Valid_From) */
 (function(){
-var now = "2026-03-17T05:28:16.865506+05:30" ? new Date("2026-03-17T05:28:16.865506+05:30") : new Date();
+var now = "2026-03-17T05:39:34.719861+05:30" ? new Date("2026-03-17T05:39:34.719861+05:30") : new Date();
 function daysBetween(a,b){ return Math.floor((b.getTime()-a.getTime())/86400000); }
 var NEW_DAYS=7;
 

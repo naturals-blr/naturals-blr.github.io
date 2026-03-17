@@ -692,82 +692,83 @@ body{
 
 
 <footer>
-<div class="ft-top">
+  <div class="ft-top">
 
-  <div class="ft-brand-col">
-    <div class="ft-brand">Naturals <span>Salon &amp; Spa</span></div>
-    <div class="ft-tagline">India's most trusted salon network.<br>Premium beauty services across Bangalore.</div>
+    <div class="ft-brand-col">
+      <div class="ft-brand">Naturals <span>Salon &amp; Spa</span></div>
+      <div class="ft-tagline">India's most trusted salon network.<br>Premium beauty services across Bangalore.</div>
+    </div>
+
+    <div class="ft-col">
+      <div class="ft-col-title">Explore</div>
+      <ul>
+        <li><a href="https://naturals-blr.github.io/services/">Services &amp; Pricing</a></li>
+        <li><a href="https://naturals-blr.github.io/offers/">Offers</a></li>
+        <li><a href="https://naturals-blr.github.io/careers/bangalore/">Careers</a></li>
+        <li><a href="https://naturals-blr.github.io/contact/">Contact Us</a></li>
+        <li><a href="https://naturals-blr.github.io/about/">About Us</a></li>
+      </ul>
+    </div>
+
+    <div class="ft-col">
+      <div class="ft-col-title">Locations</div>
+      <ul>
+        
+        
+          
+            
+            
+            
+            <li><a href="https://naturals-blr.github.io/stores/bangalore/jp-nagar-5th-phase/">JP Nagar 5th Phase</a></li>
+            
+          
+            
+            
+            
+            <li><a href="https://naturals-blr.github.io/stores/bangalore/elements-mall/">Elements Mall</a></li>
+            
+          
+            
+            
+            
+            <li><a href="https://naturals-blr.github.io/stores/bangalore/devasandra/">Devasandra</a></li>
+            
+          
+            
+            
+            
+            <li><a href="https://naturals-blr.github.io/stores/bangalore/frazer-town/">Frazer Town</a></li>
+            
+          
+            
+            
+            
+            <li><a href="https://naturals-blr.github.io/stores/bangalore/hennur/">Hennur</a></li>
+            
+          
+        
+      </ul>
+    </div>
+
+    <div class="ft-col">
+      <div class="ft-col-title">Policies</div>
+      <ul>
+        <li><a href="https://naturals-blr.github.io/booking-policy/">Booking Policy</a></li>
+        <li><a href="https://naturals-blr.github.io/cancellation-policy/">Cancellation Policy</a></li>
+        <li><a href="https://naturals.in" target="_blank" rel="noopener">Naturals India &#8599;</a></li>
+      </ul>
+    </div>
+
   </div>
 
-  <div class="ft-col">
-    <div class="ft-col-title">Explore</div>
-    <ul>
-      <li><a href="https://naturals-blr.github.io/services/">Services &amp; Pricing</a></li>
-      <li><a href="https://naturals-blr.github.io/offers/">Offers</a></li>
-      <li><a href="https://naturals-blr.github.io/careers/bangalore/">Careers</a></li>
-      <li><a href="https://naturals-blr.github.io/contact/">Contact Us</a></li>
-      <li><a href="https://naturals-blr.github.io/about/">About Us</a></li>
-    </ul>
+  <div class="ft-bottom">
+    <div class="ft-copy">&copy; 2026 Naturals Salon &amp; Spa, Bangalore. All rights reserved.</div>
+    <div class="ft-url">naturals-blr.github.io</div>
   </div>
-
-  <div class="ft-col">
-    <div class="ft-col-title">Locations</div>
-    <ul>
-      
-      
-        
-          
-          
-          
-          <li><a href="https://naturals-blr.github.io/stores/bangalore/jp-nagar-5th-phase/">JP Nagar 5th Phase</a></li>
-          
-        
-          
-          
-          
-          <li><a href="https://naturals-blr.github.io/stores/bangalore/elements-mall/">Elements Mall</a></li>
-          
-        
-          
-          
-          
-          <li><a href="https://naturals-blr.github.io/stores/bangalore/devasandra/">Devasandra</a></li>
-          
-        
-          
-          
-          
-          <li><a href="https://naturals-blr.github.io/stores/bangalore/frazer-town/">Frazer Town</a></li>
-          
-        
-          
-          
-          
-          <li><a href="https://naturals-blr.github.io/stores/bangalore/hennur/">Hennur</a></li>
-          
-        
-      
-    </ul>
-  </div>
-
-  <div class="ft-col">
-    <div class="ft-col-title">Policies</div>
-    <ul>
-      <li><a href="https://naturals-blr.github.io/booking-policy/">Booking Policy</a></li>
-      <li><a href="https://naturals-blr.github.io/cancellation-policy/">Cancellation Policy</a></li>
-      <li><a href="https://naturals.in" target="_blank" rel="noopener">Naturals India &#8599;</a></li>
-    </ul>
-  </div>
-
-</div>
-<div class="ft-bottom">
-  <div class="ft-copy">&copy; 2026 Naturals Salon &amp; Spa, Bangalore. All rights reserved.</div>
-  <div class="ft-url">naturals-blr.github.io</div>
-</div>
 </footer>
 
 <style>
-/* ── Footer shell: full viewport width, dark background ── */
+/* ── Footer shell: full viewport width, always dark ─────────────── */
 footer {
   background: #080f0b;
   width: 100%;
@@ -775,23 +776,20 @@ footer {
 }
 [data-theme="naturals"] footer { background: #0D0120; }
 
-/* ── ft-top: content grid, constrained + padded ── */
+/* ── ft-top: 4-col grid, padding mirrors page gutters (60px) ────── */
 .ft-top {
   padding: 60px 60px 40px;
   display: grid;
   grid-template-columns: 2fr 1fr 1fr 1fr;
   gap: 48px;
   border-bottom: 1px solid rgba(255,255,255,0.07);
-  max-width: 1380px;
-  margin: 0 auto;
-  box-sizing: border-box;
+  /* No max-width — fills full footer width like all other page sections */
 }
 
-/* ── Brand column ── */
+/* ── Brand column ───────────────────────────────────────────────── */
 .ft-brand-col {
   display: flex;
   flex-direction: column;
-  gap: 10px;
 }
 .ft-brand {
   font-family: 'Cormorant Garamond', serif;
@@ -808,8 +806,8 @@ footer {
   line-height: 1.7;
 }
 
-/* ── Nav columns ── */
-.ft-col { display: flex; flex-direction: column; gap: 0; }
+/* ── Nav columns ────────────────────────────────────────────────── */
+.ft-col { display: flex; flex-direction: column; }
 .ft-col-title {
   font-size: 9px;
   letter-spacing: 3px;
@@ -832,14 +830,16 @@ footer {
   font-weight: 300;
   text-decoration: none;
   transition: color 0.3s;
+  /* Truncate long store names gracefully */
   display: block;
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
+  max-width: 160px;
 }
 .ft-col ul a:hover { color: rgba(255,255,255,0.72); }
 
-/* ── Bottom bar ── */
+/* ── Bottom bar: same 60px gutter as ft-top ─────────────────────── */
 .ft-bottom {
   padding: 18px 60px;
   display: flex;
@@ -847,14 +847,11 @@ footer {
   align-items: center;
   flex-wrap: wrap;
   gap: 8px;
-  max-width: 1380px;
-  margin: 0 auto;
-  box-sizing: border-box;
 }
 .ft-copy { font-size: 11px; color: rgba(255,255,255,0.16); }
 .ft-url  { font-size: 11px; color: rgba(255,255,255,0.18); letter-spacing: 1px; }
 
-/* ── Responsive ── */
+/* ── Responsive ─────────────────────────────────────────────────── */
 @media (max-width: 960px) {
   .ft-top {
     grid-template-columns: 1fr 1fr;
@@ -872,6 +869,7 @@ footer {
     grid-template-columns: 1fr;
     padding: 28px 16px 20px;
   }
+  .ft-col ul a { max-width: 100%; }
 }
 </style>
 </body>

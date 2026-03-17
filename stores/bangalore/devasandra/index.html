@@ -40,8 +40,7 @@
 }
 </script>
 
-<style>
-:root{
+<style>:root{
 --dark:#111714;--green:#1B4332;--green-mid:#2D6A4F;--green-soft:#52B788;
 --cream:#F8F4EE;--gold:#C9A84C;--gold-pale:#EDD9A3;
 --text:#1A1A1A;--text-mid:#555;--text-light:#999;
@@ -80,7 +79,6 @@ h3, .h3{font-family:'Cormorant Garamond',serif;font-size:clamp(20px,2.5vw,24px);
 @media(max-width:992px){
 body{padding-bottom:62px;} /* space for sticky bar */
 }
-
 </style>
 <style>
 .btn-book{background:#1A73E8;color:#fff;padding:13px 22px;min-height:48px;font-size:11px;letter-spacing:1.5px;text-transform:uppercase;font-weight:600;display:inline-flex;align-items:center;gap:8px;transition:all 0.3s;border-radius:6px;white-space:nowrap;text-decoration:none;}
@@ -131,14 +129,13 @@ footer{background:#080f0b;}
 </style>
 
 <style>
-
 *{margin:0;padding:0;box-sizing:border-box;}
 html{scroll-behavior:smooth;}
 body{font-family:'Jost',sans-serif;background:var(--cream);color:var(--text);overflow-x:hidden;}
 a{text-decoration:none;color:inherit;}
 img{display:block;width:100%;object-fit:cover;}
 
-/* HERO */
+/* ── HERO ── */
 .hero{height:70vh;min-height:500px;position:relative;display:flex;align-items:flex-end;overflow:hidden;}
 .hero-bg{position:absolute;inset:0;}
 .hero-bg img{height:100%;object-fit:cover;width:100%;}
@@ -149,7 +146,7 @@ img{display:block;width:100%;object-fit:cover;}
 .hero-content h1 em{font-style:italic;color:var(--gold);}
 .hero-sub{font-size:14px;color:rgba(255,255,255,0.7);font-weight:300;line-height:1.8;margin-bottom:28px;}
 
-/* ACTION BAR */
+/* ── ACTION BAR ── */
 .hero-cta-wrap{display:flex;flex-direction:column;gap:8px;max-width:520px;}
 .hero-cta-row{display:flex;gap:8px;width:100%;}
 .hero-cta-row a,.hero-cta-row .hero-cta-ph{flex:1;justify-content:center !important;font-size:10px !important;padding:10px 12px !important;min-height:44px !important;letter-spacing:1.2px !important;}
@@ -159,9 +156,23 @@ img{display:block;width:100%;object-fit:cover;}
 .hero-cta-fb:hover{transform:translateY(-1px);box-shadow:0 6px 16px rgba(0,0,0,0.18);}
 .hero-cta-ph{visibility:hidden;pointer-events:none;}
 
-/* INFO BAR */
-.info-bar{display:grid;grid-template-columns:repeat(4,1fr);background:var(--dark);border-top:1px solid rgba(255,255,255,0.06);overflow-x:hidden;}
-.info-cell{padding:20px 22px;border-right:1px solid rgba(255,255,255,0.07);display:flex;align-items:flex-start;gap:10px;min-width:0;}
+/* ── INFO BAR ── 
+FIX: Added padding:0 60px to align left/right edges with hero-content and page-wrap.
+Previously had no padding so it bled full width while content above/below had 60px gutters.
+── */
+.info-bar{
+display:grid;
+grid-template-columns:repeat(4,1fr);
+background:var(--dark);
+border-top:1px solid rgba(255,255,255,0.06);
+overflow-x:hidden;
+padding:0 60px; /* ← FIX: align with page gutters */
+}
+.info-cell{
+padding:20px 22px;
+border-right:1px solid rgba(255,255,255,0.07);
+display:flex;align-items:flex-start;gap:10px;min-width:0;
+}
 .info-cell:last-child{border-right:none;}
 .info-icon{font-size:18px;flex-shrink:0;margin-top:2px;display:flex;align-items:center;}
 .info-label{font-size:9px;letter-spacing:2.5px;text-transform:uppercase;color:rgba(255,255,255,0.3);font-weight:600;margin-bottom:3px;}
@@ -169,11 +180,32 @@ img{display:block;width:100%;object-fit:cover;}
 a.info-val:hover{color:var(--gold);}
 .info-val-sm{font-size:11px;color:rgba(255,255,255,0.28);display:block;margin-top:2px;}
 
-/* LAYOUT */
-.page-wrap{display:grid;grid-template-columns:1fr 320px;gap:0;align-items:start;width:100%;margin:0 auto;padding:56px 60px;min-height:calc(100vh - 78px);max-width:100%;}
-.main-col{padding-right:44px;min-width:0;max-width:100%;}
+/* ── RATING SUMMARY ──
+FIX: Added padding:16px 60px so it aligns with the 60px gutter.
+── */
+.rating-wrap-outer{
+padding:16px 60px; /* ← FIX: align with page gutters */
+text-align:left;
+}
 
-/* SHARED */
+/* ── LAYOUT ──
+FIX: Changed max-width from 100% to none — let padding do the constraining.
+This ensures the content grid aligns with hero, info-bar, store-nav.
+── */
+.page-wrap{
+display:grid;
+grid-template-columns:1fr 320px;
+gap:0;
+align-items:start;
+width:100%;
+padding:56px 60px; /* same 60px gutter as hero and info-bar */
+}
+.main-col{
+padding-right:44px;
+min-width:0;
+}
+
+/* ── SHARED ── */
 .lbl{font-size:9px;letter-spacing:5px;text-transform:uppercase;color:var(--gold);font-weight:600;margin-bottom:14px;display:flex;align-items:center;gap:12px;}
 .lbl::before{content:'';width:18px;height:1px;background:var(--gold);}
 .sec-title{font-family:'Cormorant Garamond',serif;font-size:clamp(26px,3vw,38px);font-weight:300;line-height:1.05;margin-bottom:18px;}
@@ -182,37 +214,59 @@ a.info-val:hover{color:var(--gold);}
 .reveal{opacity:0;transform:translateY(20px);transition:opacity 0.6s ease,transform 0.6s ease;}
 .reveal.visible{opacity:1;transform:translateY(0);}
 
-/* ABOUT GRID */
-.about-grid{display:grid;grid-template-columns:1fr 1fr;gap:28px;margin-bottom:48px;align-items:center;overflow-x:hidden;}
+/* ── ABOUT GRID ── */
+.about-grid{display:grid;grid-template-columns:1fr 1fr;gap:28px;margin-bottom:48px;align-items:center;}
 .about-img-wrap{overflow:hidden;height:320px;}
-.about-img-wrap img{height:100%;object-fit:cover;transition:transform 6s ease;max-width:100%;}
+.about-img-wrap img{height:100%;object-fit:cover;transition:transform 6s ease;}
 .about-img-wrap:hover img{transform:scale(1.04);}
 
-/* SERVICES CARD */
-.services-offered-block{background:#fff;padding:36px;margin-bottom:3px;}
+/* ── WHITE CARD SECTIONS ──
+FIX: All sections with background:#fff previously had no border-radius,
+making them look like disconnected blocks. Added border-radius:14px,
+border, and consistent margin-bottom so they look like cards matching
+the site's card system.
+Also removed the 3px bottom margins (visual gaps) between sections —
+replaced with 24px margin-bottom for consistent spacing.
+── */
+.services-offered-block{
+background:#fff;
+padding:36px;
+margin-bottom:24px; /* ← FIX: was 3px, now consistent */
+border-radius:14px; /* ← FIX: added */
+border:1px solid rgba(0,0,0,0.06); /* ← FIX: added */
+box-shadow:0 4px 16px rgba(0,0,0,0.04); /* ← FIX: added */
+}
 .services-offered{list-style:none;padding:0;margin:0 0 24px;font-size:14px;line-height:1.8;color:var(--text-mid);}
 .services-offered li{display:flex;justify-content:space-between;border-bottom:1px solid rgba(0,0,0,0.05);padding:8px 0;}
 .services-offered .price{color:var(--gold);font-weight:500;}
 
-/* GALLERY */
-.gallery-grid{display:grid;grid-template-columns:1fr 1fr;gap:3px;overflow-x:hidden;}
-.gallery-grid img{height:240px;object-fit:cover;width:100%;max-width:100%;}
+/* ── GALLERY ──
+FIX: Added border-radius and margin-bottom to match card system.
+── */
+.gallery-section{
+margin-bottom:24px; /* ← FIX: was 3px */
+border-radius:14px; /* ← FIX: added */
+overflow:hidden;
+border:1px solid rgba(0,0,0,0.06);
+}
+.gallery-grid{display:grid;grid-template-columns:1fr 1fr;gap:3px;}
+.gallery-grid img{height:240px;object-fit:cover;width:100%;}
 
-/* OFFERS */
-.offers-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:12px;overflow-x:hidden;}
-@media(max-width:600px){ .offers-grid{grid-template-columns:1fr;} }
+/* ── OFFERS ── */
+.offers-block{
+margin-bottom:24px; /* ← FIX: was 0 */
+}
+.offers-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:12px;}
+@media(max-width:600px){.offers-grid{grid-template-columns:1fr;}}
 
 .offer-card{background:#fff;overflow:hidden;transition:box-shadow 0.25s,transform 0.25s;border:1px solid rgba(0,0,0,0.06);min-height:360px;display:flex;flex-direction:column;border-radius:14px;}
 .offer-card:hover{box-shadow:0 10px 34px rgba(0,0,0,0.10);transform:translateY(-2px);}
-
 .offer-media{height:200px;position:relative;background:linear-gradient(135deg,var(--dark) 0%,var(--green) 100%);overflow:hidden;}
 .offer-media img{width:100%;height:100%;object-fit:cover;transition:transform 0.7s ease;cursor:zoom-in;}
 .offer-card:hover .offer-media img{transform:scale(1.04);}
-
 .ribbon{position:absolute;top:14px;left:14px;z-index:2;background:rgba(201,168,76,0.92);color:var(--dark);font-size:9px;letter-spacing:2px;text-transform:uppercase;font-weight:800;padding:7px 10px;border-radius:999px;box-shadow:0 8px 18px rgba(0,0,0,0.18);}
 .ribbon.urgent{background:rgba(217,48,37,0.92);color:#fff;}
 .ribbon.new{background:rgba(26,115,232,0.92);color:#fff;}
-
 .offer-body{padding:18px 18px 16px;display:flex;flex-direction:column;flex:1;}
 .offer-badge{font-size:9px;letter-spacing:3px;text-transform:uppercase;color:var(--gold);font-weight:700;margin-bottom:8px;}
 .offer-title{font-family:'Cormorant Garamond',serif;font-size:20px;font-weight:400;margin-bottom:8px;color:var(--text);line-height:1.2;}
@@ -220,35 +274,119 @@ a.info-val:hover{color:var(--gold);}
 .offer-details.clamp{display:-webkit-box;-webkit-line-clamp:1;-webkit-box-orient:vertical;overflow:hidden;}
 .offer-valid{font-size:11px;color:var(--green-soft);font-weight:800;white-space:nowrap;margin-top:auto;padding-top:12px;border-top:1px solid rgba(0,0,0,0.06);}
 
+/* ── IMAGE MODAL ── */
 #img-modal-overlay{position:fixed;inset:0;background:rgba(0,0,0,0.75);backdrop-filter:blur(6px);z-index:12000;display:none;}
 #img-modal{position:fixed;inset:0;z-index:12001;display:none;align-items:center;justify-content:center;padding:18px;}
 #img-modal-inner{position:relative;max-width:min(980px, 96vw);max-height:86vh;background:#000;border-radius:14px;overflow:hidden;box-shadow:0 24px 90px rgba(0,0,0,0.55);}
 #img-modal-inner img{width:100%;height:100%;max-height:86vh;object-fit:contain;background:#000;}
 #img-close{position:absolute;top:10px;right:10px;width:40px;height:40px;border-radius:10px;background:rgba(255,255,255,0.12);border:1px solid rgba(255,255,255,0.22);color:#fff;font-size:20px;cursor:pointer;}
 #img-close:hover{background:rgba(255,255,255,0.22);}
-
-#img-prev,#img-next{
-position:absolute;top:50%;transform:translateY(-50%);
-width:44px;height:44px;border-radius:12px;
-background:rgba(255,255,255,0.12);border:1px solid rgba(255,255,255,0.22);
-color:#fff;font-size:18px;cursor:pointer;
-display:flex;align-items:center;justify-content:center;
-}
-#img-prev{left:10px;} #img-next{right:10px;}
+#img-prev,#img-next{position:absolute;top:50%;transform:translateY(-50%);width:44px;height:44px;border-radius:12px;background:rgba(255,255,255,0.12);border:1px solid rgba(255,255,255,0.22);color:#fff;font-size:18px;cursor:pointer;display:flex;align-items:center;justify-content:center;}
+#img-prev{left:10px;}#img-next{right:10px;}
 #img-prev:hover,#img-next:hover{background:rgba(255,255,255,0.22);}
 
-/* STYLISTS */
-.stylists-section{padding:36px 0;}
-.stylists-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:3px;margin-top:18px;overflow-x:hidden;}
-.stylist-card{background:#fff;overflow:hidden;}
-.stylist-photo{width:110px;height:110px;border-radius:50%;overflow:hidden;margin:20px auto 0;border:3px solid var(--gold);max-width:100%;}
-.stylist-photo img{width:100%;height:100%;object-fit:cover;object-position:top;max-width:100%;}
+/* ── STYLISTS ──
+FIX: Added border-radius and consistent spacing.
+── */
+.stylists-section{
+padding:36px 0;
+margin-bottom:24px; /* ← FIX: added */
+}
+.stylists-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;margin-top:18px;} /* ← FIX: gap 3px→12px */
+.stylist-card{
+background:#fff;
+overflow:hidden;
+border-radius:14px; /* ← FIX: added */
+border:1px solid rgba(0,0,0,0.06);
+}
+.stylist-photo{width:110px;height:110px;border-radius:50%;overflow:hidden;margin:20px auto 0;border:3px solid var(--gold);}
+.stylist-photo img{width:100%;height:100%;object-fit:cover;object-position:top;}
 .stylist-info{padding:14px;text-align:center;}
 .stylist-name{font-family:'Cormorant Garamond',serif;font-size:17px;color:var(--text);font-weight:400;margin-bottom:3px;}
 .stylist-spec{font-size:10px;color:var(--gold);letter-spacing:1px;text-transform:uppercase;margin-bottom:2px;}
 .stylist-exp{font-size:11px;color:var(--text-light);}
 
+/* ── REVIEWS ──
+FIX: Added border-radius and consistent spacing.
+── */
+.reviews-block{
+background:#fff;
+padding:36px;
+margin-bottom:24px; /* ← FIX: was 3px */
+border-radius:14px; /* ← FIX: added */
+border:1px solid rgba(0,0,0,0.06);
+box-shadow:0 4px 16px rgba(0,0,0,0.04);
+}
+
+/* ── FOLLOW ── */
+.follow-block{padding:36px 0;text-align:center;margin-bottom:24px;}
+.bl-social-row{display:flex;justify-content:center;gap:20px;flex-wrap:wrap;margin-top:12px;}
+.bl-soc-link{display:flex;align-items:center;gap:12px;padding:12px 24px;border:1px solid rgba(0,0,0,0.12);border-radius:6px;color:var(--text-mid);font-size:11px;letter-spacing:1.5px;text-transform:uppercase;font-weight:600;transition:all 0.3s;text-decoration:none;min-width:160px;justify-content:center;background:#fff;box-sizing:border-box;}
+.bl-soc-link:hover{transform:translateY(-2px);box-shadow:0 6px 16px rgba(0,0,0,0.06);}
+.bl-soc-ig:hover{border-color:#E1306C;color:#E1306C;}
+.bl-soc-fb:hover{border-color:#1877F2;color:#1877F2;}
+
+/* ── SIDEBAR ── */
+.sb-inner{background:#fff;padding:28px;position:sticky;top:86px;border-radius:14px;border:1px solid rgba(0,0,0,0.06);} /* ← FIX: added border-radius + border */
+.sb-sec{font-size:9px;letter-spacing:3px;text-transform:uppercase;color:var(--text-light);font-weight:600;margin-bottom:10px;}
+.sb-divider{height:1px;background:rgba(0,0,0,0.06);margin:16px 0;}
+.h-row{display:flex;justify-content:space-between;font-size:12px;color:var(--text-mid);padding:5px 0;border-bottom:1px solid rgba(0,0,0,0.04);}
+.h-day{font-weight:500;color:var(--text);}
+
+/* ── STORE NAV ──
+FIX: padding matches 60px gutter.
+── */
+.store-nav{
+background:var(--dark);
+padding:20px 60px; /* ← already correct, keeping */
+display:flex;
+justify-content:space-between;
+align-items:center;
+border-top:1px solid rgba(255,255,255,0.06);
+}
+.sn-link{font-size:11px;letter-spacing:2px;text-transform:uppercase;color:rgba(255,255,255,0.45);transition:color 0.3s;max-width:40%;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;}
+.sn-link:hover{color:var(--gold);}
+.sn-mid{font-size:10px;color:rgba(255,255,255,0.2);letter-spacing:2px;text-transform:uppercase;text-align:center;}
+
+/* ── RESPONSIVE ── */
+@media(max-width:1200px){
+.page-wrap{padding:56px 40px;}
+.hero-content{padding:60px 40px 48px;}
+.info-bar{padding:0 40px;}
+.rating-wrap-outer{padding:16px 40px;}
+.store-nav{padding:20px 40px;}
+}
+@media(max-width:1100px){
+.page-wrap{grid-template-columns:1fr;padding:40px 40px;}
+.main-col{padding-right:0;}
+.sb-inner{position:static;margin-top:36px;}
+.hero-content{padding:48px 40px 32px;}
+}
+@media(max-width:768px){
+.hero-content{padding:36px 20px 32px;}
+.info-bar{grid-template-columns:1fr 1fr;padding:0 20px;}
+.info-cell{padding:14px 16px;}
+.about-grid{grid-template-columns:1fr;}
+.about-img-wrap{height:260px;}
+.offers-grid{grid-template-columns:1fr;}
+.stylists-grid{grid-template-columns:1fr 1fr;}
+.page-wrap{padding:28px 20px;}
+.store-nav{padding:14px 20px;}
+.rating-wrap-outer{padding:12px 20px;}
+}
+@media(max-width:480px){
+.stylists-grid{grid-template-columns:1fr;}
+.gallery-grid{grid-template-columns:1fr;}
+.page-wrap{padding:20px 16px;}
+.hero-content{padding:32px 16px 24px;}
+.info-bar{padding:0 16px;}
+.rating-wrap-outer{padding:10px 16px;}
+.store-nav{padding:14px 16px;}
+.bl-social-row{gap:16px;}
+.bl-soc-link{min-width:140px;}
+}
 </style>
+
 <style>
 .rev-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:24px;max-width:1200px;margin:0 auto;}
 .rev-card{background:#fff;padding:32px;border-radius:24px;border:1px solid rgba(0,0,0,0.06);box-shadow:0 10px 40px rgba(0,0,0,0.04);display:flex;flex-direction:column;gap:18px;transition:all 0.3s ease;position:relative;}
@@ -267,71 +405,6 @@ display:flex;align-items:center;justify-content:center;
 @media(max-width:640px){
 .rev-grid{grid-template-columns:1fr;}
 .rev-card{padding:24px;}
-}
-</style>
-
-<style>
-
-/* FOLLOW */
-.follow-block{padding:36px 0;text-align:center;}
-.bl-social-row{display:flex;justify-content:center;gap:20px;flex-wrap:wrap;margin-top:12px;overflow-x:hidden;}
-.bl-soc-link{display:flex;align-items:center;gap:12px;padding:12px 24px;border:1px solid rgba(0,0,0,0.12);border-radius:6px;color:var(--text-mid);font-size:11px;letter-spacing:1.5px;text-transform:uppercase;font-weight:600;transition:all 0.3s;text-decoration:none;min-width:160px;justify-content:center;background:#fff;max-width:100%;box-sizing:border-box;}
-.bl-soc-link:hover{transform:translateY(-2px);box-shadow:0 6px 16px rgba(0,0,0,0.06);}
-.bl-soc-ig:hover{border-color:#E1306C;color:#E1306C;}
-.bl-soc-fb:hover{border-color:#1877F2;color:#1877F2;}
-
-/* SIDEBAR */
-.sb-inner{background:#fff;padding:28px;position:sticky;top:86px;}
-.sb-name{font-family:'Cormorant Garamond',serif;font-size:20px;color:var(--text);font-weight:400;margin-bottom:3px;}
-.sb-area{font-size:10px;color:var(--gold);letter-spacing:2px;text-transform:uppercase;margin-bottom:14px;}
-.sb-quick{display:grid;grid-template-columns:1fr 1fr;gap:6px;margin-bottom:16px;}
-.sb-ql{display:flex;flex-direction:column;align-items:center;justify-content:center;gap:4px;padding:10px 6px;border:1px solid rgba(0,0,0,0.09);color:var(--text-mid);font-size:9px;letter-spacing:1.5px;text-transform:uppercase;font-weight:600;transition:all 0.3s;text-align:center;}
-.sb-ql span{font-size:16px;line-height:1;}
-.sb-ql:hover{border-color:var(--green);color:var(--green);}
-.sb-ql-wa:hover{border-color:#25D366;color:#25D366;}
-.sb-divider{height:1px;background:rgba(0,0,0,0.06);margin:16px 0;}
-.sb-sec{font-size:9px;letter-spacing:3px;text-transform:uppercase;color:var(--text-light);font-weight:600;margin-bottom:10px;}
-.h-row{display:flex;justify-content:space-between;font-size:12px;color:var(--text-mid);padding:5px 0;border-bottom:1px solid rgba(0,0,0,0.04);}
-.h-day{font-weight:500;color:var(--text);}
-.sb-social-slot{margin-top:10px;}
-
-/* STORE NAV */
-.store-nav{background:var(--dark);padding:20px 60px;display:flex;justify-content:space-between;align-items:center;border-top:1px solid rgba(255,255,255,0.06);}
-.sn-link{font-size:11px;letter-spacing:2px;text-transform:uppercase;color:rgba(255,255,255,0.45);transition:color 0.3s;max-width:40%;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;}
-.sn-link:hover{color:var(--gold);}
-.sn-mid{font-size:10px;color:rgba(255,255,255,0.2);letter-spacing:2px;text-transform:uppercase;text-align:center;}
-
-@media(max-width:1200px){
-.page-wrap{padding:56px 40px;}
-.hero-content{padding:60px 40px 48px;}
-}
-@media(max-width:1100px){
-.page-wrap{grid-template-columns:1fr;padding:40px 40px;min-height:calc(100vh - 78px);}
-.main-col{padding-right:0;}
-.sb-inner{position:static;margin-top:36px;}
-.hero-content{padding:48px 40px 32px;}
-}
-@media(max-width:768px){
-.hero-content{padding:36px 20px 32px;}
-.info-bar{grid-template-columns:1fr 1fr;}
-.info-cell{padding:14px 16px;}
-.about-grid{grid-template-columns:1fr;}
-.about-img-wrap{height:260px;}
-.offers-grid{grid-template-columns:1fr;}
-.stylists-grid{grid-template-columns:1fr 1fr;}
-.page-wrap{padding:28px 20px;min-height:calc(100vh - 58px);}
-.store-nav{padding:14px 20px;gap:10px;}
-.sn-link{max-width:45%;}
-}
-@media(max-width:480px){
-.hero-actions .secondary-actions{display:grid;grid-template-columns:repeat(3,1fr);gap:8px;}
-.stylists-grid{grid-template-columns:1fr;}
-.sb-quick{grid-template-columns:repeat(4,1fr);}
-.gallery-grid{grid-template-columns:1fr;}
-.page-wrap{padding:20px 16px;min-height:calc(100vh - 58px);}
-.hero-content{padding:32px 16px 24px;}
-.bl-social-row{gap:16px;}
-.bl-soc-link{min-width:140px;}
 }
 </style>
 
@@ -614,12 +687,10 @@ onerror="this.onerror=null;this.src='https://images.unsplash.com/photo-152233736
 <div class="hero-content">
 <div class="hero-badge">Store 3 of 5 &middot; Bangalore</div>
 <h1>Naturals Salon &amp; Spa &ndash;<br><em>Devasandra</em></h1>
-
 <div class="hero-sub">
 Premium hair, skin &amp; beauty services near Devasandra
 &middot; <a href="tel:+917259490009" style="color:rgba(255,255,255,0.55);">+91 72594 90009</a>
 </div>
-
 <div class="hero-cta-wrap">
 <div class="hero-cta-row">
 <a class="btn-book " href="https://naturals-salon-devasandra.setmore.com/" target="_blank" rel="noopener">Book Now</a>
@@ -644,7 +715,7 @@ Directions</a>
 </div>
 </section>
 
-<div style="text-align:center;">
+<div class="rating-wrap-outer">
 <div class="rating-summary-wrap">
 <div class="rs-stars">
 <svg viewBox="0 0 24 24" fill="var(--gold)"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
@@ -739,20 +810,18 @@ Families in KR Puram have trusted Naturals for premium-quality beauty services a
 <div class="services-offered-block reveal">
 <div class="lbl">What We Offer</div>
 <h2 class="sec-title">Our full <em>services menu.</em></h2>
-
 <ul class="services-offered">
 <li><span>Hair Spa</span> <span class="price">Premium</span></li>
 <li><span>Facials</span> <span class="price">Premium</span></li>
 <li><span>Hair Colour &amp; Highlights</span> <span class="price">Available</span></li>
-<li><span>Men’s Grooming &amp; Styling</span> <span class="price">Available</span></li>
+<li><span>Men's Grooming &amp; Styling</span> <span class="price">Available</span></li>
 <li><span>Bridal Makeup Packages</span> <span class="price">Available</span></li>
 </ul>
-
 <a href="../services/?store=Store_N36" class="btn-secondary">View All Services &amp; Pricing &#8594;</a>
 </div>
 
 
-<div class="gallery-section reveal" style="margin-bottom:3px;">
+<div class="gallery-section reveal">
 <div class="gallery-grid">
 <img src="https://images.unsplash.com/photo-1521590832167-7bfcbaa63629?w=600&q=85" alt="Naturals Salon Interior" width="600" height="400" loading="lazy">
 <img src="https://images.unsplash.com/photo-1560066984-138dadb4c035?w=600&q=85" alt="Hair Spa Service" width="600" height="400" loading="lazy">
@@ -773,19 +842,15 @@ data-image-name="20260226_Pay20000Get30000.jpg"
 >
 <div class="offer-media">
 <div class="ribbon" style="display:none;"></div>
-
 <img class="offer-img"
 data-img-base="../assets/offer/03_published/20260226_Pay20000Get30000.jpg"
 alt="Pay 20000, Get 30000"
-width="400" height="300"
-loading="lazy">
+width="400" height="300" loading="lazy">
 </div>
-
 <div class="offer-body">
 <div class="offer-badge">Devasandra</div>
 <div class="offer-title">Pay 20000, Get 30000</div>
 <div class="offer-details clamp">Customer First Offer by Naturals Salon. Get ₹30,000 worth of salon services with easy EMI at ₹2,000 per month for 9 months. Valid for 1 year at 950+ Naturals salons, shareable with 4 family members. Limited to 100 customers. T&C apply.</div>
-
 <div class="offer-valid">Valid till 31-Mar-2026</div>
 </div>
 </article>
@@ -800,33 +865,29 @@ loading="lazy">
 <div class="stylists-grid">
 <div class="stylist-card">
 <div class="stylist-photo">
-
 <img src="https://naturals-blr.github.io/images/stylists/stylist_default_male.jpg"
 alt="Male Stylist" width="300" height="400" loading="lazy">
+</div>
 <div class="stylist-info">
 <div class="stylist-name">Male Stylist</div>
-<div class="stylist-spec">Male All-Rounder</div>
-<div class="stylist-exp">Senior yrs experience</div>
-<a href="https://naturals-salon-devasandra.setmore.com/" target="_blank" style="display:inline-block;margin-top:12px;font-size:10px;font-weight:600;color:var(--gold);text-transform:uppercase;letter-spacing:1px;text-decoration:none;">Book &#8594;</a>
+<div class="stylist-spec">Male All-Rounder</div><div class="stylist-exp">Senior yrs experience</div> <a href="https://naturals-salon-devasandra.setmore.com/" target="_blank" style="display:inline-block;margin-top:12px;font-size:10px;font-weight:600;color:var(--gold);text-transform:uppercase;letter-spacing:1px;text-decoration:none;">Book &#8594;</a>
 </div>
 </div>
 <div class="stylist-card">
 <div class="stylist-photo">
-
 <img src="https://naturals-blr.github.io/images/stylists/stylist_default_female.jpg"
 alt="Female Stylist" width="300" height="400" loading="lazy">
+</div>
 <div class="stylist-info">
 <div class="stylist-name">Female Stylist</div>
-<div class="stylist-spec">Unisex Hair Dresser</div>
-<div class="stylist-exp">Senior yrs experience</div>
-<a href="https://naturals-salon-devasandra.setmore.com/" target="_blank" style="display:inline-block;margin-top:12px;font-size:10px;font-weight:600;color:var(--gold);text-transform:uppercase;letter-spacing:1px;text-decoration:none;">Book &#8594;</a>
+<div class="stylist-spec">Unisex Hair Dresser</div><div class="stylist-exp">Senior yrs experience</div> <a href="https://naturals-salon-devasandra.setmore.com/" target="_blank" style="display:inline-block;margin-top:12px;font-size:10px;font-weight:600;color:var(--gold);text-transform:uppercase;letter-spacing:1px;text-decoration:none;">Book &#8594;</a>
 </div>
 </div>
 </div>
 </div>
 
 
-<div class="reviews-block reveal" style="background:#fff;padding:36px;margin-bottom:3px;">
+<div class="reviews-block reveal">
 <div class="lbl">Client Love</div>
 <h2 class="sec-title">What clients <em>say about us</em></h2>
 <div class="rev-grid" style="grid-template-columns:1fr;gap:16px;margin-bottom:24px;">
@@ -841,7 +902,6 @@ alt="Female Stylist" width="300" height="400" loading="lazy">
 </div>
 </div>
 </div>
-
 <div class="rev-card reveal">
 <div class="rev-stars">
 ★★★★★ </div>
@@ -853,7 +913,6 @@ alt="Female Stylist" width="300" height="400" loading="lazy">
 </div>
 </div>
 </div>
-
 </div>
 <a href="https://g.page/Naturals-Devasandra/review?rc/" target="_blank" rel="noopener" class="btn-primary">
 <span style="font-size:16px;line-height:1;">&#11088;</span> Rate Us on Google
@@ -865,19 +924,14 @@ alt="Female Stylist" width="300" height="400" loading="lazy">
 <div class="lbl" style="justify-content:center;">Follow Us</div>
 <h2 class="sec-title" style="text-align:center;">Stay connected <em>with us</em></h2>
 <div class="bl-social-row">
-<a href="https://instagram.com/Naturals.Salon.Devasandra/" target="_blank" class="bl-soc-link bl-soc-ig">
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="20" height="20" aria-hidden="true" style="flex-shrink:0"><defs><linearGradient id="ig-grad" x1="0%" y1="100%" x2="100%" y2="0%"><stop offset="0%" stop-color="#FFDC80"/><stop offset="25%" stop-color="#FCAF45"/><stop offset="50%" stop-color="#F77737"/><stop offset="75%" stop-color="#C13584"/><stop offset="100%" stop-color="#833AB4"/></linearGradient></defs><path fill="url(#ig-grad)" d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zM12 0C8.741 0 8.333.014 7.053.072 2.695.272.273 2.69.073 7.052.014 8.333 0 8.741 0 12c0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98C8.333 23.986 8.741 24 12 24c3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98C15.668.014 15.259 0 12 0zm0 5.838a6.162 6.162 0 100 12.324 6.162 6.162 0 000-12.324zM12 16a4 4 0 110-8 4 4 0 010 8zm6.406-11.845a1.44 1.44 0 100 2.881 1.44 1.44 0 000-2.881z"/></svg>
-Instagram
-</a>
-<a href="https://facebook.com/Naturals.Salon.Devasandra/" target="_blank" class="bl-soc-link bl-soc-fb">
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="20" height="20" fill="#1877F2" aria-hidden="true" style="flex-shrink:0"><path d="M24 12.073C24 5.405 18.627 0 12 0S0 5.405 0 12.073C0 18.1 4.388 23.094 10.125 24v-8.437H7.078v-3.49h3.047V9.41c0-3.025 1.792-4.697 4.533-4.697 1.313 0 2.686.236 2.686.236v2.97h-1.513c-1.491 0-1.956.93-1.956 1.883v2.271h3.328l-.532 3.49h-2.796V24C19.612 23.094 24 18.1 24 12.073z"/></svg>
-Facebook
-</a>
+<a href="https://instagram.com/Naturals.Salon.Devasandra/" target="_blank" class="bl-soc-link bl-soc-ig"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="20" height="20" aria-hidden="true" style="flex-shrink:0"><defs><linearGradient id="ig-grad" x1="0%" y1="100%" x2="100%" y2="0%"><stop offset="0%" stop-color="#FFDC80"/><stop offset="25%" stop-color="#FCAF45"/><stop offset="50%" stop-color="#F77737"/><stop offset="75%" stop-color="#C13584"/><stop offset="100%" stop-color="#833AB4"/></linearGradient></defs><path fill="url(#ig-grad)" d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zM12 0C8.741 0 8.333.014 7.053.072 2.695.272.273 2.69.073 7.052.014 8.333 0 8.741 0 12c0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98C8.333 23.986 8.741 24 12 24c3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98C15.668.014 15.259 0 12 0zm0 5.838a6.162 6.162 0 100 12.324 6.162 6.162 0 000-12.324zM12 16a4 4 0 110-8 4 4 0 010 8zm6.406-11.845a1.44 1.44 0 100 2.881 1.44 1.44 0 000-2.881z"/></svg>
+Instagram</a>
+<a href="https://facebook.com/Naturals.Salon.Devasandra/" target="_blank" class="bl-soc-link bl-soc-fb"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="20" height="20" fill="#1877F2" aria-hidden="true" style="flex-shrink:0"><path d="M24 12.073C24 5.405 18.627 0 12 0S0 5.405 0 12.073C0 18.1 4.388 23.094 10.125 24v-8.437H7.078v-3.49h3.047V9.41c0-3.025 1.792-4.697 4.533-4.697 1.313 0 2.686.236 2.686.236v2.97h-1.513c-1.491 0-1.956.93-1.956 1.883v2.271h3.328l-.532 3.49h-2.796V24C19.612 23.094 24 18.1 24 12.073z"/></svg>
+Facebook</a>
 </div>
 </div>
 
 </div>
-
 
 <div class="sidebar-col">
 <div class="sb-inner">
@@ -885,16 +939,14 @@ Facebook
 <div class="h-row"><span class="h-day">Mon &ndash; Fri</span><span></span></div>
 <div class="h-row"><span class="h-day">Saturday</span><span></span></div>
 <div class="h-row"><span class="h-day">Sunday</span><span></span></div>
-
 <div class="sb-divider"></div>
 <a href="https://g.page/Naturals-Devasandra/review?rc/" target="_blank" rel="noopener" class="btn-primary" style="width:100%;margin-bottom:4px;">
 <span style="font-size:16px;line-height:1;">&#11088;</span> Rate Us on Google
 </a>
+</div>
+</div>
 
 </div>
-</div>
-</div>
-
 <div class="store-nav">
 <a href="bangalore/elements-mall/" class="sn-link">&#8592; Elements Mall</a>
 <a href="../index.html#our-stores" class="sn-mid">All 5 Bangalore Locations</a>
@@ -940,14 +992,15 @@ Facebook
 </ul>
 </div>
 
-</div><div class="ft-bottom">
+</div>
+<div class="ft-bottom">
 <div class="ft-copy">&copy; 2026 Naturals Salon &amp; Spa, Bangalore. All rights reserved.</div>
 <div class="ft-url">naturals-blr.github.io</div>
 </div>
 </footer>
 
 <style>
-/* ── Footer shell: full viewport width, dark background ── */
+/* ── Footer shell: full viewport width, always dark ─────────────── */
 footer {
 background: #080f0b;
 width: 100%;
@@ -955,23 +1008,20 @@ display: block;
 }
 [data-theme="naturals"] footer { background: #0D0120; }
 
-/* ── ft-top: content grid, constrained + padded ── */
+/* ── ft-top: 4-col grid, padding mirrors page gutters (60px) ────── */
 .ft-top {
 padding: 60px 60px 40px;
 display: grid;
 grid-template-columns: 2fr 1fr 1fr 1fr;
 gap: 48px;
 border-bottom: 1px solid rgba(255,255,255,0.07);
-max-width: 1380px;
-margin: 0 auto;
-box-sizing: border-box;
+/* No max-width — fills full footer width like all other page sections */
 }
 
-/* ── Brand column ── */
+/* ── Brand column ───────────────────────────────────────────────── */
 .ft-brand-col {
 display: flex;
 flex-direction: column;
-gap: 10px;
 }
 .ft-brand {
 font-family: 'Cormorant Garamond', serif;
@@ -988,8 +1038,8 @@ font-weight: 300;
 line-height: 1.7;
 }
 
-/* ── Nav columns ── */
-.ft-col { display: flex; flex-direction: column; gap: 0; }
+/* ── Nav columns ────────────────────────────────────────────────── */
+.ft-col { display: flex; flex-direction: column; }
 .ft-col-title {
 font-size: 9px;
 letter-spacing: 3px;
@@ -1012,14 +1062,16 @@ color: rgba(255,255,255,0.32);
 font-weight: 300;
 text-decoration: none;
 transition: color 0.3s;
+/* Truncate long store names gracefully */
 display: block;
 white-space: nowrap;
 overflow: hidden;
 text-overflow: ellipsis;
+max-width: 160px;
 }
 .ft-col ul a:hover { color: rgba(255,255,255,0.72); }
 
-/* ── Bottom bar ── */
+/* ── Bottom bar: same 60px gutter as ft-top ─────────────────────── */
 .ft-bottom {
 padding: 18px 60px;
 display: flex;
@@ -1027,14 +1079,11 @@ justify-content: space-between;
 align-items: center;
 flex-wrap: wrap;
 gap: 8px;
-max-width: 1380px;
-margin: 0 auto;
-box-sizing: border-box;
 }
 .ft-copy { font-size: 11px; color: rgba(255,255,255,0.16); }
 .ft-url { font-size: 11px; color: rgba(255,255,255,0.18); letter-spacing: 1px; }
 
-/* ── Responsive ── */
+/* ── Responsive ─────────────────────────────────────────────────── */
 @media (max-width: 960px) {
 .ft-top {
 grid-template-columns: 1fr 1fr;
@@ -1052,6 +1101,7 @@ text-align: center;
 grid-template-columns: 1fr;
 padding: 28px 16px 20px;
 }
+.ft-col ul a { max-width: 100%; }
 }
 </style><script>
 window.NATURALS_STORES = [{"Active_Status": "Yes", "Address_City": "Bangalore", "Address_Full": "1st Floor, Anand Onyx, No 305, 15th Cross Rd, near Outer Ring Road, 5th Phase, J P Nagar Phase 5, J. P. Nagar, ", "Address_Line_2": "", "Address_State": "Karnataka", "Appointment_URL": "https://naturals-salon-jpnagar5phase.setmore.com/", "Booking_Platform": "Setmore", "Email": "jpnagar2.naturals@gmail.com", "Facebook_ID": "Naturals.Salon.JPNagar5Phase", "Facebook_URL": "https://facebook.com/Naturals.Salon.JPNagar5Phase", "Google_Location_ID": "locations/11456061934238062921", "Google_Maps_URL": "https://g.page/Naturals_JPNagar5thPhase/", "Google_Place_ID": "ChIJD_AjPBEVrjsRyrGhTRo9qvw", "Hero_Number": 1, "Instagram_ID": "@Naturals.Salon.JPNagar5Phase", "Instagram_URL": "https://instagram.com/Naturals.Salon.JPNagar5Phase/", "Manager_Name": "N78 Store Manager", "Manager_WhatsApp": "+918792642299", "Phone_Display": "+91 87926 42299", "Phone_Raw": "+918792642299", "Phone_Tel": "+918792642299", "Pincode": "560078", "Store_ID": "Store_N78", "Store_Page_URL": "stores/bangalore/jp-nagar-5th-phase/", "WhatsApp_Number": "+918792642299", "active_status": "Yes", "address_city": "Bangalore", "address_full": "1st Floor, Anand Onyx, No 305, 15th Cross Rd, near Outer Ring Road, 5th Phase, J P Nagar Phase 5, J. P. Nagar, Bengaluru, Karnataka 560078, India", "address_line_1": "1st Floor, Anand Onyx, No 305, 15th Cross Rd, near Outer Ring Road, 5th Phase, J P Nagar Phase 5, J. P. Nagar, ", "address_pincode": "560078", "address_state": "Karnataka", "appointment_url": "https://naturals-salon-jpnagar5phase.setmore.com/", "booking_platform": "Setmore", "brand_store_name": "Naturals Salon \u0026 Spa - JP Nagar 5th Phase", "description": "Premium salon in JP Nagar 5th Phase, Bangalore \u2014 expert hair, skin \u0026 bridal services on 100 Ft Ring Road.", "email": "jpnagar2.naturals@gmail.com", "escalation_contact": "Sophia", "escalation_email": "sophiaclmnt@gmail.com", "escalation_whatsapp": "919741115349", "facebook_access_token": "", "facebook_id": "Naturals.Salon.JPNagar5Phase", "facebook_page_id": "715840311849516", "facebook_url": "https://facebook.com/Naturals.Salon.JPNagar5Phase", "google_location_id": "locations/11456061934238062921", "google_maps_url": "https://g.page/Naturals_JPNagar5thPhase/", "google_place_id": "ChIJD_AjPBEVrjsRyrGhTRo9qvw", "google_review_link": "https://g.page/Naturals_JPNagar5thPhase/review?rc/", "hero_tagline": "South Bangalore\u0027s trusted destination for hair, skin \u0026 bridal beauty \u2014 on 100 Ft Ring Road.", "instagram_business_account_id": "17841425192935961", "instagram_id": "Naturals.Salon.JPNagar5Phase", "instagram_url": "https://instagram.com/Naturals.Salon.JPNagar5Phase/", "latitude": "12.9055", "longitude": "77.5945", "mon_fri_hours": "10:00 AM \u2013 9:00 PM", "phone_landline": "+918041304444", "phone_mobile": "+918792642299", "phone_whatsapp": "+918792642299", "pincode": "560078", "saturday_hours": "10:00 AM \u2013 9:00 PM", "seo_description": "Naturals Salon \u0026 Spa on 100 Ft Ring Road, JP Nagar 5th Phase, Bangalore. Premium haircuts, hair colour, bridal packages, skin care \u0026 spa. Walk in or book online today.", "seo_intro": "Welcome to Naturals Salon \u0026 Spa JP Nagar 5th Phase \u2014 south Bangalore\u0027s premium beauty destination on 100 Ft Ring Road. Nestled in the heart of JP Nagar\u0027s 5th Phase, our salon has been the go-to choice for residents of JP Nagar, Banashankari, Jayanagar and Uttarahalli for expert hair care, radiant skin treatments and flawless bridal packages.\n \n Our team of certified stylists specialises in precision haircuts, balayage and global colour, keratin smoothening, hair spa therapies, and a full range of facials tailored to Bangalore\u0027s climate and skin types. Whether you\u0027re preparing for a wedding, a corporate event, or simply your weekly self-care ritual, every visit at our JP Nagar salon is crafted around you.\n \n Part of India\u0027s most trusted salon network with over 25 years of expertise across 1,000+ outlets, Naturals brings national-standard beauty services to your neighbourhood \u2014 with transparent pricing, premium products, and no surprises. Book your appointment online or walk in at Anand Onyx, 1st Floor, 15th Cross, 100 Ft Ring Road.", "seo_title": "Naturals Salon JP Nagar 5th Phase | Hair \u0026 Bridal | Bangalore", "store_area": "", "store_display_name": "JP Nagar 5th Phase", "store_id": "Store_N78", "store_id_short": "N78", "store_manager_name": "Nisha", "sunday_hours": "10:00 AM \u2013 9:00 PM"}, {"Active_Status": "Yes", "Address_City": "Bangalore", "Address_Full": "Shop No 26, 3rd Floor, Elements Mall, 100 Ft Rd, near Manyata Tech Park Road, MS Ramaiah North City, Manayata Tech Park, Nagavara,", "Address_Line_2": "", "Address_State": "Karnataka", "Appointment_URL": "https://naturals-salon-elementsmall.setmore.com/", "Booking_Platform": "Setmore", "Email": "naturalsnagavara@gmail.com", "Facebook_ID": "Naturals.Salon.ElementsMall", "Facebook_URL": "https://facebook.com/Naturals.Salon.ElementsMall/", "Google_Location_ID": "locations/5858391068390788403", "Google_Maps_URL": "https://maps.google.com/?q=Naturals+Salon+Elements+Mall", "Google_Place_ID": "ChIJo_js4GgXrjsR3LgZhMNOPz4", "Hero_Number": 2, "Instagram_ID": "@Naturals.Salon.ElementsMall", "Instagram_URL": "https://instagram.com/Naturals.Salon.ElementsMall/", "Manager_Name": "N77 Store Manager", "Manager_WhatsApp": "+919901000017", "Phone_Display": "+91 99010 00017", "Phone_Raw": "+919901000017", "Phone_Tel": "+919901000017", "Pincode": "560077", "Store_ID": "Store_N77", "Store_Page_URL": "stores/bangalore/elements-mall/", "WhatsApp_Number": "+919901000017", "active_status": "Yes", "address_city": "Bangalore", "address_full": "Shop No 26, 3rd Floor, Elements Mall, 100 Ft Rd, near Manyata Tech Park Road, MS Ramaiah North City, Manayata Tech Park, Nagavara, Bengaluru, Karnataka 560077, India", "address_line_1": "Shop No 26, 3rd Floor, Elements Mall, 100 Ft Rd, near Manyata Tech Park Road, MS Ramaiah North City, Manayata Tech Park, Nagavara,", "address_pincode": "560077", "address_state": "Karnataka", "appointment_url": "https://naturals-salon-elementsmall.setmore.com/", "booking_platform": "Setmore", "brand_store_name": "Naturals Salon \u0026 Spa - Elements Mall", "description": "Premium salon at Elements Mall, Nagavara \u2014 hair, spa \u0026 skin care near Manyata Tech Park, north Bangalore.", "email": "naturalsnagavara@gmail.com", "escalation_contact": "Sophia", "escalation_email": "sophiaclmnt@gmail.com", "escalation_whatsapp": "919741115349", "facebook_access_token": "", "facebook_id": "Naturals.Salon.ElementsMall", "facebook_page_id": "318850925297093", "facebook_url": "https://facebook.com/Naturals.Salon.ElementsMall/", "google_location_id": "locations/5858391068390788403", "google_maps_url": "https://maps.google.com/?q=Naturals+Salon+Elements+Mall", "google_place_id": "ChIJo_js4GgXrjsR3LgZhMNOPz4", "google_review_link": "https://g.page/Naturals-ElementsMall/review?rc/", "hero_tagline": "Premium hair \u0026 spa services inside Elements Mall \u2014 your beauty break near Manyata Tech Park.", "instagram_business_account_id": "17841437507959021", "instagram_id": "Naturals.Salon.ElementsMall", "instagram_url": "https://instagram.com/Naturals.Salon.ElementsMall/", "latitude": "13.053", "longitude": "77.62", "mon_fri_hours": "10:00 AM \u2013 9:00 PM", "phone_landline": "+918046514422", "phone_mobile": "+919901000017", "phone_whatsapp": "+919901000017", "pincode": "560077", "saturday_hours": "10:00 AM \u2013 9:00 PM", "seo_description": "Naturals Salon \u0026 Spa at Elements Mall, Nagavara \u2014 3rd Floor. Haircuts, colour, spa \u0026 skin care near Manyata Tech Park. Ideal for working professionals. Book appointments online.", "seo_intro": "Welcome to Naturals Salon \u0026 Spa at Elements Mall, Nagavara \u2014 north Bangalore\u0027s most convenient premium salon, located on the 3rd Floor of Elements Mall on Thanisandra Main Road, just minutes from Manyata Tech Park and Hebbal.\n \n Designed for the busy professional, our Elements Mall salon offers express and full-service beauty treatments that fit your schedule \u2014 from quick blowouts and express facials to full hair colour sessions and relaxing spa therapies. Whether you\u0027re a tech professional stepping away from the office, or a weekend shopper looking to unwind, our certified stylists deliver precision results with premium products every time.\n \n Our services include haircuts and styling for all hair types, global and fashion hair colour, keratin and smoothening treatments, deep conditioning hair spas, advanced facials, and de-tan and clean-up treatments perfect for Bangalore\u0027s sun and pollution. As part of India\u0027s most trusted salon network \u2014 with 25 years of expertise \u2014 Naturals brings world-class beauty services to your neighbourhood mall. Book online or visit us on the 3rd Floor at Elements Mall.", "seo_title": "Naturals Salon Elements Mall | Hair \u0026 Spa | Nagavara Bangalore", "store_area": "", "store_display_name": "Elements Mall", "store_id": "Store_N77", "store_id_short": "N77", "store_manager_name": "Sandesh Kumar", "sunday_hours": "10:00 AM \u2013 9:00 PM"}, {"Active_Status": "Yes", "Address_City": "Bangalore", "Address_Full": "2,3, 1st Floor, Maruthi Tower, No. 1, Devasandra Main Rd, opp. Lulu\u0027s Bakery, Basavanapura, KRPuram,", "Address_Line_2": "", "Address_State": "Karnataka", "Appointment_URL": "https://naturals-salon-devasandra.setmore.com/", "Booking_Platform": "Setmore", "Email": "naturalsdevasandra@gmail.com", "Facebook_ID": "Naturals.Salon.Devasandra", "Facebook_URL": "https://facebook.com/Naturals.Salon.Devasandra/", "Google_Location_ID": "locations/2727661342173271867", "Google_Maps_URL": "https://maps.google.com/?q=Naturals+Salon+Devasandra", "Google_Place_ID": "ChIJoWUOlAARrjsREnWUrR3DWfk", "Hero_Number": 3, "Instagram_ID": "@Naturals.Salon.Devasandra", "Instagram_URL": "https://instagram.com/Naturals.Salon.Devasandra/", "Manager_Name": "N36 Store Manager", "Manager_WhatsApp": "+917259490009", "Phone_Display": "+91 72594 90009", "Phone_Raw": "+917259490009", "Phone_Tel": "+917259490009", "Pincode": "560036", "Store_ID": "Store_N36", "Store_Page_URL": "stores/bangalore/devasandra/", "WhatsApp_Number": "+917259490009", "active_status": "Yes", "address_city": "Bangalore", "address_full": "2,3, 1st Floor, Maruthi Tower, No. 1, Devasandra Main Rd, opp. Lulu\u0027s Bakery, Basavanapura, KRPuram, Bengaluru, Karnataka 560036, India", "address_line_1": "2,3, 1st Floor, Maruthi Tower, No. 1, Devasandra Main Rd, opp. Lulu\u0027s Bakery, Basavanapura, KRPuram,", "address_pincode": "560036", "address_state": "Karnataka", "appointment_url": "https://naturals-salon-devasandra.setmore.com/", "booking_platform": "Setmore", "brand_store_name": "Naturals Salon \u0026 Spa - Devasandra", "description": "Premium salon in Devasandra, KR Puram \u2014 hair, skin \u0026 bridal services for east Bangalore families.", "email": "naturalsdevasandra@gmail.com", "escalation_contact": "Sophia", "escalation_email": "sophiaclmnt@gmail.com", "escalation_whatsapp": "919741115349", "facebook_access_token": "", "facebook_id": "Naturals.Salon.Devasandra", "facebook_page_id": "922849001248263", "facebook_url": "https://facebook.com/Naturals.Salon.Devasandra/", "google_location_id": "locations/2727661342173271867", "google_maps_url": "https://maps.google.com/?q=Naturals+Salon+Devasandra", "google_place_id": "ChIJoWUOlAARrjsREnWUrR3DWfk", "google_review_link": "https://g.page/Naturals-Devasandra/review?rc/", "hero_tagline": "East Bangalore\u0027s neighbourhood salon for expert hair, skin \u0026 wellness \u2014 on Devasandra Main Road.", "instagram_business_account_id": "17841437347582520", "instagram_id": "Naturals.Salon.Devasandra", "instagram_url": "https://instagram.com/Naturals.Salon.Devasandra/", "latitude": "13.005", "longitude": "77.698", "mon_fri_hours": "10:00 AM \u2013 9:00 PM", "phone_landline": "", "phone_mobile": "+917259490009", "phone_whatsapp": "+917259490009", "pincode": "560036", "saturday_hours": "10:00 AM \u2013 9:00 PM", "seo_description": "Naturals Salon \u0026 Spa in Devasandra, KR Puram \u2014 opposite Lulu\u0027s Bakery. Haircuts, colour, facials, bridal \u0026 spa for east Bangalore. Trusted by families. Book now.", "seo_intro": "Welcome to Naturals Salon \u0026 Spa Devasandra \u2014 east Bangalore\u0027s trusted beauty destination, conveniently located on Devasandra Main Road, KR Puram, opposite the landmark Lulu\u0027s Bakery in Basavanapura.\n \n Our Devasandra salon serves the rapidly growing communities of KR Puram, Mahadevapura, ITPL Road, Hoodi and Varthur with a full range of professional beauty services \u2014 from everyday haircuts and hair colour to bridal packages, deep conditioning treatments, skin care and body wellness therapies. Our team of experienced stylists knows that every client is unique, which is why each visit begins with a personalised consultation to understand your hair type, skin concerns and lifestyle.\n \n Families in KR Puram have trusted Naturals for premium-quality beauty services at honest, transparent prices. Whether you\u0027re looking for a weekend blow-dry, a pre-festival makeover, or a full bridal preparation, our Devasandra team is here to deliver results that last. Part of India\u0027s most respected salon network, Naturals brings 25 years of national expertise to your neighbourhood. Book your appointment online or walk in at Maruthi Tower, 1st Floor.", "seo_title": "Naturals Salon Devasandra KR Puram | Hair \u0026 Beauty | Bangalore", "store_area": "", "store_display_name": "Devasandra", "store_id": "Store_N36", "store_id_short": "N36", "store_manager_name": "Devasandra Store Manager", "sunday_hours": "10:00 AM \u2013 9:00 PM"}, {"Active_Status": "Yes", "Address_City": "Bangalore", "Address_Full": "1st floor, No.94, Mosque Rd, above Poorvika Mobile Store, Cleveland Town, Frazer Town,", "Address_Line_2": "", "Address_State": "Karnataka", "Appointment_URL": "https://naturals-salon-frazertown.setmore.com/", "Booking_Platform": "Setmore", "Email": "frazertown.naturals@gmail.com", "Facebook_ID": "Naturals.Salon.FrazerTown", "Facebook_URL": "https://www.facebook.com/Naturals.Salon.FrazerTown/", "Google_Location_ID": "locations/4210460996377672562", "Google_Maps_URL": "https://maps.google.com/?q=Naturals+Salon+Frazer+Town", "Google_Place_ID": "ChIJcfViGvEWrjsRUuIzB28viSc", "Instagram_ID": "@Naturals.Salon.FrazerTown", "Instagram_URL": "https://instagram.com/Naturals.Salon.FrazerTown/", "Manager_Name": "N05 Store Manager", "Manager_WhatsApp": "+919606333017", "Phone_Display": "+91 96063 33017", "Phone_Raw": "+919606333017", "Phone_Tel": "+919606333017", "Pincode": "560005", "Store_ID": "Store_N05", "Store_Page_URL": "stores/bangalore/frazer-town/", "WhatsApp_Number": "+919606333017", "active_status": "Yes", "address_city": "Bangalore", "address_full": "1st floor, No.94, Mosque Rd, above Poorvika Mobile Store, Cleveland Town, Frazer Town, Bengaluru, Karnataka 560005, India", "address_line_1": "1st floor, No.94, Mosque Rd, above Poorvika Mobile Store, Cleveland Town, Frazer Town,", "address_pincode": "560005", "address_state": "Karnataka", "appointment_url": "https://naturals-salon-frazertown.setmore.com/", "booking_platform": "Setmore", "brand_store_name": "Naturals Salon \u0026 Spa - Frazer Town", "description": "Premium salon on Mosque Road, Frazer Town \u2014 expert hair, bridal \u0026 skin care in central Bangalore.", "email": "frazertown.naturals@gmail.com", "escalation_contact": "Sophia", "escalation_email": "sophiaclmnt@gmail.com", "escalation_whatsapp": "919741115349", "facebook_access_token": "", "facebook_id": "Naturals.Salon.FrazerTown", "facebook_page_id": "526783314021240", "facebook_url": "https://www.facebook.com/Naturals.Salon.FrazerTown/", "google_location_id": "locations/4210460996377672562", "google_maps_url": "https://maps.google.com/?q=Naturals+Salon+Frazer+Town", "google_place_id": "ChIJcfViGvEWrjsRUuIzB28viSc", "google_review_link": "https://g.page/Naturals-FrazerTown/review?rc/", "hero_tagline": "Central Bangalore\u0027s cosmopolitan beauty salon \u2014 expert hair, skin \u0026 bridal care on Mosque Road.", "instagram_business_account_id": "17841447241612437", "instagram_id": "Naturals.Salon.FrazerTown", "instagram_url": "https://instagram.com/Naturals.Salon.FrazerTown/", "latitude": "12.99", "longitude": "77.605", "mon_fri_hours": "10:00 AM \u2013 9:00 PM", "phone_landline": "+918040948040", "phone_mobile": "+919606333017", "phone_whatsapp": "+919606333017", "pincode": "560005", "saturday_hours": "10:00 AM \u2013 9:00 PM", "seo_description": "Naturals Salon \u0026 Spa on Mosque Road, Frazer Town \u2014 central Bangalore. Haircuts, bridal styling, colour, facials \u0026 spa. Above Poorvika Mobile. Walk in or book online today.", "seo_intro": "Welcome to Naturals Salon \u0026 Spa Frazer Town \u2014 centrally located on Mosque Road, Pulikeshi Nagar, above Poorvika Mobile Store, in the heart of one of Bangalore\u0027s most vibrant and well-connected neighbourhoods.\n \n Our Frazer Town salon caters to Bangalore\u0027s most diverse clientele \u2014 from professionals working in the CBD and Shivajinagar, to residents of Frazer Town, Richards Town, Lingarajapuram and Ulsoor. We offer a comprehensive range of beauty services including precision haircuts, global and highlight hair colour, keratin and rebonding treatments, hair spa, advanced facials, bridal and party makeup, mehendi and full bridal packages for all communities.\n \n What sets our Frazer Town salon apart is our team\u0027s deep experience with diverse hair textures and skin tones \u2014 from fine straight hair to thick curly and wavy types, and from fair to deep skin tones. Every treatment is selected and adapted to give you the best possible result. Transparent pricing, premium products, and a warm, welcoming space \u2014 that\u0027s the Naturals promise. Visit us on Mosque Road or book your appointment online.", "seo_title": "Naturals Salon Frazer Town | Hair \u0026 Bridal | Mosque Road Bangalore", "store_area": "", "store_display_name": "Frazer Town", "store_id": "Store_N05", "store_id_short": "N05", "store_manager_name": "Rethika", "sunday_hours": "10:00 AM \u2013 9:00 PM"}, {"Active_Status": "Yes", "Address_City": "Bangalore", "Address_Full": "1st Floor, No 40/A, 40/C, Main Road, above SBI Bank, Hennur Gardens, ", "Address_Line_2": "", "Address_State": "Karnataka", "Appointment_URL": "https://naturals-salon-hennur.setmore.com/", "Booking_Platform": "Setmore", "Email": "naturalshennur@gmail.com", "Facebook_ID": "Naturals.Salon.Hennur", "Facebook_URL": "https://facebook.com/Naturals.Salon.Hennur/", "Google_Location_ID": "locations/10326220211235668452", "Google_Maps_URL": "https://maps.google.com/?q=Naturals+Salon+Hennur", "Google_Place_ID": "ChIJb03gT58XrjsRv0Rytrv60BM", "Instagram_ID": "@Naturals.Salon.Hennur", "Instagram_URL": "https://instagram.com/Naturals.Salon.Hennur/", "Manager_Name": "N43 Store Manager", "Manager_WhatsApp": "+919606900069", "Phone_Display": "+91 96069 00069", "Phone_Raw": "+919606900069", "Phone_Tel": "+919606900069", "Pincode": "560043", "Store_ID": "Store_N43", "Store_Page_URL": "stores/bangalore/hennur/", "WhatsApp_Number": "+919606900069", "active_status": "Yes", "address_city": "Bangalore", "address_full": "1st Floor, No 40/A, 40/C, Main Road, above SBI Bank, Hennur Gardens, Bengaluru, Karnataka 560043, India", "address_line_1": "1st Floor, No 40/A, 40/C, Main Road, above SBI Bank, Hennur Gardens, ", "address_pincode": "560043", "address_state": "Karnataka", "appointment_url": "https://naturals-salon-hennur.setmore.com/", "booking_platform": "Setmore", "brand_store_name": "Naturals Salon \u0026 Spa - Hennur", "description": "Premium salon at Hennur Cross \u2014 hair, spa \u0026 skin care for north Bangalore\u0027s growing communities.", "email": "naturalshennur@gmail.com", "escalation_contact": "Sophia", "escalation_email": "sophiaclmnt@gmail.com", "escalation_whatsapp": "919741115349", "facebook_access_token": "", "facebook_id": "Naturals.Salon.Hennur", "facebook_page_id": "111143220365821", "facebook_url": "https://facebook.com/Naturals.Salon.Hennur/", "google_location_id": "locations/10326220211235668452", "google_maps_url": "https://maps.google.com/?q=Naturals+Salon+Hennur", "google_place_id": "ChIJb03gT58XrjsRv0Rytrv60BM", "google_review_link": "https://g.page/Naturals-Hennur/review?rc/", "hero_tagline": "North Bangalore\u0027s go-to salon for premium hair, skin \u0026 wellness \u2014 at Hennur Cross.", "instagram_business_account_id": "17841426843499448", "instagram_id": "Naturals.Salon.Hennur", "instagram_url": "https://instagram.com/Naturals.Salon.Hennur/", "latitude": "13.042", "longitude": "77.648", "mon_fri_hours": "10:00 AM \u2013 8:00 PM", "phone_landline": "", "phone_mobile": "+919606900069", "phone_whatsapp": "+919606900069", "pincode": "560043", "saturday_hours": "10:00 AM \u2013 8:00 PM", "seo_description": "Naturals Salon \u0026 Spa at Hennur Cross \u2014 above SBI Bank, Hennur Main Road. Haircuts, colour, spa \u0026 skin care for north Bangalore. Trusted. Affordable. Book online now.", "seo_intro": "Welcome to Naturals Salon \u0026 Spa Hennur \u2014 north Bangalore\u0027s trusted beauty salon, conveniently located above SBI Bank on Hennur Main Road at Hennur Cross, serving the fast-growing communities of Hennur, Kalyan Nagar, HBR Layout, Horamavu and Banaswadi.\n \n Hennur has transformed into one of Bangalore\u0027s most dynamic residential hubs, and our salon has grown with it \u2014 offering the neighbourhood access to premium salon services that were once only available in central Bangalore. From expert haircuts and the latest hair colour techniques, to relaxing hair spa therapies, brightening facials, de-tan treatments and full bridal packages, our certified team delivers outstanding results at honest, transparent prices.\n \n Our Hennur team is passionate about making every client feel pampered and confident \u2014 whether you\u0027re a working professional looking for a quick style refresh, a new bride preparing for your big day, or a family visiting together for the weekend. As part of India\u0027s most trusted salon chain with 25+ years of experience, Naturals brings the gold standard in beauty to your doorstep. Book online or walk in at Hennur Main Road.", "seo_title": "Naturals Salon Hennur | Hair \u0026 Spa | Hennur Cross Bangalore", "store_area": "", "store_display_name": "Hennur", "store_id": "Store_N43", "store_id_short": "N43", "store_manager_name": "Tresa Mary", "sunday_hours": "10:00 AM \u2013 8:00 PM"}];
@@ -1424,7 +1474,6 @@ if(nt)nt.classList.toggle('active',saved==='naturals');
 </div>
 
 <script>
-/* Image resolution (.jpg → .jpeg → .png) */
 (function(){
 var EXT=['.jpg','.jpeg','.png'];
 function hasExt(path){ return /\.[a-zA-Z0-9]{2,5}(\?.*)?$/.test(path||''); }
@@ -1446,97 +1495,40 @@ else img.style.display='none';
 </script>
 
 <script>
-/* Ribbons: urgent (<7 days) / NEW (<7 days since Valid_From) */
 (function(){
 var now = "" ? new Date("") : new Date();
 function daysBetween(a,b){ return Math.floor((b.getTime()-a.getTime())/86400000); }
-var NEW_DAYS=7;
 document.querySelectorAll('.offer-card').forEach(function(card){
-var rib = card.querySelector('.ribbon');
-if(!rib) return;
-var expIso = card.getAttribute('data-expiry-iso')||'';
-var vfIso = card.getAttribute('data-valid-from-iso')||'';
+var rib=card.querySelector('.ribbon'); if(!rib) return;
+var expIso=card.getAttribute('data-expiry-iso')||'';
+var vfIso=card.getAttribute('data-valid-from-iso')||'';
 var urgentDays=null;
-if(expIso){ urgentDays = daysBetween(now, new Date(expIso)); }
-var isUrgent = (urgentDays!==null && urgentDays>=0 && urgentDays<7);
+if(expIso){ urgentDays=daysBetween(now,new Date(expIso)); }
+var isUrgent=(urgentDays!==null && urgentDays>=0 && urgentDays<7);
 var isNew=false;
-if(vfIso){
-var age = daysBetween(new Date(vfIso), now);
-isNew = (age>=0 && age<NEW_DAYS);
-}
-if(isUrgent){
-rib.style.display='inline-flex';
-rib.className='ribbon urgent';
-rib.textContent='Ends in '+urgentDays+' day'+(urgentDays===1?'':'s');
-} else if(isNew){
-rib.style.display='inline-flex';
-rib.className='ribbon new';
-rib.textContent='NEW';
-}
+if(vfIso){ var age=daysBetween(new Date(vfIso),now); isNew=(age>=0 && age<7); }
+if(isUrgent){ rib.style.display='inline-flex'; rib.className='ribbon urgent'; rib.textContent='Ends in '+urgentDays+' day'+(urgentDays===1?'':'s'); }
+else if(isNew){ rib.style.display='inline-flex'; rib.className='ribbon new'; rib.textContent='NEW'; }
 });
 })();
 </script>
 
 <script>
-/* Image Modal */
-var gallerySrcs = [];
-var galleryIndex = 0;
-function rebuildGallerySet(){
-gallerySrcs = [];
-document.querySelectorAll('img.offer-img').forEach(function(img){
-if(img.src) gallerySrcs.push(img.src);
-});
-}
-function openImgModal(src){
-rebuildGallerySet();
-if(!src) return;
-galleryIndex = Math.max(0, gallerySrcs.indexOf(src));
-document.getElementById('img-modal-src').src = src;
-document.getElementById('img-modal-overlay').style.display='block';
-document.getElementById('img-modal').style.display='flex';
-document.body.style.overflow='hidden';
-}
-function closeImgModal(){
-document.getElementById('img-modal-overlay').style.display='none';
-document.getElementById('img-modal').style.display='none';
-document.getElementById('img-modal-src').src='';
-document.body.style.overflow='';
-}
-function nextImg(){
-if(!gallerySrcs.length) return;
-galleryIndex = (galleryIndex + 1) % gallerySrcs.length;
-document.getElementById('img-modal-src').src = gallerySrcs[galleryIndex];
-}
-function prevImg(){
-if(!gallerySrcs.length) return;
-galleryIndex = (galleryIndex - 1 + gallerySrcs.length) % gallerySrcs.length;
-document.getElementById('img-modal-src').src = gallerySrcs[galleryIndex];
-}
-document.addEventListener('DOMContentLoaded', function(){
-document.querySelectorAll('img.offer-img').forEach(function(img){
-img.addEventListener('click', function(){ openImgModal(img.src); });
-});
+var gallerySrcs=[]; var galleryIndex=0;
+function rebuildGallerySet(){ gallerySrcs=[]; document.querySelectorAll('img.offer-img').forEach(function(img){ if(img.src) gallerySrcs.push(img.src); }); }
+function openImgModal(src){ rebuildGallerySet(); if(!src) return; galleryIndex=Math.max(0,gallerySrcs.indexOf(src)); document.getElementById('img-modal-src').src=src; document.getElementById('img-modal-overlay').style.display='block'; document.getElementById('img-modal').style.display='flex'; document.body.style.overflow='hidden'; }
+function closeImgModal(){ document.getElementById('img-modal-overlay').style.display='none'; document.getElementById('img-modal').style.display='none'; document.getElementById('img-modal-src').src=''; document.body.style.overflow=''; }
+function nextImg(){ if(!gallerySrcs.length) return; galleryIndex=(galleryIndex+1)%gallerySrcs.length; document.getElementById('img-modal-src').src=gallerySrcs[galleryIndex]; }
+function prevImg(){ if(!gallerySrcs.length) return; galleryIndex=(galleryIndex-1+gallerySrcs.length)%gallerySrcs.length; document.getElementById('img-modal-src').src=gallerySrcs[galleryIndex]; }
+document.addEventListener('DOMContentLoaded',function(){
+document.querySelectorAll('img.offer-img').forEach(function(img){ img.addEventListener('click',function(){ openImgModal(img.src); }); });
 });
 document.addEventListener('keydown',function(e){
-if(e.key==='Escape'){ closeImgModal(); }
-if(document.getElementById('img-modal').style.display==='flex'){
-if(e.key==='ArrowRight') nextImg();
-if(e.key==='ArrowLeft') prevImg();
-}
+if(e.key==='Escape') closeImgModal();
+if(document.getElementById('img-modal').style.display==='flex'){ if(e.key==='ArrowRight') nextImg(); if(e.key==='ArrowLeft') prevImg(); }
 });
-
-/* Intersection Observer for reveal animations */
-var io = new IntersectionObserver(function(entries) {
-entries.forEach(function(e, i) {
-if (e.isIntersecting) {
-setTimeout(function() { e.target.classList.add('visible'); }, i * 80);
-io.unobserve(e.target);
-}
-});
-}, { threshold: 0 });
-
-document.querySelectorAll('.reveal').forEach(function(el) { io.observe(el); });
-
+var io=new IntersectionObserver(function(entries){ entries.forEach(function(e,i){ if(e.isIntersecting){ setTimeout(function(){ e.target.classList.add('visible'); },i*80); io.unobserve(e.target); } }); },{threshold:0});
+document.querySelectorAll('.reveal').forEach(function(el){ io.observe(el); });
 </script>
 </body>
 </html>
