@@ -113,14 +113,18 @@ h3, .h3{font-family:'Cormorant Garamond',serif;font-size:clamp(20px,2.5vw,24px);
 
 
 
+        html, body { margin: 0; padding: 0; }
+        *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
         body { font-family: 'Jost', sans-serif; background: var(--cream); color: var(--text); overflow-x: hidden; }
+        a { text-decoration: none; color: inherit; }
+        img { display: block; max-width: 100%; }
         .container { max-width: 1200px; margin: 0 auto; padding: 40px 60px 100px; }
 
         /* ── HAMBURGER FIX ──────────────────────────────────────────
            Only header.j2 include is used — never hamburger_nav() macro.
            This ensures the button is never accidentally hidden on mobile.
         ── */
-        #hamburger { display: flex !important; }
+        #hamburger, #hamburger.hamburger-btn, button#hamburger { display: flex !important; visibility: visible !important; opacity: 1 !important; }
 
         /* ── Breadcrumbs ── */
         .breadcrumbs {
