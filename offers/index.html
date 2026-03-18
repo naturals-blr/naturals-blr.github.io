@@ -2265,6 +2265,34 @@ padding: 28px 16px 20px;
 }
 </style>
 
+<div id="staffTrigger" style="position: fixed; bottom: 10px; right: 10px; width: 24px; height: 24px; opacity: 0.2; z-index: 9999; cursor: pointer;">
+⚙️
+</div>
+
+<script>
+(function() {
+let tapCount = 0;
+let lastTap = 0;
+const trigger = document.getElementById('staffTrigger');
+
+trigger.addEventListener('click', function() {
+const now = new Date().getTime();
+
+// Reset if delay too long
+if (now - lastTap > 2000) {
+tapCount = 0;
+}
+
+tapCount++;
+lastTap = now;
+
+if (tapCount >= 5) {
+window.location.href = "/intranet"; // change dynamically if needed
+}
+});
+})();
+</script>
+
 <script>
 /* Image resolution (.jpg → .jpeg → .png) */
 (function(){
@@ -2296,7 +2324,7 @@ else img.style.display='none';
 <script>
 /* Ribbons: urgent (<7 days) / NEW (<7 days since Valid_From) */
 (function(){
-var now = "2026-03-18T02:20:03.861630+05:30" ? new Date("2026-03-18T02:20:03.861630+05:30") : new Date();
+var now = "2026-03-18T06:55:35.481815+05:30" ? new Date("2026-03-18T06:55:35.481815+05:30") : new Date();
 function daysBetween(a,b){ return Math.floor((b.getTime()-a.getTime())/86400000); }
 var NEW_DAYS=7;
 

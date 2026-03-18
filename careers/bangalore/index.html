@@ -1421,6 +1421,35 @@ footer {
 }
 </style>
 
+<!-- Staff Trigger for Admin Access -->
+<div id="staffTrigger" style="position: fixed; bottom: 10px; right: 10px; width: 24px; height: 24px; opacity: 0.2; z-index: 9999; cursor: pointer;">
+  ⚙️
+</div>
+
+<script>
+  (function() {
+    let tapCount = 0;
+    let lastTap = 0;
+    const trigger = document.getElementById('staffTrigger');
+
+    trigger.addEventListener('click', function() {
+      const now = new Date().getTime();
+
+      // Reset if delay too long
+      if (now - lastTap > 2000) {
+        tapCount = 0;
+      }
+
+      tapCount++;
+      lastTap = now;
+
+      if (tapCount >= 5) {
+        window.location.href = "/intranet"; // change dynamically if needed
+      }
+    });
+  })();
+</script>
+
     <script>
     (function(){
         var img = document.getElementById('hero-img');
