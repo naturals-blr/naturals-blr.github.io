@@ -129,6 +129,22 @@ width: 24px;
 height: 24px;
 }
 
+/* Back Link */
+.back-link {
+display: inline-flex;
+align-items: center;
+gap: 8px;
+color: rgba(255,255,255,0.7);
+text-decoration: none;
+font-size: 14px;
+margin-bottom: 20px;
+transition: color 0.3s ease;
+}
+
+.back-link:hover {
+color: var(--gold);
+}
+
 /* Mobile Responsive */
 @media (max-width: 768px) {
 .btn-open {
@@ -158,9 +174,13 @@ height: 20px;
 <body>
 <div class="qr-container">
 
+<a href="../" class="back-link" id="backLink">
+← Back to Staff Portal
+</a>
+
 <header style="text-align:center;margin-bottom:32px">
 <h1 class="qr-title">QR Code <em>Gallery</em></h1>
-<p style="opacity:.6">Use when guest is with you</p>
+<p style="opacity:.6" id="reviewMessage">"Staff Name, it's Review Time! Show the Google QR code to capture your 5-star finish."</p>
 </header>
 
 <div class="filter-section">
@@ -316,6 +336,20 @@ document.querySelectorAll("#platformFilters .filter-btn").forEach(btn=>{
 btn.classList.remove("active");
 if(btn.dataset.platform===savedPlatform) btn.classList.add("active");
 });
+}
+
+// Personalize back link with staff name
+const staffName = localStorage.getItem("staff_name");
+if (staffName) {
+const backLink = document.getElementById("backLink");
+if (backLink) {
+backLink.textContent = `← Back to ${staffName}'s Home`;
+}
+
+const reviewMessage = document.getElementById("reviewMessage");
+if (reviewMessage) {
+reviewMessage.textContent = `"${staffName}, it's Review Time! Show the Google QR code to capture your 5-star finish."`;
+}
 }
 
 render();
