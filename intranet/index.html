@@ -1,0 +1,290 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Naturals Staff Portal - Intranet</title>
+<meta name="description" content="Staff portal for Naturals Salon & Spa team members">
+<meta name="robots" content="noindex, nofollow">
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=Jost:wght@300;400;500;600&display=swap" rel="stylesheet">
+
+<script>(function(){var t=localStorage.getItem('naturals-theme')||'luxury';document.documentElement.setAttribute('data-theme',t);})();</script>
+
+:root{
+--dark:#111714;--green:#1B4332;--green-mid:#2D6A4F;--green-soft:#52B788;
+--cream:#F8F4EE;--gold:#C9A84C;--gold-pale:#EDD9A3;
+--text:#1A1A1A;--text-mid:#555;--text-light:#999;
+--hero-tint:rgba(17,23,20,0.88);--hero-tint2:rgba(17,23,20,0.45);
+--filter-bg:#111714;--card-hover-border:#C9A84C;
+--nav-bg:rgba(17,23,20,0.97);
+}
+[data-theme="naturals"]{
+--dark:#1A0533;--green:#2596BE;--green-mid:#7B2FBE;--green-soft:#B678F0;
+--cream:#FAF7FF;--gold:#C9A84C;--gold-pale:#EDD9A3;
+--text:#1A1A1A;--text-mid:#4A4458;--text-light:#8B7FA8;
+--hero-tint:rgba(26,5,51,0.87);--hero-tint2:rgba(58,10,100,0.45);
+--filter-bg:#1A0533;--card-hover-border:#7B2FBE;
+--nav-bg:rgba(26,5,51,0.97);
+}
+
+/* GLOBAL MINIMUM TYPOGRAPHY & SPACING RULES */
+html{scroll-behavior:smooth;}
+body{font-size:16px;line-height:1.6;}
+h1, .h1{font-family:'Cormorant Garamond',serif;font-size:clamp(48px,5vw,60px);font-weight:300;line-height:1.05;}
+h2, .h2{font-family:'Cormorant Garamond',serif;font-size:clamp(32px,4vw,40px);font-weight:300;line-height:1.15;}
+h3, .h3{font-family:'Cormorant Garamond',serif;font-size:clamp(20px,2.5vw,24px);font-weight:400;line-height:1.25;}
+.lbl{font-size:10px;letter-spacing:3px;text-transform:uppercase;color:var(--gold);font-weight:600;margin-bottom:12px;display:flex;align-items:center;gap:12px;}
+.lbl::before{content:'';width:18px;height:1px;background:var(--gold);}
+
+/* COMPONENT CLASSES (8px System) */
+.section{padding:80px 60px;}
+@media(max-width:768px){.section{padding:48px 20px;}}
+.container{max-width:1200px;margin:0 auto;width:100%;}
+.card{background:#fff;border-radius:14px;border:1px solid rgba(0,0,0,0.06);overflow:hidden;transition:transform 0.3s,box-shadow 0.3s;}
+.card:hover{transform:translateY(-4px);box-shadow:0 12px 36px rgba(0,0,0,0.08);border-color:var(--card-hover-border);}
+
+/* ACCESSIBILITY */
+:focus-visible{outline:2px solid var(--gold);outline-offset:4px;border-radius:4px;}
+
+<style>
+.btn-book{background:#1A73E8;color:#fff;padding:13px 22px;min-height:48px;font-size:11px;letter-spacing:1.5px;text-transform:uppercase;font-weight:600;display:inline-flex;align-items:center;gap:8px;transition:all 0.3s;border-radius:6px;white-space:nowrap;text-decoration:none;}
+.btn-book:hover{background:#1557B0;transform:translateY(-1px);}
+.btn-wa{background:#25D366;color:#fff;padding:13px 22px;min-height:48px;font-size:11px;letter-spacing:1.5px;text-transform:uppercase;font-weight:600;display:inline-flex;align-items:center;gap:8px;transition:all 0.3s;border-radius:6px;white-space:nowrap;text-decoration:none;}
+.btn-wa:hover{background:#1da851;transform:translateY(-1px);}
+.btn-call{background:#5F6368;color:#fff;padding:13px 22px;min-height:48px;font-size:11px;letter-spacing:1.5px;text-transform:uppercase;font-weight:600;display:inline-flex;align-items:center;gap:8px;transition:all 0.3s;border-radius:6px;white-space:nowrap;text-decoration:none;}
+.btn-call:hover{background:#474c52;transform:translateY(-1px);}
+.btn-maps{background:#A82424;color:#fff;border:none;padding:13px 18px;min-height:48px;font-size:11px;letter-spacing:1px;text-transform:uppercase;font-weight:600;display:inline-flex;align-items:center;gap:7px;transition:all 0.3s;border-radius:6px;white-space:nowrap;text-decoration:none;}
+.btn-maps:hover{background:#8e1f1f;transform:translateY(-1px);}
+.btn-gold{background:var(--gold);color:var(--dark);padding:12px 24px;font-size:11px;letter-spacing:2px;text-transform:uppercase;font-weight:700;display:inline-flex;align-items:center;gap:8px;transition:all 0.3s;text-decoration:none;}
+.btn-gold:hover{background:var(--gold-pale);transform:translateY(-1px);}
+
+/* UNIFIED BUTTON SYSTEM */
+.btn-primary{background:var(--gold);color:var(--dark);padding:14px 28px;min-height:48px;font-family:'Jost',sans-serif;font-size:11px;letter-spacing:2px;text-transform:uppercase;font-weight:700;display:inline-flex;align-items:center;justify-content:center;gap:8px;transition:all 0.3s;border-radius:6px;text-decoration:none;border:1px solid transparent;cursor:pointer;}
+.btn-primary:hover{background:#b5943b;transform:translateY(-2px);box-shadow:0 8px 16px rgba(0,0,0,0.12);}
+
+.btn-secondary{background:transparent;color:var(--text);padding:10px 20px;min-height:40px;font-family:'Jost',sans-serif;font-size:11px;letter-spacing:1.5px;text-transform:uppercase;font-weight:600;display:inline-flex;align-items:center;justify-content:center;gap:6px;transition:all 0.3s;border-radius:6px;text-decoration:none;border:1px solid rgba(0,0,0,0.12);cursor:pointer;}
+.btn-secondary:hover{border-color:var(--gold);color:var(--gold);background:rgba(201,168,76,0.04);}
+.page-hero-inner .btn-secondary{color:#fff;border-color:rgba(255,255,255,0.4);}
+.page-hero-inner .btn-secondary:hover{border-color:#fff;background:rgba(255,255,255,0.1);}
+</style>
+
+<style>
+footer{background:#080f0b;}
+[data-theme="naturals"] footer{background:#0D0120;}
+.ft-top{padding:60px 60px 40px;display:grid;grid-template-columns:2fr 1fr 1fr 1fr;gap:48px;border-bottom:1px solid rgba(255,255,255,0.07);}
+.ft-brand{font-family:'Cormorant Garamond',serif;font-size:28px;color:#fff;font-weight:300;margin-bottom:10px;}
+.ft-brand span{color:var(--gold);font-style:italic;}
+.ft-tagline{font-size:12px;color:rgba(255,255,255,0.28);font-weight:300;line-height:1.7;margin-bottom:18px;}
+.ft-col-title{font-size:9px;letter-spacing:3px;text-transform:uppercase;color:var(--gold);font-weight:600;margin-bottom:16px;}
+.ft-col ul{list-style:none;display:flex;flex-direction:column;gap:9px;}
+.ft-col ul a{font-size:12px;color:rgba(255,255,255,0.32);font-weight:300;transition:color 0.3s;text-decoration:none;}
+.ft-col ul a:hover{color:rgba(255,255,255,0.72);}
+.ft-bottom{padding:18px 60px;display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:8px;}
+.ft-copy{font-size:11px;color:rgba(255,255,255,0.16);}
+.ft-url{font-size:11px;color:rgba(255,255,255,0.18);letter-spacing:1px;}
+@media(max-width:960px){.ft-top{grid-template-columns:1fr 1fr;gap:28px;padding:36px 20px 24px;}.ft-bottom{padding:14px 20px;flex-direction:column;text-align:center;}}
+@media(max-width:600px){.ft-top{grid-template-columns:1fr;padding:28px 16px 20px;}}
+</style>
+
+
+<style>
+/* ── Intranet Layout ── */
+body {
+background: var(--dark);
+color: #fff;
+font-family: 'Jost', sans-serif;
+margin: 0;
+padding: 0;
+min-height: 100vh;
+}
+[data-theme="naturals"] body {
+background: #0D0120;
+}
+
+.intranet-container {
+max-width: 1200px;
+margin: 0 auto;
+padding: 40px 20px;
+}
+
+/* ── Header ── */
+.intranet-header {
+text-align: center;
+margin-bottom: 60px;
+}
+
+.intranet-title {
+font-family: 'Cormorant Garamond', serif;
+font-size: clamp(32px, 5vw, 48px);
+font-weight: 300;
+color: #fff;
+margin-bottom: 8px;
+}
+
+.intranet-title em {
+font-style: italic;
+color: var(--gold);
+}
+
+.intranet-subtitle {
+font-size: 14px;
+color: rgba(255,255,255,0.6);
+letter-spacing: 1px;
+text-transform: uppercase;
+}
+
+/* ── Tiles Grid ── */
+.tiles-grid {
+display: grid;
+grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+gap: 24px;
+margin-bottom: 60px;
+}
+
+.tile {
+background: rgba(255,255,255,0.05);
+border: 1px solid rgba(255,255,255,0.1);
+border-radius: 16px;
+padding: 32px;
+text-decoration: none;
+color: #fff;
+transition: all 0.3s ease;
+display: block;
+position: relative;
+overflow: hidden;
+}
+
+.tile:hover {
+background: rgba(255,255,255,0.08);
+border-color: rgba(255,255,255,0.2);
+transform: translateY(-4px);
+box-shadow: 0 8px 32px rgba(0,0,0,0.3);
+}
+
+.tile-icon {
+font-size: 48px;
+margin-bottom: 16px;
+display: block;
+}
+
+.tile-title {
+font-size: 20px;
+font-weight: 600;
+margin-bottom: 8px;
+color: #fff;
+}
+
+.tile-description {
+font-size: 14px;
+color: rgba(255,255,255,0.7);
+line-height: 1.6;
+}
+
+.tile-arrow {
+position: absolute;
+bottom: 24px;
+right: 24px;
+font-size: 20px;
+color: var(--gold);
+opacity: 0;
+transition: opacity 0.3s ease;
+}
+
+.tile:hover .tile-arrow {
+opacity: 1;
+}
+
+/* ── User Info ── */
+.user-info {
+background: rgba(255,255,255,0.03);
+border: 1px solid rgba(255,255,255,0.08);
+border-radius: 12px;
+padding: 20px;
+text-align: center;
+margin-bottom: 40px;
+}
+
+.user-welcome {
+font-size: 16px;
+color: rgba(255,255,255,0.8);
+margin-bottom: 8px;
+}
+
+.user-role {
+font-size: 12px;
+color: var(--gold);
+text-transform: uppercase;
+letter-spacing: 1px;
+}
+
+/* ── Responsive ── */
+@media (max-width: 768px) {
+.intranet-container {
+padding: 20px 16px;
+}
+
+.tiles-grid {
+grid-template-columns: 1fr;
+gap: 16px;
+}
+
+.tile {
+padding: 24px;
+}
+}
+</style>
+</head>
+<body>
+<div class="intranet-container">
+<header class="intranet-header">
+<h1 class="intranet-title">Naturals <em>Staff Portal</em></h1>
+<p class="intranet-subtitle">Team Resources & Tools</p>
+</header>
+
+<div class="user-info">
+<div class="user-welcome">Welcome back, Team Member</div>
+<div class="user-role">Naturals Salon & Spa Staff</div>
+</div>
+
+<main class="tiles-grid">
+<a href="qrcode/" class="tile">
+<span class="tile-icon">📱</span>
+<h2 class="tile-title">QR Code Generator</h2>
+<p class="tile-description">Generate QR codes for store locations, services, and promotional materials.</p>
+<span class="tile-arrow">→</span>
+</a>
+
+
+<a href="#" class="tile" style="opacity: 0.5; cursor: not-allowed;">
+<span class="tile-icon">📊</span>
+<h2 class="tile-title">Analytics Dashboard</h2>
+<p class="tile-description">View performance metrics and reports (Coming Soon).</p>
+<span class="tile-arrow">→</span>
+</a>
+
+<a href="#" class="tile" style="opacity: 0.5; cursor: not-allowed;">
+<span class="tile-icon">📅</span>
+<h2 class="tile-title">Staff Scheduling</h2>
+<p class="tile-description">Manage work schedules and shift planning (Coming Soon).</p>
+<span class="tile-arrow">→</span>
+</a>
+
+<a href="#" class="tile" style="opacity: 0.5; cursor: not-allowed;">
+<span class="tile-icon">💬</span>
+<h2 class="tile-title">Team Communications</h2>
+<p class="tile-description">Internal messaging and announcements (Coming Soon).</p>
+<span class="tile-arrow">→</span>
+</a>
+</main>
+</div>
+
+<script>
+// Add any intranet-specific JavaScript here
+document.addEventListener('DOMContentLoaded', function() {
+console.log('Naturals Staff Portal loaded');
+});
+</script>
+</body>
+</html>

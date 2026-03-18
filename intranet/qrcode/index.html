@@ -1,0 +1,545 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>QR Code Generator - Naturals Staff Portal</title>
+<meta name="description" content="Generate QR codes for Naturals Salon & Spa locations and services">
+<meta name="robots" content="noindex, nofollow">
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=Jost:wght@300;400;500;600&display=swap" rel="stylesheet">
+
+<script>(function(){var t=localStorage.getItem('naturals-theme')||'luxury';document.documentElement.setAttribute('data-theme',t);})();</script>
+
+:root{
+--dark:#111714;--green:#1B4332;--green-mid:#2D6A4F;--green-soft:#52B788;
+--cream:#F8F4EE;--gold:#C9A84C;--gold-pale:#EDD9A3;
+--text:#1A1A1A;--text-mid:#555;--text-light:#999;
+--hero-tint:rgba(17,23,20,0.88);--hero-tint2:rgba(17,23,20,0.45);
+--filter-bg:#111714;--card-hover-border:#C9A84C;
+--nav-bg:rgba(17,23,20,0.97);
+}
+[data-theme="naturals"]{
+--dark:#1A0533;--green:#2596BE;--green-mid:#7B2FBE;--green-soft:#B678F0;
+--cream:#FAF7FF;--gold:#C9A84C;--gold-pale:#EDD9A3;
+--text:#1A1A1A;--text-mid:#4A4458;--text-light:#8B7FA8;
+--hero-tint:rgba(26,5,51,0.87);--hero-tint2:rgba(58,10,100,0.45);
+--filter-bg:#1A0533;--card-hover-border:#7B2FBE;
+--nav-bg:rgba(26,5,51,0.97);
+}
+
+/* GLOBAL MINIMUM TYPOGRAPHY & SPACING RULES */
+html{scroll-behavior:smooth;}
+body{font-size:16px;line-height:1.6;}
+h1, .h1{font-family:'Cormorant Garamond',serif;font-size:clamp(48px,5vw,60px);font-weight:300;line-height:1.05;}
+h2, .h2{font-family:'Cormorant Garamond',serif;font-size:clamp(32px,4vw,40px);font-weight:300;line-height:1.15;}
+h3, .h3{font-family:'Cormorant Garamond',serif;font-size:clamp(20px,2.5vw,24px);font-weight:400;line-height:1.25;}
+.lbl{font-size:10px;letter-spacing:3px;text-transform:uppercase;color:var(--gold);font-weight:600;margin-bottom:12px;display:flex;align-items:center;gap:12px;}
+.lbl::before{content:'';width:18px;height:1px;background:var(--gold);}
+
+/* COMPONENT CLASSES (8px System) */
+.section{padding:80px 60px;}
+@media(max-width:768px){.section{padding:48px 20px;}}
+.container{max-width:1200px;margin:0 auto;width:100%;}
+.card{background:#fff;border-radius:14px;border:1px solid rgba(0,0,0,0.06);overflow:hidden;transition:transform 0.3s,box-shadow 0.3s;}
+.card:hover{transform:translateY(-4px);box-shadow:0 12px 36px rgba(0,0,0,0.08);border-color:var(--card-hover-border);}
+
+/* ACCESSIBILITY */
+:focus-visible{outline:2px solid var(--gold);outline-offset:4px;border-radius:4px;}
+
+<style>
+.btn-book{background:#1A73E8;color:#fff;padding:13px 22px;min-height:48px;font-size:11px;letter-spacing:1.5px;text-transform:uppercase;font-weight:600;display:inline-flex;align-items:center;gap:8px;transition:all 0.3s;border-radius:6px;white-space:nowrap;text-decoration:none;}
+.btn-book:hover{background:#1557B0;transform:translateY(-1px);}
+.btn-wa{background:#25D366;color:#fff;padding:13px 22px;min-height:48px;font-size:11px;letter-spacing:1.5px;text-transform:uppercase;font-weight:600;display:inline-flex;align-items:center;gap:8px;transition:all 0.3s;border-radius:6px;white-space:nowrap;text-decoration:none;}
+.btn-wa:hover{background:#1da851;transform:translateY(-1px);}
+.btn-call{background:#5F6368;color:#fff;padding:13px 22px;min-height:48px;font-size:11px;letter-spacing:1.5px;text-transform:uppercase;font-weight:600;display:inline-flex;align-items:center;gap:8px;transition:all 0.3s;border-radius:6px;white-space:nowrap;text-decoration:none;}
+.btn-call:hover{background:#474c52;transform:translateY(-1px);}
+.btn-maps{background:#A82424;color:#fff;border:none;padding:13px 18px;min-height:48px;font-size:11px;letter-spacing:1px;text-transform:uppercase;font-weight:600;display:inline-flex;align-items:center;gap:7px;transition:all 0.3s;border-radius:6px;white-space:nowrap;text-decoration:none;}
+.btn-maps:hover{background:#8e1f1f;transform:translateY(-1px);}
+.btn-gold{background:var(--gold);color:var(--dark);padding:12px 24px;font-size:11px;letter-spacing:2px;text-transform:uppercase;font-weight:700;display:inline-flex;align-items:center;gap:8px;transition:all 0.3s;text-decoration:none;}
+.btn-gold:hover{background:var(--gold-pale);transform:translateY(-1px);}
+
+/* UNIFIED BUTTON SYSTEM */
+.btn-primary{background:var(--gold);color:var(--dark);padding:14px 28px;min-height:48px;font-family:'Jost',sans-serif;font-size:11px;letter-spacing:2px;text-transform:uppercase;font-weight:700;display:inline-flex;align-items:center;justify-content:center;gap:8px;transition:all 0.3s;border-radius:6px;text-decoration:none;border:1px solid transparent;cursor:pointer;}
+.btn-primary:hover{background:#b5943b;transform:translateY(-2px);box-shadow:0 8px 16px rgba(0,0,0,0.12);}
+
+.btn-secondary{background:transparent;color:var(--text);padding:10px 20px;min-height:40px;font-family:'Jost',sans-serif;font-size:11px;letter-spacing:1.5px;text-transform:uppercase;font-weight:600;display:inline-flex;align-items:center;justify-content:center;gap:6px;transition:all 0.3s;border-radius:6px;text-decoration:none;border:1px solid rgba(0,0,0,0.12);cursor:pointer;}
+.btn-secondary:hover{border-color:var(--gold);color:var(--gold);background:rgba(201,168,76,0.04);}
+.page-hero-inner .btn-secondary{color:#fff;border-color:rgba(255,255,255,0.4);}
+.page-hero-inner .btn-secondary:hover{border-color:#fff;background:rgba(255,255,255,0.1);}
+</style>
+
+<style>
+footer{background:#080f0b;}
+[data-theme="naturals"] footer{background:#0D0120;}
+.ft-top{padding:60px 60px 40px;display:grid;grid-template-columns:2fr 1fr 1fr 1fr;gap:48px;border-bottom:1px solid rgba(255,255,255,0.07);}
+.ft-brand{font-family:'Cormorant Garamond',serif;font-size:28px;color:#fff;font-weight:300;margin-bottom:10px;}
+.ft-brand span{color:var(--gold);font-style:italic;}
+.ft-tagline{font-size:12px;color:rgba(255,255,255,0.28);font-weight:300;line-height:1.7;margin-bottom:18px;}
+.ft-col-title{font-size:9px;letter-spacing:3px;text-transform:uppercase;color:var(--gold);font-weight:600;margin-bottom:16px;}
+.ft-col ul{list-style:none;display:flex;flex-direction:column;gap:9px;}
+.ft-col ul a{font-size:12px;color:rgba(255,255,255,0.32);font-weight:300;transition:color 0.3s;text-decoration:none;}
+.ft-col ul a:hover{color:rgba(255,255,255,0.72);}
+.ft-bottom{padding:18px 60px;display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:8px;}
+.ft-copy{font-size:11px;color:rgba(255,255,255,0.16);}
+.ft-url{font-size:11px;color:rgba(255,255,255,0.18);letter-spacing:1px;}
+@media(max-width:960px){.ft-top{grid-template-columns:1fr 1fr;gap:28px;padding:36px 20px 24px;}.ft-bottom{padding:14px 20px;flex-direction:column;text-align:center;}}
+@media(max-width:600px){.ft-top{grid-template-columns:1fr;padding:28px 16px 20px;}}
+</style>
+
+
+<style>
+/* ── QR Code Generator Layout ── */
+body {
+background: var(--dark);
+color: #fff;
+font-family: 'Jost', sans-serif;
+margin: 0;
+padding: 0;
+min-height: 100vh;
+}
+[data-theme="naturals"] body {
+background: #0D0120;
+}
+
+.qr-container {
+max-width: 1200px;
+margin: 0 auto;
+padding: 40px 20px;
+}
+
+/* ── Header ── */
+.qr-header {
+text-align: center;
+margin-bottom: 40px;
+}
+
+.qr-title {
+font-family: 'Cormorant Garamond', serif;
+font-size: clamp(28px, 4vw, 36px);
+font-weight: 300;
+color: #fff;
+margin-bottom: 8px;
+}
+
+.qr-title em {
+font-style: italic;
+color: var(--gold);
+}
+
+.qr-subtitle {
+font-size: 14px;
+color: rgba(255,255,255,0.6);
+letter-spacing: 1px;
+text-transform: uppercase;
+}
+
+/* ── Back Navigation ── */
+.back-nav {
+margin-bottom: 32px;
+}
+
+.back-link {
+display: inline-flex;
+align-items: center;
+color: rgba(255,255,255,0.7);
+text-decoration: none;
+font-size: 14px;
+transition: color 0.3s ease;
+}
+
+.back-link:hover {
+color: var(--gold);
+}
+
+.back-arrow {
+margin-right: 8px;
+}
+
+/* ── Filter Section ── */
+.filter-section {
+background: rgba(255,255,255,0.05);
+border: 1px solid rgba(255,255,255,0.1);
+border-radius: 16px;
+padding: 24px;
+margin-bottom: 32px;
+}
+
+.filter-group {
+margin-bottom: 20px;
+}
+
+.filter-group:last-child {
+margin-bottom: 0;
+}
+
+.filter-label {
+display: block;
+font-size: 12px;
+text-transform: uppercase;
+letter-spacing: 1px;
+color: var(--gold);
+margin-bottom: 12px;
+font-weight: 600;
+}
+
+.filter-buttons {
+display: flex;
+flex-wrap: wrap;
+gap: 8px;
+}
+
+.filter-btn {
+padding: 8px 16px;
+background: rgba(255,255,255,0.08);
+border: 1px solid rgba(255,255,255,0.2);
+border-radius: 20px;
+color: rgba(255,255,255,0.7);
+font-size: 12px;
+font-weight: 500;
+text-transform: uppercase;
+letter-spacing: 0.5px;
+cursor: pointer;
+transition: all 0.3s ease;
+}
+
+.filter-btn:hover {
+background: rgba(255,255,255,0.12);
+color: #fff;
+border-color: rgba(255,255,255,0.3);
+}
+
+.filter-btn.active {
+background: var(--gold);
+color: var(--dark);
+border-color: var(--gold);
+font-weight: 600;
+}
+
+/* ── QR Codes Grid ── */
+.qr-grid {
+display: grid;
+grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+gap: 24px;
+margin-bottom: 40px;
+}
+
+.qr-card {
+background: rgba(255,255,255,0.05);
+border: 1px solid rgba(255,255,255,0.1);
+border-radius: 16px;
+padding: 24px;
+text-align: center;
+transition: all 0.3s ease;
+}
+
+.qr-card:hover {
+background: rgba(255,255,255,0.08);
+border-color: rgba(255,255,255,0.2);
+transform: translateY(-4px);
+box-shadow: 0 8px 32px rgba(0,0,0,0.3);
+}
+
+.qr-card-image {
+width: 200px;
+height: 200px;
+margin: 0 auto 16px;
+background: rgba(255,255,255,0.1);
+border-radius: 12px;
+display: flex;
+align-items: center;
+justify-content: center;
+overflow: hidden;
+}
+
+.qr-card-image img {
+width: 100%;
+height: 100%;
+object-fit: contain;
+}
+
+.qr-card-placeholder {
+font-size: 48px;
+color: rgba(255,255,255,0.3);
+}
+
+.qr-card-title {
+font-size: 16px;
+font-weight: 600;
+color: #fff;
+margin-bottom: 8px;
+}
+
+.qr-card-subtitle {
+font-size: 12px;
+color: var(--gold);
+text-transform: uppercase;
+letter-spacing: 1px;
+margin-bottom: 12px;
+}
+
+.qr-card-description {
+font-size: 14px;
+color: rgba(255,255,255,0.7);
+line-height: 1.6;
+margin-bottom: 16px;
+}
+
+.qr-card-actions {
+display: flex;
+gap: 8px;
+justify-content: center;
+}
+
+.qr-btn {
+padding: 8px 16px;
+background: transparent;
+border: 1px solid rgba(255,255,255,0.3);
+border-radius: 6px;
+color: rgba(255,255,255,0.8);
+font-size: 11px;
+font-weight: 600;
+text-transform: uppercase;
+letter-spacing: 0.5px;
+cursor: pointer;
+transition: all 0.3s ease;
+text-decoration: none;
+display: inline-flex;
+align-items: center;
+gap: 4px;
+}
+
+.qr-btn:hover {
+background: rgba(255,255,255,0.1);
+color: #fff;
+border-color: rgba(255,255,255,0.5);
+}
+
+.qr-btn.primary {
+background: var(--gold);
+color: var(--dark);
+border-color: var(--gold);
+}
+
+.qr-btn.primary:hover {
+background: #B8943A;
+color: var(--dark);
+}
+
+/* ── No Results ── */
+.no-results {
+text-align: center;
+padding: 60px 20px;
+color: rgba(255,255,255,0.5);
+}
+
+.no-results-icon {
+font-size: 48px;
+margin-bottom: 16px;
+}
+
+.no-results-text {
+font-size: 16px;
+margin-bottom: 8px;
+}
+
+.no-results-subtext {
+font-size: 14px;
+color: rgba(255,255,255,0.3);
+}
+
+/* ── Responsive ── */
+@media (max-width: 768px) {
+.qr-container {
+padding: 20px 16px;
+}
+
+.filter-section {
+padding: 20px;
+}
+
+.qr-grid {
+grid-template-columns: 1fr;
+gap: 16px;
+}
+
+.qr-card {
+padding: 20px;
+}
+
+.qr-card-image {
+width: 160px;
+height: 160px;
+}
+}
+</style>
+</head>
+<body>
+<div class="qr-container">
+<div class="back-nav">
+<a href="../" class="back-link">
+<span class="back-arrow">←</span>
+Back to Staff Portal
+</a>
+</div>
+
+<header class="qr-header">
+<h1 class="qr-title">QR Code <em>Gallery</em></h1>
+<p class="qr-subtitle">Store QR Codes for Social Media & Reviews</p>
+</header>
+
+<main>
+<div class="filter-section">
+<div class="filter-group">
+<label class="filter-label">Filter by Store</label>
+<div class="filter-buttons" id="storeFilters">
+<button class="filter-btn active" data-store="all">All Stores</button>
+<button class="filter-btn" data-store="N78">JP Nagar 5th Phase</button>
+<button class="filter-btn" data-store="N77">Elements Mall</button>
+<button class="filter-btn" data-store="N36">Devasandra</button>
+<button class="filter-btn" data-store="N05">Frazer Town</button>
+<button class="filter-btn" data-store="N43">Hennur</button>
+</div>
+</div>
+
+<div class="filter-group">
+<label class="filter-label">Filter by Platform</label>
+<div class="filter-buttons" id="platformFilters">
+<button class="filter-btn active" data-platform="all">All Platforms</button>
+<button class="filter-btn" data-platform="facebook">Facebook</button>
+<button class="filter-btn" data-platform="instagram">Instagram</button>
+<button class="filter-btn" data-platform="google">Google Review</button>
+</div>
+</div>
+</div>
+
+<div class="qr-grid" id="qrGrid">
+
+</div>
+
+<div class="no-results" id="noResults" style="display: none;">
+<div class="no-results-icon">📱</div>
+<div class="no-results-text">No QR codes found</div>
+<div class="no-results-subtext">Try adjusting your filters or check back later</div>
+</div>
+</main>
+</div>
+
+<script>
+// QR Code data structure
+const qrCodes = [
+// N78 - JP Nagar 5th Phase
+{ store: 'N78', storeName: 'JP Nagar 5th Phase', platform: 'facebook', filename: 'N78-facebook.png', title: 'Facebook QR Code', description: 'Scan to visit our Facebook page' },
+{ store: 'N78', storeName: 'JP Nagar 5th Phase', platform: 'instagram', filename: 'N78-instagram.png', title: 'Instagram QR Code', description: 'Scan to follow us on Instagram' },
+{ store: 'N78', storeName: 'JP Nagar 5th Phase', platform: 'google', filename: 'N78-google.png', title: 'Google Review QR Code', description: 'Scan to leave a Google review' },
+
+// N77 - Elements Mall
+{ store: 'N77', storeName: 'Elements Mall', platform: 'facebook', filename: 'N77-facebook.png', title: 'Facebook QR Code', description: 'Scan to visit our Facebook page' },
+{ store: 'N77', storeName: 'Elements Mall', platform: 'instagram', filename: 'N77-instagram.png', title: 'Instagram QR Code', description: 'Scan to follow us on Instagram' },
+{ store: 'N77', storeName: 'Elements Mall', platform: 'google', filename: 'N77-google.png', title: 'Google Review QR Code', description: 'Scan to leave a Google review' },
+
+// N36 - Devasandra
+{ store: 'N36', storeName: 'Devasandra', platform: 'facebook', filename: 'N36-facebook.png', title: 'Facebook QR Code', description: 'Scan to visit our Facebook page' },
+{ store: 'N36', storeName: 'Devasandra', platform: 'instagram', filename: 'N36-instagram.png', title: 'Instagram QR Code', description: 'Scan to follow us on Instagram' },
+{ store: 'N36', storeName: 'Devasandra', platform: 'google', filename: 'N36-google.png', title: 'Google Review QR Code', description: 'Scan to leave a Google review' },
+
+// N05 - Frazer Town
+{ store: 'N05', storeName: 'Frazer Town', platform: 'facebook', filename: 'N05-facebook.png', title: 'Facebook QR Code', description: 'Scan to visit our Facebook page' },
+{ store: 'N05', storeName: 'Frazer Town', platform: 'instagram', filename: 'N05-instagram.png', title: 'Instagram QR Code', description: 'Scan to follow us on Instagram' },
+{ store: 'N05', storeName: 'Frazer Town', platform: 'google', filename: 'N05-google.png', title: 'Google Review QR Code', description: 'Scan to leave a Google review' },
+
+// N43 - Hennur
+{ store: 'N43', storeName: 'Hennur', platform: 'facebook', filename: 'N43-facebook.png', title: 'Facebook QR Code', description: 'Scan to visit our Facebook page' },
+{ store: 'N43', storeName: 'Hennur', platform: 'instagram', filename: 'N43-instagram.png', title: 'Instagram QR Code', description: 'Scan to follow us on Instagram' },
+{ store: 'N43', storeName: 'Hennur', platform: 'google', filename: 'N43-google.png', title: 'Google Review QR Code', description: 'Scan to leave a Google review' }
+];
+
+let currentStore = 'all';
+let currentPlatform = 'all';
+
+function renderQRCodes() {
+const filteredCodes = qrCodes.filter(qr => {
+const storeMatch = currentStore === 'all' || qr.store === currentStore;
+const platformMatch = currentPlatform === 'all' || qr.platform === currentPlatform;
+return storeMatch && platformMatch;
+});
+
+const qrGrid = document.getElementById('qrGrid');
+const noResults = document.getElementById('noResults');
+
+if (filteredCodes.length === 0) {
+qrGrid.innerHTML = '';
+noResults.style.display = 'block';
+return;
+}
+
+noResults.style.display = 'none';
+
+qrGrid.innerHTML = filteredCodes.map(qr => `
+<div class="qr-card">
+<div class="qr-card-image">
+<img src="/images/qrcodes/${qr.filename}" alt="${qr.title}" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
+<div class="qr-card-placeholder" style="display: none;">📱</div>
+</div>
+<h3 class="qr-card-title">${qr.title}</h3>
+<div class="qr-card-subtitle">${qr.storeName}</div>
+<p class="qr-card-description">${qr.description}</p>
+<div class="qr-card-actions">
+<a href="/images/qrcodes/${qr.filename}" download="${qr.filename}" class="qr-btn primary">
+⬇ Download
+</a>
+<button class="qr-btn" onclick="copyToClipboard('/images/qrcodes/${qr.filename}')">
+📋 Copy Link
+</button>
+</div>
+</div>
+`).join('');
+}
+
+function copyToClipboard(text) {
+navigator.clipboard.writeText(window.location.origin + text).then(() => {
+// Show success feedback
+const btn = event.target;
+const originalText = btn.innerHTML;
+btn.innerHTML = '✓ Copied!';
+btn.style.background = 'var(--gold)';
+btn.style.color = 'var(--dark)';
+
+setTimeout(() => {
+btn.innerHTML = originalText;
+btn.style.background = 'transparent';
+btn.style.color = 'rgba(255,255,255,0.8)';
+}, 2000);
+}).catch(err => {
+console.error('Failed to copy:', err);
+});
+}
+
+// Store filter handlers
+document.querySelectorAll('#storeFilters .filter-btn').forEach(btn => {
+btn.addEventListener('click', function() {
+document.querySelectorAll('#storeFilters .filter-btn').forEach(b => b.classList.remove('active'));
+this.classList.add('active');
+currentStore = this.dataset.store;
+renderQRCodes();
+});
+});
+
+// Platform filter handlers
+document.querySelectorAll('#platformFilters .filter-btn').forEach(btn => {
+btn.addEventListener('click', function() {
+document.querySelectorAll('#platformFilters .filter-btn').forEach(b => b.classList.remove('active'));
+this.classList.add('active');
+currentPlatform = this.dataset.platform;
+renderQRCodes();
+});
+});
+
+// Initial render
+document.addEventListener('DOMContentLoaded', function() {
+renderQRCodes();
+});
+</script>
+</body>
+</html>
