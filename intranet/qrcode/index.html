@@ -3,12 +3,10 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>QR Code Generator - Naturals Staff Portal</title>
-<meta name="description" content="Generate QR codes for Naturals Salon & Spa locations and services">
+<title>QR Code Gallery – Naturals Staff Portal</title>
 <meta name="robots" content="noindex, nofollow">
 
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=Jost:wght@300;400;500;600&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond&family=Jost:wght@400;500;600&display=swap" rel="stylesheet">
 
 <script>(function(){var t=localStorage.getItem('naturals-theme')||'luxury';document.documentElement.setAttribute('data-theme',t);})();</script>
 
@@ -52,314 +50,42 @@ footer{background:#080f0b;}
 @media(max-width:600px){.ft-top{grid-template-columns:1fr;padding:28px 16px 20px;}}
 </style>
 
-
 <style>
-:root{ --dark:#111714;--green:#1B4332;--green-mid:#2D6A4F;--green-soft:#52B788; --cream:#F8F4EE;--gold:#C9A84C;--gold-pale:#EDD9A3; --text:#1A1A1A;--text-mid:#555;--text-light:#999; --hero-tint:rgba(17,23,20,0.88);--hero-tint2:rgba(17,23,20,0.45); --filter-bg:#111714;--card-hover-border:#C9A84C; --nav-bg:rgba(17,23,20,0.97); } [data-theme="naturals"]{ --dark:#1A0533;--green:#2596BE;--green-mid:#7B2FBE;--green-soft:#B678F0; --cream:#FAF7FF;--gold:#C9A84C;--gold-pale:#EDD9A3; --text:#1A1A1A;--text-mid:#4A4458;--text-light:#8B7FA8; --hero-tint:rgba(26,5,51,0.87);--hero-tint2:rgba(58,10,100,0.45); --filter-bg:#1A0533;--card-hover-border:#7B2FBE; --nav-bg:rgba(26,5,51,0.97); }
-
-/* ── QR Code Generator Layout ── */
-body {
-background: var(--dark);
-color: #fff;
-font-family: 'Jost', sans-serif;
-margin: 0;
-padding: 0;
-min-height: 100vh;
-}
-[data-theme="naturals"] body {
-background: #0D0120;
-}
-
-.qr-container {
-max-width: 1200px;
-margin: 0 auto;
-padding: 40px 20px;
-}
-
-/* ── Header ── */
-.qr-header {
-text-align: center;
-margin-bottom: 40px;
-}
-
-.qr-title {
-font-family: 'Cormorant Garamond', serif;
-font-size: clamp(28px, 4vw, 36px);
-font-weight: 300;
-color: #fff;
-margin-bottom: 8px;
-}
-
-.qr-title em {
-font-style: italic;
-color: var(--gold);
-}
-
-.qr-subtitle {
-font-size: 14px;
-color: rgba(255,255,255,0.6);
-letter-spacing: 1px;
-text-transform: uppercase;
-}
-
-/* ── Back Navigation ── */
-.back-nav {
-margin-bottom: 32px;
-}
-
-.back-link {
-display: inline-flex;
-align-items: center;
-color: rgba(255,255,255,0.7);
-text-decoration: none;
-font-size: 14px;
-transition: color 0.3s ease;
-}
-
-.back-link:hover {
-color: var(--gold);
-}
-
-.back-arrow {
-margin-right: 8px;
-}
-
-/* ── Filter Section ── */
-.filter-section {
-background: rgba(255,255,255,0.05);
-border: 1px solid rgba(255,255,255,0.1);
-border-radius: 16px;
-padding: 24px;
-margin-bottom: 32px;
-}
-
-.filter-group {
-margin-bottom: 20px;
-}
-
-.filter-group:last-child {
-margin-bottom: 0;
-}
-
-.filter-label {
-display: block;
-font-size: 12px;
-text-transform: uppercase;
-letter-spacing: 1px;
-color: var(--gold);
-margin-bottom: 12px;
-font-weight: 600;
-}
-
-.filter-buttons {
-display: flex;
-flex-wrap: wrap;
-gap: 8px;
-}
-
-.filter-btn {
-padding: 8px 16px;
-background: rgba(255,255,255,0.08);
-border: 1px solid rgba(255,255,255,0.2);
-border-radius: 20px;
-color: rgba(255,255,255,0.7);
-font-size: 12px;
-font-weight: 500;
-text-transform: uppercase;
-letter-spacing: 0.5px;
-cursor: pointer;
-transition: all 0.3s ease;
-}
-
-.filter-btn:hover {
-background: rgba(255,255,255,0.12);
-color: #fff;
-border-color: rgba(255,255,255,0.3);
-}
-
-.filter-btn.active {
-background: var(--gold);
-color: var(--dark);
-border-color: var(--gold);
-font-weight: 600;
-}
-
-/* ── QR Codes Grid ── */
-.qr-grid {
-display: grid;
-grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
-gap: 24px;
-margin-bottom: 40px;
-}
-
-.qr-card {
-background: rgba(255,255,255,0.05);
-border: 1px solid rgba(255,255,255,0.1);
-border-radius: 16px;
-padding: 24px;
-text-align: center;
-transition: all 0.3s ease;
-}
-
-.qr-card:hover {
-background: rgba(255,255,255,0.08);
-border-color: rgba(255,255,255,0.2);
-transform: translateY(-4px);
-box-shadow: 0 8px 32px rgba(0,0,0,0.3);
-}
-
-.qr-card-image {
-width: 200px;
-height: 200px;
-margin: 0 auto 16px;
-background: rgba(255,255,255,0.1);
-border-radius: 12px;
-display: flex;
-align-items: center;
-justify-content: center;
-overflow: hidden;
-}
-
-.qr-card-image img {
-width: 100%;
-height: 100%;
-object-fit: contain;
-}
-
-.qr-card-placeholder {
-font-size: 48px;
-color: rgba(255,255,255,0.3);
-}
-
-.qr-card-title {
-font-size: 16px;
-font-weight: 600;
-color: #fff;
-margin-bottom: 8px;
-}
-
-.qr-card-subtitle {
-font-size: 12px;
-color: var(--gold);
-text-transform: uppercase;
-letter-spacing: 1px;
-margin-bottom: 12px;
-}
-
-.qr-card-description {
-font-size: 14px;
-color: rgba(255,255,255,0.7);
-line-height: 1.6;
-margin-bottom: 16px;
-}
-
-.qr-card-actions {
-display: flex;
-gap: 8px;
-justify-content: center;
-}
-
-.qr-btn {
-padding: 8px 16px;
-background: transparent;
-border: 1px solid rgba(255,255,255,0.3);
-border-radius: 6px;
-color: rgba(255,255,255,0.8);
-font-size: 11px;
-font-weight: 600;
-text-transform: uppercase;
-letter-spacing: 0.5px;
-cursor: pointer;
-transition: all 0.3s ease;
-text-decoration: none;
-display: inline-flex;
-align-items: center;
-gap: 4px;
-}
-
-.qr-btn:hover {
-background: rgba(255,255,255,0.1);
-color: #fff;
-border-color: rgba(255,255,255,0.5);
-}
-
-.qr-btn.primary {
-background: var(--gold);
-color: var(--dark);
-border-color: var(--gold);
-}
-
-.qr-btn.primary:hover {
-background: #B8943A;
-color: var(--dark);
-}
-
-/* ── No Results ── */
-.no-results {
-text-align: center;
-padding: 60px 20px;
-color: rgba(255,255,255,0.5);
-}
-
-.no-results-icon {
-font-size: 48px;
-margin-bottom: 16px;
-}
-
-.no-results-text {
-font-size: 16px;
-margin-bottom: 8px;
-}
-
-.no-results-subtext {
-font-size: 14px;
-color: rgba(255,255,255,0.3);
-}
-
-/* ── Responsive ── */
-@media (max-width: 768px) {
-.qr-container {
-padding: 20px 16px;
-}
-
-.filter-section {
-padding: 20px;
-}
-
-.qr-grid {
-grid-template-columns: 1fr;
-gap: 16px;
-}
-
-.qr-card {
-padding: 20px;
-}
-
-.qr-card-image {
-width: 160px;
-height: 160px;
-}
-}
+body { background:#111714; color:#fff; font-family:Jost,sans-serif; margin:0; }
+.qr-container{max-width:1200px;margin:auto;padding:40px 20px}
+.qr-title{font-family:"Cormorant Garamond";font-size:36px}
+.qr-title em{color:#C9A84C}
+.filter-section{background:#1a1f1c;border-radius:16px;padding:24px;margin-bottom:32px}
+.filter-btn{padding:8px 16px;border-radius:20px;border:1px solid #444;background:#222;color:#bbb;cursor:pointer}
+.filter-btn.active{background:#C9A84C;color:#111}
+.qr-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(280px,1fr));gap:24px}
+.qr-card{background:#1a1f1c;border-radius:16px;padding:20px;text-align:center}
+.qr-card img{width:180px;height:180px;object-fit:contain}
+.qr-card-title{font-weight:600;margin-top:12px}
+.qr-card-subtitle{color:#C9A84C;font-size:12px;text-transform:uppercase}
+.qr-actions{display:flex;gap:10px;margin-top:16px}
+.btn{flex:1;padding:10px;border-radius:6px;border:none;cursor:pointer;font-size:12px;font-weight:600}
+.btn-show{background:#C9A84C;color:#111}
+.btn-fb{background:#1877F2;color:#fff}
+.btn-ig{background:#E4405F;color:#fff}
+.btn-google{background:#4285F4;color:#fff}
+.overlay{position:fixed;inset:0;background:rgba(0,0,0,.95);display:none;align-items:center;justify-content:center;z-index:9999}
+.overlay img{width:320px;height:320px}
+.close{position:absolute;top:20px;right:20px;color:#fff;font-size:20px;cursor:pointer}
 </style>
 </head>
+
 <body>
 <div class="qr-container">
-<div class="back-nav">
-<a href="../" class="back-link">
-<span class="back-arrow">←</span>
-Back to Staff Portal
-</a>
-</div>
 
-<header class="qr-header">
+<header style="text-align:center;margin-bottom:32px">
 <h1 class="qr-title">QR Code <em>Gallery</em></h1>
-<p class="qr-subtitle">Store QR Codes for Social Media & Reviews</p>
+<p style="opacity:.6">Use when guest is with you</p>
 </header>
 
-<main>
 <div class="filter-section">
-<div class="filter-group">
-<label class="filter-label">Filter by Store</label>
-<div class="filter-buttons" id="storeFilters">
+<strong>Filter by Store</strong><br><br>
+<div id="storeFilters">
 <button class="filter-btn active" data-store="all">All Stores</button>
 <button class="filter-btn" data-store="N78">JP Nagar 5th Phase</button>
 <button class="filter-btn" data-store="N77">Elements Mall</button>
@@ -367,145 +93,97 @@ Back to Staff Portal
 <button class="filter-btn" data-store="N05">Frazer Town</button>
 <button class="filter-btn" data-store="N43">Hennur</button>
 </div>
-</div>
-
-<div class="filter-group">
-<label class="filter-label">Filter by Platform</label>
-<div class="filter-buttons" id="platformFilters">
-<button class="filter-btn active" data-platform="all">All Platforms</button>
+<br>
+<strong>Filter by Platform</strong><br><br>
+<div id="platformFilters">
+<button class="filter-btn active" data-platform="all">All</button>
 <button class="filter-btn" data-platform="facebook">Facebook</button>
 <button class="filter-btn" data-platform="instagram">Instagram</button>
 <button class="filter-btn" data-platform="google">Google Review</button>
 </div>
 </div>
+
+<div id="qrGrid" class="qr-grid"></div>
+
 </div>
 
-<div class="qr-grid" id="qrGrid">
-
-</div>
-
-<div class="no-results" id="noResults" style="display: none;">
-<div class="no-results-icon">📱</div>
-<div class="no-results-text">No QR codes found</div>
-<div class="no-results-subtext">Try adjusting your filters or check back later</div>
-</div>
-</main>
+<div id="qrOverlay" class="overlay" onclick="closeQR()">
+<span class="close">✕</span>
+<img id="qrImg">
 </div>
 
 <script>
-// QR Code data structure
-const qrCodes = [
-// N78 - JP Nagar 5th Phase
-{ store: 'N78', storeName: 'JP Nagar 5th Phase', platform: 'facebook', filename: 'N78_Facebook.png', title: 'Facebook QR Code', description: 'Scan to visit our Facebook page' },
-{ store: 'N78', storeName: 'JP Nagar 5th Phase', platform: 'instagram', filename: 'N78_Instagram.png', title: 'Instagram QR Code', description: 'Scan to follow us on Instagram' },
-{ store: 'N78', storeName: 'JP Nagar 5th Phase', platform: 'google', filename: 'N78_GoogleReview.png', title: 'Google Review QR Code', description: 'Scan to leave a Google review' },
+const stores = [{"Active_Status": "Yes", "Address_City": "Bangalore", "Address_Full": "1st Floor, Anand Onyx, No 305, 15th Cross Rd, near Outer Ring Road, 5th Phase, J P Nagar Phase 5, J. P. Nagar, ", "Address_Line_2": "", "Address_State": "Karnataka", "Appointment_URL": "https://naturals-salon-jpnagar5phase.setmore.com/", "Booking_Platform": "Setmore", "Email": "jpnagar2.naturals@gmail.com", "Facebook_ID": "Naturals.Salon.JPNagar5Phase", "Facebook_URL": "https://facebook.com/Naturals.Salon.JPNagar5Phase", "Google_Location_ID": "locations/11456061934238062921", "Google_Maps_URL": "https://g.page/Naturals_JPNagar5thPhase/", "Google_Place_ID": "ChIJD_AjPBEVrjsRyrGhTRo9qvw", "Hero_Number": 1, "Instagram_ID": "@Naturals.Salon.JPNagar5Phase", "Instagram_URL": "https://instagram.com/Naturals.Salon.JPNagar5Phase/", "Manager_Name": "N78 Store Manager", "Manager_WhatsApp": "+918792642299", "Phone_Display": "+91 87926 42299", "Phone_Raw": "+918792642299", "Phone_Tel": "+918792642299", "Pincode": "560078", "Store_ID": "Store_N78", "Store_Page_URL": "stores/bangalore/jp-nagar-5th-phase/", "WhatsApp_Number": "+918792642299", "active_status": "Yes", "address_city": "Bangalore", "address_full": "1st Floor, Anand Onyx, No 305, 15th Cross Rd, near Outer Ring Road, 5th Phase, J P Nagar Phase 5, J. P. Nagar, Bengaluru, Karnataka 560078, India", "address_line_1": "1st Floor, Anand Onyx, No 305, 15th Cross Rd, near Outer Ring Road, 5th Phase, J P Nagar Phase 5, J. P. Nagar, ", "address_pincode": "560078", "address_state": "Karnataka", "appointment_url": "https://naturals-salon-jpnagar5phase.setmore.com/", "booking_platform": "Setmore", "brand_store_name": "Naturals Salon \u0026 Spa - JP Nagar 5th Phase", "description": "Premium salon in JP Nagar 5th Phase, Bangalore \u2014 expert hair, skin \u0026 bridal services on 100 Ft Ring Road.", "email": "jpnagar2.naturals@gmail.com", "escalation_contact": "Sophia", "escalation_email": "sophiaclmnt@gmail.com", "escalation_whatsapp": "919741115349", "facebook_access_token": "", "facebook_id": "Naturals.Salon.JPNagar5Phase", "facebook_page_id": "715840311849516", "facebook_url": "https://facebook.com/Naturals.Salon.JPNagar5Phase", "google_location_id": "locations/11456061934238062921", "google_maps_url": "https://g.page/Naturals_JPNagar5thPhase/", "google_place_id": "ChIJD_AjPBEVrjsRyrGhTRo9qvw", "google_review_link": "https://g.page/Naturals_JPNagar5thPhase/review?rc/", "hero_tagline": "South Bangalore\u0027s trusted destination for hair, skin \u0026 bridal beauty \u2014 on 100 Ft Ring Road.", "instagram_business_account_id": "17841425192935961", "instagram_id": "Naturals.Salon.JPNagar5Phase", "instagram_url": "https://instagram.com/Naturals.Salon.JPNagar5Phase/", "latitude": "12.9055", "longitude": "77.5945", "mon_fri_hours": "10:00 AM \u2013 9:00 PM", "phone_landline": "+918041304444", "phone_mobile": "+918792642299", "phone_whatsapp": "+918792642299", "pincode": "560078", "saturday_hours": "10:00 AM \u2013 9:00 PM", "seo_description": "Naturals Salon \u0026 Spa on 100 Ft Ring Road, JP Nagar 5th Phase, Bangalore. Premium haircuts, hair colour, bridal packages, skin care \u0026 spa. Walk in or book online today.", "seo_intro": "Welcome to Naturals Salon \u0026 Spa JP Nagar 5th Phase \u2014 south Bangalore\u0027s premium beauty destination on 100 Ft Ring Road. Nestled in the heart of JP Nagar\u0027s 5th Phase, our salon has been the go-to choice for residents of JP Nagar, Banashankari, Jayanagar and Uttarahalli for expert hair care, radiant skin treatments and flawless bridal packages.\n \n Our team of certified stylists specialises in precision haircuts, balayage and global colour, keratin smoothening, hair spa therapies, and a full range of facials tailored to Bangalore\u0027s climate and skin types. Whether you\u0027re preparing for a wedding, a corporate event, or simply your weekly self-care ritual, every visit at our JP Nagar salon is crafted around you.\n \n Part of India\u0027s most trusted salon network with over 25 years of expertise across 1,000+ outlets, Naturals brings national-standard beauty services to your neighbourhood \u2014 with transparent pricing, premium products, and no surprises. Book your appointment online or walk in at Anand Onyx, 1st Floor, 15th Cross, 100 Ft Ring Road.", "seo_title": "Naturals Salon JP Nagar 5th Phase | Hair \u0026 Bridal | Bangalore", "store_area": "", "store_display_name": "JP Nagar 5th Phase", "store_id": "Store_N78", "store_id_short": "N78", "store_manager_name": "Nisha", "sunday_hours": "10:00 AM \u2013 9:00 PM"}, {"Active_Status": "Yes", "Address_City": "Bangalore", "Address_Full": "Shop No 26, 3rd Floor, Elements Mall, 100 Ft Rd, near Manyata Tech Park Road, MS Ramaiah North City, Manayata Tech Park, Nagavara,", "Address_Line_2": "", "Address_State": "Karnataka", "Appointment_URL": "https://naturals-salon-elementsmall.setmore.com/", "Booking_Platform": "Setmore", "Email": "naturalsnagavara@gmail.com", "Facebook_ID": "Naturals.Salon.ElementsMall", "Facebook_URL": "https://facebook.com/Naturals.Salon.ElementsMall/", "Google_Location_ID": "locations/5858391068390788403", "Google_Maps_URL": "https://maps.google.com/?q=Naturals+Salon+Elements+Mall", "Google_Place_ID": "ChIJo_js4GgXrjsR3LgZhMNOPz4", "Hero_Number": 2, "Instagram_ID": "@Naturals.Salon.ElementsMall", "Instagram_URL": "https://instagram.com/Naturals.Salon.ElementsMall/", "Manager_Name": "N77 Store Manager", "Manager_WhatsApp": "+919901000017", "Phone_Display": "+91 99010 00017", "Phone_Raw": "+919901000017", "Phone_Tel": "+919901000017", "Pincode": "560077", "Store_ID": "Store_N77", "Store_Page_URL": "stores/bangalore/elements-mall/", "WhatsApp_Number": "+919901000017", "active_status": "Yes", "address_city": "Bangalore", "address_full": "Shop No 26, 3rd Floor, Elements Mall, 100 Ft Rd, near Manyata Tech Park Road, MS Ramaiah North City, Manayata Tech Park, Nagavara, Bengaluru, Karnataka 560077, India", "address_line_1": "Shop No 26, 3rd Floor, Elements Mall, 100 Ft Rd, near Manyata Tech Park Road, MS Ramaiah North City, Manayata Tech Park, Nagavara,", "address_pincode": "560077", "address_state": "Karnataka", "appointment_url": "https://naturals-salon-elementsmall.setmore.com/", "booking_platform": "Setmore", "brand_store_name": "Naturals Salon \u0026 Spa - Elements Mall", "description": "Premium salon at Elements Mall, Nagavara \u2014 hair, spa \u0026 skin care near Manyata Tech Park, north Bangalore.", "email": "naturalsnagavara@gmail.com", "escalation_contact": "Sophia", "escalation_email": "sophiaclmnt@gmail.com", "escalation_whatsapp": "919741115349", "facebook_access_token": "", "facebook_id": "Naturals.Salon.ElementsMall", "facebook_page_id": "318850925297093", "facebook_url": "https://facebook.com/Naturals.Salon.ElementsMall/", "google_location_id": "locations/5858391068390788403", "google_maps_url": "https://maps.google.com/?q=Naturals+Salon+Elements+Mall", "google_place_id": "ChIJo_js4GgXrjsR3LgZhMNOPz4", "google_review_link": "https://g.page/Naturals-ElementsMall/review?rc/", "hero_tagline": "Premium hair \u0026 spa services inside Elements Mall \u2014 your beauty break near Manyata Tech Park.", "instagram_business_account_id": "17841437507959021", "instagram_id": "Naturals.Salon.ElementsMall", "instagram_url": "https://instagram.com/Naturals.Salon.ElementsMall/", "latitude": "13.053", "longitude": "77.62", "mon_fri_hours": "10:00 AM \u2013 9:00 PM", "phone_landline": "+918046514422", "phone_mobile": "+919901000017", "phone_whatsapp": "+919901000017", "pincode": "560077", "saturday_hours": "10:00 AM \u2013 9:00 PM", "seo_description": "Naturals Salon \u0026 Spa at Elements Mall, Nagavara \u2014 3rd Floor. Haircuts, colour, spa \u0026 skin care near Manyata Tech Park. Ideal for working professionals. Book appointments online.", "seo_intro": "Welcome to Naturals Salon \u0026 Spa at Elements Mall, Nagavara \u2014 north Bangalore\u0027s most convenient premium salon, located on the 3rd Floor of Elements Mall on Thanisandra Main Road, just minutes from Manyata Tech Park and Hebbal.\n \n Designed for the busy professional, our Elements Mall salon offers express and full-service beauty treatments that fit your schedule \u2014 from quick blowouts and express facials to full hair colour sessions and relaxing spa therapies. Whether you\u0027re a tech professional stepping away from the office, or a weekend shopper looking to unwind, our certified stylists deliver precision results with premium products every time.\n \n Our services include haircuts and styling for all hair types, global and fashion hair colour, keratin and smoothening treatments, deep conditioning hair spas, advanced facials, and de-tan and clean-up treatments perfect for Bangalore\u0027s sun and pollution. As part of India\u0027s most trusted salon network \u2014 with 25 years of expertise \u2014 Naturals brings world-class beauty services to your neighbourhood mall. Book online or visit us on the 3rd Floor at Elements Mall.", "seo_title": "Naturals Salon Elements Mall | Hair \u0026 Spa | Nagavara Bangalore", "store_area": "", "store_display_name": "Elements Mall", "store_id": "Store_N77", "store_id_short": "N77", "store_manager_name": "Sandesh Kumar", "sunday_hours": "10:00 AM \u2013 9:00 PM"}, {"Active_Status": "Yes", "Address_City": "Bangalore", "Address_Full": "2,3, 1st Floor, Maruthi Tower, No. 1, Devasandra Main Rd, opp. Lulu\u0027s Bakery, Basavanapura, KRPuram,", "Address_Line_2": "", "Address_State": "Karnataka", "Appointment_URL": "https://naturals-salon-devasandra.setmore.com/", "Booking_Platform": "Setmore", "Email": "naturalsdevasandra@gmail.com", "Facebook_ID": "Naturals.Salon.Devasandra", "Facebook_URL": "https://facebook.com/Naturals.Salon.Devasandra/", "Google_Location_ID": "locations/2727661342173271867", "Google_Maps_URL": "https://maps.google.com/?q=Naturals+Salon+Devasandra", "Google_Place_ID": "ChIJoWUOlAARrjsREnWUrR3DWfk", "Hero_Number": 3, "Instagram_ID": "@Naturals.Salon.Devasandra", "Instagram_URL": "https://instagram.com/Naturals.Salon.Devasandra/", "Manager_Name": "N36 Store Manager", "Manager_WhatsApp": "+917259490009", "Phone_Display": "+91 72594 90009", "Phone_Raw": "+917259490009", "Phone_Tel": "+917259490009", "Pincode": "560036", "Store_ID": "Store_N36", "Store_Page_URL": "stores/bangalore/devasandra/", "WhatsApp_Number": "+917259490009", "active_status": "Yes", "address_city": "Bangalore", "address_full": "2,3, 1st Floor, Maruthi Tower, No. 1, Devasandra Main Rd, opp. Lulu\u0027s Bakery, Basavanapura, KRPuram, Bengaluru, Karnataka 560036, India", "address_line_1": "2,3, 1st Floor, Maruthi Tower, No. 1, Devasandra Main Rd, opp. Lulu\u0027s Bakery, Basavanapura, KRPuram,", "address_pincode": "560036", "address_state": "Karnataka", "appointment_url": "https://naturals-salon-devasandra.setmore.com/", "booking_platform": "Setmore", "brand_store_name": "Naturals Salon \u0026 Spa - Devasandra", "description": "Premium salon in Devasandra, KR Puram \u2014 hair, skin \u0026 bridal services for east Bangalore families.", "email": "naturalsdevasandra@gmail.com", "escalation_contact": "Sophia", "escalation_email": "sophiaclmnt@gmail.com", "escalation_whatsapp": "919741115349", "facebook_access_token": "", "facebook_id": "Naturals.Salon.Devasandra", "facebook_page_id": "922849001248263", "facebook_url": "https://facebook.com/Naturals.Salon.Devasandra/", "google_location_id": "locations/2727661342173271867", "google_maps_url": "https://maps.google.com/?q=Naturals+Salon+Devasandra", "google_place_id": "ChIJoWUOlAARrjsREnWUrR3DWfk", "google_review_link": "https://g.page/Naturals-Devasandra/review?rc/", "hero_tagline": "East Bangalore\u0027s neighbourhood salon for expert hair, skin \u0026 wellness \u2014 on Devasandra Main Road.", "instagram_business_account_id": "17841437347582520", "instagram_id": "Naturals.Salon.Devasandra", "instagram_url": "https://instagram.com/Naturals.Salon.Devasandra/", "latitude": "13.005", "longitude": "77.698", "mon_fri_hours": "10:00 AM \u2013 9:00 PM", "phone_landline": "", "phone_mobile": "+917259490009", "phone_whatsapp": "+917259490009", "pincode": "560036", "saturday_hours": "10:00 AM \u2013 9:00 PM", "seo_description": "Naturals Salon \u0026 Spa in Devasandra, KR Puram \u2014 opposite Lulu\u0027s Bakery. Haircuts, colour, facials, bridal \u0026 spa for east Bangalore. Trusted by families. Book now.", "seo_intro": "Welcome to Naturals Salon \u0026 Spa Devasandra \u2014 east Bangalore\u0027s trusted beauty destination, conveniently located on Devasandra Main Road, KR Puram, opposite the landmark Lulu\u0027s Bakery in Basavanapura.\n \n Our Devasandra salon serves the rapidly growing communities of KR Puram, Mahadevapura, ITPL Road, Hoodi and Varthur with a full range of professional beauty services \u2014 from everyday haircuts and hair colour to bridal packages, deep conditioning treatments, skin care and body wellness therapies. Our team of experienced stylists knows that every client is unique, which is why each visit begins with a personalised consultation to understand your hair type, skin concerns and lifestyle.\n \n Families in KR Puram have trusted Naturals for premium-quality beauty services at honest, transparent prices. Whether you\u0027re looking for a weekend blow-dry, a pre-festival makeover, or a full bridal preparation, our Devasandra team is here to deliver results that last. Part of India\u0027s most respected salon network, Naturals brings 25 years of national expertise to your neighbourhood. Book your appointment online or walk in at Maruthi Tower, 1st Floor.", "seo_title": "Naturals Salon Devasandra KR Puram | Hair \u0026 Beauty | Bangalore", "store_area": "", "store_display_name": "Devasandra", "store_id": "Store_N36", "store_id_short": "N36", "store_manager_name": "Devasandra Store Manager", "sunday_hours": "10:00 AM \u2013 9:00 PM"}, {"Active_Status": "Yes", "Address_City": "Bangalore", "Address_Full": "1st floor, No.94, Mosque Rd, above Poorvika Mobile Store, Cleveland Town, Frazer Town,", "Address_Line_2": "", "Address_State": "Karnataka", "Appointment_URL": "https://naturals-salon-frazertown.setmore.com/", "Booking_Platform": "Setmore", "Email": "frazertown.naturals@gmail.com", "Facebook_ID": "Naturals.Salon.FrazerTown", "Facebook_URL": "https://www.facebook.com/Naturals.Salon.FrazerTown/", "Google_Location_ID": "locations/4210460996377672562", "Google_Maps_URL": "https://maps.google.com/?q=Naturals+Salon+Frazer+Town", "Google_Place_ID": "ChIJcfViGvEWrjsRUuIzB28viSc", "Hero_Number": 4, "Instagram_ID": "@Naturals.Salon.FrazerTown", "Instagram_URL": "https://instagram.com/Naturals.Salon.FrazerTown/", "Manager_Name": "N05 Store Manager", "Manager_WhatsApp": "+919606333017", "Phone_Display": "+91 96063 33017", "Phone_Raw": "+919606333017", "Phone_Tel": "+919606333017", "Pincode": "560005", "Store_ID": "Store_N05", "Store_Page_URL": "stores/bangalore/frazer-town/", "WhatsApp_Number": "+919606333017", "active_status": "Yes", "address_city": "Bangalore", "address_full": "1st floor, No.94, Mosque Rd, above Poorvika Mobile Store, Cleveland Town, Frazer Town, Bengaluru, Karnataka 560005, India", "address_line_1": "1st floor, No.94, Mosque Rd, above Poorvika Mobile Store, Cleveland Town, Frazer Town,", "address_pincode": "560005", "address_state": "Karnataka", "appointment_url": "https://naturals-salon-frazertown.setmore.com/", "booking_platform": "Setmore", "brand_store_name": "Naturals Salon \u0026 Spa - Frazer Town", "description": "Premium salon on Mosque Road, Frazer Town \u2014 expert hair, bridal \u0026 skin care in central Bangalore.", "email": "frazertown.naturals@gmail.com", "escalation_contact": "Sophia", "escalation_email": "sophiaclmnt@gmail.com", "escalation_whatsapp": "919741115349", "facebook_access_token": "", "facebook_id": "Naturals.Salon.FrazerTown", "facebook_page_id": "526783314021240", "facebook_url": "https://www.facebook.com/Naturals.Salon.FrazerTown/", "google_location_id": "locations/4210460996377672562", "google_maps_url": "https://maps.google.com/?q=Naturals+Salon+Frazer+Town", "google_place_id": "ChIJcfViGvEWrjsRUuIzB28viSc", "google_review_link": "https://g.page/Naturals-FrazerTown/review?rc/", "hero_tagline": "Central Bangalore\u0027s cosmopolitan beauty salon \u2014 expert hair, skin \u0026 bridal care on Mosque Road.", "instagram_business_account_id": "17841447241612437", "instagram_id": "Naturals.Salon.FrazerTown", "instagram_url": "https://instagram.com/Naturals.Salon.FrazerTown/", "latitude": "12.99", "longitude": "77.605", "mon_fri_hours": "10:00 AM \u2013 9:00 PM", "phone_landline": "+918040948040", "phone_mobile": "+919606333017", "phone_whatsapp": "+919606333017", "pincode": "560005", "saturday_hours": "10:00 AM \u2013 9:00 PM", "seo_description": "Naturals Salon \u0026 Spa on Mosque Road, Frazer Town \u2014 central Bangalore. Haircuts, bridal styling, colour, facials \u0026 spa. Above Poorvika Mobile. Walk in or book online today.", "seo_intro": "Welcome to Naturals Salon \u0026 Spa Frazer Town \u2014 centrally located on Mosque Road, Pulikeshi Nagar, above Poorvika Mobile Store, in the heart of one of Bangalore\u0027s most vibrant and well-connected neighbourhoods.\n \n Our Frazer Town salon caters to Bangalore\u0027s most diverse clientele \u2014 from professionals working in the CBD and Shivajinagar, to residents of Frazer Town, Richards Town, Lingarajapuram and Ulsoor. We offer a comprehensive range of beauty services including precision haircuts, global and highlight hair colour, keratin and rebonding treatments, hair spa, advanced facials, bridal and party makeup, mehendi and full bridal packages for all communities.\n \n What sets our Frazer Town salon apart is our team\u0027s deep experience with diverse hair textures and skin tones \u2014 from fine straight hair to thick curly and wavy types, and from fair to deep skin tones. Every treatment is selected and adapted to give you the best possible result. Transparent pricing, premium products, and a warm, welcoming space \u2014 that\u0027s the Naturals promise. Visit us on Mosque Road or book your appointment online.", "seo_title": "Naturals Salon Frazer Town | Hair \u0026 Bridal | Mosque Road Bangalore", "store_area": "", "store_display_name": "Frazer Town", "store_id": "Store_N05", "store_id_short": "N05", "store_manager_name": "Rethika", "sunday_hours": "10:00 AM \u2013 9:00 PM"}, {"Active_Status": "Yes", "Address_City": "Bangalore", "Address_Full": "1st Floor, No 40/A, 40/C, Main Road, above SBI Bank, Hennur Gardens, ", "Address_Line_2": "", "Address_State": "Karnataka", "Appointment_URL": "https://naturals-salon-hennur.setmore.com/", "Booking_Platform": "Setmore", "Email": "naturalshennur@gmail.com", "Facebook_ID": "Naturals.Salon.Hennur", "Facebook_URL": "https://facebook.com/Naturals.Salon.Hennur/", "Google_Location_ID": "locations/10326220211235668452", "Google_Maps_URL": "https://maps.google.com/?q=Naturals+Salon+Hennur", "Google_Place_ID": "ChIJb03gT58XrjsRv0Rytrv60BM", "Hero_Number": 5, "Instagram_ID": "@Naturals.Salon.Hennur", "Instagram_URL": "https://instagram.com/Naturals.Salon.Hennur/", "Manager_Name": "N43 Store Manager", "Manager_WhatsApp": "+919606900069", "Phone_Display": "+91 96069 00069", "Phone_Raw": "+919606900069", "Phone_Tel": "+919606900069", "Pincode": "560043", "Store_ID": "Store_N43", "Store_Page_URL": "stores/bangalore/hennur/", "WhatsApp_Number": "+919606900069", "active_status": "Yes", "address_city": "Bangalore", "address_full": "1st Floor, No 40/A, 40/C, Main Road, above SBI Bank, Hennur Gardens, Bengaluru, Karnataka 560043, India", "address_line_1": "1st Floor, No 40/A, 40/C, Main Road, above SBI Bank, Hennur Gardens, ", "address_pincode": "560043", "address_state": "Karnataka", "appointment_url": "https://naturals-salon-hennur.setmore.com/", "booking_platform": "Setmore", "brand_store_name": "Naturals Salon \u0026 Spa - Hennur", "description": "Premium salon at Hennur Cross \u2014 hair, spa \u0026 skin care for north Bangalore\u0027s growing communities.", "email": "naturalshennur@gmail.com", "escalation_contact": "Sophia", "escalation_email": "sophiaclmnt@gmail.com", "escalation_whatsapp": "919741115349", "facebook_access_token": "", "facebook_id": "Naturals.Salon.Hennur", "facebook_page_id": "111143220365821", "facebook_url": "https://facebook.com/Naturals.Salon.Hennur/", "google_location_id": "locations/10326220211235668452", "google_maps_url": "https://maps.google.com/?q=Naturals+Salon+Hennur", "google_place_id": "ChIJb03gT58XrjsRv0Rytrv60BM", "google_review_link": "https://g.page/Naturals-Hennur/review?rc/", "hero_tagline": "North Bangalore\u0027s go-to salon for premium hair, skin \u0026 wellness \u2014 at Hennur Cross.", "instagram_business_account_id": "17841426843499448", "instagram_id": "Naturals.Salon.Hennur", "instagram_url": "https://instagram.com/Naturals.Salon.Hennur/", "latitude": "13.042", "longitude": "77.648", "mon_fri_hours": "10:00 AM \u2013 8:00 PM", "phone_landline": "", "phone_mobile": "+919606900069", "phone_whatsapp": "+919606900069", "pincode": "560043", "saturday_hours": "10:00 AM \u2013 8:00 PM", "seo_description": "Naturals Salon \u0026 Spa at Hennur Cross \u2014 above SBI Bank, Hennur Main Road. Haircuts, colour, spa \u0026 skin care for north Bangalore. Trusted. Affordable. Book online now.", "seo_intro": "Welcome to Naturals Salon \u0026 Spa Hennur \u2014 north Bangalore\u0027s trusted beauty salon, conveniently located above SBI Bank on Hennur Main Road at Hennur Cross, serving the fast-growing communities of Hennur, Kalyan Nagar, HBR Layout, Horamavu and Banaswadi.\n \n Hennur has transformed into one of Bangalore\u0027s most dynamic residential hubs, and our salon has grown with it \u2014 offering the neighbourhood access to premium salon services that were once only available in central Bangalore. From expert haircuts and the latest hair colour techniques, to relaxing hair spa therapies, brightening facials, de-tan treatments and full bridal packages, our certified team delivers outstanding results at honest, transparent prices.\n \n Our Hennur team is passionate about making every client feel pampered and confident \u2014 whether you\u0027re a working professional looking for a quick style refresh, a new bride preparing for your big day, or a family visiting together for the weekend. As part of India\u0027s most trusted salon chain with 25+ years of experience, Naturals brings the gold standard in beauty to your doorstep. Book online or walk in at Hennur Main Road.", "seo_title": "Naturals Salon Hennur | Hair \u0026 Spa | Hennur Cross Bangalore", "store_area": "", "store_display_name": "Hennur", "store_id": "Store_N43", "store_id_short": "N43", "store_manager_name": "Tresa Mary", "sunday_hours": "10:00 AM \u2013 8:00 PM"}];
+const qrTypes = ["facebook","instagram","google"];
+let currentStore="all", currentPlatform="all";
 
-// N77 - Elements Mall
-{ store: 'N77', storeName: 'Elements Mall', platform: 'facebook', filename: 'N77_Facebook.png', title: 'Facebook QR Code', description: 'Scan to visit our Facebook page' },
-{ store: 'N77', storeName: 'Elements Mall', platform: 'instagram', filename: 'N77_Instagram.png', title: 'Instagram QR Code', description: 'Scan to follow us on Instagram' },
-{ store: 'N77', storeName: 'Elements Mall', platform: 'google', filename: 'N77_GoogleReview.png', title: 'Google Review QR Code', description: 'Scan to leave a Google review' },
-
-// N36 - Devasandra
-{ store: 'N36', storeName: 'Devasandra', platform: 'facebook', filename: 'N36_Facebook.png', title: 'Facebook QR Code', description: 'Scan to visit our Facebook page' },
-{ store: 'N36', storeName: 'Devasandra', platform: 'instagram', filename: 'N36_Instagram.png', title: 'Instagram QR Code', description: 'Scan to follow us on Instagram' },
-{ store: 'N36', storeName: 'Devasandra', platform: 'google', filename: 'N36_GoogleReview.png', title: 'Google Review QR Code', description: 'Scan to leave a Google review' },
-
-// N05 - Frazer Town
-{ store: 'N05', storeName: 'Frazer Town', platform: 'facebook', filename: 'N05_Facebook.png', title: 'Facebook QR Code', description: 'Scan to visit our Facebook page' },
-{ store: 'N05', storeName: 'Frazer Town', platform: 'instagram', filename: 'N05_Instagram.png', title: 'Instagram QR Code', description: 'Scan to follow us on Instagram' },
-{ store: 'N05', storeName: 'Frazer Town', platform: 'google', filename: 'N05_GoogleReview.png', title: 'Google Review QR Code', description: 'Scan to leave a Google review' },
-
-// N43 - Hennur
-{ store: 'N43', storeName: 'Hennur', platform: 'facebook', filename: 'N43_Facebook.png', title: 'Facebook QR Code', description: 'Scan to visit our Facebook page' },
-{ store: 'N43', storeName: 'Hennur', platform: 'instagram', filename: 'N43_Instagram.png', title: 'Instagram QR Code', description: 'Scan to follow us on Instagram' },
-{ store: 'N43', storeName: 'Hennur', platform: 'google', filename: 'N43_GoogleReview.png', title: 'Google Review QR Code', description: 'Scan to leave a Google review' }
-];
-
-let currentStore = 'all';
-let currentPlatform = 'all';
-
-function renderQRCodes() {
-const filteredCodes = qrCodes.filter(qr => {
-const storeMatch = currentStore === 'all' || qr.store === currentStore;
-const platformMatch = currentPlatform === 'all' || qr.platform === currentPlatform;
-return storeMatch && platformMatch;
-});
-
-const qrGrid = document.getElementById('qrGrid');
-const noResults = document.getElementById('noResults');
-
-if (filteredCodes.length === 0) {
-qrGrid.innerHTML = '';
-noResults.style.display = 'block';
-return;
+function getURL(store,platform){
+if(platform==="facebook") return store.Facebook_URL || store.facebook_url;
+if(platform==="instagram") return store.Instagram_URL || store.instagram_url;
+if(platform==="google") return store.google_review_link;
 }
 
-noResults.style.display = 'none';
-
-qrGrid.innerHTML = filteredCodes.map(qr => `
+function render(){
+const grid=document.getElementById("qrGrid");
+grid.innerHTML="";
+stores.forEach(store=>{
+if(currentStore!=="all" && store.store_id_short!==currentStore) return;
+qrTypes.forEach(p=>{
+if(currentPlatform!=="all" && p!==currentPlatform) return;
+const img=`/images/qrcodes/${store.store_id_short}_${p.charAt(0).toUpperCase()+p.slice(1)}.png`;
+grid.innerHTML+=`
 <div class="qr-card">
-<div class="qr-card-image">
-<img src="/images/qrcodes/${qr.filename}" alt="${qr.title}" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
-<div class="qr-card-placeholder" style="display: none;">📱</div>
-</div>
-<h3 class="qr-card-title">${qr.title}</h3>
-<div class="qr-card-subtitle">${qr.storeName}</div>
-<p class="qr-card-description">${qr.description}</p>
-<div class="qr-card-actions">
-<a href="/images/qrcodes/${qr.filename}" download="${qr.filename}" class="qr-btn primary">
-⬇ Download
-</a>
-<button class="qr-btn" onclick="copyToClipboard('/images/qrcodes/${qr.filename}')">
-📋 Copy Link
+<img src="${img}">
+<div class="qr-card-title">${p==="google"?"⭐ Google Review":p.toUpperCase()}</div>
+<div class="qr-card-subtitle">${store.store_display_name}</div>
+<div class="qr-actions">
+<button class="btn btn-show" onclick="showQR('${img}','${store.store_id_short}','${p}')">SHOW QR</button>
+<button class="btn btn-${p==='facebook'?'fb':p==='instagram'?'ig':'google'}"
+onclick="openLink('${getURL(store,p)}','${store.store_id_short}','${p}')">
+OPEN
 </button>
 </div>
-</div>
-`).join('');
-}
-
-function copyToClipboard(text) {
-navigator.clipboard.writeText(window.location.origin + text).then(() => {
-// Show success feedback
-const btn = event.target;
-const originalText = btn.innerHTML;
-btn.innerHTML = '✓ Copied!';
-btn.style.background = 'var(--gold)';
-btn.style.color = 'var(--dark)';
-
-setTimeout(() => {
-btn.innerHTML = originalText;
-btn.style.background = 'transparent';
-btn.style.color = 'rgba(255,255,255,0.8)';
-}, 2000);
-}).catch(err => {
-console.error('Failed to copy:', err);
+</div>`;
+});
 });
 }
 
-// Store filter handlers
-document.querySelectorAll('#storeFilters .filter-btn').forEach(btn => {
-btn.addEventListener('click', function() {
-document.querySelectorAll('#storeFilters .filter-btn').forEach(b => b.classList.remove('active'));
-this.classList.add('active');
-currentStore = this.dataset.store;
-renderQRCodes();
-});
+function showQR(img,store,platform){
+document.getElementById("qrImg").src=img;
+document.getElementById("qrOverlay").style.display="flex";
+trackEvent("show_qr",store,platform);
+}
+
+function closeQR(){document.getElementById("qrOverlay").style.display="none"}
+
+function openLink(url,store,platform){
+window.open(url,"_blank");
+trackEvent("open_platform",store,platform);
+}
+
+/* 🔹 CLIENT-SIDE TRACKING (Google Apps Script ready) */
+function trackEvent(event,store,platform){
+fetch("https://script.google.com/macros/s/YOUR_SCRIPT_ID/exec",{
+method:"POST",
+body:JSON.stringify({
+event,event_store:store,platform,
+page:location.pathname,
+ts:new Date().toISOString()
+})
+}).catch(()=>{});
+}
+
+document.querySelectorAll(".filter-btn").forEach(b=>{
+b.onclick=()=>{
+b.parentElement.querySelectorAll(".filter-btn").forEach(x=>x.classList.remove("active"));
+b.classList.add("active");
+if(b.dataset.store){currentStore=b.dataset.store}
+if(b.dataset.platform){currentPlatform=b.dataset.platform}
+render();
+};
 });
 
-// Platform filter handlers
-document.querySelectorAll('#platformFilters .filter-btn').forEach(btn => {
-btn.addEventListener('click', function() {
-document.querySelectorAll('#platformFilters .filter-btn').forEach(b => b.classList.remove('active'));
-this.classList.add('active');
-currentPlatform = this.dataset.platform;
-renderQRCodes();
-});
-});
-
-// Initial render
-document.addEventListener('DOMContentLoaded', function() {
-renderQRCodes();
-});
+render();
 </script>
 </body>
 </html>
