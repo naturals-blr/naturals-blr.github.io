@@ -1187,7 +1187,7 @@ body{
 
     <div class="ft-brand-col">
       <div class="ft-brand">Naturals <span>Salon &amp; Spa</span></div>
-      <div class="ft-tagline">India's most trusted salon network.<br>Premium beauty services across Bangalore.</div>
+      <div class="ft-tagline">India's most trusted salon network. <span id="staffTriggerFooter" style="position: relative; display: inline-block; width: 16px; height: 16px; opacity: 0.3; cursor: pointer; vertical-align: middle; margin-left: 4px;" title="Staff Portal">⚙️</span><br>Premium beauty services across Bangalore.</div>
     </div>
 
     <div class="ft-col">
@@ -1373,9 +1373,12 @@ footer {
   (function() {
     let tapCount = 0;
     let lastTap = 0;
-    const trigger = document.getElementById('staffTrigger');
+    const triggers = [
+      document.getElementById('staffTrigger'),
+      document.getElementById('staffTriggerFooter')
+    ].filter(Boolean); // Remove null elements
 
-    trigger.addEventListener('click', function() {
+    function handleTriggerClick() {
       const now = new Date().getTime();
 
       // Reset if delay too long
@@ -1389,6 +1392,11 @@ footer {
       if (tapCount >= 5) {
         window.location.href = "/intranet"; // change dynamically if needed
       }
+    }
+
+    // Add click listeners to all trigger elements
+    triggers.forEach(trigger => {
+      trigger.addEventListener('click', handleTriggerClick);
     });
   })();
 </script>
