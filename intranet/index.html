@@ -200,6 +200,101 @@ gap: 16px;
 padding: 24px;
 }
 }
+
+/* ── Staff Name Personalization ── */
+.change-name-container {
+margin-top: 12px;
+}
+
+.change-name-btn {
+background: rgba(255,255,255,0.1);
+border: 1px solid rgba(255,255,255,0.2);
+border-radius: 20px;
+color: rgba(255,255,255,0.7);
+font-size: 12px;
+padding: 6px 12px;
+cursor: pointer;
+transition: all 0.3s ease;
+font-family: 'Jost', sans-serif;
+}
+
+.change-name-btn:hover {
+background: rgba(255,255,255,0.2);
+color: #fff;
+border-color: rgba(255,255,255,0.3);
+}
+
+.name-modal {
+position: fixed;
+top: 0;
+left: 0;
+width: 100%;
+height: 100%;
+background: rgba(0,0,0,0.8);
+display: none;
+align-items: center;
+justify-content: center;
+z-index: 10000;
+}
+
+.name-modal-content {
+background: var(--dark);
+border: 1px solid rgba(255,255,255,0.2);
+border-radius: 16px;
+padding: 32px;
+text-align: center;
+max-width: 400px;
+width: 90%;
+}
+
+.name-modal-title {
+font-size: 24px;
+margin-bottom: 16px;
+color: #fff;
+}
+
+.name-modal-subtitle {
+font-size: 14px;
+color: rgba(255,255,255,0.7);
+margin-bottom: 24px;
+line-height: 1.5;
+}
+
+.name-input {
+width: 100%;
+padding: 12px 16px;
+background: rgba(255,255,255,0.1);
+border: 1px solid rgba(255,255,255,0.3);
+border-radius: 8px;
+color: #fff;
+font-size: 16px;
+font-family: 'Jost', sans-serif;
+margin-bottom: 20px;
+}
+
+.name-input:focus {
+outline: none;
+border-color: var(--gold);
+background: rgba(255,255,255,0.15);
+}
+
+.name-submit-btn {
+background: var(--gold);
+color: var(--dark);
+border: none;
+border-radius: 8px;
+padding: 12px 24px;
+font-size: 14px;
+font-weight: 600;
+cursor: pointer;
+transition: all 0.3s ease;
+font-family: 'Jost', sans-serif;
+}
+
+.name-submit-btn:hover {
+background: #B8943A;
+transform: translateY(-2px);
+}
 </style>
 </head>
 <body>
@@ -210,8 +305,13 @@ padding: 24px;
 </header>
 
 <div class="user-info">
-<div class="user-welcome">Welcome back, Team Member</div>
+<div class="user-welcome">
+<span id="staffGreeting">Welcome 👋</span>
+</div>
 <div class="user-role">Naturals Salon & Spa Staff</div>
+<div class="change-name-container">
+<button onclick="resetStaffName()" class="change-name-btn">Change Name</button>
+</div>
 </div>
 
 <main class="tiles-grid">
@@ -246,11 +346,75 @@ padding: 24px;
 </main>
 </div>
 
+
+<div id="nameModal" class="name-modal">
+<div class="name-modal-content">
+<h3 class="name-modal-title">👋 Welcome!</h3>
+<p class="name-modal-subtitle">
+Please enter your name (this stays on your device only)<br>
+This helps personalize the screen while you assist guests.
+</p>
+<input type="text" id="nameInput" class="name-input" placeholder="Enter your name" maxlength="50">
+<button onclick="saveStaffName()" class="name-submit-btn">Continue</button>
+</div>
+</div>
+
 <script>
-// Add any intranet-specific JavaScript here
-document.addEventListener('DOMContentLoaded', function() {
-console.log('Naturals Staff Portal loaded');
+document.addEventListener("DOMContentLoaded", () => {
+const staffName = localStorage.getItem("staff_name");
+
+if (!staffName) {
+askStaffName();
+} else {
+greetStaff(staffName);
+}
 });
+
+function askStaffName() {
+const modal = document.getElementById("nameModal");
+const input = document.getElementById("nameInput");
+
+modal.style.display = "flex";
+input.focus();
+
+// Handle Enter key
+input.addEventListener("keypress", function(e) {
+if (e.key === "Enter") {
+saveStaffName();
+}
+});
+}
+
+function saveStaffName() {
+const input = document.getElementById("nameInput");
+const name = input.value.trim();
+
+if (name && name.length > 0) {
+localStorage.setItem("staff_name", name);
+document.getElementById("nameModal").style.display = "none";
+greetStaff(name);
+} else {
+input.focus();
+input.style.borderColor = "#ff6b6b";
+setTimeout(() => {
+input.style.borderColor = "rgba(255,255,255,0.3)";
+}, 2000);
+}
+}
+
+function greetStaff(name) {
+const el = document.getElementById("staffGreeting");
+if (el) {
+el.innerText = `Hi ${name} 👋`;
+}
+}
+
+function resetStaffName() {
+if (confirm("Are you sure you want to change your name?")) {
+localStorage.removeItem("staff_name");
+location.reload();
+}
+}
 </script>
 </body>
 </html>
