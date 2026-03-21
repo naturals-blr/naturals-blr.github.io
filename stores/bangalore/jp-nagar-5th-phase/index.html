@@ -1526,8 +1526,8 @@ Facebook</a>
 <div class="ft-top">
 
 <div class="ft-brand-col">
-<div class="ft-brand">Naturals <span>Salon &amp; Spa</span></div>
-<div class="ft-tagline">India's most trusted salon network. <span id="staffTriggerFooter" style="position: relative; display: inline-block; width: 16px; height: 16px; opacity: 0.3; cursor: pointer; vertical-align: middle; margin-left: 4px;" title="Staff Portal">⚙️</span><br>Premium beauty services across Bangalore.</div>
+<div class="ft-brand"><span id="staffTriggerBrand" style="cursor: pointer; position: relative;" title="Staff Portal - Click 5 times for access">N</span>aturals <span>Salon &amp; Spa</span></div>
+<div class="ft-tagline">India's most trusted salon network.<br>Premium beauty services across Bangalore.</div>
 </div>
 
 <div class="ft-col">
@@ -1684,7 +1684,7 @@ let tapCount = 0;
 let lastTap = 0;
 const triggers = [
 document.getElementById('staffTrigger'),
-document.getElementById('staffTriggerFooter')
+document.getElementById('staffTriggerBrand')
 ].filter(Boolean); // Remove null elements
 
 function handleTriggerClick() {
