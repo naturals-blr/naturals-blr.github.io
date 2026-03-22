@@ -416,6 +416,43 @@ border-top:1px solid rgba(255,255,255,0.06);
 .rev-name{font-size:14px;font-weight:600;color:var(--text);letter-spacing:0.5px;}
 .rev-store{font-size:10px;color:var(--gold);text-transform:uppercase;letter-spacing:2px;font-weight:600;margin-top:2px;}
 
+/* Enhanced Reviews Features */
+.reviews-snippet{margin-bottom:24px;}
+.reviews-snippet .rev-grid{grid-template-columns:1fr;gap:16px;}
+
+/* Wall of Love Modal */
+.modal-overlay{position:fixed;inset:0;background:rgba(0,0,0,0.6);display:flex;align-items:center;justify-content:center;z-index:9999;opacity:0;visibility:hidden;transition:all 0.3s ease;padding:20px;}
+.modal-overlay.active{opacity:1;visibility:visible;}
+.modal-content{background:#fff;border-radius:24px;max-width:800px;width:100%;max-height:85vh;height:100%;display:flex;flex-direction:column;transform:scale(0.9);transition:all 0.3s ease;}
+.modal-overlay.active .modal-content{transform:scale(1);}
+.modal-header{padding:24px 24px 16px;border-bottom:1px solid rgba(0,0,0,0.06);display:flex;align-items:center;justify-content:space-between;flex-shrink:0;}
+.modal-title{font-family:'Cormorant Garamond',serif;font-size:24px;font-weight:300;color:var(--text);}
+.modal-title em{color:var(--gold);font-style:italic;}
+.modal-close{width:40px;height:40px;background:var(--cream);border:none;border-radius:50%;display:flex;align-items:center;justify-content:center;cursor:pointer;border:1px solid rgba(0,0,0,0.06);transition:all 0.2s ease;}
+.modal-close:hover{background:var(--gold);color:#fff;}
+.modal-close svg{width:20px;height:20px;}
+.modal-body{flex:1;overflow-y:auto;padding:24px;}
+.modal-reviews{display:grid;gap:16px;}
+.modal-loading{text-align:center;padding:40px;color:var(--text-mid);}
+.modal-loading-spinner{width:40px;height:40px;border:3px solid var(--cream);border-top:3px solid var(--gold);border-radius:50%;animation:spin 1s linear infinite;margin:0 auto 16px;}
+@keyframes spin{0%{transform:rotate(0deg);}100%{transform:rotate(360deg);}}
+
+/* Read All Reviews Button */
+.read-all-btn{display:flex;align-items:center;justify-content:center;width:100%;padding:16px;background:var(--gold);color:#fff;border-radius:16px;font-weight:500;font-size:15px;transition:all 0.3s ease;text-decoration:none;border:none;cursor:pointer;}
+.read-all-btn:hover{background:var(--gold-dark);transform:translateY(-2px);box-shadow:0 8px 25px rgba(201,161,94,0.3);}
+.read-all-btn svg{width:20px;height:20px;margin-right:8px;}
+
+/* Mobile Optimizations */
+@media(max-width:640px){
+.modal-overlay{padding:16px;}
+.modal-content{max-height:90vh;border-radius:16px;}
+.modal-header{padding:20px 20px 16px;}
+.modal-title{font-size:20px;}
+.modal-body{padding:20px;}
+.modal-close{width:36px;height:36px;}
+.modal-close svg{width:18px;height:18px;}
+}
+
 @media(max-width:992px){
 .rev-grid{grid-template-columns:1fr 1fr;gap:20px;}
 }
@@ -1459,6 +1496,9 @@ alt="Anas" width="300" height="400" loading="lazy">
 <div class="reviews-block reveal">
 <div class="lbl">Client Love</div>
 <h2 class="sec-title">What clients <em>say about us</em></h2>
+
+
+<div class="reviews-snippet">
 <div class="rev-grid" style="grid-template-columns:1fr;gap:16px;margin-bottom:24px;">
 <div class="rev-card reveal">
 <div class="rev-stars">
@@ -1471,6 +1511,7 @@ alt="Anas" width="300" height="400" loading="lazy">
 </div>
 </div>
 </div>
+
 <div class="rev-card reveal">
 <div class="rev-stars">
 ★★★★★ </div>
@@ -1482,6 +1523,7 @@ alt="Anas" width="300" height="400" loading="lazy">
 </div>
 </div>
 </div>
+
 <div class="rev-card reveal">
 <div class="rev-stars">
 ★★★★★ </div>
@@ -1493,6 +1535,7 @@ alt="Anas" width="300" height="400" loading="lazy">
 </div>
 </div>
 </div>
+
 <div class="rev-card reveal">
 <div class="rev-stars">
 ★★★★★ </div>
@@ -1504,455 +1547,19 @@ alt="Anas" width="300" height="400" loading="lazy">
 </div>
 </div>
 </div>
-<div class="rev-card reveal">
-<div class="rev-stars">
-★★★★★ </div>
-<div class="rev-text">"Gufran gave a nice service, satisfied with the haircut."</div>
-<div class="rev-user">
-<div class="rev-user-img">s</div>
-<div class="rev-user-info">
-<div class="rev-name">safiya khaleel</div>
-</div>
-</div>
-</div>
-<div class="rev-card reveal">
-<div class="rev-stars">
-★★★★★ </div>
-<div class="rev-text">"Ayesha. Very good"</div>
-<div class="rev-user">
-<div class="rev-user-img">N</div>
-<div class="rev-user-info">
-<div class="rev-name">Nirmal GEORGE</div>
-</div>
-</div>
-</div>
-<div class="rev-card reveal">
-<div class="rev-stars">
-★★★★★ </div>
-<div class="rev-text">"had q good service with gufran"</div>
-<div class="rev-user">
-<div class="rev-user-img">R</div>
-<div class="rev-user-info">
-<div class="rev-name">Ruksar Taj</div>
-</div>
-</div>
-</div>
-<div class="rev-card reveal">
-<div class="rev-stars">
-★★★★★ </div>
-<div class="rev-text">"Loved the experience. Shout out to Gufran, thx a lot for the haircut, adore it!"</div>
-<div class="rev-user">
-<div class="rev-user-img">S</div>
-<div class="rev-user-info">
-<div class="rev-name">Sana Furqan</div>
-</div>
-</div>
-</div>
-<div class="rev-card reveal">
-<div class="rev-stars">
-★★★★★ </div>
-<div class="rev-text">"Had a wonderful experience at Naturals! I took my wife and daughter for a haircut, and we were genuinely impressed. Jyothi did an amazing job—she was patient, professional, and really understood what would suit them best.
 
-Both haircuts turned out beautifully, and the care she took made the whole experience very comfortable and enjoyable. It’s not always easy to find someone who handles kids and adults with equal skill, but Jyothi did it effortlessly.
+</div>
+</div>
 
-Highly recommend Naturals, especially Jyothi, for anyone looking for a great haircut and friendly service!"</div>
-<div class="rev-user">
-<div class="rev-user-img">M</div>
-<div class="rev-user-info">
-<div class="rev-name">Masroor khan miftahi</div>
-</div>
-</div>
-</div>
-<div class="rev-card reveal">
-<div class="rev-stars">
-★★★★★ </div>
-<div class="rev-text">"I had an amazing experience at this salon!
-Ayesha did an exceptional job. She was very kind and understanding and did a great job! Would definitely recommend this place."</div>
-<div class="rev-user">
-<div class="rev-user-img">A</div>
-<div class="rev-user-info">
-<div class="rev-name">Akanksha Kodandera</div>
-</div>
-</div>
-</div>
-<div class="rev-card reveal">
-<div class="rev-stars">
-★★★★★ </div>
-<div class="rev-text">"Beautician Aisha at Naturals of mosque road branch has always been helpful and gives us good suggestions about what is suitable for our skin and hair."</div>
-<div class="rev-user">
-<div class="rev-user-img">S</div>
-<div class="rev-user-info">
-<div class="rev-name">Swathi P</div>
-</div>
-</div>
-</div>
-<div class="rev-card reveal">
-<div class="rev-stars">
-★★★★★ </div>
-<div class="rev-text">"Gurmeet's an excellent hair stylist.
 
-He takes his time and gets the details right."</div>
-<div class="rev-user">
-<div class="rev-user-img">M</div>
-<div class="rev-user-info">
-<div class="rev-name">Mohammed Usaid</div>
-</div>
-</div>
-</div>
-<div class="rev-card reveal">
-<div class="rev-stars">
-★★★★★ </div>
-<div class="rev-text">"Sameer is amazing , great service, great haircut"</div>
-<div class="rev-user">
-<div class="rev-user-img">s</div>
-<div class="rev-user-info">
-<div class="rev-name">sahir hajiameen</div>
-</div>
-</div>
-</div>
-<div class="rev-card reveal">
-<div class="rev-stars">
-★★★★★ </div>
-<div class="rev-text">"Very excellent service. Good work. Polite staff
+<button class="read-all-btn" onclick="openReviewsModal()">
+<svg fill="currentColor" viewBox="0 0 24 24">
+<path d="M12 2l3.09 6.26L22 9.27l-6.91 1.01L12 22l-3.09-5.72L2 9.27l6.91-1.01L12 2z"/>
+</svg>
+Read All 44 5-Star Reviews
+</button>
 
-Gurmeet gill was my stylist and he was extremely professional, polite and took a lot of care to work. Kudo for the team."</div>
-<div class="rev-user">
-<div class="rev-user-img">A</div>
-<div class="rev-user-info">
-<div class="rev-name">Aswin Mathew</div>
-</div>
-</div>
-</div>
-<div class="rev-card reveal">
-<div class="rev-stars">
-★★★★★ </div>
-<div class="rev-text">"The experience was really nice. Very good customer service by Jyothi."</div>
-<div class="rev-user">
-<div class="rev-user-img">M</div>
-<div class="rev-user-info">
-<div class="rev-name">Megha Mariam Shaji</div>
-</div>
-</div>
-</div>
-<div class="rev-card reveal">
-<div class="rev-stars">
-★★★★★ </div>
-<div class="rev-text">"Good service done by jyoti,ayesha,gurmeet...
-Good and friendly ambience...."</div>
-<div class="rev-user">
-<div class="rev-user-img">S</div>
-<div class="rev-user-info">
-<div class="rev-name">Sadiq Ks</div>
-</div>
-</div>
-</div>
-<div class="rev-card reveal">
-<div class="rev-stars">
-★★★★★ </div>
-<div class="rev-text">"Great staff. Quick and supportive. Loved the style."</div>
-<div class="rev-user">
-<div class="rev-user-img">M</div>
-<div class="rev-user-info">
-<div class="rev-name">Mariettaleo 4819</div>
-</div>
-</div>
-</div>
-<div class="rev-card reveal">
-<div class="rev-stars">
-★★★★★ </div>
-<div class="rev-text">"Great experience. The staff was very supportive"</div>
-<div class="rev-user">
-<div class="rev-user-img">A</div>
-<div class="rev-user-info">
-<div class="rev-name">Aditi Shukla</div>
-</div>
-</div>
-</div>
-<div class="rev-card reveal">
-<div class="rev-stars">
-★★★★★ </div>
-<div class="rev-text">"Good experience with sameer"</div>
-<div class="rev-user">
-<div class="rev-user-img">P</div>
-<div class="rev-user-info">
-<div class="rev-name">Prince Yadav</div>
-</div>
-</div>
-</div>
-<div class="rev-card reveal">
-<div class="rev-stars">
-★★★★★ </div>
-<div class="rev-text">"I had a very good service. Especially Sameer he had attended very good to me
-And had a very good service"</div>
-<div class="rev-user">
-<div class="rev-user-img">K</div>
-<div class="rev-user-info">
-<div class="rev-name">K mohammed Faizan</div>
-</div>
-</div>
-</div>
-<div class="rev-card reveal">
-<div class="rev-stars">
-★★★★★ </div>
-<div class="rev-text">"Sameer, good haircut"</div>
-<div class="rev-user">
-<div class="rev-user-img">M</div>
-<div class="rev-user-info">
-<div class="rev-name">Mohammed Faheem N</div>
-</div>
-</div>
-</div>
-<div class="rev-card reveal">
-<div class="rev-stars">
-★★★★★ </div>
-<div class="rev-text">"Very good service. The barber Gurmeet did an excellent haircut. I’m very satisfied. Highly recommended."</div>
-<div class="rev-user">
-<div class="rev-user-img">m</div>
-<div class="rev-user-info">
-<div class="rev-name">md hussain</div>
-</div>
-</div>
-</div>
-<div class="rev-card reveal">
-<div class="rev-stars">
-★★★★★ </div>
-<div class="rev-text">"I had a wonderful experience getting a facial, pedicure, and manicure by Ayesha. The service was excellent and very relaxing. Ayesha was professional, gentle, and made the whole session feel comfortable and refreshing. I really appreciated the care and attention she gave during the treatment.
-
-I left feeling completely relaxed and satisfied with the results. Highly recommend her services to anyone looking for a pleasant and quality beauty treatment experience. ✨💆‍♀️💅"</div>
-<div class="rev-user">
-<div class="rev-user-img">B</div>
-<div class="rev-user-info">
-<div class="rev-name">Baby Kannaki</div>
-</div>
-</div>
-</div>
-<div class="rev-card reveal">
-<div class="rev-stars">
-★★★★★ </div>
-<div class="rev-text">"Good service by Jyothi. Very friendly and caring."</div>
-<div class="rev-user">
-<div class="rev-user-img">A</div>
-<div class="rev-user-info">
-<div class="rev-name">Akza Ann Rinyf</div>
-</div>
-</div>
-</div>
-<div class="rev-card reveal">
-<div class="rev-stars">
-★★★★★ </div>
-<div class="rev-text">"Jyothi is Very professional and good"</div>
-<div class="rev-user">
-<div class="rev-user-img">S</div>
-<div class="rev-user-info">
-<div class="rev-name">SYED JUNAID</div>
-</div>
-</div>
-</div>
-<div class="rev-card reveal">
-<div class="rev-stars">
-★★★★★ </div>
-<div class="rev-text">"I have been taking services from ms Ayesha for eyebrow and honestly she is fully trained and most kind in behaviour wise and yeah highly recommended to all the ladies who wanna shape their eyebrow please get it done by Ms.Ayesha"</div>
-<div class="rev-user">
-<div class="rev-user-img">R</div>
-<div class="rev-user-info">
-<div class="rev-name">Rayisa Banu</div>
-</div>
-</div>
-</div>
-<div class="rev-card reveal">
-<div class="rev-stars">
-★★★★★ </div>
-<div class="rev-text">"I got my haircut done by Sameer, he is pretty good at what he does and is friendly. And also got my eye brows done by Ayesha and she is also good at it"</div>
-<div class="rev-user">
-<div class="rev-user-img">J</div>
-<div class="rev-user-info">
-<div class="rev-name">Joshua Daniel</div>
-</div>
-</div>
-</div>
-<div class="rev-card reveal">
-<div class="rev-stars">
-★★★★★ </div>
-<div class="rev-text">"Good services by Gurmeet"</div>
-<div class="rev-user">
-<div class="rev-user-img">m</div>
-<div class="rev-user-info">
-<div class="rev-name">mohammed afshan</div>
-</div>
-</div>
-</div>
-<div class="rev-card reveal">
-<div class="rev-stars">
-★★★★★ </div>
-<div class="rev-text">"Ayesha serivce is it very good. She is customer friendly. She is very caring to the customer."</div>
-<div class="rev-user">
-<div class="rev-user-img">a</div>
-<div class="rev-user-info">
-<div class="rev-name">ashwini loganathan</div>
-</div>
-</div>
-</div>
-<div class="rev-card reveal">
-<div class="rev-stars">
-★★★★★ </div>
-<div class="rev-text">"Had a good experience with Ayesha for my face and JYOTI FOR MY hair cut... I do recommend both!!!!!!!"</div>
-<div class="rev-user">
-<div class="rev-user-img">s</div>
-<div class="rev-user-info">
-<div class="rev-name">sumaiya khatoon</div>
-</div>
-</div>
-</div>
-<div class="rev-card reveal">
-<div class="rev-stars">
-★★★★★ </div>
-<div class="rev-text">"(Translated by Google) Jyothi..
-Good....
-
-(Original)
-Jyothi..
-Gudd...."</div>
-<div class="rev-user">
-<div class="rev-user-img">P</div>
-<div class="rev-user-info">
-<div class="rev-name">P THIRUPAL</div>
-</div>
-</div>
-</div>
-<div class="rev-card reveal">
-<div class="rev-stars">
-★★★★★ </div>
-<div class="rev-text">"Ayesha did a good job with eyebrow.."</div>
-<div class="rev-user">
-<div class="rev-user-img">D</div>
-<div class="rev-user-info">
-<div class="rev-name">Deeksha H R</div>
-</div>
-</div>
-</div>
-<div class="rev-card reveal">
-<div class="rev-stars">
-★★★★★ </div>
-<div class="rev-text">"Gurmeet does very nice Hair Cut & Shave keep it up.."</div>
-<div class="rev-user">
-<div class="rev-user-img">A</div>
-<div class="rev-user-info">
-<div class="rev-name">Anant Dhankani</div>
-</div>
-</div>
-</div>
-<div class="rev-card reveal">
-<div class="rev-stars">
-★★★★★ </div>
-<div class="rev-text">"Great service by Anas, greatly appreciated his attention to detail and care."</div>
-<div class="rev-user">
-<div class="rev-user-img">K</div>
-<div class="rev-user-info">
-<div class="rev-name">Keshav Mittal</div>
-</div>
-</div>
-</div>
-<div class="rev-card reveal">
-<div class="rev-stars">
-★★★★★ </div>
-<div class="rev-text">"haircutting services is very good here. great work done by jyothi"</div>
-<div class="rev-user">
-<div class="rev-user-img">R</div>
-<div class="rev-user-info">
-<div class="rev-name">Rem Sanjana</div>
-</div>
-</div>
-</div>
-<div class="rev-card reveal">
-<div class="rev-stars">
-★★★★★ </div>
-<div class="rev-text">"Very nice service from ayesha"</div>
-<div class="rev-user">
-<div class="rev-user-img">A</div>
-<div class="rev-user-info">
-<div class="rev-name">Arshil Kunnan</div>
-</div>
-</div>
-</div>
-<div class="rev-card reveal">
-<div class="rev-stars">
-★★★★★ </div>
-<div class="rev-text">"We had good experience with naturals we had taken spa service Ayesha was very friendly and happy with her service great experience with naturals"</div>
-<div class="rev-user">
-<div class="rev-user-img">A</div>
-<div class="rev-user-info">
-<div class="rev-name">Anusha Jijju</div>
-</div>
-</div>
-</div>
-<div class="rev-card reveal">
-<div class="rev-stars">
-★★★★★ </div>
-<div class="rev-text">"I come here regularly for hair cut and shaving. Anas is really skilled and experienced."</div>
-<div class="rev-user">
-<div class="rev-user-img">H</div>
-<div class="rev-user-info">
-<div class="rev-name">Harshit Garg</div>
-</div>
-</div>
-</div>
-<div class="rev-card reveal">
-<div class="rev-stars">
-★★★★★ </div>
-<div class="rev-text">"Ayesha / Service is worth the wait"</div>
-<div class="rev-user">
-<div class="rev-user-img">K</div>
-<div class="rev-user-info">
-<div class="rev-name">Karthik Shylu</div>
-</div>
-</div>
-</div>
-<div class="rev-card reveal">
-<div class="rev-stars">
-★★★★★ </div>
-<div class="rev-text">"I did Anti Dandruff, Haircut and Beard trimming here. Service was too good and hygiene. Mr.Sameer was taking care of all these above. And his service was professional."</div>
-<div class="rev-user">
-<div class="rev-user-img">A</div>
-<div class="rev-user-info">
-<div class="rev-name">ANANDH MV</div>
-</div>
-</div>
-</div>
-<div class="rev-card reveal">
-<div class="rev-stars">
-★★★★★ </div>
-<div class="rev-text">"Had a great experience. Sameer was very friendly."</div>
-<div class="rev-user">
-<div class="rev-user-img">S</div>
-<div class="rev-user-info">
-<div class="rev-name">Sreenath J</div>
-</div>
-</div>
-</div>
-<div class="rev-card reveal">
-<div class="rev-stars">
-★★★★★ </div>
-<div class="rev-text">"Anas he gives a great service and a goodd suggestion about hair and the service i should take up to protect my hair"</div>
-<div class="rev-user">
-<div class="rev-user-img">K</div>
-<div class="rev-user-info">
-<div class="rev-name">Karan Mutha</div>
-</div>
-</div>
-</div>
-<div class="rev-card reveal">
-<div class="rev-stars">
-★★★★★ </div>
-<div class="rev-text">"Ayesha, was tood good ..I liked her behaviour..plus they handled my 3 yr old very well.thanks"</div>
-<div class="rev-user">
-<div class="rev-user-img">t</div>
-<div class="rev-user-info">
-<div class="rev-name">triporna C</div>
-</div>
-</div>
-</div>
-</div>
-<a href="https://g.page/Naturals-FrazerTown/review?rc/" target="_blank" rel="noopener" class="btn-primary">
+<a href="https://g.page/Naturals-FrazerTown/review?rc/" target="_blank" rel="noopener" class="btn-primary" style="margin-top:16px;">
 <span style="font-size:16px;line-height:1;">&#11088;</span> Rate Us on Google
 </a>
 </div>
@@ -2643,13 +2250,186 @@ function nextImg(){ if(!gallerySrcs.length) return; galleryIndex=(galleryIndex+1
 function prevImg(){ if(!gallerySrcs.length) return; galleryIndex=(galleryIndex-1+gallerySrcs.length)%gallerySrcs.length; document.getElementById('img-modal-src').src=gallerySrcs[galleryIndex]; }
 document.addEventListener('DOMContentLoaded',function(){
 document.querySelectorAll('img.offer-img').forEach(function(img){ img.addEventListener('click',function(){ openImgModal(img.src); }); });
+
+<div id="reviewsModal" class="modal-overlay">
+<div class="modal-content">
+<div class="modal-header">
+<h3 class="modal-title">Wall of <em>Love</em></h3>
+<button class="modal-close" onclick="closeReviewsModal()" aria-label="Close reviews">
+<svg fill="currentColor" viewBox="0 0 24 24">
+<path d="M19 6.41L17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 10.59 17.59 19 17.59 13.41 12z"/>
+</svg>
+</button>
+</div>
+<div class="modal-body">
+<div id="modalReviewsContent" class="modal-reviews">
+
+</div>
+</div>
+</div>
+</div>
+
+<script>
+// Store reviews data
+const storeReviews = [{"Stars": 5, "customer_name": "Shazia N", "date_posted": "15-Jul-2023", "review_comments": "Nice service by Rupa and Ayesha", "review_id": "AbFvOqlj0VBaKvDsSpU9RM5sEJbDx35iRIeYXcFB43PpF92btvCsxIbSCQiRFwBAIhUQqsQaq1vNkg", "show_it_in_website": "Yes", "stars": "5", "store_id": "Store_N05", "store_name": "Frazer Town"}, {"Stars": 5, "customer_name": "myra martin ahmed", "date_posted": "20-Mar-2026", "review_comments": "Ayesha is always very warm and good at her service . A great asset to the company", "review_id": "AbFvOqnrTYka_2lUhCcWw8ova343q35VMWlsg-8_RbYbNwk4PgQLEbaCeWmwoxw_INCxcFWcr7Mu", "show_it_in_website": "Yes", "stars": "5", "store_id": "Store_N05", "store_name": "Frazer Town"}, {"Stars": 5, "customer_name": "Nusrath Fathima.M", "date_posted": "20-Mar-2026", "review_comments": "Great service provided by Ayesha .would love to visit again and get other service from her ,the staff was very friendly police and understanding.", "review_id": "AbFvOqk3ibnKcRxjsq0a_7j4hcTUPmznVMKy01m5ym-EXAHXKHhZ9kzuEgUuS6f_cjyiUA0eoyATXg", "show_it_in_website": "Yes", "stars": "5", "store_id": "Store_N05", "store_name": "Frazer Town"}, {"Stars": 5, "customer_name": "Areeba maryam ahmed", "date_posted": "20-Mar-2026", "review_comments": "Gud service by Ayesha", "review_id": "AbFvOqn3ui7VDFBkKiFQepkAmjNaGuNT-JJuUmto6dhvlZnKyxN8C5WfSxxlksMBBethAbYm4mwGcA", "show_it_in_website": "Yes", "stars": "5", "store_id": "Store_N05", "store_name": "Frazer Town"}, {"Stars": 5, "customer_name": "safiya khaleel", "date_posted": "20-Mar-2026", "review_comments": "Gufran gave a nice service, satisfied with the haircut.", "review_id": "AbFvOqku2MyHqS3rOVYNmB0nsH-z0Y4Vs9Wc7x0MLjM-qJI2tpZ_HjfaKgNYLJZJe9DtBIpnt15S", "show_it_in_website": "Yes", "stars": "5", "store_id": "Store_N05", "store_name": "Frazer Town"}, {"Stars": 5, "customer_name": "Nirmal GEORGE", "date_posted": "20-Mar-2026", "review_comments": "Ayesha. Very good", "review_id": "AbFvOqnleLdNDbpQ7kSUkqXZ4rot1eu9emz3tqaun-KJpZmYLCUKw2CrTwwPzHoRHuZ_t3OJ-KR6vA", "show_it_in_website": "Yes", "stars": "5", "store_id": "Store_N05", "store_name": "Frazer Town"}, {"Stars": 5, "customer_name": "Ruksar Taj", "date_posted": "19-Mar-2026", "review_comments": "had q good service with gufran", "review_id": "AbFvOqlgiwaAgGdFepeuuOXWvmPkKu6i3Y8ENhTZwwHO3r-R3vlQnH2oarIqtHm_IQl0ZqwBZwTb", "show_it_in_website": "Yes", "stars": "5", "store_id": "Store_N05", "store_name": "Frazer Town"}, {"Stars": 5, "customer_name": "Sana Furqan", "date_posted": "19-Mar-2026", "review_comments": "Loved the experience. Shout out to Gufran, thx a lot for the haircut, adore it!", "review_id": "AbFvOqkk8O3hMXrA0FKh9iN_HwU-0p5Bn7cSGx1wwkrLGaILDvw5azVhBc31DjMYC9oMd6B8yTRUqA", "show_it_in_website": "Yes", "stars": "5", "store_id": "Store_N05", "store_name": "Frazer Town"}, {"Stars": 5, "customer_name": "Masroor khan miftahi", "date_posted": "18-Mar-2026", "review_comments": "Had a wonderful experience at Naturals! I took my wife and daughter for a haircut, and we were genuinely impressed. Jyothi did an amazing job\u2014she was patient, professional, and really understood what would suit them best.\n\nBoth haircuts turned out beautifully, and the care she took made the whole experience very comfortable and enjoyable. It\u2019s not always easy to find someone who handles kids and adults with equal skill, but Jyothi did it effortlessly.\n\nHighly recommend Naturals, especially Jyothi, for anyone looking for a great haircut and friendly service!", "review_id": "AbFvOqmOdYXXq_Bkf2jQm5kaWo8UYbAV6lsuJpASy82ObSCMwAO3kPMO67aXEa51N_9gDswP1eYemw", "show_it_in_website": "Yes", "stars": "5", "store_id": "Store_N05", "store_name": "Frazer Town"}, {"Stars": 5, "customer_name": "Akanksha Kodandera", "date_posted": "16-Mar-2026", "review_comments": "I had an amazing experience at this salon!\nAyesha did an exceptional job. She was very kind and understanding and did a great job! Would definitely recommend this place.", "review_id": "AbFvOqmrUJZG38yUXjDfPMEF1xwzpTWSZ1hV4Sc1Qg_j5C1qd1Pw39ZE5L162Seaca0JPnQDrcatfA", "show_it_in_website": "Yes", "stars": "5", "store_id": "Store_N05", "store_name": "Frazer Town"}, {"Stars": 5, "customer_name": "Swathi P", "date_posted": "16-Mar-2026", "review_comments": "Beautician Aisha at Naturals of mosque road branch has always been helpful and gives us good suggestions about what is suitable for our skin and hair.", "review_id": "AbFvOqly9EEjMZkooUP4WzEmJq8KgznmoO5TxJmjdz4E5d0OEBQbl9vulP501DpHPCTXCpim9qqQPQ", "show_it_in_website": "Yes", "stars": "5", "store_id": "Store_N05", "store_name": "Frazer Town"}, {"Stars": 5, "customer_name": "Mohammed Usaid", "date_posted": "16-Mar-2026", "review_comments": "Gurmeet\u0027s an excellent hair stylist.\n\nHe takes his time and gets the details right.", "review_id": "AbFvOqkSrB1wUYu8r_lO93ctVxxTDVO9seTtrwUAHMRIdQe6MPbw6gVnex_ot4kzo7TV3ZtjYe-6ow", "show_it_in_website": "Yes", "stars": "5", "store_id": "Store_N05", "store_name": "Frazer Town"}, {"Stars": 5, "customer_name": "sahir hajiameen", "date_posted": "15-Mar-2026", "review_comments": "Sameer is amazing , great service, great haircut", "review_id": "AbFvOqmLU0-wYbiMFFn0WCeKw6zUh-QvGPUBdjwf4Z6TotZUknOaS2R8a3jKjUJd0tVyiDF0bXJJ", "show_it_in_website": "Yes", "stars": "5", "store_id": "Store_N05", "store_name": "Frazer Town"}, {"Stars": 5, "customer_name": "Aswin Mathew", "date_posted": "15-Mar-2026", "review_comments": "Very excellent service. Good work. Polite staff\n\nGurmeet gill was my stylist and he was extremely professional, polite and took a lot of care to work. Kudo for the team.", "review_id": "AbFvOqlcdG13YcJfLrKxUGO8GPXz_E6v0fWlQKZWxFtQiZF_E-3iE3wsXOLDaX0Z4-iznmukSMkjVg", "show_it_in_website": "Yes", "stars": "5", "store_id": "Store_N05", "store_name": "Frazer Town"}, {"Stars": 5, "customer_name": "Megha Mariam Shaji", "date_posted": "15-Mar-2026", "review_comments": "The experience was really nice. Very good customer service by Jyothi.", "review_id": "AbFvOqm2aRx_7pKjoL5kfvJC0qaFFFbep9jzICufLf5yt7SS3MsgnSw40EC2WrQ0rYqLN7aJbRq-", "show_it_in_website": "Yes", "stars": "5", "store_id": "Store_N05", "store_name": "Frazer Town"}, {"Stars": 5, "customer_name": "Sadiq Ks", "date_posted": "15-Mar-2026", "review_comments": "Good service done by jyoti,ayesha,gurmeet...\nGood and friendly ambience....", "review_id": "AbFvOqnH19mVgqZr8jsI3ngs31IWjUA0WTs06G9S9cpMxn7FLpWzfRLRD-GM5QYcT8fXKRB78hfOTg", "show_it_in_website": "Yes", "stars": "5", "store_id": "Store_N05", "store_name": "Frazer Town"}, {"Stars": 5, "customer_name": "Mariettaleo 4819", "date_posted": "15-Mar-2026", "review_comments": "Great staff. Quick and supportive. Loved the style.", "review_id": "AbFvOqki0zNEKAFDggET0uMN7kG6kA9Hq1Moe20ldcypXt8PTLFV44cDITSJIApxFJn_Gygz2lXu7A", "show_it_in_website": "Yes", "stars": "5", "store_id": "Store_N05", "store_name": "Frazer Town"}, {"Stars": 5, "customer_name": "Aditi Shukla", "date_posted": "15-Mar-2026", "review_comments": "Great experience. The staff was very supportive", "review_id": "AbFvOqkoporl7ilSeLjBm6uRH2PJ7GAey0Gmo4mGrgJQEJRgpy-rIlLsUIy1jl6I_jjDJ4uapSm65A", "show_it_in_website": "Yes", "stars": "5", "store_id": "Store_N05", "store_name": "Frazer Town"}, {"Stars": 5, "customer_name": "Prince Yadav", "date_posted": "15-Mar-2026", "review_comments": "Good experience with sameer", "review_id": "AbFvOqnMVQi7WWr4bA2WXw1WxP_LmmoSainfX1uc5IYUUthuL4J36H_RMJRuueJrjd6imfLY-GhKaQ", "show_it_in_website": "Yes", "stars": "5", "store_id": "Store_N05", "store_name": "Frazer Town"}, {"Stars": 5, "customer_name": "K mohammed Faizan", "date_posted": "15-Mar-2026", "review_comments": "I had a very good service. Especially Sameer he had attended very good to me\nAnd had a very good service", "review_id": "AbFvOqkdCLgH0QuJ9QOOV1Xr7sJtYxcJes2z9liQHnN4Qw85lJwPZNVLct37hL4RLgSsAgOyb7KlYQ", "show_it_in_website": "Yes", "stars": "5", "store_id": "Store_N05", "store_name": "Frazer Town"}, {"Stars": 5, "customer_name": "Mohammed Faheem N", "date_posted": "15-Mar-2026", "review_comments": "Sameer, good haircut", "review_id": "AbFvOqmaFVpJoMHsChmDTBZbd6KzH2TVMooMGSss5AuebnwEVfIjwDs67P3tqnphHMzXTFOJfLDXcA", "show_it_in_website": "Yes", "stars": "5", "store_id": "Store_N05", "store_name": "Frazer Town"}, {"Stars": 5, "customer_name": "md hussain", "date_posted": "15-Mar-2026", "review_comments": "Very good service. The barber Gurmeet did an excellent haircut. I\u2019m very satisfied. Highly recommended.", "review_id": "AbFvOqmcmA9rmssSs9FP8pyH5lEC83KX3J-bUNo9HHA8gpIsCvjka7MaovDa7ogNVzok_dlnS6z2ZQ", "show_it_in_website": "Yes", "stars": "5", "store_id": "Store_N05", "store_name": "Frazer Town"}, {"Stars": 5, "customer_name": "Baby Kannaki", "date_posted": "14-Mar-2026", "review_comments": "I had a wonderful experience getting a facial, pedicure, and manicure by Ayesha. The service was excellent and very relaxing. Ayesha was professional, gentle, and made the whole session feel comfortable and refreshing. I really appreciated the care and attention she gave during the treatment.\n\nI left feeling completely relaxed and satisfied with the results. Highly recommend her services to anyone looking for a pleasant and quality beauty treatment experience. \u2728\ud83d\udc86\u200d\u2640\ufe0f\ud83d\udc85", "review_id": "AbFvOqmzGrUBuzqtxz1dBa3VoldAdBLXH54ILbrYwV5rP67uJR-IGiE__we3KAFeDxjDXeVqMqNtpA", "show_it_in_website": "Yes", "stars": "5", "store_id": "Store_N05", "store_name": "Frazer Town"}, {"Stars": 5, "customer_name": "Akza Ann Rinyf", "date_posted": "14-Mar-2026", "review_comments": "Good service by Jyothi. Very friendly and caring.", "review_id": "AbFvOqm3CHZ7dJ1ZH0iH0xu6pBUSTqN2EGnw_pDalrlTyY7qQ0YYQCfwIW42PiQWpPC_eNBUmEYwIQ", "show_it_in_website": "Yes", "stars": "5", "store_id": "Store_N05", "store_name": "Frazer Town"}, {"Stars": 5, "customer_name": "SYED JUNAID", "date_posted": "14-Mar-2026", "review_comments": "Jyothi is Very professional and good", "review_id": "AbFvOql8De9YJAig0esJEsa0pY1jh89hWl2_NvGMcIYGF1CKuF1yixmpQ8Fteo83gkd8rfkaZaZh", "show_it_in_website": "Yes", "stars": "5", "store_id": "Store_N05", "store_name": "Frazer Town"}, {"Stars": 5, "customer_name": "Rayisa Banu", "date_posted": "14-Mar-2026", "review_comments": "I have been taking services from ms Ayesha for eyebrow and honestly she is fully trained and most kind in behaviour wise and yeah highly recommended to all the ladies who wanna shape their eyebrow please get it done by Ms.Ayesha", "review_id": "AbFvOqkhWCY5XqcYf5UY49imt6N8uow34QacshEz4YG3mtgB9xrNIkEgDHai5YGib1M3M-OyhiHl", "show_it_in_website": "Yes", "stars": "5", "store_id": "Store_N05", "store_name": "Frazer Town"}, {"Stars": 5, "customer_name": "Joshua Daniel", "date_posted": "14-Mar-2026", "review_comments": "I got my haircut done by Sameer, he is pretty good at what he does and is friendly. And also got my eye brows done by Ayesha and she is also good at it", "review_id": "AbFvOqljv7Xt_X9aadpk9up1EaB5HeVLK5MYTQPayFhjRjqNes1e9yh4QM9wxW8c2RYsB18HuHVa4Q", "show_it_in_website": "Yes", "stars": "5", "store_id": "Store_N05", "store_name": "Frazer Town"}, {"Stars": 5, "customer_name": "mohammed afshan", "date_posted": "13-Mar-2026", "review_comments": "Good services by Gurmeet", "review_id": "AbFvOqkF9QWLJ730SfyMS-RvtEtWb6HLbEZmVPj8kalNkTEIViaglM0xNj3XQR7pnKEvIfwTvGL8wA", "show_it_in_website": "Yes", "stars": "5", "store_id": "Store_N05", "store_name": "Frazer Town"}, {"Stars": 5, "customer_name": "ashwini loganathan", "date_posted": "12-Dec-2022", "review_comments": "Ayesha serivce is it very good. She is customer friendly. She is very caring to the customer.", "review_id": "AbFvOqmsxze_EKGE6N1HHqhsSYHu0EylT274fpS5GWa7EzRw-drRI3vnpt_kCHOwAgOtHz-hVtssyg", "show_it_in_website": "Yes", "stars": "5", "store_id": "Store_N05", "store_name": "Frazer Town"}, {"Stars": 5, "customer_name": "sumaiya khatoon", "date_posted": "11-Mar-2026", "review_comments": "Had a good experience with Ayesha for my face and JYOTI FOR MY hair cut... I do recommend both!!!!!!!", "review_id": "AbFvOqkUZA0sdYGQ6s85Dov7zGZVtpOnmmH8kr6Xskj5UTLnuMESL15n41vBEDICXvXr3PjELOPxJg", "show_it_in_website": "Yes", "stars": "5", "store_id": "Store_N05", "store_name": "Frazer Town"}, {"Stars": 5, "customer_name": "P THIRUPAL", "date_posted": "11-Mar-2026", "review_comments": "(Translated by Google) Jyothi..\nGood....\n\n(Original)\nJyothi..\nGudd....", "review_id": "AbFvOqkM8uAtGWd63_E6lCA43z03VFl1RyNPRIQbt58OFyJcK3vM2v0N-_BqSb1NprHzVsrBkIxpYA", "show_it_in_website": "Yes", "stars": "5", "store_id": "Store_N05", "store_name": "Frazer Town"}, {"Stars": 5, "customer_name": "Deeksha H R", "date_posted": "11-Mar-2026", "review_comments": "Ayesha did a good job with eyebrow..", "review_id": "AbFvOqmSh__uFXDEdISYaftFfh7QTNv82dxyWRUBg1ALNz9tpb_aCHyO6-p5_n3uo-rbC5jdDFVlfA", "show_it_in_website": "Yes", "stars": "5", "store_id": "Store_N05", "store_name": "Frazer Town"}, {"Stars": 5, "customer_name": "Anant Dhankani", "date_posted": "27-Feb-2026", "review_comments": "Gurmeet does very nice Hair Cut \u0026 Shave keep it up..", "review_id": "AbFvOqnXCMfSsUuUbFWVrUNK8K0o1okVSUKqbg0B7F01noJyrnzuYyVsE1S0IGco-u35gmBiDf3Z4A", "show_it_in_website": "Yes", "stars": "5", "store_id": "Store_N05", "store_name": "Frazer Town"}, {"Stars": 5, "customer_name": "Keshav Mittal", "date_posted": "10-Mar-2026", "review_comments": "Great service by Anas, greatly appreciated his attention to detail and care.", "review_id": "AbFvOqnm2cL1wJLnYrtZ2-z1htjlwLmyD_YZNK-2a5zIFF10P3QLYTXVvGbygmBd6I5kE5-zittX8w", "show_it_in_website": "Yes", "stars": "5", "store_id": "Store_N05", "store_name": "Frazer Town"}, {"Stars": 5, "customer_name": "Rem Sanjana", "date_posted": "9-Mar-2026", "review_comments": "haircutting services is very good here. great work done by jyothi", "review_id": "AbFvOqmPPVku-UOMHauosAe3MrgCNlCL9JQkfR3M2W1oTUK48-tvsxysY9OTm1lPLpUJ5cQZog5fug", "show_it_in_website": "Yes", "stars": "5", "store_id": "Store_N05", "store_name": "Frazer Town"}, {"Stars": 5, "customer_name": "Arshil Kunnan", "date_posted": "9-Mar-2026", "review_comments": "Very nice service from ayesha", "review_id": "AbFvOqkFprJ5SyC4GJiGJ54iOlq4leXgAHS2871HkfoKTn0GoWGeSg2p4BELOz4v0jMpz4dMLlWh_w", "show_it_in_website": "Yes", "stars": "5", "store_id": "Store_N05", "store_name": "Frazer Town"}, {"Stars": 5, "customer_name": "Anusha Jijju", "date_posted": "8-Mar-2026", "review_comments": "We had good experience with naturals we had taken spa service Ayesha was very friendly and happy with her service great experience with naturals", "review_id": "AbFvOqlz9eWEiBR-gN5SDutDDz5vtEs8EIgn7PSDMzgY0FKTl64sH4balslkf4EgXPv6yTIKgmAl", "show_it_in_website": "Yes", "stars": "5", "store_id": "Store_N05", "store_name": "Frazer Town"}, {"Stars": 5, "customer_name": "Harshit Garg", "date_posted": "8-Mar-2026", "review_comments": "I come here regularly for hair cut and shaving. Anas is really skilled and experienced.", "review_id": "AbFvOqllk7vsgS_CzuBDcgFi5IT5IeT_FuioyYWGr3SNQtlq9bxHVbi8mCPSpWSw3D6vxh08RRFLRQ", "show_it_in_website": "Yes", "stars": "5", "store_id": "Store_N05", "store_name": "Frazer Town"}, {"Stars": 5, "customer_name": "Karthik Shylu", "date_posted": "8-Mar-2026", "review_comments": "Ayesha / Service is worth the wait", "review_id": "AbFvOqkOVJbSt1LP2IxNA10WNjxrKU44VT6wcnNLUaXEzHpeCRKNbgslxLxk_9p6eL66L62eldBg", "show_it_in_website": "Yes", "stars": "5", "store_id": "Store_N05", "store_name": "Frazer Town"}, {"Stars": 5, "customer_name": "ANANDH MV", "date_posted": "8-Mar-2026", "review_comments": "I did Anti Dandruff, Haircut and Beard trimming here. Service was too good and hygiene. Mr.Sameer was taking care of all these above. And his service was professional.", "review_id": "AbFvOqnB0-5HHkqGYqXt-ETVPj0N72j5ZdF4pOELNikbRoRUZGA35pAgcsCmNWjM84x9JSt9bGq6Ig", "show_it_in_website": "Yes", "stars": "5", "store_id": "Store_N05", "store_name": "Frazer Town"}, {"Stars": 5, "customer_name": "Sreenath J", "date_posted": "8-Mar-2026", "review_comments": "Had a great experience. Sameer was very friendly.", "review_id": "AbFvOqlN6QZ2tnriuwxxlNzcF2RxWnkJuKTqJfGdLuhQQkn1NmyLJVMaFmwuWSITGcLBFxuFh5l0", "show_it_in_website": "Yes", "stars": "5", "store_id": "Store_N05", "store_name": "Frazer Town"}, {"Stars": 5, "customer_name": "Karan Mutha", "date_posted": "8-Mar-2026", "review_comments": "Anas he gives a great service and a goodd suggestion about hair and the service i should take up to protect my hair", "review_id": "AbFvOqk6xv1J49J0n6b-GctjbzNpEK_CrzfCJCRoNZqqLZhmdRBRtXSydCp9UGcVxPKK_uqoLbJI", "show_it_in_website": "Yes", "stars": "5", "store_id": "Store_N05", "store_name": "Frazer Town"}, {"Stars": 5, "customer_name": "triporna C", "date_posted": "8-Mar-2026", "review_comments": "Ayesha, was tood good ..I liked her behaviour..plus they handled my 3 yr old very well.thanks", "review_id": "AbFvOqnJsCYqrNzPIJdbxJIRoqC7HcClftdMcONPho6Kq8Wp8iVtmtSkNWAL2P9bZkZ52jrLT4BF0g", "show_it_in_website": "Yes", "stars": "5", "store_id": "Store_N05", "store_name": "Frazer Town"}, {"Stars": 5, "customer_name": "Pushpa Balakrishnan", "date_posted": "22-Mar-2026", "review_comments": "Loved the service by Jyothi. She has done a very good hair cut and would love to go back. Thank you.", "review_id": "AbFvOqnxUDkAGTFse55SiGelvR4Kf3HpJD-wcO2qopJqkI13te-vG7gMGgrE1FnVf5_U4_-4vpe3", "show_it_in_website": "Yes", "stars": "5", "store_id": "Store_N05", "store_name": "Frazer Town"}];
+
+// State management
+let isModalOpen = false;
+let currentReviews = [];
+let isLoading = false;
+
+// Open reviews modal
+function openReviewsModal() {
+if (isModalOpen || isLoading) return;
+
+isModalOpen = true;
+isLoading = true;
+
+const modal = document.getElementById('reviewsModal');
+const content = document.getElementById('modalReviewsContent');
+
+// Show modal
+modal.classList.add('active');
+document.body.style.overflow = 'hidden';
+
+// Show loading state
+content.innerHTML = '<div class="modal-loading"><div class="modal-loading-spinner"></div><p>Loading amazing reviews...</p></div>';
+
+// Load reviews with lazy loading
+setTimeout(() => {
+loadReviewsInBatches();
+}, 300);
+}
+
+// Close reviews modal
+function closeReviewsModal() {
+isModalOpen = false;
+const modal = document.getElementById('reviewsModal');
+modal.classList.remove('active');
+document.body.style.overflow = '';
+}
+
+// Load reviews in batches for performance
+function loadReviewsInBatches() {
+const content = document.getElementById('modalReviewsContent');
+const batchSize = 20; // Load 20 reviews at a time
+let currentIndex = 0;
+
+// Sort reviews by date_posted descending
+const sortedReviews = [...storeReviews].sort((a, b) => {
+const dateA = new Date(a.date_posted);
+const dateB = new Date(b.date_posted);
+return dateB - dateA;
 });
-document.addEventListener('keydown',function(e){
-if(e.key==='Escape') closeImgModal();
-if(document.getElementById('img-modal').style.display==='flex'){ if(e.key==='ArrowRight') nextImg(); if(e.key==='ArrowLeft') prevImg(); }
+
+currentReviews = sortedReviews;
+
+function loadBatch() {
+if (currentIndex >= sortedReviews.length) {
+isLoading = false;
+return;
+}
+
+const batch = sortedReviews.slice(currentIndex, currentIndex + batchSize);
+const batchHtml = batch.map(review => createReviewCard(review)).join('');
+
+if (currentIndex === 0) {
+content.innerHTML = batchHtml;
+} else {
+content.innerHTML += batchHtml;
+}
+
+currentIndex += batchSize;
+
+// Load next batch if user scrolls near bottom or if first batch
+if (currentIndex < sortedReviews.length) {
+if (currentIndex === batchSize || content.scrollHeight - content.scrollTop <= content.clientHeight + 200) {
+setTimeout(loadBatch, 100);
+}
+}
+}
+
+// Load first batch immediately
+loadBatch();
+
+// Add scroll listener for lazy loading
+content.addEventListener('scroll', () => {
+if (content.scrollHeight - content.scrollTop <= content.clientHeight + 200) {
+loadBatch();
+}
 });
-var io=new IntersectionObserver(function(entries){ entries.forEach(function(e,i){ if(e.isIntersecting){ setTimeout(function(){ e.target.classList.add('visible'); },i*80); io.unobserve(e.target); } }); },{threshold:0});
-document.querySelectorAll('.reveal').forEach(function(el){ io.observe(el); });
+}
+
+// Create review card HTML
+function createReviewCard(review) {
+const stars = '★'.repeat(parseInt(review.stars || 5));
+const initial = review.customer_name ? review.customer_name.charAt(0).toUpperCase() : 'A';
+
+return `
+<div class="rev-card reveal">
+<div class="rev-stars">${stars}</div>
+<div class="rev-text">"${review.review_comments}"</div>
+<div class="rev-user">
+<div class="rev-user-img">${initial}</div>
+<div class="rev-user-info">
+<div class="rev-name">${review.customer_name}</div>
+<div class="rev-store">${review.store_name}</div>
+</div>
+</div>
+</div>
+`;
+}
+
+// Close modal on escape key
+document.addEventListener('keydown', (e) => {
+if (e.key === 'Escape' && isModalOpen) {
+closeReviewsModal();
+}
+});
+
+// Close modal on background click
+document.getElementById('reviewsModal').addEventListener('click', (e) => {
+if (e.target.id === 'reviewsModal') {
+closeReviewsModal();
+}
+});
 </script>
+
+<footer>
+<div class="ft-top">
+<div class="ft-brand-col">
+<div class="ft-brand">Naturals <span>Salon &amp; Spa</span></div>
+<div class="ft-tagline">India's most trusted salon network.<br>Premium beauty services across Bangalore.</div>
+</div>
+<div class="ft-col">
+<div class="ft-col-title">Explore</div>
+<ul>
+<li><a href="/services/">Services &amp; Pricing</a></li>
+<li><a href="/offers/">Offers</a></li>
+<li><a href="/careers/bangalore/">Careers</a></li>
+<li><a href="/contact/">Contact Us</a></li>
+<li><a href="/about/">About Us</a></li>
+</ul>
+</div>
+<div class="ft-col">
+<div class="ft-col-title">Locations</div>
+<ul>
+</ul>
+</div>
+<div class="ft-col">
+<div class="ft-col-title">Policies</div>
+<ul>
+<li><a href="/booking-policy/">Booking Policy</a></li>
+<li><a href="/cancellation-policy/">Cancellation Policy</a></li>
+<li><a href="https://naturals.in" target="_blank" rel="noopener">Naturals India &#8599;</a></li>
+</ul>
+</div>
+</div>
+<div class="ft-bottom">
+<div class="ft-copy">&copy; 2026 Naturals Salon &amp; Spa, Bangalore. All rights reserved.</div>
+<div class="ft-url">naturals-blr.github.io</div>
+</div>
+</footer>
+
 </body>
 </html>
