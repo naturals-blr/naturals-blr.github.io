@@ -405,16 +405,34 @@ border-top:1px solid rgba(255,255,255,0.06);
 </style>
 
 <style>
-.rev-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:24px;max-width:1200px;margin:0 auto;}
-.rev-card{background:#fff;padding:32px;border-radius:24px;border:1px solid rgba(0,0,0,0.06);box-shadow:0 10px 40px rgba(0,0,0,0.04);display:flex;flex-direction:column;gap:18px;transition:all 0.3s ease;position:relative;}
-.rev-card:hover{transform:translateY(-6px);box-shadow:0 20px 60px rgba(0,0,0,0.08);border-color:var(--gold);}
-.rev-stars{color:var(--gold);font-size:14px;display:flex;gap:4px;letter-spacing:1px;}
-.rev-text{font-size:15px;color:var(--text-mid);line-height:1.75;font-style:italic;flex:1;font-weight:300;}
-.rev-user{display:flex;align-items:center;gap:14px;border-top:1px solid rgba(0,0,0,0.04);padding-top:16px;}
-.rev-user-img{width:42px;height:42px;border-radius:50%;background:var(--green);color:#fff;display:flex;align-items:center;justify-content:center;font-weight:600;font-size:14px;text-transform:uppercase;box-shadow:0 4px 12px rgba(0,0,0,0.1);}
-.rev-user-info{display:flex;flex-direction:column;}
-.rev-name{font-size:14px;font-weight:600;color:var(--text);letter-spacing:0.5px;}
-.rev-store{font-size:10px;color:var(--gold);text-transform:uppercase;letter-spacing:2px;font-weight:600;margin-top:2px;}
+@import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700&family=Montserrat:wght@300;400;500;600&family=Inter:wght@400;500;600&display=swap');
+
+.rev-grid{display:grid;grid-template-columns:repeat(auto-fill, minmax(300px, 1fr));gap:15px;max-width:1200px;margin:0 auto;}
+.rev-card{background:#fff;border:1px solid #eee;border-radius:12px;box-shadow:0 2px 4px rgba(0,0,0,0.05);padding:15px;transition:all 0.3s ease;position:relative;break-inside:avoid;margin-bottom:15px;}
+.rev-card:hover{transform:translateY(-2px);box-shadow:0 4px 12px rgba(0,0,0,0.08);border-color:#D4AF37;}
+
+/* Tile Header - Inline Layout */
+.rev-header{display:flex;align-items:center;justify-content:space-between;margin-bottom:12px;}
+.rev-header-left{display:flex;align-items:center;gap:10px;}
+.rev-user-img{width:32px;height:32px;border-radius:50%;background:linear-gradient(135deg,var(--gold),#b8941f);color:#fff;display:flex;align-items:center;justify-content:center;font-size:14px;font-weight:600;font-family:'Inter',sans-serif;flex-shrink:0;}
+.rev-name{font-family:'Inter',sans-serif;font-size:14px;font-weight:600;color:#2c2c2c;line-height:1.2;margin:0;display:flex;align-items:center;gap:6px;}
+.rev-name .rev-stars{color:#D4AF37;font-size:12px;display:inline-flex;gap:1px;letter-spacing:0.5px;margin-left:6px;}
+.rev-header-right{display:flex;align-items:center;gap:6px;}
+.rev-google-icon{width:16px;height:16px;background:#4285f4;border-radius:2px;display:flex;align-items:center;justify-content:center;color:#fff;font-size:10px;font-weight:600;font-family:'Inter',sans-serif;}
+.rev-verified-text{font-family:'Inter',sans-serif;font-size:10px;color:#888;font-weight:400;}
+
+/* Content Handling - Full Text */
+.rev-content{margin-bottom:8px;}
+.rev-text{font-family:'Inter',sans-serif;font-size:13px;color:#4a4a4a;line-height:1.5;font-weight:400;margin:0;}
+
+/* Mobile Responsiveness */
+@media(max-width:768px){
+.rev-grid{grid-template-columns:1fr;gap:12px;}
+.rev-card{padding:12px;}
+.rev-header{margin-bottom:10px;}
+.rev-name{font-size:13px;}
+.rev-text{font-size:12px;}
+}
 
 /* Enhanced Reviews Features */
 .reviews-snippet{margin-bottom:24px;}
@@ -423,24 +441,74 @@ border-top:1px solid rgba(255,255,255,0.06);
 /* Wall of Love Modal */
 .modal-overlay{position:fixed;inset:0;background:rgba(0,0,0,0.6);display:flex;align-items:center;justify-content:center;z-index:9999;opacity:0;visibility:hidden;transition:all 0.3s ease;padding:20px;}
 .modal-overlay.active{opacity:1;visibility:visible;}
-.modal-content{background:#fff;border-radius:24px;max-width:800px;width:100%;max-height:85vh;height:100%;display:flex;flex-direction:column;transform:scale(0.9);transition:all 0.3s ease;}
+.modal-content{background:#fff;border-radius:20px;max-width:1000px;width:100%;max-height:90vh;height:100%;display:flex;flex-direction:column;transform:scale(0.9);transition:all 0.3s ease;overflow-y:auto;}
 .modal-overlay.active .modal-content{transform:scale(1);}
-.modal-header{padding:24px 24px 16px;border-bottom:1px solid rgba(0,0,0,0.06);display:flex;align-items:center;justify-content:space-between;flex-shrink:0;}
-.modal-title{font-family:'Cormorant Garamond',serif;font-size:24px;font-weight:300;color:var(--text);}
-.modal-title em{color:var(--gold);font-style:italic;}
-.modal-close{width:40px;height:40px;background:var(--cream);border:none;border-radius:50%;display:flex;align-items:center;justify-content:center;cursor:pointer;border:1px solid rgba(0,0,0,0.06);transition:all 0.2s ease;}
-.modal-close:hover{background:var(--gold);color:#fff;}
-.modal-close svg{width:20px;height:20px;}
-.modal-body{flex:1;overflow-y:auto;padding:24px;}
+.modal-header{padding:16px 24px 12px;border-bottom:1px solid #f0f0f0;position:sticky;top:0;z-index:10;background:#fff;}
+.modal-title{font-family:'Inter',sans-serif;font-size:18px;font-weight:600;color:#2c2c2c;margin:0;}
+.modal-close{width:32px;height:32px;position:absolute;top:16px;right:16px;background:none;border:none;cursor:pointer;color:#666;display:flex;align-items:center;justify-content:center;border-radius:50%;transition:all 0.2s ease;}
+.modal-close:hover{background:#f5f5f5;color:#333;}
+.modal-close svg{width:16px;height:16px;}
+.modal-body{padding:16px 24px;overflow-y:visible;flex:1;min-height:0;}
+
+/* Modal Cards - Nuclear Fix: Break All Context */
+.modal-body .rev-card{display:block !important;flex-direction:column !important;align-items:flex-start !important;width:100% !important;background:#fff;border:1px solid #eee;border-radius:12px;box-shadow:0 2px 4px rgba(0,0,0,0.05);padding:15px;transition:all 0.3s ease;position:relative;}
+.modal-body .rev-card:hover{transform:translateY(-2px);box-shadow:0 4px 12px rgba(0,0,0,0.08);border-color:#D4AF37;}
+
+/* Modal Header Row - Gap Reset */
+.modal-body .rev-header-row{margin-bottom:0 !important;padding-bottom:0 !important;}
+
+/* Modal Grid - Force Grid Layout */
+.modal-body .rev-grid{display:grid !important;grid-template-columns:repeat(auto-fill, minmax(300px, 1fr)) !important;gap:15px !important;max-width:none;margin:0;column-count:auto !important;}
+@media(max-width:768px){
+.modal-body .rev-grid{grid-template-columns:1fr !important;gap:12px !important;}
+}
+
+/* Modal Content Row - Force Clear */
+.modal-body .rev-content-row{clear:both !important;display:block !important;padding-top:5px;width:100%;}
+.modal-body .rev-content{white-space:normal !important;font-family:'Inter',sans-serif;font-size:13px;color:#4a4a4a;line-height:1.5;font-weight:400;margin:0;padding-top:2px !important;}
+
+/* Modal Header - Inline Styles Override */
+.modal-body .rev-header{display:flex;align-items:center;justify-content:space-between;margin-bottom:0;}
+.modal-body .rev-header-left{display:flex;align-items:center;gap:10px;}
+.modal-body .rev-avatar{width:32px;height:32px;border-radius:50%;background:linear-gradient(135deg,var(--gold),#b8941f);color:#fff;display:flex;align-items:center;justify-content:center;font-size:14px;font-weight:600;font-family:'Inter',sans-serif;flex-shrink:0;}
+.modal-body .rev-name-stars{display:flex;flex-direction:column;gap:2px;}
+.modal-body .rev-name{font-family:'Inter',sans-serif;font-size:14px;font-weight:600;color:#2c2c2c;line-height:1.2;margin:0;}
+.modal-body .rev-stars{color:#D4AF37;font-size:12px;display:inline-flex;gap:1px;letter-spacing:0.5px;}
+.modal-body .google-icon{display:flex;align-items:center;gap:6px;}
+.modal-body .google-icon img{width:16px;height:16px;}
+
 .modal-reviews{display:grid;gap:16px;}
 .modal-loading{text-align:center;padding:40px;color:var(--text-mid);}
 .modal-loading-spinner{width:40px;height:40px;border:3px solid var(--cream);border-top:3px solid var(--gold);border-radius:50%;animation:spin 1s linear infinite;margin:0 auto 16px;}
 @keyframes spin{0%{transform:rotate(0deg);}100%{transform:rotate(360deg);}}
 
 /* Read All Reviews Button */
-.read-all-btn{display:flex;align-items:center;justify-content:center;width:100%;padding:16px;background:var(--gold);color:#fff;border-radius:16px;font-weight:500;font-size:15px;transition:all 0.3s ease;text-decoration:none;border:none;cursor:pointer;}
-.read-all-btn:hover{background:var(--gold-dark);transform:translateY(-2px);box-shadow:0 8px 25px rgba(201,161,94,0.3);}
-.read-all-btn svg{width:20px;height:20px;margin-right:8px;}
+.read-all-btn, .read-all-reviews-btn {
+background-color: #c19b4a !important; /* Your brand gold */
+color: #ffffff !important; /* Force white text */
+display: inline-flex;
+align-items: center;
+justify-content: center;
+padding: 12px 24px;
+border-radius: 8px;
+font-weight: 600;
+transition: background-color 0.3s ease;
+text-decoration: none;
+border: none;
+cursor: pointer;
+width: 100%;
+}
+
+.read-all-btn:hover, .read-all-reviews-btn:hover {
+background-color: #a8853b !important;
+color: #ffffff !important;
+}
+
+.read-all-btn svg, .read-all-reviews-btn svg {
+width: 20px;
+height: 20px;
+margin-right: 8px;
+}
 
 /* Mobile Optimizations */
 @media(max-width:640px){
@@ -453,14 +521,89 @@ border-top:1px solid rgba(255,255,255,0.06);
 .modal-close svg{width:18px;height:18px;}
 }
 
-@media(max-width:992px){
-.rev-grid{grid-template-columns:1fr 1fr;gap:20px;}
+/* CSS Sledgehammer: Force review cards to be visible */
+.modal-body .review-card { 
+display: flex !important; 
+opacity: 1 !important; 
+visibility: visible !important; 
+color: #333 !important; 
 }
-@media(max-width:640px){
-.rev-grid{grid-template-columns:1fr;}
-.rev-card{padding:24px;}
+.modal-body .rev-card { 
+display: flex !important; 
+opacity: 1 !important; 
+visibility: visible !important; 
+color: #333 !important; 
+align-items: center !important;
+padding: 12px 16px !important;
+margin-bottom: 8px !important;
+border-radius: 8px !important;
+min-height: auto !important;
+}
+
+/* Modal-specific compact styling */
+.modal-body .rev-grid {
+grid-template-columns: 1fr !important;
+gap: 0 !important;
+padding: 0 !important;
+}
+
+.modal-body .rev-card {
+grid-template-columns: 80px 1fr 60px !important;
+padding: 8px 0 !important;
+gap: 12px !important;
+border-bottom: 1px solid #eee !important;
+}
+
+.modal-body .rev-card:hover {
+transform: none !important;
+background: linear-gradient(90deg, rgba(212,175,55,0.02) 0%, rgba(255,248,220,0.03) 100%) !important;
+}
+
+.modal-body .rev-identity { gap: 8px !important; }
+.modal-body .rev-user-img { width: 28px !important; height: 28px !important; font-size: 12px !important; }
+.modal-body .rev-name { font-size: 12px !important; }
+.modal-body .rev-name .rev-stars { font-size: 10px !important; margin-left: 4px !important; }
+.modal-body .rev-content { gap: 0 !important; }
+.modal-body .rev-text { font-size: 11px !important; color: #666 !important; }
+.modal-body .read-more { font-size: 10px !important; margin-left: 4px !important; }
+.modal-body .verified-badge { font-size: 7px !important; padding: 1px 4px !important; }
+.modal-body .source-text { font-size: 9px !important; }
+
+/* Read More functionality */
+.read-more { 
+font-family: 'Montserrat', sans-serif !important; 
+font-size: 11px !important; 
+color: #D4AF37 !important; 
+font-weight: 400 !important; 
+font-style: italic !important;
+cursor: pointer !important; 
+text-decoration: none !important; 
+margin-left: 8px !important; 
+display: inline !important; 
+transition: all 0.2s ease !important; 
+background: none !important; 
+border: none !important; 
+padding: 0 !important;
+}
+.read-more:hover { 
+color: #b8941f !important; 
+text-decoration: underline !important; 
 }
 </style>
+
+<script>
+// Toggle review text expansion
+function toggleReviewText(textId) {
+const textElement = document.getElementById(textId);
+if (textElement) {
+textElement.classList.toggle('expanded');
+const readMoreLink = textElement.nextElementSibling;
+if (readMoreLink && readMoreLink.classList.contains('read-more')) {
+readMoreLink.textContent = textElement.classList.contains('expanded') ? 'Read Less' : 'Read More';
+}
+}
+}
+</script>
 
 <script>(function(){var t=localStorage.getItem('naturals-theme')||'luxury';document.documentElement.setAttribute('data-theme',t);})();</script>
 
@@ -1501,51 +1644,95 @@ alt="Poornima" width="300" height="400" loading="lazy">
 <div class="reviews-snippet">
 <div class="rev-grid" style="grid-template-columns:1fr;gap:16px;margin-bottom:24px;">
 <div class="rev-card reveal">
+
+<div class="rev-header">
+<div class="rev-header-left">
+<div class="rev-user-img">D</div>
+<div class="rev-name">
+Dimple Nair
 <div class="rev-stars">
 ★★★★★ </div>
-<div class="rev-text">"Awesome services. Especially by Poornima Ma'am! Very gentle and very professional!"</div>
-<div class="rev-user">
-<div class="rev-user-img">D</div>
-<div class="rev-user-info">
-<div class="rev-name">Dimple Nair</div>
 </div>
+</div>
+<div class="rev-header-right">
+<div class="rev-google-icon">G</div>
+<div class="rev-verified-text">Verified via Google</div>
+</div>
+</div>
+
+
+<div class="rev-content">
+<div class="rev-text">"Awesome services. Especially by Poornima Ma'am! Very gentle and very professional!"</div>
 </div>
 </div>
 
 <div class="rev-card reveal">
+
+<div class="rev-header">
+<div class="rev-header-left">
+<div class="rev-user-img">R</div>
+<div class="rev-name">
+ramya yalamarthi
 <div class="rev-stars">
 ★★★★★ </div>
+</div>
+</div>
+<div class="rev-header-right">
+<div class="rev-google-icon">G</div>
+<div class="rev-verified-text">Verified via Google</div>
+</div>
+</div>
+
+
+<div class="rev-content">
 <div class="rev-text">"Stylish: thaygaraju
 Great experience! The staff was friendly and the haircut turned out exactly how I wanted. Very satisfied with the service."</div>
-<div class="rev-user">
-<div class="rev-user-img">r</div>
-<div class="rev-user-info">
-<div class="rev-name">ramya yalamarthi</div>
-</div>
 </div>
 </div>
 
 <div class="rev-card reveal">
-<div class="rev-stars">
-★★★★★ </div>
-<div class="rev-text">"Tyagaraja very good service got what I wanted today happy with service 😇😇😇"</div>
-<div class="rev-user">
+
+<div class="rev-header">
+<div class="rev-header-left">
 <div class="rev-user-img">L</div>
-<div class="rev-user-info">
-<div class="rev-name">Likitha Bandlamudi</div>
+<div class="rev-name">
+Likitha Bandlamudi
+<div class="rev-stars">
+★★★★★ </div>
 </div>
+</div>
+<div class="rev-header-right">
+<div class="rev-google-icon">G</div>
+<div class="rev-verified-text">Verified via Google</div>
+</div>
+</div>
+
+
+<div class="rev-content">
+<div class="rev-text">"Tyagaraja very good service got what I wanted today happy with service 😇😇😇"</div>
 </div>
 </div>
 
 <div class="rev-card reveal">
+
+<div class="rev-header">
+<div class="rev-header-left">
+<div class="rev-user-img">வ</div>
+<div class="rev-name">
+வேலன்
 <div class="rev-stars">
 ★★★★★ </div>
+</div>
+</div>
+<div class="rev-header-right">
+<div class="rev-google-icon">G</div>
+<div class="rev-verified-text">Verified via Google</div>
+</div>
+</div>
+
+
+<div class="rev-content">
 <div class="rev-text">"Dhayagaraj.. haircut was so good."</div>
-<div class="rev-user">
-<div class="rev-user-img">வ</div>
-<div class="rev-user-info">
-<div class="rev-name">வேலன்</div>
-</div>
 </div>
 </div>
 
@@ -1553,11 +1740,11 @@ Great experience! The staff was friendly and the haircut turned out exactly how 
 </div>
 
 
-<button class="read-all-btn" onclick="openReviewsModal()">
+<button class="read-all-btn" onclick="openModal()">
 <svg fill="currentColor" viewBox="0 0 24 24">
 <path d="M12 2l3.09 6.26L22 9.27l-6.91 1.01L12 22l-3.09-5.72L2 9.27l6.91-1.01L12 2z"/>
 </svg>
-Read All 42 5-Star Reviews
+View All 5-Star Reviews
 </button>
 
 <a href="https://g.page/Naturals-ElementsMall/review?rc/" target="_blank" rel="noopener" class="btn-primary" style="margin-top:16px;">
@@ -1598,6 +1785,8 @@ Facebook</a>
 <a href="../index.html#our-stores" class="sn-mid">All 5 Bangalore Locations</a>
 <a href="stores/bangalore/devasandra/" class="sn-link">Devasandra &#8594;</a>
 </div>
+
+<div style="clear: both;"></div>
 
 <footer>
 <div class="ft-top">
@@ -1650,9 +1839,19 @@ Facebook</a>
 footer {
 background: #080f0b;
 width: 100%;
+margin: 0;
+padding: 40px 0;
 display: block;
 }
 [data-theme="naturals"] footer { background: #0D0120; }
+
+/* Fix 2: Apply Full-Width CSS - ensure footer stretches full viewport */
+.footer-section {
+width: 100% !important;
+margin: 0 !important;
+padding: 40px 0 !important;
+background-color: #080f0b !important;
+}
 
 /* ── ft-top: 4-col grid, padding mirrors page gutters (60px) ────── */
 .ft-top {
@@ -2192,6 +2391,241 @@ if(typeof window._applyStickyStore==='function') window._applyStickyStore(saved)
 });
 </script>
 
+<script>
+// Store reviews data
+const storeReviews = [{"Stars": 5, "customer_name": "Dimple Nair", "date_posted": "21-March-2026", "review_comments": "Awesome services. Especially by Poornima Ma\u0027am! Very gentle and very professional!", "review_id": "AbFvOqmrVBYSHlpt9QleV7CPPkuw_I4fFxMfRo2kyFCAh1l31EeucxLN1PpRdmUTAoM9j38nwZLo", "show_it_in_website": "Yes", "stars": "5", "store_id": "Store_N77", "store_name": "Elements Mall"}, {"Stars": 5, "customer_name": "ramya yalamarthi", "date_posted": "20-Mar-2026", "review_comments": "Stylish: thaygaraju\nGreat experience! The staff was friendly and the haircut turned out exactly how I wanted. Very satisfied with the service.", "review_id": "AbFvOqnHRYcM98_1P8qMEAkw7p7OFmM4tyByVlLU89DnenD_By4V_faaDQvF3_YrO8F4oWymITKr", "show_it_in_website": "Yes", "stars": "5", "store_id": "Store_N77", "store_name": "Elements Mall"}, {"Stars": 5, "customer_name": "Likitha Bandlamudi", "date_posted": "8-May-2023", "review_comments": "Tyagaraja very good service got what I wanted today happy with service \ud83d\ude07\ud83d\ude07\ud83d\ude07", "review_id": "AbFvOql0j81EA-LAymIwbIDxZhkov0b9B0t2FZWAeQ8NnYtqSFzRLnCWt9gXZOsgiH099hxBH9JL", "show_it_in_website": "Yes", "stars": "5", "store_id": "Store_N77", "store_name": "Elements Mall"}, {"Stars": 5, "customer_name": "\u0bb5\u0bc7\u0bb2\u0ba9\u0bcd", "date_posted": "19-Mar-2026", "review_comments": "Dhayagaraj.. haircut was so good.", "review_id": "AbFvOqlK19Yh-TZX9O8P09saAGuEHXPrQa-my_fu6PWSQSWJX3ZVeggKIZQy-4-xHbUljJSY_AvVYw", "show_it_in_website": "Yes", "stars": "5", "store_id": "Store_N77", "store_name": "Elements Mall"}, {"Stars": 5, "customer_name": "Revathi A", "date_posted": "27-Aug-2021", "review_comments": "My hair treatment was done by Gufran Ahmed, he did an excellent job,great customer service done by him.The staff was very friendly. Happy with the service.", "review_id": "AbFvOql9Wgh1PRMp-Vhl_cGFGPii6Y-veP_uonUCCCxdyo-fEks5ni3vPgs6EPQqYDjzZYanIyb1tg", "show_it_in_website": "Yes", "stars": "5", "store_id": "Store_N77", "store_name": "Elements Mall"}, {"Stars": 5, "customer_name": "Shruthi Vasudeva K", "date_posted": "11-Dec-2025", "review_comments": "I went here for the hair cut \u0026 hair spa the service given by Shanthi \u0026 Thyagaraj was really good.I really recomend her for hairs", "review_id": "AbFvOqkDXry0O3MoeagBDAIU2Gbz8kO4bBT1J_af2vbZ0TngOXWtwvuh8rrkc9n-tulAs_uVsU0Zyw", "show_it_in_website": "Yes", "stars": "5", "store_id": "Store_N77", "store_name": "Elements Mall"}, {"Stars": 5, "customer_name": "Prathiksha Biradar", "date_posted": "14-Mar-2026", "review_comments": "Really good service, got a really good haircut from Thyagaraja, nice place", "review_id": "AbFvOqmo_vXZEv3rAJC8tpUmsPoWn0zNpwTaYVaisLUWYNV2peXvydnxqARawWd6FauQTY_Irydz", "show_it_in_website": "Yes", "stars": "5", "store_id": "Store_N77", "store_name": "Elements Mall"}, {"Stars": 5, "customer_name": "Parvathy K", "date_posted": "7-Mar-2026", "review_comments": "Very nice experience excellent customer service,iam satisfied with the service.", "review_id": "AbFvOqkC-pHww9yJoGrvBdPBClFkTfGjsUARgALVp-wi59JEFJCw4GORL3iE_0ZAQptWuCe2j2G8aA", "show_it_in_website": "Yes", "stars": "5", "store_id": "Store_N77", "store_name": "Elements Mall"}, {"Stars": 5, "customer_name": "Deepa Muni", "date_posted": "5-Mar-2026", "review_comments": "Price was reasonable and results was more than my expectations must visit", "review_id": "AbFvOqmj6j4fYjKfG4iLr9_-rXvJwzjqR2wjJmXVD7tzLpV02oKPu9vobIPa45UppmuQ8hxR9JHNsg", "show_it_in_website": "Yes", "stars": "5", "store_id": "Store_N77", "store_name": "Elements Mall"}, {"Stars": 5, "customer_name": "Gopalakrishnan Natarajan", "date_posted": "2-Mar-2026", "review_comments": "Outstanding customer service and professional care by PoorNima", "review_id": "AbFvOqnYNR4Oof8i4M30rd9hPlcqCMB4TKJk1W7pfNLqPI0Mf6Vx3HYOOQoDSa8FkMmeDFSw5zeo", "show_it_in_website": "Yes", "stars": "5", "store_id": "Store_N77", "store_name": "Elements Mall"}, {"Stars": 5, "customer_name": "Lasyasree Maddukuri", "date_posted": "2-Mar-2026", "review_comments": "I have visited the place today and got my hair cut done \u2026and mine was curly hair I really got the best output I can have and it\u2019s done by Gufran \u2026 do check it if you really need a good hair treatment", "review_id": "AbFvOqn1bEW2LLCuHw2QYGSAHJ04GBfu7PBY00RWxkT69Y6SnwE1GtiPBtmWiA3PpGzv-NmrMAOSPQ", "show_it_in_website": "Yes", "stars": "5", "store_id": "Store_N77", "store_name": "Elements Mall"}, {"Stars": 5, "customer_name": "Yallappa Madar", "date_posted": "2-Mar-2026", "review_comments": "I\u0027m soo happy with Natural salon haircut and thank you so much wodrafull extent job THYAGARAJ sir, now onwards i will visit every time and I will haircut with Thyagaraja sir...\n\nThank you soo much naturals salon\ud83e\udd1d\nAnd one\u0027s again thank you THYAGARAJ sir....\ud83e\udd1d", "review_id": "AbFvOqkFKN53brwJq7c9otpnO1BGaGACmqSkqED4R-M30d54ubFp4KVJbbTLA8LMckGRJtJjGluxyQ", "show_it_in_website": "Yes", "stars": "5", "store_id": "Store_N77", "store_name": "Elements Mall"}, {"Stars": 5, "customer_name": "Lorraine Dsouza", "date_posted": "28-Feb-2026", "review_comments": "Had a haircut and streaks done. Thank you Pramila for the wonderful job. I loved the overall experience \ud83d\ude07", "review_id": "AbFvOqmm-dkTQ3RGuKsLBsHK2-ZpbKb4ws7XMLu_MQaJgF9Bh3Nq8BPnPFpb20hp9jU2SsCCfRbp6Q", "show_it_in_website": "Yes", "stars": "5", "store_id": "Store_N77", "store_name": "Elements Mall"}, {"Stars": 5, "customer_name": "rakesh dondapati", "date_posted": "28-Feb-2026", "review_comments": "Very good service , thyagaraju did excellent job", "review_id": "AbFvOqlFkQbXhhR7FpLlY9gY0mLw5tgkgTRxKyksIPctAroyU0Zs-y8uxBrA-7oSGoU3txv5_ciy9Q", "show_it_in_website": "Yes", "stars": "5", "store_id": "Store_N77", "store_name": "Elements Mall"}, {"Stars": 5, "customer_name": "khushi sezwar", "date_posted": "8-Nov-2025", "review_comments": "Great service in this branch\nSpecial mention to poornima", "review_id": "AbFvOqmPE6Wi802MzCc0LzyMAUmUAHVFvmj71IEAQSTAOPcvD0K_dD-A5aIecKwU3tBsiUwbKZ1fgA", "show_it_in_website": "Yes", "stars": "5", "store_id": "Store_N77", "store_name": "Elements Mall"}, {"Stars": 5, "customer_name": "Vishnumaya", "date_posted": "27-Feb-2026", "review_comments": "Good service by Poornima\nThank you Poornima", "review_id": "AbFvOqlNqegjgq-9rdugSzGGoPPQ9vOeLfCFbtMMDQcZzuvPn5RhA4q6OwUMxhHZkMWMcsBhKKxdXA", "show_it_in_website": "Yes", "stars": "5", "store_id": "Store_N77", "store_name": "Elements Mall"}, {"Stars": 5, "customer_name": "Suryan V Kumar", "date_posted": "27-Feb-2026", "review_comments": "Very friendly staff ...very good service. Especially the head massage done by Mr.Thyagaraj was awesome.", "review_id": "AbFvOqklx4jXAmhAFFrWmjD-JH3enivGwmZmbIF7iKtGTXOChAl0dvdHnmCv7vhFpiTVDon86IF-Hg", "show_it_in_website": "Yes", "stars": "5", "store_id": "Store_N77", "store_name": "Elements Mall"}, {"Stars": 5, "customer_name": "Indhu nisha", "date_posted": "24-Feb-2026", "review_comments": "I visited Naturals Salon at Elements Mall for a haircut and had a great experience. The stylist did an amazing job, and I absolutely loved the cut. Highly recommend! \u2728", "review_id": "AbFvOqk-i__oISGIzxhBfKEYM3B2Ol7Z5royff8vcvirQTuuMDnrv-1v7LSqKP414cY7oTNv6eG8og", "show_it_in_website": "Yes", "stars": "5", "store_id": "Store_N77", "store_name": "Elements Mall"}, {"Stars": 5, "customer_name": "Megha Chopra", "date_posted": "23-Feb-2026", "review_comments": "Gufram is amazing staff for haircut which he provided me, explned my hair texture so well i m satisfied.", "review_id": "AbFvOqmaLkNK8EXh_SNIimD0AqehAYcFYXKTeQAAUCLgqeJAhd6JV1bUYysC9NhQ616wUMLOIbWCPw", "show_it_in_website": "Yes", "stars": "5", "store_id": "Store_N77", "store_name": "Elements Mall"}, {"Stars": 5, "customer_name": "Anushree Basu", "date_posted": "21-Feb-2026", "review_comments": "I\u0027m very happy with Gufran\u0027s service for my haircut. Amazing service!!!", "review_id": "AbFvOqlOKcoazBZnZSkpROVPhe3UBV1BRtmZ9XEevQLQQDiAO53ONdbjr5pTSfYyWRufTS4uXwWwgw", "show_it_in_website": "Yes", "stars": "5", "store_id": "Store_N77", "store_name": "Elements Mall"}, {"Stars": 5, "customer_name": "Kumkum Banerjee", "date_posted": "21-Feb-2026", "review_comments": "Satisfied with the service . Gufran is one of the best . Must recommended", "review_id": "AbFvOqksrqmt0T-31Q7ViV2eiRztf8oerVXhi7BaDmLuVhMDwqDnZGcYth058Uh7T__3QgUTPGgSEA", "show_it_in_website": "Yes", "stars": "5", "store_id": "Store_N77", "store_name": "Elements Mall"}, {"Stars": 5, "customer_name": "Bhargava Ram Dyta", "date_posted": "19-Feb-2026", "review_comments": "Great saloon! Came here for the first time and was really content with the stylist Gufran. Great service. Didn\u0027t try to pawn me off to any memberships and didn\u0027t probe for extra services.", "review_id": "AbFvOql4AeBPozfXfBKkewNpmCI-71BxNbmXwGqqVLWW6LjyRRO0SQEid0m3ZKhsifqhV4Ssmk3g0w", "show_it_in_website": "Yes", "stars": "5", "store_id": "Store_N77", "store_name": "Elements Mall"}, {"Stars": 5, "customer_name": "prathik karanam", "date_posted": "18-Feb-2026", "review_comments": "Great experience and friendly with customers special mention to Mr. Thyagaraj and Mr. Soaibh", "review_id": "AbFvOqmGBiwR57XAXXyNyWkhvUlmDczA1znWt3orJVUaBbgBp0Dl2rClB9ujVJl9o3KxQ5YwJwPJlg", "show_it_in_website": "Yes", "stars": "5", "store_id": "Store_N77", "store_name": "Elements Mall"}, {"Stars": 5, "customer_name": "ibtesam alam", "date_posted": "17-Feb-2026", "review_comments": "I went for a hair cut. My hair is long but Tyagraj took care of it very gently. I loved his politeness and he knows his work very well. I\u0027m totally satisfied with the service. Highly recommend this place. I know i would come here again. Loved it\u2764\ufe0f", "review_id": "AbFvOqlO341X3nkzujOJryolA9d24HtHjK34V9O5ZN93ApSxaFGkIPmtIw9TAuf_asUJgl_0hqVgiw", "show_it_in_website": "Yes", "stars": "5", "store_id": "Store_N77", "store_name": "Elements Mall"}, {"Stars": 5, "customer_name": "Pradeep Kumar", "date_posted": "17-Feb-2026", "review_comments": "I had best haircut here, Kudoos to Thiyagarag\ud83d\udc4d\ud83d\udc4d", "review_id": "AbFvOql0ROUMx6rSbVisD8PsZ5wcxNxcq2Nrxo7J_8Jz3OYbfbaRQx1xV5vu6aqDgNADE1RwzGsU", "show_it_in_website": "Yes", "stars": "5", "store_id": "Store_N77", "store_name": "Elements Mall"}, {"Stars": 5, "customer_name": "Swayantan Sun Maji", "date_posted": "25-Oct-2025", "review_comments": "Haircut: had a great experience with Gurfan", "review_id": "AbFvOqmJMgEkbXWFOSH0mlkJVYVmjiQfKRoid395L_mp2mI7r8Gn9J3KgqVt2NzSAlS7GGzEXjSs", "show_it_in_website": "Yes", "stars": "5", "store_id": "Store_N77", "store_name": "Elements Mall"}, {"Stars": 5, "customer_name": "Tushar Hedaoo", "date_posted": "14-Feb-2026", "review_comments": "Service is very good and gufran did it very professionally.", "review_id": "AbFvOqmD5ZweJ6MiVm6U1Sw1b3Hqc1Xs13VIdJomOSJHEs8okOWs4kT3yhk5KggLmzWuZzDmHPC1YQ", "show_it_in_website": "Yes", "stars": "5", "store_id": "Store_N77", "store_name": "Elements Mall"}, {"Stars": 5, "customer_name": "Selvi Poornima", "date_posted": "13-Feb-2026", "review_comments": "I had a wonderful experience at Naturals Salon. I recently got a haircut and I absolutely loved the result. The stylist understood exactly what I wanted and gave me a perfect look. The way they treated me was very professional and friendly. The staff made me feel comfortable throughout the service. Highly recommend this salon for great service and amazing results! \u2728", "review_id": "AbFvOqmAGr7-JDXh4PtgVRCZhHGF4BRIBhsJG-n8qc4z2ybzLAeeei6kmwnPw6X4YtNTdSYJZOAZew", "show_it_in_website": "Yes", "stars": "5", "store_id": "Store_N77", "store_name": "Elements Mall"}, {"Stars": 5, "customer_name": "Thyagaraj Chinni", "date_posted": "25-Aug-2021", "review_comments": "parmila did good job thank you\ud83d\udc4c", "review_id": "AbFvOqm8vBjcGuc_RfgFIHvKXyqXMi8zQweSECKYVLriN4uNKpjSMKFF_mXxCXQ7408cRfL7ruP3", "show_it_in_website": "Yes", "stars": "5", "store_id": "Store_N77", "store_name": "Elements Mall"}, {"Stars": 5, "customer_name": "M Ramya", "date_posted": "8-Feb-2026", "review_comments": "Good work and Tyagaraju did it will as explained\nThank you", "review_id": "AbFvOqnQz1qESIdu5xSEuTvVzrNt_nLCc7NRZmLXRbKJ-NMMtlJwBcm4m6xI8SQ_k3C8cMUnMpxDtw", "show_it_in_website": "Yes", "stars": "5", "store_id": "Store_N77", "store_name": "Elements Mall"}, {"Stars": 5, "customer_name": "mohit kumar", "date_posted": "7-Feb-2026", "review_comments": "Tyagaraju had done very well service\nAnd hair cut he done fast and it is very nice", "review_id": "AbFvOqn5ngUpyMxFAetEUI0YdLKq17AOFYDRNl62VIuS1fOXWC_LcuWmqKeORfXOPEtLV0aR8GvbSQ", "show_it_in_website": "Yes", "stars": "5", "store_id": "Store_N77", "store_name": "Elements Mall"}, {"Stars": 5, "customer_name": "Veerababu Yamalavalasa", "date_posted": "6-Feb-2026", "review_comments": "Good service ptovided by thyagaraj", "review_id": "AbFvOql1WAkh3VGnPTacbFjEEzQmQ-6oKhM6QIgWY3GrihujXUpR9lQzipaV2wD1CMiUzbTeYsmW", "show_it_in_website": "Yes", "stars": "5", "store_id": "Store_N77", "store_name": "Elements Mall"}, {"Stars": 5, "customer_name": "Varun Raj", "date_posted": "3-Feb-2026", "review_comments": "I had wonderful experience and great service from Thyagraj", "review_id": "AbFvOqmv0aGoL8EafZ23Q6a96it1KqDqw9TvwrMqL9uHXGyDoxt_i2X0pk0a2Cn8GSOg39WGrIhRHQ", "show_it_in_website": "Yes", "stars": "5", "store_id": "Store_N77", "store_name": "Elements Mall"}, {"Stars": 5, "customer_name": "triveni padatare", "date_posted": "2-Feb-2026", "review_comments": "Hair cut and hair spa, which i have received service, and good service also friendly specialist, thank you \u263a\ufe0f", "review_id": "AbFvOqkyvBiXgIYzW_wWYrHDh5PH6__oIm2E8rzwmGE2euGFjJzvxxnaAwLfAbDFCkskI4LJ5Lq3xA", "show_it_in_website": "Yes", "stars": "5", "store_id": "Store_N77", "store_name": "Elements Mall"}, {"Stars": 5, "customer_name": "Uzma Tahseen", "date_posted": "1-Feb-2026", "review_comments": "My daughter had a wonderful haircut experience at Naturals. Mr.Gufran has amazing skills and helps you achieve the desired haircut.", "review_id": "AbFvOqkw0LMOUuDfVhlGRsVyIXL8vYL6lz4m5A7WO66EIMCLxM2kJo1NJJ7f3TOnnSIuwhfx3SE5RA", "show_it_in_website": "Yes", "stars": "5", "store_id": "Store_N77", "store_name": "Elements Mall"}, {"Stars": 5, "customer_name": "Rahul S", "date_posted": "1-Feb-2026", "review_comments": "Came here to do a Pedicure and had a great time under the service of Thyagarajar (Thank you)\nHe gave very good leg massage and i was very good with the Pedicure service.\n\nI did Deep sea Pedicure and recommend it.", "review_id": "AbFvOqmuS2TUPwjGhkudlRCo5wpvOloSZIkaUzOeOb3YEBNhl9KS6jU_IrjrtXSkZ_jVOvJBr7CtNw", "show_it_in_website": "Yes", "stars": "5", "store_id": "Store_N77", "store_name": "Elements Mall"}, {"Stars": 5, "customer_name": "Muthu Lakshmi", "date_posted": "1-Feb-2026", "review_comments": "I did my Pedicure for the second time here and I felt really relaxed and clean.\nPoornima helped me with the right pedicure for my leg and her service was really commendable. The massage was too good and I had a great time during the pedicure", "review_id": "AbFvOqkPj43VpxWmni-X2ye4fG_M-a8W1r2swRKJqoEyuU0OaLEaMAgBxlp2budiHhUkpV0N9bVRHw", "show_it_in_website": "Yes", "stars": "5", "store_id": "Store_N77", "store_name": "Elements Mall"}, {"Stars": 5, "customer_name": "VISHNU N", "date_posted": "31-Jan-2026", "review_comments": "Very good service by tyagarajan", "review_id": "AbFvOqk8h2hN_1RVql9BZ4xFaLCu9UNwsBMG5gcT2CBPUGDrHzJdV6DTDenll2n01lqZ7DMhr-BuaQ", "show_it_in_website": "Yes", "stars": "5", "store_id": "Store_N77", "store_name": "Elements Mall"}, {"Stars": 5, "customer_name": "parvathy ulaganathan", "date_posted": "31-Jan-2026", "review_comments": "Excellent service by Pournima..", "review_id": "AbFvOqmG-UUUcVN_I8l0SxFSBwnCI9FgCINKMjCCiDB06wIXvreUWPDptbF0REDwFj-RDxfqjwyt", "show_it_in_website": "Yes", "stars": "5", "store_id": "Store_N77", "store_name": "Elements Mall"}, {"Stars": 5, "customer_name": "Deepti Patil", "date_posted": "31-Jan-2026", "review_comments": "Liked the service", "review_id": "AbFvOqkfNzz4gGO5M9nXbnvgOdUkWe8m_nG6X8Ute1VOOb2mvrWxCE93oGdFskSiikXkqyCtyNalAQ", "show_it_in_website": "Yes", "stars": "5", "store_id": "Store_N77", "store_name": "Elements Mall"}, {"Stars": 5, "customer_name": "vijaya sri", "date_posted": "30-Jan-2026", "review_comments": "Poornima good service to the customer", "review_id": "AbFvOqn-oDX3uVUOQSIEpaat7Eqy9yKYS21Ne4fdZuJl2SpyMhFEFqXKtilxrNPnapBiillps_3COg", "show_it_in_website": "Yes", "stars": "5", "store_id": "Store_N77", "store_name": "Elements Mall"}, {"Stars": 5, "customer_name": "Samana K", "date_posted": "28-Jan-2026", "review_comments": "good service by Thyagaraj", "review_id": "AbFvOqnUbPMUMI4mZz3dTG2ToPBY7Xsyc9XsiTDHmlsgjQOzstu_jl0Rdmd-MkOMFZHhpd9LcxVh5g", "show_it_in_website": "Yes", "stars": "5", "store_id": "Store_N77", "store_name": "Elements Mall"}];
+
+// State management
+let isModalOpen = false;
+let currentReviews = [];
+let isLoading = false;
+
+// Open reviews modal
+function openModal() {
+console.log('Checking Data:', typeof storeReviews, storeReviews?.length);
+
+// Fix 3: The One-Time Guard - Prevent multiple executions
+if (window.isModalOpening) return;
+window.isModalOpening = true;
+
+// Fix 1: Remove any recursive calls - no setInterval or recursive calls here
+
+// Fix 2: Event Bubbling Prevention - Stop event propagation
+if (event) {
+event.stopPropagation();
+event.preventDefault();
+}
+
+// Bulletproof Change 1: Delay the execution
+setTimeout(() => {
+console.log("Opening modal with bulletproof changes...");
+
+// Bulletproof Change 2: Explicit Spinner Removal
+const spinners = document.querySelectorAll('.modal-loading-spinner');
+spinners.forEach(spinner => {
+spinner.style.display = 'none';
+});
+const loadingDivs = document.querySelectorAll('.modal-loading');
+loadingDivs.forEach(div => {
+div.style.display = 'none';
+});
+
+// Hard Reset 1: Clear the target first
+let modalContent = document.getElementById('modalReviewsContent');
+if (!modalContent) {
+// Fallback: Try alternative target
+modalContent = document.getElementById('modal-content') || document.getElementById('reviewsModal').querySelector('.modal-body');
+console.log("Using fallback modal content element for clearing");
+}
+
+if (modalContent) {
+modalContent.innerHTML = '';
+}
+
+if (isModalOpen || isLoading) {
+window.isModalOpening = false; // Reset guard on exit
+return;
+}
+
+isModalOpen = true;
+isLoading = true;
+
+const modal = document.getElementById('reviewsModal');
+
+// Fallback: Find content element for loading state
+let content = document.getElementById('modalReviewsContent');
+if (!content) {
+content = document.getElementById('modal-content') || document.getElementById('reviewsModal').querySelector('.modal-body');
+}
+
+// Show modal
+modal.classList.add('active');
+document.body.style.overflow = 'hidden';
+
+// Hard Reset 2: Force Display
+modal.style.display = 'block !important';
+modal.style.opacity = '1 !important';
+
+// Show loading state briefly
+if (content) {
+content.innerHTML = '<div class="modal-loading"><div class="modal-loading-spinner"></div><p>Loading amazing reviews...</p></div>';
+}
+
+// Load reviews with lazy loading
+setTimeout(() => {
+loadReviewsInBatches();
+window.isModalOpening = false; // Reset guard after loading starts
+}, 300);
+}, 100); // Bulletproof Change 1: 100ms delay
+}
+
+// Close reviews modal
+function closeReviewsModal() {
+isModalOpen = false;
+isLoading = false;
+window.isModalOpening = false; // Reset guard when modal is closed
+const modal = document.getElementById('reviewsModal');
+modal.classList.remove('active');
+document.body.style.overflow = '';
+}
+
+// Load reviews in batches for performance
+function loadReviewsInBatches() {
+// Fix 2: Manual HTML Injection - Force injection directly into modal body
+const modalBody = document.querySelector('.modal-body') || document.getElementById('modalReviewsContent');
+if (modalBody && storeReviews && storeReviews.length > 0) {
+console.log("Manual HTML Injection: Rendering all reviews at once");
+modalBody.innerHTML = storeReviews.map((r, index) => createReviewCard(r, index)).join('');
+console.log("Manual injection completed - reviews should be visible now");
+window.isModalOpening = false; // Reset guard
+return; // Skip batch loading
+}
+
+// Fallback: Try alternative target if main target not found
+let content = document.getElementById('modalReviewsContent');
+if (!content) {
+content = document.getElementById('modal-content') || document.getElementById('reviewsModal').querySelector('.modal-body');
+console.log("Using fallback modal content element");
+}
+
+if (!content) {
+console.error("Could not find modal content element!");
+window.isModalOpening = false; // Reset guard
+return;
+}
+
+const batchSize = 20; // Load 20 reviews at a time
+let currentIndex = 0;
+
+// Debug: Check if storeReviews data exists
+console.log("Store reviews data:", storeReviews);
+console.log("Store reviews count:", storeReviews.length);
+console.log("Target content element found:", !!content);
+
+// Sort reviews by date_posted descending
+const sortedReviews = [...storeReviews].sort((a, b) => {
+// Handle empty or invalid dates
+const dateA = a.date_posted ? new Date(a.date_posted) : new Date(0);
+const dateB = b.date_posted ? new Date(b.date_posted) : new Date(0);
+return dateB - dateA;
+});
+
+console.log("Sorted reviews count:", sortedReviews.length);
+currentReviews = sortedReviews;
+
+function loadBatch() {
+if (currentIndex >= sortedReviews.length) {
+isLoading = false;
+return;
+}
+
+const batch = sortedReviews.slice(currentIndex, currentIndex + batchSize);
+
+// Hard Reset 3: Manual Trigger
+console.log("Rendering " + batch.length + " cards now...");
+
+const batchHtml = batch.map((review, index) => {
+const globalIndex = currentIndex + index;
+console.log("Rendering card " + (globalIndex + 1) + ": " + review.customer_name);
+return createReviewCard(review, globalIndex);
+}).join('');
+
+content.innerHTML += batchHtml;
+currentIndex += batchSize;
+
+// Continue loading if more reviews
+if (currentIndex < sortedReviews.length) {
+setTimeout(loadBatch, 100);
+} else {
+isLoading = false;
+console.log("All reviews loaded successfully!");
+}
+}
+
+// Load first batch immediately
+loadBatch();
+
+// Add scroll listener for lazy loading
+content?.addEventListener('scroll', () => {
+if (content.scrollHeight - content.scrollTop <= content.clientHeight + 200) {
+loadBatch();
+}
+});
+
+// Load first batch immediately
+loadBatch();
+}
+
+// Close modal on escape key
+document.addEventListener('keydown', (e) => {
+if (e.key === 'Escape' && isModalOpen) {
+closeReviewsModal();
+}
+});
+
+// Create review card HTML
+function createReviewCard(review, index) {
+// Safety check: Skip if review is missing basic info
+if (!review || !review.customer_name) {
+console.warn("Skipping invalid review:", review);
+return '';
+}
+
+// Handle stars field - it might be string or number
+const starsCount = parseInt(review.stars || review.Stars || 5);
+const stars = '★'.repeat(starsCount);
+const initial = review.customer_name ? review.customer_name.charAt(0).toUpperCase() : 'A';
+const comments = review.review_comments || review.comments || 'Great experience!';
+
+return `
+<div class="rev-card">
+<div class="rev-header-row" style="display: block; width: 100%; clear: both;">
+<div class="rev-header" style="display: flex; align-items: center; justify-content: space-between;">
+<div class="rev-header-left" style="display: flex; align-items: center; gap: 10px;">
+<div class="rev-avatar">${initial}</div>
+<div class="rev-name-stars">
+<span class="rev-name">${review.customer_name}</span>
+<div class="rev-stars">${stars}</div>
+</div>
+</div>
+<div class="google-icon"><img src="/images/icons/google.png" width="16"></div>
+</div>
+</div><div class="rev-content-row" style="display: block; width: 100%; margin-top: 0px;">
+<div class="rev-content">
+"${comments}"
+</div>
+</div>
+</div>`;
+}
+
+// Close modal on background click
+document.getElementById('reviewsModal').addEventListener('click', (e) => {
+if (e.target.id === 'reviewsModal') {
+closeReviewsModal();
+}
+});
+</script>
+
 <div id="img-modal-overlay" onclick="closeImgModal()"></div>
 <div id="img-modal" role="dialog" aria-modal="true" aria-label="Offer image">
 <div id="img-modal-inner">
@@ -2251,6 +2685,17 @@ function nextImg(){ if(!gallerySrcs.length) return; galleryIndex=(galleryIndex+1
 function prevImg(){ if(!gallerySrcs.length) return; galleryIndex=(galleryIndex-1+gallerySrcs.length)%gallerySrcs.length; document.getElementById('img-modal-src').src=gallerySrcs[galleryIndex]; }
 document.addEventListener('DOMContentLoaded',function(){
 document.querySelectorAll('img.offer-img').forEach(function(img){ img.addEventListener('click',function(){ openImgModal(img.src); }); });
+});
+document.addEventListener('keydown',function(e){
+if(e.key==='Escape') closeImgModal();
+if(document.getElementById('img-modal').style.display==='flex'){ if(e.key==='ArrowRight') nextImg(); if(e.key==='ArrowLeft') prevImg(); }
+});
+var io=new IntersectionObserver(function(entries){ entries.forEach(function(e,i){ if(e.isIntersecting){ setTimeout(function(){ e.target.classList.add('visible'); },i*80); io.unobserve(e.target); } }); },{threshold:0});
+document.querySelectorAll('.reveal').forEach(function(el){ io.observe(el); });
+
+// Bulletproof Alias: Ensure both function names work simultaneously
+window.openReviewsModal = openModal;
+</script>
 
 <div id="reviewsModal" class="modal-overlay">
 <div class="modal-content">
@@ -2269,168 +2714,5 @@ document.querySelectorAll('img.offer-img').forEach(function(img){ img.addEventLi
 </div>
 </div>
 </div>
-
-<script>
-// Store reviews data
-const storeReviews = [{"Stars": 5, "customer_name": "Dimple Nair", "date_posted": "21-March-2026", "review_comments": "Awesome services. Especially by Poornima Ma\u0027am! Very gentle and very professional!", "review_id": "AbFvOqmrVBYSHlpt9QleV7CPPkuw_I4fFxMfRo2kyFCAh1l31EeucxLN1PpRdmUTAoM9j38nwZLo", "show_it_in_website": "Yes", "stars": "5", "store_id": "Store_N77", "store_name": "Elements Mall"}, {"Stars": 5, "customer_name": "ramya yalamarthi", "date_posted": "20-Mar-2026", "review_comments": "Stylish: thaygaraju\nGreat experience! The staff was friendly and the haircut turned out exactly how I wanted. Very satisfied with the service.", "review_id": "AbFvOqnHRYcM98_1P8qMEAkw7p7OFmM4tyByVlLU89DnenD_By4V_faaDQvF3_YrO8F4oWymITKr", "show_it_in_website": "Yes", "stars": "5", "store_id": "Store_N77", "store_name": "Elements Mall"}, {"Stars": 5, "customer_name": "Likitha Bandlamudi", "date_posted": "8-May-2023", "review_comments": "Tyagaraja very good service got what I wanted today happy with service \ud83d\ude07\ud83d\ude07\ud83d\ude07", "review_id": "AbFvOql0j81EA-LAymIwbIDxZhkov0b9B0t2FZWAeQ8NnYtqSFzRLnCWt9gXZOsgiH099hxBH9JL", "show_it_in_website": "Yes", "stars": "5", "store_id": "Store_N77", "store_name": "Elements Mall"}, {"Stars": 5, "customer_name": "\u0bb5\u0bc7\u0bb2\u0ba9\u0bcd", "date_posted": "19-Mar-2026", "review_comments": "Dhayagaraj.. haircut was so good.", "review_id": "AbFvOqlK19Yh-TZX9O8P09saAGuEHXPrQa-my_fu6PWSQSWJX3ZVeggKIZQy-4-xHbUljJSY_AvVYw", "show_it_in_website": "Yes", "stars": "5", "store_id": "Store_N77", "store_name": "Elements Mall"}, {"Stars": 5, "customer_name": "Revathi A", "date_posted": "27-Aug-2021", "review_comments": "My hair treatment was done by Gufran Ahmed, he did an excellent job,great customer service done by him.The staff was very friendly. Happy with the service.", "review_id": "AbFvOql9Wgh1PRMp-Vhl_cGFGPii6Y-veP_uonUCCCxdyo-fEks5ni3vPgs6EPQqYDjzZYanIyb1tg", "show_it_in_website": "Yes", "stars": "5", "store_id": "Store_N77", "store_name": "Elements Mall"}, {"Stars": 5, "customer_name": "Shruthi Vasudeva K", "date_posted": "11-Dec-2025", "review_comments": "I went here for the hair cut \u0026 hair spa the service given by Shanthi \u0026 Thyagaraj was really good.I really recomend her for hairs", "review_id": "AbFvOqkDXry0O3MoeagBDAIU2Gbz8kO4bBT1J_af2vbZ0TngOXWtwvuh8rrkc9n-tulAs_uVsU0Zyw", "show_it_in_website": "Yes", "stars": "5", "store_id": "Store_N77", "store_name": "Elements Mall"}, {"Stars": 5, "customer_name": "Prathiksha Biradar", "date_posted": "14-Mar-2026", "review_comments": "Really good service, got a really good haircut from Thyagaraja, nice place", "review_id": "AbFvOqmo_vXZEv3rAJC8tpUmsPoWn0zNpwTaYVaisLUWYNV2peXvydnxqARawWd6FauQTY_Irydz", "show_it_in_website": "Yes", "stars": "5", "store_id": "Store_N77", "store_name": "Elements Mall"}, {"Stars": 5, "customer_name": "Parvathy K", "date_posted": "7-Mar-2026", "review_comments": "Very nice experience excellent customer service,iam satisfied with the service.", "review_id": "AbFvOqkC-pHww9yJoGrvBdPBClFkTfGjsUARgALVp-wi59JEFJCw4GORL3iE_0ZAQptWuCe2j2G8aA", "show_it_in_website": "Yes", "stars": "5", "store_id": "Store_N77", "store_name": "Elements Mall"}, {"Stars": 5, "customer_name": "Deepa Muni", "date_posted": "5-Mar-2026", "review_comments": "Price was reasonable and results was more than my expectations must visit", "review_id": "AbFvOqmj6j4fYjKfG4iLr9_-rXvJwzjqR2wjJmXVD7tzLpV02oKPu9vobIPa45UppmuQ8hxR9JHNsg", "show_it_in_website": "Yes", "stars": "5", "store_id": "Store_N77", "store_name": "Elements Mall"}, {"Stars": 5, "customer_name": "Gopalakrishnan Natarajan", "date_posted": "2-Mar-2026", "review_comments": "Outstanding customer service and professional care by PoorNima", "review_id": "AbFvOqnYNR4Oof8i4M30rd9hPlcqCMB4TKJk1W7pfNLqPI0Mf6Vx3HYOOQoDSa8FkMmeDFSw5zeo", "show_it_in_website": "Yes", "stars": "5", "store_id": "Store_N77", "store_name": "Elements Mall"}, {"Stars": 5, "customer_name": "Lasyasree Maddukuri", "date_posted": "2-Mar-2026", "review_comments": "I have visited the place today and got my hair cut done \u2026and mine was curly hair I really got the best output I can have and it\u2019s done by Gufran \u2026 do check it if you really need a good hair treatment", "review_id": "AbFvOqn1bEW2LLCuHw2QYGSAHJ04GBfu7PBY00RWxkT69Y6SnwE1GtiPBtmWiA3PpGzv-NmrMAOSPQ", "show_it_in_website": "Yes", "stars": "5", "store_id": "Store_N77", "store_name": "Elements Mall"}, {"Stars": 5, "customer_name": "Yallappa Madar", "date_posted": "2-Mar-2026", "review_comments": "I\u0027m soo happy with Natural salon haircut and thank you so much wodrafull extent job THYAGARAJ sir, now onwards i will visit every time and I will haircut with Thyagaraja sir...\n\nThank you soo much naturals salon\ud83e\udd1d\nAnd one\u0027s again thank you THYAGARAJ sir....\ud83e\udd1d", "review_id": "AbFvOqkFKN53brwJq7c9otpnO1BGaGACmqSkqED4R-M30d54ubFp4KVJbbTLA8LMckGRJtJjGluxyQ", "show_it_in_website": "Yes", "stars": "5", "store_id": "Store_N77", "store_name": "Elements Mall"}, {"Stars": 5, "customer_name": "Lorraine Dsouza", "date_posted": "28-Feb-2026", "review_comments": "Had a haircut and streaks done. Thank you Pramila for the wonderful job. I loved the overall experience \ud83d\ude07", "review_id": "AbFvOqmm-dkTQ3RGuKsLBsHK2-ZpbKb4ws7XMLu_MQaJgF9Bh3Nq8BPnPFpb20hp9jU2SsCCfRbp6Q", "show_it_in_website": "Yes", "stars": "5", "store_id": "Store_N77", "store_name": "Elements Mall"}, {"Stars": 5, "customer_name": "rakesh dondapati", "date_posted": "28-Feb-2026", "review_comments": "Very good service , thyagaraju did excellent job", "review_id": "AbFvOqlFkQbXhhR7FpLlY9gY0mLw5tgkgTRxKyksIPctAroyU0Zs-y8uxBrA-7oSGoU3txv5_ciy9Q", "show_it_in_website": "Yes", "stars": "5", "store_id": "Store_N77", "store_name": "Elements Mall"}, {"Stars": 5, "customer_name": "khushi sezwar", "date_posted": "8-Nov-2025", "review_comments": "Great service in this branch\nSpecial mention to poornima", "review_id": "AbFvOqmPE6Wi802MzCc0LzyMAUmUAHVFvmj71IEAQSTAOPcvD0K_dD-A5aIecKwU3tBsiUwbKZ1fgA", "show_it_in_website": "Yes", "stars": "5", "store_id": "Store_N77", "store_name": "Elements Mall"}, {"Stars": 5, "customer_name": "Vishnumaya", "date_posted": "27-Feb-2026", "review_comments": "Good service by Poornima\nThank you Poornima", "review_id": "AbFvOqlNqegjgq-9rdugSzGGoPPQ9vOeLfCFbtMMDQcZzuvPn5RhA4q6OwUMxhHZkMWMcsBhKKxdXA", "show_it_in_website": "Yes", "stars": "5", "store_id": "Store_N77", "store_name": "Elements Mall"}, {"Stars": 5, "customer_name": "Suryan V Kumar", "date_posted": "27-Feb-2026", "review_comments": "Very friendly staff ...very good service. Especially the head massage done by Mr.Thyagaraj was awesome.", "review_id": "AbFvOqklx4jXAmhAFFrWmjD-JH3enivGwmZmbIF7iKtGTXOChAl0dvdHnmCv7vhFpiTVDon86IF-Hg", "show_it_in_website": "Yes", "stars": "5", "store_id": "Store_N77", "store_name": "Elements Mall"}, {"Stars": 5, "customer_name": "Indhu nisha", "date_posted": "24-Feb-2026", "review_comments": "I visited Naturals Salon at Elements Mall for a haircut and had a great experience. The stylist did an amazing job, and I absolutely loved the cut. Highly recommend! \u2728", "review_id": "AbFvOqk-i__oISGIzxhBfKEYM3B2Ol7Z5royff8vcvirQTuuMDnrv-1v7LSqKP414cY7oTNv6eG8og", "show_it_in_website": "Yes", "stars": "5", "store_id": "Store_N77", "store_name": "Elements Mall"}, {"Stars": 5, "customer_name": "Megha Chopra", "date_posted": "23-Feb-2026", "review_comments": "Gufram is amazing staff for haircut which he provided me, explned my hair texture so well i m satisfied.", "review_id": "AbFvOqmaLkNK8EXh_SNIimD0AqehAYcFYXKTeQAAUCLgqeJAhd6JV1bUYysC9NhQ616wUMLOIbWCPw", "show_it_in_website": "Yes", "stars": "5", "store_id": "Store_N77", "store_name": "Elements Mall"}, {"Stars": 5, "customer_name": "Anushree Basu", "date_posted": "21-Feb-2026", "review_comments": "I\u0027m very happy with Gufran\u0027s service for my haircut. Amazing service!!!", "review_id": "AbFvOqlOKcoazBZnZSkpROVPhe3UBV1BRtmZ9XEevQLQQDiAO53ONdbjr5pTSfYyWRufTS4uXwWwgw", "show_it_in_website": "Yes", "stars": "5", "store_id": "Store_N77", "store_name": "Elements Mall"}, {"Stars": 5, "customer_name": "Kumkum Banerjee", "date_posted": "21-Feb-2026", "review_comments": "Satisfied with the service . Gufran is one of the best . Must recommended", "review_id": "AbFvOqksrqmt0T-31Q7ViV2eiRztf8oerVXhi7BaDmLuVhMDwqDnZGcYth058Uh7T__3QgUTPGgSEA", "show_it_in_website": "Yes", "stars": "5", "store_id": "Store_N77", "store_name": "Elements Mall"}, {"Stars": 5, "customer_name": "Bhargava Ram Dyta", "date_posted": "19-Feb-2026", "review_comments": "Great saloon! Came here for the first time and was really content with the stylist Gufran. Great service. Didn\u0027t try to pawn me off to any memberships and didn\u0027t probe for extra services.", "review_id": "AbFvOql4AeBPozfXfBKkewNpmCI-71BxNbmXwGqqVLWW6LjyRRO0SQEid0m3ZKhsifqhV4Ssmk3g0w", "show_it_in_website": "Yes", "stars": "5", "store_id": "Store_N77", "store_name": "Elements Mall"}, {"Stars": 5, "customer_name": "prathik karanam", "date_posted": "18-Feb-2026", "review_comments": "Great experience and friendly with customers special mention to Mr. Thyagaraj and Mr. Soaibh", "review_id": "AbFvOqmGBiwR57XAXXyNyWkhvUlmDczA1znWt3orJVUaBbgBp0Dl2rClB9ujVJl9o3KxQ5YwJwPJlg", "show_it_in_website": "Yes", "stars": "5", "store_id": "Store_N77", "store_name": "Elements Mall"}, {"Stars": 5, "customer_name": "ibtesam alam", "date_posted": "17-Feb-2026", "review_comments": "I went for a hair cut. My hair is long but Tyagraj took care of it very gently. I loved his politeness and he knows his work very well. I\u0027m totally satisfied with the service. Highly recommend this place. I know i would come here again. Loved it\u2764\ufe0f", "review_id": "AbFvOqlO341X3nkzujOJryolA9d24HtHjK34V9O5ZN93ApSxaFGkIPmtIw9TAuf_asUJgl_0hqVgiw", "show_it_in_website": "Yes", "stars": "5", "store_id": "Store_N77", "store_name": "Elements Mall"}, {"Stars": 5, "customer_name": "Pradeep Kumar", "date_posted": "17-Feb-2026", "review_comments": "I had best haircut here, Kudoos to Thiyagarag\ud83d\udc4d\ud83d\udc4d", "review_id": "AbFvOql0ROUMx6rSbVisD8PsZ5wcxNxcq2Nrxo7J_8Jz3OYbfbaRQx1xV5vu6aqDgNADE1RwzGsU", "show_it_in_website": "Yes", "stars": "5", "store_id": "Store_N77", "store_name": "Elements Mall"}, {"Stars": 5, "customer_name": "Swayantan Sun Maji", "date_posted": "25-Oct-2025", "review_comments": "Haircut: had a great experience with Gurfan", "review_id": "AbFvOqmJMgEkbXWFOSH0mlkJVYVmjiQfKRoid395L_mp2mI7r8Gn9J3KgqVt2NzSAlS7GGzEXjSs", "show_it_in_website": "Yes", "stars": "5", "store_id": "Store_N77", "store_name": "Elements Mall"}, {"Stars": 5, "customer_name": "Tushar Hedaoo", "date_posted": "14-Feb-2026", "review_comments": "Service is very good and gufran did it very professionally.", "review_id": "AbFvOqmD5ZweJ6MiVm6U1Sw1b3Hqc1Xs13VIdJomOSJHEs8okOWs4kT3yhk5KggLmzWuZzDmHPC1YQ", "show_it_in_website": "Yes", "stars": "5", "store_id": "Store_N77", "store_name": "Elements Mall"}, {"Stars": 5, "customer_name": "Selvi Poornima", "date_posted": "13-Feb-2026", "review_comments": "I had a wonderful experience at Naturals Salon. I recently got a haircut and I absolutely loved the result. The stylist understood exactly what I wanted and gave me a perfect look. The way they treated me was very professional and friendly. The staff made me feel comfortable throughout the service. Highly recommend this salon for great service and amazing results! \u2728", "review_id": "AbFvOqmAGr7-JDXh4PtgVRCZhHGF4BRIBhsJG-n8qc4z2ybzLAeeei6kmwnPw6X4YtNTdSYJZOAZew", "show_it_in_website": "Yes", "stars": "5", "store_id": "Store_N77", "store_name": "Elements Mall"}, {"Stars": 5, "customer_name": "Thyagaraj Chinni", "date_posted": "25-Aug-2021", "review_comments": "parmila did good job thank you\ud83d\udc4c", "review_id": "AbFvOqm8vBjcGuc_RfgFIHvKXyqXMi8zQweSECKYVLriN4uNKpjSMKFF_mXxCXQ7408cRfL7ruP3", "show_it_in_website": "Yes", "stars": "5", "store_id": "Store_N77", "store_name": "Elements Mall"}, {"Stars": 5, "customer_name": "M Ramya", "date_posted": "8-Feb-2026", "review_comments": "Good work and Tyagaraju did it will as explained\nThank you", "review_id": "AbFvOqnQz1qESIdu5xSEuTvVzrNt_nLCc7NRZmLXRbKJ-NMMtlJwBcm4m6xI8SQ_k3C8cMUnMpxDtw", "show_it_in_website": "Yes", "stars": "5", "store_id": "Store_N77", "store_name": "Elements Mall"}, {"Stars": 5, "customer_name": "mohit kumar", "date_posted": "7-Feb-2026", "review_comments": "Tyagaraju had done very well service\nAnd hair cut he done fast and it is very nice", "review_id": "AbFvOqn5ngUpyMxFAetEUI0YdLKq17AOFYDRNl62VIuS1fOXWC_LcuWmqKeORfXOPEtLV0aR8GvbSQ", "show_it_in_website": "Yes", "stars": "5", "store_id": "Store_N77", "store_name": "Elements Mall"}, {"Stars": 5, "customer_name": "Veerababu Yamalavalasa", "date_posted": "6-Feb-2026", "review_comments": "Good service ptovided by thyagaraj", "review_id": "AbFvOql1WAkh3VGnPTacbFjEEzQmQ-6oKhM6QIgWY3GrihujXUpR9lQzipaV2wD1CMiUzbTeYsmW", "show_it_in_website": "Yes", "stars": "5", "store_id": "Store_N77", "store_name": "Elements Mall"}, {"Stars": 5, "customer_name": "Varun Raj", "date_posted": "3-Feb-2026", "review_comments": "I had wonderful experience and great service from Thyagraj", "review_id": "AbFvOqmv0aGoL8EafZ23Q6a96it1KqDqw9TvwrMqL9uHXGyDoxt_i2X0pk0a2Cn8GSOg39WGrIhRHQ", "show_it_in_website": "Yes", "stars": "5", "store_id": "Store_N77", "store_name": "Elements Mall"}, {"Stars": 5, "customer_name": "triveni padatare", "date_posted": "2-Feb-2026", "review_comments": "Hair cut and hair spa, which i have received service, and good service also friendly specialist, thank you \u263a\ufe0f", "review_id": "AbFvOqkyvBiXgIYzW_wWYrHDh5PH6__oIm2E8rzwmGE2euGFjJzvxxnaAwLfAbDFCkskI4LJ5Lq3xA", "show_it_in_website": "Yes", "stars": "5", "store_id": "Store_N77", "store_name": "Elements Mall"}, {"Stars": 5, "customer_name": "Uzma Tahseen", "date_posted": "1-Feb-2026", "review_comments": "My daughter had a wonderful haircut experience at Naturals. Mr.Gufran has amazing skills and helps you achieve the desired haircut.", "review_id": "AbFvOqkw0LMOUuDfVhlGRsVyIXL8vYL6lz4m5A7WO66EIMCLxM2kJo1NJJ7f3TOnnSIuwhfx3SE5RA", "show_it_in_website": "Yes", "stars": "5", "store_id": "Store_N77", "store_name": "Elements Mall"}, {"Stars": 5, "customer_name": "Rahul S", "date_posted": "1-Feb-2026", "review_comments": "Came here to do a Pedicure and had a great time under the service of Thyagarajar (Thank you)\nHe gave very good leg massage and i was very good with the Pedicure service.\n\nI did Deep sea Pedicure and recommend it.", "review_id": "AbFvOqmuS2TUPwjGhkudlRCo5wpvOloSZIkaUzOeOb3YEBNhl9KS6jU_IrjrtXSkZ_jVOvJBr7CtNw", "show_it_in_website": "Yes", "stars": "5", "store_id": "Store_N77", "store_name": "Elements Mall"}, {"Stars": 5, "customer_name": "Muthu Lakshmi", "date_posted": "1-Feb-2026", "review_comments": "I did my Pedicure for the second time here and I felt really relaxed and clean.\nPoornima helped me with the right pedicure for my leg and her service was really commendable. The massage was too good and I had a great time during the pedicure", "review_id": "AbFvOqkPj43VpxWmni-X2ye4fG_M-a8W1r2swRKJqoEyuU0OaLEaMAgBxlp2budiHhUkpV0N9bVRHw", "show_it_in_website": "Yes", "stars": "5", "store_id": "Store_N77", "store_name": "Elements Mall"}, {"Stars": 5, "customer_name": "VISHNU N", "date_posted": "31-Jan-2026", "review_comments": "Very good service by tyagarajan", "review_id": "AbFvOqk8h2hN_1RVql9BZ4xFaLCu9UNwsBMG5gcT2CBPUGDrHzJdV6DTDenll2n01lqZ7DMhr-BuaQ", "show_it_in_website": "Yes", "stars": "5", "store_id": "Store_N77", "store_name": "Elements Mall"}, {"Stars": 5, "customer_name": "parvathy ulaganathan", "date_posted": "31-Jan-2026", "review_comments": "Excellent service by Pournima..", "review_id": "AbFvOqmG-UUUcVN_I8l0SxFSBwnCI9FgCINKMjCCiDB06wIXvreUWPDptbF0REDwFj-RDxfqjwyt", "show_it_in_website": "Yes", "stars": "5", "store_id": "Store_N77", "store_name": "Elements Mall"}, {"Stars": 5, "customer_name": "Deepti Patil", "date_posted": "31-Jan-2026", "review_comments": "Liked the service", "review_id": "AbFvOqkfNzz4gGO5M9nXbnvgOdUkWe8m_nG6X8Ute1VOOb2mvrWxCE93oGdFskSiikXkqyCtyNalAQ", "show_it_in_website": "Yes", "stars": "5", "store_id": "Store_N77", "store_name": "Elements Mall"}, {"Stars": 5, "customer_name": "vijaya sri", "date_posted": "30-Jan-2026", "review_comments": "Poornima good service to the customer", "review_id": "AbFvOqn-oDX3uVUOQSIEpaat7Eqy9yKYS21Ne4fdZuJl2SpyMhFEFqXKtilxrNPnapBiillps_3COg", "show_it_in_website": "Yes", "stars": "5", "store_id": "Store_N77", "store_name": "Elements Mall"}, {"Stars": 5, "customer_name": "Samana K", "date_posted": "28-Jan-2026", "review_comments": "good service by Thyagaraj", "review_id": "AbFvOqnUbPMUMI4mZz3dTG2ToPBY7Xsyc9XsiTDHmlsgjQOzstu_jl0Rdmd-MkOMFZHhpd9LcxVh5g", "show_it_in_website": "Yes", "stars": "5", "store_id": "Store_N77", "store_name": "Elements Mall"}];
-
-// State management
-let isModalOpen = false;
-let currentReviews = [];
-let isLoading = false;
-
-// Open reviews modal
-function openReviewsModal() {
-if (isModalOpen || isLoading) return;
-
-isModalOpen = true;
-isLoading = true;
-
-const modal = document.getElementById('reviewsModal');
-const content = document.getElementById('modalReviewsContent');
-
-// Show modal
-modal.classList.add('active');
-document.body.style.overflow = 'hidden';
-
-// Show loading state
-content.innerHTML = '<div class="modal-loading"><div class="modal-loading-spinner"></div><p>Loading amazing reviews...</p></div>';
-
-// Load reviews with lazy loading
-setTimeout(() => {
-loadReviewsInBatches();
-}, 300);
-}
-
-// Close reviews modal
-function closeReviewsModal() {
-isModalOpen = false;
-const modal = document.getElementById('reviewsModal');
-modal.classList.remove('active');
-document.body.style.overflow = '';
-}
-
-// Load reviews in batches for performance
-function loadReviewsInBatches() {
-const content = document.getElementById('modalReviewsContent');
-const batchSize = 20; // Load 20 reviews at a time
-let currentIndex = 0;
-
-// Sort reviews by date_posted descending
-const sortedReviews = [...storeReviews].sort((a, b) => {
-const dateA = new Date(a.date_posted);
-const dateB = new Date(b.date_posted);
-return dateB - dateA;
-});
-
-currentReviews = sortedReviews;
-
-function loadBatch() {
-if (currentIndex >= sortedReviews.length) {
-isLoading = false;
-return;
-}
-
-const batch = sortedReviews.slice(currentIndex, currentIndex + batchSize);
-const batchHtml = batch.map(review => createReviewCard(review)).join('');
-
-if (currentIndex === 0) {
-content.innerHTML = batchHtml;
-} else {
-content.innerHTML += batchHtml;
-}
-
-currentIndex += batchSize;
-
-// Load next batch if user scrolls near bottom or if first batch
-if (currentIndex < sortedReviews.length) {
-if (currentIndex === batchSize || content.scrollHeight - content.scrollTop <= content.clientHeight + 200) {
-setTimeout(loadBatch, 100);
-}
-}
-}
-
-// Load first batch immediately
-loadBatch();
-
-// Add scroll listener for lazy loading
-content.addEventListener('scroll', () => {
-if (content.scrollHeight - content.scrollTop <= content.clientHeight + 200) {
-loadBatch();
-}
-});
-}
-
-// Create review card HTML
-function createReviewCard(review) {
-const stars = '★'.repeat(parseInt(review.stars || 5));
-const initial = review.customer_name ? review.customer_name.charAt(0).toUpperCase() : 'A';
-
-return `
-<div class="rev-card reveal">
-<div class="rev-stars">${stars}</div>
-<div class="rev-text">"${review.review_comments}"</div>
-<div class="rev-user">
-<div class="rev-user-img">${initial}</div>
-<div class="rev-user-info">
-<div class="rev-name">${review.customer_name}</div>
-<div class="rev-store">${review.store_name}</div>
-</div>
-</div>
-</div>
-`;
-}
-
-// Close modal on escape key
-document.addEventListener('keydown', (e) => {
-if (e.key === 'Escape' && isModalOpen) {
-closeReviewsModal();
-}
-});
-
-// Close modal on background click
-document.getElementById('reviewsModal').addEventListener('click', (e) => {
-if (e.target.id === 'reviewsModal') {
-closeReviewsModal();
-}
-});
-</script>
-
-<footer>
-<div class="ft-top">
-<div class="ft-brand-col">
-<div class="ft-brand">Naturals <span>Salon &amp; Spa</span></div>
-<div class="ft-tagline">India's most trusted salon network.<br>Premium beauty services across Bangalore.</div>
-</div>
-<div class="ft-col">
-<div class="ft-col-title">Explore</div>
-<ul>
-<li><a href="/services/">Services &amp; Pricing</a></li>
-<li><a href="/offers/">Offers</a></li>
-<li><a href="/careers/bangalore/">Careers</a></li>
-<li><a href="/contact/">Contact Us</a></li>
-<li><a href="/about/">About Us</a></li>
-</ul>
-</div>
-<div class="ft-col">
-<div class="ft-col-title">Locations</div>
-<ul>
-</ul>
-</div>
-<div class="ft-col">
-<div class="ft-col-title">Policies</div>
-<ul>
-<li><a href="/booking-policy/">Booking Policy</a></li>
-<li><a href="/cancellation-policy/">Cancellation Policy</a></li>
-<li><a href="https://naturals.in" target="_blank" rel="noopener">Naturals India &#8599;</a></li>
-</ul>
-</div>
-</div>
-<div class="ft-bottom">
-<div class="ft-copy">&copy; 2026 Naturals Salon &amp; Spa, Bangalore. All rights reserved.</div>
-<div class="ft-url">naturals-blr.github.io</div>
-</div>
-</footer>
-
 </body>
 </html>

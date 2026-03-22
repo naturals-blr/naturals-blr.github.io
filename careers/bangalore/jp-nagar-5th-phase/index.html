@@ -1159,9 +1159,19 @@ Our salon is located in , Bangalore. As part of India's most trusted salon netwo
 footer {
 background: #080f0b;
 width: 100%;
+margin: 0;
+padding: 40px 0;
 display: block;
 }
 [data-theme="naturals"] footer { background: #0D0120; }
+
+/* Fix 2: Apply Full-Width CSS - ensure footer stretches full viewport */
+.footer-section {
+width: 100% !important;
+margin: 0 !important;
+padding: 40px 0 !important;
+background-color: #080f0b !important;
+}
 
 /* ── ft-top: 4-col grid, padding mirrors page gutters (60px) ────── */
 .ft-top {

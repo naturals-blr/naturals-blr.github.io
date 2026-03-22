@@ -405,16 +405,34 @@ border-top:1px solid rgba(255,255,255,0.06);
 </style>
 
 <style>
-.rev-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:24px;max-width:1200px;margin:0 auto;}
-.rev-card{background:#fff;padding:32px;border-radius:24px;border:1px solid rgba(0,0,0,0.06);box-shadow:0 10px 40px rgba(0,0,0,0.04);display:flex;flex-direction:column;gap:18px;transition:all 0.3s ease;position:relative;}
-.rev-card:hover{transform:translateY(-6px);box-shadow:0 20px 60px rgba(0,0,0,0.08);border-color:var(--gold);}
-.rev-stars{color:var(--gold);font-size:14px;display:flex;gap:4px;letter-spacing:1px;}
-.rev-text{font-size:15px;color:var(--text-mid);line-height:1.75;font-style:italic;flex:1;font-weight:300;}
-.rev-user{display:flex;align-items:center;gap:14px;border-top:1px solid rgba(0,0,0,0.04);padding-top:16px;}
-.rev-user-img{width:42px;height:42px;border-radius:50%;background:var(--green);color:#fff;display:flex;align-items:center;justify-content:center;font-weight:600;font-size:14px;text-transform:uppercase;box-shadow:0 4px 12px rgba(0,0,0,0.1);}
-.rev-user-info{display:flex;flex-direction:column;}
-.rev-name{font-size:14px;font-weight:600;color:var(--text);letter-spacing:0.5px;}
-.rev-store{font-size:10px;color:var(--gold);text-transform:uppercase;letter-spacing:2px;font-weight:600;margin-top:2px;}
+@import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700&family=Montserrat:wght@300;400;500;600&family=Inter:wght@400;500;600&display=swap');
+
+.rev-grid{display:grid;grid-template-columns:repeat(auto-fill, minmax(300px, 1fr));gap:15px;max-width:1200px;margin:0 auto;}
+.rev-card{background:#fff;border:1px solid #eee;border-radius:12px;box-shadow:0 2px 4px rgba(0,0,0,0.05);padding:15px;transition:all 0.3s ease;position:relative;break-inside:avoid;margin-bottom:15px;}
+.rev-card:hover{transform:translateY(-2px);box-shadow:0 4px 12px rgba(0,0,0,0.08);border-color:#D4AF37;}
+
+/* Tile Header - Inline Layout */
+.rev-header{display:flex;align-items:center;justify-content:space-between;margin-bottom:12px;}
+.rev-header-left{display:flex;align-items:center;gap:10px;}
+.rev-user-img{width:32px;height:32px;border-radius:50%;background:linear-gradient(135deg,var(--gold),#b8941f);color:#fff;display:flex;align-items:center;justify-content:center;font-size:14px;font-weight:600;font-family:'Inter',sans-serif;flex-shrink:0;}
+.rev-name{font-family:'Inter',sans-serif;font-size:14px;font-weight:600;color:#2c2c2c;line-height:1.2;margin:0;display:flex;align-items:center;gap:6px;}
+.rev-name .rev-stars{color:#D4AF37;font-size:12px;display:inline-flex;gap:1px;letter-spacing:0.5px;margin-left:6px;}
+.rev-header-right{display:flex;align-items:center;gap:6px;}
+.rev-google-icon{width:16px;height:16px;background:#4285f4;border-radius:2px;display:flex;align-items:center;justify-content:center;color:#fff;font-size:10px;font-weight:600;font-family:'Inter',sans-serif;}
+.rev-verified-text{font-family:'Inter',sans-serif;font-size:10px;color:#888;font-weight:400;}
+
+/* Content Handling - Full Text */
+.rev-content{margin-bottom:8px;}
+.rev-text{font-family:'Inter',sans-serif;font-size:13px;color:#4a4a4a;line-height:1.5;font-weight:400;margin:0;}
+
+/* Mobile Responsiveness */
+@media(max-width:768px){
+.rev-grid{grid-template-columns:1fr;gap:12px;}
+.rev-card{padding:12px;}
+.rev-header{margin-bottom:10px;}
+.rev-name{font-size:13px;}
+.rev-text{font-size:12px;}
+}
 
 /* Enhanced Reviews Features */
 .reviews-snippet{margin-bottom:24px;}
@@ -423,24 +441,74 @@ border-top:1px solid rgba(255,255,255,0.06);
 /* Wall of Love Modal */
 .modal-overlay{position:fixed;inset:0;background:rgba(0,0,0,0.6);display:flex;align-items:center;justify-content:center;z-index:9999;opacity:0;visibility:hidden;transition:all 0.3s ease;padding:20px;}
 .modal-overlay.active{opacity:1;visibility:visible;}
-.modal-content{background:#fff;border-radius:24px;max-width:800px;width:100%;max-height:85vh;height:100%;display:flex;flex-direction:column;transform:scale(0.9);transition:all 0.3s ease;}
+.modal-content{background:#fff;border-radius:20px;max-width:1000px;width:100%;max-height:90vh;height:100%;display:flex;flex-direction:column;transform:scale(0.9);transition:all 0.3s ease;overflow-y:auto;}
 .modal-overlay.active .modal-content{transform:scale(1);}
-.modal-header{padding:24px 24px 16px;border-bottom:1px solid rgba(0,0,0,0.06);display:flex;align-items:center;justify-content:space-between;flex-shrink:0;}
-.modal-title{font-family:'Cormorant Garamond',serif;font-size:24px;font-weight:300;color:var(--text);}
-.modal-title em{color:var(--gold);font-style:italic;}
-.modal-close{width:40px;height:40px;background:var(--cream);border:none;border-radius:50%;display:flex;align-items:center;justify-content:center;cursor:pointer;border:1px solid rgba(0,0,0,0.06);transition:all 0.2s ease;}
-.modal-close:hover{background:var(--gold);color:#fff;}
-.modal-close svg{width:20px;height:20px;}
-.modal-body{flex:1;overflow-y:auto;padding:24px;}
+.modal-header{padding:16px 24px 12px;border-bottom:1px solid #f0f0f0;position:sticky;top:0;z-index:10;background:#fff;}
+.modal-title{font-family:'Inter',sans-serif;font-size:18px;font-weight:600;color:#2c2c2c;margin:0;}
+.modal-close{width:32px;height:32px;position:absolute;top:16px;right:16px;background:none;border:none;cursor:pointer;color:#666;display:flex;align-items:center;justify-content:center;border-radius:50%;transition:all 0.2s ease;}
+.modal-close:hover{background:#f5f5f5;color:#333;}
+.modal-close svg{width:16px;height:16px;}
+.modal-body{padding:16px 24px;overflow-y:visible;flex:1;min-height:0;}
+
+/* Modal Cards - Nuclear Fix: Break All Context */
+.modal-body .rev-card{display:block !important;flex-direction:column !important;align-items:flex-start !important;width:100% !important;background:#fff;border:1px solid #eee;border-radius:12px;box-shadow:0 2px 4px rgba(0,0,0,0.05);padding:15px;transition:all 0.3s ease;position:relative;}
+.modal-body .rev-card:hover{transform:translateY(-2px);box-shadow:0 4px 12px rgba(0,0,0,0.08);border-color:#D4AF37;}
+
+/* Modal Header Row - Gap Reset */
+.modal-body .rev-header-row{margin-bottom:0 !important;padding-bottom:0 !important;}
+
+/* Modal Grid - Force Grid Layout */
+.modal-body .rev-grid{display:grid !important;grid-template-columns:repeat(auto-fill, minmax(300px, 1fr)) !important;gap:15px !important;max-width:none;margin:0;column-count:auto !important;}
+@media(max-width:768px){
+.modal-body .rev-grid{grid-template-columns:1fr !important;gap:12px !important;}
+}
+
+/* Modal Content Row - Force Clear */
+.modal-body .rev-content-row{clear:both !important;display:block !important;padding-top:5px;width:100%;}
+.modal-body .rev-content{white-space:normal !important;font-family:'Inter',sans-serif;font-size:13px;color:#4a4a4a;line-height:1.5;font-weight:400;margin:0;padding-top:2px !important;}
+
+/* Modal Header - Inline Styles Override */
+.modal-body .rev-header{display:flex;align-items:center;justify-content:space-between;margin-bottom:0;}
+.modal-body .rev-header-left{display:flex;align-items:center;gap:10px;}
+.modal-body .rev-avatar{width:32px;height:32px;border-radius:50%;background:linear-gradient(135deg,var(--gold),#b8941f);color:#fff;display:flex;align-items:center;justify-content:center;font-size:14px;font-weight:600;font-family:'Inter',sans-serif;flex-shrink:0;}
+.modal-body .rev-name-stars{display:flex;flex-direction:column;gap:2px;}
+.modal-body .rev-name{font-family:'Inter',sans-serif;font-size:14px;font-weight:600;color:#2c2c2c;line-height:1.2;margin:0;}
+.modal-body .rev-stars{color:#D4AF37;font-size:12px;display:inline-flex;gap:1px;letter-spacing:0.5px;}
+.modal-body .google-icon{display:flex;align-items:center;gap:6px;}
+.modal-body .google-icon img{width:16px;height:16px;}
+
 .modal-reviews{display:grid;gap:16px;}
 .modal-loading{text-align:center;padding:40px;color:var(--text-mid);}
 .modal-loading-spinner{width:40px;height:40px;border:3px solid var(--cream);border-top:3px solid var(--gold);border-radius:50%;animation:spin 1s linear infinite;margin:0 auto 16px;}
 @keyframes spin{0%{transform:rotate(0deg);}100%{transform:rotate(360deg);}}
 
 /* Read All Reviews Button */
-.read-all-btn{display:flex;align-items:center;justify-content:center;width:100%;padding:16px;background:var(--gold);color:#fff;border-radius:16px;font-weight:500;font-size:15px;transition:all 0.3s ease;text-decoration:none;border:none;cursor:pointer;}
-.read-all-btn:hover{background:var(--gold-dark);transform:translateY(-2px);box-shadow:0 8px 25px rgba(201,161,94,0.3);}
-.read-all-btn svg{width:20px;height:20px;margin-right:8px;}
+.read-all-btn, .read-all-reviews-btn {
+background-color: #c19b4a !important; /* Your brand gold */
+color: #ffffff !important; /* Force white text */
+display: inline-flex;
+align-items: center;
+justify-content: center;
+padding: 12px 24px;
+border-radius: 8px;
+font-weight: 600;
+transition: background-color 0.3s ease;
+text-decoration: none;
+border: none;
+cursor: pointer;
+width: 100%;
+}
+
+.read-all-btn:hover, .read-all-reviews-btn:hover {
+background-color: #a8853b !important;
+color: #ffffff !important;
+}
+
+.read-all-btn svg, .read-all-reviews-btn svg {
+width: 20px;
+height: 20px;
+margin-right: 8px;
+}
 
 /* Mobile Optimizations */
 @media(max-width:640px){
@@ -453,14 +521,89 @@ border-top:1px solid rgba(255,255,255,0.06);
 .modal-close svg{width:18px;height:18px;}
 }
 
-@media(max-width:992px){
-.rev-grid{grid-template-columns:1fr 1fr;gap:20px;}
+/* CSS Sledgehammer: Force review cards to be visible */
+.modal-body .review-card { 
+display: flex !important; 
+opacity: 1 !important; 
+visibility: visible !important; 
+color: #333 !important; 
 }
-@media(max-width:640px){
-.rev-grid{grid-template-columns:1fr;}
-.rev-card{padding:24px;}
+.modal-body .rev-card { 
+display: flex !important; 
+opacity: 1 !important; 
+visibility: visible !important; 
+color: #333 !important; 
+align-items: center !important;
+padding: 12px 16px !important;
+margin-bottom: 8px !important;
+border-radius: 8px !important;
+min-height: auto !important;
+}
+
+/* Modal-specific compact styling */
+.modal-body .rev-grid {
+grid-template-columns: 1fr !important;
+gap: 0 !important;
+padding: 0 !important;
+}
+
+.modal-body .rev-card {
+grid-template-columns: 80px 1fr 60px !important;
+padding: 8px 0 !important;
+gap: 12px !important;
+border-bottom: 1px solid #eee !important;
+}
+
+.modal-body .rev-card:hover {
+transform: none !important;
+background: linear-gradient(90deg, rgba(212,175,55,0.02) 0%, rgba(255,248,220,0.03) 100%) !important;
+}
+
+.modal-body .rev-identity { gap: 8px !important; }
+.modal-body .rev-user-img { width: 28px !important; height: 28px !important; font-size: 12px !important; }
+.modal-body .rev-name { font-size: 12px !important; }
+.modal-body .rev-name .rev-stars { font-size: 10px !important; margin-left: 4px !important; }
+.modal-body .rev-content { gap: 0 !important; }
+.modal-body .rev-text { font-size: 11px !important; color: #666 !important; }
+.modal-body .read-more { font-size: 10px !important; margin-left: 4px !important; }
+.modal-body .verified-badge { font-size: 7px !important; padding: 1px 4px !important; }
+.modal-body .source-text { font-size: 9px !important; }
+
+/* Read More functionality */
+.read-more { 
+font-family: 'Montserrat', sans-serif !important; 
+font-size: 11px !important; 
+color: #D4AF37 !important; 
+font-weight: 400 !important; 
+font-style: italic !important;
+cursor: pointer !important; 
+text-decoration: none !important; 
+margin-left: 8px !important; 
+display: inline !important; 
+transition: all 0.2s ease !important; 
+background: none !important; 
+border: none !important; 
+padding: 0 !important;
+}
+.read-more:hover { 
+color: #b8941f !important; 
+text-decoration: underline !important; 
 }
 </style>
+
+<script>
+// Toggle review text expansion
+function toggleReviewText(textId) {
+const textElement = document.getElementById(textId);
+if (textElement) {
+textElement.classList.toggle('expanded');
+const readMoreLink = textElement.nextElementSibling;
+if (readMoreLink && readMoreLink.classList.contains('read-more')) {
+readMoreLink.textContent = textElement.classList.contains('expanded') ? 'Read Less' : 'Read More';
+}
+}
+}
+</script>
 
 <script>(function(){var t=localStorage.getItem('naturals-theme')||'luxury';document.documentElement.setAttribute('data-theme',t);})();</script>
 
@@ -1491,51 +1634,95 @@ alt="Stella" width="300" height="400" loading="lazy">
 <div class="reviews-snippet">
 <div class="rev-grid" style="grid-template-columns:1fr;gap:16px;margin-bottom:24px;">
 <div class="rev-card reveal">
+
+<div class="rev-header">
+<div class="rev-header-left">
+<div class="rev-user-img">L</div>
+<div class="rev-name">
+Lumina P
 <div class="rev-stars">
 ★★★★★ </div>
+</div>
+</div>
+<div class="rev-header-right">
+<div class="rev-google-icon">G</div>
+<div class="rev-verified-text">Verified via Google</div>
+</div>
+</div>
+
+
+<div class="rev-content">
 <div class="rev-text">"Very good service by Stella
 I really liked it very much"</div>
-<div class="rev-user">
-<div class="rev-user-img">L</div>
-<div class="rev-user-info">
-<div class="rev-name">Lumina P</div>
-</div>
 </div>
 </div>
 
 <div class="rev-card reveal">
-<div class="rev-stars">
-★★★★★ </div>
-<div class="rev-text">"Excellent service by Shoiab"</div>
-<div class="rev-user">
+
+<div class="rev-header">
+<div class="rev-header-left">
 <div class="rev-user-img">A</div>
-<div class="rev-user-info">
-<div class="rev-name">Aniketh Dilip</div>
+<div class="rev-name">
+Aniketh Dilip
+<div class="rev-stars">
+★★★★★ </div>
 </div>
+</div>
+<div class="rev-header-right">
+<div class="rev-google-icon">G</div>
+<div class="rev-verified-text">Verified via Google</div>
+</div>
+</div>
+
+
+<div class="rev-content">
+<div class="rev-text">"Excellent service by Shoiab"</div>
 </div>
 </div>
 
 <div class="rev-card reveal">
+
+<div class="rev-header">
+<div class="rev-header-left">
+<div class="rev-user-img">J</div>
+<div class="rev-name">
+jaya prabha
 <div class="rev-stars">
 ★★★★★ </div>
+</div>
+</div>
+<div class="rev-header-right">
+<div class="rev-google-icon">G</div>
+<div class="rev-verified-text">Verified via Google</div>
+</div>
+</div>
+
+
+<div class="rev-content">
 <div class="rev-text">"Excellent service, I have been visiting this salon for 5 years, very polite staff. Shout out to Shikaa and Stella for their Excellent service !"</div>
-<div class="rev-user">
-<div class="rev-user-img">j</div>
-<div class="rev-user-info">
-<div class="rev-name">jaya prabha</div>
-</div>
 </div>
 </div>
 
 <div class="rev-card reveal">
+
+<div class="rev-header">
+<div class="rev-header-left">
+<div class="rev-user-img">V</div>
+<div class="rev-name">
+V E
 <div class="rev-stars">
 ★★★★★ </div>
+</div>
+</div>
+<div class="rev-header-right">
+<div class="rev-google-icon">G</div>
+<div class="rev-verified-text">Verified via Google</div>
+</div>
+</div>
+
+
+<div class="rev-content">
 <div class="rev-text">"Shikha's service is good"</div>
-<div class="rev-user">
-<div class="rev-user-img">V</div>
-<div class="rev-user-info">
-<div class="rev-name">V E</div>
-</div>
 </div>
 </div>
 
@@ -1543,11 +1730,11 @@ I really liked it very much"</div>
 </div>
 
 
-<button class="read-all-btn" onclick="openReviewsModal()">
+<button class="read-all-btn" onclick="openModal()">
 <svg fill="currentColor" viewBox="0 0 24 24">
 <path d="M12 2l3.09 6.26L22 9.27l-6.91 1.01L12 22l-3.09-5.72L2 9.27l6.91-1.01L12 2z"/>
 </svg>
-Read All 43 5-Star Reviews
+View All 5-Star Reviews
 </button>
 
 <a href="https://g.page/Naturals-Hennur/review?rc/" target="_blank" rel="noopener" class="btn-primary" style="margin-top:16px;">
@@ -1588,6 +1775,8 @@ Facebook</a>
 <a href="../index.html#our-stores" class="sn-mid">All 5 Bangalore Locations</a>
 <a href="stores/bangalore/jp-nagar-5th-phase/" class="sn-link">JP Nagar 5th Phase &#8594;</a>
 </div>
+
+<div style="clear: both;"></div>
 
 <footer>
 <div class="ft-top">
@@ -1640,9 +1829,19 @@ Facebook</a>
 footer {
 background: #080f0b;
 width: 100%;
+margin: 0;
+padding: 40px 0;
 display: block;
 }
 [data-theme="naturals"] footer { background: #0D0120; }
+
+/* Fix 2: Apply Full-Width CSS - ensure footer stretches full viewport */
+.footer-section {
+width: 100% !important;
+margin: 0 !important;
+padding: 40px 0 !important;
+background-color: #080f0b !important;
+}
 
 /* ── ft-top: 4-col grid, padding mirrors page gutters (60px) ────── */
 .ft-top {
@@ -2182,6 +2381,241 @@ if(typeof window._applyStickyStore==='function') window._applyStickyStore(saved)
 });
 </script>
 
+<script>
+// Store reviews data
+const storeReviews = [{"Stars": 5, "customer_name": "Lumina P", "date_posted": "21-Mar-2026", "review_comments": "Very good service by Stella\nI really liked it very much", "review_id": "AbFvOqnaMqPB9iTKSaZW41xPsY34VwpFSBWmhqIocwPiiyDnpya7Y4bl3K_MaYKf6iow2eTxvZ8a", "show_it_in_website": "Yes", "stars": "5", "store_id": "Store_N43", "store_name": "Hennur"}, {"Stars": 5, "customer_name": "Aniketh Dilip", "date_posted": "21-Mar-2026", "review_comments": "Excellent service by Shoiab", "review_id": "AbFvOqkUflS0pEW2hEluz1Y7vNPaaUeoTvkNcFRe6nsqoxHTFSKDKh0VkwdcGBAKuQ7bIVUdZg_6yQ", "show_it_in_website": "Yes", "stars": "5", "store_id": "Store_N43", "store_name": "Hennur"}, {"Stars": 5, "customer_name": "jaya prabha", "date_posted": "21-Mar-2026", "review_comments": "Excellent service, I have been visiting this salon for 5 years, very polite staff. Shout out to Shikaa and Stella for their Excellent service !", "review_id": "AbFvOqlfcQFb5tTMkDnjYTeSfu82Nqot4wcfsmulwbRHnlkdmXRQWfw6Q1olSaT7tT8Cw3uLjdX-", "show_it_in_website": "Yes", "stars": "5", "store_id": "Store_N43", "store_name": "Hennur"}, {"Stars": 5, "customer_name": "V E", "date_posted": "21-Mar-2026", "review_comments": "Shikha\u0027s service is good", "review_id": "AbFvOqkifIQo10a7iCq5CxbX8sxwMFKXB30qIv87eR2h3cVIPV5iNB9dUMGFUj29L3ucsfLBE6Gm4A", "show_it_in_website": "Yes", "stars": "5", "store_id": "Store_N43", "store_name": "Hennur"}, {"Stars": 5, "customer_name": "Safiya K", "date_posted": "20-Mar-2026", "review_comments": "I get my eyebrows done by the trustworthy Shikha who is always there for guidance as well as her work is top notch and really professional.\nShe is my family\u2019s go to person for any beauty services here in Bangalore! Highly recommend her if you visit the branch.", "review_id": "AbFvOqkrLPs_aoFgPgDaHlF5rAfnmz8ESQKNlWI2oOXXC46h8WW9xHFOuj0Od4fEEcERinmdFoplWQ", "show_it_in_website": "Yes", "stars": "5", "store_id": "Store_N43", "store_name": "Hennur"}, {"Stars": 5, "customer_name": "Haseeb Kanji", "date_posted": "20-Mar-2026", "review_comments": "Shoaib gave good service , overall good experience", "review_id": "AbFvOqla1bSAvHGMTUHuqJLm2czaQmDKt4OWR07W9D5Nw1O3qul80uqfvQocjmenBMnGblWhTTGVsg", "show_it_in_website": "Yes", "stars": "5", "store_id": "Store_N43", "store_name": "Hennur"}, {"Stars": 5, "customer_name": "lionel calebs", "date_posted": "20-Mar-2026", "review_comments": "I had an amazing service by Shikha.\nHad a good Har wash service done by her she carried it very patiently and neatly I would prefer her again back for my hair wash", "review_id": "AbFvOqkm7xK4A-dU3Vnb7RZj196qi6MtrTAXAw7LACdzOAiqkD05S4M9MXALeAsU2oswH1T4e6x1WQ", "show_it_in_website": "Yes", "stars": "5", "store_id": "Store_N43", "store_name": "Hennur"}, {"Stars": 5, "customer_name": "Esther Kumar", "date_posted": "20-Mar-2026", "review_comments": "Thank you Shikha. You are awesome!!", "review_id": "AbFvOqmvRA2V5IowcthQ7GY8KWqA19NAwCYGxvjcoijJLsYs2u9gECc1OkD8pGcOFjkKY2VbaPhiBw", "show_it_in_website": "Yes", "stars": "5", "store_id": "Store_N43", "store_name": "Hennur"}, {"Stars": 5, "customer_name": "Sajeed Munshi", "date_posted": "20-Mar-2026", "review_comments": "Thanks stella for a wonderful facial...\nVery professional and knowledgeable..\nThanks to Asif for great hair cut...", "review_id": "AbFvOqnKnVC9Lyfl9FFeoyp8jCVQWDz6TN3wqUrQX3qoOCeRFYsKpsuz42QcBg1MF6pn2pS4infw", "show_it_in_website": "Yes", "stars": "5", "store_id": "Store_N43", "store_name": "Hennur"}, {"Stars": 5, "customer_name": "Krishna Sukumaran", "date_posted": "20-Mar-2026", "review_comments": "Had a great experience, thanks to Shikha.", "review_id": "AbFvOqkYejDIfrmR4XsujrI5F3EbJtCAhTiiqP3HEv6hWG4PC7EdzYNRKvv4M76jQcLhiEkGb6_UMw", "show_it_in_website": "Yes", "stars": "5", "store_id": "Store_N43", "store_name": "Hennur"}, {"Stars": 5, "customer_name": "Shaista Banu", "date_posted": "19-Mar-2026", "review_comments": "Stella is the go to person for hair colour, facial and all other services. She just know what the person needs and how to deliver it so the customer is fully satisfied. Appreciate her level of dedication and care for the customer. She is brilliant in her work.", "review_id": "AbFvOqlGeVgVZtDVM-5CcGDDnnIgjX1xE0wfULTLu7qSbYBSiSTh3ULVBEFwp22idRT2V9OK93xL", "show_it_in_website": "Yes", "stars": "5", "store_id": "Store_N43", "store_name": "Hennur"}, {"Stars": 5, "customer_name": "Yellapu Archana", "date_posted": "19-Mar-2026", "review_comments": "Excellent service by Stella. Thank you naturals.", "review_id": "AbFvOqmStSu5fyqw8A4jhr4U61Hs52Aw4DbQoFB7U4NVmniYzGYVoZlGclyHP1EPSl3T91Ixt89TuA", "show_it_in_website": "Yes", "stars": "5", "store_id": "Store_N43", "store_name": "Hennur"}, {"Stars": 5, "customer_name": "Faiza Banu", "date_posted": "22-Dec-2024", "review_comments": "Shikha has been my go-to for beauty services like facials, waxing, and pedicures, and I couldn\u2019t be happier with her work. She is professional, attentive, and ensures a very comfortable experience every time. Her attention to detail and commitment to hygiene really stand out. I am truly satisfied with her services and always leave feeling refreshed and well taken care of. I highly recommend her to anyone looking for quality beauty services.\n\nI recommend Stella for her tremendous job in giving me a perfect haircut.\n\nTruly satisfied with the staff here. Thank you!", "review_id": "AbFvOqmC8GiNVoZvMkKZvegnp-b-3_WJN2nh7dCu1UCzLbumBY1_LpO1RMcC5YC45iOD9ZenYnAqzQ", "show_it_in_website": "Yes", "stars": "5", "store_id": "Store_N43", "store_name": "Hennur"}, {"Stars": 5, "customer_name": "Hacker Boy4u", "date_posted": "14-Mar-2026", "review_comments": "It good experience in haircut and other services and behavior as well good", "review_id": "AbFvOqnsxM4uNs2JKW8ECy0Z0ytela1vtuh4ZUWks5l0XpU8f_1umVXWdxe3R_blljAht_ajLQ39Cg", "show_it_in_website": "Yes", "stars": "5", "store_id": "Store_N43", "store_name": "Hennur"}, {"Stars": 5, "customer_name": "Shubham Khangaonkar", "date_posted": "14-Mar-2026", "review_comments": "Great service by Shoaib", "review_id": "AbFvOqnSpXoXh8gHb0wARQtf89pg0U3NckR5MzvkQRD03-fF4SA_z4eQ5NuPqIZ186mO5h5XADSV", "show_it_in_website": "Yes", "stars": "5", "store_id": "Store_N43", "store_name": "Hennur"}, {"Stars": 5, "customer_name": "Harshita Ramanathan", "date_posted": "13-Mar-2026", "review_comments": "Got a hair massage by Shikha, it was amazing!!!! I\u2019d definitely recommend, she also takes care of the pressure well!!", "review_id": "AbFvOqkSa2rGRjtDuMm_xr55k9QWOXdHTPai3PfG_Yk9Kxy_faFVTadQZPDGg8SFl1WaKdnvVJSx8g", "show_it_in_website": "Yes", "stars": "5", "store_id": "Store_N43", "store_name": "Hennur"}, {"Stars": 5, "customer_name": "Gifty Isabella", "date_posted": "13-Mar-2026", "review_comments": "Good service with excellent professionals", "review_id": "AbFvOqlibvpuCaj-gd1nBHzM9oD8Ck8x829QfgkqTC6oOAYEeHaJuCUUFKLZae1NEffWZE-dRzygBg", "show_it_in_website": "Yes", "stars": "5", "store_id": "Store_N43", "store_name": "Hennur"}, {"Stars": 5, "customer_name": "Gayathri Ramesh", "date_posted": "12-Mar-2026", "review_comments": "Sikha did my pedicure ajd eyebrows, it was amazing and not just that she was very sweet and waited whenever i asked her to.", "review_id": "AbFvOqmN00tBn7m3NqITaLbreX8ySxktQoP0UDvgb_V-zfr6ZVxqEY_ZFp-1itcV6q7pPqJhR4CebQ", "show_it_in_website": "Yes", "stars": "5", "store_id": "Store_N43", "store_name": "Hennur"}, {"Stars": 5, "customer_name": "DIVYA PRADHAN", "date_posted": "8-Mar-2026", "review_comments": "Amazing service by Mr. Mang and very polite and kind person", "review_id": "AbFvOqmeGvWr1yD_niFeNvlKKBdH9nEwetQ_y1aTUwFCnvBQHnwxC2eFNR7oy0K-_V8KPr9OOZaFXg", "show_it_in_website": "Yes", "stars": "5", "store_id": "Store_N43", "store_name": "Hennur"}, {"Stars": 5, "customer_name": "vasee karan", "date_posted": "7-Mar-2026", "review_comments": "Stylist Asif did a very great job. Satisfied.", "review_id": "AbFvOqkaa7g809aWdsr9ZPDaKNltWkSPhF3Jn92jtpB2Lr9DlVB_EH2LCuBHljGcF09_hCIFbDs7Gw", "show_it_in_website": "Yes", "stars": "5", "store_id": "Store_N43", "store_name": "Hennur"}, {"Stars": 5, "customer_name": "CP ATHIRA", "date_posted": "5-Dec-2025", "review_comments": "Awesome service especially shika and asif . Go for it guy\u0027s. Shika does great", "review_id": "AbFvOqlXxFzEIVUMAZ6_0gm1d7-NZFNIaNqvAH59e9QgT3feAKQG-iYIS299WsU9ZEDxv9XLmdSnqQ", "show_it_in_website": "Yes", "stars": "5", "store_id": "Store_N43", "store_name": "Hennur"}, {"Stars": 5, "customer_name": "Steffy Ramola", "date_posted": "7-Mar-2026", "review_comments": "Had a great experience at naturals hennur... Manz gave me a super cool layer cut and wonderful hair spa... So happy with my new look \ud83d\ude00 Great service overall", "review_id": "AbFvOqkEcxb_35IVaP_y7FtSKeS6JeCIReBFMCPxgtYS09bupLpGCb65v6MmJNw7A9KWIezRzhxv", "show_it_in_website": "Yes", "stars": "5", "store_id": "Store_N43", "store_name": "Hennur"}, {"Stars": 5, "customer_name": "pooja mishra", "date_posted": "6-Sep-2025", "review_comments": "Excellent job Mong", "review_id": "AbFvOqmZDLFo9rdc6k8H_lZgsWv_70eA_7OkkCK2To0Lte2T51d45_mPba4xynB08XDt9d6ysfPCyw", "show_it_in_website": "Yes", "stars": "5", "store_id": "Store_N43", "store_name": "Hennur"}, {"Stars": 5, "customer_name": "ramya radhakrishnan", "date_posted": "5-Mar-2026", "review_comments": "Excellent service! Especially, Shikha!", "review_id": "AbFvOqleZz-KnginJU6bN_qBIgzw4K04KnMrWgzguw-Br6VJqlsHI0GfM5y0NS1nVjthNMDpSQi9", "show_it_in_website": "Yes", "stars": "5", "store_id": "Store_N43", "store_name": "Hennur"}, {"Stars": 5, "customer_name": "Rovena Joseph", "date_posted": "24-Feb-2026", "review_comments": "The experience was very good and even the service provided by Stella was very awesome.\nThank u for the wonderful service.", "review_id": "AbFvOqnvOfvvDmPnb-pfGznlMBz54yCND1dGJ3X3ruY5vtX9dSTWF9kGQCor9r_WI4APYoU8xg-Xag", "show_it_in_website": "Yes", "stars": "5", "store_id": "Store_N43", "store_name": "Hennur"}, {"Stars": 5, "customer_name": "Sudipta Chatterjee", "date_posted": "21-Feb-2026", "review_comments": "I had a wonderful experience at Naturals Salon. Stella Mary ma\u2019am was very professional, polite, and attentive. She understood my requirements clearly and did an excellent job. Highly recommended!", "review_id": "AbFvOqn0IpXtS1Zcudl8NZtdA5srJb8hWTnKN9a8FlpH8ihSfbaiKZL7NW7QWzP_LpJu6XsBKEAOnA", "show_it_in_website": "Yes", "stars": "5", "store_id": "Store_N43", "store_name": "Hennur"}, {"Stars": 5, "customer_name": "AbHi SiNGh (wOOdie)", "date_posted": "20-Feb-2026", "review_comments": "Great service by Asif", "review_id": "AbFvOqmf3nSZC8shvHvys1MYwoIodi3K17y9QtvTOSufmI8wK596n9SLcH_Q1yOi3g6HCh_wJ0Bwrg", "show_it_in_website": "Yes", "stars": "5", "store_id": "Store_N43", "store_name": "Hennur"}, {"Stars": 5, "customer_name": "Simeon Jeberson", "date_posted": "15-Feb-2026", "review_comments": "Thank you very much Mang for the great service. Very kind person! Thanks Naturals :)", "review_id": "AbFvOqne_dazLbZix4XFfnCerKVma33mYgovb38OpxgcEa06bag-KISyMft9L_FAhuUgbaUQH7_bzw", "show_it_in_website": "Yes", "stars": "5", "store_id": "Store_N43", "store_name": "Hennur"}, {"Stars": 5, "customer_name": "praveen kumar", "date_posted": "1-Sep-2023", "review_comments": "Asif was very courteous and patient for the entire duration. My hair cut and Spa. I would recommend him and will revisit.", "review_id": "AbFvOqmhw_Xl-MiNoEspddTeepimDd9t5ibb7cZEDpeUtbYhrPgDgTismbKrD0ttQus0wkg5KJc1LA", "show_it_in_website": "Yes", "stars": "5", "store_id": "Store_N43", "store_name": "Hennur"}, {"Stars": 5, "customer_name": "Mankirat Kaur", "date_posted": "5-Feb-2026", "review_comments": "Great service by Shikha!! Verly keenly done waxing", "review_id": "AbFvOqma1P88puzzIJ46pry3I0KwA18OqUoU5NaSrZwUbSDbJt2dSRIaWyr6GBiGVcyPLYFH5jrTkw", "show_it_in_website": "Yes", "stars": "5", "store_id": "Store_N43", "store_name": "Hennur"}, {"Stars": 5, "customer_name": "lakshmi kesavan", "date_posted": "5-Feb-2026", "review_comments": "Excellent hair set done by Stella", "review_id": "AbFvOqnKwcffF0uZEroo8d-cLIHhL_PCI03LNxQ7nUgro-hapCLZxkcn-LSthf1Z_X-OXiVYPhY-jA", "show_it_in_website": "Yes", "stars": "5", "store_id": "Store_N43", "store_name": "Hennur"}, {"Stars": 5, "customer_name": "Monisha Muralidharan", "date_posted": "30-Jan-2026", "review_comments": "Great service, friendly professionals. Do ask for Shikha for a calm, comfortable and peaceful experience", "review_id": "AbFvOqky1MCHSS8Ltn8YgN1jD7i7vgOw79eBPsCcBha7zEjHDXIW2PQLVUT_oW-fOp9rag16bEtq8A", "show_it_in_website": "Yes", "stars": "5", "store_id": "Store_N43", "store_name": "Hennur"}, {"Stars": 5, "customer_name": "RAJ SHEKHER", "date_posted": "26-Jan-2026", "review_comments": "Good Service by asif", "review_id": "AbFvOqmVe7Ne7GETiwrSoDuS4-j09m1qYwGsVmVEuzD9w7yIzlY6zY3LROgpMX5nVEQNsRFZ8UropA", "show_it_in_website": "Yes", "stars": "5", "store_id": "Store_N43", "store_name": "Hennur"}, {"Stars": 5, "customer_name": "Madhuri", "date_posted": "26-Jan-2026", "review_comments": "Tella", "review_id": "AbFvOqkweqyhhM6oZy_yRPKKZEEVhueRY7dXF-iFaQCGKbEOXEqAzfl7-MiwlMl6kqKZeynhXaWljw", "show_it_in_website": "Yes", "stars": "5", "store_id": "Store_N43", "store_name": "Hennur"}, {"Stars": 5, "customer_name": "Umesh Rudakiya", "date_posted": "25-Jan-2026", "review_comments": "Recently I had the haircut at this outlet, It was nice experience, Mr Asif did a great job and understood my requirement clearly, he\u0027s very approachable and polite.", "review_id": "AbFvOqluEkQm34MuWLmOf5KOS_Kt0tngpjgn-FmKYE1imM1MWbtw5adgFdWLI395PNc5mVuHPpgx7A", "show_it_in_website": "Yes", "stars": "5", "store_id": "Store_N43", "store_name": "Hennur"}, {"Stars": 5, "customer_name": "Ramyaa Manoharan", "date_posted": "10-Jan-2026", "review_comments": "Stella did a great job. Nice haircut and other services.", "review_id": "AbFvOqlRwn1VB7i3YrS1tukyj4qED4AVPZ6dMjwY-CV2Nf1yKARrIq8ODO8e55NKW24Xr1IVCAsT", "show_it_in_website": "Yes", "stars": "5", "store_id": "Store_N43", "store_name": "Hennur"}, {"Stars": 5, "customer_name": "neha desai", "date_posted": "3-Jan-2026", "review_comments": "Mangboi gave me a really nice haircut. Very professional and friendly, with great service. Highly recommend!", "review_id": "AbFvOqm_Q2OGaFmAwmABAOgxgDNpexCF2qT0JH_RckwwaZOT0TdtMetI7hErIq30VsIvF3mtodGhrw", "show_it_in_website": "Yes", "stars": "5", "store_id": "Store_N43", "store_name": "Hennur"}, {"Stars": 5, "customer_name": "adrika bora", "date_posted": "2-Jan-2026", "review_comments": "Shikha has been amazing in her work and pleasant personality and good work\nOverall good", "review_id": "AbFvOqlK-vj6xvBc648L6OORJdXBNZ00CcvM_zHcNdCvwkf-MlEH1CEg3Ki9UOLShTWabHoRpizHkQ", "show_it_in_website": "Yes", "stars": "5", "store_id": "Store_N43", "store_name": "Hennur"}, {"Stars": 5, "customer_name": "Elisha Lionel", "date_posted": "1-Jan-2026", "review_comments": "It was really a good service.\nWe thank Aasif who did the men\u0027s hair cut who waited patiently did the service he really did a good job", "review_id": "AbFvOqksHGky7klzq8yAEr1NiJvmFa32OJw29IldpcFnNFBP66KDXWVUrrUEw6-VnH74KzI9i5ccdQ", "show_it_in_website": "Yes", "stars": "5", "store_id": "Store_N43", "store_name": "Hennur"}, {"Stars": 5, "customer_name": "Alisha Zacheria", "date_posted": "29-Dec-2025", "review_comments": "It was wonderful service. The staff was very kind and guided me each step. Ms. Stella did a wonderful job of giving me a haircut which suits my face. Even facial and waxing was done very professionally.", "review_id": "AbFvOqnaOevr1gndWxenqsuh-2Bx56RfhnLF3eRONLRxGX2usyNZ_zGda5rYS5zsC_UuvgLNvXdJhQ", "show_it_in_website": "Yes", "stars": "5", "store_id": "Store_N43", "store_name": "Hennur"}, {"Stars": 5, "customer_name": "SAMYA", "date_posted": "26-Dec-2025", "review_comments": "I\u2019ve had a wonderful experience with Shikha at the salon. She is incredibly professional and very particular about cleanliness in every service she provides. Her attention to hygiene and detail really makes me feel comfortable and well cared for. I truly appreciate the care she puts into her work and would highly recommend her to anyone looking for a clean, reliable, and skilled beauty professional.", "review_id": "AbFvOqlPL50IpHPRzCjOpUno8vxVGfT0VXmn3-XEMFEoKIDVGBf59XuyLxQ_sL0VLMaBndFIzDz8Ww", "show_it_in_website": "Yes", "stars": "5", "store_id": "Store_N43", "store_name": "Hennur"}, {"Stars": 5, "customer_name": "J. Kumaran", "date_posted": "25-Dec-2025", "review_comments": "Shikhia , did a professional works for my wife. Experienced person", "review_id": "AbFvOqmHdIQG5OQLlI49WD6ygyImIipSvFCyjgAw16LfoQy6WCGjFeBrg-xi8dcZKG_Jiw9uxrMRCA", "show_it_in_website": "Yes", "stars": "5", "store_id": "Store_N43", "store_name": "Hennur"}, {"Stars": 5, "customer_name": "Tejas S", "date_posted": "22-Mar-2026", "review_comments": "Suhaib did a very fantastic job, loved the haircut and hospitality", "review_id": "AbFvOqlQ6ZaJwVXYp4evXR6o3JEToMcznIGnOLZxjJBKqjMDtvJECXJdFKKG8J2OtN8c-F2C9Kmg", "show_it_in_website": "Yes", "stars": "5", "store_id": "Store_N43", "store_name": "Hennur"}];
+
+// State management
+let isModalOpen = false;
+let currentReviews = [];
+let isLoading = false;
+
+// Open reviews modal
+function openModal() {
+console.log('Checking Data:', typeof storeReviews, storeReviews?.length);
+
+// Fix 3: The One-Time Guard - Prevent multiple executions
+if (window.isModalOpening) return;
+window.isModalOpening = true;
+
+// Fix 1: Remove any recursive calls - no setInterval or recursive calls here
+
+// Fix 2: Event Bubbling Prevention - Stop event propagation
+if (event) {
+event.stopPropagation();
+event.preventDefault();
+}
+
+// Bulletproof Change 1: Delay the execution
+setTimeout(() => {
+console.log("Opening modal with bulletproof changes...");
+
+// Bulletproof Change 2: Explicit Spinner Removal
+const spinners = document.querySelectorAll('.modal-loading-spinner');
+spinners.forEach(spinner => {
+spinner.style.display = 'none';
+});
+const loadingDivs = document.querySelectorAll('.modal-loading');
+loadingDivs.forEach(div => {
+div.style.display = 'none';
+});
+
+// Hard Reset 1: Clear the target first
+let modalContent = document.getElementById('modalReviewsContent');
+if (!modalContent) {
+// Fallback: Try alternative target
+modalContent = document.getElementById('modal-content') || document.getElementById('reviewsModal').querySelector('.modal-body');
+console.log("Using fallback modal content element for clearing");
+}
+
+if (modalContent) {
+modalContent.innerHTML = '';
+}
+
+if (isModalOpen || isLoading) {
+window.isModalOpening = false; // Reset guard on exit
+return;
+}
+
+isModalOpen = true;
+isLoading = true;
+
+const modal = document.getElementById('reviewsModal');
+
+// Fallback: Find content element for loading state
+let content = document.getElementById('modalReviewsContent');
+if (!content) {
+content = document.getElementById('modal-content') || document.getElementById('reviewsModal').querySelector('.modal-body');
+}
+
+// Show modal
+modal.classList.add('active');
+document.body.style.overflow = 'hidden';
+
+// Hard Reset 2: Force Display
+modal.style.display = 'block !important';
+modal.style.opacity = '1 !important';
+
+// Show loading state briefly
+if (content) {
+content.innerHTML = '<div class="modal-loading"><div class="modal-loading-spinner"></div><p>Loading amazing reviews...</p></div>';
+}
+
+// Load reviews with lazy loading
+setTimeout(() => {
+loadReviewsInBatches();
+window.isModalOpening = false; // Reset guard after loading starts
+}, 300);
+}, 100); // Bulletproof Change 1: 100ms delay
+}
+
+// Close reviews modal
+function closeReviewsModal() {
+isModalOpen = false;
+isLoading = false;
+window.isModalOpening = false; // Reset guard when modal is closed
+const modal = document.getElementById('reviewsModal');
+modal.classList.remove('active');
+document.body.style.overflow = '';
+}
+
+// Load reviews in batches for performance
+function loadReviewsInBatches() {
+// Fix 2: Manual HTML Injection - Force injection directly into modal body
+const modalBody = document.querySelector('.modal-body') || document.getElementById('modalReviewsContent');
+if (modalBody && storeReviews && storeReviews.length > 0) {
+console.log("Manual HTML Injection: Rendering all reviews at once");
+modalBody.innerHTML = storeReviews.map((r, index) => createReviewCard(r, index)).join('');
+console.log("Manual injection completed - reviews should be visible now");
+window.isModalOpening = false; // Reset guard
+return; // Skip batch loading
+}
+
+// Fallback: Try alternative target if main target not found
+let content = document.getElementById('modalReviewsContent');
+if (!content) {
+content = document.getElementById('modal-content') || document.getElementById('reviewsModal').querySelector('.modal-body');
+console.log("Using fallback modal content element");
+}
+
+if (!content) {
+console.error("Could not find modal content element!");
+window.isModalOpening = false; // Reset guard
+return;
+}
+
+const batchSize = 20; // Load 20 reviews at a time
+let currentIndex = 0;
+
+// Debug: Check if storeReviews data exists
+console.log("Store reviews data:", storeReviews);
+console.log("Store reviews count:", storeReviews.length);
+console.log("Target content element found:", !!content);
+
+// Sort reviews by date_posted descending
+const sortedReviews = [...storeReviews].sort((a, b) => {
+// Handle empty or invalid dates
+const dateA = a.date_posted ? new Date(a.date_posted) : new Date(0);
+const dateB = b.date_posted ? new Date(b.date_posted) : new Date(0);
+return dateB - dateA;
+});
+
+console.log("Sorted reviews count:", sortedReviews.length);
+currentReviews = sortedReviews;
+
+function loadBatch() {
+if (currentIndex >= sortedReviews.length) {
+isLoading = false;
+return;
+}
+
+const batch = sortedReviews.slice(currentIndex, currentIndex + batchSize);
+
+// Hard Reset 3: Manual Trigger
+console.log("Rendering " + batch.length + " cards now...");
+
+const batchHtml = batch.map((review, index) => {
+const globalIndex = currentIndex + index;
+console.log("Rendering card " + (globalIndex + 1) + ": " + review.customer_name);
+return createReviewCard(review, globalIndex);
+}).join('');
+
+content.innerHTML += batchHtml;
+currentIndex += batchSize;
+
+// Continue loading if more reviews
+if (currentIndex < sortedReviews.length) {
+setTimeout(loadBatch, 100);
+} else {
+isLoading = false;
+console.log("All reviews loaded successfully!");
+}
+}
+
+// Load first batch immediately
+loadBatch();
+
+// Add scroll listener for lazy loading
+content?.addEventListener('scroll', () => {
+if (content.scrollHeight - content.scrollTop <= content.clientHeight + 200) {
+loadBatch();
+}
+});
+
+// Load first batch immediately
+loadBatch();
+}
+
+// Close modal on escape key
+document.addEventListener('keydown', (e) => {
+if (e.key === 'Escape' && isModalOpen) {
+closeReviewsModal();
+}
+});
+
+// Create review card HTML
+function createReviewCard(review, index) {
+// Safety check: Skip if review is missing basic info
+if (!review || !review.customer_name) {
+console.warn("Skipping invalid review:", review);
+return '';
+}
+
+// Handle stars field - it might be string or number
+const starsCount = parseInt(review.stars || review.Stars || 5);
+const stars = '★'.repeat(starsCount);
+const initial = review.customer_name ? review.customer_name.charAt(0).toUpperCase() : 'A';
+const comments = review.review_comments || review.comments || 'Great experience!';
+
+return `
+<div class="rev-card">
+<div class="rev-header-row" style="display: block; width: 100%; clear: both;">
+<div class="rev-header" style="display: flex; align-items: center; justify-content: space-between;">
+<div class="rev-header-left" style="display: flex; align-items: center; gap: 10px;">
+<div class="rev-avatar">${initial}</div>
+<div class="rev-name-stars">
+<span class="rev-name">${review.customer_name}</span>
+<div class="rev-stars">${stars}</div>
+</div>
+</div>
+<div class="google-icon"><img src="/images/icons/google.png" width="16"></div>
+</div>
+</div><div class="rev-content-row" style="display: block; width: 100%; margin-top: 0px;">
+<div class="rev-content">
+"${comments}"
+</div>
+</div>
+</div>`;
+}
+
+// Close modal on background click
+document.getElementById('reviewsModal').addEventListener('click', (e) => {
+if (e.target.id === 'reviewsModal') {
+closeReviewsModal();
+}
+});
+</script>
+
 <div id="img-modal-overlay" onclick="closeImgModal()"></div>
 <div id="img-modal" role="dialog" aria-modal="true" aria-label="Offer image">
 <div id="img-modal-inner">
@@ -2241,6 +2675,17 @@ function nextImg(){ if(!gallerySrcs.length) return; galleryIndex=(galleryIndex+1
 function prevImg(){ if(!gallerySrcs.length) return; galleryIndex=(galleryIndex-1+gallerySrcs.length)%gallerySrcs.length; document.getElementById('img-modal-src').src=gallerySrcs[galleryIndex]; }
 document.addEventListener('DOMContentLoaded',function(){
 document.querySelectorAll('img.offer-img').forEach(function(img){ img.addEventListener('click',function(){ openImgModal(img.src); }); });
+});
+document.addEventListener('keydown',function(e){
+if(e.key==='Escape') closeImgModal();
+if(document.getElementById('img-modal').style.display==='flex'){ if(e.key==='ArrowRight') nextImg(); if(e.key==='ArrowLeft') prevImg(); }
+});
+var io=new IntersectionObserver(function(entries){ entries.forEach(function(e,i){ if(e.isIntersecting){ setTimeout(function(){ e.target.classList.add('visible'); },i*80); io.unobserve(e.target); } }); },{threshold:0});
+document.querySelectorAll('.reveal').forEach(function(el){ io.observe(el); });
+
+// Bulletproof Alias: Ensure both function names work simultaneously
+window.openReviewsModal = openModal;
+</script>
 
 <div id="reviewsModal" class="modal-overlay">
 <div class="modal-content">
@@ -2259,168 +2704,5 @@ document.querySelectorAll('img.offer-img').forEach(function(img){ img.addEventLi
 </div>
 </div>
 </div>
-
-<script>
-// Store reviews data
-const storeReviews = [{"Stars": 5, "customer_name": "Lumina P", "date_posted": "21-Mar-2026", "review_comments": "Very good service by Stella\nI really liked it very much", "review_id": "AbFvOqnaMqPB9iTKSaZW41xPsY34VwpFSBWmhqIocwPiiyDnpya7Y4bl3K_MaYKf6iow2eTxvZ8a", "show_it_in_website": "Yes", "stars": "5", "store_id": "Store_N43", "store_name": "Hennur"}, {"Stars": 5, "customer_name": "Aniketh Dilip", "date_posted": "21-Mar-2026", "review_comments": "Excellent service by Shoiab", "review_id": "AbFvOqkUflS0pEW2hEluz1Y7vNPaaUeoTvkNcFRe6nsqoxHTFSKDKh0VkwdcGBAKuQ7bIVUdZg_6yQ", "show_it_in_website": "Yes", "stars": "5", "store_id": "Store_N43", "store_name": "Hennur"}, {"Stars": 5, "customer_name": "jaya prabha", "date_posted": "21-Mar-2026", "review_comments": "Excellent service, I have been visiting this salon for 5 years, very polite staff. Shout out to Shikaa and Stella for their Excellent service !", "review_id": "AbFvOqlfcQFb5tTMkDnjYTeSfu82Nqot4wcfsmulwbRHnlkdmXRQWfw6Q1olSaT7tT8Cw3uLjdX-", "show_it_in_website": "Yes", "stars": "5", "store_id": "Store_N43", "store_name": "Hennur"}, {"Stars": 5, "customer_name": "V E", "date_posted": "21-Mar-2026", "review_comments": "Shikha\u0027s service is good", "review_id": "AbFvOqkifIQo10a7iCq5CxbX8sxwMFKXB30qIv87eR2h3cVIPV5iNB9dUMGFUj29L3ucsfLBE6Gm4A", "show_it_in_website": "Yes", "stars": "5", "store_id": "Store_N43", "store_name": "Hennur"}, {"Stars": 5, "customer_name": "Safiya K", "date_posted": "20-Mar-2026", "review_comments": "I get my eyebrows done by the trustworthy Shikha who is always there for guidance as well as her work is top notch and really professional.\nShe is my family\u2019s go to person for any beauty services here in Bangalore! Highly recommend her if you visit the branch.", "review_id": "AbFvOqkrLPs_aoFgPgDaHlF5rAfnmz8ESQKNlWI2oOXXC46h8WW9xHFOuj0Od4fEEcERinmdFoplWQ", "show_it_in_website": "Yes", "stars": "5", "store_id": "Store_N43", "store_name": "Hennur"}, {"Stars": 5, "customer_name": "Haseeb Kanji", "date_posted": "20-Mar-2026", "review_comments": "Shoaib gave good service , overall good experience", "review_id": "AbFvOqla1bSAvHGMTUHuqJLm2czaQmDKt4OWR07W9D5Nw1O3qul80uqfvQocjmenBMnGblWhTTGVsg", "show_it_in_website": "Yes", "stars": "5", "store_id": "Store_N43", "store_name": "Hennur"}, {"Stars": 5, "customer_name": "lionel calebs", "date_posted": "20-Mar-2026", "review_comments": "I had an amazing service by Shikha.\nHad a good Har wash service done by her she carried it very patiently and neatly I would prefer her again back for my hair wash", "review_id": "AbFvOqkm7xK4A-dU3Vnb7RZj196qi6MtrTAXAw7LACdzOAiqkD05S4M9MXALeAsU2oswH1T4e6x1WQ", "show_it_in_website": "Yes", "stars": "5", "store_id": "Store_N43", "store_name": "Hennur"}, {"Stars": 5, "customer_name": "Esther Kumar", "date_posted": "20-Mar-2026", "review_comments": "Thank you Shikha. You are awesome!!", "review_id": "AbFvOqmvRA2V5IowcthQ7GY8KWqA19NAwCYGxvjcoijJLsYs2u9gECc1OkD8pGcOFjkKY2VbaPhiBw", "show_it_in_website": "Yes", "stars": "5", "store_id": "Store_N43", "store_name": "Hennur"}, {"Stars": 5, "customer_name": "Sajeed Munshi", "date_posted": "20-Mar-2026", "review_comments": "Thanks stella for a wonderful facial...\nVery professional and knowledgeable..\nThanks to Asif for great hair cut...", "review_id": "AbFvOqnKnVC9Lyfl9FFeoyp8jCVQWDz6TN3wqUrQX3qoOCeRFYsKpsuz42QcBg1MF6pn2pS4infw", "show_it_in_website": "Yes", "stars": "5", "store_id": "Store_N43", "store_name": "Hennur"}, {"Stars": 5, "customer_name": "Krishna Sukumaran", "date_posted": "20-Mar-2026", "review_comments": "Had a great experience, thanks to Shikha.", "review_id": "AbFvOqkYejDIfrmR4XsujrI5F3EbJtCAhTiiqP3HEv6hWG4PC7EdzYNRKvv4M76jQcLhiEkGb6_UMw", "show_it_in_website": "Yes", "stars": "5", "store_id": "Store_N43", "store_name": "Hennur"}, {"Stars": 5, "customer_name": "Shaista Banu", "date_posted": "19-Mar-2026", "review_comments": "Stella is the go to person for hair colour, facial and all other services. She just know what the person needs and how to deliver it so the customer is fully satisfied. Appreciate her level of dedication and care for the customer. She is brilliant in her work.", "review_id": "AbFvOqlGeVgVZtDVM-5CcGDDnnIgjX1xE0wfULTLu7qSbYBSiSTh3ULVBEFwp22idRT2V9OK93xL", "show_it_in_website": "Yes", "stars": "5", "store_id": "Store_N43", "store_name": "Hennur"}, {"Stars": 5, "customer_name": "Yellapu Archana", "date_posted": "19-Mar-2026", "review_comments": "Excellent service by Stella. Thank you naturals.", "review_id": "AbFvOqmStSu5fyqw8A4jhr4U61Hs52Aw4DbQoFB7U4NVmniYzGYVoZlGclyHP1EPSl3T91Ixt89TuA", "show_it_in_website": "Yes", "stars": "5", "store_id": "Store_N43", "store_name": "Hennur"}, {"Stars": 5, "customer_name": "Faiza Banu", "date_posted": "22-Dec-2024", "review_comments": "Shikha has been my go-to for beauty services like facials, waxing, and pedicures, and I couldn\u2019t be happier with her work. She is professional, attentive, and ensures a very comfortable experience every time. Her attention to detail and commitment to hygiene really stand out. I am truly satisfied with her services and always leave feeling refreshed and well taken care of. I highly recommend her to anyone looking for quality beauty services.\n\nI recommend Stella for her tremendous job in giving me a perfect haircut.\n\nTruly satisfied with the staff here. Thank you!", "review_id": "AbFvOqmC8GiNVoZvMkKZvegnp-b-3_WJN2nh7dCu1UCzLbumBY1_LpO1RMcC5YC45iOD9ZenYnAqzQ", "show_it_in_website": "Yes", "stars": "5", "store_id": "Store_N43", "store_name": "Hennur"}, {"Stars": 5, "customer_name": "Hacker Boy4u", "date_posted": "14-Mar-2026", "review_comments": "It good experience in haircut and other services and behavior as well good", "review_id": "AbFvOqnsxM4uNs2JKW8ECy0Z0ytela1vtuh4ZUWks5l0XpU8f_1umVXWdxe3R_blljAht_ajLQ39Cg", "show_it_in_website": "Yes", "stars": "5", "store_id": "Store_N43", "store_name": "Hennur"}, {"Stars": 5, "customer_name": "Shubham Khangaonkar", "date_posted": "14-Mar-2026", "review_comments": "Great service by Shoaib", "review_id": "AbFvOqnSpXoXh8gHb0wARQtf89pg0U3NckR5MzvkQRD03-fF4SA_z4eQ5NuPqIZ186mO5h5XADSV", "show_it_in_website": "Yes", "stars": "5", "store_id": "Store_N43", "store_name": "Hennur"}, {"Stars": 5, "customer_name": "Harshita Ramanathan", "date_posted": "13-Mar-2026", "review_comments": "Got a hair massage by Shikha, it was amazing!!!! I\u2019d definitely recommend, she also takes care of the pressure well!!", "review_id": "AbFvOqkSa2rGRjtDuMm_xr55k9QWOXdHTPai3PfG_Yk9Kxy_faFVTadQZPDGg8SFl1WaKdnvVJSx8g", "show_it_in_website": "Yes", "stars": "5", "store_id": "Store_N43", "store_name": "Hennur"}, {"Stars": 5, "customer_name": "Gifty Isabella", "date_posted": "13-Mar-2026", "review_comments": "Good service with excellent professionals", "review_id": "AbFvOqlibvpuCaj-gd1nBHzM9oD8Ck8x829QfgkqTC6oOAYEeHaJuCUUFKLZae1NEffWZE-dRzygBg", "show_it_in_website": "Yes", "stars": "5", "store_id": "Store_N43", "store_name": "Hennur"}, {"Stars": 5, "customer_name": "Gayathri Ramesh", "date_posted": "12-Mar-2026", "review_comments": "Sikha did my pedicure ajd eyebrows, it was amazing and not just that she was very sweet and waited whenever i asked her to.", "review_id": "AbFvOqmN00tBn7m3NqITaLbreX8ySxktQoP0UDvgb_V-zfr6ZVxqEY_ZFp-1itcV6q7pPqJhR4CebQ", "show_it_in_website": "Yes", "stars": "5", "store_id": "Store_N43", "store_name": "Hennur"}, {"Stars": 5, "customer_name": "DIVYA PRADHAN", "date_posted": "8-Mar-2026", "review_comments": "Amazing service by Mr. Mang and very polite and kind person", "review_id": "AbFvOqmeGvWr1yD_niFeNvlKKBdH9nEwetQ_y1aTUwFCnvBQHnwxC2eFNR7oy0K-_V8KPr9OOZaFXg", "show_it_in_website": "Yes", "stars": "5", "store_id": "Store_N43", "store_name": "Hennur"}, {"Stars": 5, "customer_name": "vasee karan", "date_posted": "7-Mar-2026", "review_comments": "Stylist Asif did a very great job. Satisfied.", "review_id": "AbFvOqkaa7g809aWdsr9ZPDaKNltWkSPhF3Jn92jtpB2Lr9DlVB_EH2LCuBHljGcF09_hCIFbDs7Gw", "show_it_in_website": "Yes", "stars": "5", "store_id": "Store_N43", "store_name": "Hennur"}, {"Stars": 5, "customer_name": "CP ATHIRA", "date_posted": "5-Dec-2025", "review_comments": "Awesome service especially shika and asif . Go for it guy\u0027s. Shika does great", "review_id": "AbFvOqlXxFzEIVUMAZ6_0gm1d7-NZFNIaNqvAH59e9QgT3feAKQG-iYIS299WsU9ZEDxv9XLmdSnqQ", "show_it_in_website": "Yes", "stars": "5", "store_id": "Store_N43", "store_name": "Hennur"}, {"Stars": 5, "customer_name": "Steffy Ramola", "date_posted": "7-Mar-2026", "review_comments": "Had a great experience at naturals hennur... Manz gave me a super cool layer cut and wonderful hair spa... So happy with my new look \ud83d\ude00 Great service overall", "review_id": "AbFvOqkEcxb_35IVaP_y7FtSKeS6JeCIReBFMCPxgtYS09bupLpGCb65v6MmJNw7A9KWIezRzhxv", "show_it_in_website": "Yes", "stars": "5", "store_id": "Store_N43", "store_name": "Hennur"}, {"Stars": 5, "customer_name": "pooja mishra", "date_posted": "6-Sep-2025", "review_comments": "Excellent job Mong", "review_id": "AbFvOqmZDLFo9rdc6k8H_lZgsWv_70eA_7OkkCK2To0Lte2T51d45_mPba4xynB08XDt9d6ysfPCyw", "show_it_in_website": "Yes", "stars": "5", "store_id": "Store_N43", "store_name": "Hennur"}, {"Stars": 5, "customer_name": "ramya radhakrishnan", "date_posted": "5-Mar-2026", "review_comments": "Excellent service! Especially, Shikha!", "review_id": "AbFvOqleZz-KnginJU6bN_qBIgzw4K04KnMrWgzguw-Br6VJqlsHI0GfM5y0NS1nVjthNMDpSQi9", "show_it_in_website": "Yes", "stars": "5", "store_id": "Store_N43", "store_name": "Hennur"}, {"Stars": 5, "customer_name": "Rovena Joseph", "date_posted": "24-Feb-2026", "review_comments": "The experience was very good and even the service provided by Stella was very awesome.\nThank u for the wonderful service.", "review_id": "AbFvOqnvOfvvDmPnb-pfGznlMBz54yCND1dGJ3X3ruY5vtX9dSTWF9kGQCor9r_WI4APYoU8xg-Xag", "show_it_in_website": "Yes", "stars": "5", "store_id": "Store_N43", "store_name": "Hennur"}, {"Stars": 5, "customer_name": "Sudipta Chatterjee", "date_posted": "21-Feb-2026", "review_comments": "I had a wonderful experience at Naturals Salon. Stella Mary ma\u2019am was very professional, polite, and attentive. She understood my requirements clearly and did an excellent job. Highly recommended!", "review_id": "AbFvOqn0IpXtS1Zcudl8NZtdA5srJb8hWTnKN9a8FlpH8ihSfbaiKZL7NW7QWzP_LpJu6XsBKEAOnA", "show_it_in_website": "Yes", "stars": "5", "store_id": "Store_N43", "store_name": "Hennur"}, {"Stars": 5, "customer_name": "AbHi SiNGh (wOOdie)", "date_posted": "20-Feb-2026", "review_comments": "Great service by Asif", "review_id": "AbFvOqmf3nSZC8shvHvys1MYwoIodi3K17y9QtvTOSufmI8wK596n9SLcH_Q1yOi3g6HCh_wJ0Bwrg", "show_it_in_website": "Yes", "stars": "5", "store_id": "Store_N43", "store_name": "Hennur"}, {"Stars": 5, "customer_name": "Simeon Jeberson", "date_posted": "15-Feb-2026", "review_comments": "Thank you very much Mang for the great service. Very kind person! Thanks Naturals :)", "review_id": "AbFvOqne_dazLbZix4XFfnCerKVma33mYgovb38OpxgcEa06bag-KISyMft9L_FAhuUgbaUQH7_bzw", "show_it_in_website": "Yes", "stars": "5", "store_id": "Store_N43", "store_name": "Hennur"}, {"Stars": 5, "customer_name": "praveen kumar", "date_posted": "1-Sep-2023", "review_comments": "Asif was very courteous and patient for the entire duration. My hair cut and Spa. I would recommend him and will revisit.", "review_id": "AbFvOqmhw_Xl-MiNoEspddTeepimDd9t5ibb7cZEDpeUtbYhrPgDgTismbKrD0ttQus0wkg5KJc1LA", "show_it_in_website": "Yes", "stars": "5", "store_id": "Store_N43", "store_name": "Hennur"}, {"Stars": 5, "customer_name": "Mankirat Kaur", "date_posted": "5-Feb-2026", "review_comments": "Great service by Shikha!! Verly keenly done waxing", "review_id": "AbFvOqma1P88puzzIJ46pry3I0KwA18OqUoU5NaSrZwUbSDbJt2dSRIaWyr6GBiGVcyPLYFH5jrTkw", "show_it_in_website": "Yes", "stars": "5", "store_id": "Store_N43", "store_name": "Hennur"}, {"Stars": 5, "customer_name": "lakshmi kesavan", "date_posted": "5-Feb-2026", "review_comments": "Excellent hair set done by Stella", "review_id": "AbFvOqnKwcffF0uZEroo8d-cLIHhL_PCI03LNxQ7nUgro-hapCLZxkcn-LSthf1Z_X-OXiVYPhY-jA", "show_it_in_website": "Yes", "stars": "5", "store_id": "Store_N43", "store_name": "Hennur"}, {"Stars": 5, "customer_name": "Monisha Muralidharan", "date_posted": "30-Jan-2026", "review_comments": "Great service, friendly professionals. Do ask for Shikha for a calm, comfortable and peaceful experience", "review_id": "AbFvOqky1MCHSS8Ltn8YgN1jD7i7vgOw79eBPsCcBha7zEjHDXIW2PQLVUT_oW-fOp9rag16bEtq8A", "show_it_in_website": "Yes", "stars": "5", "store_id": "Store_N43", "store_name": "Hennur"}, {"Stars": 5, "customer_name": "RAJ SHEKHER", "date_posted": "26-Jan-2026", "review_comments": "Good Service by asif", "review_id": "AbFvOqmVe7Ne7GETiwrSoDuS4-j09m1qYwGsVmVEuzD9w7yIzlY6zY3LROgpMX5nVEQNsRFZ8UropA", "show_it_in_website": "Yes", "stars": "5", "store_id": "Store_N43", "store_name": "Hennur"}, {"Stars": 5, "customer_name": "Madhuri", "date_posted": "26-Jan-2026", "review_comments": "Tella", "review_id": "AbFvOqkweqyhhM6oZy_yRPKKZEEVhueRY7dXF-iFaQCGKbEOXEqAzfl7-MiwlMl6kqKZeynhXaWljw", "show_it_in_website": "Yes", "stars": "5", "store_id": "Store_N43", "store_name": "Hennur"}, {"Stars": 5, "customer_name": "Umesh Rudakiya", "date_posted": "25-Jan-2026", "review_comments": "Recently I had the haircut at this outlet, It was nice experience, Mr Asif did a great job and understood my requirement clearly, he\u0027s very approachable and polite.", "review_id": "AbFvOqluEkQm34MuWLmOf5KOS_Kt0tngpjgn-FmKYE1imM1MWbtw5adgFdWLI395PNc5mVuHPpgx7A", "show_it_in_website": "Yes", "stars": "5", "store_id": "Store_N43", "store_name": "Hennur"}, {"Stars": 5, "customer_name": "Ramyaa Manoharan", "date_posted": "10-Jan-2026", "review_comments": "Stella did a great job. Nice haircut and other services.", "review_id": "AbFvOqlRwn1VB7i3YrS1tukyj4qED4AVPZ6dMjwY-CV2Nf1yKARrIq8ODO8e55NKW24Xr1IVCAsT", "show_it_in_website": "Yes", "stars": "5", "store_id": "Store_N43", "store_name": "Hennur"}, {"Stars": 5, "customer_name": "neha desai", "date_posted": "3-Jan-2026", "review_comments": "Mangboi gave me a really nice haircut. Very professional and friendly, with great service. Highly recommend!", "review_id": "AbFvOqm_Q2OGaFmAwmABAOgxgDNpexCF2qT0JH_RckwwaZOT0TdtMetI7hErIq30VsIvF3mtodGhrw", "show_it_in_website": "Yes", "stars": "5", "store_id": "Store_N43", "store_name": "Hennur"}, {"Stars": 5, "customer_name": "adrika bora", "date_posted": "2-Jan-2026", "review_comments": "Shikha has been amazing in her work and pleasant personality and good work\nOverall good", "review_id": "AbFvOqlK-vj6xvBc648L6OORJdXBNZ00CcvM_zHcNdCvwkf-MlEH1CEg3Ki9UOLShTWabHoRpizHkQ", "show_it_in_website": "Yes", "stars": "5", "store_id": "Store_N43", "store_name": "Hennur"}, {"Stars": 5, "customer_name": "Elisha Lionel", "date_posted": "1-Jan-2026", "review_comments": "It was really a good service.\nWe thank Aasif who did the men\u0027s hair cut who waited patiently did the service he really did a good job", "review_id": "AbFvOqksHGky7klzq8yAEr1NiJvmFa32OJw29IldpcFnNFBP66KDXWVUrrUEw6-VnH74KzI9i5ccdQ", "show_it_in_website": "Yes", "stars": "5", "store_id": "Store_N43", "store_name": "Hennur"}, {"Stars": 5, "customer_name": "Alisha Zacheria", "date_posted": "29-Dec-2025", "review_comments": "It was wonderful service. The staff was very kind and guided me each step. Ms. Stella did a wonderful job of giving me a haircut which suits my face. Even facial and waxing was done very professionally.", "review_id": "AbFvOqnaOevr1gndWxenqsuh-2Bx56RfhnLF3eRONLRxGX2usyNZ_zGda5rYS5zsC_UuvgLNvXdJhQ", "show_it_in_website": "Yes", "stars": "5", "store_id": "Store_N43", "store_name": "Hennur"}, {"Stars": 5, "customer_name": "SAMYA", "date_posted": "26-Dec-2025", "review_comments": "I\u2019ve had a wonderful experience with Shikha at the salon. She is incredibly professional and very particular about cleanliness in every service she provides. Her attention to hygiene and detail really makes me feel comfortable and well cared for. I truly appreciate the care she puts into her work and would highly recommend her to anyone looking for a clean, reliable, and skilled beauty professional.", "review_id": "AbFvOqlPL50IpHPRzCjOpUno8vxVGfT0VXmn3-XEMFEoKIDVGBf59XuyLxQ_sL0VLMaBndFIzDz8Ww", "show_it_in_website": "Yes", "stars": "5", "store_id": "Store_N43", "store_name": "Hennur"}, {"Stars": 5, "customer_name": "J. Kumaran", "date_posted": "25-Dec-2025", "review_comments": "Shikhia , did a professional works for my wife. Experienced person", "review_id": "AbFvOqmHdIQG5OQLlI49WD6ygyImIipSvFCyjgAw16LfoQy6WCGjFeBrg-xi8dcZKG_Jiw9uxrMRCA", "show_it_in_website": "Yes", "stars": "5", "store_id": "Store_N43", "store_name": "Hennur"}, {"Stars": 5, "customer_name": "Tejas S", "date_posted": "22-Mar-2026", "review_comments": "Suhaib did a very fantastic job, loved the haircut and hospitality", "review_id": "AbFvOqlQ6ZaJwVXYp4evXR6o3JEToMcznIGnOLZxjJBKqjMDtvJECXJdFKKG8J2OtN8c-F2C9Kmg", "show_it_in_website": "Yes", "stars": "5", "store_id": "Store_N43", "store_name": "Hennur"}];
-
-// State management
-let isModalOpen = false;
-let currentReviews = [];
-let isLoading = false;
-
-// Open reviews modal
-function openReviewsModal() {
-if (isModalOpen || isLoading) return;
-
-isModalOpen = true;
-isLoading = true;
-
-const modal = document.getElementById('reviewsModal');
-const content = document.getElementById('modalReviewsContent');
-
-// Show modal
-modal.classList.add('active');
-document.body.style.overflow = 'hidden';
-
-// Show loading state
-content.innerHTML = '<div class="modal-loading"><div class="modal-loading-spinner"></div><p>Loading amazing reviews...</p></div>';
-
-// Load reviews with lazy loading
-setTimeout(() => {
-loadReviewsInBatches();
-}, 300);
-}
-
-// Close reviews modal
-function closeReviewsModal() {
-isModalOpen = false;
-const modal = document.getElementById('reviewsModal');
-modal.classList.remove('active');
-document.body.style.overflow = '';
-}
-
-// Load reviews in batches for performance
-function loadReviewsInBatches() {
-const content = document.getElementById('modalReviewsContent');
-const batchSize = 20; // Load 20 reviews at a time
-let currentIndex = 0;
-
-// Sort reviews by date_posted descending
-const sortedReviews = [...storeReviews].sort((a, b) => {
-const dateA = new Date(a.date_posted);
-const dateB = new Date(b.date_posted);
-return dateB - dateA;
-});
-
-currentReviews = sortedReviews;
-
-function loadBatch() {
-if (currentIndex >= sortedReviews.length) {
-isLoading = false;
-return;
-}
-
-const batch = sortedReviews.slice(currentIndex, currentIndex + batchSize);
-const batchHtml = batch.map(review => createReviewCard(review)).join('');
-
-if (currentIndex === 0) {
-content.innerHTML = batchHtml;
-} else {
-content.innerHTML += batchHtml;
-}
-
-currentIndex += batchSize;
-
-// Load next batch if user scrolls near bottom or if first batch
-if (currentIndex < sortedReviews.length) {
-if (currentIndex === batchSize || content.scrollHeight - content.scrollTop <= content.clientHeight + 200) {
-setTimeout(loadBatch, 100);
-}
-}
-}
-
-// Load first batch immediately
-loadBatch();
-
-// Add scroll listener for lazy loading
-content.addEventListener('scroll', () => {
-if (content.scrollHeight - content.scrollTop <= content.clientHeight + 200) {
-loadBatch();
-}
-});
-}
-
-// Create review card HTML
-function createReviewCard(review) {
-const stars = '★'.repeat(parseInt(review.stars || 5));
-const initial = review.customer_name ? review.customer_name.charAt(0).toUpperCase() : 'A';
-
-return `
-<div class="rev-card reveal">
-<div class="rev-stars">${stars}</div>
-<div class="rev-text">"${review.review_comments}"</div>
-<div class="rev-user">
-<div class="rev-user-img">${initial}</div>
-<div class="rev-user-info">
-<div class="rev-name">${review.customer_name}</div>
-<div class="rev-store">${review.store_name}</div>
-</div>
-</div>
-</div>
-`;
-}
-
-// Close modal on escape key
-document.addEventListener('keydown', (e) => {
-if (e.key === 'Escape' && isModalOpen) {
-closeReviewsModal();
-}
-});
-
-// Close modal on background click
-document.getElementById('reviewsModal').addEventListener('click', (e) => {
-if (e.target.id === 'reviewsModal') {
-closeReviewsModal();
-}
-});
-</script>
-
-<footer>
-<div class="ft-top">
-<div class="ft-brand-col">
-<div class="ft-brand">Naturals <span>Salon &amp; Spa</span></div>
-<div class="ft-tagline">India's most trusted salon network.<br>Premium beauty services across Bangalore.</div>
-</div>
-<div class="ft-col">
-<div class="ft-col-title">Explore</div>
-<ul>
-<li><a href="/services/">Services &amp; Pricing</a></li>
-<li><a href="/offers/">Offers</a></li>
-<li><a href="/careers/bangalore/">Careers</a></li>
-<li><a href="/contact/">Contact Us</a></li>
-<li><a href="/about/">About Us</a></li>
-</ul>
-</div>
-<div class="ft-col">
-<div class="ft-col-title">Locations</div>
-<ul>
-</ul>
-</div>
-<div class="ft-col">
-<div class="ft-col-title">Policies</div>
-<ul>
-<li><a href="/booking-policy/">Booking Policy</a></li>
-<li><a href="/cancellation-policy/">Cancellation Policy</a></li>
-<li><a href="https://naturals.in" target="_blank" rel="noopener">Naturals India &#8599;</a></li>
-</ul>
-</div>
-</div>
-<div class="ft-bottom">
-<div class="ft-copy">&copy; 2026 Naturals Salon &amp; Spa, Bangalore. All rights reserved.</div>
-<div class="ft-url">naturals-blr.github.io</div>
-</div>
-</footer>
-
 </body>
 </html>
