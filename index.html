@@ -1926,33 +1926,14 @@ let isLoading = false;
 function openModal() {
 console.log('Checking Data:', typeof featuredReviews, featuredReviews?.length);
 
+// Add history state for back button handling
+history.pushState({modalOpen: true}, "", "#reviews-modal");
+
 // Fix 3: The One-Time Guard - Prevent multiple executions
 if (window.isModalOpening) return;
 window.isModalOpening = true;
 
-// Fix 1: Remove any recursive calls - no setInterval or recursive calls here
-
-// Fix 2: Event Bubbling Prevention - Stop event propagation
-if (event) {
-event.stopPropagation();
-event.preventDefault();
-}
-
-// Bulletproof Change 1: Delay the execution
-setTimeout(() => {
-console.log("Opening modal with bulletproof changes...");
-
-// Bulletproof Change 2: Explicit Spinner Removal
-const spinners = document.querySelectorAll('.modal-loading-spinner');
-spinners.forEach(spinner => {
-spinner.style.display = 'none';
-});
-const loadingDivs = document.querySelectorAll('.modal-loading');
-loadingDivs.forEach(div => {
-div.style.display = 'none';
-});
-
-// Hard Reset 1: Clear the target first
+// Clear previous content
 let modalContent = document.getElementById('modalReviewsContent');
 if (!modalContent) {
 // Fallback: Try alternative target
@@ -1962,11 +1943,6 @@ console.log("Using fallback modal content element for clearing");
 
 if (modalContent) {
 modalContent.innerHTML = '';
-}
-
-if (isModalOpen || isLoading) {
-window.isModalOpening = false; // Reset guard on exit
-return;
 }
 
 isModalOpen = true;
@@ -1984,17 +1960,29 @@ content = document.getElementById('modal-content') || document.getElementById('r
 modal.classList.add('active');
 document.body.style.overflow = 'hidden';
 
-// Hard Reset 2: Force Display
-modal.style.display = 'block !important';
-modal.style.opacity = '1 !important';
-
-// Show loading state briefly
-if (content) {
-content.innerHTML = '<div class="modal-loading"><div class="modal-loading-spinner"></div><p>Loading amazing reviews...</p></div>';
+// Bulletproof Change 1: Add loading state with delay
+setTimeout(() => {
+if (content && isLoading) {
+content.innerHTML = '<div class="loading-spinner"></div>';
+}
+loadReviewsInBatches();
+window.isModalOpening = false; // Reset guard after loading starts
+}, 100); // Bulletproof Change 1: 100ms delay
+}
+let content = document.getElementById('modalReviewsContent');
+if (!content) {
+content = document.getElementById('modal-content') || document.getElementById('reviewsModal').querySelector('.modal-body');
 }
 
-// Load reviews with lazy loading
+// Show modal
+modal.classList.add('active');
+document.body.style.overflow = 'hidden';
+
+// Bulletproof Change 1: Add loading state with delay
 setTimeout(() => {
+if (content && isLoading) {
+content.innerHTML = '<div class="loading-spinner"></div>';
+}
 loadReviewsInBatches();
 window.isModalOpening = false; // Reset guard after loading starts
 }, 300);
@@ -2006,6 +1994,12 @@ function closeReviewsModal() {
 isModalOpen = false;
 isLoading = false;
 window.isModalOpening = false; // Reset guard when modal is closed
+
+// Remove modal history state
+if (history.state && history.state.modalOpen) {
+history.back();
+}
+
 const modal = document.getElementById('reviewsModal');
 modal.classList.remove('active');
 document.body.style.overflow = '';
@@ -2101,6 +2095,15 @@ loadBatch();
 // Close modal on escape key
 document.addEventListener('keydown', (e) => {
 if (e.key === 'Escape' && isModalOpen) {
+closeReviewsModal();
+}
+});
+
+// ── Handle browser back button for reviews modal ──
+window.addEventListener('popstate', function(event) {
+// If reviews modal is open and back button is pressed, close modal
+const modal = document.getElementById('reviewsModal');
+if (modal && modal.classList.contains('active')) {
 closeReviewsModal();
 }
 });
