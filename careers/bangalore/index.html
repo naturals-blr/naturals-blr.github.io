@@ -168,29 +168,76 @@ font-family: 'Cormorant Garamond', serif;
 font-size: clamp(24px,3vw,32px); font-weight: 300;
 color: var(--text); margin-bottom: 24px;
 }
-.filter-buttons {
-display: grid; grid-template-columns: repeat(auto-fill, minmax(220px,1fr)); gap: 14px;
+
+/* ── Filter Container ── */
+.filter-container {
+display: flex;
+gap: 8px;
+overflow-x: auto;
+padding: 10px 0;
+-ms-overflow-style: none; /* Hide scrollbar IE/Edge */
+scrollbar-width: none; /* Hide scrollbar Firefox */
 }
-.filter-btn {
-padding: 16px 18px; background: var(--dark);
-color: #fff !important; border: 1px solid rgba(255,255,255,0.2);
-border-radius: 10px; font-family: 'Jost', sans-serif;
-font-size: 12px; letter-spacing: 1px; text-transform: uppercase; font-weight: 500;
-text-decoration: none; display: flex; align-items: center;
-justify-content: space-between; gap: 10px; transition: all 0.25s;
+
+.filter-container::-webkit-scrollbar {
+display: none; /* Hide scrollbar Chrome/Safari/Opera */
 }
-[data-theme="naturals"] .filter-btn { background: #1A0533; color: #fff !important; }
-.filter-btn:hover { border-color: var(--gold); transform: translateY(-2px); box-shadow: 0 8px 24px rgba(0,0,0,0.15); }
-.filter-btn.active { background: var(--gold); color: #fff !important; border-color: var(--gold); }
-.filter-btn .store-name { flex: 1; }
-.job-badge {
-display: inline-flex; align-items: center; justify-content: center;
+
+/* ── Pill Filter Buttons ── */
+.filter-pill {
+display: inline-flex;
+align-items: center;
+white-space: nowrap;
+border-radius: 50px;
+padding: 8px 20px;
+border: 1px solid rgba(255,255,255,0.2);
+background: var(--dark);
+color: #fff;
+font-size: 14px;
+font-weight: 500;
+cursor: pointer;
+transition: all 0.2s ease;
+flex-shrink: 0;
+min-width: fit-content;
+text-decoration: none;
+}
+[data-theme="naturals"] .filter-pill { 
+background: #1A0533; 
+border-color: rgba(255,255,255,0.2); 
+}
+
+.filter-pill:hover {
+border-color: var(--gold);
+transform: translateY(-1px);
+box-shadow: 0 4px 12px rgba(0,0,0,0.2);
+}
+
+.filter-pill.is-active {
+background: var(--gold);
+color: #111;
+border-color: var(--gold);
+font-weight: 600;
+box-shadow: 0 2px 8px rgba(201, 168, 76, 0.3);
+}
+
+.filter-pill .store-name {
+flex: 1;
+}
+
+.filter-pill .job-badge {
+display: inline-flex;
+align-items: center;
+justify-content: center;
 min-width: 26px; height: 22px; padding: 0 8px;
-background: var(--gold); color: var(--dark);
+background: rgba(255,255,255,0.2); color: #fff;
 border-radius: 11px; font-size: 10px; font-weight: 700;
 text-transform: none; letter-spacing: 0; white-space: nowrap; flex-shrink: 0;
+margin-left: 8px;
 }
-.job-badge.empty { background: rgba(255,255,255,0.1); color: rgba(255,255,255,0.4); }
+
+.filter-pill.is-active .job-badge {
+background: rgba(0,0,0,0.2); color: #111;
+}
 
 /* ── Labels & Headings ── */
 .section-lbl {
@@ -1071,30 +1118,30 @@ loading="eager">
 <section class="store-filters">
 <div class="section-lbl">Browse by Location</div>
 <h2>Filter by Store</h2>
-<div class="filter-buttons">
-<a href="https://naturals-blr.github.io/careers/bangalore/" class="filter-btn active" data-store-id="all" id="show-all-btn">
-<span class="store-name">All Locations</span>
+<div class="filter-container">
+<a href="https://naturals-blr.github.io/careers/bangalore/" class="filter-pill is-active" data-store-id="all" id="show-all-btn">
+<span class="store-name">All</span>
 <span class="job-badge">3 total</span>
 </a>
-<a href="https://naturals-blr.github.io/careers/bangalore/jp-nagar-5th-phase/" class="filter-btn " data-store-id="N78">
+<a href="https://naturals-blr.github.io/careers/bangalore/jp-nagar-5th-phase/" class="filter-pill " data-store-id="N78">
 <span class="store-name">JP Nagar 5th Phase</span>
 <span class="job-badge">3 jobs</span>
 </a>
-<a href="https://naturals-blr.github.io/careers/bangalore/elements-mall/" class="filter-btn " data-store-id="N77">
+<a href="https://naturals-blr.github.io/careers/bangalore/elements-mall/" class="filter-pill " data-store-id="N77">
 <span class="store-name">Elements Mall</span>
-<span class="job-badge empty">0</span>
+<span class="job-badge">0</span>
 </a>
-<a href="https://naturals-blr.github.io/careers/bangalore/devasandra/" class="filter-btn " data-store-id="N36">
+<a href="https://naturals-blr.github.io/careers/bangalore/devasandra/" class="filter-pill " data-store-id="N36">
 <span class="store-name">Devasandra</span>
-<span class="job-badge empty">0</span>
+<span class="job-badge">0</span>
 </a>
-<a href="https://naturals-blr.github.io/careers/bangalore/frazer-town/" class="filter-btn " data-store-id="N05">
+<a href="https://naturals-blr.github.io/careers/bangalore/frazer-town/" class="filter-pill " data-store-id="N05">
 <span class="store-name">Frazer Town</span>
-<span class="job-badge empty">0</span>
+<span class="job-badge">0</span>
 </a>
-<a href="https://naturals-blr.github.io/careers/bangalore/hennur/" class="filter-btn " data-store-id="N43">
+<a href="https://naturals-blr.github.io/careers/bangalore/hennur/" class="filter-pill " data-store-id="N43">
 <span class="store-name">Hennur</span>
-<span class="job-badge empty">0</span>
+<span class="job-badge">0</span>
 </a>
 </div>
 </section>
@@ -1369,16 +1416,16 @@ img.style.display = 'none';
 
 // Filter button active state management
 document.addEventListener('DOMContentLoaded', function() {
-var filterButtons = document.querySelectorAll('.filter-btn');
+var filterPills = document.querySelectorAll('.filter-pill');
 
-filterButtons.forEach(function(btn) {
-btn.addEventListener('click', function() {
-// Remove active class from all buttons
-filterButtons.forEach(function(b) {
-b.classList.remove('active');
+filterPills.forEach(function(pill) {
+pill.addEventListener('click', function() {
+// Remove active class from all pills
+filterPills.forEach(function(p) {
+p.classList.remove('is-active');
 });
-// Add active class to clicked button
-this.classList.add('active');
+// Add active class to clicked pill
+this.classList.add('is-active');
 });
 });
 });
