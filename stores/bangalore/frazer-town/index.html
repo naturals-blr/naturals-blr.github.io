@@ -344,17 +344,20 @@ box-shadow:0 4px 16px rgba(0,0,0,0.04);
 .bl-soc-fb:hover{border-color:#1877F2;color:#1877F2;}
 
 /* ── SIDEBAR ── */
-.sb-inner{background:#fff;padding:28px;position:sticky;top:86px;border-radius:14px;border:1px solid rgba(0,0,0,0.06);} /* ← FIX: added border-radius + border */
+.sb-inner{background:#fff;padding:28px;position:sticky;top:86px;border-radius:14px;border:1px solid rgba(0,0,0,0.06);position:relative;} /* ← FIX: added position:relative */
 .sb-sec{font-size:9px;letter-spacing:3px;text-transform:uppercase;color:var(--text-light);font-weight:600;margin-bottom:10px;}
-.sb-divider{height:1px;background:rgba(0,0,0,0.06);margin:16px 0;}
+.open-status-indicator{display:flex;align-items:center;gap:6px;margin-top:8px;position:absolute;top:20px;right:20px;}
+.h-row{display:flex;justify-content:space-between;font-size:12px;color:var(--text-mid);padding:5px 0;border-bottom:1px solid rgba(0,0,0,0.04);width:100%;}
+.h-day{font-weight:500;color:var(--text);font-size:12px;}
+.open-status-indicator{display:flex;align-items:center;gap:6px;margin-top:8px;}
+.open-status-indicator.status-open .status-dot{background:#28a745;}
+.open-status-indicator.status-open .status-text{color:#28a745;}
+.open-status-indicator.status-closed .status-dot{background:#dc3545;}
+.open-status-indicator.status-closed .status-text{color:#dc3545;}
+.status-dot{width:8px;height:8px;border-radius:50%;background:var(--text-light);}
+.status-text{font-size:11px;font-weight:600;color:var(--text-mid);}
 .h-row{display:flex;justify-content:space-between;font-size:12px;color:var(--text-mid);padding:5px 0;border-bottom:1px solid rgba(0,0,0,0.04);}
-.h-day{font-weight:500;color:var(--text);}
-
-/* ── STORE NAV ──
-FIX: padding matches 60px gutter.
-── */
-.store-nav{
-background:var(--dark);
+.h-day{font-weight:500;color:var(--text);font-size:12px;}
 padding:20px 60px; /* ← already correct, keeping */
 display:flex;
 justify-content:space-between;
@@ -1752,11 +1755,16 @@ Facebook</a>
 
 <div class="sidebar-col">
 <div class="sb-inner">
-<div class="sb-sec">Hours</div>
+<div class="sb-sec" style="position:relative;">
+<span class="open-status-indicator" id="store-status-Store_N05" style="position:absolute;top:-10px;right:12px;">
+<span class="status-dot"></span>
+<span class="status-text">Checking...</span>
+</span>
+<span style="float:left;">HOURS</span>
+</div>
 <div class="h-row"><span class="h-day">Mon &ndash; Fri</span><span>10:00 AM – 9:00 PM</span></div>
 <div class="h-row"><span class="h-day">Saturday</span><span>10:00 AM – 9:00 PM</span></div>
 <div class="h-row"><span class="h-day">Sunday</span><span>10:00 AM – 9:00 PM</span></div>
-<div class="sb-divider"></div>
 <a href="https://g.page/Naturals-FrazerTown/review?rc/" target="_blank" rel="noopener" class="btn-primary" style="width:100%;margin-bottom:4px;">
 <span style="font-size:16px;line-height:1;">&#11088;</span> Rate Us on Google
 </a>
@@ -2629,9 +2637,135 @@ else img.style.display='none';
 }
 (document.readyState==='loading') ? document.addEventListener('DOMContentLoaded', attach) : attach();
 })();
-</script>
 
-<script>
+/* Store Open Status System - Global timezone-aware status tracking */
+window.store_open_status = {}; // Global object to store status for all stores
+
+function checkStoreOpenStatus() {
+var now = new Date();
+var day = now.getDay(); // 0 = Sunday, 1 = Monday, ..., 6 = Saturday
+
+// Force comparison using Asia/Kolkata time only (no local time conversion)
+var istTime = new Date(now.toLocaleString("en-US", {timeZone: "Asia/Kolkata"}));
+var istHours = istTime.getHours();
+var istMinutes = istTime.getMinutes();
+var currentTime = istHours * 60 + istMinutes;
+
+// Get store hours for current store
+var storeHours = "10:00 AM – 9:00 PM"; // Mon-Fri hours
+var satHours = "10:00 AM – 9:00 PM";
+var sunHours = "10:00 AM – 9:00 PM";
+
+if (day === 6 && satHours) storeHours = satHours; // Saturday
+if (day === 0 && sunHours) storeHours = sunHours; // Sunday
+
+// Parse hours like "10:00 AM – 9:00 PM"
+var timeMatch = storeHours.match(/(\d+):(\d+)\s*(AM|PM)\s*–\s*(\d+):(\d+)\s*(AM|PM)/);
+if (!timeMatch) return;
+
+var openTime = parseTime(timeMatch[1], timeMatch[2], timeMatch[3]);
+var closeTime = parseTime(timeMatch[4], timeMatch[5], timeMatch[6]);
+
+// 24-hour comparison: if current time is after 9 PM, store is closed
+var isOpen = currentTime >= openTime && currentTime < closeTime;
+
+// DEBUG: Log simplified logic
+console.log('=== IST TIME LOGIC ===');
+console.log('Local time:', now.toLocaleTimeString());
+console.log('IST time:', istTime.toLocaleTimeString());
+console.log('Current day:', day, '(0=Sun,1=Mon,2=Tue,3=Wed,4=Thu,5=Fri,6=Sat)');
+console.log('Current IST time (minutes):', currentTime);
+console.log('Store hours:', storeHours);
+console.log('Open time (minutes):', openTime);
+console.log('Close time (minutes):', closeTime);
+console.log('Is open?', isOpen);
+
+// Store status globally
+window.store_open_status["Store_N05"] = isOpen;
+
+return isOpen;
+}
+
+function parseTime(hours, minutes, period) {
+var h = parseInt(hours);
+var m = parseInt(minutes);
+if (period === 'PM' && h !== 12) h += 12;
+if (period === 'AM' && h === 12) h = 0;
+return h * 60 + m;
+}
+
+function updateStoreStatusIndicators() {
+Object.keys(window.store_open_status).forEach(function(storeId) {
+var statusEl = document.getElementById('store-status-' + storeId);
+if (statusEl) {
+var isOpen = window.store_open_status[storeId];
+var dot = statusEl.querySelector('.status-dot');
+var text = statusEl.querySelector('.status-text');
+
+if (isOpen) {
+dot.style.background = '#28a745'; // Green
+text.textContent = 'Open Now';
+text.style.color = '#28a745';
+statusEl.className = 'open-status-indicator status-open'; // Add class
+} else {
+dot.style.background = '#dc3545'; // Red
+text.textContent = 'Closed';
+text.style.color = '#dc3545';
+statusEl.className = 'open-status-indicator status-closed'; // Add class
+}
+}
+});
+}
+
+// Initialize store status on page load
+document.addEventListener('DOMContentLoaded', function() {
+console.log('DOM loaded, checking status...');
+checkStoreOpenStatus(); // Check current status
+updateStoreStatusIndicators(); // Update visual indicators
+setInterval(function() {
+checkStoreOpenStatus();
+updateStoreStatusIndicators();
+}, 60000); // Update every minute
+});
+
+// Test function to manually trigger status update
+function testStatusUpdate() {
+console.log('=== MANUAL STATUS TEST ===');
+checkStoreOpenStatus();
+updateStoreStatusIndicators();
+console.log('window.store_open_status:', window.store_open_status);
+console.log('=== END MANUAL TEST ===');
+}
+
+// Simple hardcoded test to bypass timezone issues
+function testHardcodedStatus() {
+console.log('=== HARDCODED TEST ===');
+
+// Test 1: Force open status
+var statusEl = document.getElementById('store-status-Store_N05');
+if (statusEl) {
+var dot = statusEl.querySelector('.status-dot');
+var text = statusEl.querySelector('.status-text');
+
+dot.style.background = '#28a745'; // Green
+text.textContent = 'Open Now';
+text.style.color = '#28a745';
+
+console.log('Forced Open status - Green dot');
+}
+
+// Test 2: Force closed status 
+setTimeout(function() {
+dot.style.background = '#dc3545'; // Red
+text.textContent = 'Closed';
+text.style.color = '#dc3545';
+
+console.log('Forced Closed status - Red dot');
+}, 2000);
+
+console.log('=== END HARDCODED TEST ===');
+}
+
 (function(){
 var now = "" ? new Date("") : new Date();
 function daysBetween(a,b){ return Math.floor((b.getTime()-a.getTime())/86400000); }
