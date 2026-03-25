@@ -290,8 +290,7 @@ onerror="this.style.display='none'">
 <nav id="drawer" aria-label="Site menu">
 <div class="drawer-head">
 <div class="drawer-brand">Naturals <span>Salon &amp; Spa</span></div>
-<button class="drawer-x" aria-label="Close menu"
-onclick="document.body.classList.remove('drawer-open');document.getElementById('hamburger')?.setAttribute('aria-expanded','false');">×</button>
+<button class="drawer-x" aria-label="Close menu">×</button>
 </div>
 
 <div class="drawer-theme-section">
@@ -642,6 +641,9 @@ function toggle(){ body.classList.contains('drawer-open') ? closeDrawer() : open
 
 hamburger && hamburger.addEventListener('click', function(e){ e.stopPropagation(); toggle(); });
 overlay && overlay.addEventListener('click', closeDrawer);
+
+// Initialize drawer state - close on page load
+closeDrawer();
 
 drawer && drawer.addEventListener('click', function(e){
 var a=e.target.closest('a');
@@ -3174,7 +3176,7 @@ else img.style.display='none';
 <script>
 /* Ribbons: urgent (<7 days) / NEW (<7 days since Valid_From) */
 (function(){
-var now = "2026-03-25T11:10:27.632526+05:30" ? new Date("2026-03-25T11:10:27.632526+05:30") : new Date();
+var now = "2026-03-25T19:35:59.490985+05:30" ? new Date("2026-03-25T19:35:59.490985+05:30") : new Date();
 function daysBetween(a,b){ return Math.floor((b.getTime()-a.getTime())/86400000); }
 var NEW_DAYS=7;
 

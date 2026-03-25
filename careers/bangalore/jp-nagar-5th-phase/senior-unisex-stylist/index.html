@@ -411,8 +411,7 @@ onerror="this.style.display='none'">
 <nav id="drawer" aria-label="Site menu">
 <div class="drawer-head">
 <div class="drawer-brand">Naturals <span>Salon &amp; Spa</span></div>
-<button class="drawer-x" aria-label="Close menu"
-onclick="document.body.classList.remove('drawer-open');document.getElementById('hamburger')?.setAttribute('aria-expanded','false');">×</button>
+<button class="drawer-x" aria-label="Close menu">×</button>
 </div>
 
 <div class="drawer-theme-section">
@@ -763,6 +762,9 @@ function toggle(){ body.classList.contains('drawer-open') ? closeDrawer() : open
 
 hamburger && hamburger.addEventListener('click', function(e){ e.stopPropagation(); toggle(); });
 overlay && overlay.addEventListener('click', closeDrawer);
+
+// Initialize drawer state - close on page load
+closeDrawer();
 
 drawer && drawer.addEventListener('click', function(e){
 var a=e.target.closest('a');
