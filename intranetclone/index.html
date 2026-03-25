@@ -343,6 +343,56 @@ font-family: 'Courier New', monospace;
 font-size: 13px;
 }
 
+/* Filter Group Styles */
+.filter-group {
+margin-bottom: 30px;
+}
+
+.filter-group h4 {
+color: var(--text, #fff);
+font-size: 16px;
+font-weight: 600;
+margin-bottom: 15px;
+text-transform: uppercase;
+letter-spacing: 0.5px;
+}
+
+.filter-status {
+background: rgba(255,255,255,0.05);
+border: 1px solid rgba(255,255,255,0.1);
+border-radius: 12px;
+padding: 20px;
+margin-top: 30px;
+}
+
+.filter-status h4 {
+color: var(--gold, #D4AF37);
+font-size: 14px;
+font-weight: 600;
+margin-bottom: 15px;
+text-transform: uppercase;
+letter-spacing: 0.5px;
+}
+
+.filter-status p {
+color: rgba(255,255,255,0.8);
+font-size: 14px;
+margin-bottom: 8px;
+display: flex;
+align-items: center;
+gap: 8px;
+}
+
+.filter-status strong {
+color: var(--text, #fff);
+font-weight: 600;
+}
+
+.filter-status span {
+color: var(--gold, #D4AF37);
+font-weight: 500;
+}
+
 /* Mobile Responsive */
 @media (max-width: 768px) {
 .intranet-container {
@@ -1187,6 +1237,1009 @@ Test page for intranet clone header and footer components. This is a development
 </ul>
 <p><strong>Template:</strong> <code>intranetclone/index.html.j2</code></p>
 <p><strong>Status:</strong> Ready for development</p>
+</div>
+</div>
+
+<div class="test-section">
+<h3>Filter Engine Test</h3>
+<p>Testing modular filter component with pills and dropdown logic.</p>
+
+
+<div class="filter-group">
+<h4>Store Filters</h4>
+
+<div class="filter-engine store-filters" data-filter-id="stores">
+
+<div class="filter-pills-container">
+<button 
+class="filter-pill filter-pill-solid"
+data-filter-value="jp-nagar"
+data-filter-type="primary"
+onclick="toggleFilter(this)"
+>
+JP Nagar
+</button>
+<button 
+class="filter-pill filter-pill-solid"
+data-filter-value="elements-mall"
+data-filter-type="primary"
+onclick="toggleFilter(this)"
+>
+Elements Mall
+</button>
+<button 
+class="filter-pill filter-pill-solid"
+data-filter-value="devasandra"
+data-filter-type="primary"
+onclick="toggleFilter(this)"
+>
+Devasandra
+</button>
+<button 
+class="filter-pill filter-pill-solid"
+data-filter-value="frazer-town"
+data-filter-type="primary"
+onclick="toggleFilter(this)"
+>
+Frazer Town
+</button>
+<button 
+class="filter-pill filter-pill-solid"
+data-filter-value="hennur"
+data-filter-type="primary"
+onclick="toggleFilter(this)"
+>
+Hennur
+</button>
+</div>
+</div>
+
+<style>
+/* Filter Engine Styles */
+.filter-engine {
+margin: 20px 0;
+position: relative;
+}
+
+/* Pills Container */
+.filter-pills-container {
+display: flex;
+gap: 8px;
+overflow-x: auto;
+padding: 4px 0;
+scrollbar-width: thin;
+scrollbar-color: rgba(255,255,255,0.2) transparent;
+}
+
+.filter-pills-container::-webkit-scrollbar {
+height: 4px;
+}
+
+.filter-pills-container::-webkit-scrollbar-track {
+background: transparent;
+}
+
+.filter-pills-container::-webkit-scrollbar-thumb {
+background: rgba(255,255,255,0.2);
+border-radius: 2px;
+}
+
+/* Pill Styles */
+.filter-pill {
+padding: 8px 16px;
+border-radius: 20px;
+border: none;
+font-size: 14px;
+font-weight: 500;
+cursor: pointer;
+transition: all 0.2s ease;
+white-space: nowrap;
+flex-shrink: 0;
+}
+
+.filter-pill-solid {
+background: var(--gold, #D4AF37);
+color: var(--dark, #1a1a1a);
+}
+
+.filter-pill-outline {
+background: transparent;
+border: 1px solid rgba(255,255,255,0.3);
+color: rgba(255,255,255,0.7);
+}
+
+.filter-pill:hover {
+transform: translateY(-1px);
+box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+}
+
+.filter-pill.is-active {
+background: var(--gold, #D4AF37);
+color: var(--dark, #1a1a1a);
+border-color: var(--gold, #D4AF37);
+}
+
+/* Dropdown Styles */
+.filter-dropdown-container {
+position: relative;
+min-width: 200px;
+}
+
+.filter-dropdown-trigger {
+width: 100%;
+padding: 10px 16px;
+border-radius: 8px;
+border: none;
+font-size: 14px;
+font-weight: 500;
+cursor: pointer;
+transition: all 0.2s ease;
+display: flex;
+align-items: center;
+justify-content: space-between;
+}
+
+.dropdown-arrow {
+transition: transform 0.2s ease;
+}
+
+.filter-dropdown-trigger.is-open .dropdown-arrow {
+transform: rotate(180deg);
+}
+
+.filter-dropdown-menu {
+position: absolute;
+top: 100%;
+left: 0;
+right: 0;
+background: var(--dark, #1a1a1a);
+border: 1px solid rgba(255,255,255,0.1);
+border-radius: 8px;
+margin-top: 4px;
+max-height: 240px;
+overflow-y: auto;
+z-index: 1000;
+opacity: 0;
+visibility: hidden;
+transform: translateY(-8px);
+transition: all 0.2s ease;
+}
+
+.filter-dropdown-menu.is-open {
+opacity: 1;
+visibility: visible;
+transform: translateY(0);
+}
+
+.filter-dropdown-item {
+width: 100%;
+padding: 10px 16px;
+border: none;
+background: transparent;
+color: rgba(255,255,255,0.8);
+font-size: 14px;
+text-align: left;
+cursor: pointer;
+transition: all 0.2s ease;
+border-bottom: 1px solid rgba(255,255,255,0.05);
+}
+
+.filter-dropdown-item:last-child {
+border-bottom: none;
+}
+
+.filter-dropdown-item:hover {
+background: rgba(255,255,255,0.1);
+color: white;
+}
+
+.filter-dropdown-item.is-selected {
+background: var(--gold, #D4AF37);
+color: var(--dark, #1a1a1a);
+}
+
+/* Mobile Responsive */
+@media (max-width: 768px) {
+.filter-pills-container {
+gap: 6px;
+}
+
+.filter-pill {
+padding: 6px 12px;
+font-size: 13px;
+}
+
+.filter-dropdown-container {
+min-width: 160px;
+}
+}
+</style>
+
+<script>
+// Filter Engine JavaScript
+function toggleFilter(element) {
+const isActive = element.classList.contains('is-active');
+
+// Remove active class from all pills in same filter type
+const filterType = element.dataset.filterType;
+document.querySelectorAll(`[data-filter-type="${filterType}"]`).forEach(pill => {
+pill.classList.remove('is-active');
+});
+
+// Add active class to clicked pill if it wasn't active
+if (!isActive) {
+element.classList.add('is-active');
+}
+
+// Trigger filter change event
+const filterEvent = new CustomEvent('filterChanged', {
+detail: {
+type: filterType,
+value: element.dataset.filterValue,
+element: element
+}
+});
+document.dispatchEvent(filterEvent);
+}
+
+function toggleDropdown(element) {
+const isOpen = element.classList.contains('is-open');
+const menu = element.nextElementSibling;
+
+// Close all other dropdowns
+document.querySelectorAll('.filter-dropdown-menu').forEach(dropdown => {
+dropdown.classList.remove('is-open');
+});
+document.querySelectorAll('.filter-dropdown-trigger').forEach(trigger => {
+trigger.classList.remove('is-open');
+});
+
+// Toggle current dropdown
+if (!isOpen) {
+element.classList.add('is-open');
+menu.classList.add('is-open');
+}
+
+// Close dropdown when clicking outside
+document.addEventListener('click', function closeDropdown(e) {
+if (!element.contains(e.target) && !menu.contains(e.target)) {
+element.classList.remove('is-open');
+menu.classList.remove('is-open');
+document.removeEventListener('click', closeDropdown);
+}
+});
+}
+
+function selectDropdownItem(element) {
+const dropdown = element.closest('.filter-dropdown-container');
+const trigger = dropdown.querySelector('.filter-dropdown-trigger');
+const menu = dropdown.querySelector('.filter-dropdown-menu');
+
+// Update trigger text
+const label = element.textContent;
+trigger.querySelector('.dropdown-label').textContent = label;
+
+// Update selected state
+menu.querySelectorAll('.filter-dropdown-item').forEach(item => {
+item.classList.remove('is-selected');
+});
+element.classList.add('is-selected');
+
+// Close dropdown
+trigger.classList.remove('is-open');
+menu.classList.remove('is-open');
+
+// Trigger filter change event
+const filterEvent = new CustomEvent('filterChanged', {
+detail: {
+type: trigger.dataset.filterType,
+value: element.dataset.filterValue,
+element: element
+}
+});
+document.dispatchEvent(filterEvent);
+}
+
+// Global filter event listener
+document.addEventListener('filterChanged', function(e) {
+console.log('Filter changed:', e.detail);
+
+// Update status display based on filter type
+const filterType = e.detail.type;
+const filterValue = e.detail.value;
+
+if (filterType === 'primary') {
+// Store filter
+const storeElement = document.getElementById('active-store');
+if (storeElement) {
+storeElement.textContent = filterValue;
+}
+} else if (filterType === 'secondary') {
+// Gender filter
+const genderElement = document.getElementById('active-gender');
+if (genderElement) {
+genderElement.textContent = filterValue;
+}
+} else if (filterType === 'services') {
+// Service filter
+const serviceElement = document.getElementById('active-service');
+if (serviceElement) {
+serviceElement.textContent = filterValue;
+}
+}
+});
+</script>
+
+</div>
+
+
+<div class="filter-group">
+<h4>Gender Filters</h4>
+
+<div class="filter-engine gender-filters" data-filter-id="gender">
+
+<div class="filter-pills-container">
+<button 
+class="filter-pill filter-pill-outline"
+data-filter-value="all"
+data-filter-type="secondary"
+onclick="toggleFilter(this)"
+>
+All
+</button>
+<button 
+class="filter-pill filter-pill-outline"
+data-filter-value="male"
+data-filter-type="secondary"
+onclick="toggleFilter(this)"
+>
+Male
+</button>
+<button 
+class="filter-pill filter-pill-outline"
+data-filter-value="female"
+data-filter-type="secondary"
+onclick="toggleFilter(this)"
+>
+Female
+</button>
+</div>
+</div>
+
+<style>
+/* Filter Engine Styles */
+.filter-engine {
+margin: 20px 0;
+position: relative;
+}
+
+/* Pills Container */
+.filter-pills-container {
+display: flex;
+gap: 8px;
+overflow-x: auto;
+padding: 4px 0;
+scrollbar-width: thin;
+scrollbar-color: rgba(255,255,255,0.2) transparent;
+}
+
+.filter-pills-container::-webkit-scrollbar {
+height: 4px;
+}
+
+.filter-pills-container::-webkit-scrollbar-track {
+background: transparent;
+}
+
+.filter-pills-container::-webkit-scrollbar-thumb {
+background: rgba(255,255,255,0.2);
+border-radius: 2px;
+}
+
+/* Pill Styles */
+.filter-pill {
+padding: 8px 16px;
+border-radius: 20px;
+border: none;
+font-size: 14px;
+font-weight: 500;
+cursor: pointer;
+transition: all 0.2s ease;
+white-space: nowrap;
+flex-shrink: 0;
+}
+
+.filter-pill-solid {
+background: var(--gold, #D4AF37);
+color: var(--dark, #1a1a1a);
+}
+
+.filter-pill-outline {
+background: transparent;
+border: 1px solid rgba(255,255,255,0.3);
+color: rgba(255,255,255,0.7);
+}
+
+.filter-pill:hover {
+transform: translateY(-1px);
+box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+}
+
+.filter-pill.is-active {
+background: var(--gold, #D4AF37);
+color: var(--dark, #1a1a1a);
+border-color: var(--gold, #D4AF37);
+}
+
+/* Dropdown Styles */
+.filter-dropdown-container {
+position: relative;
+min-width: 200px;
+}
+
+.filter-dropdown-trigger {
+width: 100%;
+padding: 10px 16px;
+border-radius: 8px;
+border: none;
+font-size: 14px;
+font-weight: 500;
+cursor: pointer;
+transition: all 0.2s ease;
+display: flex;
+align-items: center;
+justify-content: space-between;
+}
+
+.dropdown-arrow {
+transition: transform 0.2s ease;
+}
+
+.filter-dropdown-trigger.is-open .dropdown-arrow {
+transform: rotate(180deg);
+}
+
+.filter-dropdown-menu {
+position: absolute;
+top: 100%;
+left: 0;
+right: 0;
+background: var(--dark, #1a1a1a);
+border: 1px solid rgba(255,255,255,0.1);
+border-radius: 8px;
+margin-top: 4px;
+max-height: 240px;
+overflow-y: auto;
+z-index: 1000;
+opacity: 0;
+visibility: hidden;
+transform: translateY(-8px);
+transition: all 0.2s ease;
+}
+
+.filter-dropdown-menu.is-open {
+opacity: 1;
+visibility: visible;
+transform: translateY(0);
+}
+
+.filter-dropdown-item {
+width: 100%;
+padding: 10px 16px;
+border: none;
+background: transparent;
+color: rgba(255,255,255,0.8);
+font-size: 14px;
+text-align: left;
+cursor: pointer;
+transition: all 0.2s ease;
+border-bottom: 1px solid rgba(255,255,255,0.05);
+}
+
+.filter-dropdown-item:last-child {
+border-bottom: none;
+}
+
+.filter-dropdown-item:hover {
+background: rgba(255,255,255,0.1);
+color: white;
+}
+
+.filter-dropdown-item.is-selected {
+background: var(--gold, #D4AF37);
+color: var(--dark, #1a1a1a);
+}
+
+/* Mobile Responsive */
+@media (max-width: 768px) {
+.filter-pills-container {
+gap: 6px;
+}
+
+.filter-pill {
+padding: 6px 12px;
+font-size: 13px;
+}
+
+.filter-dropdown-container {
+min-width: 160px;
+}
+}
+</style>
+
+<script>
+// Filter Engine JavaScript
+function toggleFilter(element) {
+const isActive = element.classList.contains('is-active');
+
+// Remove active class from all pills in same filter type
+const filterType = element.dataset.filterType;
+document.querySelectorAll(`[data-filter-type="${filterType}"]`).forEach(pill => {
+pill.classList.remove('is-active');
+});
+
+// Add active class to clicked pill if it wasn't active
+if (!isActive) {
+element.classList.add('is-active');
+}
+
+// Trigger filter change event
+const filterEvent = new CustomEvent('filterChanged', {
+detail: {
+type: filterType,
+value: element.dataset.filterValue,
+element: element
+}
+});
+document.dispatchEvent(filterEvent);
+}
+
+function toggleDropdown(element) {
+const isOpen = element.classList.contains('is-open');
+const menu = element.nextElementSibling;
+
+// Close all other dropdowns
+document.querySelectorAll('.filter-dropdown-menu').forEach(dropdown => {
+dropdown.classList.remove('is-open');
+});
+document.querySelectorAll('.filter-dropdown-trigger').forEach(trigger => {
+trigger.classList.remove('is-open');
+});
+
+// Toggle current dropdown
+if (!isOpen) {
+element.classList.add('is-open');
+menu.classList.add('is-open');
+}
+
+// Close dropdown when clicking outside
+document.addEventListener('click', function closeDropdown(e) {
+if (!element.contains(e.target) && !menu.contains(e.target)) {
+element.classList.remove('is-open');
+menu.classList.remove('is-open');
+document.removeEventListener('click', closeDropdown);
+}
+});
+}
+
+function selectDropdownItem(element) {
+const dropdown = element.closest('.filter-dropdown-container');
+const trigger = dropdown.querySelector('.filter-dropdown-trigger');
+const menu = dropdown.querySelector('.filter-dropdown-menu');
+
+// Update trigger text
+const label = element.textContent;
+trigger.querySelector('.dropdown-label').textContent = label;
+
+// Update selected state
+menu.querySelectorAll('.filter-dropdown-item').forEach(item => {
+item.classList.remove('is-selected');
+});
+element.classList.add('is-selected');
+
+// Close dropdown
+trigger.classList.remove('is-open');
+menu.classList.remove('is-open');
+
+// Trigger filter change event
+const filterEvent = new CustomEvent('filterChanged', {
+detail: {
+type: trigger.dataset.filterType,
+value: element.dataset.filterValue,
+element: element
+}
+});
+document.dispatchEvent(filterEvent);
+}
+
+// Global filter event listener
+document.addEventListener('filterChanged', function(e) {
+console.log('Filter changed:', e.detail);
+
+// Update status display based on filter type
+const filterType = e.detail.type;
+const filterValue = e.detail.value;
+
+if (filterType === 'primary') {
+// Store filter
+const storeElement = document.getElementById('active-store');
+if (storeElement) {
+storeElement.textContent = filterValue;
+}
+} else if (filterType === 'secondary') {
+// Gender filter
+const genderElement = document.getElementById('active-gender');
+if (genderElement) {
+genderElement.textContent = filterValue;
+}
+} else if (filterType === 'services') {
+// Service filter
+const serviceElement = document.getElementById('active-service');
+if (serviceElement) {
+serviceElement.textContent = filterValue;
+}
+}
+});
+</script>
+
+</div>
+
+
+<div class="filter-group">
+<h4>Service Category (Dropdown Test)</h4>
+
+<div class="filter-engine service-filters" data-filter-id="services">
+
+<div class="filter-dropdown-container">
+<button 
+class="filter-dropdown-trigger filter-pill-solid"
+data-filter-type="primary"
+onclick="toggleDropdown(this)"
+>
+<span class="dropdown-label">Select Primary</span>
+<svg class="dropdown-arrow" width="12" height="8" viewBox="0 0 12 8">
+<path d="M1 1l5 5 5-5" stroke="currentColor" stroke-width="2" fill="none"/>
+</svg>
+</button>
+
+<div class="filter-dropdown-menu" data-filter-id="services">
+<button 
+class="filter-dropdown-item"
+data-filter-value="haircuts"
+data-filter-type="primary"
+onclick="selectDropdownItem(this)"
+>
+Haircuts & Styling
+</button>
+<button 
+class="filter-dropdown-item"
+data-filter-value="colour"
+data-filter-type="primary"
+onclick="selectDropdownItem(this)"
+>
+Hair Colour & Highlights
+</button>
+<button 
+class="filter-dropdown-item"
+data-filter-value="spa"
+data-filter-type="primary"
+onclick="selectDropdownItem(this)"
+>
+Hair Spa & Treatments
+</button>
+<button 
+class="filter-dropdown-item"
+data-filter-value="mens"
+data-filter-type="primary"
+onclick="selectDropdownItem(this)"
+>
+Men's Grooming
+</button>
+<button 
+class="filter-dropdown-item"
+data-filter-value="bridal"
+data-filter-type="primary"
+onclick="selectDropdownItem(this)"
+>
+Bridal Services
+</button>
+<button 
+class="filter-dropdown-item"
+data-filter-value="special"
+data-filter-type="primary"
+onclick="selectDropdownItem(this)"
+>
+Special Treatments
+</button>
+</div>
+</div>
+</div>
+
+<style>
+/* Filter Engine Styles */
+.filter-engine {
+margin: 20px 0;
+position: relative;
+}
+
+/* Pills Container */
+.filter-pills-container {
+display: flex;
+gap: 8px;
+overflow-x: auto;
+padding: 4px 0;
+scrollbar-width: thin;
+scrollbar-color: rgba(255,255,255,0.2) transparent;
+}
+
+.filter-pills-container::-webkit-scrollbar {
+height: 4px;
+}
+
+.filter-pills-container::-webkit-scrollbar-track {
+background: transparent;
+}
+
+.filter-pills-container::-webkit-scrollbar-thumb {
+background: rgba(255,255,255,0.2);
+border-radius: 2px;
+}
+
+/* Pill Styles */
+.filter-pill {
+padding: 8px 16px;
+border-radius: 20px;
+border: none;
+font-size: 14px;
+font-weight: 500;
+cursor: pointer;
+transition: all 0.2s ease;
+white-space: nowrap;
+flex-shrink: 0;
+}
+
+.filter-pill-solid {
+background: var(--gold, #D4AF37);
+color: var(--dark, #1a1a1a);
+}
+
+.filter-pill-outline {
+background: transparent;
+border: 1px solid rgba(255,255,255,0.3);
+color: rgba(255,255,255,0.7);
+}
+
+.filter-pill:hover {
+transform: translateY(-1px);
+box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+}
+
+.filter-pill.is-active {
+background: var(--gold, #D4AF37);
+color: var(--dark, #1a1a1a);
+border-color: var(--gold, #D4AF37);
+}
+
+/* Dropdown Styles */
+.filter-dropdown-container {
+position: relative;
+min-width: 200px;
+}
+
+.filter-dropdown-trigger {
+width: 100%;
+padding: 10px 16px;
+border-radius: 8px;
+border: none;
+font-size: 14px;
+font-weight: 500;
+cursor: pointer;
+transition: all 0.2s ease;
+display: flex;
+align-items: center;
+justify-content: space-between;
+}
+
+.dropdown-arrow {
+transition: transform 0.2s ease;
+}
+
+.filter-dropdown-trigger.is-open .dropdown-arrow {
+transform: rotate(180deg);
+}
+
+.filter-dropdown-menu {
+position: absolute;
+top: 100%;
+left: 0;
+right: 0;
+background: var(--dark, #1a1a1a);
+border: 1px solid rgba(255,255,255,0.1);
+border-radius: 8px;
+margin-top: 4px;
+max-height: 240px;
+overflow-y: auto;
+z-index: 1000;
+opacity: 0;
+visibility: hidden;
+transform: translateY(-8px);
+transition: all 0.2s ease;
+}
+
+.filter-dropdown-menu.is-open {
+opacity: 1;
+visibility: visible;
+transform: translateY(0);
+}
+
+.filter-dropdown-item {
+width: 100%;
+padding: 10px 16px;
+border: none;
+background: transparent;
+color: rgba(255,255,255,0.8);
+font-size: 14px;
+text-align: left;
+cursor: pointer;
+transition: all 0.2s ease;
+border-bottom: 1px solid rgba(255,255,255,0.05);
+}
+
+.filter-dropdown-item:last-child {
+border-bottom: none;
+}
+
+.filter-dropdown-item:hover {
+background: rgba(255,255,255,0.1);
+color: white;
+}
+
+.filter-dropdown-item.is-selected {
+background: var(--gold, #D4AF37);
+color: var(--dark, #1a1a1a);
+}
+
+/* Mobile Responsive */
+@media (max-width: 768px) {
+.filter-pills-container {
+gap: 6px;
+}
+
+.filter-pill {
+padding: 6px 12px;
+font-size: 13px;
+}
+
+.filter-dropdown-container {
+min-width: 160px;
+}
+}
+</style>
+
+<script>
+// Filter Engine JavaScript
+function toggleFilter(element) {
+const isActive = element.classList.contains('is-active');
+
+// Remove active class from all pills in same filter type
+const filterType = element.dataset.filterType;
+document.querySelectorAll(`[data-filter-type="${filterType}"]`).forEach(pill => {
+pill.classList.remove('is-active');
+});
+
+// Add active class to clicked pill if it wasn't active
+if (!isActive) {
+element.classList.add('is-active');
+}
+
+// Trigger filter change event
+const filterEvent = new CustomEvent('filterChanged', {
+detail: {
+type: filterType,
+value: element.dataset.filterValue,
+element: element
+}
+});
+document.dispatchEvent(filterEvent);
+}
+
+function toggleDropdown(element) {
+const isOpen = element.classList.contains('is-open');
+const menu = element.nextElementSibling;
+
+// Close all other dropdowns
+document.querySelectorAll('.filter-dropdown-menu').forEach(dropdown => {
+dropdown.classList.remove('is-open');
+});
+document.querySelectorAll('.filter-dropdown-trigger').forEach(trigger => {
+trigger.classList.remove('is-open');
+});
+
+// Toggle current dropdown
+if (!isOpen) {
+element.classList.add('is-open');
+menu.classList.add('is-open');
+}
+
+// Close dropdown when clicking outside
+document.addEventListener('click', function closeDropdown(e) {
+if (!element.contains(e.target) && !menu.contains(e.target)) {
+element.classList.remove('is-open');
+menu.classList.remove('is-open');
+document.removeEventListener('click', closeDropdown);
+}
+});
+}
+
+function selectDropdownItem(element) {
+const dropdown = element.closest('.filter-dropdown-container');
+const trigger = dropdown.querySelector('.filter-dropdown-trigger');
+const menu = dropdown.querySelector('.filter-dropdown-menu');
+
+// Update trigger text
+const label = element.textContent;
+trigger.querySelector('.dropdown-label').textContent = label;
+
+// Update selected state
+menu.querySelectorAll('.filter-dropdown-item').forEach(item => {
+item.classList.remove('is-selected');
+});
+element.classList.add('is-selected');
+
+// Close dropdown
+trigger.classList.remove('is-open');
+menu.classList.remove('is-open');
+
+// Trigger filter change event
+const filterEvent = new CustomEvent('filterChanged', {
+detail: {
+type: trigger.dataset.filterType,
+value: element.dataset.filterValue,
+element: element
+}
+});
+document.dispatchEvent(filterEvent);
+}
+
+// Global filter event listener
+document.addEventListener('filterChanged', function(e) {
+console.log('Filter changed:', e.detail);
+
+// Update status display based on filter type
+const filterType = e.detail.type;
+const filterValue = e.detail.value;
+
+if (filterType === 'primary') {
+// Store filter
+const storeElement = document.getElementById('active-store');
+if (storeElement) {
+storeElement.textContent = filterValue;
+}
+} else if (filterType === 'secondary') {
+// Gender filter
+const genderElement = document.getElementById('active-gender');
+if (genderElement) {
+genderElement.textContent = filterValue;
+}
+} else if (filterType === 'services') {
+// Service filter
+const serviceElement = document.getElementById('active-service');
+if (serviceElement) {
+serviceElement.textContent = filterValue;
+}
+}
+});
+</script>
+
+</div>
+
+<div class="filter-status">
+<h4>Filter Status</h4>
+<div id="active-filters">
+<p><strong>Active Store:</strong> <span id="active-store">None</span></p>
+<p><strong>Active Gender:</strong> <span id="active-gender">None</span></p>
+<p><strong>Active Service:</strong> <span id="active-service">None</span></p>
+</div>
 </div>
 </div>
 
