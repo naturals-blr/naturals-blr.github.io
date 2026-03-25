@@ -296,7 +296,7 @@ Access curated video tutorials on advanced hair trends, tool handling, and profe
 
 <script>
 // Training data from template
-const trainingModules = [];
+const trainingModules = [{"is_active": "Yes", "is_featured": "No", "key_takeaways": "", "target_role": "All", "training_category": "Service Standards", "training_date_added": "4-Mar-2026", "training_description": "Effective communication techniques for customer consultations and service recommendations.", "training_duration": "75", "training_id": "TR20260304_SC_01", "training_level": "advanced", "training_link": "https://youtube.com", "training_source": "Youtube", "training_thumbnail_link": "na", "training_title": "Customer Consultation Skills"}, {"is_active": "Yes", "is_featured": "No", "key_takeaways": "", "target_role": "All", "training_category": "Latest Trends", "training_date_added": "6-Mar-2026", "training_description": "Effective communication techniques for customer consultations and service recommendations.", "training_duration": "35", "training_id": "TR20260306_LC_01", "training_level": "intermediate", "training_link": "https://youtube.com", "training_source": "Youtube", "training_thumbnail_link": "na", "training_title": "Customer Consultation Skills"}, {"is_active": "Yes", "is_featured": "No", "key_takeaways": "", "target_role": "All", "training_category": "Tool Handling", "training_date_added": "9-Mar-2026", "training_description": "Effective communication techniques for customer consultations and service recommendations.", "training_duration": "25", "training_id": "TR20260309_TC_01", "training_level": "beginner", "training_link": "https://youtube.com", "training_source": "Youtube", "training_thumbnail_link": "na", "training_title": "Customer Consultation Skills"}, {"is_active": "Yes", "is_featured": "No", "key_takeaways": "", "target_role": "All", "training_category": "Service Standards", "training_date_added": "12-Mar-2026", "training_description": "Effective communication techniques for customer consultations and service recommendations.", "training_duration": "15", "training_id": "TR20260312_SC_01", "training_level": "intermediate", "training_link": "https://youtube.com", "training_source": "Youtube", "training_thumbnail_link": "na", "training_title": "Customer Consultation Skills"}, {"is_active": "Yes", "is_featured": "No", "key_takeaways": "", "target_role": "All", "training_category": "Latest Trends", "training_date_added": "13-Mar-2026", "training_description": "Effective communication techniques for customer consultations and service recommendations.", "training_duration": "25", "training_id": "TR20260313_LC_01", "training_level": "advanced", "training_link": "https://youtube.com", "training_source": "Youtube", "training_thumbnail_link": "na", "training_title": "Customer Consultation Skills"}, {"is_active": "Yes", "is_featured": "No", "key_takeaways": "", "target_role": "All", "training_category": "Tool Handling", "training_date_added": "13-Mar-2026", "training_description": "Effective communication techniques for customer consultations and service recommendations.", "training_duration": "45", "training_id": "TR20260313_TC_01", "training_level": "beginner", "training_link": "https://youtube.com", "training_source": "Youtube", "training_thumbnail_link": "na", "training_title": "Customer Consultation Skills"}, {"is_active": "Yes", "is_featured": "No", "key_takeaways": "", "target_role": "All", "training_category": "Tool Handling", "training_date_added": "17-Mar-2026", "training_description": "Effective communication techniques for customer consultations and service recommendations.", "training_duration": "25", "training_id": "TR20260317_TC_01", "training_level": "advanced", "training_link": "https://youtube.com", "training_source": "Youtube", "training_thumbnail_link": "na", "training_title": "Customer Consultation Skills"}];
 
 // Category icons mapping - minimal fallback
 const categoryIcons = {
@@ -357,15 +357,18 @@ const filteredModules = currentCategory === 'all'
 
 // Sort by featured status and date added
 filteredModules.sort((a, b) => {
-if (a.is_featured && !b.is_featured) return -1;
-if (!a.is_featured && b.is_featured) return 1;
+const aFeatured = a.is_featured === "Yes" || a.is_featured === true;
+const bFeatured = b.is_featured === "Yes" || b.is_featured === true;
+if (aFeatured && !bFeatured) return -1;
+if (!aFeatured && bFeatured) return 1;
 return new Date(b.training_date_added) - new Date(a.training_date_added);
 });
 
 filteredModules.forEach(module => {
 const card = document.createElement('div');
 card.className = 'training-card';
-if (module.is_featured) {
+const isFeatured = module.is_featured === "Yes" || module.is_featured === true;
+if (isFeatured) {
 card.style.border = '2px solid var(--gold)';
 }
 
