@@ -88,57 +88,34 @@ h3, .h3{font-family:'Cormorant Garamond',serif;font-size:clamp(20px,2.5vw,24px);
 body{font-family:'Jost',sans-serif;background:var(--cream);color:var(--text);}
 a{text-decoration:none;color:inherit;}img{display:block;width:100%;object-fit:cover;}
 
-/* FILTER BAR */
-.filter-bar{background:var(--filter-bg);padding:0 60px;position:sticky;top:70px;z-index:100;border-bottom:1px solid rgba(255,255,255,0.06);overflow-x:hidden;}
-.filter-row{display:flex;align-items:center;gap:10px;padding:8px 0;width:100%;min-width:0;flex-wrap:nowrap;}
-.filter-group{display:flex;align-items:center;gap:6px;flex-wrap:nowrap;min-width:0;}
-.filter-group.store-group{flex:1 1 auto;min-width:180px;}
-.filter-group.sort-group{flex:0 0 auto;min-width:140px;}
+/* ── Filter Bar ── */
+.filter-bar{background:var(--filter-bg);padding:15px 60px;position:sticky;top:70px;z-index:100;border-bottom:1px solid rgba(255,255,255,0.06);min-height:60px;}
+.filter-row{display:flex;align-items:center;gap:15px;width:100%;flex-wrap:wrap;}
+.filter-group.store-group{display:flex;flex-wrap:wrap;gap:8px;flex:1;}
 .filter-lbl{font-size:9px;letter-spacing:1.5px;text-transform:uppercase;font-weight:600;color:var(--green-soft);white-space:nowrap;margin-right:3px;}
-#store-select, #sort-mode{
-appearance:none;background:rgba(255,255,255,0.05);border:1px solid rgba(255,255,255,0.12);color:rgba(255,255,255,0.7);padding:5px 32px 5px 12px;font-size:10px;letter-spacing:0.5px;text-transform:uppercase;font-family:'Jost',sans-serif;font-weight:500;cursor:pointer;transition:all 0.3s;border-radius:10px;min-width:160px;width:100%;flex-shrink:0;
-}
-#store-select:hover, #sort-mode:hover{border-color:rgba(255,255,255,0.3);color:#fff;}
-#store-select:focus, #sort-mode:focus{outline:none;border-color:var(--gold);color:#fff;}
-#store-select.active{background:var(--gold);border-color:var(--gold);color:var(--dark);font-weight:600;}
-[data-theme="naturals"] #store-select.active{background:var(--green-mid);border-color:var(--green-mid);color:#fff;}
 .f-btn{background:rgba(255,255,255,0.03);border:1px solid rgba(255,255,255,0.1);color:rgba(255,255,255,0.4);padding:6px 14px;font-size:11px;letter-spacing:1px;text-transform:uppercase;cursor:pointer;transition:all 0.25s;font-family:'Jost',sans-serif;font-weight:500;border-radius:10px;}
 .f-btn:hover{border-color:rgba(255,255,255,0.3);color:#fff;}
 .f-btn.active{background:var(--gold);border-color:var(--gold);color:var(--dark);font-weight:600;}
 [data-theme="naturals"] .f-btn.active{background:var(--green-mid);border-color:var(--green-mid);color:#fff;}
 
-.sort-wrap{margin-left:auto;display:flex;align-items:center;gap:10px;flex-shrink:0;}
-.sort-lbl{font-size:10px;letter-spacing:2px;text-transform:uppercase;font-weight:600;color:rgba(255,255,255,0.25);}
-.sort-sel-wrap{position:relative;display:flex;align-items:center;}
-.sort-sel{appearance:none;background:rgba(255,255,255,0.05);border:1px solid rgba(255,255,255,0.12);color:rgba(255,255,255,0.7);padding:6px 32px 6px 12px;font-size:11px;letter-spacing:1px;border-radius:10px;cursor:pointer;transition:all 0.2s;}
-.sort-sel:hover{border-color:rgba(255,255,255,0.3);color:#fff;}
-.sort-sel:focus{outline:none;border-color:var(--gold);color:#fff;}
-.sort-sel:disabled{opacity:0.3;cursor:not-allowed;}
-.sort-sel-wrap .chev{position:absolute;right:10px;color:rgba(255,255,255,0.3);pointer-events:none;font-size:10px;}
+/* ── Results bar ── */
+.results-bar{background:var(--cream);padding:14px 60px;border-bottom:1px solid rgba(0,0,0,0.06);font-size:13px;color:var(--text-light);}
 
-.results-bar{background:var(--cream);padding:14px 60px;border-bottom:1px solid rgba(0,0,0,0.06);font-size:13px;color:var(--text-light);overflow-x:hidden;}
+/* ── Offers layout ── */
+.offers-main{padding:40px 60px;}
+.offers-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:20px;}
+@media(max-width:900px){.offers-grid{grid-template-columns:1fr 1fr;}}
+@media(max-width:600px){.offers-grid{grid-template-columns:1fr;}}
 
-.offers-main{}
-.store-group{margin-bottom:52px;}
-.store-group-hdr{display:flex;align-items:baseline;gap:16px;margin-bottom:20px;padding-bottom:12px;border-bottom:2px solid rgba(0,0,0,0.06);}
-.store-group-name{font-family:'Cormorant Garamond',serif;font-size:30px;font-weight:300;color:var(--text);}
-.store-group-count{font-size:11px;color:var(--text-light);letter-spacing:2px;text-transform:uppercase;}
-
-.offers-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;}
-@media(max-width:900px){ .offers-grid{grid-template-columns:1fr 1fr;} }
-@media(max-width:600px){ .offers-grid{grid-template-columns:1fr;} }
-
+/* ── Card ── */
 .offer-card{background:#fff;overflow:hidden;transition:box-shadow 0.25s,transform 0.25s;border:1px solid rgba(0,0,0,0.06);min-height:360px;display:flex;flex-direction:column;border-radius:14px;}
 .offer-card:hover{box-shadow:0 10px 34px rgba(0,0,0,0.10);transform:translateY(-2px);}
-
 .offer-media{height:200px;position:relative;background:linear-gradient(135deg,var(--dark) 0%,var(--green) 100%);overflow:hidden;}
 .offer-media img{width:100%;height:100%;object-fit:cover;transition:transform 0.7s ease;cursor:zoom-in;}
 .offer-card:hover .offer-media img{transform:scale(1.04);}
-
 .ribbon{position:absolute;top:14px;left:14px;z-index:2;background:rgba(201,168,76,0.92);color:var(--dark);font-size:9px;letter-spacing:2px;text-transform:uppercase;font-weight:800;padding:7px 10px;border-radius:999px;box-shadow:0 8px 18px rgba(0,0,0,0.18);}
 .ribbon.urgent{background:rgba(217,48,37,0.92);color:#fff;}
 .ribbon.new{background:rgba(26,115,232,0.92);color:#fff;}
-
 .offer-body{padding:18px 18px 16px;display:flex;flex-direction:column;flex:1;}
 .offer-badge{font-size:9px;letter-spacing:3px;text-transform:uppercase;color:var(--gold);font-weight:700;margin-bottom:8px;}
 .offer-title{font-family:'Cormorant Garamond',serif;font-size:20px;font-weight:400;margin-bottom:8px;color:var(--text);line-height:1.2;}
@@ -146,67 +123,51 @@ appearance:none;background:rgba(255,255,255,0.05);border:1px solid rgba(255,255,
 .offer-details.clamp{display:-webkit-box;-webkit-line-clamp:1;-webkit-box-orient:vertical;overflow:hidden;}
 .offer-more{display:inline-flex;gap:6px;align-items:center;font-size:11px;color:var(--green-mid);cursor:pointer;margin-top:-6px;margin-bottom:12px;}
 .offer-more:hover{text-decoration:underline;}
-
 .offer-footer{margin-top:auto;display:flex;justify-content:space-between;align-items:center;gap:10px;flex-wrap:wrap;padding-top:12px;border-top:1px solid rgba(0,0,0,0.06);}
 .offer-valid{font-size:11px;color:var(--green-soft);font-weight:800;white-space:nowrap;}
 .offer-ctas{display:flex;gap:8px;align-items:center;flex-wrap:wrap;}
-
-.offer-icon-btn{
-width:40px;height:40px;border-radius:12px;
-display:inline-flex;align-items:center;justify-content:center;
-border:1px solid rgba(0,0,0,0.10);
-transition:transform 0.2s, box-shadow 0.2s, opacity 0.2s;
-text-decoration:none;
-}
+.offer-icon-btn{width:40px;height:40px;border-radius:12px;display:inline-flex;align-items:center;justify-content:center;border:1px solid rgba(0,0,0,0.10);transition:transform 0.2s,box-shadow 0.2s;text-decoration:none;}
 .offer-icon-btn:hover{transform:translateY(-1px);box-shadow:0 8px 18px rgba(0,0,0,0.12);}
-
 .offer-icon-book{background:#1A73E8;border-color:rgba(26,115,232,0.45);}
 .offer-icon-wa{background:#25D366;border-color:rgba(37,211,102,0.45);}
 .offer-icon-call{background:#5F6368;border-color:rgba(95,99,104,0.45);}
 .offer-icon-fb{background:#fff;border-color:rgba(24,119,242,0.30);}
 .offer-icon-ig{background:#fff;border-color:rgba(225,48,108,0.25);}
-
 .offer-icon-btn svg{width:18px;height:18px;display:block;}
-.offer-icon-book svg{fill:#fff;}
-.offer-icon-wa svg{fill:#fff;}
-.offer-icon-call svg{fill:#fff;}
+.offer-icon-book svg,.offer-icon-wa svg,.offer-icon-call svg{fill:#fff;}
 
+/* ── No offers ── */
 .no-offers{text-align:center;padding:80px 32px;color:var(--text-light);}
 .no-offers h3{font-family:'Cormorant Garamond',serif;font-size:32px;font-weight:300;margin-bottom:10px;}
 
+/* ── Image Modal ── */
 #img-modal-overlay{position:fixed;inset:0;background:rgba(0,0,0,0.75);backdrop-filter:blur(6px);z-index:12000;display:none;}
 #img-modal{position:fixed;inset:0;z-index:12001;display:none;align-items:center;justify-content:center;padding:18px;}
-#img-modal-inner{position:relative;max-width:min(980px, 96vw);max-height:86vh;background:#000;border-radius:14px;overflow:hidden;box-shadow:0 24px 90px rgba(0,0,0,0.55);}
+#img-modal-inner{position:relative;max-width:min(980px,96vw);max-height:86vh;background:#000;border-radius:14px;overflow:hidden;}
 #img-modal-inner img{width:100%;height:100%;max-height:86vh;object-fit:contain;background:#000;}
 #img-close{position:absolute;top:10px;right:10px;width:40px;height:40px;border-radius:10px;background:rgba(255,255,255,0.12);border:1px solid rgba(255,255,255,0.22);color:#fff;font-size:20px;cursor:pointer;}
-#img-close:hover{background:rgba(255,255,255,0.22);}
-
-#img-prev,#img-next{
-position:absolute;top:50%;transform:translateY(-50%);
-width:44px;height:44px;border-radius:12px;
-background:rgba(255,255,255,0.12);border:1px solid rgba(255,255,255,0.22);
-color:#fff;font-size:18px;cursor:pointer;
-display:flex;align-items:center;justify-content:center;
-}
-#img-prev{left:10px;} #img-next{right:10px;}
+#img-prev,#img-next{position:absolute;top:50%;transform:translateY(-50%);width:44px;height:44px;border-radius:12px;background:rgba(255,255,255,0.12);border:1px solid rgba(255,255,255,0.22);color:#fff;font-size:18px;cursor:pointer;display:flex;align-items:center;justify-content:center;}
+#img-prev{left:10px;}#img-next{right:10px;}
 #img-prev:hover,#img-next:hover{background:rgba(255,255,255,0.22);}
 
+/* ── Details Modal ── */
 #details-overlay{position:fixed;inset:0;background:rgba(0,0,0,0.6);backdrop-filter:blur(4px);z-index:11000;display:none;}
 #details-modal{position:fixed;top:50%;left:50%;transform:translate(-50%,-50%);width:92%;max-width:620px;max-height:84vh;overflow:auto;background:var(--cream);z-index:11001;display:none;border-radius:14px;box-shadow:0 24px 80px rgba(0,0,0,0.45);}
-[data-theme="naturals"] #details-modal{background:#FAF7FF;}
 .dm-head{background:var(--dark);padding:20px 22px;position:sticky;top:0;}
-[data-theme="naturals"] .dm-head{background:#1A0533;}
 .dm-title{font-family:'Cormorant Garamond',serif;font-size:24px;font-weight:300;color:#fff;line-height:1.1;margin-bottom:4px;}
 .dm-meta{font-size:10px;letter-spacing:2px;text-transform:uppercase;color:rgba(255,255,255,0.38);}
 .dm-close{position:absolute;top:14px;right:14px;width:40px;height:40px;border-radius:10px;background:rgba(255,255,255,0.10);border:1px solid rgba(255,255,255,0.18);color:#fff;font-size:20px;cursor:pointer;}
-.dm-close:hover{background:rgba(255,255,255,0.20);}
 .dm-body{padding:18px 22px;}
 .dm-body p{font-size:13px;color:var(--text-mid);line-height:1.85;font-weight:300;white-space:pre-wrap;}
 
-#scroll-top{position:fixed;bottom:32px;right:32px;z-index:500;width:44px;height:44px;background:var(--dark);border:1px solid rgba(255,255,255,0.15);color:rgba(255,255,255,0.7);font-size:18px;display:flex;align-items:center;justify-content:center;cursor:pointer;opacity:0;pointer-events:none;transform:translateY(12px);transition:opacity 0.3s,transform 0.3s,background 0.2s;}
+/* ── Scroll top ── */
+#scroll-top{position:fixed;bottom:32px;right:32px;z-index:500;width:44px;height:44px;background:var(--dark);border:1px solid rgba(255,255,255,0.15);color:rgba(255,255,255,0.7);font-size:18px;display:flex;align-items:center;justify-content:center;cursor:pointer;opacity:0;pointer-events:none;transform:translateY(12px);transition:opacity 0.3s,transform 0.3s;}
 #scroll-top.visible{opacity:1;pointer-events:auto;transform:translateY(0);}
 #scroll-top:hover{background:var(--green);}
 
+/* ── Mobile ── */
+@media(max-width:900px){.filter-bar{padding:15px 20px;top:60px;}.offers-main{padding:30px 20px;}.results-bar{padding:14px 20px;}}
+@media(max-width:600px){.filter-bar{padding:10px 12px;}.filter-row{flex-direction:column;align-items:flex-start;}.offers-main{padding:20px 12px;}.results-bar{padding:12px;}}
 </style>
 <style>
 .btn-book{background:#1A73E8;color:#fff;padding:13px 22px;min-height:48px;font-size:11px;letter-spacing:1.5px;text-transform:uppercase;font-weight:600;display:inline-flex;align-items:center;gap:8px;transition:all 0.3s;border-radius:6px;white-space:nowrap;text-decoration:none;}
@@ -248,33 +209,6 @@ footer{background:#080f0b;}
 @media(max-width:600px){.ft-top{grid-template-columns:1fr;padding:28px 16px 20px;}}
 </style>
 
-<style>
-
-@media(max-width:900px){
-.page-hero-inner{padding:76px 20px 40px;}
-.filter-bar{padding:0 20px 10px;top:60px;}
-.results-bar{padding:12px 20px;}
-#scroll-top{bottom:20px;right:20px;}
-.filter-row{gap:8px;}
-.filter-group.store-group{min-width:140px;}
-.filter-group.sort-group{min-width:120px;}
-#store-select, #sort-mode{min-width:120px;}
-}
-@media(max-width:600px){
-.filter-bar{padding:0 16px 10px;}
-.results-bar{padding:12px 16px;}
-.filter-row{gap:6px;flex-wrap:wrap;}
-.filter-group.store-group{flex:1 1 100%;min-width:auto;}
-.filter-group.sort-group{flex:1 1 100%;min-width:auto;}
-#store-select, #sort-mode{min-width:100%;}
-}
-@media(max-width:480px){
-.filter-bar{padding:0 12px 10px;}
-.results-bar{padding:12px 12px;}
-.filter-row{gap:4px;}
-.filter-group{gap:4px;}
-}
-</style>
 </head>
 <body>
 
@@ -1097,54 +1031,63 @@ loading="eager">
 
 <div class="filter-bar">
 <div class="filter-row">
+<span class="filter-lbl">Filter by Store:</span>
 <div class="filter-group store-group">
-<span class="filter-lbl">Store</span>
-<div class="cat-select-wrap">
-<select id="store-select" onchange="filterOffers(this.value, null)">
-<option value="all">All Stores</option>
-<option value="">JP Nagar 5th Phase</option>
-<option value="">Elements Mall</option>
-<option value="">Devasandra</option>
-<option value="">Frazer Town</option>
-<option value="">Hennur</option>
-</select>
+<button class="f-btn active"
+data-store-id="all"
+onclick="filterByStore(this)">All Stores</button>
+<button class="f-btn"
+data-store-id="Store_N78"
+data-store-label="JP Nagar 5th Phase"
+onclick="filterByStore(this)">JP Nagar 5th Phase</button>
+<button class="f-btn"
+data-store-id="Store_N77"
+data-store-label="Elements Mall"
+onclick="filterByStore(this)">Elements Mall</button>
+<button class="f-btn"
+data-store-id="Store_N36"
+data-store-label="Devasandra"
+onclick="filterByStore(this)">Devasandra</button>
+<button class="f-btn"
+data-store-id="Store_N05"
+data-store-label="Frazer Town"
+onclick="filterByStore(this)">Frazer Town</button>
+<button class="f-btn"
+data-store-id="Store_N43"
+data-store-label="Hennur"
+onclick="filterByStore(this)">Hennur</button>
+</div>
+</div>
 </div>
 
-<div class="filter-group sort-group">
-<span class="sort-lbl">Sort</span>
-<div class="sort-sel-wrap">
-<select id="sort-mode" class="sort-sel">
-<option value="store">By Store</option>
-<option value="offer">By Offer (Expiry)</option>
-</select>
-<span class="chev">▾</span>
+<div class="results-bar" id="results-bar">
+Showing 21 offers (All Stores)
 </div>
-</div>
-
-</div>
-</div>
-
-<div class="results-bar" id="results-bar">Showing 9 offers (All stores)</div>
 
 <main class="offers-main section" id="offers-main">
-
-<section id="view-by-store">
-</section>
-
-<section id="view-by-offer" style="display:none;">
 <div class="offers-grid" id="offers-grid-all">
+
 <article class="offer-card"
-data-store="ALL_STORES"
-data-store-name="Frazer Town"
+data-store-id="ALL_STORES"
+data-store-name=""
 data-valid=""
 data-expiry-iso=""
 data-valid-from-iso=""
-data-image-available="Yes"
-data-image-name="20260226_Pay20000Get30000"
 >
+<script type="application/ld+json">
+{
+"@context":"https://schema.org",
+"@type":"Offer",
+"name":"Pay 20000, Get 30000",
+"description":"Customer First Offer by Naturals Salon. Get ₹30,000 worth of salon services with easy EMI at ₹2,000 per month for 9 months. Valid for 1 year at 950+ Naturals salons, shareable with 4 family members. Limited to 100 customers. T&C apply.",
+"availabilityEnds":"",
+"validFrom":"",
+"url":"/offers/index.html"
+}
+</script>
+
 <div class="offer-media">
 <div class="ribbon" style="display:none;"></div>
-
 <img class="offer-img"
 data-img-base="/campaigns/offer/03_published/20260226_Pay20000Get30000"
 alt="Pay 20000, Get 30000"
@@ -1152,45 +1095,49 @@ loading="lazy">
 </div>
 
 <div class="offer-body">
-<div class="offer-badge">Frazer Town</div>
+<div class="offer-badge"></div>
 <div class="offer-title">Pay 20000, Get 30000</div>
-
 <div class="offer-details clamp">Customer First Offer by Naturals Salon. Get ₹30,000 worth of salon services with easy EMI at ₹2,000 per month for 9 months. Valid for 1 year at 950+ Naturals salons, shareable with 4 family members. Limited to 100 customers. T&C apply.</div>
 <div class="offer-more" onclick="openDetailsModal(this)" role="button" tabindex="0">Read more <span>→</span></div>
 
 <div class="offer-footer">
 <span class="offer-valid">Valid till </span>
 <div class="offer-ctas">
-<a class="offer-icon-btn offer-icon-book" href="https://naturals-salon-frazertown.setmore.com/" target="_blank" rel="noopener"
-aria-label="Book appointment (Frazer Town)" title="Book (Frazer Town)">
-<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M7 2a1 1 0 0 1 1 1v1h8V3a1 1 0 1 1 2 0v1h1.5A2.5 2.5 0 0 1 22 6.5v14A2.5 2.5 0 0 1 19.5 23h-15A2.5 2.5 0 0 1 2 20.5v-14A2.5 2.5 0 0 1 4.5 4H6V3a1 1 0 0 1 1-1zm13 8H4v10.5c0 .276.224.5.5.5h15a.5.5 0 0 0 .5-.5V10zM6 6H4.5a.5.5 0 0 0-.5.5V8h16V6.5a.5.5 0 0 0-.5-.5H18v1a1 1 0 1 1-2 0V6H8v1a1 1 0 1 1-2 0V6z"/></svg>
+<a class="offer-icon-btn offer-icon-book" href="" target="_blank" rel="noopener" title="Book Now">
+<svg viewBox="0 0 24 24"><path d="M7 2a1 1 0 0 1 1 1v1h8V3a1 1 0 1 1 2 0v1h1.5A2.5 2.5 0 0 1 22 6.5v14A2.5 2.5 0 0 1 19.5 23h-15A2.5 2.5 0 0 1 2 20.5v-14A2.5 2.5 0 0 1 4.5 4H6V3a1 1 0 0 1 1-1zm13 8H4v10.5c0 .276.224.5.5.5h15a.5.5 0 0 0 .5-.5V10zM6 6H4.5a.5.5 0 0 0-.5.5V8h16V6.5a.5.5 0 0 0-.5-.5H18v1a1 1 0 1 1-2 0V6H8v1a1 1 0 1 1-2 0V6z"/></svg>
 </a>
-<a class="offer-icon-btn offer-icon-wa" href="https://wa.me/" target="_blank" rel="noopener"
-aria-label="WhatsApp (Frazer Town)" title="WhatsApp (Frazer Town)">
+<a class="offer-icon-btn offer-icon-wa" href="https://wa.me/" target="_blank" rel="noopener" title="WhatsApp">
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="#25D366" width="18" height="18" style="flex-shrink:0" aria-hidden="true"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
 
 </a>
-<a class="offer-icon-btn offer-icon-call" href="tel:"
-aria-label="Call (Frazer Town)" title="Call (Frazer Town)">
-<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M6.62 10.79a15.05 15.05 0 0 0 6.59 6.59l2.2-2.2a1 1 0 0 1 1.01-.24c1.12.37 2.33.57 3.58.57a1 1 0 0 1 1 1V21a1 1 0 0 1-1 1C10.85 22 2 13.15 2 2a1 1 0 0 1 1-1h3.5a1 1 0 0 1 1 1c0 1.25.2 2.46.57 3.58a1 1 0 0 1-.24 1.01l-2.2 2.2z"/></svg>
+<a class="offer-icon-btn offer-icon-call" href="tel:" title="Call">
+<svg viewBox="0 0 24 24"><path d="M6.62 10.79a15.05 15.05 0 0 0 6.59 6.59l2.2-2.2a1 1 0 0 1 1.01-.24c1.12.37 2.33.57 3.58.57a1 1 0 0 1 1 1V21a1 1 0 0 1-1 1C10.85 22 2 13.15 2 2a1 1 0 0 1 1-1h3.5a1 1 0 0 1 1 1c0 1.25.2 2.46.57 3.58a1 1 0 0 1-.24 1.01l-2.2 2.2z"/></svg>
 </a>
-
 </div>
 </div>
 </div>
 </article>
 <article class="offer-card"
-data-store="ALL_STORES"
-data-store-name="Hennur"
+data-store-id="ALL_STORES"
+data-store-name=""
 data-valid=""
 data-expiry-iso=""
 data-valid-from-iso=""
-data-image-available="Yes"
-data-image-name="20260226_Pay20000Get30000"
 >
+<script type="application/ld+json">
+{
+"@context":"https://schema.org",
+"@type":"Offer",
+"name":"Pay 20000, Get 30000",
+"description":"Customer First Offer by Naturals Salon. Get ₹30,000 worth of salon services with easy EMI at ₹2,000 per month for 9 months. Valid for 1 year at 950+ Naturals salons, shareable with 4 family members. Limited to 100 customers. T&C apply.",
+"availabilityEnds":"",
+"validFrom":"",
+"url":"/offers/index.html"
+}
+</script>
+
 <div class="offer-media">
 <div class="ribbon" style="display:none;"></div>
-
 <img class="offer-img"
 data-img-base="/campaigns/offer/03_published/20260226_Pay20000Get30000"
 alt="Pay 20000, Get 30000"
@@ -1198,45 +1145,49 @@ loading="lazy">
 </div>
 
 <div class="offer-body">
-<div class="offer-badge">Hennur</div>
+<div class="offer-badge"></div>
 <div class="offer-title">Pay 20000, Get 30000</div>
-
 <div class="offer-details clamp">Customer First Offer by Naturals Salon. Get ₹30,000 worth of salon services with easy EMI at ₹2,000 per month for 9 months. Valid for 1 year at 950+ Naturals salons, shareable with 4 family members. Limited to 100 customers. T&C apply.</div>
 <div class="offer-more" onclick="openDetailsModal(this)" role="button" tabindex="0">Read more <span>→</span></div>
 
 <div class="offer-footer">
 <span class="offer-valid">Valid till </span>
 <div class="offer-ctas">
-<a class="offer-icon-btn offer-icon-book" href="https://naturals-salon-hennur.setmore.com/" target="_blank" rel="noopener"
-aria-label="Book appointment (Hennur)" title="Book (Hennur)">
-<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M7 2a1 1 0 0 1 1 1v1h8V3a1 1 0 1 1 2 0v1h1.5A2.5 2.5 0 0 1 22 6.5v14A2.5 2.5 0 0 1 19.5 23h-15A2.5 2.5 0 0 1 2 20.5v-14A2.5 2.5 0 0 1 4.5 4H6V3a1 1 0 0 1 1-1zm13 8H4v10.5c0 .276.224.5.5.5h15a.5.5 0 0 0 .5-.5V10zM6 6H4.5a.5.5 0 0 0-.5.5V8h16V6.5a.5.5 0 0 0-.5-.5H18v1a1 1 0 1 1-2 0V6H8v1a1 1 0 1 1-2 0V6z"/></svg>
+<a class="offer-icon-btn offer-icon-book" href="" target="_blank" rel="noopener" title="Book Now">
+<svg viewBox="0 0 24 24"><path d="M7 2a1 1 0 0 1 1 1v1h8V3a1 1 0 1 1 2 0v1h1.5A2.5 2.5 0 0 1 22 6.5v14A2.5 2.5 0 0 1 19.5 23h-15A2.5 2.5 0 0 1 2 20.5v-14A2.5 2.5 0 0 1 4.5 4H6V3a1 1 0 0 1 1-1zm13 8H4v10.5c0 .276.224.5.5.5h15a.5.5 0 0 0 .5-.5V10zM6 6H4.5a.5.5 0 0 0-.5.5V8h16V6.5a.5.5 0 0 0-.5-.5H18v1a1 1 0 1 1-2 0V6H8v1a1 1 0 1 1-2 0V6z"/></svg>
 </a>
-<a class="offer-icon-btn offer-icon-wa" href="https://wa.me/" target="_blank" rel="noopener"
-aria-label="WhatsApp (Hennur)" title="WhatsApp (Hennur)">
+<a class="offer-icon-btn offer-icon-wa" href="https://wa.me/" target="_blank" rel="noopener" title="WhatsApp">
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="#25D366" width="18" height="18" style="flex-shrink:0" aria-hidden="true"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
 
 </a>
-<a class="offer-icon-btn offer-icon-call" href="tel:"
-aria-label="Call (Hennur)" title="Call (Hennur)">
-<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M6.62 10.79a15.05 15.05 0 0 0 6.59 6.59l2.2-2.2a1 1 0 0 1 1.01-.24c1.12.37 2.33.57 3.58.57a1 1 0 0 1 1 1V21a1 1 0 0 1-1 1C10.85 22 2 13.15 2 2a1 1 0 0 1 1-1h3.5a1 1 0 0 1 1 1c0 1.25.2 2.46.57 3.58a1 1 0 0 1-.24 1.01l-2.2 2.2z"/></svg>
+<a class="offer-icon-btn offer-icon-call" href="tel:" title="Call">
+<svg viewBox="0 0 24 24"><path d="M6.62 10.79a15.05 15.05 0 0 0 6.59 6.59l2.2-2.2a1 1 0 0 1 1.01-.24c1.12.37 2.33.57 3.58.57a1 1 0 0 1 1 1V21a1 1 0 0 1-1 1C10.85 22 2 13.15 2 2a1 1 0 0 1 1-1h3.5a1 1 0 0 1 1 1c0 1.25.2 2.46.57 3.58a1 1 0 0 1-.24 1.01l-2.2 2.2z"/></svg>
 </a>
-
 </div>
 </div>
 </div>
 </article>
 <article class="offer-card"
-data-store="ALL_STORES"
-data-store-name="Devasandra"
+data-store-id="ALL_STORES"
+data-store-name=""
 data-valid=""
 data-expiry-iso=""
 data-valid-from-iso=""
-data-image-available="Yes"
-data-image-name="20260226_Pay20000Get30000"
 >
+<script type="application/ld+json">
+{
+"@context":"https://schema.org",
+"@type":"Offer",
+"name":"Pay 20000, Get 30000",
+"description":"Customer First Offer by Naturals Salon. Get ₹30,000 worth of salon services with easy EMI at ₹2,000 per month for 9 months. Valid for 1 year at 950+ Naturals salons, shareable with 4 family members. Limited to 100 customers. T&C apply.",
+"availabilityEnds":"",
+"validFrom":"",
+"url":"/offers/index.html"
+}
+</script>
+
 <div class="offer-media">
 <div class="ribbon" style="display:none;"></div>
-
 <img class="offer-img"
 data-img-base="/campaigns/offer/03_published/20260226_Pay20000Get30000"
 alt="Pay 20000, Get 30000"
@@ -1244,45 +1195,49 @@ loading="lazy">
 </div>
 
 <div class="offer-body">
-<div class="offer-badge">Devasandra</div>
+<div class="offer-badge"></div>
 <div class="offer-title">Pay 20000, Get 30000</div>
-
 <div class="offer-details clamp">Customer First Offer by Naturals Salon. Get ₹30,000 worth of salon services with easy EMI at ₹2,000 per month for 9 months. Valid for 1 year at 950+ Naturals salons, shareable with 4 family members. Limited to 100 customers. T&C apply.</div>
 <div class="offer-more" onclick="openDetailsModal(this)" role="button" tabindex="0">Read more <span>→</span></div>
 
 <div class="offer-footer">
 <span class="offer-valid">Valid till </span>
 <div class="offer-ctas">
-<a class="offer-icon-btn offer-icon-book" href="https://naturals-salon-devasandra.setmore.com/" target="_blank" rel="noopener"
-aria-label="Book appointment (Devasandra)" title="Book (Devasandra)">
-<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M7 2a1 1 0 0 1 1 1v1h8V3a1 1 0 1 1 2 0v1h1.5A2.5 2.5 0 0 1 22 6.5v14A2.5 2.5 0 0 1 19.5 23h-15A2.5 2.5 0 0 1 2 20.5v-14A2.5 2.5 0 0 1 4.5 4H6V3a1 1 0 0 1 1-1zm13 8H4v10.5c0 .276.224.5.5.5h15a.5.5 0 0 0 .5-.5V10zM6 6H4.5a.5.5 0 0 0-.5.5V8h16V6.5a.5.5 0 0 0-.5-.5H18v1a1 1 0 1 1-2 0V6H8v1a1 1 0 1 1-2 0V6z"/></svg>
+<a class="offer-icon-btn offer-icon-book" href="" target="_blank" rel="noopener" title="Book Now">
+<svg viewBox="0 0 24 24"><path d="M7 2a1 1 0 0 1 1 1v1h8V3a1 1 0 1 1 2 0v1h1.5A2.5 2.5 0 0 1 22 6.5v14A2.5 2.5 0 0 1 19.5 23h-15A2.5 2.5 0 0 1 2 20.5v-14A2.5 2.5 0 0 1 4.5 4H6V3a1 1 0 0 1 1-1zm13 8H4v10.5c0 .276.224.5.5.5h15a.5.5 0 0 0 .5-.5V10zM6 6H4.5a.5.5 0 0 0-.5.5V8h16V6.5a.5.5 0 0 0-.5-.5H18v1a1 1 0 1 1-2 0V6H8v1a1 1 0 1 1-2 0V6z"/></svg>
 </a>
-<a class="offer-icon-btn offer-icon-wa" href="https://wa.me/" target="_blank" rel="noopener"
-aria-label="WhatsApp (Devasandra)" title="WhatsApp (Devasandra)">
+<a class="offer-icon-btn offer-icon-wa" href="https://wa.me/" target="_blank" rel="noopener" title="WhatsApp">
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="#25D366" width="18" height="18" style="flex-shrink:0" aria-hidden="true"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
 
 </a>
-<a class="offer-icon-btn offer-icon-call" href="tel:"
-aria-label="Call (Devasandra)" title="Call (Devasandra)">
-<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M6.62 10.79a15.05 15.05 0 0 0 6.59 6.59l2.2-2.2a1 1 0 0 1 1.01-.24c1.12.37 2.33.57 3.58.57a1 1 0 0 1 1 1V21a1 1 0 0 1-1 1C10.85 22 2 13.15 2 2a1 1 0 0 1 1-1h3.5a1 1 0 0 1 1 1c0 1.25.2 2.46.57 3.58a1 1 0 0 1-.24 1.01l-2.2 2.2z"/></svg>
+<a class="offer-icon-btn offer-icon-call" href="tel:" title="Call">
+<svg viewBox="0 0 24 24"><path d="M6.62 10.79a15.05 15.05 0 0 0 6.59 6.59l2.2-2.2a1 1 0 0 1 1.01-.24c1.12.37 2.33.57 3.58.57a1 1 0 0 1 1 1V21a1 1 0 0 1-1 1C10.85 22 2 13.15 2 2a1 1 0 0 1 1-1h3.5a1 1 0 0 1 1 1c0 1.25.2 2.46.57 3.58a1 1 0 0 1-.24 1.01l-2.2 2.2z"/></svg>
 </a>
-
 </div>
 </div>
 </div>
 </article>
 <article class="offer-card"
-data-store="ALL_STORES"
-data-store-name="JP Nagar 5th Phase"
+data-store-id="ALL_STORES"
+data-store-name=""
 data-valid=""
 data-expiry-iso=""
 data-valid-from-iso=""
-data-image-available="Yes"
-data-image-name="20260226_Pay20000Get30000"
 >
+<script type="application/ld+json">
+{
+"@context":"https://schema.org",
+"@type":"Offer",
+"name":"Pay 20000, Get 30000",
+"description":"Customer First Offer by Naturals Salon. Get ₹30,000 worth of salon services with easy EMI at ₹2,000 per month for 9 months. Valid for 1 year at 950+ Naturals salons, shareable with 4 family members. Limited to 100 customers. T&C apply.",
+"availabilityEnds":"",
+"validFrom":"",
+"url":"/offers/index.html"
+}
+</script>
+
 <div class="offer-media">
 <div class="ribbon" style="display:none;"></div>
-
 <img class="offer-img"
 data-img-base="/campaigns/offer/03_published/20260226_Pay20000Get30000"
 alt="Pay 20000, Get 30000"
@@ -1290,45 +1245,49 @@ loading="lazy">
 </div>
 
 <div class="offer-body">
-<div class="offer-badge">JP Nagar 5th Phase</div>
+<div class="offer-badge"></div>
 <div class="offer-title">Pay 20000, Get 30000</div>
-
 <div class="offer-details clamp">Customer First Offer by Naturals Salon. Get ₹30,000 worth of salon services with easy EMI at ₹2,000 per month for 9 months. Valid for 1 year at 950+ Naturals salons, shareable with 4 family members. Limited to 100 customers. T&C apply.</div>
 <div class="offer-more" onclick="openDetailsModal(this)" role="button" tabindex="0">Read more <span>→</span></div>
 
 <div class="offer-footer">
 <span class="offer-valid">Valid till </span>
 <div class="offer-ctas">
-<a class="offer-icon-btn offer-icon-book" href="https://naturals-salon-jpnagar5phase.setmore.com/" target="_blank" rel="noopener"
-aria-label="Book appointment (JP Nagar 5th Phase)" title="Book (JP Nagar 5th Phase)">
-<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M7 2a1 1 0 0 1 1 1v1h8V3a1 1 0 1 1 2 0v1h1.5A2.5 2.5 0 0 1 22 6.5v14A2.5 2.5 0 0 1 19.5 23h-15A2.5 2.5 0 0 1 2 20.5v-14A2.5 2.5 0 0 1 4.5 4H6V3a1 1 0 0 1 1-1zm13 8H4v10.5c0 .276.224.5.5.5h15a.5.5 0 0 0 .5-.5V10zM6 6H4.5a.5.5 0 0 0-.5.5V8h16V6.5a.5.5 0 0 0-.5-.5H18v1a1 1 0 1 1-2 0V6H8v1a1 1 0 1 1-2 0V6z"/></svg>
+<a class="offer-icon-btn offer-icon-book" href="" target="_blank" rel="noopener" title="Book Now">
+<svg viewBox="0 0 24 24"><path d="M7 2a1 1 0 0 1 1 1v1h8V3a1 1 0 1 1 2 0v1h1.5A2.5 2.5 0 0 1 22 6.5v14A2.5 2.5 0 0 1 19.5 23h-15A2.5 2.5 0 0 1 2 20.5v-14A2.5 2.5 0 0 1 4.5 4H6V3a1 1 0 0 1 1-1zm13 8H4v10.5c0 .276.224.5.5.5h15a.5.5 0 0 0 .5-.5V10zM6 6H4.5a.5.5 0 0 0-.5.5V8h16V6.5a.5.5 0 0 0-.5-.5H18v1a1 1 0 1 1-2 0V6H8v1a1 1 0 1 1-2 0V6z"/></svg>
 </a>
-<a class="offer-icon-btn offer-icon-wa" href="https://wa.me/" target="_blank" rel="noopener"
-aria-label="WhatsApp (JP Nagar 5th Phase)" title="WhatsApp (JP Nagar 5th Phase)">
+<a class="offer-icon-btn offer-icon-wa" href="https://wa.me/" target="_blank" rel="noopener" title="WhatsApp">
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="#25D366" width="18" height="18" style="flex-shrink:0" aria-hidden="true"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
 
 </a>
-<a class="offer-icon-btn offer-icon-call" href="tel:"
-aria-label="Call (JP Nagar 5th Phase)" title="Call (JP Nagar 5th Phase)">
-<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M6.62 10.79a15.05 15.05 0 0 0 6.59 6.59l2.2-2.2a1 1 0 0 1 1.01-.24c1.12.37 2.33.57 3.58.57a1 1 0 0 1 1 1V21a1 1 0 0 1-1 1C10.85 22 2 13.15 2 2a1 1 0 0 1 1-1h3.5a1 1 0 0 1 1 1c0 1.25.2 2.46.57 3.58a1 1 0 0 1-.24 1.01l-2.2 2.2z"/></svg>
+<a class="offer-icon-btn offer-icon-call" href="tel:" title="Call">
+<svg viewBox="0 0 24 24"><path d="M6.62 10.79a15.05 15.05 0 0 0 6.59 6.59l2.2-2.2a1 1 0 0 1 1.01-.24c1.12.37 2.33.57 3.58.57a1 1 0 0 1 1 1V21a1 1 0 0 1-1 1C10.85 22 2 13.15 2 2a1 1 0 0 1 1-1h3.5a1 1 0 0 1 1 1c0 1.25.2 2.46.57 3.58a1 1 0 0 1-.24 1.01l-2.2 2.2z"/></svg>
 </a>
-
 </div>
 </div>
 </div>
 </article>
 <article class="offer-card"
-data-store="ALL_STORES"
-data-store-name="Elements Mall"
+data-store-id="ALL_STORES"
+data-store-name=""
 data-valid=""
 data-expiry-iso=""
 data-valid-from-iso=""
-data-image-available="Yes"
-data-image-name="20260226_Pay20000Get30000"
 >
+<script type="application/ld+json">
+{
+"@context":"https://schema.org",
+"@type":"Offer",
+"name":"Pay 20000, Get 30000",
+"description":"Customer First Offer by Naturals Salon. Get ₹30,000 worth of salon services with easy EMI at ₹2,000 per month for 9 months. Valid for 1 year at 950+ Naturals salons, shareable with 4 family members. Limited to 100 customers. T&C apply.",
+"availabilityEnds":"",
+"validFrom":"",
+"url":"/offers/index.html"
+}
+</script>
+
 <div class="offer-media">
 <div class="ribbon" style="display:none;"></div>
-
 <img class="offer-img"
 data-img-base="/campaigns/offer/03_published/20260226_Pay20000Get30000"
 alt="Pay 20000, Get 30000"
@@ -1336,45 +1295,49 @@ loading="lazy">
 </div>
 
 <div class="offer-body">
-<div class="offer-badge">Elements Mall</div>
+<div class="offer-badge"></div>
 <div class="offer-title">Pay 20000, Get 30000</div>
-
 <div class="offer-details clamp">Customer First Offer by Naturals Salon. Get ₹30,000 worth of salon services with easy EMI at ₹2,000 per month for 9 months. Valid for 1 year at 950+ Naturals salons, shareable with 4 family members. Limited to 100 customers. T&C apply.</div>
 <div class="offer-more" onclick="openDetailsModal(this)" role="button" tabindex="0">Read more <span>→</span></div>
 
 <div class="offer-footer">
 <span class="offer-valid">Valid till </span>
 <div class="offer-ctas">
-<a class="offer-icon-btn offer-icon-book" href="https://naturals-salon-elementsmall.setmore.com/" target="_blank" rel="noopener"
-aria-label="Book appointment (Elements Mall)" title="Book (Elements Mall)">
-<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M7 2a1 1 0 0 1 1 1v1h8V3a1 1 0 1 1 2 0v1h1.5A2.5 2.5 0 0 1 22 6.5v14A2.5 2.5 0 0 1 19.5 23h-15A2.5 2.5 0 0 1 2 20.5v-14A2.5 2.5 0 0 1 4.5 4H6V3a1 1 0 0 1 1-1zm13 8H4v10.5c0 .276.224.5.5.5h15a.5.5 0 0 0 .5-.5V10zM6 6H4.5a.5.5 0 0 0-.5.5V8h16V6.5a.5.5 0 0 0-.5-.5H18v1a1 1 0 1 1-2 0V6H8v1a1 1 0 1 1-2 0V6z"/></svg>
+<a class="offer-icon-btn offer-icon-book" href="" target="_blank" rel="noopener" title="Book Now">
+<svg viewBox="0 0 24 24"><path d="M7 2a1 1 0 0 1 1 1v1h8V3a1 1 0 1 1 2 0v1h1.5A2.5 2.5 0 0 1 22 6.5v14A2.5 2.5 0 0 1 19.5 23h-15A2.5 2.5 0 0 1 2 20.5v-14A2.5 2.5 0 0 1 4.5 4H6V3a1 1 0 0 1 1-1zm13 8H4v10.5c0 .276.224.5.5.5h15a.5.5 0 0 0 .5-.5V10zM6 6H4.5a.5.5 0 0 0-.5.5V8h16V6.5a.5.5 0 0 0-.5-.5H18v1a1 1 0 1 1-2 0V6H8v1a1 1 0 1 1-2 0V6z"/></svg>
 </a>
-<a class="offer-icon-btn offer-icon-wa" href="https://wa.me/" target="_blank" rel="noopener"
-aria-label="WhatsApp (Elements Mall)" title="WhatsApp (Elements Mall)">
+<a class="offer-icon-btn offer-icon-wa" href="https://wa.me/" target="_blank" rel="noopener" title="WhatsApp">
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="#25D366" width="18" height="18" style="flex-shrink:0" aria-hidden="true"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
 
 </a>
-<a class="offer-icon-btn offer-icon-call" href="tel:"
-aria-label="Call (Elements Mall)" title="Call (Elements Mall)">
-<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M6.62 10.79a15.05 15.05 0 0 0 6.59 6.59l2.2-2.2a1 1 0 0 1 1.01-.24c1.12.37 2.33.57 3.58.57a1 1 0 0 1 1 1V21a1 1 0 0 1-1 1C10.85 22 2 13.15 2 2a1 1 0 0 1 1-1h3.5a1 1 0 0 1 1 1c0 1.25.2 2.46.57 3.58a1 1 0 0 1-.24 1.01l-2.2 2.2z"/></svg>
+<a class="offer-icon-btn offer-icon-call" href="tel:" title="Call">
+<svg viewBox="0 0 24 24"><path d="M6.62 10.79a15.05 15.05 0 0 0 6.59 6.59l2.2-2.2a1 1 0 0 1 1.01-.24c1.12.37 2.33.57 3.58.57a1 1 0 0 1 1 1V21a1 1 0 0 1-1 1C10.85 22 2 13.15 2 2a1 1 0 0 1 1-1h3.5a1 1 0 0 1 1 1c0 1.25.2 2.46.57 3.58a1 1 0 0 1-.24 1.01l-2.2 2.2z"/></svg>
 </a>
-
 </div>
 </div>
 </div>
 </article>
 <article class="offer-card"
-data-store="Store_N05"
-data-store-name="Frazer Town"
+data-store-id="Store_N78"
+data-store-name=""
 data-valid=""
 data-expiry-iso=""
 data-valid-from-iso=""
-data-image-available="Yes"
-data-image-name="20260322_25percentmorewort"
 >
+<script type="application/ld+json">
+{
+"@context":"https://schema.org",
+"@type":"Offer",
+"name":"25 percent more worth",
+"description":"25% More worth. Pay 4000 get 5000",
+"availabilityEnds":"",
+"validFrom":"",
+"url":"/offers/index.html"
+}
+</script>
+
 <div class="offer-media">
 <div class="ribbon" style="display:none;"></div>
-
 <img class="offer-img"
 data-img-base="/campaigns/offer/03_published/20260322_25percentmorewort"
 alt="25 percent more worth"
@@ -1382,45 +1345,49 @@ loading="lazy">
 </div>
 
 <div class="offer-body">
-<div class="offer-badge">Frazer Town</div>
+<div class="offer-badge"></div>
 <div class="offer-title">25 percent more worth</div>
-
 <div class="offer-details clamp">25% More worth. Pay 4000 get 5000</div>
 <div style="height:24px;"></div>
 
 <div class="offer-footer">
 <span class="offer-valid">Valid till </span>
 <div class="offer-ctas">
-<a class="offer-icon-btn offer-icon-book" href="https://naturals-salon-frazertown.setmore.com/" target="_blank" rel="noopener"
-aria-label="Book appointment (Frazer Town)" title="Book (Frazer Town)">
-<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M7 2a1 1 0 0 1 1 1v1h8V3a1 1 0 1 1 2 0v1h1.5A2.5 2.5 0 0 1 22 6.5v14A2.5 2.5 0 0 1 19.5 23h-15A2.5 2.5 0 0 1 2 20.5v-14A2.5 2.5 0 0 1 4.5 4H6V3a1 1 0 0 1 1-1zm13 8H4v10.5c0 .276.224.5.5.5h15a.5.5 0 0 0 .5-.5V10zM6 6H4.5a.5.5 0 0 0-.5.5V8h16V6.5a.5.5 0 0 0-.5-.5H18v1a1 1 0 1 1-2 0V6H8v1a1 1 0 1 1-2 0V6z"/></svg>
+<a class="offer-icon-btn offer-icon-book" href="" target="_blank" rel="noopener" title="Book Now">
+<svg viewBox="0 0 24 24"><path d="M7 2a1 1 0 0 1 1 1v1h8V3a1 1 0 1 1 2 0v1h1.5A2.5 2.5 0 0 1 22 6.5v14A2.5 2.5 0 0 1 19.5 23h-15A2.5 2.5 0 0 1 2 20.5v-14A2.5 2.5 0 0 1 4.5 4H6V3a1 1 0 0 1 1-1zm13 8H4v10.5c0 .276.224.5.5.5h15a.5.5 0 0 0 .5-.5V10zM6 6H4.5a.5.5 0 0 0-.5.5V8h16V6.5a.5.5 0 0 0-.5-.5H18v1a1 1 0 1 1-2 0V6H8v1a1 1 0 1 1-2 0V6z"/></svg>
 </a>
-<a class="offer-icon-btn offer-icon-wa" href="https://wa.me/" target="_blank" rel="noopener"
-aria-label="WhatsApp (Frazer Town)" title="WhatsApp (Frazer Town)">
+<a class="offer-icon-btn offer-icon-wa" href="https://wa.me/" target="_blank" rel="noopener" title="WhatsApp">
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="#25D366" width="18" height="18" style="flex-shrink:0" aria-hidden="true"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
 
 </a>
-<a class="offer-icon-btn offer-icon-call" href="tel:"
-aria-label="Call (Frazer Town)" title="Call (Frazer Town)">
-<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M6.62 10.79a15.05 15.05 0 0 0 6.59 6.59l2.2-2.2a1 1 0 0 1 1.01-.24c1.12.37 2.33.57 3.58.57a1 1 0 0 1 1 1V21a1 1 0 0 1-1 1C10.85 22 2 13.15 2 2a1 1 0 0 1 1-1h3.5a1 1 0 0 1 1 1c0 1.25.2 2.46.57 3.58a1 1 0 0 1-.24 1.01l-2.2 2.2z"/></svg>
+<a class="offer-icon-btn offer-icon-call" href="tel:" title="Call">
+<svg viewBox="0 0 24 24"><path d="M6.62 10.79a15.05 15.05 0 0 0 6.59 6.59l2.2-2.2a1 1 0 0 1 1.01-.24c1.12.37 2.33.57 3.58.57a1 1 0 0 1 1 1V21a1 1 0 0 1-1 1C10.85 22 2 13.15 2 2a1 1 0 0 1 1-1h3.5a1 1 0 0 1 1 1c0 1.25.2 2.46.57 3.58a1 1 0 0 1-.24 1.01l-2.2 2.2z"/></svg>
 </a>
-
 </div>
 </div>
 </div>
 </article>
 <article class="offer-card"
-data-store="Store_N43"
-data-store-name="Hennur"
+data-store-id="Store_N77"
+data-store-name=""
 data-valid=""
 data-expiry-iso=""
 data-valid-from-iso=""
-data-image-available="Yes"
-data-image-name="20260322_25percentmorewort"
 >
+<script type="application/ld+json">
+{
+"@context":"https://schema.org",
+"@type":"Offer",
+"name":"25 percent more worth",
+"description":"25% More worth. Pay 4000 get 5000",
+"availabilityEnds":"",
+"validFrom":"",
+"url":"/offers/index.html"
+}
+</script>
+
 <div class="offer-media">
 <div class="ribbon" style="display:none;"></div>
-
 <img class="offer-img"
 data-img-base="/campaigns/offer/03_published/20260322_25percentmorewort"
 alt="25 percent more worth"
@@ -1428,45 +1395,49 @@ loading="lazy">
 </div>
 
 <div class="offer-body">
-<div class="offer-badge">Hennur</div>
+<div class="offer-badge"></div>
 <div class="offer-title">25 percent more worth</div>
-
 <div class="offer-details clamp">25% More worth. Pay 4000 get 5000</div>
 <div style="height:24px;"></div>
 
 <div class="offer-footer">
 <span class="offer-valid">Valid till </span>
 <div class="offer-ctas">
-<a class="offer-icon-btn offer-icon-book" href="https://naturals-salon-hennur.setmore.com/" target="_blank" rel="noopener"
-aria-label="Book appointment (Hennur)" title="Book (Hennur)">
-<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M7 2a1 1 0 0 1 1 1v1h8V3a1 1 0 1 1 2 0v1h1.5A2.5 2.5 0 0 1 22 6.5v14A2.5 2.5 0 0 1 19.5 23h-15A2.5 2.5 0 0 1 2 20.5v-14A2.5 2.5 0 0 1 4.5 4H6V3a1 1 0 0 1 1-1zm13 8H4v10.5c0 .276.224.5.5.5h15a.5.5 0 0 0 .5-.5V10zM6 6H4.5a.5.5 0 0 0-.5.5V8h16V6.5a.5.5 0 0 0-.5-.5H18v1a1 1 0 1 1-2 0V6H8v1a1 1 0 1 1-2 0V6z"/></svg>
+<a class="offer-icon-btn offer-icon-book" href="" target="_blank" rel="noopener" title="Book Now">
+<svg viewBox="0 0 24 24"><path d="M7 2a1 1 0 0 1 1 1v1h8V3a1 1 0 1 1 2 0v1h1.5A2.5 2.5 0 0 1 22 6.5v14A2.5 2.5 0 0 1 19.5 23h-15A2.5 2.5 0 0 1 2 20.5v-14A2.5 2.5 0 0 1 4.5 4H6V3a1 1 0 0 1 1-1zm13 8H4v10.5c0 .276.224.5.5.5h15a.5.5 0 0 0 .5-.5V10zM6 6H4.5a.5.5 0 0 0-.5.5V8h16V6.5a.5.5 0 0 0-.5-.5H18v1a1 1 0 1 1-2 0V6H8v1a1 1 0 1 1-2 0V6z"/></svg>
 </a>
-<a class="offer-icon-btn offer-icon-wa" href="https://wa.me/" target="_blank" rel="noopener"
-aria-label="WhatsApp (Hennur)" title="WhatsApp (Hennur)">
+<a class="offer-icon-btn offer-icon-wa" href="https://wa.me/" target="_blank" rel="noopener" title="WhatsApp">
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="#25D366" width="18" height="18" style="flex-shrink:0" aria-hidden="true"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
 
 </a>
-<a class="offer-icon-btn offer-icon-call" href="tel:"
-aria-label="Call (Hennur)" title="Call (Hennur)">
-<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M6.62 10.79a15.05 15.05 0 0 0 6.59 6.59l2.2-2.2a1 1 0 0 1 1.01-.24c1.12.37 2.33.57 3.58.57a1 1 0 0 1 1 1V21a1 1 0 0 1-1 1C10.85 22 2 13.15 2 2a1 1 0 0 1 1-1h3.5a1 1 0 0 1 1 1c0 1.25.2 2.46.57 3.58a1 1 0 0 1-.24 1.01l-2.2 2.2z"/></svg>
+<a class="offer-icon-btn offer-icon-call" href="tel:" title="Call">
+<svg viewBox="0 0 24 24"><path d="M6.62 10.79a15.05 15.05 0 0 0 6.59 6.59l2.2-2.2a1 1 0 0 1 1.01-.24c1.12.37 2.33.57 3.58.57a1 1 0 0 1 1 1V21a1 1 0 0 1-1 1C10.85 22 2 13.15 2 2a1 1 0 0 1 1-1h3.5a1 1 0 0 1 1 1c0 1.25.2 2.46.57 3.58a1 1 0 0 1-.24 1.01l-2.2 2.2z"/></svg>
 </a>
-
 </div>
 </div>
 </div>
 </article>
 <article class="offer-card"
-data-store="Store_N78"
-data-store-name="JP Nagar 5th Phase"
+data-store-id="Store_N05"
+data-store-name=""
 data-valid=""
 data-expiry-iso=""
 data-valid-from-iso=""
-data-image-available="Yes"
-data-image-name="20260322_25percentmorewort"
 >
+<script type="application/ld+json">
+{
+"@context":"https://schema.org",
+"@type":"Offer",
+"name":"25 percent more worth",
+"description":"25% More worth. Pay 4000 get 5000",
+"availabilityEnds":"",
+"validFrom":"",
+"url":"/offers/index.html"
+}
+</script>
+
 <div class="offer-media">
 <div class="ribbon" style="display:none;"></div>
-
 <img class="offer-img"
 data-img-base="/campaigns/offer/03_published/20260322_25percentmorewort"
 alt="25 percent more worth"
@@ -1474,45 +1445,49 @@ loading="lazy">
 </div>
 
 <div class="offer-body">
-<div class="offer-badge">JP Nagar 5th Phase</div>
+<div class="offer-badge"></div>
 <div class="offer-title">25 percent more worth</div>
-
 <div class="offer-details clamp">25% More worth. Pay 4000 get 5000</div>
 <div style="height:24px;"></div>
 
 <div class="offer-footer">
 <span class="offer-valid">Valid till </span>
 <div class="offer-ctas">
-<a class="offer-icon-btn offer-icon-book" href="https://naturals-salon-jpnagar5phase.setmore.com/" target="_blank" rel="noopener"
-aria-label="Book appointment (JP Nagar 5th Phase)" title="Book (JP Nagar 5th Phase)">
-<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M7 2a1 1 0 0 1 1 1v1h8V3a1 1 0 1 1 2 0v1h1.5A2.5 2.5 0 0 1 22 6.5v14A2.5 2.5 0 0 1 19.5 23h-15A2.5 2.5 0 0 1 2 20.5v-14A2.5 2.5 0 0 1 4.5 4H6V3a1 1 0 0 1 1-1zm13 8H4v10.5c0 .276.224.5.5.5h15a.5.5 0 0 0 .5-.5V10zM6 6H4.5a.5.5 0 0 0-.5.5V8h16V6.5a.5.5 0 0 0-.5-.5H18v1a1 1 0 1 1-2 0V6H8v1a1 1 0 1 1-2 0V6z"/></svg>
+<a class="offer-icon-btn offer-icon-book" href="" target="_blank" rel="noopener" title="Book Now">
+<svg viewBox="0 0 24 24"><path d="M7 2a1 1 0 0 1 1 1v1h8V3a1 1 0 1 1 2 0v1h1.5A2.5 2.5 0 0 1 22 6.5v14A2.5 2.5 0 0 1 19.5 23h-15A2.5 2.5 0 0 1 2 20.5v-14A2.5 2.5 0 0 1 4.5 4H6V3a1 1 0 0 1 1-1zm13 8H4v10.5c0 .276.224.5.5.5h15a.5.5 0 0 0 .5-.5V10zM6 6H4.5a.5.5 0 0 0-.5.5V8h16V6.5a.5.5 0 0 0-.5-.5H18v1a1 1 0 1 1-2 0V6H8v1a1 1 0 1 1-2 0V6z"/></svg>
 </a>
-<a class="offer-icon-btn offer-icon-wa" href="https://wa.me/" target="_blank" rel="noopener"
-aria-label="WhatsApp (JP Nagar 5th Phase)" title="WhatsApp (JP Nagar 5th Phase)">
+<a class="offer-icon-btn offer-icon-wa" href="https://wa.me/" target="_blank" rel="noopener" title="WhatsApp">
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="#25D366" width="18" height="18" style="flex-shrink:0" aria-hidden="true"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
 
 </a>
-<a class="offer-icon-btn offer-icon-call" href="tel:"
-aria-label="Call (JP Nagar 5th Phase)" title="Call (JP Nagar 5th Phase)">
-<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M6.62 10.79a15.05 15.05 0 0 0 6.59 6.59l2.2-2.2a1 1 0 0 1 1.01-.24c1.12.37 2.33.57 3.58.57a1 1 0 0 1 1 1V21a1 1 0 0 1-1 1C10.85 22 2 13.15 2 2a1 1 0 0 1 1-1h3.5a1 1 0 0 1 1 1c0 1.25.2 2.46.57 3.58a1 1 0 0 1-.24 1.01l-2.2 2.2z"/></svg>
+<a class="offer-icon-btn offer-icon-call" href="tel:" title="Call">
+<svg viewBox="0 0 24 24"><path d="M6.62 10.79a15.05 15.05 0 0 0 6.59 6.59l2.2-2.2a1 1 0 0 1 1.01-.24c1.12.37 2.33.57 3.58.57a1 1 0 0 1 1 1V21a1 1 0 0 1-1 1C10.85 22 2 13.15 2 2a1 1 0 0 1 1-1h3.5a1 1 0 0 1 1 1c0 1.25.2 2.46.57 3.58a1 1 0 0 1-.24 1.01l-2.2 2.2z"/></svg>
 </a>
-
 </div>
 </div>
 </div>
 </article>
 <article class="offer-card"
-data-store="Store_N77"
-data-store-name="Elements Mall"
+data-store-id="Store_N43"
+data-store-name=""
 data-valid=""
 data-expiry-iso=""
 data-valid-from-iso=""
-data-image-available="Yes"
-data-image-name="20260322_25percentmorewort"
 >
+<script type="application/ld+json">
+{
+"@context":"https://schema.org",
+"@type":"Offer",
+"name":"25 percent more worth",
+"description":"25% More worth. Pay 4000 get 5000",
+"availabilityEnds":"",
+"validFrom":"",
+"url":"/offers/index.html"
+}
+</script>
+
 <div class="offer-media">
 <div class="ribbon" style="display:none;"></div>
-
 <img class="offer-img"
 data-img-base="/campaigns/offer/03_published/20260322_25percentmorewort"
 alt="25 percent more worth"
@@ -1520,65 +1495,657 @@ loading="lazy">
 </div>
 
 <div class="offer-body">
-<div class="offer-badge">Elements Mall</div>
+<div class="offer-badge"></div>
 <div class="offer-title">25 percent more worth</div>
-
 <div class="offer-details clamp">25% More worth. Pay 4000 get 5000</div>
 <div style="height:24px;"></div>
 
 <div class="offer-footer">
 <span class="offer-valid">Valid till </span>
 <div class="offer-ctas">
-<a class="offer-icon-btn offer-icon-book" href="https://naturals-salon-elementsmall.setmore.com/" target="_blank" rel="noopener"
-aria-label="Book appointment (Elements Mall)" title="Book (Elements Mall)">
-<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M7 2a1 1 0 0 1 1 1v1h8V3a1 1 0 1 1 2 0v1h1.5A2.5 2.5 0 0 1 22 6.5v14A2.5 2.5 0 0 1 19.5 23h-15A2.5 2.5 0 0 1 2 20.5v-14A2.5 2.5 0 0 1 4.5 4H6V3a1 1 0 0 1 1-1zm13 8H4v10.5c0 .276.224.5.5.5h15a.5.5 0 0 0 .5-.5V10zM6 6H4.5a.5.5 0 0 0-.5.5V8h16V6.5a.5.5 0 0 0-.5-.5H18v1a1 1 0 1 1-2 0V6H8v1a1 1 0 1 1-2 0V6z"/></svg>
+<a class="offer-icon-btn offer-icon-book" href="" target="_blank" rel="noopener" title="Book Now">
+<svg viewBox="0 0 24 24"><path d="M7 2a1 1 0 0 1 1 1v1h8V3a1 1 0 1 1 2 0v1h1.5A2.5 2.5 0 0 1 22 6.5v14A2.5 2.5 0 0 1 19.5 23h-15A2.5 2.5 0 0 1 2 20.5v-14A2.5 2.5 0 0 1 4.5 4H6V3a1 1 0 0 1 1-1zm13 8H4v10.5c0 .276.224.5.5.5h15a.5.5 0 0 0 .5-.5V10zM6 6H4.5a.5.5 0 0 0-.5.5V8h16V6.5a.5.5 0 0 0-.5-.5H18v1a1 1 0 1 1-2 0V6H8v1a1 1 0 1 1-2 0V6z"/></svg>
 </a>
-<a class="offer-icon-btn offer-icon-wa" href="https://wa.me/" target="_blank" rel="noopener"
-aria-label="WhatsApp (Elements Mall)" title="WhatsApp (Elements Mall)">
+<a class="offer-icon-btn offer-icon-wa" href="https://wa.me/" target="_blank" rel="noopener" title="WhatsApp">
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="#25D366" width="18" height="18" style="flex-shrink:0" aria-hidden="true"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
 
 </a>
-<a class="offer-icon-btn offer-icon-call" href="tel:"
-aria-label="Call (Elements Mall)" title="Call (Elements Mall)">
-<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M6.62 10.79a15.05 15.05 0 0 0 6.59 6.59l2.2-2.2a1 1 0 0 1 1.01-.24c1.12.37 2.33.57 3.58.57a1 1 0 0 1 1 1V21a1 1 0 0 1-1 1C10.85 22 2 13.15 2 2a1 1 0 0 1 1-1h3.5a1 1 0 0 1 1 1c0 1.25.2 2.46.57 3.58a1 1 0 0 1-.24 1.01l-2.2 2.2z"/></svg>
+<a class="offer-icon-btn offer-icon-call" href="tel:" title="Call">
+<svg viewBox="0 0 24 24"><path d="M6.62 10.79a15.05 15.05 0 0 0 6.59 6.59l2.2-2.2a1 1 0 0 1 1.01-.24c1.12.37 2.33.57 3.58.57a1 1 0 0 1 1 1V21a1 1 0 0 1-1 1C10.85 22 2 13.15 2 2a1 1 0 0 1 1-1h3.5a1 1 0 0 1 1 1c0 1.25.2 2.46.57 3.58a1 1 0 0 1-.24 1.01l-2.2 2.2z"/></svg>
 </a>
-
 </div>
 </div>
 </div>
 </article>
+<article class="offer-card"
+data-store-id="Store_N78"
+data-store-name=""
+data-valid=""
+data-expiry-iso=""
+data-valid-from-iso=""
+>
+<script type="application/ld+json">
+{
+"@context":"https://schema.org",
+"@type":"Offer",
+"name":"25 percent more worth",
+"description":"25% More worth. Pay 4000 get 5000",
+"availabilityEnds":"",
+"validFrom":"",
+"url":"/offers/index.html"
+}
+</script>
+
+<div class="offer-media">
+<div class="ribbon" style="display:none;"></div>
+<img class="offer-img"
+data-img-base="/campaigns/offer/03_published/20260322_25percentmorewort"
+alt="25 percent more worth"
+loading="lazy">
 </div>
-</section>
+
+<div class="offer-body">
+<div class="offer-badge"></div>
+<div class="offer-title">25 percent more worth</div>
+<div class="offer-details clamp">25% More worth. Pay 4000 get 5000</div>
+<div style="height:24px;"></div>
+
+<div class="offer-footer">
+<span class="offer-valid">Valid till </span>
+<div class="offer-ctas">
+<a class="offer-icon-btn offer-icon-book" href="" target="_blank" rel="noopener" title="Book Now">
+<svg viewBox="0 0 24 24"><path d="M7 2a1 1 0 0 1 1 1v1h8V3a1 1 0 1 1 2 0v1h1.5A2.5 2.5 0 0 1 22 6.5v14A2.5 2.5 0 0 1 19.5 23h-15A2.5 2.5 0 0 1 2 20.5v-14A2.5 2.5 0 0 1 4.5 4H6V3a1 1 0 0 1 1-1zm13 8H4v10.5c0 .276.224.5.5.5h15a.5.5 0 0 0 .5-.5V10zM6 6H4.5a.5.5 0 0 0-.5.5V8h16V6.5a.5.5 0 0 0-.5-.5H18v1a1 1 0 1 1-2 0V6H8v1a1 1 0 1 1-2 0V6z"/></svg>
+</a>
+<a class="offer-icon-btn offer-icon-wa" href="https://wa.me/" target="_blank" rel="noopener" title="WhatsApp">
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="#25D366" width="18" height="18" style="flex-shrink:0" aria-hidden="true"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+
+</a>
+<a class="offer-icon-btn offer-icon-call" href="tel:" title="Call">
+<svg viewBox="0 0 24 24"><path d="M6.62 10.79a15.05 15.05 0 0 0 6.59 6.59l2.2-2.2a1 1 0 0 1 1.01-.24c1.12.37 2.33.57 3.58.57a1 1 0 0 1 1 1V21a1 1 0 0 1-1 1C10.85 22 2 13.15 2 2a1 1 0 0 1 1-1h3.5a1 1 0 0 1 1 1c0 1.25.2 2.46.57 3.58a1 1 0 0 1-.24 1.01l-2.2 2.2z"/></svg>
+</a>
+</div>
+</div>
+</div>
+</article>
+<article class="offer-card"
+data-store-id="Store_N77"
+data-store-name=""
+data-valid=""
+data-expiry-iso=""
+data-valid-from-iso=""
+>
+<script type="application/ld+json">
+{
+"@context":"https://schema.org",
+"@type":"Offer",
+"name":"25 percent more worth",
+"description":"25% More worth. Pay 4000 get 5000",
+"availabilityEnds":"",
+"validFrom":"",
+"url":"/offers/index.html"
+}
+</script>
+
+<div class="offer-media">
+<div class="ribbon" style="display:none;"></div>
+<img class="offer-img"
+data-img-base="/campaigns/offer/03_published/20260322_25percentmorewort"
+alt="25 percent more worth"
+loading="lazy">
+</div>
+
+<div class="offer-body">
+<div class="offer-badge"></div>
+<div class="offer-title">25 percent more worth</div>
+<div class="offer-details clamp">25% More worth. Pay 4000 get 5000</div>
+<div style="height:24px;"></div>
+
+<div class="offer-footer">
+<span class="offer-valid">Valid till </span>
+<div class="offer-ctas">
+<a class="offer-icon-btn offer-icon-book" href="" target="_blank" rel="noopener" title="Book Now">
+<svg viewBox="0 0 24 24"><path d="M7 2a1 1 0 0 1 1 1v1h8V3a1 1 0 1 1 2 0v1h1.5A2.5 2.5 0 0 1 22 6.5v14A2.5 2.5 0 0 1 19.5 23h-15A2.5 2.5 0 0 1 2 20.5v-14A2.5 2.5 0 0 1 4.5 4H6V3a1 1 0 0 1 1-1zm13 8H4v10.5c0 .276.224.5.5.5h15a.5.5 0 0 0 .5-.5V10zM6 6H4.5a.5.5 0 0 0-.5.5V8h16V6.5a.5.5 0 0 0-.5-.5H18v1a1 1 0 1 1-2 0V6H8v1a1 1 0 1 1-2 0V6z"/></svg>
+</a>
+<a class="offer-icon-btn offer-icon-wa" href="https://wa.me/" target="_blank" rel="noopener" title="WhatsApp">
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="#25D366" width="18" height="18" style="flex-shrink:0" aria-hidden="true"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+
+</a>
+<a class="offer-icon-btn offer-icon-call" href="tel:" title="Call">
+<svg viewBox="0 0 24 24"><path d="M6.62 10.79a15.05 15.05 0 0 0 6.59 6.59l2.2-2.2a1 1 0 0 1 1.01-.24c1.12.37 2.33.57 3.58.57a1 1 0 0 1 1 1V21a1 1 0 0 1-1 1C10.85 22 2 13.15 2 2a1 1 0 0 1 1-1h3.5a1 1 0 0 1 1 1c0 1.25.2 2.46.57 3.58a1 1 0 0 1-.24 1.01l-2.2 2.2z"/></svg>
+</a>
+</div>
+</div>
+</div>
+</article>
+<article class="offer-card"
+data-store-id="Store_N05"
+data-store-name=""
+data-valid=""
+data-expiry-iso=""
+data-valid-from-iso=""
+>
+<script type="application/ld+json">
+{
+"@context":"https://schema.org",
+"@type":"Offer",
+"name":"25 percent more worth",
+"description":"25% More worth. Pay 4000 get 5000",
+"availabilityEnds":"",
+"validFrom":"",
+"url":"/offers/index.html"
+}
+</script>
+
+<div class="offer-media">
+<div class="ribbon" style="display:none;"></div>
+<img class="offer-img"
+data-img-base="/campaigns/offer/03_published/20260322_25percentmorewort"
+alt="25 percent more worth"
+loading="lazy">
+</div>
+
+<div class="offer-body">
+<div class="offer-badge"></div>
+<div class="offer-title">25 percent more worth</div>
+<div class="offer-details clamp">25% More worth. Pay 4000 get 5000</div>
+<div style="height:24px;"></div>
+
+<div class="offer-footer">
+<span class="offer-valid">Valid till </span>
+<div class="offer-ctas">
+<a class="offer-icon-btn offer-icon-book" href="" target="_blank" rel="noopener" title="Book Now">
+<svg viewBox="0 0 24 24"><path d="M7 2a1 1 0 0 1 1 1v1h8V3a1 1 0 1 1 2 0v1h1.5A2.5 2.5 0 0 1 22 6.5v14A2.5 2.5 0 0 1 19.5 23h-15A2.5 2.5 0 0 1 2 20.5v-14A2.5 2.5 0 0 1 4.5 4H6V3a1 1 0 0 1 1-1zm13 8H4v10.5c0 .276.224.5.5.5h15a.5.5 0 0 0 .5-.5V10zM6 6H4.5a.5.5 0 0 0-.5.5V8h16V6.5a.5.5 0 0 0-.5-.5H18v1a1 1 0 1 1-2 0V6H8v1a1 1 0 1 1-2 0V6z"/></svg>
+</a>
+<a class="offer-icon-btn offer-icon-wa" href="https://wa.me/" target="_blank" rel="noopener" title="WhatsApp">
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="#25D366" width="18" height="18" style="flex-shrink:0" aria-hidden="true"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+
+</a>
+<a class="offer-icon-btn offer-icon-call" href="tel:" title="Call">
+<svg viewBox="0 0 24 24"><path d="M6.62 10.79a15.05 15.05 0 0 0 6.59 6.59l2.2-2.2a1 1 0 0 1 1.01-.24c1.12.37 2.33.57 3.58.57a1 1 0 0 1 1 1V21a1 1 0 0 1-1 1C10.85 22 2 13.15 2 2a1 1 0 0 1 1-1h3.5a1 1 0 0 1 1 1c0 1.25.2 2.46.57 3.58a1 1 0 0 1-.24 1.01l-2.2 2.2z"/></svg>
+</a>
+</div>
+</div>
+</div>
+</article>
+<article class="offer-card"
+data-store-id="Store_N43"
+data-store-name=""
+data-valid=""
+data-expiry-iso=""
+data-valid-from-iso=""
+>
+<script type="application/ld+json">
+{
+"@context":"https://schema.org",
+"@type":"Offer",
+"name":"25 percent more worth",
+"description":"25% More worth. Pay 4000 get 5000",
+"availabilityEnds":"",
+"validFrom":"",
+"url":"/offers/index.html"
+}
+</script>
+
+<div class="offer-media">
+<div class="ribbon" style="display:none;"></div>
+<img class="offer-img"
+data-img-base="/campaigns/offer/03_published/20260322_25percentmorewort"
+alt="25 percent more worth"
+loading="lazy">
+</div>
+
+<div class="offer-body">
+<div class="offer-badge"></div>
+<div class="offer-title">25 percent more worth</div>
+<div class="offer-details clamp">25% More worth. Pay 4000 get 5000</div>
+<div style="height:24px;"></div>
+
+<div class="offer-footer">
+<span class="offer-valid">Valid till </span>
+<div class="offer-ctas">
+<a class="offer-icon-btn offer-icon-book" href="" target="_blank" rel="noopener" title="Book Now">
+<svg viewBox="0 0 24 24"><path d="M7 2a1 1 0 0 1 1 1v1h8V3a1 1 0 1 1 2 0v1h1.5A2.5 2.5 0 0 1 22 6.5v14A2.5 2.5 0 0 1 19.5 23h-15A2.5 2.5 0 0 1 2 20.5v-14A2.5 2.5 0 0 1 4.5 4H6V3a1 1 0 0 1 1-1zm13 8H4v10.5c0 .276.224.5.5.5h15a.5.5 0 0 0 .5-.5V10zM6 6H4.5a.5.5 0 0 0-.5.5V8h16V6.5a.5.5 0 0 0-.5-.5H18v1a1 1 0 1 1-2 0V6H8v1a1 1 0 1 1-2 0V6z"/></svg>
+</a>
+<a class="offer-icon-btn offer-icon-wa" href="https://wa.me/" target="_blank" rel="noopener" title="WhatsApp">
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="#25D366" width="18" height="18" style="flex-shrink:0" aria-hidden="true"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+
+</a>
+<a class="offer-icon-btn offer-icon-call" href="tel:" title="Call">
+<svg viewBox="0 0 24 24"><path d="M6.62 10.79a15.05 15.05 0 0 0 6.59 6.59l2.2-2.2a1 1 0 0 1 1.01-.24c1.12.37 2.33.57 3.58.57a1 1 0 0 1 1 1V21a1 1 0 0 1-1 1C10.85 22 2 13.15 2 2a1 1 0 0 1 1-1h3.5a1 1 0 0 1 1 1c0 1.25.2 2.46.57 3.58a1 1 0 0 1-.24 1.01l-2.2 2.2z"/></svg>
+</a>
+</div>
+</div>
+</div>
+</article>
+<article class="offer-card"
+data-store-id="Store_N78"
+data-store-name=""
+data-valid=""
+data-expiry-iso=""
+data-valid-from-iso=""
+>
+<script type="application/ld+json">
+{
+"@context":"https://schema.org",
+"@type":"Offer",
+"name":"25 percent more worth",
+"description":"25% More worth. Pay 4000 get 5000",
+"availabilityEnds":"",
+"validFrom":"",
+"url":"/offers/index.html"
+}
+</script>
+
+<div class="offer-media">
+<div class="ribbon" style="display:none;"></div>
+<img class="offer-img"
+data-img-base="/campaigns/offer/03_published/20260322_25percentmorewort"
+alt="25 percent more worth"
+loading="lazy">
+</div>
+
+<div class="offer-body">
+<div class="offer-badge"></div>
+<div class="offer-title">25 percent more worth</div>
+<div class="offer-details clamp">25% More worth. Pay 4000 get 5000</div>
+<div style="height:24px;"></div>
+
+<div class="offer-footer">
+<span class="offer-valid">Valid till </span>
+<div class="offer-ctas">
+<a class="offer-icon-btn offer-icon-book" href="" target="_blank" rel="noopener" title="Book Now">
+<svg viewBox="0 0 24 24"><path d="M7 2a1 1 0 0 1 1 1v1h8V3a1 1 0 1 1 2 0v1h1.5A2.5 2.5 0 0 1 22 6.5v14A2.5 2.5 0 0 1 19.5 23h-15A2.5 2.5 0 0 1 2 20.5v-14A2.5 2.5 0 0 1 4.5 4H6V3a1 1 0 0 1 1-1zm13 8H4v10.5c0 .276.224.5.5.5h15a.5.5 0 0 0 .5-.5V10zM6 6H4.5a.5.5 0 0 0-.5.5V8h16V6.5a.5.5 0 0 0-.5-.5H18v1a1 1 0 1 1-2 0V6H8v1a1 1 0 1 1-2 0V6z"/></svg>
+</a>
+<a class="offer-icon-btn offer-icon-wa" href="https://wa.me/" target="_blank" rel="noopener" title="WhatsApp">
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="#25D366" width="18" height="18" style="flex-shrink:0" aria-hidden="true"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+
+</a>
+<a class="offer-icon-btn offer-icon-call" href="tel:" title="Call">
+<svg viewBox="0 0 24 24"><path d="M6.62 10.79a15.05 15.05 0 0 0 6.59 6.59l2.2-2.2a1 1 0 0 1 1.01-.24c1.12.37 2.33.57 3.58.57a1 1 0 0 1 1 1V21a1 1 0 0 1-1 1C10.85 22 2 13.15 2 2a1 1 0 0 1 1-1h3.5a1 1 0 0 1 1 1c0 1.25.2 2.46.57 3.58a1 1 0 0 1-.24 1.01l-2.2 2.2z"/></svg>
+</a>
+</div>
+</div>
+</div>
+</article>
+<article class="offer-card"
+data-store-id="Store_N77"
+data-store-name=""
+data-valid=""
+data-expiry-iso=""
+data-valid-from-iso=""
+>
+<script type="application/ld+json">
+{
+"@context":"https://schema.org",
+"@type":"Offer",
+"name":"25 percent more worth",
+"description":"25% More worth. Pay 4000 get 5000",
+"availabilityEnds":"",
+"validFrom":"",
+"url":"/offers/index.html"
+}
+</script>
+
+<div class="offer-media">
+<div class="ribbon" style="display:none;"></div>
+<img class="offer-img"
+data-img-base="/campaigns/offer/03_published/20260322_25percentmorewort"
+alt="25 percent more worth"
+loading="lazy">
+</div>
+
+<div class="offer-body">
+<div class="offer-badge"></div>
+<div class="offer-title">25 percent more worth</div>
+<div class="offer-details clamp">25% More worth. Pay 4000 get 5000</div>
+<div style="height:24px;"></div>
+
+<div class="offer-footer">
+<span class="offer-valid">Valid till </span>
+<div class="offer-ctas">
+<a class="offer-icon-btn offer-icon-book" href="" target="_blank" rel="noopener" title="Book Now">
+<svg viewBox="0 0 24 24"><path d="M7 2a1 1 0 0 1 1 1v1h8V3a1 1 0 1 1 2 0v1h1.5A2.5 2.5 0 0 1 22 6.5v14A2.5 2.5 0 0 1 19.5 23h-15A2.5 2.5 0 0 1 2 20.5v-14A2.5 2.5 0 0 1 4.5 4H6V3a1 1 0 0 1 1-1zm13 8H4v10.5c0 .276.224.5.5.5h15a.5.5 0 0 0 .5-.5V10zM6 6H4.5a.5.5 0 0 0-.5.5V8h16V6.5a.5.5 0 0 0-.5-.5H18v1a1 1 0 1 1-2 0V6H8v1a1 1 0 1 1-2 0V6z"/></svg>
+</a>
+<a class="offer-icon-btn offer-icon-wa" href="https://wa.me/" target="_blank" rel="noopener" title="WhatsApp">
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="#25D366" width="18" height="18" style="flex-shrink:0" aria-hidden="true"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+
+</a>
+<a class="offer-icon-btn offer-icon-call" href="tel:" title="Call">
+<svg viewBox="0 0 24 24"><path d="M6.62 10.79a15.05 15.05 0 0 0 6.59 6.59l2.2-2.2a1 1 0 0 1 1.01-.24c1.12.37 2.33.57 3.58.57a1 1 0 0 1 1 1V21a1 1 0 0 1-1 1C10.85 22 2 13.15 2 2a1 1 0 0 1 1-1h3.5a1 1 0 0 1 1 1c0 1.25.2 2.46.57 3.58a1 1 0 0 1-.24 1.01l-2.2 2.2z"/></svg>
+</a>
+</div>
+</div>
+</div>
+</article>
+<article class="offer-card"
+data-store-id="Store_N05"
+data-store-name=""
+data-valid=""
+data-expiry-iso=""
+data-valid-from-iso=""
+>
+<script type="application/ld+json">
+{
+"@context":"https://schema.org",
+"@type":"Offer",
+"name":"25 percent more worth",
+"description":"25% More worth. Pay 4000 get 5000",
+"availabilityEnds":"",
+"validFrom":"",
+"url":"/offers/index.html"
+}
+</script>
+
+<div class="offer-media">
+<div class="ribbon" style="display:none;"></div>
+<img class="offer-img"
+data-img-base="/campaigns/offer/03_published/20260322_25percentmorewort"
+alt="25 percent more worth"
+loading="lazy">
+</div>
+
+<div class="offer-body">
+<div class="offer-badge"></div>
+<div class="offer-title">25 percent more worth</div>
+<div class="offer-details clamp">25% More worth. Pay 4000 get 5000</div>
+<div style="height:24px;"></div>
+
+<div class="offer-footer">
+<span class="offer-valid">Valid till </span>
+<div class="offer-ctas">
+<a class="offer-icon-btn offer-icon-book" href="" target="_blank" rel="noopener" title="Book Now">
+<svg viewBox="0 0 24 24"><path d="M7 2a1 1 0 0 1 1 1v1h8V3a1 1 0 1 1 2 0v1h1.5A2.5 2.5 0 0 1 22 6.5v14A2.5 2.5 0 0 1 19.5 23h-15A2.5 2.5 0 0 1 2 20.5v-14A2.5 2.5 0 0 1 4.5 4H6V3a1 1 0 0 1 1-1zm13 8H4v10.5c0 .276.224.5.5.5h15a.5.5 0 0 0 .5-.5V10zM6 6H4.5a.5.5 0 0 0-.5.5V8h16V6.5a.5.5 0 0 0-.5-.5H18v1a1 1 0 1 1-2 0V6H8v1a1 1 0 1 1-2 0V6z"/></svg>
+</a>
+<a class="offer-icon-btn offer-icon-wa" href="https://wa.me/" target="_blank" rel="noopener" title="WhatsApp">
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="#25D366" width="18" height="18" style="flex-shrink:0" aria-hidden="true"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+
+</a>
+<a class="offer-icon-btn offer-icon-call" href="tel:" title="Call">
+<svg viewBox="0 0 24 24"><path d="M6.62 10.79a15.05 15.05 0 0 0 6.59 6.59l2.2-2.2a1 1 0 0 1 1.01-.24c1.12.37 2.33.57 3.58.57a1 1 0 0 1 1 1V21a1 1 0 0 1-1 1C10.85 22 2 13.15 2 2a1 1 0 0 1 1-1h3.5a1 1 0 0 1 1 1c0 1.25.2 2.46.57 3.58a1 1 0 0 1-.24 1.01l-2.2 2.2z"/></svg>
+</a>
+</div>
+</div>
+</div>
+</article>
+<article class="offer-card"
+data-store-id="Store_N43"
+data-store-name=""
+data-valid=""
+data-expiry-iso=""
+data-valid-from-iso=""
+>
+<script type="application/ld+json">
+{
+"@context":"https://schema.org",
+"@type":"Offer",
+"name":"25 percent more worth",
+"description":"25% More worth. Pay 4000 get 5000",
+"availabilityEnds":"",
+"validFrom":"",
+"url":"/offers/index.html"
+}
+</script>
+
+<div class="offer-media">
+<div class="ribbon" style="display:none;"></div>
+<img class="offer-img"
+data-img-base="/campaigns/offer/03_published/20260322_25percentmorewort"
+alt="25 percent more worth"
+loading="lazy">
+</div>
+
+<div class="offer-body">
+<div class="offer-badge"></div>
+<div class="offer-title">25 percent more worth</div>
+<div class="offer-details clamp">25% More worth. Pay 4000 get 5000</div>
+<div style="height:24px;"></div>
+
+<div class="offer-footer">
+<span class="offer-valid">Valid till </span>
+<div class="offer-ctas">
+<a class="offer-icon-btn offer-icon-book" href="" target="_blank" rel="noopener" title="Book Now">
+<svg viewBox="0 0 24 24"><path d="M7 2a1 1 0 0 1 1 1v1h8V3a1 1 0 1 1 2 0v1h1.5A2.5 2.5 0 0 1 22 6.5v14A2.5 2.5 0 0 1 19.5 23h-15A2.5 2.5 0 0 1 2 20.5v-14A2.5 2.5 0 0 1 4.5 4H6V3a1 1 0 0 1 1-1zm13 8H4v10.5c0 .276.224.5.5.5h15a.5.5 0 0 0 .5-.5V10zM6 6H4.5a.5.5 0 0 0-.5.5V8h16V6.5a.5.5 0 0 0-.5-.5H18v1a1 1 0 1 1-2 0V6H8v1a1 1 0 1 1-2 0V6z"/></svg>
+</a>
+<a class="offer-icon-btn offer-icon-wa" href="https://wa.me/" target="_blank" rel="noopener" title="WhatsApp">
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="#25D366" width="18" height="18" style="flex-shrink:0" aria-hidden="true"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+
+</a>
+<a class="offer-icon-btn offer-icon-call" href="tel:" title="Call">
+<svg viewBox="0 0 24 24"><path d="M6.62 10.79a15.05 15.05 0 0 0 6.59 6.59l2.2-2.2a1 1 0 0 1 1.01-.24c1.12.37 2.33.57 3.58.57a1 1 0 0 1 1 1V21a1 1 0 0 1-1 1C10.85 22 2 13.15 2 2a1 1 0 0 1 1-1h3.5a1 1 0 0 1 1 1c0 1.25.2 2.46.57 3.58a1 1 0 0 1-.24 1.01l-2.2 2.2z"/></svg>
+</a>
+</div>
+</div>
+</div>
+</article>
+<article class="offer-card"
+data-store-id="Store_N78"
+data-store-name=""
+data-valid=""
+data-expiry-iso=""
+data-valid-from-iso=""
+>
+<script type="application/ld+json">
+{
+"@context":"https://schema.org",
+"@type":"Offer",
+"name":"25 percent more worth",
+"description":"25% More worth. Pay 4000 get 5000",
+"availabilityEnds":"",
+"validFrom":"",
+"url":"/offers/index.html"
+}
+</script>
+
+<div class="offer-media">
+<div class="ribbon" style="display:none;"></div>
+<img class="offer-img"
+data-img-base="/campaigns/offer/03_published/20260322_25percentmorewort"
+alt="25 percent more worth"
+loading="lazy">
+</div>
+
+<div class="offer-body">
+<div class="offer-badge"></div>
+<div class="offer-title">25 percent more worth</div>
+<div class="offer-details clamp">25% More worth. Pay 4000 get 5000</div>
+<div style="height:24px;"></div>
+
+<div class="offer-footer">
+<span class="offer-valid">Valid till </span>
+<div class="offer-ctas">
+<a class="offer-icon-btn offer-icon-book" href="" target="_blank" rel="noopener" title="Book Now">
+<svg viewBox="0 0 24 24"><path d="M7 2a1 1 0 0 1 1 1v1h8V3a1 1 0 1 1 2 0v1h1.5A2.5 2.5 0 0 1 22 6.5v14A2.5 2.5 0 0 1 19.5 23h-15A2.5 2.5 0 0 1 2 20.5v-14A2.5 2.5 0 0 1 4.5 4H6V3a1 1 0 0 1 1-1zm13 8H4v10.5c0 .276.224.5.5.5h15a.5.5 0 0 0 .5-.5V10zM6 6H4.5a.5.5 0 0 0-.5.5V8h16V6.5a.5.5 0 0 0-.5-.5H18v1a1 1 0 1 1-2 0V6H8v1a1 1 0 1 1-2 0V6z"/></svg>
+</a>
+<a class="offer-icon-btn offer-icon-wa" href="https://wa.me/" target="_blank" rel="noopener" title="WhatsApp">
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="#25D366" width="18" height="18" style="flex-shrink:0" aria-hidden="true"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+
+</a>
+<a class="offer-icon-btn offer-icon-call" href="tel:" title="Call">
+<svg viewBox="0 0 24 24"><path d="M6.62 10.79a15.05 15.05 0 0 0 6.59 6.59l2.2-2.2a1 1 0 0 1 1.01-.24c1.12.37 2.33.57 3.58.57a1 1 0 0 1 1 1V21a1 1 0 0 1-1 1C10.85 22 2 13.15 2 2a1 1 0 0 1 1-1h3.5a1 1 0 0 1 1 1c0 1.25.2 2.46.57 3.58a1 1 0 0 1-.24 1.01l-2.2 2.2z"/></svg>
+</a>
+</div>
+</div>
+</div>
+</article>
+<article class="offer-card"
+data-store-id="Store_N77"
+data-store-name=""
+data-valid=""
+data-expiry-iso=""
+data-valid-from-iso=""
+>
+<script type="application/ld+json">
+{
+"@context":"https://schema.org",
+"@type":"Offer",
+"name":"25 percent more worth",
+"description":"25% More worth. Pay 4000 get 5000",
+"availabilityEnds":"",
+"validFrom":"",
+"url":"/offers/index.html"
+}
+</script>
+
+<div class="offer-media">
+<div class="ribbon" style="display:none;"></div>
+<img class="offer-img"
+data-img-base="/campaigns/offer/03_published/20260322_25percentmorewort"
+alt="25 percent more worth"
+loading="lazy">
+</div>
+
+<div class="offer-body">
+<div class="offer-badge"></div>
+<div class="offer-title">25 percent more worth</div>
+<div class="offer-details clamp">25% More worth. Pay 4000 get 5000</div>
+<div style="height:24px;"></div>
+
+<div class="offer-footer">
+<span class="offer-valid">Valid till </span>
+<div class="offer-ctas">
+<a class="offer-icon-btn offer-icon-book" href="" target="_blank" rel="noopener" title="Book Now">
+<svg viewBox="0 0 24 24"><path d="M7 2a1 1 0 0 1 1 1v1h8V3a1 1 0 1 1 2 0v1h1.5A2.5 2.5 0 0 1 22 6.5v14A2.5 2.5 0 0 1 19.5 23h-15A2.5 2.5 0 0 1 2 20.5v-14A2.5 2.5 0 0 1 4.5 4H6V3a1 1 0 0 1 1-1zm13 8H4v10.5c0 .276.224.5.5.5h15a.5.5 0 0 0 .5-.5V10zM6 6H4.5a.5.5 0 0 0-.5.5V8h16V6.5a.5.5 0 0 0-.5-.5H18v1a1 1 0 1 1-2 0V6H8v1a1 1 0 1 1-2 0V6z"/></svg>
+</a>
+<a class="offer-icon-btn offer-icon-wa" href="https://wa.me/" target="_blank" rel="noopener" title="WhatsApp">
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="#25D366" width="18" height="18" style="flex-shrink:0" aria-hidden="true"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+
+</a>
+<a class="offer-icon-btn offer-icon-call" href="tel:" title="Call">
+<svg viewBox="0 0 24 24"><path d="M6.62 10.79a15.05 15.05 0 0 0 6.59 6.59l2.2-2.2a1 1 0 0 1 1.01-.24c1.12.37 2.33.57 3.58.57a1 1 0 0 1 1 1V21a1 1 0 0 1-1 1C10.85 22 2 13.15 2 2a1 1 0 0 1 1-1h3.5a1 1 0 0 1 1 1c0 1.25.2 2.46.57 3.58a1 1 0 0 1-.24 1.01l-2.2 2.2z"/></svg>
+</a>
+</div>
+</div>
+</div>
+</article>
+<article class="offer-card"
+data-store-id="Store_N05"
+data-store-name=""
+data-valid=""
+data-expiry-iso=""
+data-valid-from-iso=""
+>
+<script type="application/ld+json">
+{
+"@context":"https://schema.org",
+"@type":"Offer",
+"name":"25 percent more worth",
+"description":"25% More worth. Pay 4000 get 5000",
+"availabilityEnds":"",
+"validFrom":"",
+"url":"/offers/index.html"
+}
+</script>
+
+<div class="offer-media">
+<div class="ribbon" style="display:none;"></div>
+<img class="offer-img"
+data-img-base="/campaigns/offer/03_published/20260322_25percentmorewort"
+alt="25 percent more worth"
+loading="lazy">
+</div>
+
+<div class="offer-body">
+<div class="offer-badge"></div>
+<div class="offer-title">25 percent more worth</div>
+<div class="offer-details clamp">25% More worth. Pay 4000 get 5000</div>
+<div style="height:24px;"></div>
+
+<div class="offer-footer">
+<span class="offer-valid">Valid till </span>
+<div class="offer-ctas">
+<a class="offer-icon-btn offer-icon-book" href="" target="_blank" rel="noopener" title="Book Now">
+<svg viewBox="0 0 24 24"><path d="M7 2a1 1 0 0 1 1 1v1h8V3a1 1 0 1 1 2 0v1h1.5A2.5 2.5 0 0 1 22 6.5v14A2.5 2.5 0 0 1 19.5 23h-15A2.5 2.5 0 0 1 2 20.5v-14A2.5 2.5 0 0 1 4.5 4H6V3a1 1 0 0 1 1-1zm13 8H4v10.5c0 .276.224.5.5.5h15a.5.5 0 0 0 .5-.5V10zM6 6H4.5a.5.5 0 0 0-.5.5V8h16V6.5a.5.5 0 0 0-.5-.5H18v1a1 1 0 1 1-2 0V6H8v1a1 1 0 1 1-2 0V6z"/></svg>
+</a>
+<a class="offer-icon-btn offer-icon-wa" href="https://wa.me/" target="_blank" rel="noopener" title="WhatsApp">
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="#25D366" width="18" height="18" style="flex-shrink:0" aria-hidden="true"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+
+</a>
+<a class="offer-icon-btn offer-icon-call" href="tel:" title="Call">
+<svg viewBox="0 0 24 24"><path d="M6.62 10.79a15.05 15.05 0 0 0 6.59 6.59l2.2-2.2a1 1 0 0 1 1.01-.24c1.12.37 2.33.57 3.58.57a1 1 0 0 1 1 1V21a1 1 0 0 1-1 1C10.85 22 2 13.15 2 2a1 1 0 0 1 1-1h3.5a1 1 0 0 1 1 1c0 1.25.2 2.46.57 3.58a1 1 0 0 1-.24 1.01l-2.2 2.2z"/></svg>
+</a>
+</div>
+</div>
+</div>
+</article>
+<article class="offer-card"
+data-store-id="Store_N43"
+data-store-name=""
+data-valid=""
+data-expiry-iso=""
+data-valid-from-iso=""
+>
+<script type="application/ld+json">
+{
+"@context":"https://schema.org",
+"@type":"Offer",
+"name":"25 percent more worth",
+"description":"25% More worth. Pay 4000 get 5000",
+"availabilityEnds":"",
+"validFrom":"",
+"url":"/offers/index.html"
+}
+</script>
+
+<div class="offer-media">
+<div class="ribbon" style="display:none;"></div>
+<img class="offer-img"
+data-img-base="/campaigns/offer/03_published/20260322_25percentmorewort"
+alt="25 percent more worth"
+loading="lazy">
+</div>
+
+<div class="offer-body">
+<div class="offer-badge"></div>
+<div class="offer-title">25 percent more worth</div>
+<div class="offer-details clamp">25% More worth. Pay 4000 get 5000</div>
+<div style="height:24px;"></div>
+
+<div class="offer-footer">
+<span class="offer-valid">Valid till </span>
+<div class="offer-ctas">
+<a class="offer-icon-btn offer-icon-book" href="" target="_blank" rel="noopener" title="Book Now">
+<svg viewBox="0 0 24 24"><path d="M7 2a1 1 0 0 1 1 1v1h8V3a1 1 0 1 1 2 0v1h1.5A2.5 2.5 0 0 1 22 6.5v14A2.5 2.5 0 0 1 19.5 23h-15A2.5 2.5 0 0 1 2 20.5v-14A2.5 2.5 0 0 1 4.5 4H6V3a1 1 0 0 1 1-1zm13 8H4v10.5c0 .276.224.5.5.5h15a.5.5 0 0 0 .5-.5V10zM6 6H4.5a.5.5 0 0 0-.5.5V8h16V6.5a.5.5 0 0 0-.5-.5H18v1a1 1 0 1 1-2 0V6H8v1a1 1 0 1 1-2 0V6z"/></svg>
+</a>
+<a class="offer-icon-btn offer-icon-wa" href="https://wa.me/" target="_blank" rel="noopener" title="WhatsApp">
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="#25D366" width="18" height="18" style="flex-shrink:0" aria-hidden="true"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+
+</a>
+<a class="offer-icon-btn offer-icon-call" href="tel:" title="Call">
+<svg viewBox="0 0 24 24"><path d="M6.62 10.79a15.05 15.05 0 0 0 6.59 6.59l2.2-2.2a1 1 0 0 1 1.01-.24c1.12.37 2.33.57 3.58.57a1 1 0 0 1 1 1V21a1 1 0 0 1-1 1C10.85 22 2 13.15 2 2a1 1 0 0 1 1-1h3.5a1 1 0 0 1 1 1c0 1.25.2 2.46.57 3.58a1 1 0 0 1-.24 1.01l-2.2 2.2z"/></svg>
+</a>
+</div>
+</div>
+</div>
+</article>
+
+</div>
 
 <div class="no-offers" id="no-offers" style="display:none;">
-<h3>No active offers</h3>
+<h3>No offers for this store</h3>
 <p>Check back soon — new deals are added regularly.</p>
 </div>
-
 </main>
 
 <button id="scroll-top" onclick="window.scrollTo({top:0,behavior:'smooth'})" title="Back to top">&#8593;</button>
 
 <div id="img-modal-overlay" onclick="closeImgModal()"></div>
-<div id="img-modal" role="dialog" aria-modal="true" aria-label="Offer image">
+<div id="img-modal" role="dialog" aria-modal="true">
 <div id="img-modal-inner">
-<button id="img-close" onclick="closeImgModal()" aria-label="Close">×</button>
-<button id="img-prev" onclick="prevImg()" aria-label="Previous">‹</button>
-<button id="img-next" onclick="nextImg()" aria-label="Next">›</button>
+<button id="img-close" onclick="closeImgModal()">×</button>
+<button id="img-prev" onclick="prevImg()">‹</button>
+<button id="img-next" onclick="nextImg()">›</button>
 <img id="img-modal-src" alt="Offer image">
 </div>
 </div>
 
 <div id="details-overlay" onclick="closeDetailsModal()"></div>
-<div id="details-modal" role="dialog" aria-modal="true" aria-label="Offer details">
+<div id="details-modal" role="dialog" aria-modal="true">
 <div class="dm-head">
 <div class="dm-title" id="dm-title"></div>
 <div class="dm-meta" id="dm-meta"></div>
-<button class="dm-close" onclick="closeDetailsModal()" aria-label="Close">×</button>
+<button class="dm-close" onclick="closeDetailsModal()">×</button>
 </div>
-<div class="dm-body">
-<p id="dm-body"></p>
-</div>
+<div class="dm-body"><p id="dm-body"></p></div>
 </div>
 
 <div id="store-modal-overlay" onclick="closeStorePicker()" style="display:none;"></div>
@@ -2190,186 +2757,159 @@ trigger.addEventListener('click', handleTriggerClick);
 </script>
 
 <script>
-/* Image resolution (.jpg → .jpeg → .png) */
+/* ── Image src resolution (.jpg → .jpeg → .png) ── */
 (function(){
 var EXT=['.jpg','.jpeg','.png'];
-function hasExt(path){ return /\.[a-zA-Z0-9]{2,5}(\?.*)?$/.test(path||''); }
-
+function hasExt(p){return /\.[a-zA-Z0-9]{2,5}(\?.*)?$/.test(p||'');}
 function attach(){
 document.querySelectorAll('img.offer-img').forEach(function(img){
 var base=img.getAttribute('data-img-base')||'';
-if(!base) return;
-
-if(hasExt(base)){
-img.src=base;
-return;
-}
-var i=0;
-img.src=base + EXT[i];
-img.onerror=function(){
-i++;
-if(i<EXT.length) img.src=base + EXT[i];
-else img.style.display='none';
-};
+if(!base)return;
+if(hasExt(base)){img.src=base;return;}
+var i=0; img.src=base+EXT[i];
+img.onerror=function(){ i++; if(i<EXT.length) img.src=base+EXT[i]; else img.style.display='none'; };
 });
 }
-(document.readyState==='loading') ? document.addEventListener('DOMContentLoaded', attach) : attach();
+document.readyState==='loading' ? document.addEventListener('DOMContentLoaded',attach) : attach();
 })();
 </script>
 
 <script>
-/* Ribbons: urgent (<7 days) / NEW (<7 days since Valid_From) */
+/* ── Ribbons: URGENT / NEW ── */
 (function(){
-var now = "2026-03-28T08:52:31.456094+05:30" ? new Date("2026-03-28T08:52:31.456094+05:30") : new Date();
-function daysBetween(a,b){ return Math.floor((b.getTime()-a.getTime())/86400000); }
-var NEW_DAYS=7;
-
+var now="2026-03-28T08:53:12.488600+05:30" ? new Date("2026-03-28T08:53:12.488600+05:30") : new Date();
+function days(a,b){return Math.floor((b-a)/86400000);}
 document.querySelectorAll('.offer-card').forEach(function(card){
-var rib = card.querySelector('.ribbon');
-if(!rib) return;
-
-var expIso = card.getAttribute('data-expiry-iso')||'';
-var vfIso = card.getAttribute('data-valid-from-iso')||'';
-
-var urgentDays=null;
-if(expIso){ urgentDays = daysBetween(now, new Date(expIso)); }
-
-var isUrgent = (urgentDays!==null && urgentDays>=0 && urgentDays<7);
-var isNew=false;
-if(vfIso){
-var age = daysBetween(new Date(vfIso), now);
-isNew = (age>=0 && age<NEW_DAYS);
-}
-
-if(isUrgent){
-rib.style.display='inline-flex';
-rib.className='ribbon urgent';
-rib.textContent='Ends in '+urgentDays+' day'+(urgentDays===1?'':'s');
-} else if(isNew){
-rib.style.display='inline-flex';
-rib.className='ribbon new';
-rib.textContent='NEW';
-}
+var rib=card.querySelector('.ribbon'); if(!rib)return;
+var exp=card.getAttribute('data-expiry-iso')||'';
+var vf=card.getAttribute('data-valid-from-iso')||'';
+var urgent=exp?days(now,new Date(exp)):null;
+var isU=urgent!==null&&urgent>=0&&urgent<7;
+var isN=vf?(function(){var a=days(new Date(vf),now);return a>=0&&a<7;})():false;
+if(isU){rib.style.display='inline-flex';rib.className='ribbon urgent';rib.textContent='Ends in '+urgent+' day'+(urgent===1?'':'s');}
+else if(isN){rib.style.display='inline-flex';rib.className='ribbon new';rib.textContent='NEW';}
 });
 })();
 </script>
 
 <script>
-/* Filter + Sort UI rules */
-var currentStore='all';
-var sortSel=document.getElementById('sort-mode');
+/*
+══════════════════════════════════════════════════════════════════
+filterByStore
+──────────────────────────────────────────────────────────────────
+PRIMARY match: data-store-id vs button data-store-id
+e.g. "Store_N43" "Store_N43"
+Case-insensitive so Store_N43 == store_n43
 
-function updateResultsBar(count, storeLabel){
-var bar=document.getElementById('results-bar');
-var label=storeLabel || (currentStore==='all' ? 'All stores' : 'Selected store');
-bar.textContent='Showing '+count+' offer'+(count===1?'':'s')+' ('+label+')';
-}
+FALLBACK match: data-store-name vs button data-store-label
+Used when _store_id is not set on the offer yet.
+Also case-insensitive.
 
-function updateNoOffersMessage() {
-// More robust check for visible offer cards
-const visibleCards = document.querySelectorAll('.offer-card:not([style*="display: none"], [style*="display:none"])');
-const noOffersElement = document.getElementById('no-offers');
+The console diagnostic block logs every card's IDs on load so
+you can see instantly which field is populated.
+══════════════════════════════════════════════════════════════════
+*/
+function filterByStore(storeId, btn) {
+// 1. UI Updates
+document.querySelectorAll('.f-btn').forEach(b => b.classList.remove('active'));
+btn.classList.add('active');
 
-if (visibleCards.length === 0) {
-noOffersElement.classList.remove('hidden');
+const allCards = document.querySelectorAll('#offers-grid-all .offer-card');
+const seenInAllView = new Set(); // To track unique offers for the "All" view
+let visibleCount = 0;
+
+allCards.forEach(card => {
+const cardStoreId = card.getAttribute('data-store-id'); // e.g., Store_N78
+const cardTitle = card.querySelector('.offer-title').innerText.trim();
+
+if (storeId === 'all') {
+// In "All" view, only show the first time we see this specific offer title
+if (!seenInAllView.has(cardTitle)) {
+card.style.display = 'flex';
+seenInAllView.add(cardTitle);
+visibleCount++;
 } else {
-noOffersElement.classList.add('hidden');
+card.style.display = 'none';
 }
-
-updateResultsBar(visibleCards.length, 'All stores');
+} else {
+// In "Specific Store" view, show if the ID matches EXACTLY
+// We don't deduplicate here because we want to see all offers for THIS store
+if (cardStoreId === storeId) {
+card.style.display = 'flex';
+visibleCount++;
+} else {
+card.style.display = 'none';
 }
-
-var viewStore=document.getElementById('view-by-store');
-var viewOffer=document.getElementById('view-by-offer');
-
-if(sortSel){
-sortSel.addEventListener('change', function(){
-if(currentStore!=='all') return;
-filterOffers('all');
-});
-}
-
-function filterOffers(storeId, btn){
-currentStore=storeId;
-var storeSel = document.getElementById('store-select');
-if (storeSel) {
-storeSel.value = storeId;
-storeSel.classList.toggle('active', storeId !== 'all');
-}
-
-var viewStore=document.getElementById('view-by-store');
-var viewOffer=document.getElementById('view-by-offer');
-
-if(storeId==='all'){
-if(sortSel) sortSel.disabled=false;
-var mode = sortSel ? sortSel.value : 'store';
-if(mode==='offer'){
-viewStore.style.display='none';
-viewOffer.style.display='';
-var allCards=viewOffer.querySelectorAll('.offer-card');
-updateResultsBar(allCards.length,'All stores');
-document.getElementById('no-offers').style.display=(allCards.length?'none':'');
-}else{
-viewOffer.style.display='none';
-viewStore.style.display='';
-var groups=viewStore.querySelectorAll('.store-group');
-var total=0;
-groups.forEach(function(g){g.style.display=''; total += g.querySelectorAll('.offer-card').length;});
-updateResultsBar(total,'All stores');
-document.getElementById('no-offers').style.display=(total?'none':'');
-}
-// rebuild filtered gallery set
-rebuildGallerySet();
-return;
-}
-
-if(sortSel){ sortSel.value='store'; sortSel.disabled=true; }
-viewOffer.style.display='none';
-viewStore.style.display='';
-
-var visibleCount=0;
-var visibleStoreName=null;
-viewStore.querySelectorAll('.store-group').forEach(function(g){
-var show=(g.dataset.storeGroup===storeId);
-g.style.display=show?'':'none';
-if(show){
-visibleCount += g.querySelectorAll('.offer-card').length;
-var nm=g.querySelector('.store-group-name');
-visibleStoreName = nm ? nm.textContent : null;
 }
 });
 
-document.getElementById('no-offers').style.display=(visibleCount?'none':'');
-updateResultsBar(visibleCount, visibleStoreName || 'Selected store');
-
-// rebuild filtered gallery set
-rebuildGallerySet();
+// 2. Update Counter
+const resultsBar = document.getElementById('results-bar');
+resultsBar.innerText = `Showing ${visibleCount} offer${visibleCount !== 1 ? 's' : ''} (${btn.innerText})`;
 }
 
-if(sortSel){
-sortSel.addEventListener('change', function(){
-if(currentStore!=='all') return;
-filterOffers('all');
+/* ── Init + diagnostic on load ── */
+document.addEventListener('DOMContentLoaded', function() {
+
+/* Show all on first load */
+var allBtn = document.querySelector('.f-btn[data-store-id="all"]');
+if (allBtn) filterByStore(allBtn);
+
+/* Console diagnostic — always runs so you can check without debug mode */
+(function() {
+console.group('[Offers filter] Startup diagnostic');
+
+var cards = document.querySelectorAll('#offers-grid-all .offer-card');
+console.log('Total cards rendered:', cards.length);
+
+/* Tally what's in the cards */
+var byId = {}, byName = {};
+cards.forEach(function(c) {
+var id = (c.getAttribute('data-store-id') || '<<empty>>').trim();
+var name = (c.getAttribute('data-store-name') || '<<empty>>').trim();
+byId[id] = (byId[id] || 0) + 1;
+byName[name] = (byName[name] || 0) + 1;
 });
+console.log('Cards by data-store-id:', byId);
+console.log('Cards by data-store-name:', byName);
+
+/* Compare against buttons */
+document.querySelectorAll('.f-btn:not([data-store-id="all"])').forEach(function(btn) {
+var sid = (btn.getAttribute('data-store-id') || '').trim().toLowerCase();
+var sname = (btn.getAttribute('data-store-label') || '').trim().toLowerCase();
+
+var matchById = Object.keys(byId).filter(function(k){ return k.toLowerCase() === sid; });
+var matchByName = Object.keys(byName).filter(function(k){ return k.toLowerCase() === sname; });
+var total = matchById.reduce(function(s,k){ return s+byId[k]; }, 0)
++ (matchById.length === 0 ? matchByName.reduce(function(s,k){ return s+byName[k]; }, 0) : 0);
+
+if (total === 0) {
+console.warn('⚠ NO MATCH — button store-id="' + sid + '" label="' + sname + '"');
+console.warn(' → Add offer["_store_id"] = store["Store_ID"] in your Python build script');
+} else {
+console.log('✓ "' + btn.textContent.trim() + '" → ' + total + ' offer(s) (matched via ' + (matchById.length > 0 ? 'Store_ID' : 'name fallback') + ')');
 }
+});
+
+console.groupEnd();
+})();
+});
 </script>
 
 <script>
-/* Details Modal */
-function openDetailsModal(el){
-var card=el.closest('.offer-card'); if(!card) return;
-var title=(card.querySelector('.offer-title')||{}).textContent || 'Offer';
-var store=card.getAttribute('data-store-name')||'';
+/* ── Details Modal ── */
+function openDetailsModal(el) {
+var card=el.closest('.offer-card'); if(!card)return;
+document.getElementById('dm-title').textContent=(card.querySelector('.offer-title')||{}).textContent||'';
+var store=(card.getAttribute('data-store-name')||'').trim();
 var valid=card.getAttribute('data-valid')||'';
-var details=(card.querySelector('.offer-details')||{}).textContent || '';
-document.getElementById('dm-title').textContent=title;
-document.getElementById('dm-meta').textContent=(store?store+' • ':'')+(valid?('Valid till '+valid):'');
-document.getElementById('dm-body').textContent=details;
+document.getElementById('dm-meta').textContent=(store?store+' \u2022 ':'')+( valid?'Valid till '+valid:'');
+document.getElementById('dm-body').textContent=(card.querySelector('.offer-details')||{}).textContent||'';
 document.getElementById('details-overlay').style.display='block';
 document.getElementById('details-modal').style.display='block';
 document.body.style.overflow='hidden';
 }
-function closeDetailsModal(){
+function closeDetailsModal() {
 document.getElementById('details-overlay').style.display='none';
 document.getElementById('details-modal').style.display='none';
 document.body.style.overflow='';
@@ -2377,33 +2917,20 @@ document.body.style.overflow='';
 </script>
 
 <script>
-/* Image Modal — gallery uses FILTERED set (your decision) */
-var gallerySrcs = [];
-var galleryIndex = 0;
-
+/* ── Image Modal ── */
+var gallerySrcs=[], galleryIndex=0;
 function rebuildGallerySet(){
-gallerySrcs = [];
-// collect visible offer images only
-document.querySelectorAll('img.offer-img').forEach(function(img){
-// visible card?
-var card = img.closest('.offer-card');
-if(!card) return;
-
-// card visible if all ancestors displayed
-var p = card;
-while(p){
-if(p.style && p.style.display === 'none') return;
-p = p.parentElement;
-}
-if(img.src) gallerySrcs.push(img.src);
+gallerySrcs=[];
+document.querySelectorAll('#offers-grid-all img.offer-img').forEach(function(img){
+var card=img.closest('.offer-card');
+if(card&&card.style.display!=='none'&&img.src&&img.src!==window.location.href)
+gallerySrcs.push(img.src);
 });
 }
-
 function openImgModal(src){
-rebuildGallerySet();
-if(!src) return;
-galleryIndex = Math.max(0, gallerySrcs.indexOf(src));
-document.getElementById('img-modal-src').src = src;
+rebuildGallerySet(); if(!src)return;
+galleryIndex=Math.max(0,gallerySrcs.indexOf(src));
+document.getElementById('img-modal-src').src=src;
 document.getElementById('img-modal-overlay').style.display='block';
 document.getElementById('img-modal').style.display='flex';
 document.body.style.overflow='hidden';
@@ -2414,85 +2941,34 @@ document.getElementById('img-modal').style.display='none';
 document.getElementById('img-modal-src').src='';
 document.body.style.overflow='';
 }
-function nextImg(){
-if(!gallerySrcs.length) return;
-galleryIndex = (galleryIndex + 1) % gallerySrcs.length;
-document.getElementById('img-modal-src').src = gallerySrcs[galleryIndex];
-}
-function prevImg(){
-if(!gallerySrcs.length) return;
-galleryIndex = (galleryIndex - 1 + gallerySrcs.length) % gallerySrcs.length;
-document.getElementById('img-modal-src').src = gallerySrcs[galleryIndex];
-}
+function nextImg(){if(!gallerySrcs.length)return;galleryIndex=(galleryIndex+1)%gallerySrcs.length;document.getElementById('img-modal-src').src=gallerySrcs[galleryIndex];}
+function prevImg(){if(!gallerySrcs.length)return;galleryIndex=(galleryIndex-1+gallerySrcs.length)%gallerySrcs.length;document.getElementById('img-modal-src').src=gallerySrcs[galleryIndex];}
 
-document.addEventListener('DOMContentLoaded', function(){
-// hook clicks
+document.addEventListener('DOMContentLoaded',function(){
 document.querySelectorAll('img.offer-img').forEach(function(img){
-img.addEventListener('click', function(){ openImgModal(img.src); });
+img.addEventListener('click',function(){ openImgModal(img.src); });
 });
-
-// swipe
-var startX=null;
-var inner=document.getElementById('img-modal-inner');
+var sx=null, inner=document.getElementById('img-modal-inner');
 if(inner){
-inner.addEventListener('touchstart', function(e){ startX=e.touches[0].clientX; }, {passive:true});
-inner.addEventListener('touchend', function(e){
-if(startX===null) return;
-var dx=e.changedTouches[0].clientX - startX;
-startX=null;
-if(Math.abs(dx)<40) return;
-if(dx<0) nextImg(); else prevImg();
-}, {passive:true});
-}
-});
-
-document.addEventListener('keydown',function(e){
-if(e.key==='Escape'){ closeImgModal(); closeDetailsModal(); }
-if(document.getElementById('img-modal').style.display==='flex'){
-if(e.key==='ArrowRight') nextImg();
-if(e.key==='ArrowLeft') prevImg();
-}
-});
-</script>
-
-<script>
-/* Scroll-to-top */
-var scrollBtn=document.getElementById('scroll-top');
-window.addEventListener('scroll',function(){
-if(scrollBtn) scrollBtn.classList.toggle('visible', window.scrollY>320);
+inner.addEventListener('touchstart',function(e){sx=e.touches[0].clientX;},{passive:true});
+inner.addEventListener('touchend',function(e){
+if(sx===null)return; var dx=e.changedTouches[0].clientX-sx; sx=null;
+if(Math.abs(dx)<40)return; dx<0?nextImg():prevImg();
 },{passive:true});
-</script>
-
-<script>
-/* Initialize */
-filterOffers('all', document.querySelector('.f-btn[data-store="all"]'));
-</script>
-
-<script>
-(function(){
-var EXT=['.jpg','.jpeg','.png'];
-document.querySelectorAll('img.hero-resolver-img').forEach(function(img){
-var slug = img.getAttribute('data-slug');
-var fallback = img.getAttribute('data-fallback');
-if(!slug) return;
-
-var i=0;
-var base = '/images/heroes/' + slug;
-img.src = base + EXT[i];
-
-img.onerror = function(){
-i++;
-if(i < EXT.length) {
-img.src = base + EXT[i];
-} else if(fallback) {
-img.src = fallback;
-img.onerror = null;
-} else {
-img.style.display = 'none';
 }
-};
 });
-})();
+document.addEventListener('keydown',function(e){
+if(e.key==='Escape'){closeImgModal();closeDetailsModal();}
+if(document.getElementById('img-modal').style.display==='flex'){
+if(e.key==='ArrowRight')nextImg(); if(e.key==='ArrowLeft')prevImg();
+}
+});
+</script>
+
+<script>
+/* ── Scroll-to-top ── */
+var _stBtn=document.getElementById('scroll-top');
+window.addEventListener('scroll',function(){if(_stBtn)_stBtn.classList.toggle('visible',window.scrollY>320);},{passive:true});
 </script>
 
 </body>
