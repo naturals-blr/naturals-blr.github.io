@@ -698,57 +698,57 @@ style="display:none;">
 
 <div class="spm-cards" id="spm-cards">
 <div class="spm-card"
-onclick="selectStore('','JP Nagar 5th Phase','','918792642299','','','/stores/bangalore/jp-nagar-5th-phase/')"
+onclick="selectStore('N78','JP Nagar 5th Phase','https://naturals-salon-jpnagar5phase.setmore.com/','918792642299','918792642299','https://g.page/Naturals_JPNagar5thPhase/','/stores/bangalore/jp-nagar-5th-phase/')"
 role="button" tabindex="0">
 <div class="spm-card-num">1</div>
 <div class="spm-card-info">
 <div class="spm-card-name">JP Nagar 5th Phase</div>
-<div class="spm-card-area">JP Nagar 5th Phase &middot; </div>
-<div class="spm-card-addr"></div>
+<div class="spm-card-area">JP Nagar 5th Phase &middot; 560078</div>
+<div class="spm-card-addr">1st Floor, Anand Onyx, No 305, 15th Cross Rd, near Outer Ring Road, 5th Phase, J P Nagar Phase 5, J. P. Nagar, Bangalore, Karnataka 560078, India</div>
 </div>
 <div class="spm-card-cta">Select &#8594;</div>
 </div>
 <div class="spm-card"
-onclick="selectStore('','Elements Mall','','919901000017','','','/stores/bangalore/elements-mall/')"
+onclick="selectStore('N77','Elements Mall','https://naturals-salon-elementsmall.setmore.com/','919901000017','919901000017','https://maps.google.com/?q=Naturals+Salon+Elements+Mall','/stores/bangalore/elements-mall/')"
 role="button" tabindex="0">
 <div class="spm-card-num">2</div>
 <div class="spm-card-info">
 <div class="spm-card-name">Elements Mall</div>
-<div class="spm-card-area">Elements Mall &middot; </div>
-<div class="spm-card-addr"></div>
+<div class="spm-card-area">Elements Mall &middot; 560077</div>
+<div class="spm-card-addr">Shop No 26, 3rd Floor, Elements Mall, 100 Ft Rd, near Manyata Tech Park Road, MS Ramaiah North City, Manayata Tech Park, Nagavara, Bangalore, Karnataka 560077, India</div>
 </div>
 <div class="spm-card-cta">Select &#8594;</div>
 </div>
 <div class="spm-card"
-onclick="selectStore('','Devasandra','','917259490009','','','/stores/bangalore/devasandra/')"
+onclick="selectStore('N36','Devasandra','https://naturals-salon-devasandra.setmore.com/','917259490009','917259490009','https://maps.google.com/?q=Naturals+Salon+Devasandra','/stores/bangalore/devasandra/')"
 role="button" tabindex="0">
 <div class="spm-card-num">3</div>
 <div class="spm-card-info">
 <div class="spm-card-name">Devasandra</div>
-<div class="spm-card-area">Devasandra &middot; </div>
-<div class="spm-card-addr"></div>
+<div class="spm-card-area">Devasandra &middot; 560036</div>
+<div class="spm-card-addr">2,3, 1st Floor, Maruthi Tower, No. 1, Devasandra Main Rd, opp. Lulu's Bakery, Basavanapura, KRPuram, Bangalore, Karnataka 560036, India</div>
 </div>
 <div class="spm-card-cta">Select &#8594;</div>
 </div>
 <div class="spm-card"
-onclick="selectStore('','Frazer Town','','919606333017','','','/stores/bangalore/frazer-town/')"
+onclick="selectStore('N05','Frazer Town','https://naturals-salon-frazertown.setmore.com/','919606333017','919606333017','https://maps.google.com/?q=Naturals+Salon+Frazer+Town','/stores/bangalore/frazer-town/')"
 role="button" tabindex="0">
 <div class="spm-card-num">4</div>
 <div class="spm-card-info">
 <div class="spm-card-name">Frazer Town</div>
-<div class="spm-card-area">Frazer Town &middot; </div>
-<div class="spm-card-addr"></div>
+<div class="spm-card-area">Frazer Town &middot; 560005</div>
+<div class="spm-card-addr">1st floor, No.94, Mosque Rd, above Poorvika Mobile Store, Cleveland Town, Frazer Town, Bangalore, Karnataka 560005, India</div>
 </div>
 <div class="spm-card-cta">Select &#8594;</div>
 </div>
 <div class="spm-card"
-onclick="selectStore('','Hennur','','919606900069','','','/stores/bangalore/hennur/')"
+onclick="selectStore('N43','Hennur','https://naturals-salon-hennur.setmore.com/','919606900069','919606900069','https://maps.google.com/?q=Naturals+Salon+Hennur','/stores/bangalore/hennur/')"
 role="button" tabindex="0">
 <div class="spm-card-num">5</div>
 <div class="spm-card-info">
 <div class="spm-card-name">Hennur</div>
-<div class="spm-card-area">Hennur &middot; </div>
-<div class="spm-card-addr"></div>
+<div class="spm-card-area">Hennur &middot; 560043</div>
+<div class="spm-card-addr">1st Floor, No 40/A, 40/C, Main Road, above SBI Bank, Hennur Gardens, Bangalore, Karnataka 560043, India</div>
 </div>
 <div class="spm-card-cta">Select &#8594;</div>
 </div>
@@ -875,18 +875,30 @@ closeStorePicker();
 if(typeof window._applyStickyStore==='function') window._applyStickyStore(sd);
 
 // Handle pending booking action
+var actionPerformed = false;
 if(typeof window._naturalsPendingAction==='string' && window._naturalsPendingAction==='book' && book){
 window.open(book,'_blank');
 window._naturalsPendingAction=null;
+actionPerformed = true;
 } else if(typeof window._naturalsPendingAction==='string' && window._naturalsPendingAction==='wa' && wa){
 window.open('https://wa.me/'+wa,'_blank');
 window._naturalsPendingAction=null;
+actionPerformed = true;
 } else if(typeof window._naturalsPendingAction==='string' && window._naturalsPendingAction==='call' && call){
 window.location.href='tel:'+call;
 window._naturalsPendingAction=null;
+actionPerformed = true;
+} else if(typeof window._naturalsPendingAction==='string' && window._naturalsPendingAction==='maps' && maps){
+window.open(maps,'_blank');
+window._naturalsPendingAction=null;
+actionPerformed = true;
 } else if(typeof window._naturalsPerformPendingAction==='function' && window._naturalsPendingAction){
 window._naturalsPerformPendingAction(sd);
-} else if(pageUrl) {
+actionPerformed = true;
+}
+
+// Only navigate if no action was performed and we have a pageUrl
+if(!actionPerformed && pageUrl) {
 window.location.href = pageUrl;
 }
 }
