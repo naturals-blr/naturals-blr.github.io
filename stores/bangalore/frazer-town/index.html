@@ -2248,7 +2248,7 @@ var waBtn=document.getElementById('sb-wa');
 var callBtn=document.getElementById('sb-call');
 var mapsBtn=document.getElementById('sb-maps');
 
-var SD = {id:'',name:'Frazer Town',book:'',wa:'919606333017',call:'',maps:''};
+var SD = {id:'N05',name:'Frazer Town',book:'https://naturals-salon-frazertown.setmore.com/',wa:'919606333017',call:'919606333017',maps:'https://maps.google.com/?q=Naturals+Salon+Frazer+Town'};
 localStorage.setItem('naturals-store', JSON.stringify(SD));
 bookBtn && bookBtn.addEventListener('click', function(){ performAction(SD,'book'); });
 waBtn && waBtn.addEventListener('click', function(){ performAction(SD,'wa'); });
@@ -2266,7 +2266,7 @@ else bar.classList.remove('is-visible');
 }, { threshold: 0 });
 
 var target = document.querySelector('.hero-btns, .hero-cta-wrap, .page-hero-inner');
-var isHomeOrStore = bar.getAttribute('data-page-type') === 'homepage' || bar.getAttribute('data-page-type') === 'store';
+var isHomeOrStore = bar.getAttribute('data-page-type') === 'homepage' || bar.getAttribute('data-page-type') === 'store' || bar.getAttribute('data-page-type') === 'offers';
 
 if(target && isHomeOrStore){
 observer.observe(target);

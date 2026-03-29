@@ -1456,7 +1456,7 @@ else bar.classList.remove('is-visible');
 }, { threshold: 0 });
 
 var target = document.querySelector('.hero-btns, .hero-cta-wrap, .page-hero-inner');
-var isHomeOrStore = bar.getAttribute('data-page-type') === 'homepage' || bar.getAttribute('data-page-type') === 'store';
+var isHomeOrStore = bar.getAttribute('data-page-type') === 'homepage' || bar.getAttribute('data-page-type') === 'store' || bar.getAttribute('data-page-type') === 'offers';
 
 if(target && isHomeOrStore){
 observer.observe(target);
