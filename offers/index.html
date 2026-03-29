@@ -3174,7 +3174,7 @@ document.readyState==='loading' ? document.addEventListener('DOMContentLoaded',a
 <script>
 /* ── Ribbons: URGENT / NEW ── */
 (function(){
-var now="2026-03-30T03:36:15.887107+05:30" ? new Date("2026-03-30T03:36:15.887107+05:30") : new Date();
+var now="2026-03-30T04:13:06.597412+05:30" ? new Date("2026-03-30T04:13:06.597412+05:30") : new Date();
 function days(a,b){return Math.floor((b-a)/86400000);}
 document.querySelectorAll('.offer-card').forEach(function(card){
 var rib=card.querySelector('.ribbon'); if(!rib)return;
@@ -3324,19 +3324,25 @@ if(card&&card.style.display!=='none'&&img.src&&img.src!==window.location.href)
 gallerySrcs.push(img.src);
 });
 }
-function openImgModal(src){
-rebuildGallerySet(); if(!src)return;
-galleryIndex=Math.max(0,gallerySrcs.indexOf(src));
-document.getElementById('img-modal-src').src=src;
-document.getElementById('img-modal-overlay').style.display='block';
-document.getElementById('img-modal').style.display='flex';
-document.body.style.overflow='hidden';
+function openImgModal(src){ 
+rebuildGallerySet(); 
+if(!src) return; 
+galleryIndex=Math.max(0,gallerySrcs.indexOf(src)); 
+document.getElementById('img-modal-src').src=src; 
+document.getElementById('img-modal-overlay').style.display='block'; 
+document.getElementById('img-modal').style.display='flex'; 
+document.body.style.overflow='hidden'; 
+if(!window._imgModalHistoryPushed){ 
+history.pushState({ imgModalOpen: true }, ''); 
+window._imgModalHistoryPushed=true; 
+} 
 }
-function closeImgModal(){
-document.getElementById('img-modal-overlay').style.display='none';
-document.getElementById('img-modal').style.display='none';
-document.getElementById('img-modal-src').src='';
-document.body.style.overflow='';
+function closeImgModal(){ 
+document.getElementById('img-modal-overlay').style.display='none'; 
+document.getElementById('img-modal').style.display='none'; 
+document.getElementById('img-modal-src').src=''; 
+document.body.style.overflow=''; 
+window._imgModalHistoryPushed=false; 
 }
 function nextImg(){if(!gallerySrcs.length)return;galleryIndex=(galleryIndex+1)%gallerySrcs.length;document.getElementById('img-modal-src').src=gallerySrcs[galleryIndex];}
 function prevImg(){if(!gallerySrcs.length)return;galleryIndex=(galleryIndex-1+gallerySrcs.length)%gallerySrcs.length;document.getElementById('img-modal-src').src=gallerySrcs[galleryIndex];}
@@ -3359,6 +3365,10 @@ if(e.key==='Escape'){closeImgModal();closeDetailsModal();}
 if(document.getElementById('img-modal').style.display==='flex'){
 if(e.key==='ArrowRight')nextImg(); if(e.key==='ArrowLeft')prevImg();
 }
+});
+window.addEventListener('popstate',function(e){
+var modal=document.getElementById('img-modal');
+if(modal && modal.style.display==='flex'){ window._imgModalHistoryPushed=false; closeImgModal(); }
 });
 </script>
 
@@ -3387,14 +3397,35 @@ document.body.removeChild(a);
 }
 
 function shareContent(btnOrElement, customText){
-var card = btnOrElement.closest ? btnOrElement.closest('.offer-card') || btnOrElement.closest('.content-card') : null;
-var title = customText || (card ? (card.querySelector('.offer-title') || card.querySelector('h3')) : null);
-var text = (title ? (title.textContent || title) : 'Check out this content!') + ' - ' + window.location.href;
-if(navigator.share){
-navigator.share({title: text, text: text, url: window.location.href});
-} else {
-var shareUrl = 'https://wa.me/?text=' + encodeURIComponent(text);
+var card = btnOrElement.closest ? btnOrElement.closest('.offer-card') || btnOrElement.closest('.content-card') || btnOrElement.closest('.hoc') : null;
+var img = card ? card.querySelector('img') : null;
+var imgSrc = img ? (img.src || img.getAttribute('data-img-base') || '') : '';
+
+// Build full image URL
+var imageUrl = imgSrc;
+if(imgSrc && !imgSrc.match(/^https?:\/\//)){
+// Convert relative URL to absolute
+var baseUrl = window.location.origin;
+imageUrl = baseUrl + (imgSrc.startsWith('/') ? imgSrc : '/' + imgSrc);
+}
+
+var title = customText || (card ? (card.querySelector('.offer-title') || card.querySelector('.hoc-title') || card.querySelector('h3')) : null);
+var titleText = title ? (title.textContent || title) : 'Check out this offer!';
+var shareText = titleText + ' - ' + imageUrl;
+
+if(navigator.share && imageUrl){
+navigator.share({title: titleText, text: shareText, url: imageUrl});
+} else if(imageUrl){
+var shareUrl = 'https://wa.me/?text=' + encodeURIComponent(shareText);
 window.open(shareUrl, '_blank');
+} else {
+// Fallback to page URL if no image found
+var fallbackText = titleText + ' - ' + window.location.href;
+if(navigator.share){
+navigator.share({title: titleText, text: fallbackText, url: window.location.href});
+} else {
+window.open('https://wa.me/?text=' + encodeURIComponent(fallbackText), '_blank');
+}
 }
 }
 </script>
