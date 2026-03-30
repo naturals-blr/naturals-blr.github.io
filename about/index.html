@@ -1413,6 +1413,331 @@ window.NATURALS_STORES = [{"Hero_Number": 1, "about_store_text": "Welcome to Nat
 window.NATURALS_BASE = '/';
 </script>
 
+<div id="store-modal-overlay" onclick="closeStorePicker()" style="display:none;"></div>
+
+<div id="store-modal"
+role="dialog"
+aria-modal="true"
+aria-label="Select your store"
+data-store-count="5"
+style="display:none;">
+<div id="store-modal-inner">
+<div class="spm-header">
+<div class="spm-title">Select Your <em>Store</em></div>
+<div class="spm-sub">Choose your preferred Naturals Salon &amp; Spa Bangalore location</div>
+<button class="spm-close" onclick="closeStorePicker()" aria-label="Close">&#10005;</button>
+</div>
+
+<div class="spm-cards" id="spm-cards">
+<div class="spm-card"
+onclick="selectStore('N78','JP Nagar 5th Phase','https://naturals-salon-jpnagar5phase.setmore.com/','918792642299','918792642299','https://g.page/Naturals_JPNagar5thPhase/','//stores/bangalore/jp-nagar-5th-phase/')"
+role="button" tabindex="0">
+<div class="spm-card-num">1</div>
+<div class="spm-card-info">
+<div class="spm-card-name">JP Nagar 5th Phase</div>
+<div class="spm-card-area">JP Nagar 5th Phase &middot; 560078</div>
+<div class="spm-card-addr">1st Floor, Anand Onyx, No 305, 15th Cross Rd, near Outer Ring Road, 5th Phase, J P Nagar Phase 5, J. P. Nagar, Bangalore, Karnataka 560078, India</div>
+</div>
+<div class="spm-card-cta">Select &#8594;</div>
+</div>
+<div class="spm-card"
+onclick="selectStore('N77','Elements Mall','https://naturals-salon-elementsmall.setmore.com/','919901000017','919901000017','https://maps.google.com/?q=Naturals+Salon+Elements+Mall','//stores/bangalore/elements-mall/')"
+role="button" tabindex="0">
+<div class="spm-card-num">2</div>
+<div class="spm-card-info">
+<div class="spm-card-name">Elements Mall</div>
+<div class="spm-card-area">Elements Mall &middot; 560077</div>
+<div class="spm-card-addr">Shop No 26, 3rd Floor, Elements Mall, 100 Ft Rd, near Manyata Tech Park Road, MS Ramaiah North City, Manayata Tech Park, Nagavara, Bangalore, Karnataka 560077, India</div>
+</div>
+<div class="spm-card-cta">Select &#8594;</div>
+</div>
+<div class="spm-card"
+onclick="selectStore('N36','Devasandra','https://naturals-salon-devasandra.setmore.com/','917259490009','917259490009','https://maps.google.com/?q=Naturals+Salon+Devasandra','//stores/bangalore/devasandra/')"
+role="button" tabindex="0">
+<div class="spm-card-num">3</div>
+<div class="spm-card-info">
+<div class="spm-card-name">Devasandra</div>
+<div class="spm-card-area">Devasandra &middot; 560036</div>
+<div class="spm-card-addr">2,3, 1st Floor, Maruthi Tower, No. 1, Devasandra Main Rd, opp. Lulu's Bakery, Basavanapura, KRPuram, Bangalore, Karnataka 560036, India</div>
+</div>
+<div class="spm-card-cta">Select &#8594;</div>
+</div>
+<div class="spm-card"
+onclick="selectStore('N05','Frazer Town','https://naturals-salon-frazertown.setmore.com/','919606333017','919606333017','https://maps.google.com/?q=Naturals+Salon+Frazer+Town','//stores/bangalore/frazer-town/')"
+role="button" tabindex="0">
+<div class="spm-card-num">4</div>
+<div class="spm-card-info">
+<div class="spm-card-name">Frazer Town</div>
+<div class="spm-card-area">Frazer Town &middot; 560005</div>
+<div class="spm-card-addr">1st floor, No.94, Mosque Rd, above Poorvika Mobile Store, Cleveland Town, Frazer Town, Bangalore, Karnataka 560005, India</div>
+</div>
+<div class="spm-card-cta">Select &#8594;</div>
+</div>
+<div class="spm-card"
+onclick="selectStore('N43','Hennur','https://naturals-salon-hennur.setmore.com/','919606900069','919606900069','https://maps.google.com/?q=Naturals+Salon+Hennur','//stores/bangalore/hennur/')"
+role="button" tabindex="0">
+<div class="spm-card-num">5</div>
+<div class="spm-card-info">
+<div class="spm-card-name">Hennur</div>
+<div class="spm-card-area">Hennur &middot; 560043</div>
+<div class="spm-card-addr">1st Floor, No 40/A, 40/C, Main Road, above SBI Bank, Hennur Gardens, Bangalore, Karnataka 560043, India</div>
+</div>
+<div class="spm-card-cta">Select &#8594;</div>
+</div>
+</div>
+</div>
+</div>
+
+<style>
+#store-modal-overlay{position:fixed;inset:0;background:rgba(0,0,0,0.65);z-index:12000;backdrop-filter:blur(4px);}
+
+#store-modal{
+position:fixed;top:50%;left:50%;
+transform:translate(-50%,-50%);
+z-index:12001;
+width:min(640px, 92vw);
+max-height:86vh;
+background:var(--cream);
+box-shadow:0 24px 80px rgba(0,0,0,0.45);
+border-radius:16px;
+overflow:hidden;
+}
+[data-theme="naturals"] #store-modal{background:#FAF7FF;}
+
+.spm-header{background:var(--dark);padding:22px 22px;position:relative;}
+[data-theme="naturals"] .spm-header{background:#1A0533;}
+.spm-title{font-family:'Cormorant Garamond',serif;font-size:26px;font-weight:300;color:#fff;margin-bottom:4px;}
+.spm-title em{font-style:italic;color:var(--gold);}
+.spm-sub{font-size:11px;color:rgba(255,255,255,0.4);letter-spacing:1px;line-height:1.4;}
+.spm-close{position:absolute;top:14px;right:14px;background:rgba(255,255,255,0.10);border:1px solid rgba(255,255,255,0.18);color:#fff;border-radius:12px;width:40px;height:40px;font-size:18px;cursor:pointer;line-height:1;}
+.spm-close:hover{background:rgba(255,255,255,0.18);}
+
+.spm-cards{padding:4px;overflow:hidden;}
+/* Toggle scroll ON only when store-count > 6 */
+.spm-cards.spm-scroll{overflow-y:auto;max-height:calc(86vh - 110px);}
+
+.spm-card{
+display:flex;align-items:center;gap:14px;
+padding:14px 18px;background:#fff;border-bottom:1px solid rgba(0,0,0,0.05);
+cursor:pointer;transition:all 0.2s;border-left:3px solid transparent;
+}
+.spm-card:hover{background:#f8f6f0;border-left-color:var(--gold);}
+[data-theme="naturals"] .spm-card:hover{background:#f3eeff;border-left-color:var(--green-mid);}
+.spm-card:focus{outline:2px solid var(--gold);outline-offset:-2px;}
+
+.spm-card-num{font-family:'Cormorant Garamond',serif;font-size:26px;color:rgba(0,0,0,0.12);font-weight:300;width:28px;flex-shrink:0;}
+.spm-card-info{flex:1;min-width:0;}
+.spm-card-name{font-family:'Cormorant Garamond',serif;font-size:18px;font-weight:400;color:var(--text);margin-bottom:2px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;}
+.spm-card-area{font-size:10px;color:var(--gold);letter-spacing:2px;text-transform:uppercase;margin-bottom:2px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;}
+.spm-card-addr{font-size:11px;color:var(--text-light);font-weight:300;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;}
+.spm-card-cta{font-size:11px;color:var(--text-light);letter-spacing:1px;text-transform:uppercase;white-space:nowrap;transition:color 0.2s;}
+.spm-card:hover .spm-card-cta{color:var(--green-mid);}
+
+@media(max-width:640px){
+#store-modal{width:min(520px, 92vw);max-height:82vh;}
+.spm-header{padding:18px 18px;}
+.spm-title{font-size:22px;}
+.spm-card{padding:12px 14px;}
+.spm-card-addr{display:none;} /* ✅ hide address only on mobile */
+}
+</style>
+
+<script>
+(function(){
+function applyStoreModalScrollRule(){
+var modal = document.getElementById('store-modal');
+var cards = document.getElementById('spm-cards');
+if(!modal || !cards) return;
+var n = parseInt(modal.getAttribute('data-store-count') || '0', 10);
+cards.classList.toggle('spm-scroll', n > 6); /* ✅ scroll only if >6 */
+}
+if(document.readyState === 'loading'){
+document.addEventListener('DOMContentLoaded', applyStoreModalScrollRule);
+} else {
+applyStoreModalScrollRule();
+}
+})();
+</script>
+
+<script>
+function openStorePicker(){
+document.getElementById('store-modal-overlay').style.display='block';
+document.getElementById('store-modal').style.display='block';
+document.body.style.overflow='hidden';
+}
+function closeStorePicker(){
+document.getElementById('store-modal-overlay').style.display='none';
+document.getElementById('store-modal').style.display='none';
+document.body.style.overflow='';
+}
+
+/* Ensure sticky buttons use selected store on non-store pages */
+window._applyStickyStore = function(sd){
+try{
+if(!sd) return;
+var bar=document.getElementById('sticky-bar');
+if(bar && bar.getAttribute('data-page-type') !== 'store'){
+/* On non-store pages, we always want to prompt.
+So we don't bind the sticky bar buttons to the selected store. */
+return;
+}
+var bookBtn=document.getElementById('sb-book');
+var waBtn=document.getElementById('sb-wa');
+var callBtn=document.getElementById('sb-call');
+var mapsBtn=document.getElementById('sb-maps');
+
+function clearAndBind(btn, fn){
+if(!btn) return;
+var clone = btn.cloneNode(true);
+btn.parentNode.replaceChild(clone, btn);
+clone.addEventListener('click', fn);
+}
+
+clearAndBind(bookBtn, function(){ if(sd.book) window.open(sd.book,'_blank'); });
+clearAndBind(waBtn, function(){ if(sd.wa) window.open('https://wa.me/' + sd.wa,'_blank'); });
+clearAndBind(callBtn, function(){ if(sd.call) window.location.href='tel:' + sd.call; });
+clearAndBind(mapsBtn, function(){ if(sd.maps) window.open(sd.maps,'_blank'); });
+}catch(e){}
+};
+
+function selectStore(id,name,book,wa,call,maps,pageUrl){
+var sd={id:id,name:name,book:book,wa:wa,call:call,maps:maps,pageUrl:pageUrl};
+localStorage.setItem('naturals-store',JSON.stringify(sd));
+closeStorePicker();
+if(typeof window._applyStickyStore==='function') window._applyStickyStore(sd);
+
+// Handle pending booking action
+var actionPerformed = false;
+if(typeof window._naturalsPendingAction==='string' && window._naturalsPendingAction==='book' && book){
+window.open(book,'_blank');
+window._naturalsPendingAction=null;
+actionPerformed = true;
+} else if(typeof window._naturalsPendingAction==='string' && window._naturalsPendingAction==='wa' && wa){
+window.open('https://wa.me/'+wa,'_blank');
+window._naturalsPendingAction=null;
+actionPerformed = true;
+} else if(typeof window._naturalsPendingAction==='string' && window._naturalsPendingAction==='call' && call){
+window.location.href='tel:'+call;
+window._naturalsPendingAction=null;
+actionPerformed = true;
+} else if(typeof window._naturalsPendingAction==='string' && window._naturalsPendingAction==='maps' && maps){
+window.open(maps,'_blank');
+window._naturalsPendingAction=null;
+actionPerformed = true;
+} else if(typeof window._naturalsPerformPendingAction==='function' && window._naturalsPendingAction){
+window._naturalsPerformPendingAction(sd);
+actionPerformed = true;
+}
+
+// Only navigate if no action was performed and we have a pageUrl
+if(!actionPerformed && pageUrl) {
+window.location.href = pageUrl;
+}
+}
+
+/* Used by homepage store tiles (Book/Chat/Call/Directions) to keep your flow */
+function storePickerThen(id,name,book,wa,call,maps,pageUrl,action){
+var sd={id:id,name:name,book:book,wa:wa,call:call,maps:maps,pageUrl:pageUrl};
+localStorage.setItem('naturals-store',JSON.stringify(sd));
+closeStorePicker();
+if(action==='book' && book) window.open(book,'_blank');
+if(action==='wa' && wa) window.open('https://wa.me/'+wa,'_blank');
+if(action==='call' && call) window.location.href='tel:'+call;
+if(action==='maps' && maps) window.open(maps,'_blank');
+}
+
+/* Set active state for store pages */
+function setActiveStoreState(){
+try{
+var currentPath = window.location.pathname;
+var storeLinks = document.querySelectorAll('.drawer-store-link');
+
+storeLinks.forEach(function(link){
+var href = link.getAttribute('href');
+if(href && currentPath.includes(href.replace(/^\//, ''))){
+link.classList.add('active');
+} else {
+link.classList.remove('active');
+}
+});
+}catch(e){}
+}
+
+/* Run on page load and when drawer opens */
+document.addEventListener('DOMContentLoaded', setActiveStoreState);
+
+/* Also run when hamburger is clicked (drawer opens) */
+var hamburger = document.getElementById('hamburger');
+if(hamburger){
+hamburger.addEventListener('click', function(){
+setTimeout(setActiveStoreState, 100); // Small delay for drawer animation
+setTimeout(updateThemeSwatches, 50); // Update theme swatches when drawer opens
+});
+}
+
+/* Theme toggle functionality - Global State Management */
+function setTheme(themeName){
+// Apply to document for immediate effect
+document.documentElement.setAttribute('data-theme', themeName);
+document.body.setAttribute('data-theme', themeName);
+
+// Persist in localStorage for global state
+localStorage.setItem('naturals-theme', themeName);
+
+// Update visual state
+updateThemeSwatches();
+}
+
+function updateThemeSwatches(){
+try{
+var currentTheme = document.body.getAttribute('data-theme') || 'luxury';
+var swatches = document.querySelectorAll('.theme-swatch');
+
+swatches.forEach(function(swatch){
+swatch.classList.remove('active');
+if(swatch.getAttribute('data-theme') === currentTheme){
+swatch.classList.add('active');
+}
+});
+}catch(e){}
+}
+
+/* Set default theme to Luxury for new visitors - Global State */
+(function(){
+var savedTheme = localStorage.getItem('naturals-theme');
+if(!savedTheme){
+savedTheme = 'luxury'; // Default to Luxury theme for premium identity
+localStorage.setItem('naturals-theme', savedTheme);
+}
+
+// Apply to both documentElement and body for global consistency
+if(savedTheme){
+document.documentElement.setAttribute('data-theme', savedTheme);
+document.body.setAttribute('data-theme', savedTheme);
+}
+
+// Update visual state when DOM is ready
+if(document.readyState === 'loading'){
+document.addEventListener('DOMContentLoaded', updateThemeSwatches);
+} else {
+updateThemeSwatches();
+}
+})();
+
+document.addEventListener('keydown',function(e){ if(e.key==='Escape') closeStorePicker(); });
+document.addEventListener('DOMContentLoaded',function(){
+try{
+var saved=JSON.parse(localStorage.getItem('naturals-store'));
+if(saved && saved.name){
+var ind=document.getElementById('store-indicator');
+var nm=document.getElementById('si-name');
+if(ind && nm){ nm.textContent=saved.name; ind.style.display='flex'; }
+if(typeof window._applyStickyStore==='function') window._applyStickyStore(saved);
+}
+}catch(e){}
+});
+</script>
+
 <div id="sticky-bar" data-page-type="other">
 <button class="sb-btn" id="sb-book" aria-label="Book appointment" title="Book"><svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-calendar" style="flex-shrink:0" aria-hidden="true"><rect width="18" height="18" x="3" y="4" rx="2" ry="2"/><path d="M16 2v4"/><path d="M8 2v4"/><path d="M3 10h18"/></svg>
 </button>

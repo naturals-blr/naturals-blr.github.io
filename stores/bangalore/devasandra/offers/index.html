@@ -1131,7 +1131,7 @@ loading="eager">
 <article class="offer-card" data-store-id="" data-store-name="devasandra">
 <div class="offer-media">
 <span class="ribbon urgent">Featured</span>
-<img src="/campaigns/offer/03_published/20260226_Pay20000Get30000.jpg" alt="" loading="lazy" onclick="openModal(this)">
+<img src="/campaigns/offer/03_published/20260226_Pay20000Get30000.jpg" alt="Pay 20000, Get 30000" loading="lazy" onclick="openModal(this)">
 <div class="img-actions">
 <button class="img-action-btn" onclick="downloadImage(this)" title="Download Image">
 <svg viewBox="0 0 24 24"><path d="M19 9h-4V3H9v6H5l7 7 7-7zM5 18v2h14v-2H5z"/></svg>
@@ -1142,11 +1142,11 @@ loading="eager">
 </div>
 </div>
 <div class="offer-body">
-<div class="offer-badge">offer</div>
-<h3 class="offer-title"></h3>
-<p class="offer-details clamp"></p>
+<div class="offer-badge">OFFER</div>
+<h3 class="offer-title">Pay 20000, Get 30000</h3>
+<p class="offer-details clamp">Customer First Offer by Naturals Salon. Get ₹30,000 worth of salon services with easy EMI at ₹2,000 per month for 9 months. Valid for 1 year at 950+ Naturals salons, shareable with 4 family members. Limited to 100 customers. T&C apply.</p>
 <div class="offer-footer">
-<span class="offer-valid">Valid until limited period</span>
+<span class="offer-valid">Valid until 31-Mar-2026</span>
 <div class="offer-ctas">
 <a class="offer-icon-btn offer-icon-book" href="https://naturals-salon-devasandra.setmore.com/" target="_blank" rel="noopener" title="Book Now">
 <svg viewBox="0 0 24 24"><path d="M7 2a1 1 0 0 1 1 1v1h8V3a1 1 0 1 1 2 0v1h1.5A2.5 2.5 0 0 1 22 6.5v14A2.5 2.5 0 0 1 19.5 23h-15A2.5 2.5 0 0 1 2 20.5v-14A2.5 2.5 0 0 1 4.5 4H6V3a1 1 0 0 1 1-1zm13 8H4v10.5c0 .276.224.5.5.5h15a.5.5 0 0 0 .5-.5V10zM6 6H4.5a.5.5 0 0 0-.5.5V8h16V6.5a.5.5 0 0 0-.5-.5H18v1a1 1 0 1 1-2 0V6H8v1a1 1 0 1 1-2 0V6z"/></svg>
@@ -1690,17 +1690,16 @@ var titleText = title ? (title.textContent || title) : 'Check out this offer!';
 var shareText = titleText + ' - ' + imageUrl;
 
 if(navigator.share && imageUrl){
-navigator.share({title: titleText, text: shareText, url: imageUrl});
+navigator.share({title: titleText, url: imageUrl});
 } else if(imageUrl){
-var shareUrl = 'https://wa.me/?text=' + encodeURIComponent(shareText);
+var shareUrl = 'https://wa.me/?text=' + encodeURIComponent(imageUrl);
 window.open(shareUrl, '_blank');
 } else {
 // Fallback to page URL if no image found
-var fallbackText = titleText + ' - ' + window.location.href;
 if(navigator.share){
-navigator.share({title: titleText, text: fallbackText, url: window.location.href});
+navigator.share({title: titleText, url: window.location.href});
 } else {
-window.open('https://wa.me/?text=' + encodeURIComponent(fallbackText), '_blank');
+window.open('https://wa.me/?text=' + encodeURIComponent(window.location.href), '_blank');
 }
 }
 }
