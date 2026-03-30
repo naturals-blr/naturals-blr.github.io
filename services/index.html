@@ -803,8 +803,8 @@ img{display:block;width:100%;object-fit:cover;}
 .filter-dropdown-item:hover{background:rgba(255,255,255,0.1);color:#fff;}
 .filter-dropdown-item.active{background:var(--gold);color:var(--dark);}
 
-/* FILTERS */
-.filters-wrap{display:flex;flex-direction:column;gap:24px;background:var(--dark);padding:20px 60px;position:sticky;top:70px;z-index:1000;border-bottom:1px solid rgba(255,255,255,0.06);box-shadow:0 4px 20px rgba(0,0,0,0.3);margin-top:0;}
+/* FILTERS - Fixed z-index for hamburger menu */
+.filters-wrap{display:flex;flex-direction:column;gap:24px;background:var(--dark);padding:20px 60px;position:sticky;top:70px;z-index:100;border-bottom:1px solid rgba(255,255,255,0.06);box-shadow:0 4px 20px rgba(0,0,0,0.3);margin-top:0;}
 .filter-row{display:flex;align-items:center;justify-content:flex-start;}
 .filter-row.salon-row{margin-bottom:8px;}
 .filter-row.filters-row{justify-content:space-between;align-items:center;}
@@ -827,12 +827,9 @@ img{display:block;width:100%;object-fit:cover;}
 /* Empty State Gap Removal */
 .empty-state{margin-top:0;padding:60px 20px;}
 
-/* Store Pills Container */
-.store-pills-container{display:flex;gap:10px;overflow-x:auto;padding-bottom:4px;-webkit-overflow-scrolling:touch;}
-.store-pills-container::-webkit-scrollbar{height:4px;}
-.store-pills-container::-webkit-scrollbar-track{background:transparent;}
-.store-pills-container::-webkit-scrollbar-thumb{background:rgba(255,255,255,0.3);border-radius:2px;}
-.store-pill{padding:10px 20px;border:1px solid rgba(255,255,255,0.2);border-radius:50px;background:rgba(255,255,255,0.05);color:rgba(255,255,255,0.8);font-size:14px;font-weight:500;cursor:pointer;transition:all 0.2s;white-space:nowrap;min-width:fit-content;}
+/* Store Pills Container - Fixed for no unnecessary scroll */
+.store-pills-container{display:flex;gap:10px;flex-wrap:wrap;padding-bottom:4px;}
+.store-pill{padding:8px 16px;border:1px solid rgba(255,255,255,0.2);border-radius:50px;background:rgba(255,255,255,0.05);color:rgba(255,255,255,0.8);font-size:13px;font-weight:500;cursor:pointer;transition:all 0.2s;white-space:nowrap;}
 .store-pill:hover{background:rgba(255,255,255,0.1);border-color:rgba(255,255,255,0.3);color:#fff;}
 .store-pill.active{background:var(--gold);border-color:var(--gold);color:var(--dark);font-weight:600;}
 
@@ -1180,7 +1177,7 @@ footer{background:#080f0b;}
 
 @media(max-width:900px){
 .page-hero-inner{padding:44px 20px 0;}
-.filters-wrap{padding:0 20px 12px;top:60px;}
+.filters-wrap{padding:12px 20px;top:60px;gap:16px;}
 .filter-row{gap:8px;}
 .filter-group.store-group{min-width:140px;}
 .filter-group.gender-group{min-width:120px;}
@@ -1189,9 +1186,10 @@ footer{background:#080f0b;}
 #store-select, #cat-select{min-width:120px;}
 .svc-grid{grid-template-columns:1fr 1fr;}
 #scroll-top{bottom:20px;right:20px;width:40px;height:40px;font-size:16px;}
+.store-pill{padding:6px 12px;font-size:12px;}
 }
 @media(max-width:600px){
-.filters-wrap{padding:0 16px 12px;}
+.filters-wrap{padding:10px 16px;top:60px;gap:12px;}
 .filter-row{gap:6px;flex-wrap:wrap;}
 .filter-group.store-group{flex:1 1 100%;min-width:auto;}
 .filter-group.gender-group{flex:1 1 100%;min-width:auto;}
@@ -1201,11 +1199,13 @@ footer{background:#080f0b;}
 .filter-lbl{display:none;}
 .cat-filter-scroll{flex-wrap:wrap;}
 .svc-grid{grid-template-columns:1fr;}
+.store-pill{padding:6px 10px;font-size:11px;}
 }
 @media(max-width:480px){
-.filters-wrap{padding:0 12px 12px;}
+.filters-wrap{padding:8px 12px;top:60px;gap:10px;}
 .filter-row{gap:4px;}
 .filter-group{gap:4px;}
+.store-pill{padding:5px 8px;font-size:10px;}
 }
 </style>
 <script>(function(){var t=localStorage.getItem('naturals-theme')||'luxury';document.documentElement.setAttribute('data-theme',t);})();</script>
