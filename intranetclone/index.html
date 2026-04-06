@@ -2324,40 +2324,46 @@ serviceElement.textContent = filterValue;
 </div>
 
 
+
 <footer>
 <div class="ft-top">
+
 <div class="ft-brand-col">
-<div class="ft-brand">Naturals <span>Salon &amp; Spa</span></div>
+<div class="ft-brand"><span id="staffTriggerBrand" style="cursor: pointer; position: relative;" title="Staff Portal - Click 5 times for access">N</span>aturals <span>Salon &amp; Spa</span></div>
 <div class="ft-tagline">India's most trusted salon network.<br>Premium beauty services across Bangalore.</div>
 </div>
+
 <div class="ft-col">
 <div class="ft-col-title">Explore</div>
 <ul>
-<li><a href="/services/">Services &amp; Pricing</a></li>
-<li><a href="/offers/">Offers</a></li>
-<li><a href="/careers/bangalore/">Careers</a></li>
-<li><a href="/contact/">Contact Us</a></li>
-<li><a href="/about/">About Us</a></li>
+<li><a href="//services/">Services &amp; Pricing</a></li>
+<li><a href="//offers/">Offers</a></li>
+<li><a href="//careers/bangalore/">Join our Team</a></li>
+<li><a href="//contact/">Contact Us</a></li>
+<li><a href="//about/">About Us</a></li>
 </ul>
 </div>
+
 <div class="ft-col">
 <div class="ft-col-title">Locations</div>
 <ul>
-<li><a href="/stores/bangalore/jp-nagar-5th-phase/">JP Nagar 5th Phase</a></li>
-<li><a href="/stores/bangalore/elements-mall/">Elements Mall</a></li>
-<li><a href="/stores/bangalore/devasandra/">Devasandra</a></li>
-<li><a href="/stores/bangalore/frazer-town/">Frazer Town</a></li>
-<li><a href="/stores/bangalore/hennur/">Hennur</a></li>
+<li><a href="//stores/bangalore/jp-nagar-5th-phase/">JP Nagar 5th Phase</a></li>
+<li><a href="//stores/bangalore/elements-mall/">Elements Mall</a></li>
+<li><a href="//stores/bangalore/devasandra/">Devasandra</a></li>
+<li><a href="//stores/bangalore/frazer-town/">Frazer Town</a></li>
+<li><a href="//stores/bangalore/hennur/">Hennur</a></li>
 </ul>
 </div>
+
 <div class="ft-col">
 <div class="ft-col-title">Policies</div>
 <ul>
-<li><a href="/booking-policy/">Booking Policy</a></li>
-<li><a href="/cancellation-policy/">Cancellation Policy</a></li>
+<li><a href="//booking-policy/">Booking Policy</a></li>
+<li><a href="//cancellation-policy/">Cancellation Policy</a></li>
 <li><a href="https://naturals.in" target="_blank" rel="noopener">Naturals India &#8599;</a></li>
 </ul>
 </div>
+
 </div>
 <div class="ft-bottom">
 <div class="ft-copy">&copy; 2026 Naturals Salon &amp; Spa, Bangalore. All rights reserved.</div>
@@ -2365,5 +2371,155 @@ serviceElement.textContent = filterValue;
 </div>
 </footer>
 
-</body>
+<style>
+/* ── Footer shell: full viewport width, always dark ─────────────── */
+footer {
+background: #080f0b;
+width: 100%;
+margin: 0;
+padding: 40px 0;
+display: block;
+}
+[data-theme="naturals"] footer { background: #0D0120; }
+
+/* Fix 2: Apply Full-Width CSS - ensure footer stretches full viewport */
+.footer-section {
+width: 100% !important;
+margin: 0 !important;
+padding: 40px 0 !important;
+background-color: #080f0b !important;
+}
+
+/* ── ft-top: 4-col grid, padding mirrors page gutters (60px) ────── */
+.ft-top {
+padding: 60px 60px 40px;
+display: grid;
+grid-template-columns: 2fr 1fr 1fr 1fr;
+gap: 48px;
+border-bottom: 1px solid rgba(255,255,255,0.07);
+/* No max-width — fills full footer width like all other page sections */
+}
+
+/* ── Brand column ───────────────────────────────────────────────── */
+.ft-brand-col {
+display: flex;
+flex-direction: column;
+}
+.ft-brand {
+font-family: 'Cormorant Garamond', serif;
+font-size: 28px;
+color: #fff;
+font-weight: 300;
+margin-bottom: 10px;
+}
+.ft-brand span { color: var(--gold); font-style: italic; }
+.ft-tagline {
+font-size: 12px;
+color: rgba(255,255,255,0.28);
+font-weight: 300;
+line-height: 1.7;
+}
+
+/* ── Nav columns ────────────────────────────────────────────────── */
+.ft-col { display: flex; flex-direction: column; }
+.ft-col-title {
+font-size: 9px;
+letter-spacing: 3px;
+text-transform: uppercase;
+color: var(--gold);
+font-weight: 600;
+margin-bottom: 16px;
+}
+.ft-col ul {
+list-style: none;
+padding: 0; margin: 0;
+display: flex;
+flex-direction: column;
+gap: 9px;
+}
+.ft-col li { margin: 0; }
+.ft-col ul a {
+font-size: 12px;
+color: rgba(255,255,255,0.32);
+font-weight: 300;
+text-decoration: none;
+transition: color 0.3s;
+/* Truncate long store names gracefully */
+display: block;
+white-space: nowrap;
+overflow: hidden;
+text-overflow: ellipsis;
+max-width: 160px;
+}
+.ft-col ul a:hover { color: rgba(255,255,255,0.72); }
+
+/* ── Bottom bar: same 60px gutter as ft-top ─────────────────────── */
+.ft-bottom {
+padding: 18px 60px;
+display: flex;
+justify-content: space-between;
+align-items: center;
+flex-wrap: wrap;
+gap: 8px;
+}
+.ft-copy { font-size: 11px; color: rgba(255,255,255,0.16); }
+.ft-url { font-size: 11px; color: rgba(255,255,255,0.18); letter-spacing: 1px; }
+
+/* ── Responsive ─────────────────────────────────────────────────── */
+@media (max-width: 960px) {
+.ft-top {
+grid-template-columns: 1fr 1fr;
+gap: 28px;
+padding: 36px 20px 24px;
+}
+.ft-bottom {
+padding: 14px 20px;
+flex-direction: column;
+text-align: center;
+}
+}
+@media (max-width: 600px) {
+.ft-top {
+grid-template-columns: 1fr;
+padding: 28px 16px 20px;
+}
+.ft-col ul a { max-width: 100%; }
+}
+</style>
+
+<div id="staffTrigger" style="position: fixed; bottom: 10px; right: 10px; width: 24px; height: 24px; opacity: 0.2; z-index: 9999; cursor: pointer;">
+⚙️
+</div>
+
+<script>
+(function() {
+let tapCount = 0;
+let lastTap = 0;
+const triggers = [
+document.getElementById('staffTrigger'),
+document.getElementById('staffTriggerBrand')
+].filter(Boolean); // Remove null elements
+
+function handleTriggerClick() {
+const now = new Date().getTime();
+
+// Reset if delay too long
+if (now - lastTap > 2000) {
+tapCount = 0;
+}
+
+tapCount++;
+lastTap = now;
+
+if (tapCount >= 5) {
+window.location.href = "/intranet"; // change dynamically if needed
+}
+}
+
+// Add click listeners to all trigger elements
+triggers.forEach(trigger => {
+trigger.addEventListener('click', handleTriggerClick);
+});
+})();
+</script></body>
 </html>
