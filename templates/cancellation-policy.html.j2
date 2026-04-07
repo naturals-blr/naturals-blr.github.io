@@ -1,0 +1,129 @@
+{% from "macros.j2" import full_footer, footer_css, wa_svg, theme_vars, theme_toggle, theme_init_script, button_css, btn_book, btn_wa, btn_call, btn_maps, store_indicator, store_picker_modal, sticky_mobile_bar, store_picker_js, hamburger_nav, tracking_head, tracking_body, stores_json, fb_svg, ig_svg, social_icons, social_icons_css, calendar_svg, call_svg, maps_svg, clock_svg, checklist_svg, mobile_svg, page_hero, hero_resolver, hero_css, google_analytics, favicon_tags %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
+{{ favicon_tags() }}
+
+<!-- Google Analytics -->
+{{ google_analytics() }}
+
+<link rel="canonical" href="{{ canonical_url | default('https://naturals-blr.github.io/cancellation-policy/') }}">
+<meta name="description" content="{{ meta_description | default('Cancellation Policy — Naturals Salon &amp; Spa Bangalore.') }}">
+<title>{{ seo_title | default('Cancellation Policy | Naturals Salon &amp; Spa Bangalore') }}</title>
+<meta property="og:type" content="website">
+<meta property="og:title" content="{{ seo_title | default('Cancellation Policy | Naturals Salon &amp; Spa Bangalore') }}">
+<meta property="og:description" content="{{ meta_description | default('') }}">
+<meta property="og:image" content="{{ website_base_url }}{{ og_image | default('/images/og/og-cancellation-policy.jpg') }}">
+<meta property="og:url" content="{{ canonical_url | default(website_base_url + '/cancellation-policy/') }}">
+<meta property="og:site_name" content="Naturals Salon &amp; Spa Bangalore">
+<meta name="whatsapp-msg" content="{{ whatsapp_msg | default('') }}">
+<script type="application/ld+json">
+{"@context":"https://schema.org","@type":"{{ schema_type | default('WebPage') }}","name":"{{ seo_title | default('') }}","url":"{{ canonical_url | default(website_base_url) }}"}
+</script>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+{{ tracking_head(gtm_id, pixel_id) }}
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=Jost:wght@300;400;500;600&display=swap" rel="stylesheet">
+{{ theme_init_script() }}
+<style>
+{{ theme_vars() }}
+{{ hero_css() }}
+*{margin:0;padding:0;box-sizing:border-box;}html{scroll-behavior:smooth;}
+body{font-family:'Jost',sans-serif;background:var(--cream);color:var(--text);}
+a{text-decoration:none;color:inherit;}
+
+/* CONTENT */
+.policy-wrap{max-width:800px;margin:0 auto;padding:64px 60px;}
+.policy-section{margin-bottom:48px;}
+.policy-section h2{font-family:'Cormorant Garamond',serif;font-size:28px;font-weight:300;margin-bottom:16px;color:var(--text);}
+.policy-section h2 em{font-style:italic;color:var(--green-mid);}
+.policy-section p{font-size:14px;color:var(--text-mid);line-height:1.9;font-weight:300;margin-bottom:12px;}
+.policy-highlight{background:#fff;border-left:3px solid var(--gold);padding:20px 24px;margin:20px 0;}
+.policy-highlight p{margin:0;font-size:14px;color:var(--text);font-weight:400;}
+.store-policy-grid{display:grid;grid-template-columns:1fr 1fr;gap:3px;margin-top:20px;}
+.spc{background:#fff;padding:20px 22px;border-top:2px solid transparent;transition:border-color 0.3s;}
+.spc:hover{border-top-color:var(--gold);}
+.spc-name{font-family:'Cormorant Garamond',serif;font-size:17px;font-weight:400;margin-bottom:4px;}
+.spc-area{font-size:10px;color:var(--gold);letter-spacing:2px;text-transform:uppercase;margin-bottom:8px;}
+.spc-text{font-size:12px;color:var(--text-mid);line-height:1.7;font-weight:300;}
+.last-updated{font-size:11px;color:var(--text-light);margin-top:40px;padding-top:20px;border-top:1px solid rgba(0,0,0,0.08);}
+</style>
+{{ footer_css() }}
+<style>
+@media(max-width:768px){
+  .page-hero-inner{padding:44px 20px 44px;}
+  .policy-wrap{padding:40px 20px;}
+  .store-policy-grid{grid-template-columns:1fr;}
+}
+</style>
+</head>
+<body>
+{{ tracking_body(gtm_id) }}
+
+{% set base_path = '' %}
+{% set active_page = 'home' %}
+{% include "header.j2" %}
+
+{{ page_hero('cancellation-policy', h1_heading | default('Cancellation <em>Policy</em>'), meta_description | default('We understand that plans change. Please review our cancellation policy to ensure the best experience for all our clients.'), 'Our Policies', 'https://images.unsplash.com/photo-1595476108010-b4d1f102b1b1?w=1800&q=85') }}
+
+<div class="policy-wrap">
+  <div class="policy-section">
+    <h2>Our <em>Commitment</em> to You</h2>
+    <p>At Naturals Salon &amp; Spa, we are dedicated to providing every client with a punctual, personalised, and premium experience. Our appointment slots are reserved exclusively for you, and last-minute cancellations affect both our team and other clients awaiting their turn.</p>
+    <p>To ensure fairness and the highest quality of service for all, we kindly request that all clients adhere to the following cancellation guidelines.</p>
+  </div>
+
+  <div class="policy-section">
+    <h2>Cancellation <em>Notice Period</em></h2>
+    <div class="policy-highlight">
+      <p>{{ clock_svg(18, 'var(--gold)') }} We request a minimum of <strong>24 hours' advance notice</strong> for all appointment cancellations. Cancellations made with less than 24 hours' notice may be subject to a cancellation charge.</p>
+    </div>
+    <p>This applies to all appointments including haircuts, colour services, facials, bridal packages, and any other bookings made at our stores.</p>
+  </div>
+
+  <div class="policy-section">
+    <h2>How to <em>Cancel</em></h2>
+    <p>You may cancel or reschedule your appointment through any of the following channels:</p>
+    <p>{{ calendar_svg(16, 'var(--green-mid)') }} Via our online booking portal (link in your confirmation message)<br>
+    {{ mobile_svg(16, 'var(--green-mid)') }} By calling your store directly<br>
+    {{ wa_svg(16, '#25d366') }} Via WhatsApp to your store's number<br>
+    {{ checklist_svg(16, 'var(--green-mid)') }} By replying to your appointment confirmation message</p>
+  </div>
+
+  <div class="policy-section">
+    <h2>Cancellation Policy by <em>Store</em></h2>
+    <p>The following policy applies at each of our Bangalore locations:</p>
+    <div class="store-policy-grid">
+    {% for s in stores %}
+      <div class="spc">
+        <div class="spc-name">{{ s.store_display_name }}</div>
+        <div class="spc-area">{{ s.store_display_name }}</div>
+        <div class="spc-text">Naturals Salon {{ s.store_display_name }} requests customers to cancel appointments at least 24 hours in advance to avoid cancellation charges.</div>
+      </div>
+    {% endfor %}
+    </div>
+  </div>
+
+  <div class="policy-section">
+    <h2>No-Show <em>Policy</em></h2>
+    <p>Clients who do not arrive for their scheduled appointment without prior notice (no-show) may be required to prepay for future bookings. We appreciate your understanding as this helps us serve all clients fairly.</p>
+  </div>
+
+  <div class="policy-section">
+    <h2>Exceptions &amp; <em>Special Circumstances</em></h2>
+    <p>We understand that genuine emergencies happen. If you are unable to provide 24 hours' notice due to a medical emergency or unforeseen circumstances, please contact your store directly and our team will do their best to accommodate you without any charge.</p>
+    <p>Bridal and special event packages may be subject to separate cancellation terms as outlined at the time of booking.</p>
+  </div>
+
+  <div class="last-updated">Last updated: February 2026 &nbsp;&middot;&nbsp; For queries, <a href="../contact/index.html" style="color:var(--green-mid);">contact us here</a>.</div>
+</div>
+
+{% include 'footer.j2' %}
+{{ stores_json(stores, '') }}
+{{ store_picker_modal(stores, '') }}
+{{ sticky_mobile_bar('other') }}
+{{ store_picker_js() }}
+{{ theme_toggle() }}
+{{ hero_resolver() }}
+</body>
+</html>

@@ -1,0 +1,313 @@
+{% from "macros.j2" import theme_vars, theme_init_script, button_css, footer_css, google_analytics, favicon_tags %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <!-- Google Analytics -->
+    {{ google_analytics() }}
+
+    <title>{{ seo_title | default('Job Openings at ' + store.store_display_name + ' | Naturals Salon Bangalore | Join Our Team') }}</title>
+    <meta name="description" content="{{ meta_description | default('Join our team at Naturals Salon & Spa, ' + store.store_display_name + ', Bangalore. Browse open positions and apply directly via phone — no portal needed.') }}">
+    <meta name="robots" content="index, follow">
+    <link rel="canonical" href="{{ canonical_url | default(website_base_url + '/careers/' + city_slug + '/' + store_slug + '/') }}">
+
+    <!-- Favicon and Touch Icons -->
+    {{ favicon_tags() }}
+    <link rel="manifest" href="{{ website_base_url }}/site.webmanifest">
+    <meta name="apple-mobile-web-app-title" content="Naturals Salon">
+    <meta name="application-name" content="Naturals Salon">
+    <meta name="msapplication-TileColor" content="#c9a84c">
+    <meta name="theme-color" content="#c9a84c">
+
+    <meta property="og:title" content="{{ seo_title | default('Salon Jobs in ' + store.store_display_name + ', Bangalore | Naturals Join Our Team') }}">
+    <meta property="og:description" content="{{ meta_description | default('Join our team at Naturals Salon ' + store.store_display_name + ', Bangalore. Apply directly via phone.') }}">
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="{{ canonical_url | default(website_base_url + '/careers/' + city_slug + '/' + store_slug + '/') }}">
+    <meta property="og:image" content="{{ website_base_url }}{{ og_image | default('/images/stores/' + store_slug + '/cover.jpg') }}">
+    <meta name="whatsapp-msg" content="{{ whatsapp_msg | default('') }}">
+
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "{{ schema_type | default('CollectionPage') }}",
+      "name": "{{ seo_title | default('Careers at Naturals ' + store.store_display_name) }}",
+      "description": "{{ meta_description | default('Join the elite styling team at Naturals Salon & Spa ' + store.store_display_name + '. Explore open positions for Stylists and All-Rounders near ' + (store.nearby_landmarks | default('Bangalore')) + '.') }}",
+      "url": "{{ website_base_url }}/careers/{{ city_slug }}/{{ store_slug }}/",
+      "mainEntity": {
+        "@type": "ItemList",
+        "numberOfItems": {{ jobs | length }},
+        "itemListElement": [
+          {% for job in jobs %}
+          {% set job_slug = job.job_slug | default(job.job_title | lower | replace(' ', '-') | replace('/', '-') | replace('_', '-')) %}
+          {
+            "@type": "ListItem",
+            "position": {{ loop.index }},
+            "name": "{{ job.job_title }}",
+            "url": "{{ website_base_url }}/careers/{{ city_slug }}/{{ store_slug }}/{{ job_slug }}/"
+          }{% if not loop.last %},{% endif %}
+          {% endfor %}
+        ]
+      },
+      "breadcrumb": {
+        "@type": "BreadcrumbList",
+        "itemListElement": [
+          {
+            "@type": "ListItem",
+            "position": 1,
+            "name": "Home",
+            "item": "{{ website_base_url }}/"
+          },
+          {
+            "@type": "ListItem",
+            "position": 2,
+            "name": "Careers",
+            "item": "{{ website_base_url }}/careers/{{ city_slug }}/"
+          },
+          {
+            "@type": "ListItem",
+            "position": 3,
+            "name": "{{ store.store_display_name }}",
+            "item": "{{ website_base_url }}/careers/{{ city_slug }}/{{ store_slug }}/"
+          }
+        ]
+      }
+    }
+    </script>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=Jost:wght@300;400;500;600&display=swap" rel="stylesheet">
+    {{ theme_init_script() }}
+    {{ button_css() }}
+    {{ footer_css() }}
+    <style>
+        {{ theme_vars() }}
+
+        html, body { margin: 0; padding: 0; }
+        *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+        body { font-family: 'Jost', sans-serif; background: var(--cream); color: var(--text); overflow-x: hidden; }
+        a { text-decoration: none; color: inherit; }
+        img { display: block; max-width: 100%; }
+        .container { max-width: 1200px; margin: 0 auto; padding: 40px 60px 100px; }
+
+        /* ── HAMBURGER FIX ──────────────────────────────────────────
+           Only header.j2 include is used — never hamburger_nav() macro.
+           This ensures the button is never accidentally hidden on mobile.
+        ── */
+        #hamburger, #hamburger.hamburger-btn, button#hamburger { display: flex !important; visibility: visible !important; opacity: 1 !important; }
+
+        /* ── Breadcrumbs ── */
+        .breadcrumbs {
+            max-width: 1200px; margin: 0 auto; padding: 16px 60px;
+            font-size: 11px; color: var(--text-light);
+            display: flex; flex-wrap: wrap; gap: 6px; align-items: center;
+        }
+        .breadcrumbs a { color: var(--text-mid); text-decoration: none; transition: color 0.2s; }
+        .breadcrumbs a:hover { color: var(--gold); }
+        .breadcrumbs .sep { opacity: 0.4; }
+
+        /* ── Hero — full bleed, no side margins ── */
+        .careers-hero {
+            position: relative;
+            width: 100%;
+            min-height: 320px;
+            display: flex;
+            align-items: flex-end;
+            overflow: hidden;
+        }
+        .careers-hero-bg {
+            position: absolute; inset: 0;
+            background: var(--dark);
+        }
+        .careers-hero-bg img { width: 100%; height: 100%; object-fit: cover; display: block; }
+        .careers-hero-ov {
+            position: absolute; inset: 0;
+            background: linear-gradient(135deg, var(--hero-tint) 0%, var(--hero-tint2) 60%, rgba(0,0,0,0.12) 100%);
+        }
+        .careers-hero-inner {
+            position: relative; z-index: 2;
+            padding: 40px 60px;
+            max-width: 1200px; width: 100%; margin: 0 auto;
+            color: #fff;
+        }
+        .back-link {
+            display: inline-flex; align-items: center; gap: 6px;
+            color: rgba(255,255,255,0.7); text-decoration: none;
+            font-size: 11px; letter-spacing: 1.5px; text-transform: uppercase;
+            margin-bottom: 16px; transition: color 0.2s;
+        }
+        .back-link:hover { color: var(--gold); }
+        .careers-hero-inner h1 {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: clamp(28px,4vw,48px); font-weight: 300;
+            color: #fff; line-height: 1.1; margin: 8px 0 10px;
+        }
+        .careers-hero-inner h1 em { font-style: italic; color: var(--gold); }
+        .hero-sub { font-size: 13px; color: rgba(255,255,255,0.65); }
+
+        /* ── Location bar ── */
+        .location-bar {
+            display: flex; align-items: center; gap: 16px; flex-wrap: wrap;
+            padding: 18px 24px; background: #fff; border-radius: 12px;
+            border: 1px solid rgba(0,0,0,0.06); box-shadow: 0 2px 12px rgba(0,0,0,0.04);
+            margin-bottom: 40px;
+        }
+        .location-bar .loc-item { display: flex; align-items: center; gap: 8px; font-size: 13px; color: var(--text-mid); }
+        .location-bar .loc-item strong { color: var(--text); }
+        .location-bar .loc-sep { width: 1px; height: 20px; background: rgba(0,0,0,0.1); }
+        .location-bar a { color: var(--gold); text-decoration: none; font-weight: 600; font-size: 12px; transition: color 0.2s; }
+        .location-bar a:hover { color: var(--green); }
+
+        /* ── Labels & headings ── */
+        .section-lbl { font-size: 10px; letter-spacing: 3px; text-transform: uppercase; color: var(--gold); font-weight: 600; margin-bottom: 12px; display: flex; align-items: center; gap: 12px; }
+        .section-lbl::before { content: ''; width: 18px; height: 1px; background: var(--gold); }
+        .section-heading { font-family: 'Cormorant Garamond', serif; font-size: clamp(26px,3vw,34px); font-weight: 300; color: var(--text); margin-bottom: 28px; }
+
+        /* ── Job cards ── */
+        .job-card { background: #fff; border-radius: 14px; padding: 28px 32px; margin-bottom: 20px; border: 1px solid rgba(0,0,0,0.06); box-shadow: 0 4px 16px rgba(0,0,0,0.04); transition: transform 0.3s, box-shadow 0.3s, border-color 0.3s; }
+        .job-card:hover { transform: translateY(-4px); box-shadow: 0 12px 36px rgba(0,0,0,0.08); border-color: var(--card-hover-border); }
+        .job-title { font-family: 'Cormorant Garamond', serif; font-size: 24px; font-weight: 400; color: var(--text); margin-bottom: 10px; }
+        .job-meta { display: flex; gap: 10px; flex-wrap: wrap; margin-bottom: 14px; }
+        .meta-item { background: var(--cream); color: var(--text-mid); padding: 4px 12px; border-radius: 20px; font-size: 11px; letter-spacing: 0.5px; border: 1px solid rgba(0,0,0,0.07); }
+        .job-details { font-size: 14px; color: var(--text-mid); line-height: 1.7; margin-bottom: 20px; }
+        .job-details p { margin-bottom: 6px; }
+
+        /* ── No jobs ── */
+        .no-jobs-wrapper { text-align: center; padding: 80px 32px; background: #fff; border-radius: 16px; border: 1px solid rgba(0,0,0,0.06); box-shadow: 0 4px 24px rgba(0,0,0,0.04); }
+        .no-jobs-icon { font-size: 3.5rem; margin-bottom: 20px; display: block; }
+        .no-jobs-wrapper h2 { font-family: 'Cormorant Garamond', serif; font-size: 32px; font-weight: 300; color: var(--text); margin-bottom: 16px; }
+        .no-jobs-wrapper p { font-size: 14px; color: var(--text-mid); line-height: 1.8; max-width: 480px; margin: 0 auto 32px; }
+        .no-jobs-actions { display: flex; gap: 16px; justify-content: center; flex-wrap: wrap; }
+        .no-jobs-note { margin-top: 28px; font-size: 12px; color: var(--text-light); }
+
+        /* ── Sticky mobile CTA ── */
+        .sticky-cta { display: none; position: fixed; bottom: 0; left: 0; right: 0; z-index: 9000; padding: 12px 16px; background: var(--dark); border-top: 1px solid rgba(255,255,255,0.08); }
+        [data-theme="naturals"] .sticky-cta { background: #1A0533; }
+        .sticky-cta a { display: flex; align-items: center; justify-content: center; gap: 10px; width: 100%; padding: 14px; border-radius: 10px; background: #25D366; color: #fff; font-family: 'Jost', sans-serif; font-size: 13px; font-weight: 600; letter-spacing: 1px; text-transform: uppercase; text-decoration: none; }
+        @media (max-width: 992px) { .sticky-cta { display: block; } }
+
+        @media (max-width: 960px) {
+            .breadcrumbs { padding: 14px 20px; }
+            .careers-hero-inner { padding: 28px 20px; }
+            .container { padding: 28px 20px 100px; }
+            .job-card { padding: 22px 20px; }
+        }
+        @media (max-width: 640px) {
+            .careers-hero { min-height: 260px; }
+            .no-jobs-actions { flex-direction: column; align-items: center; }
+        }
+    </style>
+</head>
+<body>
+    {% include 'header.j2' %}
+
+    <section class="careers-hero">
+        <div class="careers-hero-bg">
+            {#
+              Image resolution order:
+              1. /images/careers/store-{store.slug}.jpg  (store-specific)
+              2. /images/careers/default.jpg              (site default)
+              3. CSS var(--dark) background               (always visible)
+            #}
+            <img id="hero-img"
+                 src="{{ website_base_url }}/images/careers/store-{{ store.slug }}.jpg"
+                 alt="Naturals Salon {{ store.store_display_name }}, {{ store.store_display_name }}, Bangalore"
+                 loading="eager">
+        </div>
+        <div class="careers-hero-ov"></div>
+        <div class="careers-hero-inner">
+            <a href="{{ website_base_url }}/careers/{{ city_slug }}/" class="back-link">← All Bangalore Jobs</a>
+            <div class="lbl">Join Our Team · {{ store.store_display_name }}</div>
+            <h1>{{ h1_heading | default('Jobs at Naturals <em>' + store.store_display_name + '</em>') }}</h1>
+            <p class="hero-sub">{{ store.store_display_name }}, Bangalore</p>
+        </div>
+    </section>
+
+    <nav class="breadcrumbs" aria-label="Breadcrumb">
+        <a href="{{ website_base_url }}/">Home</a>
+        <span class="sep">›</span>
+        <a href="{{ website_base_url }}/careers/{{ city_slug }}/">Join Our Team</a>
+        <span class="sep">›</span>
+        <a href="{{ website_base_url }}/careers/{{ city_slug }}/">Bangalore</a>
+        <span class="sep">›</span>
+        <span>{{ store.store_display_name }}</span>
+    </nav>
+
+    <main class="container">
+
+        <div class="location-bar">
+            <div class="loc-item">📍 <span><strong>{{ store.store_display_name }}</strong>, Bangalore</span></div>
+            {% if store.mon_fri_hours %}<div class="loc-sep"></div><div class="loc-item">🕐 <span>{{ store.mon_fri_hours }}</span></div>{% endif %}
+            {% if store.contact_phone_1 %}<div class="loc-sep"></div><div class="loc-item">📞 <a href="tel:{{ store.contact_phone_1 }}">{{ store.contact_phone_1 }}</a></div>{% endif %}
+            {% if store.google_maps_url %}<div class="loc-sep"></div><a href="{{ store.google_maps_url }}" target="_blank" rel="noopener">📌 View on Maps</a>{% endif %}
+        </div>
+
+        <section style="margin-bottom:48px;">
+            <div class="section-lbl">About This Location</div>
+            <h2 class="section-heading">Naturals Salon &amp; Spa, {{ store.store_display_name }}</h2>
+            <p style="font-size:14px;color:var(--text-mid);line-height:1.85;max-width:760px;">
+                Our {{ store.store_display_name }} salon is located in {{ store.store_display_name }}, Bangalore{% if store.nearby_areas %}, conveniently accessible from {{ store.nearby_areas[:3] | join(', ') }}{% endif %}. As part of India's most trusted salon network with 25+ years of experience, we offer a rewarding work environment with clear career growth, competitive compensation, and ongoing training.
+            </p>
+        </section>
+
+        <section>
+            <div class="section-lbl">Open Positions</div>
+            <h2 class="section-heading">Current Openings at {{ store.store_display_name }}</h2>
+
+            {% if jobs %}
+                {% for job in jobs %}
+                <div class="job-card">
+                    <h3 class="job-title">{{ job.job_title }}</h3>
+                    <div class="job-meta">
+                        <span class="meta-item">{{ job.employment_type }}</span>
+                        <span class="meta-item">{{ job.vacancies }} vacancy</span>
+                        {% if job.gender_preference and job.gender_preference != 'Any' %}<span class="meta-item">{{ job.gender_preference }}</span>{% endif %}
+                        {% if job.salary_min and job.salary_max %}<span class="meta-item">₹{{ job.salary_min }}–{{ job.salary_max }}/mo</span>{% endif %}
+                    </div>
+                    <div class="job-details">
+                        {% if job.experience_min_years and job.experience_max_years %}<p><strong>Experience:</strong> {{ job.experience_min_years }}–{{ job.experience_max_years }} years</p>{% endif %}
+                        {% if job.job_summary %}<p>{{ job.job_summary | truncate(200) }}</p>{% endif %}
+                    </div>
+                    <a href="{{ get_job_url(job, website_base_url, city_slug, store.slug) }}" class="btn-primary">View Details &amp; Apply</a>
+                </div>
+                {% endfor %}
+            {% else %}
+                <div class="no-jobs-wrapper">
+                    <span class="no-jobs-icon">🌿</span>
+                    <h2>No Open Positions Right Now</h2>
+                    <p>We currently don't have active vacancies at {{ store.store_display_name }}, but our team is always growing. Check back soon or explore openings at our other Bangalore locations.</p>
+                    <div class="no-jobs-actions">
+                        <a href="{{ website_base_url }}/careers/{{ city_slug }}/" class="btn-primary">View All Bangalore Jobs</a>
+                        {% if store.contact_phone_1 %}<a href="tel:{{ store.contact_phone_1 }}" class="btn-secondary">📞 Call This Store</a>{% endif %}
+                    </div>
+                    <p class="no-jobs-note">Walk-in enquiries are always welcome at the salon.</p>
+                </div>
+            {% endif %}
+        </section>
+
+    </main>
+
+    {# footer.j2 uses website_base_url for all links — no relative path issues #}
+    {% include 'footer.j2' %}
+
+    {% if store.contact_phone_1 %}
+    <div class="sticky-cta" aria-label="Call to apply">
+        <a href="tel:{{ store.contact_phone_1 }}">📞 Call to Apply — {{ store.contact_phone_1 }}</a>
+    </div>
+    {% endif %}
+
+    <script>
+    (function(){
+        var img = document.getElementById('hero-img');
+        if (!img) return;
+        var fallback = '{{ website_base_url }}/images/careers/default.jpg';
+        var tried = false;
+        img.onerror = function(){
+            if (!tried) { tried = true; img.src = fallback; }
+            else { img.style.display = 'none'; }
+        };
+    })();
+    </script>
+</body>
+</html>

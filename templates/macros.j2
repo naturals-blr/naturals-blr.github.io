@@ -1,0 +1,1822 @@
+{# build/templates/macros.j2 — complete macros (merged + extended, no feature removals) #}
+
+{% macro theme_vars() %}
+:root{
+  --dark:#111714;--green:#1B4332;--green-mid:#2D6A4F;--green-soft:#52B788;
+  --cream:#F8F4EE;--gold:#C9A84C;--gold-pale:#EDD9A3;
+  --text:#1A1A1A;--text-mid:#555;--text-light:#999;
+  --hero-tint:rgba(17,23,20,0.88);--hero-tint2:rgba(17,23,20,0.45);
+  --filter-bg:#111714;--card-hover-border:#C9A84C;
+  --nav-bg:rgba(17,23,20,0.97);
+}
+[data-theme="naturals"]{
+  --dark:#1A0533;--green:#2596BE;--green-mid:#7B2FBE;--green-soft:#B678F0;
+  --cream:#FAF7FF;--gold:#C9A84C;--gold-pale:#EDD9A3;
+  --text:#1A1A1A;--text-mid:#4A4458;--text-light:#8B7FA8;
+  --hero-tint:rgba(26,5,51,0.87);--hero-tint2:rgba(58,10,100,0.45);
+  --filter-bg:#1A0533;--card-hover-border:#7B2FBE;
+  --nav-bg:rgba(26,5,51,0.97);
+}
+
+/* GLOBAL MINIMUM TYPOGRAPHY & SPACING RULES */
+html{scroll-behavior:smooth;}
+body{font-size:16px;line-height:1.6;}
+h1, .h1{font-family:'Cormorant Garamond',serif;font-size:clamp(48px,5vw,60px);font-weight:300;line-height:1.05;}
+h2, .h2{font-family:'Cormorant Garamond',serif;font-size:clamp(32px,4vw,40px);font-weight:300;line-height:1.15;}
+h3, .h3{font-family:'Cormorant Garamond',serif;font-size:clamp(20px,2.5vw,24px);font-weight:400;line-height:1.25;}
+.lbl{font-size:10px;letter-spacing:3px;text-transform:uppercase;color:var(--gold);font-weight:600;margin-bottom:12px;display:flex;align-items:center;gap:12px;}
+.lbl::before{content:'';width:18px;height:1px;background:var(--gold);}
+
+/* COMPONENT CLASSES (8px System) */
+.section{padding:80px 60px;}
+@media(max-width:768px){.section{padding:48px 20px;}}
+.container{max-width:1200px;margin:0 auto;width:100%;}
+.card{background:#fff;border-radius:14px;border:1px solid rgba(0,0,0,0.06);overflow:hidden;transition:transform 0.3s,box-shadow 0.3s;}
+.card:hover{transform:translateY(-4px);box-shadow:0 12px 36px rgba(0,0,0,0.08);border-color:var(--card-hover-border);}
+
+/* ACCESSIBILITY */
+:focus-visible{outline:2px solid var(--gold);outline-offset:4px;border-radius:4px;}
+
+{% endmacro %}
+
+{% macro tracking_head(gtm_id='', pixel_id='') %}
+{% if gtm_id %}
+<script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src='https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);})(window,document,'script','dataLayer','{{ gtm_id }}');</script>
+{% endif %}
+{% if pixel_id %}
+<script>!function(f,b,e,v,n,t,s){if(f.fbq)return;n=f.fbq=function(){n.callMethod?n.callMethod.apply(n,arguments):n.queue.push(arguments)};if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';n.queue=[];t=b.createElement(e);t.async=!0;t.src=v;s=b.getElementsByTagName(e)[0];s.parentNode.insertBefore(t,s)}(window,document,'script','https://connect.facebook.net/en_US/fbevents.js');fbq('init','{{ pixel_id }}');fbq('track','PageView');</script>
+<noscript><img height="1" width="1" style="display:none" src="https://www.facebook.com/tr?id={{ pixel_id }}&ev=PageView&noscript=1"/></noscript>
+{% endif %}
+{% endmacro %}
+
+{% macro google_analytics(ga_id='G-6H5YGVGG1Q') %}
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id={{ ga_id }}"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', '{{ ga_id }}');
+</script>
+{% endmacro %}
+
+{% macro tracking_body(gtm_id, pixel_id) %}
+{% if gtm_id %}
+<noscript><iframe src="https://www.googletagmanager.com/ns.html?id={{ gtm_id }}" height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
+{% endif %}
+{% if pixel_id %}
+<!-- Meta Pixel -->
+<script>
+!function(f,b,e,v,n,t,s)
+{if(f.fbq)return;n=f.fbq=function(){n.callMethod?
+n.callMethod.apply(n,arguments):n.queue.push(arguments)};
+if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';n.queue=[];t=b.createElement(e);t.async=!0;
+t.src=v;s=b.getElementsByTagName(e)[0];s.parentNode.insertBefore(t,s)}(window,document,'script',
+'https://connect.facebook.net/en_US/fbevents.js');
+fbq('init', '{{ pixel_id }}');
+fbq('track', 'PageView');
+</script>
+<noscript><img height="1" width="1" style="display:none" src="https://www.facebook.com/tr?id={{ pixel_id }}&ev=PageView&noscript=1"/></noscript>
+{% endif %}
+{% endmacro %}
+
+{% macro theme_init_script() %}
+<script>(function(){var t=localStorage.getItem('naturals-theme')||'luxury';document.documentElement.setAttribute('data-theme',t);})();</script>
+{% endmacro %}
+
+{% macro theme_toggle() %}
+<!-- Old floating theme removed - now using mobile navigation theme swatches -->
+{% endmacro %}
+
+{% macro stores_json(stores, base_path='') %}
+<script>
+window.NATURALS_STORES = {{ stores | tojson }};
+window.NATURALS_BASE   = '{{ base_path }}';
+</script>
+{% endmacro %}
+
+{# ─────────────────────────────────────────────────────────────────────────────
+   Compatibility macros (to avoid breaking existing templates)
+   These were referenced in earlier templates you pasted (btn_* / social_icons / global_mobile_css)
+   ───────────────────────────────────────────────────────────────────────────── #}
+
+{% macro global_mobile_css() %}
+@media(max-width:992px){
+  body{padding-bottom:62px;} /* space for sticky bar */
+}
+{% endmacro %}
+
+{% macro btn_book(href, text='Book', extra_class='') %}
+<a class="btn-book {{ extra_class }}" href="{{ href }}" target="_blank" rel="noopener">{{ text }}</a>
+{% endmacro %}
+
+{% macro btn_wa(wa_number, text='WhatsApp', extra_class='') %}
+<a class="btn-wa {{ extra_class }}" href="https://wa.me/+{{ wa_number | replace('+', '') | replace(' ', '') }}" target="_blank" rel="noopener">{{ wa_svg(18) }} {{ text }}</a>
+{% endmacro %}
+
+{% macro btn_call(tel_number, text='Call', extra_class='') %}
+<a class="btn-call {{ extra_class }}" href="tel:+{{ tel_number | replace('+', '') | replace(' ', '') }}">{{ call_svg(18) }} {{ text }}</a>
+{% endmacro %}
+
+{% macro btn_maps(maps_url, text='Directions', extra_class='') %}
+<a class="btn-maps {{ extra_class }}" href="{{ maps_url }}" target="_blank" rel="noopener">{{ maps_svg(18) }} {{ text }}</a>
+{% endmacro %}
+
+{% macro format_phone(phone_number) %}
+  {% if phone_number and phone_number != '' %}
+    {% set phone = phone_number|string %}
+    {% if phone|length == 12 and phone.startswith('91') %}
+      +91 {{ phone[2:6] }} {{ phone[6:10] }}
+    {% elif phone|length == 10 %}
+      +91 {{ phone[:5] }} {{ phone[5:] }}
+    {% elif phone|length == 11 and phone.startswith('0') %}
+      +91 {{ phone[1:6] }} {{ phone[6:] }}
+    {% else %}
+      {{ phone }}
+    {% endif %}
+  {% else %}
+    No phone
+  {% endif %}
+{% endmacro %}
+
+{% macro social_icons(store, size=18) %}
+<div class="soc-row">
+  {% if store.get('instagram_url') and store.instagram_url not in ('', 'https://instagram.com/', 'https://instagram.com') %}
+    <a class="soc-btn soc-ig" href="{{ store.instagram_url }}" target="_blank" rel="noopener" aria-label="Instagram"><span aria-hidden="true">{{ ig_svg(size) }}</span></a>
+  {% endif %}
+  {% if store.get('facebook_url') and store.facebook_url not in ('', 'https://facebook.com/', 'https://facebook.com') %}
+    <a class="soc-btn soc-fb" href="{{ store.facebook_url }}" target="_blank" rel="noopener" aria-label="Facebook"><span aria-hidden="true">{{ fb_svg(size) }}</span></a>
+  {% endif %}
+</div>
+<style>
+.soc-row{display:flex;gap:8px;align-items:center;}
+.soc-btn{width:40px;height:40px;border-radius:10px;display:inline-flex;align-items:center;justify-content:center;border:1px solid rgba(0,0,0,0.10);background:#fff;transition:transform 0.2s, box-shadow 0.2s;}
+.soc-btn:hover{transform:translateY(-1px);box-shadow:0 10px 22px rgba(0,0,0,0.10);}
+.soc-ig:hover{border-color:rgba(225,48,108,0.35);}
+.soc-fb:hover{border-color:rgba(24,119,242,0.35);}
+</style>
+{% endmacro %}
+
+{# ── HAMBURGER NAV (refactored for 5-store rebranding) ── #}
+{% macro hamburger_nav(base_path, active_page, all_stores=None) %}
+<button id="hamburger" aria-label="Menu" aria-expanded="false" aria-controls="drawer">
+  <span class="hb-line"></span>
+  <span class="hb-line"></span>
+  <span class="hb-line"></span>
+</button>
+
+<div id="drawer-overlay" aria-hidden="true"></div>
+
+<nav id="drawer" aria-label="Site menu">
+<div class="drawer-head">
+  <div class="drawer-brand">Naturals <span>Salon &amp; Spa</span></div>
+  <button class="drawer-x" aria-label="Close menu">×</button>
+</div>
+
+{# ── THEME TOGGLE (COLOR SWATCHES) ── #}
+<div class="drawer-theme-section">
+  <div class="drawer-theme-label">CHOOSE THEME</div>
+  <div class="drawer-theme-swatches">
+    <button class="theme-swatch theme-luxury" onclick="setTheme('luxury')" aria-label="Switch to Luxury theme" data-theme="luxury">
+      <span class="swatch-circle"></span>
+    </button>
+    <button class="theme-swatch theme-naturals" onclick="setTheme('naturals')" aria-label="Switch to Naturals theme" data-theme="naturals">
+      <span class="swatch-circle"></span>
+    </button>
+  </div>
+</div>
+
+  {# Prefer absolute navigation so nested pages don't break links. #}
+  {% set nav_base = website_base_url if website_base_url is defined and website_base_url else base_path %}
+
+  {# Derive careers city slug from stores data (single-city setup). #}
+  {% set _stores = all_stores if all_stores is not none else (stores if stores is defined else []) %}
+  {% set _city = '' %}
+  {% if careers_city_name is defined and careers_city_name %}
+    {% set _city = careers_city_name %}
+  {% elif _stores and _stores[0] is defined %}
+    {% if _stores[0].address_city is defined and _stores[0].address_city %}
+      {% set _city = _stores[0].address_city %}
+    {% elif _stores[0].city is defined and _stores[0].city %}
+      {% set _city = _stores[0].city %}
+    {% elif _stores[0].address is defined and _stores[0].address.city is defined and _stores[0].address.city %}
+      {% set _city = _stores[0].address.city %}
+    {% endif %}
+  {% endif %}
+
+  {# ── PRIMARY NAVIGATION ── #}
+  <div class="drawer-section">
+    <a class="drawer-link {% if active_page=='home' %}is-active{% endif %}" href="{{ nav_base }}/" aria-label="Naturals Salon & Spa — Home">HOME</a>
+    <a class="drawer-link {% if active_page=='services' %}is-active{% endif %}" href="{{ nav_base }}/services/" aria-label="View all salon services">SERVICES</a>
+    <a class="drawer-link {% if active_page=='offers' %}is-active{% endif %}" href="{{ nav_base }}/offers/" aria-label="View current salon offers and promotions">OFFERS</a>
+    
+    {# ── OUR STORES (ALWAYS VISIBLE) ── #}
+    <div class="drawer-stores-section">
+      <div class="drawer-stores-header">
+        <span class="drawer-stores-title">OUR STORES</span>
+      </div>
+      
+      <div class="drawer-stores-list">
+        {% if _stores %}
+          {% for s in _stores %}
+            {% set city = s.address_city|lower|replace(' ', '-') if s.address_city else 'bangalore' %}
+            {% set slug = s.slug|lower if s.slug else (s.store_display_name|lower|replace(' ', '-')) %}
+            <a class="drawer-store-link" href="{{ website_base_url }}/stores/{{ city }}/{{ slug }}/" aria-label="Visit Naturals Salon {{ s.store_display_name }}">
+              <span class="drawer-store-name">{{ s.store_display_name }}</span>
+            </a>
+          {% endfor %}
+        {% endif %}
+      </div>
+    </div>
+    
+    <a class="drawer-link {% if active_page=='careers' %}is-active{% endif %}" href="{{ nav_base }}/careers/{{ city_slug }}/" aria-label="Join our team and view career opportunities">Join our Team</a>
+    <a class="drawer-link {% if active_page=='about' %}is-active{% endif %}" href="{{ nav_base }}/about/" aria-label="Learn about Naturals Salon & Spa">ABOUT</a>
+  </div>
+
+  {# ── BOOK APPOINTMENT CTA ── #}
+  <div class="drawer-cta-section">
+    <button class="drawer-cta-btn" onclick="window._naturalsPendingAction='book'; openStorePicker();" aria-label="Select store and book appointment">
+      BOOK APPOINTMENT
+    </button>
+  </div>
+</nav>
+
+<style>
+#hamburger{
+  width:44px;height:40px;border-radius:10px;
+  background:rgba(255,255,255,0.10);
+  border:1px solid rgba(255,255,255,0.14);
+  padding:9px 10px;cursor:pointer;
+  display:flex;flex-direction:column;justify-content:center;gap:6px;
+  transition:background 0.2s,border-color 0.2s,transform 0.2s;
+}
+#hamburger:hover{background:rgba(255,255,255,0.18);border-color:rgba(255,255,255,0.22);transform:translateY(-1px);}
+
+.hb-line{display:block;width:22px;height:2px;background:#fff;border-radius:2px;transition:0.25s;}
+
+#drawer-overlay{
+  position:fixed;inset:0;
+  background:rgba(0,0,0,0.58);
+  backdrop-filter:blur(4px);
+  opacity:0;pointer-events:none;
+  transition:opacity 0.25s ease;
+  z-index:10000;
+}
+
+#drawer{
+  position:fixed;top:0;right:-360px;
+  width:min(340px, 92vw);
+  height:100%;
+  background:var(--dark);
+  padding:16px;
+  display:flex;flex-direction:column;gap:12px;
+  transition:right 0.35s ease;
+  z-index:10001;
+  overflow-y:auto;
+  border-left:1px solid rgba(255,255,255,0.10);
+  box-shadow:-24px 0 80px rgba(0,0,0,0.35);
+}
+
+.drawer-head{display:flex;align-items:center;justify-content:space-between;padding:10px 8px 6px;}
+.drawer-brand{font-family:'Cormorant Garamond',serif;color:#fff;font-size:20px;font-weight:300;}
+.drawer-brand span{color:var(--gold);font-style:italic;}
+.drawer-x{
+  width:40px;height:40px;border-radius:12px;
+  background:rgba(255,255,255,0.08);
+  border:1px solid rgba(255,255,255,0.14);
+  color:#fff;font-size:22px;cursor:pointer;
+}
+.drawer-x:hover{background:rgba(255,255,255,0.14);}
+
+.drawer-section{display:flex;flex-direction:column;gap:8px;}
+.drawer-divider{height:1px;background:rgba(255,255,255,0.08);margin:2px 0;}
+
+.drawer-title{
+  font-size:10px;letter-spacing:2.5px;text-transform:uppercase;
+  color:rgba(255,255,255,0.38);margin:4px 0 2px;
+}
+
+.drawer-link,.store-link{
+  display:block;
+  color:rgba(255,255,255,0.92);
+  text-decoration:none;
+  font-size:12px;letter-spacing:1.4px;text-transform:uppercase;
+  padding:11px 12px;border-radius:12px;
+  background:rgba(255,255,255,0.04);
+  border:1px solid rgba(255,255,255,0.06);
+  white-space:nowrap;overflow:hidden;text-overflow:ellipsis;line-height:1.1;
+  transition:background 0.2s,border-color 0.2s,transform 0.2s;
+  font-weight:600; /* Primary menu items - font-weight: 600 */
+  margin-bottom:6px; /* Consistent vertical spacing */
+}
+.drawer-link:hover,.store-link:hover{
+  background:rgba(255,255,255,0.07);
+  border-color:rgba(255,255,255,0.12);
+  transform:translateY(-1px);
+}
+.drawer-link.is-active{
+  border-color:rgba(201,168,76,0.60);
+  box-shadow:0 0 0 1px rgba(201,168,76,0.18) inset;
+}
+
+/* Careers high priority styling - JOIN OUR TEAM */
+.drawer-link[href*="careers"]{
+  color:var(--gold, #D4AF37); /* Gold text color from theme */
+  border:1px solid rgba(255,255,255,0.06); /* Same as other primary links */
+}
+.drawer-link[href*="careers"].is-active{
+  border-color:var(--gold, rgba(201,168,76,0.60)); /* Active state from theme */
+  box-shadow:0 0 0 1px rgba(212,175,55,0.18) inset;
+}
+
+.drawer-open #drawer{right:0;}
+.drawer-open #drawer-overlay{opacity:1;pointer-events:auto;}
+.drawer-open #hamburger .hb-line:nth-child(1){transform:rotate(45deg) translate(5px,5px);}
+.drawer-open #hamburger .hb-line:nth-child(2){opacity:0;}
+.drawer-open #hamburger .hb-line:nth-child(3){transform:rotate(-45deg) translate(6px,-6px);}
+
+/* ── THEME TOGGLE SECTION ── */
+.drawer-theme-section{
+  padding:16px 16px 12px;
+  border-bottom:1px solid rgba(255,255,255,0.08);
+  text-align:center;
+}
+
+.drawer-theme-label{
+  font-size:9px;
+  color:rgba(255,255,255,0.4);
+  letter-spacing:1px;
+  text-transform:uppercase;
+  margin-bottom:10px;
+  font-weight:400;
+}
+
+.drawer-theme-swatches{
+  display:flex;
+  justify-content:center;
+  gap:12px;
+  align-items:center;
+}
+
+.theme-swatch{
+  background:transparent;
+  border:none;
+  padding:0;
+  cursor:pointer;
+  border-radius:50%;
+  transition:all 0.2s ease;
+  position:relative;
+}
+
+.swatch-circle{
+  display:block;
+  width:28px;
+  height:28px;
+  border-radius:50%;
+  transition:all 0.2s ease;
+  border:2px solid transparent;
+}
+
+.theme-luxury .swatch-circle{
+  background:#D4AF37; /* Gold for Luxury theme */
+}
+
+.theme-naturals .swatch-circle{
+  background:#4B2C60; /* Brand purple for Naturals theme */
+}
+
+/* Active state - white border */
+.theme-swatch.active .swatch-circle{
+  border:2px solid #FFFFFF; /* White border for active theme */
+  box-shadow:0 0 0 1px rgba(255,255,255,0.3), 0 0 8px rgba(255,255,255,0.15);
+}
+
+.theme-swatch:hover .swatch-circle{
+  transform:scale(1.1);
+}
+
+/* ── STORES SECTION STYLES ── */
+.drawer-stores-section{
+  margin-top:12px;
+  border-radius:12px;
+  background:rgba(255,255,255,0.03);
+  border:1px solid rgba(255,255,255,0.06);
+  overflow:hidden;
+}
+
+.drawer-stores-header{
+  display:flex;
+  align-items:center;
+  padding:14px 16px 8px;
+  border-bottom:1px solid rgba(255,255,255,0.08);
+}
+
+.drawer-stores-title{
+  color:rgba(255,255,255,0.95);
+  font-size:12px;
+  font-weight:600;
+  letter-spacing:1.2px;
+  text-transform:uppercase;
+}
+
+.drawer-stores-list{
+  padding:8px 0;
+}
+
+.drawer-store-link{
+  display:block;
+  padding:12px 16px 12px 36px; /* 20px indentation (16px + 20px) */
+  color:rgba(255,255,255,0.88);
+  text-decoration:none;
+  font-size:11px;
+  letter-spacing:0.08rem; /* Elite tracking */
+  text-transform:uppercase; /* ALL CAPS */
+  font-weight:400; /* Lighter than primary menu */
+  border-radius:8px;
+  transition:all 0.2s ease;
+  border-left:3px solid transparent;
+  margin:2px 8px;
+}
+
+.drawer-store-link:hover{
+  background:rgba(255,255,255,0.08);
+  color:rgba(255,255,255,0.98);
+  border-left-color:rgba(201,168,76,0.5);
+  transform:translateX(3px);
+}
+
+/* Active state for store pages - gold text color */
+.drawer-store-link.active .drawer-store-name{
+  color:var(--gold, #D4AF37); /* Gold color from theme */
+  font-weight:500;
+}
+
+.drawer-store-name{
+  white-space:nowrap;
+  overflow:hidden;
+  text-overflow:ellipsis;
+  font-weight:400;
+  transition:color 0.2s ease;
+}
+
+/* ── BOOK NOW CTA STYLES ── */
+.drawer-cta-section{
+  position:sticky;
+  bottom:0;
+  margin-top:16px;
+  padding:16px;
+  background:var(--dark);
+  border-top:1px solid rgba(255,255,255,0.08);
+  backdrop-filter:blur(8px);
+}
+
+.drawer-cta-btn{
+  display:block;
+  width:100%;
+  padding:14px 28px; /* Increased horizontal padding for longer text */
+  background:linear-gradient(135deg, var(--gold, #D4AF37) 0%, #C9A84C 50%, #B8943A 100%); /* Brand gold gradient from theme */
+  color:#000000;
+  text-decoration:none;
+  font-size:13px;
+  font-weight:600;
+  letter-spacing:1px;
+  text-transform:uppercase;
+  border-radius:12px;
+  text-align:center;
+  transition:all 0.2s ease;
+  box-shadow:0 4px 12px rgba(212,175,55,0.25);
+  border:1px solid rgba(212,175,55,0.3);
+}
+
+.drawer-cta-btn:hover{
+  background:linear-gradient(135deg, #B8943A 0%, #C9A84C 50%, #A67C26 100%); /* Darker gold gradient on hover */
+  transform:translateY(-1px);
+  box-shadow:0 6px 16px rgba(212,175,55,0.35);
+  border-color:rgba(212,175,55,0.4);
+}
+
+.drawer-cta-btn:active{
+  transform:translateY(0);
+  box-shadow:0 2px 8px rgba(212,175,55,0.25);
+}
+
+/* ── RESPONSIVE OPTIMIZATIONS ── */
+@media(max-width:480px){
+  .drawer-nested-content{
+    max-height:200px;
+  }
+  
+  .drawer-store-link{
+    padding:8px 12px;
+    font-size:10px;
+  }
+  
+  .drawer-cta-btn{
+    padding:12px 16px;
+    font-size:12px;
+  }
+}
+</style>
+
+<script>
+(function(){
+  var body=document.body;
+  var hamburger=document.getElementById('hamburger');
+  var overlay=document.getElementById('drawer-overlay');
+  var drawer=document.getElementById('drawer');
+
+  function openDrawer(){
+    body.classList.add('drawer-open');
+    hamburger && hamburger.setAttribute('aria-expanded','true');
+  }
+  function closeDrawer(){
+    body.classList.remove('drawer-open');
+    hamburger && hamburger.setAttribute('aria-expanded','false');
+  }
+  function toggle(){ body.classList.contains('drawer-open') ? closeDrawer() : openDrawer(); }
+
+  hamburger && hamburger.addEventListener('click', function(e){ e.stopPropagation(); toggle(); });
+  overlay && overlay.addEventListener('click', closeDrawer);
+
+  // Initialize drawer state - close on page load
+  closeDrawer();
+
+  drawer && drawer.addEventListener('click', function(e){
+    var a=e.target.closest('a');
+    if(a) closeDrawer();
+  });
+
+  document.addEventListener('keydown', function(e){
+    if(e.key==='Escape') closeDrawer();
+  });
+})();
+</script>
+{% endmacro %}
+
+{% macro social_icons_css() %}
+<style>
+.soc-row{display:flex;gap:8px;align-items:center;}
+.soc-btn{width:40px;height:40px;border-radius:10px;display:inline-flex;align-items:center;justify-content:center;border:1px solid rgba(0,0,0,0.10);background:#fff;transition:transform 0.2s, box-shadow 0.2s;}
+.soc-btn:hover{transform:translateY(-1px);box-shadow:0 10px 22px rgba(0,0,0,0.10);}
+.soc-ig:hover{border-color:rgba(225,48,108,0.35);}
+.soc-fb:hover{border-color:rgba(24,119,242,0.35);}
+</style>
+{% endmacro %}
+
+{% macro store_indicator() %}
+<div id="store-indicator" style="display:none;">
+  <span id="si-label">Viewing: <strong id="si-name"></strong></span>
+  <button onclick="openStorePicker()" id="si-change">Change</button>
+</div>
+<style>
+#store-indicator{display:flex;align-items:center;gap:8px;font-size:10px;letter-spacing:1px;color:rgba(255,255,255,0.5);white-space:nowrap;}
+#si-label strong{color:var(--gold);}
+#si-change{background:none;border:1px solid rgba(255,255,255,0.2);color:rgba(255,255,255,0.5);padding:4px 10px;font-size:9px;letter-spacing:1.5px;text-transform:uppercase;cursor:pointer;font-family:'Jost',sans-serif;transition:all 0.2s;}
+#si-change:hover{border-color:var(--gold);color:var(--gold);}
+@media(max-width:992px){ #store-indicator{display:none!important;} }
+</style>
+{% endmacro %}
+
+{# ── STORE PICKER MODAL (mobile: no address, centered, scroll if >6) ── #}
+{% macro store_picker_modal(stores, base_path='') %}
+<div id="store-modal-overlay" onclick="closeStorePicker()" style="display:none;"></div>
+
+<div id="store-modal"
+     role="dialog"
+     aria-modal="true"
+     aria-label="Select your store"
+     data-store-count="{{ stores|length }}"
+     style="display:none;">
+  <div id="store-modal-inner">
+    <div class="spm-header">
+      <div class="spm-title">Select Your <em>Store</em></div>
+      <div class="spm-sub">Choose your preferred Naturals Salon &amp; Spa Bangalore location</div>
+      <button class="spm-close" onclick="closeStorePicker()" aria-label="Close">&#10005;</button>
+    </div>
+
+    <div class="spm-cards" id="spm-cards">
+      {% for s in stores %}
+      {% set store_slug = s.store_display_name|lower|replace(' ', '-')|replace('&', 'and') %}
+      <div class="spm-card"
+           onclick="selectStore('{{ s.store_id_short }}','{{ s.store_display_name }}','{{ s.appointment_url }}','+{{ s.phone_whatsapp }}','+{{ s.phone_mobile }}','{{ s.google_maps_url }}','{{ base_path }}/stores/{{ s.address_city|lower|replace(' ', '-') if s.address_city else 'bangalore' }}/{{ store_slug }}/')"
+           role="button" tabindex="0">
+        <div class="spm-card-num">{{ loop.index }}</div>
+        <div class="spm-card-info">
+          <div class="spm-card-name">{{ s.store_display_name }}</div>
+          <div class="spm-card-area">{{ s.store_display_name }} &middot; {{ s.pincode }}</div>
+          <div class="spm-card-addr">{{ s.address_full }}</div>
+        </div>
+        <div class="spm-card-cta">Select &#8594;</div>
+      </div>
+      {% endfor %}
+    </div>
+  </div>
+</div>
+
+<style>
+#store-modal-overlay{position:fixed;inset:0;background:rgba(0,0,0,0.65);z-index:12000;backdrop-filter:blur(4px);}
+
+#store-modal{
+  position:fixed;top:50%;left:50%;
+  transform:translate(-50%,-50%);
+  z-index:12001;
+  width:min(640px, 92vw);
+  max-height:86vh;
+  background:var(--cream);
+  box-shadow:0 24px 80px rgba(0,0,0,0.45);
+  border-radius:16px;
+  overflow:hidden;
+}
+[data-theme="naturals"] #store-modal{background:#FAF7FF;}
+
+.spm-header{background:var(--dark);padding:22px 22px;position:relative;}
+[data-theme="naturals"] .spm-header{background:#1A0533;}
+.spm-title{font-family:'Cormorant Garamond',serif;font-size:26px;font-weight:300;color:#fff;margin-bottom:4px;}
+.spm-title em{font-style:italic;color:var(--gold);}
+.spm-sub{font-size:11px;color:rgba(255,255,255,0.4);letter-spacing:1px;line-height:1.4;}
+.spm-close{position:absolute;top:14px;right:14px;background:rgba(255,255,255,0.10);border:1px solid rgba(255,255,255,0.18);color:#fff;border-radius:12px;width:40px;height:40px;font-size:18px;cursor:pointer;line-height:1;}
+.spm-close:hover{background:rgba(255,255,255,0.18);}
+
+.spm-cards{padding:4px;overflow:hidden;}
+/* Toggle scroll ON only when store-count > 6 */
+.spm-cards.spm-scroll{overflow-y:auto;max-height:calc(86vh - 110px);}
+
+.spm-card{
+  display:flex;align-items:center;gap:14px;
+  padding:14px 18px;background:#fff;border-bottom:1px solid rgba(0,0,0,0.05);
+  cursor:pointer;transition:all 0.2s;border-left:3px solid transparent;
+}
+.spm-card:hover{background:#f8f6f0;border-left-color:var(--gold);}
+[data-theme="naturals"] .spm-card:hover{background:#f3eeff;border-left-color:var(--green-mid);}
+.spm-card:focus{outline:2px solid var(--gold);outline-offset:-2px;}
+
+.spm-card-num{font-family:'Cormorant Garamond',serif;font-size:26px;color:rgba(0,0,0,0.12);font-weight:300;width:28px;flex-shrink:0;}
+.spm-card-info{flex:1;min-width:0;}
+.spm-card-name{font-family:'Cormorant Garamond',serif;font-size:18px;font-weight:400;color:var(--text);margin-bottom:2px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;}
+.spm-card-area{font-size:10px;color:var(--gold);letter-spacing:2px;text-transform:uppercase;margin-bottom:2px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;}
+.spm-card-addr{font-size:11px;color:var(--text-light);font-weight:300;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;}
+.spm-card-cta{font-size:11px;color:var(--text-light);letter-spacing:1px;text-transform:uppercase;white-space:nowrap;transition:color 0.2s;}
+.spm-card:hover .spm-card-cta{color:var(--green-mid);}
+
+@media(max-width:640px){
+  #store-modal{width:min(520px, 92vw);max-height:82vh;}
+  .spm-header{padding:18px 18px;}
+  .spm-title{font-size:22px;}
+  .spm-card{padding:12px 14px;}
+  .spm-card-addr{display:none;} /* ✅ hide address only on mobile */
+}
+</style>
+
+<script>
+(function(){
+  function applyStoreModalScrollRule(){
+    var modal = document.getElementById('store-modal');
+    var cards = document.getElementById('spm-cards');
+    if(!modal || !cards) return;
+    var n = parseInt(modal.getAttribute('data-store-count') || '0', 10);
+    cards.classList.toggle('spm-scroll', n > 6); /* ✅ scroll only if >6 */
+  }
+  if(document.readyState === 'loading'){
+    document.addEventListener('DOMContentLoaded', applyStoreModalScrollRule);
+  } else {
+    applyStoreModalScrollRule();
+  }
+})();
+</script>
+{% endmacro %}
+
+{# ── STICKY MOBILE CTA BAR ── #}
+{% macro sticky_mobile_bar(page_type='other', store=None) %}
+<div id="sticky-bar" data-page-type="{{ page_type }}">
+  <button class="sb-btn" id="sb-book" aria-label="Book appointment" title="Book">{{ calendar_svg(20) }}</button>
+  <button class="sb-btn" id="sb-wa" aria-label="WhatsApp us" title="WhatsApp">{{ wa_svg(20) }}</button>
+  <button class="sb-btn" id="sb-call" aria-label="Call us" title="Call">{{ call_svg(20) }}</button>
+  <button class="sb-btn" id="sb-maps" aria-label="Get directions" title="Directions">{{ maps_svg(20) }}</button>
+</div>
+<style>
+#sticky-bar{
+  display:none;position:fixed;bottom:0;left:0;right:0;
+  height:76px;z-index:9999;
+  background:rgba(8,15,11,0.94);backdrop-filter:blur(12px);
+  border-top:1px solid rgba(255,255,255,0.08);
+  grid-template-columns:repeat(4,1fr);
+  gap:10px;padding:12px 14px;
+  transform:translateY(100%);
+  transition:transform 0.45s cubic-bezier(0.165, 0.84, 0.44, 1);
+}
+#sticky-bar.is-visible{transform:translateY(0);}
+[data-theme="naturals"] #sticky-bar{background:rgba(21,5,44,0.94);}
+@media(max-width:992px){ #sticky-bar{display:grid;} }
+
+.sb-btn{
+  display:flex;flex-direction:column;align-items:center;justify-content:center;gap:3px;
+  font-family:'Jost',sans-serif;font-size:9px;letter-spacing:1px;text-transform:uppercase;font-weight:700;
+  border:none;cursor:pointer;transition:all 0.2s;text-decoration:none;
+  height:100%;border-radius:12px;padding:0 4px;color:#fff;
+  box-shadow:0 4px 10px rgba(0,0,0,0.18);
+}
+.sb-btn svg{width:16px;height:16px;}
+.sb-btn svg path{fill:#fff !important;}
+#sb-book{background:#1A73E8;border:1px solid rgba(255,255,255,0.1);}
+#sb-wa{background:#25D366;border:1px solid rgba(255,255,255,0.1);}
+#sb-call{background:#5F6368;border:1px solid rgba(255,255,255,0.1);}
+#sb-maps{background:#A82424;border:1px solid rgba(255,255,255,0.1);}
+.sb-btn:active{filter:brightness(0.9);transform:scale(0.96);}
+</style>
+
+<script>
+(function(){
+  function performAction(sd, action){
+    if(!sd) return;
+    if(action==='book' && sd.book) window.open(sd.book,'_blank');
+    if(action==='wa'   && sd.wa)   window.open('https://wa.me/' + sd.wa,'_blank');
+    if(action==='call' && sd.call) window.location.href='tel:' + sd.call;
+    if(action==='maps' && sd.maps) window.open(sd.maps,'_blank');
+  }
+
+  window._naturalsPendingAction = null;
+  window._naturalsPerformPendingAction = function(sd){
+    if(!window._naturalsPendingAction) return;
+    var act = window._naturalsPendingAction;
+    window._naturalsPendingAction = null;
+    performAction(sd, act);
+  };
+
+  var bookBtn=document.getElementById('sb-book');
+  var waBtn=document.getElementById('sb-wa');
+  var callBtn=document.getElementById('sb-call');
+  var mapsBtn=document.getElementById('sb-maps');
+
+  {% if (page_type == 'store' or page_type == 'offers') and store %}
+  var SD = {id:'{{ store.store_id_short }}',name:'{{ store.store_display_name }}',book:'{{ store.appointment_url }}',wa:'+{{ store.phone_whatsapp }}',call:'+{{ store.phone_mobile }}',maps:'{{ store.google_maps_url }}'};
+  localStorage.setItem('naturals-store', JSON.stringify(SD));
+  bookBtn && bookBtn.addEventListener('click', function(){ performAction(SD,'book'); });
+  waBtn   && waBtn.addEventListener('click',   function(){ performAction(SD,'wa'); });
+  callBtn && callBtn.addEventListener('click', function(){ performAction(SD,'call'); });
+  mapsBtn && mapsBtn.addEventListener('click', function(){ performAction(SD,'maps'); });
+  {% else %}
+  function openPickerFor(action){
+    window._naturalsPendingAction = action;
+    if(typeof openStorePicker==='function') openStorePicker();
+  }
+  bookBtn && bookBtn.addEventListener('click', function(){ openPickerFor('book'); });
+  waBtn   && waBtn.addEventListener('click',   function(){ openPickerFor('wa'); });
+  callBtn && callBtn.addEventListener('click', function(){ openPickerFor('call'); });
+  mapsBtn && mapsBtn.addEventListener('click', function(){ openPickerFor('maps'); });
+  {% endif %}
+
+  /* Visibility Toggle logic */
+  var bar = document.getElementById('sticky-bar');
+  if(bar && 'IntersectionObserver' in window){
+    var observer = new IntersectionObserver(function(entries) {
+      entries.forEach(function(entry) {
+        if(!entry.isIntersecting) bar.classList.add('is-visible');
+        else bar.classList.remove('is-visible');
+      });
+    }, { threshold: 0 });
+
+    var target = document.querySelector('.hero-btns, .hero-cta-wrap, .page-hero-inner');
+    var isHomeOrStore = bar.getAttribute('data-page-type') === 'homepage' || bar.getAttribute('data-page-type') === 'store' || bar.getAttribute('data-page-type') === 'offers';
+
+    if(target && isHomeOrStore){
+      observer.observe(target);
+    } else {
+      bar.classList.add('is-visible'); /* Show on load for other pages */
+    }
+  } else if (bar) {
+    bar.classList.add('is-visible'); /* Legacy fallback */
+  }
+})();
+</script>
+{% endmacro %}
+
+{% macro store_picker_js() %}
+<script>
+function openStorePicker(){
+  document.getElementById('store-modal-overlay').style.display='block';
+  document.getElementById('store-modal').style.display='block';
+  document.body.style.overflow='hidden';
+}
+function closeStorePicker(){
+  document.getElementById('store-modal-overlay').style.display='none';
+  document.getElementById('store-modal').style.display='none';
+  document.body.style.overflow='';
+}
+
+/* Ensure sticky buttons use selected store on non-store pages */
+window._applyStickyStore = function(sd){
+  try{
+    if(!sd) return;
+    var bar=document.getElementById('sticky-bar');
+    if(bar && bar.getAttribute('data-page-type') !== 'store'){
+      /* On non-store pages, we always want to prompt.
+         So we don't bind the sticky bar buttons to the selected store. */
+      return;
+    }
+    var bookBtn=document.getElementById('sb-book');
+    var waBtn=document.getElementById('sb-wa');
+    var callBtn=document.getElementById('sb-call');
+    var mapsBtn=document.getElementById('sb-maps');
+
+    function clearAndBind(btn, fn){
+      if(!btn) return;
+      var clone = btn.cloneNode(true);
+      btn.parentNode.replaceChild(clone, btn);
+      clone.addEventListener('click', fn);
+    }
+
+    clearAndBind(bookBtn, function(){ if(sd.book) window.open(sd.book,'_blank'); });
+    clearAndBind(waBtn,   function(){ if(sd.wa) window.open('https://wa.me/' + sd.wa,'_blank'); });
+    clearAndBind(callBtn, function(){ if(sd.call) window.location.href='tel:' + sd.call; });
+    clearAndBind(mapsBtn, function(){ if(sd.maps) window.open(sd.maps,'_blank'); });
+  }catch(e){}
+};
+
+function selectStore(id,name,book,wa,call,maps,pageUrl){
+  var sd={id:id,name:name,book:book,wa:wa,call:call,maps:maps,pageUrl:pageUrl};
+  localStorage.setItem('naturals-store',JSON.stringify(sd));
+  closeStorePicker();
+  if(typeof window._applyStickyStore==='function') window._applyStickyStore(sd);
+  
+  // Handle pending booking action
+  var actionPerformed = false;
+  if(typeof window._naturalsPendingAction==='string' && window._naturalsPendingAction==='book' && book){
+    window.open(book,'_blank');
+    window._naturalsPendingAction=null;
+    actionPerformed = true;
+  } else if(typeof window._naturalsPendingAction==='string' && window._naturalsPendingAction==='wa' && wa){
+    window.open('https://wa.me/'+wa,'_blank');
+    window._naturalsPendingAction=null;
+    actionPerformed = true;
+  } else if(typeof window._naturalsPendingAction==='string' && window._naturalsPendingAction==='call' && call){
+    window.location.href='tel:'+call;
+    window._naturalsPendingAction=null;
+    actionPerformed = true;
+  } else if(typeof window._naturalsPendingAction==='string' && window._naturalsPendingAction==='maps' && maps){
+    window.open(maps,'_blank');
+    window._naturalsPendingAction=null;
+    actionPerformed = true;
+  } else if(typeof window._naturalsPerformPendingAction==='function' && window._naturalsPendingAction){
+    window._naturalsPerformPendingAction(sd);
+    actionPerformed = true;
+  }
+  
+  // Only navigate if no action was performed and we have a pageUrl
+  if(!actionPerformed && pageUrl) {
+    window.location.href = pageUrl;
+  }
+}
+
+/* Used by homepage store tiles (Book/Chat/Call/Directions) to keep your flow */
+function storePickerThen(id,name,book,wa,call,maps,pageUrl,action){
+  var sd={id:id,name:name,book:book,wa:wa,call:call,maps:maps,pageUrl:pageUrl};
+  localStorage.setItem('naturals-store',JSON.stringify(sd));
+  closeStorePicker();
+  if(action==='book' && book) window.open(book,'_blank');
+  if(action==='wa' && wa) window.open('https://wa.me/'+wa,'_blank');
+  if(action==='call' && call) window.location.href='tel:'+call;
+  if(action==='maps' && maps) window.open(maps,'_blank');
+}
+
+/* Set active state for store pages */
+function setActiveStoreState(){
+  try{
+    var currentPath = window.location.pathname;
+    var storeLinks = document.querySelectorAll('.drawer-store-link');
+    
+    storeLinks.forEach(function(link){
+      var href = link.getAttribute('href');
+      if(href && currentPath.includes(href.replace(/^\//, ''))){
+        link.classList.add('active');
+      } else {
+        link.classList.remove('active');
+      }
+    });
+  }catch(e){}
+}
+
+/* Run on page load and when drawer opens */
+document.addEventListener('DOMContentLoaded', setActiveStoreState);
+
+/* Also run when hamburger is clicked (drawer opens) */
+var hamburger = document.getElementById('hamburger');
+if(hamburger){
+  hamburger.addEventListener('click', function(){
+    setTimeout(setActiveStoreState, 100); // Small delay for drawer animation
+    setTimeout(updateThemeSwatches, 50); // Update theme swatches when drawer opens
+  });
+}
+
+/* Theme toggle functionality - Global State Management */
+function setTheme(themeName){
+  // Apply to document for immediate effect
+  document.documentElement.setAttribute('data-theme', themeName);
+  document.body.setAttribute('data-theme', themeName);
+  
+  // Persist in localStorage for global state
+  localStorage.setItem('naturals-theme', themeName);
+  
+  // Update visual state
+  updateThemeSwatches();
+}
+
+function updateThemeSwatches(){
+  try{
+    var currentTheme = document.body.getAttribute('data-theme') || 'luxury';
+    var swatches = document.querySelectorAll('.theme-swatch');
+    
+    swatches.forEach(function(swatch){
+      swatch.classList.remove('active');
+      if(swatch.getAttribute('data-theme') === currentTheme){
+        swatch.classList.add('active');
+      }
+    });
+  }catch(e){}
+}
+
+/* Set default theme to Luxury for new visitors - Global State */
+(function(){
+  var savedTheme = localStorage.getItem('naturals-theme');
+  if(!savedTheme){
+    savedTheme = 'luxury'; // Default to Luxury theme for premium identity
+    localStorage.setItem('naturals-theme', savedTheme);
+  }
+  
+  // Apply to both documentElement and body for global consistency
+  if(savedTheme){
+    document.documentElement.setAttribute('data-theme', savedTheme);
+    document.body.setAttribute('data-theme', savedTheme);
+  }
+  
+  // Update visual state when DOM is ready
+  if(document.readyState === 'loading'){
+    document.addEventListener('DOMContentLoaded', updateThemeSwatches);
+  } else {
+    updateThemeSwatches();
+  }
+})();
+
+document.addEventListener('keydown',function(e){ if(e.key==='Escape') closeStorePicker(); });
+document.addEventListener('DOMContentLoaded',function(){
+  try{
+    var saved=JSON.parse(localStorage.getItem('naturals-store'));
+    if(saved && saved.name){
+      var ind=document.getElementById('store-indicator');
+      var nm=document.getElementById('si-name');
+      if(ind && nm){ nm.textContent=saved.name; ind.style.display='flex'; }
+      if(typeof window._applyStickyStore==='function') window._applyStickyStore(saved);
+    }
+  }catch(e){}
+});
+</script>
+{% endmacro %}
+
+{# ── BUTTONS + SVGs ── #}
+{% macro wa_svg(size=18, color='#25D366') %}
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="{{ color }}" width="{{ size }}" height="{{ size }}" style="flex-shrink:0" aria-hidden="true"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+{% endmacro %}
+
+{% macro fb_svg(size=18) %}
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="{{ size }}" height="{{ size }}" fill="#1877F2" aria-hidden="true" style="flex-shrink:0"><path d="M24 12.073C24 5.405 18.627 0 12 0S0 5.405 0 12.073C0 18.1 4.388 23.094 10.125 24v-8.437H7.078v-3.49h3.047V9.41c0-3.025 1.792-4.697 4.533-4.697 1.313 0 2.686.236 2.686.236v2.97h-1.513c-1.491 0-1.956.93-1.956 1.883v2.271h3.328l-.532 3.49h-2.796V24C19.612 23.094 24 18.1 24 12.073z"/></svg>
+{% endmacro %}
+
+{% macro ig_svg(size=18) %}
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="{{ size }}" height="{{ size }}" aria-hidden="true" style="flex-shrink:0"><defs><linearGradient id="ig-grad" x1="0%" y1="100%" x2="100%" y2="0%"><stop offset="0%" stop-color="#FFDC80"/><stop offset="25%" stop-color="#FCAF45"/><stop offset="50%" stop-color="#F77737"/><stop offset="75%" stop-color="#C13584"/><stop offset="100%" stop-color="#833AB4"/></linearGradient></defs><path fill="url(#ig-grad)" d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zM12 0C8.741 0 8.333.014 7.053.072 2.695.272.273 2.69.073 7.052.014 8.333 0 8.741 0 12c0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98C8.333 23.986 8.741 24 12 24c3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98C15.668.014 15.259 0 12 0zm0 5.838a6.162 6.162 0 100 12.324 6.162 6.162 0 000-12.324zM12 16a4 4 0 110-8 4 4 0 010 8zm6.406-11.845a1.44 1.44 0 100 2.881 1.44 1.44 0 000-2.881z"/></svg>
+{% endmacro %}
+
+{% macro call_svg(size=18, color='currentColor') %}
+<svg xmlns="http://www.w3.org/2000/svg" width="{{ size }}" height="{{ size }}" viewBox="0 0 24 24" fill="none" stroke="{{ color }}" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-phone" style="flex-shrink:0" aria-hidden="true"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
+{% endmacro %}
+
+{% macro maps_svg(size=18, color='currentColor') %}
+<svg xmlns="http://www.w3.org/2000/svg" width="{{ size }}" height="{{ size }}" viewBox="0 0 24 24" fill="none" stroke="{{ color }}" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-map-pin" style="flex-shrink:0" aria-hidden="true"><path d="M20 10c0 6-8 12-8 12s-8-6-8-12a8 8 0 0 1 16 0Z"/><circle cx="12" cy="10" r="3"/></svg>
+{% endmacro %}
+
+{% macro calendar_svg(size=18, color='currentColor') %}
+<svg xmlns="http://www.w3.org/2000/svg" width="{{ size }}" height="{{ size }}" viewBox="0 0 24 24" fill="none" stroke="{{ color }}" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-calendar" style="flex-shrink:0" aria-hidden="true"><rect width="18" height="18" x="3" y="4" rx="2" ry="2"/><path d="M16 2v4"/><path d="M8 2v4"/><path d="M3 10h18"/></svg>
+{% endmacro %}
+
+{% macro clock_svg(size=18, color='currentColor') %}
+<svg xmlns="http://www.w3.org/2000/svg" width="{{ size }}" height="{{ size }}" viewBox="0 0 24 24" fill="none" stroke="{{ color }}" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-clock" style="flex-shrink:0" aria-hidden="true"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+{% endmacro %}
+
+{% macro checklist_svg(size=18, color='currentColor') %}
+<svg xmlns="http://www.w3.org/2000/svg" width="{{ size }}" height="{{ size }}" viewBox="0 0 24 24" fill="none" stroke="{{ color }}" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-clipboard-check" style="flex-shrink:0" aria-hidden="true"><path d="m9 14 2 2 4-4"/><path d="M16 4h2a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2h2"/><path d="M9 2h6v4H9z"/></svg>
+{% endmacro %}
+
+{% macro mobile_svg(size=18, color='currentColor') %}
+<svg xmlns="http://www.w3.org/2000/svg" width="{{ size }}" height="{{ size }}" viewBox="0 0 24 24" fill="none" stroke="{{ color }}" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-smartphone" style="flex-shrink:0" aria-hidden="true"><rect width="14" height="20" x="5" y="2" rx="2" ry="2"/><path d="M12 18h.01"/></svg>
+{% endmacro %}
+
+{% macro button_css() %}
+<style>
+.btn-book{background:#1A73E8;color:#fff;padding:13px 22px;min-height:48px;font-size:11px;letter-spacing:1.5px;text-transform:uppercase;font-weight:600;display:inline-flex;align-items:center;gap:8px;transition:all 0.3s;border-radius:6px;white-space:nowrap;text-decoration:none;}
+.btn-book:hover{background:#1557B0;transform:translateY(-1px);}
+.btn-wa{background:#25D366;color:#fff;padding:13px 22px;min-height:48px;font-size:11px;letter-spacing:1.5px;text-transform:uppercase;font-weight:600;display:inline-flex;align-items:center;gap:8px;transition:all 0.3s;border-radius:6px;white-space:nowrap;text-decoration:none;}
+.btn-wa:hover{background:#1da851;transform:translateY(-1px);}
+.btn-call{background:#5F6368;color:#fff;padding:13px 22px;min-height:48px;font-size:11px;letter-spacing:1.5px;text-transform:uppercase;font-weight:600;display:inline-flex;align-items:center;gap:8px;transition:all 0.3s;border-radius:6px;white-space:nowrap;text-decoration:none;}
+.btn-call:hover{background:#474c52;transform:translateY(-1px);}
+.btn-maps{background:#A82424;color:#fff;border:none;padding:13px 18px;min-height:48px;font-size:11px;letter-spacing:1px;text-transform:uppercase;font-weight:600;display:inline-flex;align-items:center;gap:7px;transition:all 0.3s;border-radius:6px;white-space:nowrap;text-decoration:none;}
+.btn-maps:hover{background:#8e1f1f;transform:translateY(-1px);}
+.btn-gold{background:var(--gold);color:var(--dark);padding:12px 24px;font-size:11px;letter-spacing:2px;text-transform:uppercase;font-weight:700;display:inline-flex;align-items:center;gap:8px;transition:all 0.3s;text-decoration:none;}
+.btn-gold:hover{background:var(--gold-pale);transform:translateY(-1px);}
+
+/* UNIFIED BUTTON SYSTEM */
+.btn-primary{background:var(--gold);color:var(--dark);padding:14px 28px;min-height:48px;font-family:'Jost',sans-serif;font-size:11px;letter-spacing:2px;text-transform:uppercase;font-weight:700;display:inline-flex;align-items:center;justify-content:center;gap:8px;transition:all 0.3s;border-radius:6px;text-decoration:none;border:1px solid transparent;cursor:pointer;}
+.btn-primary:hover{background:#b5943b;transform:translateY(-2px);box-shadow:0 8px 16px rgba(0,0,0,0.12);}
+
+.btn-secondary{background:transparent;color:var(--text);padding:10px 20px;min-height:40px;font-family:'Jost',sans-serif;font-size:11px;letter-spacing:1.5px;text-transform:uppercase;font-weight:600;display:inline-flex;align-items:center;justify-content:center;gap:6px;transition:all 0.3s;border-radius:6px;text-decoration:none;border:1px solid rgba(0,0,0,0.12);cursor:pointer;}
+.btn-secondary:hover{border-color:var(--gold);color:var(--gold);background:rgba(201,168,76,0.04);}
+.page-hero-inner .btn-secondary{color:#fff;border-color:rgba(255,255,255,0.4);}
+.page-hero-inner .btn-secondary:hover{border-color:#fff;background:rgba(255,255,255,0.1);}
+</style>
+{% endmacro %}
+
+{% macro footer_css() %}
+<style>
+footer{background:#080f0b;}
+[data-theme="naturals"] footer{background:#0D0120;}
+.ft-top{padding:60px 60px 40px;display:grid;grid-template-columns:2fr 1fr 1fr 1fr;gap:48px;border-bottom:1px solid rgba(255,255,255,0.07);}
+.ft-brand{font-family:'Cormorant Garamond',serif;font-size:28px;color:#fff;font-weight:300;margin-bottom:10px;}
+.ft-brand span{color:var(--gold);font-style:italic;}
+.ft-tagline{font-size:12px;color:rgba(255,255,255,0.28);font-weight:300;line-height:1.7;margin-bottom:18px;}
+.ft-col-title{font-size:9px;letter-spacing:3px;text-transform:uppercase;color:var(--gold);font-weight:600;margin-bottom:16px;}
+.ft-col ul{list-style:none;display:flex;flex-direction:column;gap:9px;}
+.ft-col ul a{font-size:12px;color:rgba(255,255,255,0.32);font-weight:300;transition:color 0.3s;text-decoration:none;}
+.ft-col ul a:hover{color:rgba(255,255,255,0.72);}
+.ft-bottom{padding:18px 60px;display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:8px;}
+.ft-copy{font-size:11px;color:rgba(255,255,255,0.16);}
+.ft-url{font-size:11px;color:rgba(255,255,255,0.18);letter-spacing:1px;}
+@media(max-width:960px){.ft-top{grid-template-columns:1fr 1fr;gap:28px;padding:36px 20px 24px;}.ft-bottom{padding:14px 20px;flex-direction:column;text-align:center;}}
+@media(max-width:600px){.ft-top{grid-template-columns:1fr;padding:28px 16px 20px;}}
+</style>
+{% endmacro %}
+
+{% macro full_footer(base_path='', stores=[], careers_city_name='', website_base_url='') %}
+<footer>
+<div class="ft-top">
+  <div class="ft-brand-col">
+    <div class="ft-brand">Naturals <span>Salon &amp; Spa</span></div>
+    <div class="ft-tagline">India's most trusted salon network.<br>Premium beauty services across Bangalore.</div>
+  </div>
+  {% set nav_base = website_base_url if website_base_url else base_path %}
+  <div class="ft-col">
+    <div class="ft-col-title">Explore</div>
+    <ul>
+      <li><a href="{{ website_base_url }}/services/">Services &amp; Pricing</a></li>
+      <li><a href="{{ website_base_url }}/offers/">Offers</a></li>
+      {# Derive careers city slug from stores data (single-city setup). #}
+      {% set _city = '' %}
+      {% if careers_city_name %}
+        {% set _city = careers_city_name %}
+      {% elif stores and stores[0] is defined %}
+        {% if stores[0].address_city is defined and stores[0].address_city %}
+          {% set _city = stores[0].address_city %}
+        {% elif stores[0].city is defined and stores[0].city %}
+          {% set _city = stores[0].city %}
+        {% elif stores[0].address is defined and stores[0].address.city is defined and stores[0].address.city %}
+          {% set _city = stores[0].address.city %}
+        {% endif %}
+      {% endif %}
+      <li><a href="{{ website_base_url }}/careers/{{ city_slug }}/">Careers</a></li>
+      <li><a href="{{ website_base_url }}/contact/">Contact Us</a></li>
+      <li><a href="{{ website_base_url }}/about/">About Us</a></li>
+    </ul>
+  </div>
+  <div class="ft-col">
+    <div class="ft-col-title">Locations</div>
+    <ul>
+      {% if stores %}{% for s in stores %}
+      {% set city = s.address_city|lower|replace(' ', '-') if s.address_city else 'bangalore' %}
+      {% set slug = s.slug|lower if s.slug else (s.store_display_name|lower|replace(' ', '-')) %}
+      <li><a href="{{ website_base_url }}/stores/{{ city }}/{{ slug }}/">{{ s.store_display_name }}</a></li>
+      {% endfor %}{% endif %}
+    </ul>
+  </div>
+  <div class="ft-col">
+    <div class="ft-col-title">Policies</div>
+    <ul>
+      <li><a href="{{ website_base_url }}/booking-policy/">Booking Policy</a></li>
+      <li><a href="{{ website_base_url }}/cancellation-policy/">Cancellation Policy</a></li>
+      <li><a href="https://naturals.in" target="_blank" rel="noopener">Naturals India &#8599;</a></li>
+    </ul>
+  </div>
+</div>
+<div class="ft-bottom">
+  <div class="ft-copy">&copy; 2026 Naturals Salon &amp; Spa, Bangalore. All rights reserved.</div>
+  <div class="ft-url">naturals-blr.github.io</div>
+</div>
+</footer>
+{% endmacro %}
+
+{% macro review_card(rev, store_name) %}
+<div class="rev-card reveal">
+  <!-- Tile Header - Inline Layout -->
+  <div class="rev-header">
+    <div class="rev-header-left">
+      <div class="rev-user-img">{{ rev.customer_name|first|upper }}</div>
+      <div class="rev-name">
+        {{ rev.customer_name }}
+        <div class="rev-stars">
+          {% for _ in range(rev.stars|default(5)|int) %}★{% endfor %}
+        </div>
+      </div>
+    </div>
+    <div class="rev-header-right">
+      <div class="rev-google-icon">G</div>
+      <div class="rev-verified-text">Verified via Google</div>
+    </div>
+  </div>
+  
+  <!-- Content Handling - Full Text -->
+  <div class="rev-content">
+    <div class="rev-text">"{{ rev.review_comments or rev.comments or 'Great experience!' }}"</div>
+  </div>
+</div>
+{% endmacro %}
+
+{% macro review_css() %}
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700&family=Montserrat:wght@300;400;500;600&family=Inter:wght@400;500;600&display=swap');
+
+.rev-grid{display:grid;grid-template-columns:repeat(auto-fill, minmax(300px, 1fr));gap:15px;max-width:1200px;margin:0 auto;}
+.rev-card{background:#fff;border:1px solid #eee;border-radius:12px;box-shadow:0 2px 4px rgba(0,0,0,0.05);padding:15px;transition:all 0.3s ease;position:relative;break-inside:avoid;margin-bottom:15px;}
+.rev-card:hover{transform:translateY(-2px);box-shadow:0 4px 12px rgba(0,0,0,0.08);border-color:#D4AF37;}
+
+/* Tile Header - Inline Layout */
+.rev-header{display:flex;align-items:center;justify-content:space-between;margin-bottom:12px;}
+.rev-header-left{display:flex;align-items:center;gap:10px;}
+.rev-user-img{width:32px;height:32px;border-radius:50%;background:linear-gradient(135deg,var(--gold),#b8941f);color:#fff;display:flex;align-items:center;justify-content:center;font-size:14px;font-weight:600;font-family:'Inter',sans-serif;flex-shrink:0;}
+.rev-name{font-family:'Inter',sans-serif;font-size:14px;font-weight:600;color:#2c2c2c;line-height:1.2;margin:0;display:flex;align-items:center;gap:6px;}
+.rev-name .rev-stars{color:#D4AF37;font-size:12px;display:inline-flex;gap:1px;letter-spacing:0.5px;margin-left:6px;}
+.rev-header-right{display:flex;align-items:center;gap:6px;}
+.rev-google-icon{width:16px;height:16px;background:#4285f4;border-radius:2px;display:flex;align-items:center;justify-content:center;color:#fff;font-size:10px;font-weight:600;font-family:'Inter',sans-serif;}
+.rev-verified-text{font-family:'Inter',sans-serif;font-size:10px;color:#888;font-weight:400;}
+
+/* Content Handling - Full Text */
+.rev-content{margin-bottom:8px;}
+.rev-text{font-family:'Inter',sans-serif;font-size:13px;color:#4a4a4a;line-height:1.5;font-weight:400;margin:0;}
+
+/* Mobile Responsiveness */
+@media(max-width:768px){
+  .rev-grid{grid-template-columns:1fr;gap:12px;}
+  .rev-card{padding:12px;}
+  .rev-header{margin-bottom:10px;}
+  .rev-name{font-size:13px;}
+  .rev-text{font-size:12px;}
+}
+
+/* Enhanced Reviews Features */
+.reviews-snippet{margin-bottom:24px;}
+.reviews-snippet .rev-grid{grid-template-columns:1fr;gap:16px;}
+
+/* Wall of Love Modal */
+.modal-overlay{position:fixed;inset:0;background:rgba(0,0,0,0.6);display:flex;align-items:center;justify-content:center;z-index:99999;opacity:0;visibility:hidden;transition:all 0.3s ease;padding:20px;}
+.modal-overlay.active{opacity:1;visibility:visible;}
+.modal-content{background:#fff;border-radius:20px;max-width:1000px;width:100%;max-height:90vh;height:100%;display:flex;flex-direction:column;transform:scale(0.9);transition:all 0.3s ease;overflow-y:auto;}
+.modal-overlay.active .modal-content{transform:scale(1);}
+.modal-header{padding:16px 24px 12px;border-bottom:1px solid #f0f0f0;position:sticky;top:0;z-index:10;background:#fff;}
+.modal-title{font-family:'Inter',sans-serif;font-size:18px;font-weight:600;color:#2c2c2c;margin:0;}
+.modal-close{width:32px;height:32px;position:absolute;top:16px;right:16px;background:none;border:none;cursor:pointer;color:#666;display:flex;align-items:center;justify-content:center;border-radius:50%;transition:all 0.2s ease;}
+.modal-close:hover{background:#f5f5f5;color:#333;}
+.modal-close svg{width:16px;height:16px;}
+.modal-body{padding:16px 24px;overflow-y:visible;flex:1;min-height:0;}
+
+/* Modal Cards - Nuclear Fix: Break All Context */
+.modal-body .rev-card{display:block !important;flex-direction:column !important;align-items:flex-start !important;width:100% !important;background:#fff;border:1px solid #eee;border-radius:12px;box-shadow:0 2px 4px rgba(0,0,0,0.05);padding:15px;transition:all 0.3s ease;position:relative;}
+.modal-body .rev-card:hover{transform:translateY(-2px);box-shadow:0 4px 12px rgba(0,0,0,0.08);border-color:#D4AF37;}
+
+/* Modal Header Row - Gap Reset */
+.modal-body .rev-header-row{margin-bottom:0 !important;padding-bottom:0 !important;}
+
+/* Modal Grid - Force Grid Layout */
+.modal-body .rev-grid{display:grid !important;grid-template-columns:repeat(auto-fill, minmax(300px, 1fr)) !important;gap:15px !important;max-width:none;margin:0;column-count:auto !important;}
+@media(max-width:768px){
+  .modal-body .rev-grid{grid-template-columns:1fr !important;gap:12px !important;}
+}
+
+/* Modal Content Row - Force Clear */
+.modal-body .rev-content-row{clear:both !important;display:block !important;padding-top:5px;width:100%;}
+.modal-body .rev-content{white-space:normal !important;font-family:'Inter',sans-serif;font-size:13px;color:#4a4a4a;line-height:1.5;font-weight:400;margin:0;padding-top:2px !important;}
+
+/* Modal Header - Inline Styles Override */
+.modal-body .rev-header{display:flex;align-items:center;justify-content:space-between;margin-bottom:0;}
+.modal-body .rev-header-left{display:flex;align-items:center;gap:10px;}
+.modal-body .rev-avatar{width:32px;height:32px;border-radius:50%;background:linear-gradient(135deg,var(--gold),#b8941f);color:#fff;display:flex;align-items:center;justify-content:center;font-size:14px;font-weight:600;font-family:'Inter',sans-serif;flex-shrink:0;}
+.modal-body .rev-name-stars{display:flex;flex-direction:column;gap:2px;}
+.modal-body .rev-name{font-family:'Inter',sans-serif;font-size:14px;font-weight:600;color:#2c2c2c;line-height:1.2;margin:0;}
+.modal-body .rev-stars{color:#D4AF37;font-size:12px;display:inline-flex;gap:1px;letter-spacing:0.5px;}
+.modal-body .google-icon{display:flex;align-items:center;gap:6px;}
+.modal-body .google-icon img{width:16px;height:16px;}
+
+.modal-reviews{display:grid;gap:16px;}
+.modal-loading{text-align:center;padding:40px;color:var(--text-mid);}
+.modal-loading-spinner{width:40px;height:40px;border:3px solid var(--cream);border-top:3px solid var(--gold);border-radius:50%;animation:spin 1s linear infinite;margin:0 auto 16px;}
+@keyframes spin{0%{transform:rotate(0deg);}100%{transform:rotate(360deg);}}
+
+/* Read All Reviews Button */
+.read-all-btn, .read-all-reviews-btn {
+    background-color: #c19b4a !important; /* Your brand gold */
+    color: #ffffff !important;           /* Force white text */
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    padding: 12px 24px;
+    border-radius: 8px;
+    font-weight: 600;
+    transition: background-color 0.3s ease;
+    text-decoration: none;
+    border: none;
+    cursor: pointer;
+    width: 100%;
+}
+
+.read-all-btn:hover, .read-all-reviews-btn:hover {
+    background-color: #a8853b !important;
+    color: #ffffff !important;
+}
+
+.read-all-btn svg, .read-all-reviews-btn svg {
+    width: 20px;
+    height: 20px;
+    margin-right: 8px;
+}
+
+/* Mobile Optimizations */
+@media(max-width:640px){
+  .modal-overlay{padding:16px;}
+  .modal-content{max-height:90vh;border-radius:16px;}
+  .modal-header{padding:20px 20px 16px;}
+  .modal-title{font-size:20px;}
+  .modal-body{padding:20px;}
+  .modal-close{width:36px;height:36px;}
+  .modal-close svg{width:18px;height:18px;}
+}
+
+/* CSS Sledgehammer: Force review cards to be visible */
+.modal-body .review-card { 
+  display: flex !important; 
+  opacity: 1 !important; 
+  visibility: visible !important; 
+  color: #333 !important; 
+}
+.modal-body .rev-card { 
+  display: flex !important; 
+  opacity: 1 !important; 
+  visibility: visible !important; 
+  color: #333 !important; 
+  align-items: center !important;
+  padding: 12px 16px !important;
+  margin-bottom: 8px !important;
+  border-radius: 8px !important;
+  min-height: auto !important;
+}
+
+/* Modal-specific compact styling */
+.modal-body .rev-grid {
+  grid-template-columns: 1fr !important;
+  gap: 0 !important;
+  padding: 0 !important;
+}
+
+.modal-body .rev-card {
+  grid-template-columns: 80px 1fr 60px !important;
+  padding: 8px 0 !important;
+  gap: 12px !important;
+  border-bottom: 1px solid #eee !important;
+}
+
+.modal-body .rev-card:hover {
+  transform: none !important;
+  background: linear-gradient(90deg, rgba(212,175,55,0.02) 0%, rgba(255,248,220,0.03) 100%) !important;
+}
+
+.modal-body .rev-identity { gap: 8px !important; }
+.modal-body .rev-user-img { width: 28px !important; height: 28px !important; font-size: 12px !important; }
+.modal-body .rev-name { font-size: 12px !important; }
+.modal-body .rev-name .rev-stars { font-size: 10px !important; margin-left: 4px !important; }
+.modal-body .rev-content { gap: 0 !important; }
+.modal-body .rev-text { font-size: 11px !important; color: #666 !important; }
+.modal-body .read-more { font-size: 10px !important; margin-left: 4px !important; }
+.modal-body .verified-badge { font-size: 7px !important; padding: 1px 4px !important; }
+.modal-body .source-text { font-size: 9px !important; }
+
+/* Read More functionality */
+.read-more { 
+  font-family: 'Montserrat', sans-serif !important; 
+  font-size: 11px !important; 
+  color: #D4AF37 !important; 
+  font-weight: 400 !important; 
+  font-style: italic !important;
+  cursor: pointer !important; 
+  text-decoration: none !important; 
+  margin-left: 8px !important; 
+  display: inline !important; 
+  transition: all 0.2s ease !important; 
+  background: none !important; 
+  border: none !important; 
+  padding: 0 !important;
+}
+.read-more:hover { 
+  color: #b8941f !important; 
+  text-decoration: underline !important; 
+}
+</style>
+
+<script>
+// Toggle review text expansion
+function toggleReviewText(textId) {
+  const textElement = document.getElementById(textId);
+  if (textElement) {
+    textElement.classList.toggle('expanded');
+    const readMoreLink = textElement.nextElementSibling;
+    if (readMoreLink && readMoreLink.classList.contains('read-more')) {
+      readMoreLink.textContent = textElement.classList.contains('expanded') ? 'Read Less' : 'Read More';
+    }
+  }
+}
+</script>
+{% endmacro %}
+{% macro hero_css() %}
+.page-hero{background:var(--dark);position:relative;overflow:hidden;height:70vh;min-height:500px;display:flex;align-items:flex-end;}
+.page-hero-bg{position:absolute;inset:0;}
+.page-hero-bg img{width:100%;height:100%;object-fit:cover;filter:saturate(1.05);}
+.page-hero-ov{position:absolute;inset:0;background:linear-gradient(135deg,var(--hero-tint) 0%,var(--hero-tint2) 60%,rgba(0,0,0,0.12) 100%);}
+.page-hero-inner{position:relative;z-index:2;padding:60px 60px 48px;max-width:1200px;margin:0 auto;width:100%;}
+.page-hero-inner h1{font-family:'Cormorant Garamond',serif;font-size:clamp(36px,5vw,68px);font-weight:300;color:#fff;line-height:0.95;margin-bottom:16px;}
+.page-hero-inner h1 em{font-style:italic;color:var(--gold);}
+.page-hero-inner p{font-size:14px;color:rgba(255,255,255,0.7);font-weight:300;line-height:1.8;max-width:650px;}
+
+@media(max-width:960px){
+  .page-hero{height:60vh;min-height:400px;}
+  .page-hero-inner{padding:48px 20px 44px;}
+}
+{% endmacro %}
+
+
+{% macro page_hero(slug, title, subtitle, label='Our Story', unsplash_url='') %}
+<div class="page-hero">
+  <div class="page-hero-bg">
+    <img class="hero-resolver-img" 
+         data-slug="{{ slug }}" 
+         data-fallback="{{ unsplash_url }}"
+         alt="{{ title }}"
+         loading="eager">
+  </div>
+  <div class="page-hero-ov"></div>
+  <div class="page-hero-inner">
+    <div class="lbl">{{ label }}</div>
+    <h1>{{ title | safe }}</h1>
+    <p>{{ subtitle }}</p>
+  </div>
+</div>
+{% endmacro %}
+
+{% macro hero_resolver() %}
+<script>
+(function(){
+  var EXT=['.jpg','.jpeg','.png'];
+  document.querySelectorAll('img.hero-resolver-img').forEach(function(img){
+    var slug = img.getAttribute('data-slug');
+    var fallback = img.getAttribute('data-fallback');
+    if(!slug) return;
+    
+    var i=0;
+    var base = '/images/heroes/' + slug;
+    img.src = base + EXT[i];
+    
+    img.onerror = function(){
+      i++;
+      if(i < EXT.length) {
+        img.src = base + EXT[i];
+      } else if(fallback) {
+        img.src = fallback;
+        img.onerror = null;
+      } else {
+        img.style.display = 'none';
+      }
+    };
+  });
+})();
+</script>
+{% endmacro %}
+
+
+{# ─────────────────────────────────────────────
+   MODULAR FILTER ENGINE
+   Reusable component for pills/dropdowns
+───────────────────────────────────────────── #}
+
+{% macro filter_engine(filter_type, items, filter_id='', filter_class='') %}
+{% set pill_count = items | length %}
+{% set use_pills = pill_count <= 5 %}
+{% set use_dropdown = pill_count > 5 %}
+
+<div class="filter-engine {{ filter_class }}" data-filter-id="{{ filter_id }}">
+  {% if use_pills %}
+    <!-- Horizontal Scrollable Pills -->
+    <div class="filter-pills-container">
+      {% for item in items %}
+        <button 
+          class="filter-pill {{ 'filter-pill-solid' if filter_type == 'Primary' else 'filter-pill-outline' }}"
+          data-filter-value="{{ item.value | default(item) }}"
+          data-filter-type="{{ filter_type | lower }}"
+          onclick="toggleFilter(this)"
+        >
+          {{ item.label | default(item) }}
+        </button>
+      {% endfor %}
+    </div>
+  {% elif use_dropdown %}
+    <!-- Custom Dropdown -->
+    <div class="filter-dropdown-container">
+      <button 
+        class="filter-dropdown-trigger {{ 'filter-pill-solid' if filter_type == 'Primary' else 'filter-pill-outline' }}"
+        data-filter-type="{{ filter_type | lower }}"
+        onclick="toggleDropdown(this)"
+      >
+        <span class="dropdown-label">Select {{ filter_type }}</span>
+        <svg class="dropdown-arrow" width="12" height="8" viewBox="0 0 12 8">
+          <path d="M1 1l5 5 5-5" stroke="currentColor" stroke-width="2" fill="none"/>
+        </svg>
+      </button>
+      
+      <div class="filter-dropdown-menu" data-filter-id="{{ filter_id }}">
+        {% for item in items %}
+          <button 
+            class="filter-dropdown-item"
+            data-filter-value="{{ item.value | default(item) }}"
+            data-filter-type="{{ filter_type | lower }}"
+            onclick="selectDropdownItem(this)"
+          >
+            {{ item.label | default(item) }}
+          </button>
+        {% endfor %}
+      </div>
+    </div>
+  {% endif %}
+</div>
+
+<style>
+/* Filter Engine Styles */
+.filter-engine {
+  margin: 20px 0;
+  position: relative;
+}
+
+/* Pills Container */
+.filter-pills-container {
+  display: flex;
+  gap: 8px;
+  overflow-x: auto;
+  padding: 4px 0;
+  scrollbar-width: thin;
+  scrollbar-color: rgba(255,255,255,0.2) transparent;
+}
+
+.filter-pills-container::-webkit-scrollbar {
+  height: 4px;
+}
+
+.filter-pills-container::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+.filter-pills-container::-webkit-scrollbar-thumb {
+  background: rgba(255,255,255,0.2);
+  border-radius: 2px;
+}
+
+/* Pill Styles */
+.filter-pill {
+  padding: 8px 16px;
+  border-radius: 20px;
+  border: none;
+  font-size: 14px;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  white-space: nowrap;
+  flex-shrink: 0;
+}
+
+.filter-pill-solid {
+  background: var(--gold, #D4AF37);
+  color: var(--dark, #1a1a1a);
+}
+
+.filter-pill-outline {
+  background: transparent;
+  border: 1px solid rgba(255,255,255,0.3);
+  color: rgba(255,255,255,0.7);
+}
+
+.filter-pill:hover {
+  transform: translateY(-1px);
+  box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+}
+
+.filter-pill.is-active {
+  background: var(--gold, #D4AF37);
+  color: var(--dark, #1a1a1a);
+  border-color: var(--gold, #D4AF37);
+}
+
+/* Dropdown Styles */
+.filter-dropdown-container {
+  position: relative;
+  min-width: 200px;
+}
+
+.filter-dropdown-trigger {
+  width: 100%;
+  padding: 10px 16px;
+  border-radius: 8px;
+  border: none;
+  font-size: 14px;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.dropdown-arrow {
+  transition: transform 0.2s ease;
+}
+
+.filter-dropdown-trigger.is-open .dropdown-arrow {
+  transform: rotate(180deg);
+}
+
+.filter-dropdown-menu {
+  position: absolute;
+  top: 100%;
+  left: 0;
+  right: 0;
+  background: var(--dark, #1a1a1a);
+  border: 1px solid rgba(255,255,255,0.1);
+  border-radius: 8px;
+  margin-top: 4px;
+  max-height: 240px;
+  overflow-y: auto;
+  z-index: 1000;
+  opacity: 0;
+  visibility: hidden;
+  transform: translateY(-8px);
+  transition: all 0.2s ease;
+}
+
+.filter-dropdown-menu.is-open {
+  opacity: 1;
+  visibility: visible;
+  transform: translateY(0);
+}
+
+.filter-dropdown-item {
+  width: 100%;
+  padding: 10px 16px;
+  border: none;
+  background: transparent;
+  color: rgba(255,255,255,0.8);
+  font-size: 14px;
+  text-align: left;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  border-bottom: 1px solid rgba(255,255,255,0.05);
+}
+
+.filter-dropdown-item:last-child {
+  border-bottom: none;
+}
+
+.filter-dropdown-item:hover {
+  background: rgba(255,255,255,0.1);
+  color: white;
+}
+
+.filter-dropdown-item.is-selected {
+  background: var(--gold, #D4AF37);
+  color: var(--dark, #1a1a1a);
+}
+
+/* Mobile Responsive */
+@media (max-width: 768px) {
+  .filter-pills-container {
+    gap: 6px;
+  }
+  
+  .filter-pill {
+    padding: 6px 12px;
+    font-size: 13px;
+  }
+  
+  .filter-dropdown-container {
+    min-width: 160px;
+  }
+}
+</style>
+
+<script>
+// Filter Engine JavaScript
+function toggleFilter(element) {
+  const isActive = element.classList.contains('is-active');
+  
+  // Remove active class from all pills in same filter type
+  const filterType = element.dataset.filterType;
+  document.querySelectorAll(`[data-filter-type="${filterType}"]`).forEach(pill => {
+    pill.classList.remove('is-active');
+  });
+  
+  // Add active class to clicked pill if it wasn't active
+  if (!isActive) {
+    element.classList.add('is-active');
+  }
+  
+  // Trigger filter change event
+  const filterEvent = new CustomEvent('filterChanged', {
+    detail: {
+      type: filterType,
+      value: element.dataset.filterValue,
+      element: element
+    }
+  });
+  document.dispatchEvent(filterEvent);
+}
+
+function toggleDropdown(element) {
+  const isOpen = element.classList.contains('is-open');
+  const menu = element.nextElementSibling;
+  
+  // Close all other dropdowns
+  document.querySelectorAll('.filter-dropdown-menu').forEach(dropdown => {
+    dropdown.classList.remove('is-open');
+  });
+  document.querySelectorAll('.filter-dropdown-trigger').forEach(trigger => {
+    trigger.classList.remove('is-open');
+  });
+  
+  // Toggle current dropdown
+  if (!isOpen) {
+    element.classList.add('is-open');
+    menu.classList.add('is-open');
+  }
+  
+  // Close dropdown when clicking outside
+  document.addEventListener('click', function closeDropdown(e) {
+    if (!element.contains(e.target) && !menu.contains(e.target)) {
+      element.classList.remove('is-open');
+      menu.classList.remove('is-open');
+      document.removeEventListener('click', closeDropdown);
+    }
+  });
+}
+
+function selectDropdownItem(element) {
+  const dropdown = element.closest('.filter-dropdown-container');
+  const trigger = dropdown.querySelector('.filter-dropdown-trigger');
+  const menu = dropdown.querySelector('.filter-dropdown-menu');
+  
+  // Update trigger text
+  const label = element.textContent;
+  trigger.querySelector('.dropdown-label').textContent = label;
+  
+  // Update selected state
+  menu.querySelectorAll('.filter-dropdown-item').forEach(item => {
+    item.classList.remove('is-selected');
+  });
+  element.classList.add('is-selected');
+  
+  // Close dropdown
+  trigger.classList.remove('is-open');
+  menu.classList.remove('is-open');
+  
+  // Trigger filter change event
+  const filterEvent = new CustomEvent('filterChanged', {
+    detail: {
+      type: trigger.dataset.filterType,
+      value: element.dataset.filterValue,
+      element: element
+    }
+  });
+  document.dispatchEvent(filterEvent);
+}
+
+// Global filter event listener
+document.addEventListener('filterChanged', function(e) {
+  console.log('Filter changed:', e.detail);
+  
+  // Update status display based on filter type
+  const filterType = e.detail.type;
+  const filterValue = e.detail.value;
+  
+  if (filterType === 'primary') {
+    // Store filter
+    const storeElement = document.getElementById('active-store');
+    if (storeElement) {
+      storeElement.textContent = filterValue;
+    }
+  } else if (filterType === 'secondary') {
+    // Gender filter
+    const genderElement = document.getElementById('active-gender');
+    if (genderElement) {
+      genderElement.textContent = filterValue;
+    }
+  } else if (filterType === 'services') {
+    // Service filter
+    const serviceElement = document.getElementById('active-service');
+    if (serviceElement) {
+      serviceElement.textContent = filterValue;
+    }
+  }
+});
+</script>
+{% endmacro %}
+
+
+{# ─────────────────────────────────────────────
+   OFFERS CARD COMPONENT
+   Used in offers page + store pages
+───────────────────────────────────────────── #}
+
+{% macro offer_card(offer, base_path='') %}
+<div class="offer-card card">
+
+  {% if offer.Image_Name %}
+  <div class="offer-img">
+    <img src="{{ base_path }}campaigns/offer/03_published/{{ offer.Image_Name }}" alt="{{ offer.Offer_Title }}" loading="lazy">
+  </div>
+  {% endif %}
+
+  <div class="offer-body">
+
+    <div class="offer-title">
+      {{ offer.Offer_Title }}
+    </div>
+
+    {% if offer.Offer_Details %}
+    <div class="offer-desc">
+      {{ offer.Offer_Details }}
+    </div>
+    {% endif %}
+
+    <div class="offer-validity">
+      Valid: {{ offer.Valid_From }} – {{ offer.Valid_till }}
+    </div>
+
+  </div>
+
+</div>
+
+<style>
+.offer-card{
+  display:flex;
+  flex-direction:column;
+  overflow:hidden;
+}
+
+.offer-img img{
+  width:100%;
+  height:260px;
+  object-fit:cover;
+}
+
+.offer-body{
+  padding:18px;
+}
+
+.offer-title{
+  font-family:'Cormorant Garamond',serif;
+  font-size:22px;
+  margin-bottom:6px;
+}
+
+.offer-desc{
+  font-size:13px;
+  color:var(--text-mid);
+  margin-bottom:10px;
+}
+
+.offer-validity{
+  font-size:10px;
+  letter-spacing:1px;
+  text-transform:uppercase;
+  color:var(--gold);
+}
+</style>
+{% endmacro %}
+
+
+{# ─────────────────────────────────────────────
+   favicon_tags — standard favicon <link> block
+   Usage: {{ favicon_tags(website_base_url) }}
+   ───────────────────────────────────────────── #}
+{% macro favicon_tags(base_url='') %}
+<link rel="icon" type="image/x-icon" href="/images/favicon/favicon.ico">
+<link rel="apple-touch-icon" sizes="180x180" href="/images/favicon/apple-touch-icon.png">
+<link rel="icon" type="image/png" sizes="32x32" href="/images/favicon/favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="/images/favicon/favicon-16x16.png">
+<link rel="shortcut icon" href="/images/favicon/favicon.ico">
+{% endmacro %}

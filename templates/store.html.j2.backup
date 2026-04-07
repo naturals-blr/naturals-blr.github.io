@@ -1,0 +1,712 @@
+{% from "macros.j2" import
+  full_footer, footer_css, wa_svg, fb_svg, ig_svg, social_icons, social_icons_css,
+  global_mobile_css, theme_vars, theme_toggle, theme_init_script,
+  button_css, btn_book, btn_wa, btn_call, btn_maps,
+  store_indicator, store_picker_modal, sticky_mobile_bar, store_picker_js,
+  hamburger_nav, tracking_head, tracking_body, stores_json, calendar_svg, call_svg, maps_svg,
+  review_card, review_css, rating_summary
+with context %}
+
+{% set s = store %}
+{% set base_path = '../' %}
+{% set active_page = 'stores' %}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+<meta name="description" content="{{ s.meta_description | default('Visit Naturals Salon in ' + s.store_display_name + ' for hair spa, skin care, bridal and beauty services. Book online or call ' + s.Phone_Display + '.') }}" />
+<title>{{ s.seo_title | default(s.store_display_name + ' | Salon in ' + s.store_display_name + ' | Book Online') }}</title>
+<link rel="canonical" href="https://naturals-blr.github.io/{{ s.Store_Page_URL }}" />
+
+<!-- Favicon and Touch Icons -->
+<link rel="apple-touch-icon" sizes="180x180" href="https://naturals-blr.github.io/apple-touch-icon.png">
+<link rel="icon" type="image/png" sizes="32x32" href="https://naturals-blr.github.io/favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="https://naturals-blr.github.io/favicon-16x16.png">
+<link rel="manifest" href="https://naturals-blr.github.io/site.webmanifest">
+<link rel="shortcut icon" href="https://naturals-blr.github.io/favicon.ico">
+
+<meta name="apple-mobile-web-app-title" content="Naturals Salon">
+<meta name="application-name" content="Naturals Salon">
+<meta name="msapplication-TileColor" content="#c9a84c">
+<meta name="theme-color" content="#c9a84c">
+
+<meta property="og:title" content="{{ s.store_display_name }} | Naturals Salon &amp; Spa Bangalore" />
+<meta property="og:description" content="Visit Naturals Salon in {{ s.store_display_name }} for hair spa, skin care, bridal and beauty services. Book online or call {{ s.Phone_Display }}." />
+<meta property="og:type" content="business.business" />
+<meta property="og:url" content="https://naturals-blr.github.io/{{ s.Store_Page_URL }}" />
+<meta property="og:image" content="https://naturals-blr.github.io/images/stores/{{ s.slug }}/cover.jpg" />
+<meta property="og:image:alt" content="{{ s.store_display_name }} - Naturals Salon &amp; Spa" />
+
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=Jost:wght@300;400;500;600&display=swap" rel="stylesheet" />
+
+{{ tracking_head(gtm_id, pixel_id) }}
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BeautySalon",
+  "name": "Naturals Salon & Spa {{ s.store_display_name }}",
+  "image": "https://naturals-blr.github.io/assets/stores/{{ s.Store_Page_URL | replace('stores/','') | replace('.html','') }}.jpg",
+  "telephone": "{{ s.Phone_Tel }}",
+  "url": "https://naturals-blr.github.io/{{ s.Store_Page_URL }}",
+  "priceRange": "₹₹",
+  "address": {
+    "@type": "PostalAddress",
+    "streetAddress": "{{ s.Address_Full }}",
+    "addressLocality": "Bangalore",
+    "addressRegion": "Karnataka",
+    "postalCode": "{{ s.Pincode }}",
+    "addressCountry": "IN"
+  },
+  "geo": {
+    "@type": "GeoCoordinates",
+    "latitude": {{ s.schema_latitude | default('12.971599') }},
+    "longitude": {{ s.schema_longitude | default('77.594562') }}
+  },
+  "hasMap": true,
+  "sameAs": "https://naturals-blr.github.io/{{ s.Store_Page_URL }}",
+  "google_place_id": "{{ s.google_place_id | default('') }}"
+}
+</script>
+
+<style>{{ theme_vars() }}{{ global_mobile_css() }}</style>
+{{ button_css() }}
+{{ footer_css() }}
+{{ social_icons_css() }}
+
+<style>
+*{margin:0;padding:0;box-sizing:border-box;}
+html{scroll-behavior:smooth;}
+body{font-family:'Jost',sans-serif;background:var(--cream);color:var(--text);overflow-x:hidden;}
+a{text-decoration:none;color:inherit;}
+img{display:block;width:100%;object-fit:cover;}
+
+/* ── HERO ── */
+.hero{height:70vh;min-height:500px;position:relative;display:flex;align-items:flex-end;overflow:hidden;}
+.hero-bg{position:absolute;inset:0;}
+.hero-bg img{height:100%;object-fit:cover;width:100%;}
+.hero-ov{position:absolute;inset:0;background:linear-gradient(135deg,var(--hero-tint) 0%,var(--hero-tint2) 60%,rgba(0,0,0,0.12) 100%);}
+.hero-content{position:relative;z-index:2;padding:60px 60px 48px;width:100%;max-width:100%;}
+.hero-badge{font-size:9px;letter-spacing:4px;text-transform:uppercase;color:var(--gold);font-weight:600;margin-bottom:12px;}
+.hero-content h1{font-family:'Cormorant Garamond',serif;font-size:clamp(36px,5vw,68px);font-weight:300;color:#fff;line-height:0.95;margin-bottom:12px;}
+.hero-content h1 em{font-style:italic;color:var(--gold);}
+.hero-sub{font-size:14px;color:rgba(255,255,255,0.7);font-weight:300;line-height:1.8;margin-bottom:28px;}
+
+/* ── ACTION BAR ── */
+.hero-cta-wrap{display:flex;flex-direction:column;gap:8px;max-width:520px;}
+.hero-cta-row{display:flex;gap:8px;width:100%;}
+.hero-cta-row a,.hero-cta-row .hero-cta-ph{flex:1;justify-content:center !important;font-size:10px !important;padding:10px 12px !important;min-height:44px !important;letter-spacing:1.2px !important;}
+.hero-cta-ig{background:#fff;border:1px solid rgba(225,48,108,0.45);border-radius:6px;display:inline-flex;align-items:center;justify-content:center;transition:all 0.3s;text-decoration:none;}
+.hero-cta-ig:hover{transform:translateY(-1px);box-shadow:0 6px 16px rgba(0,0,0,0.18);}
+.hero-cta-fb{background:#fff;border:1px solid rgba(24,119,242,0.45);border-radius:6px;display:inline-flex;align-items:center;justify-content:center;transition:all 0.3s;text-decoration:none;}
+.hero-cta-fb:hover{transform:translateY(-1px);box-shadow:0 6px 16px rgba(0,0,0,0.18);}
+.hero-cta-ph{visibility:hidden;pointer-events:none;}
+
+/* ── INFO BAR ── 
+   FIX: Added padding:0 60px to align left/right edges with hero-content and page-wrap.
+   Previously had no padding so it bled full width while content above/below had 60px gutters.
+── */
+.info-bar{
+  display:grid;
+  grid-template-columns:repeat(4,1fr);
+  background:var(--dark);
+  border-top:1px solid rgba(255,255,255,0.06);
+  overflow-x:hidden;
+  padding:0 60px;           /* ← FIX: align with page gutters */
+}
+.info-cell{
+  padding:20px 22px;
+  border-right:1px solid rgba(255,255,255,0.07);
+  display:flex;align-items:flex-start;gap:10px;min-width:0;
+}
+.info-cell:last-child{border-right:none;}
+.info-icon{font-size:18px;flex-shrink:0;margin-top:2px;display:flex;align-items:center;}
+.info-label{font-size:9px;letter-spacing:2.5px;text-transform:uppercase;color:rgba(255,255,255,0.3);font-weight:600;margin-bottom:3px;}
+.info-val{font-size:13px;color:#fff;font-weight:400;display:block;transition:color 0.2s;line-height:1.3;word-wrap:break-word;}
+a.info-val:hover{color:var(--gold);}
+.info-val-sm{font-size:11px;color:rgba(255,255,255,0.28);display:block;margin-top:2px;}
+
+/* ── RATING SUMMARY ──
+   FIX: Added padding:16px 60px so it aligns with the 60px gutter.
+── */
+.rating-wrap-outer{
+  padding:16px 60px;        /* ← FIX: align with page gutters */
+  text-align:left;
+}
+
+/* ── LAYOUT ──
+   FIX: Changed max-width from 100% to none — let padding do the constraining.
+   This ensures the content grid aligns with hero, info-bar, store-nav.
+── */
+.page-wrap{
+  display:grid;
+  grid-template-columns:1fr 320px;
+  gap:0;
+  align-items:start;
+  width:100%;
+  padding:56px 60px;        /* same 60px gutter as hero and info-bar */
+}
+.main-col{
+  padding-right:44px;
+  min-width:0;
+}
+
+/* ── SHARED ── */
+.lbl{font-size:9px;letter-spacing:5px;text-transform:uppercase;color:var(--gold);font-weight:600;margin-bottom:14px;display:flex;align-items:center;gap:12px;}
+.lbl::before{content:'';width:18px;height:1px;background:var(--gold);}
+.sec-title{font-family:'Cormorant Garamond',serif;font-size:clamp(26px,3vw,38px);font-weight:300;line-height:1.05;margin-bottom:18px;}
+.sec-title em{font-style:italic;color:var(--green-mid);}
+.about-p{font-size:13px;color:var(--text-mid);line-height:1.9;font-weight:300;margin-bottom:10px;}
+.reveal{opacity:0;transform:translateY(20px);transition:opacity 0.6s ease,transform 0.6s ease;}
+.reveal.visible{opacity:1;transform:translateY(0);}
+
+/* ── ABOUT GRID ── */
+.about-grid{display:grid;grid-template-columns:1fr 1fr;gap:28px;margin-bottom:48px;align-items:center;}
+.about-img-wrap{overflow:hidden;height:320px;}
+.about-img-wrap img{height:100%;object-fit:cover;transition:transform 6s ease;}
+.about-img-wrap:hover img{transform:scale(1.04);}
+
+/* ── WHITE CARD SECTIONS ──
+   FIX: All sections with background:#fff previously had no border-radius,
+   making them look like disconnected blocks. Added border-radius:14px,
+   border, and consistent margin-bottom so they look like cards matching
+   the site's card system.
+   Also removed the 3px bottom margins (visual gaps) between sections —
+   replaced with 24px margin-bottom for consistent spacing.
+── */
+.services-offered-block{
+  background:#fff;
+  padding:36px;
+  margin-bottom:24px;       /* ← FIX: was 3px, now consistent */
+  border-radius:14px;       /* ← FIX: added */
+  border:1px solid rgba(0,0,0,0.06); /* ← FIX: added */
+  box-shadow:0 4px 16px rgba(0,0,0,0.04); /* ← FIX: added */
+}
+.services-offered{list-style:none;padding:0;margin:0 0 24px;font-size:14px;line-height:1.8;color:var(--text-mid);}
+.services-offered li{display:flex;justify-content:space-between;border-bottom:1px solid rgba(0,0,0,0.05);padding:8px 0;}
+.services-offered .price{color:var(--gold);font-weight:500;}
+
+/* ── GALLERY ──
+   FIX: Added border-radius and margin-bottom to match card system.
+── */
+.gallery-section{
+  margin-bottom:24px;       /* ← FIX: was 3px */
+  border-radius:14px;       /* ← FIX: added */
+  overflow:hidden;
+  border:1px solid rgba(0,0,0,0.06);
+}
+.gallery-grid{display:grid;grid-template-columns:1fr 1fr;gap:3px;}
+.gallery-grid img{height:240px;object-fit:cover;width:100%;}
+
+/* ── OFFERS ── */
+.offers-block{
+  margin-bottom:24px;       /* ← FIX: was 0 */
+}
+.offers-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:12px;}
+@media(max-width:600px){.offers-grid{grid-template-columns:1fr;}}
+
+.offer-card{background:#fff;overflow:hidden;transition:box-shadow 0.25s,transform 0.25s;border:1px solid rgba(0,0,0,0.06);min-height:360px;display:flex;flex-direction:column;border-radius:14px;}
+.offer-card:hover{box-shadow:0 10px 34px rgba(0,0,0,0.10);transform:translateY(-2px);}
+.offer-media{height:200px;position:relative;background:linear-gradient(135deg,var(--dark) 0%,var(--green) 100%);overflow:hidden;}
+.offer-media img{width:100%;height:100%;object-fit:cover;transition:transform 0.7s ease;cursor:zoom-in;}
+.offer-card:hover .offer-media img{transform:scale(1.04);}
+.ribbon{position:absolute;top:14px;left:14px;z-index:2;background:rgba(201,168,76,0.92);color:var(--dark);font-size:9px;letter-spacing:2px;text-transform:uppercase;font-weight:800;padding:7px 10px;border-radius:999px;box-shadow:0 8px 18px rgba(0,0,0,0.18);}
+.ribbon.urgent{background:rgba(217,48,37,0.92);color:#fff;}
+.ribbon.new{background:rgba(26,115,232,0.92);color:#fff;}
+.offer-body{padding:18px 18px 16px;display:flex;flex-direction:column;flex:1;}
+.offer-badge{font-size:9px;letter-spacing:3px;text-transform:uppercase;color:var(--gold);font-weight:700;margin-bottom:8px;}
+.offer-title{font-family:'Cormorant Garamond',serif;font-size:20px;font-weight:400;margin-bottom:8px;color:var(--text);line-height:1.2;}
+.offer-details{font-size:12px;color:var(--text-mid);line-height:1.7;font-weight:300;margin-bottom:12px;}
+.offer-details.clamp{display:-webkit-box;-webkit-line-clamp:1;-webkit-box-orient:vertical;overflow:hidden;}
+.offer-valid{font-size:11px;color:var(--green-soft);font-weight:800;white-space:nowrap;margin-top:auto;padding-top:12px;border-top:1px solid rgba(0,0,0,0.06);}
+
+/* ── IMAGE MODAL ── */
+#img-modal-overlay{position:fixed;inset:0;background:rgba(0,0,0,0.75);backdrop-filter:blur(6px);z-index:12000;display:none;}
+#img-modal{position:fixed;inset:0;z-index:12001;display:none;align-items:center;justify-content:center;padding:18px;}
+#img-modal-inner{position:relative;max-width:min(980px, 96vw);max-height:86vh;background:#000;border-radius:14px;overflow:hidden;box-shadow:0 24px 90px rgba(0,0,0,0.55);}
+#img-modal-inner img{width:100%;height:100%;max-height:86vh;object-fit:contain;background:#000;}
+#img-close{position:absolute;top:10px;right:10px;width:40px;height:40px;border-radius:10px;background:rgba(255,255,255,0.12);border:1px solid rgba(255,255,255,0.22);color:#fff;font-size:20px;cursor:pointer;}
+#img-close:hover{background:rgba(255,255,255,0.22);}
+#img-prev,#img-next{position:absolute;top:50%;transform:translateY(-50%);width:44px;height:44px;border-radius:12px;background:rgba(255,255,255,0.12);border:1px solid rgba(255,255,255,0.22);color:#fff;font-size:18px;cursor:pointer;display:flex;align-items:center;justify-content:center;}
+#img-prev{left:10px;}#img-next{right:10px;}
+#img-prev:hover,#img-next:hover{background:rgba(255,255,255,0.22);}
+
+/* ── STYLISTS ──
+   FIX: Added border-radius and consistent spacing.
+── */
+.stylists-section{
+  padding:36px 0;
+  margin-bottom:24px;       /* ← FIX: added */
+}
+.stylists-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;margin-top:18px;} /* ← FIX: gap 3px→12px */
+.stylist-card{
+  background:#fff;
+  overflow:hidden;
+  border-radius:14px;       /* ← FIX: added */
+  border:1px solid rgba(0,0,0,0.06);
+}
+.stylist-photo{width:110px;height:110px;border-radius:50%;overflow:hidden;margin:20px auto 0;border:3px solid var(--gold);}
+.stylist-photo img{width:100%;height:100%;object-fit:cover;object-position:top;}
+.stylist-info{padding:14px;text-align:center;}
+.stylist-name{font-family:'Cormorant Garamond',serif;font-size:17px;color:var(--text);font-weight:400;margin-bottom:3px;}
+.stylist-spec{font-size:10px;color:var(--gold);letter-spacing:1px;text-transform:uppercase;margin-bottom:2px;}
+.stylist-exp{font-size:11px;color:var(--text-light);}
+
+/* ── REVIEWS ──
+   FIX: Added border-radius and consistent spacing.
+── */
+.reviews-block{
+  background:#fff;
+  padding:36px;
+  margin-bottom:24px;       /* ← FIX: was 3px */
+  border-radius:14px;       /* ← FIX: added */
+  border:1px solid rgba(0,0,0,0.06);
+  box-shadow:0 4px 16px rgba(0,0,0,0.04);
+}
+
+/* ── FOLLOW ── */
+.follow-block{padding:36px 0;text-align:center;margin-bottom:24px;}
+.bl-social-row{display:flex;justify-content:center;gap:20px;flex-wrap:wrap;margin-top:12px;}
+.bl-soc-link{display:flex;align-items:center;gap:12px;padding:12px 24px;border:1px solid rgba(0,0,0,0.12);border-radius:6px;color:var(--text-mid);font-size:11px;letter-spacing:1.5px;text-transform:uppercase;font-weight:600;transition:all 0.3s;text-decoration:none;min-width:160px;justify-content:center;background:#fff;box-sizing:border-box;}
+.bl-soc-link:hover{transform:translateY(-2px);box-shadow:0 6px 16px rgba(0,0,0,0.06);}
+.bl-soc-ig:hover{border-color:#E1306C;color:#E1306C;}
+.bl-soc-fb:hover{border-color:#1877F2;color:#1877F2;}
+
+/* ── SIDEBAR ── */
+.sb-inner{background:#fff;padding:28px;position:sticky;top:86px;border-radius:14px;border:1px solid rgba(0,0,0,0.06);} /* ← FIX: added border-radius + border */
+.sb-sec{font-size:9px;letter-spacing:3px;text-transform:uppercase;color:var(--text-light);font-weight:600;margin-bottom:10px;}
+.sb-divider{height:1px;background:rgba(0,0,0,0.06);margin:16px 0;}
+.h-row{display:flex;justify-content:space-between;font-size:12px;color:var(--text-mid);padding:5px 0;border-bottom:1px solid rgba(0,0,0,0.04);}
+.h-day{font-weight:500;color:var(--text);}
+
+/* ── STORE NAV ──
+   FIX: padding matches 60px gutter.
+── */
+.store-nav{
+  background:var(--dark);
+  padding:20px 60px;        /* ← already correct, keeping */
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  border-top:1px solid rgba(255,255,255,0.06);
+}
+.sn-link{font-size:11px;letter-spacing:2px;text-transform:uppercase;color:rgba(255,255,255,0.45);transition:color 0.3s;max-width:40%;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;}
+.sn-link:hover{color:var(--gold);}
+.sn-mid{font-size:10px;color:rgba(255,255,255,0.2);letter-spacing:2px;text-transform:uppercase;text-align:center;}
+
+/* ── RESPONSIVE ── */
+@media(max-width:1200px){
+  .page-wrap{padding:56px 40px;}
+  .hero-content{padding:60px 40px 48px;}
+  .info-bar{padding:0 40px;}
+  .rating-wrap-outer{padding:16px 40px;}
+  .store-nav{padding:20px 40px;}
+}
+@media(max-width:1100px){
+  .page-wrap{grid-template-columns:1fr;padding:40px 40px;}
+  .main-col{padding-right:0;}
+  .sb-inner{position:static;margin-top:36px;}
+  .hero-content{padding:48px 40px 32px;}
+}
+@media(max-width:768px){
+  .hero-content{padding:36px 20px 32px;}
+  .info-bar{grid-template-columns:1fr 1fr;padding:0 20px;}
+  .info-cell{padding:14px 16px;}
+  .about-grid{grid-template-columns:1fr;}
+  .about-img-wrap{height:260px;}
+  .offers-grid{grid-template-columns:1fr;}
+  .stylists-grid{grid-template-columns:1fr 1fr;}
+  .page-wrap{padding:28px 20px;}
+  .store-nav{padding:14px 20px;}
+  .rating-wrap-outer{padding:12px 20px;}
+}
+@media(max-width:480px){
+  .stylists-grid{grid-template-columns:1fr;}
+  .gallery-grid{grid-template-columns:1fr;}
+  .page-wrap{padding:20px 16px;}
+  .hero-content{padding:32px 16px 24px;}
+  .info-bar{padding:0 16px;}
+  .rating-wrap-outer{padding:10px 16px;}
+  .store-nav{padding:14px 16px;}
+  .bl-social-row{gap:16px;}
+  .bl-soc-link{min-width:140px;}
+}
+</style>
+
+{{ review_css() }}
+{{ theme_init_script() }}
+</head>
+
+<body>
+{{ tracking_body(gtm_id) }}
+
+{% include "header.j2" %}
+
+<!-- HERO -->
+<section class="hero">
+  <div class="hero-bg">
+    <img src="/images/heroes/{{ s.Store_Page_URL | replace('stores/','') | replace('.html','') }}.jpg"
+         alt="Naturals {{ s.store_display_name }}"
+         onerror="this.onerror=null;this.src='https://images.unsplash.com/photo-1522337360788-8b13dee7a37e?w=1800&q=85'">
+  </div>
+  <div class="hero-ov"></div>
+  <div class="hero-content">
+    <div class="hero-badge">Store {{ s.Hero_Number }} of {{ all_stores | length }} &middot; Bangalore</div>
+    <h1>{{ s.h1_heading | default(s.store_display_name + ' | Naturals Salon &amp; Spa ' + s.store_display_name) }}</h1>
+    <div class="hero-sub">
+      Premium hair, skin &amp; beauty services near {{ s.store_display_name }}
+      &middot; <a href="tel:{{ s.Phone_Tel }}" style="color:rgba(255,255,255,0.55);">{{ s.Phone_Display }}</a>
+    </div>
+    <div class="hero-cta-wrap">
+      <div class="hero-cta-row">
+        {{ btn_book(s.Appointment_URL, 'Book Now', '') | safe }}
+        {{ btn_wa(s.phone_whatsapp, 'WhatsApp', '') | safe }}
+        {{ btn_call(s.Phone_Tel, 'Call Us', '') | safe }}
+      </div>
+      <div class="hero-cta-row">
+        {% if s.get('Instagram_URL') and s.Instagram_URL not in ('','https://instagram.com/','https://instagram.com') %}
+        <a href="{{ s.Instagram_URL }}" target="_blank" rel="noopener" class="hero-cta-ig" aria-label="{{ s.store_display_name }} on Instagram">{{ ig_svg(22) }}</a>
+        {% else %}<div class="hero-cta-ph"></div>{% endif %}
+        {% if s.get('Facebook_URL') and s.Facebook_URL not in ('','https://facebook.com/','https://facebook.com') %}
+        <a href="{{ s.Facebook_URL }}" target="_blank" rel="noopener" class="hero-cta-fb" aria-label="{{ s.store_display_name }} on Facebook">{{ fb_svg(22) }}</a>
+        {% else %}<div class="hero-cta-ph"></div>{% endif %}
+        {{ btn_maps(s.Google_Maps_URL, 'Directions', '') | safe }}
+      </div>
+    </div>
+  </div>
+</section>
+
+{# Rating summary — wrapped in aligning div #}
+<div class="rating-wrap-outer">
+  {{ rating_summary(rating=s.get('Google_Rating','4.8'), count=s.get('Google_Reviews_Count','1,000+'), google_url=s.get('Google_Maps_URL','')) }}
+</div>
+
+<!-- INFO BAR -->
+<div class="info-bar">
+  <div class="info-cell">
+    <span class="info-icon">{{ calendar_svg(18) }}</span>
+    <div>
+      <div class="info-label">Book Online</div>
+      <a href="{{ s.Appointment_URL }}" target="_blank" class="info-val">Book Now</a>
+      <span class="info-val-sm">Available 24/7</span>
+    </div>
+  </div>
+  <div class="info-cell">
+    <span class="info-icon">{{ wa_svg(18) }}</span>
+    <div>
+      <div class="info-label">WhatsApp</div>
+      <a href="https://wa.me/{{ s.phone_whatsapp }}" class="info-val">{{ s.Phone_Display }}</a>
+    </div>
+  </div>
+  <div class="info-cell">
+    <span class="info-icon">{{ call_svg(18) }}</span>
+    <div>
+      <div class="info-label">Call Us</div>
+      <a href="tel:{{ s.Phone_Tel }}" class="info-val">{{ s.Phone_Display }}</a>
+    </div>
+  </div>
+  <div class="info-cell" style="min-width:0;">
+    <span class="info-icon">{{ maps_svg(18) }}</span>
+    <div style="min-width:0;overflow:hidden;">
+      <div class="info-label">Address</div>
+      <a href="{{ s.Google_Maps_URL }}" target="_blank" class="info-val" style="white-space:nowrap;overflow:hidden;text-overflow:ellipsis;">{{ s.Address_Full }}</a>
+    </div>
+    {% if s.local_neighborhood %}
+      <div class="info-label">Neighborhood</div>
+      <div class="info-val">{{ s.local_neighborhood }}</div>
+    {% endif %}
+    {% if s.nearby_landmarks %}
+      <div class="info-label">Nearby Landmarks</div>
+      <div class="info-val">{{ s.nearby_landmarks }}</div>
+    {% endif %}
+  </div>
+</div>
+
+<div class="page-wrap">
+  <div class="main-col">
+
+    <!-- ABOUT -->
+    <div class="about-grid reveal">
+      <div class="about-img-wrap">
+        <img src="/images/heroes/{{ s.Store_Page_URL | replace('stores/','') | replace('.html','') }}.jpg"
+             alt="Naturals {{ s.store_display_name }}" loading="lazy"
+             onerror="this.onerror=null;this.src='https://images.unsplash.com/photo-1560066984-138dadb4c035?w=900&q=85'">
+      </div>
+      <div>
+        <div class="lbl">Our Store</div>
+        <h2 class="sec-title">A premium experience<br>in <em>{{ s.store_display_name }}.</em></h2>
+        {% if s.get('seo_intro') %}
+          <p class="about-p">{{ s.seo_intro }}</p>
+        {% else %}
+          <p class="about-p">Naturals Salon &amp; Spa in {{ s.store_display_name }} is one of the most trusted salons in Bangalore for hair spa, haircuts, facials, and bridal services.</p>
+          <p class="about-p">Whether you're looking for a top-rated salon near {{ s.store_display_name }} or the best salon in Bangalore, our expert stylists deliver world-class results in a relaxed, luxurious setting.</p>
+        {% endif %}
+        {{ btn_book(s.Appointment_URL, 'Book Your Visit →', '') }}
+      </div>
+    </div>
+    
+    <!-- HOURS -->
+    <div class="info-bar reveal">
+      <div class="info-label">Opening Hours</div>
+      <div class="info-val">
+        <div itemscope itemtype="https://schema.org/OpeningHoursSpecification">
+          {% if s.mon_fri_hours %}
+            <meta itemprop="dayOfWeek" content="Friday" />
+            <meta itemprop="opens" content="{{ s.mon_fri_hours }}" />
+            <meta itemprop="closes" content="{{ s.saturday_hours }}" />
+          {% endif %}
+          {% if s.saturday_hours %}
+            <meta itemprop="dayOfWeek" content="Saturday" />
+            <meta itemprop="opens" content="{{ s.saturday_hours }}" />
+            <meta itemprop="closes" content="{{ s.sunday_hours }}" />
+          {% endif %}
+          {% if s.sunday_hours %}
+            <meta itemprop="dayOfWeek" content="Sunday" />
+            <meta itemprop="opens" content="{{ s.sunday_hours }}" />
+            <meta itemprop="closes" content="{{ s.sunday_hours }}" />
+          {% endif %}
+        </div>
+      </div>
+    </div>
+
+    <!-- SERVICES -->
+    <div class="services-offered-block reveal">
+      <div class="lbl">What We Offer</div>
+      <h2 class="sec-title">Our full <em>services menu.</em></h2>
+      <ul class="services-offered">
+        <li><span>Hair Spa</span> <span class="price">Premium</span></li>
+        <li><span>Facials</span> <span class="price">Premium</span></li>
+        <li><span>Hair Colour &amp; Highlights</span> <span class="price">Available</span></li>
+        <li><span>Men's Grooming &amp; Styling</span> <span class="price">Available</span></li>
+        <li><span>Bridal Makeup Packages</span> <span class="price">Available</span></li>
+      </ul>
+      <a href="../services/index.html" class="btn-secondary">View All Services &amp; Pricing &#8594;</a>
+    </div>
+
+    <!-- GALLERY -->
+    <div class="gallery-section reveal">
+      <div class="gallery-grid">
+        <img src="https://images.unsplash.com/photo-1521590832167-7bfcbaa63629?w=600&q=85" alt="Naturals Salon Interior" width="600" height="400" loading="lazy">
+        <img src="https://images.unsplash.com/photo-1560066984-138dadb4c035?w=600&q=85" alt="Hair Spa Service" width="600" height="400" loading="lazy">
+      </div>
+    </div>
+
+    <!-- OFFERS -->
+    {% if offers %}
+    <div class="offers-block reveal">
+      <div class="lbl">Current Offers</div>
+      <h2 class="sec-title">Deals &amp; <em>offers</em></h2>
+      <div class="offers-grid">
+      {% for offer in offers %}
+        <article class="offer-card"
+          data-valid="{{ offer.get('Valid_till','') }}"
+          data-expiry-iso="{{ offer.get('_expiry_iso','') }}"
+          data-valid-from-iso="{{ offer.get('_valid_from_iso','') }}"
+          data-image-available="{{ offer.get('Image_Available','') }}"
+          data-image-name="{{ offer.get('Image_Name','') }}"
+        >
+          <div class="offer-media">
+            <div class="ribbon" style="display:none;"></div>
+            {% if is_yes(offer.get('Image_Available','')) and offer.get('Image_Name','') %}
+              <img class="offer-img"
+                   data-img-base="/campaigns/offer/03_published/{{ offer.get('Image_Name','') }}"
+                   alt="{{ offer.get('Offer_Title','Offer') }}"
+                   width="400" height="300" loading="lazy">
+            {% else %}
+              <div style="position:absolute;inset:0;display:flex;align-items:center;justify-content:center;padding:18px;text-align:center;">
+                <div style="color:#fff;">
+                  <div style="font-size:11px;letter-spacing:3px;text-transform:uppercase;opacity:0.7;margin-bottom:10px;">Special Offer</div>
+                  <div style="font-family:'Cormorant Garamond',serif;font-size:28px;font-weight:300;line-height:1.05;margin-bottom:10px;">{{ offer.get('Offer_Title','') }}</div>
+                  <div style="font-size:12px;opacity:0.65;line-height:1.6;">{{ offer.get('Offer_Details','') }}</div>
+                </div>
+              </div>
+            {% endif %}
+          </div>
+          <div class="offer-body">
+            <div class="offer-badge">{{ s.store_display_name }}</div>
+            <div class="offer-title">{{ offer.get('Offer_Title','') }}</div>
+            <div class="offer-details clamp">{{ offer.get('Offer_Details','') }}</div>
+            {% if offer.get('Valid_till') %}
+            <div class="offer-valid">Valid till {{ offer.get('Valid_till','') }}</div>
+            {% endif %}
+          </div>
+        </article>
+      {% endfor %}
+      </div>
+      <p style="font-size:11px;color:var(--text-light);margin-top:12px;font-style:italic;">* Offers subject to availability. Contact store to confirm.</p>
+    </div>
+    {% endif %}
+
+    <!-- STYLISTS -->
+    {% if stylists %}
+    <div class="stylists-section reveal">
+      <div class="lbl">Our Team</div>
+      <h2 class="sec-title">Meet our <em>stylists</em></h2>
+      <div class="stylists-grid">
+      {% for stylist in stylists %}
+        <div class="stylist-card">
+          <div class="stylist-photo">
+            {% set stylist_name = stylist.get('stylist_name', stylist.get('Stylist_Name','')) %}
+            {% set stylist_slug = stylist_name | lower | replace(' ','_') | replace("'",'') %}
+            {% set has_profile_photo = stylist.get('has_profile_photo', 'no') %}
+            {% set stylist_gender = stylist.get('stylist_gender', 'male') %}
+            {% set gender_file = 'female' if stylist_gender == 'F' else 'male' %}
+            {% if has_profile_photo == 'yes' %}
+              <img src="{{ website_base_url }}/images/stylists/{{ stylist_slug }}.png"
+                   alt="{{ stylist_name }}" width="300" height="400" loading="lazy"
+                   onerror="this.onerror=null;this.src='{{ website_base_url }}/images/stylists/stylist_default_{{ gender_file }}.jpg'">
+            {% else %}
+              <img src="{{ website_base_url }}/images/stylists/stylist_default_{{ gender_file }}.jpg"
+                   alt="{{ stylist_name }}" width="300" height="400" loading="lazy">
+            {% endif %}
+          </div>
+          <div class="stylist-info">
+            <div class="stylist-name">{{ stylist_name }}</div>
+            {% set role = stylist.get('stylist_role', stylist.get('designation', stylist.get('Specialization',''))) %}
+            {% if role %}<div class="stylist-spec">{{ role }}</div>{% endif %}
+            {% set exp = stylist.get('experience_level', stylist.get('Experience','')) %}
+            {% if exp %}<div class="stylist-exp">{{ exp }} yrs experience</div>{% endif %}
+            <a href="{{ s.Appointment_URL }}" target="_blank" style="display:inline-block;margin-top:12px;font-size:10px;font-weight:600;color:var(--gold);text-transform:uppercase;letter-spacing:1px;text-decoration:none;">Book &#8594;</a>
+          </div>
+        </div>
+      {% endfor %}
+      </div>
+    </div>
+    {% endif %}
+
+    <!-- REVIEWS -->
+    {% if reviews %}
+    <div class="reviews-block reveal">
+      <div class="lbl">Client Love</div>
+      <h2 class="sec-title">What clients <em>say about us</em></h2>
+      <div class="rev-grid" style="grid-template-columns:1fr;gap:16px;margin-bottom:24px;">
+        {% for rev in reviews %}{{ review_card(rev) }}{% endfor %}
+      </div>
+      {% if s.google_review_link %}
+      <a href="{{ s.google_review_link }}" target="_blank" rel="noopener" class="btn-primary">
+        <span style="font-size:16px;line-height:1;">&#11088;</span> Rate Us on Google
+      </a>
+      {% endif %}
+    </div>
+    {% endif %}
+
+    <!-- FOLLOW -->
+    <div class="follow-block reveal">
+      <div class="lbl" style="justify-content:center;">Follow Us</div>
+      <h2 class="sec-title" style="text-align:center;">Stay connected <em>with us</em></h2>
+      <div class="bl-social-row">
+        {% if s.get('Instagram_URL') and s.Instagram_URL not in ('', 'https://instagram.com/', 'https://instagram.com') %}
+        <a href="{{ s.Instagram_URL }}" target="_blank" class="bl-soc-link bl-soc-ig">{{ ig_svg(20) }} Instagram</a>
+        {% endif %}
+        {% if s.get('Facebook_URL') and s.Facebook_URL not in ('', 'https://facebook.com/', 'https://facebook.com') %}
+        <a href="{{ s.Facebook_URL }}" target="_blank" class="bl-soc-link bl-soc-fb">{{ fb_svg(20) }} Facebook</a>
+        {% endif %}
+      </div>
+    </div>
+
+  </div>{# /.main-col #}
+
+  <!-- SIDEBAR -->
+  <div class="sidebar-col">
+    <div class="sb-inner">
+      <div class="sb-sec">Hours</div>
+      <div class="h-row"><span class="h-day">Mon &ndash; Fri</span><span>{{ s.Mon_Fri_Hours }}</span></div>
+      <div class="h-row"><span class="h-day">Saturday</span><span>{{ s.Saturday_Hours }}</span></div>
+      <div class="h-row"><span class="h-day">Sunday</span><span>{{ s.Sunday_Hours }}</span></div>
+      <div class="sb-divider"></div>
+      {% if s.google_review_link %}
+      <a href="{{ s.google_review_link }}" target="_blank" rel="noopener" class="btn-primary" style="width:100%;margin-bottom:4px;">
+        <span style="font-size:16px;line-height:1;">&#11088;</span> Rate Us on Google
+      </a>
+      {% endif %}
+    </div>
+  </div>
+
+</div>{# /.page-wrap #}
+
+<div class="store-nav">
+  <a href="{{ prev_store.Store_Page_URL }}" class="sn-link">&#8592; {{ prev_store.store_display_name }}</a>
+  <a href="../index.html#our-stores" class="sn-mid">All {{ all_stores | length }} Bangalore Locations</a>
+  <a href="{{ next_store.Store_Page_URL }}" class="sn-link">{{ next_store.store_display_name }} &#8594;</a>
+</div>
+
+{% include 'footer.j2' %}
+{{ stores_json(all_stores, '../') }}
+{{ store_picker_modal(all_stores, '../') }}
+{{ sticky_mobile_bar('store', s) }}
+{{ store_picker_js() }}
+{{ theme_toggle() }}
+
+<div id="img-modal-overlay" onclick="closeImgModal()"></div>
+<div id="img-modal" role="dialog" aria-modal="true" aria-label="Offer image">
+  <div id="img-modal-inner">
+    <button id="img-close" onclick="closeImgModal()" aria-label="Close">×</button>
+    <button id="img-prev" onclick="prevImg()" aria-label="Previous">‹</button>
+    <button id="img-next" onclick="nextImg()" aria-label="Next">›</button>
+    <img id="img-modal-src" alt="Offer image">
+  </div>
+</div>
+
+<script>
+(function(){
+  var EXT=['.jpg','.jpeg','.png'];
+  function hasExt(path){ return /\.[a-zA-Z0-9]{2,5}(\?.*)?$/.test(path||''); }
+  function attach(){
+    document.querySelectorAll('img.offer-img').forEach(function(img){
+      var base=img.getAttribute('data-img-base')||'';
+      if(!base) return;
+      if(hasExt(base)){ img.src=base; return; }
+      var i=0; img.src=base + EXT[i];
+      img.onerror=function(){
+        i++;
+        if(i<EXT.length) img.src=base + EXT[i];
+        else img.style.display='none';
+      };
+    });
+  }
+  (document.readyState==='loading') ? document.addEventListener('DOMContentLoaded', attach) : attach();
+})();
+</script>
+
+<script>
+(function(){
+  var now = "{{ now_ist_iso }}" ? new Date("{{ now_ist_iso }}") : new Date();
+  function daysBetween(a,b){ return Math.floor((b.getTime()-a.getTime())/86400000); }
+  document.querySelectorAll('.offer-card').forEach(function(card){
+    var rib=card.querySelector('.ribbon'); if(!rib) return;
+    var expIso=card.getAttribute('data-expiry-iso')||'';
+    var vfIso=card.getAttribute('data-valid-from-iso')||'';
+    var urgentDays=null;
+    if(expIso){ urgentDays=daysBetween(now,new Date(expIso)); }
+    var isUrgent=(urgentDays!==null && urgentDays>=0 && urgentDays<7);
+    var isNew=false;
+    if(vfIso){ var age=daysBetween(new Date(vfIso),now); isNew=(age>=0 && age<7); }
+    if(isUrgent){ rib.style.display='inline-flex'; rib.className='ribbon urgent'; rib.textContent='Ends in '+urgentDays+' day'+(urgentDays===1?'':'s'); }
+    else if(isNew){ rib.style.display='inline-flex'; rib.className='ribbon new'; rib.textContent='NEW'; }
+  });
+})();
+</script>
+
+<script>
+var gallerySrcs=[]; var galleryIndex=0;
+function rebuildGallerySet(){ gallerySrcs=[]; document.querySelectorAll('img.offer-img').forEach(function(img){ if(img.src) gallerySrcs.push(img.src); }); }
+function openImgModal(src){ rebuildGallerySet(); if(!src) return; galleryIndex=Math.max(0,gallerySrcs.indexOf(src)); document.getElementById('img-modal-src').src=src; document.getElementById('img-modal-overlay').style.display='block'; document.getElementById('img-modal').style.display='flex'; document.body.style.overflow='hidden'; }
+function closeImgModal(){ document.getElementById('img-modal-overlay').style.display='none'; document.getElementById('img-modal').style.display='none'; document.getElementById('img-modal-src').src=''; document.body.style.overflow=''; }
+function nextImg(){ if(!gallerySrcs.length) return; galleryIndex=(galleryIndex+1)%gallerySrcs.length; document.getElementById('img-modal-src').src=gallerySrcs[galleryIndex]; }
+function prevImg(){ if(!gallerySrcs.length) return; galleryIndex=(galleryIndex-1+gallerySrcs.length)%gallerySrcs.length; document.getElementById('img-modal-src').src=gallerySrcs[galleryIndex]; }
+document.addEventListener('DOMContentLoaded',function(){
+  document.querySelectorAll('img.offer-img').forEach(function(img){ img.addEventListener('click',function(){ openImgModal(img.src); }); });
+});
+document.addEventListener('keydown',function(e){
+  if(e.key==='Escape') closeImgModal();
+  if(document.getElementById('img-modal').style.display==='flex'){ if(e.key==='ArrowRight') nextImg(); if(e.key==='ArrowLeft') prevImg(); }
+});
+var io=new IntersectionObserver(function(entries){ entries.forEach(function(e,i){ if(e.isIntersecting){ setTimeout(function(){ e.target.classList.add('visible'); },i*80); io.unobserve(e.target); } }); },{threshold:0});
+document.querySelectorAll('.reveal').forEach(function(el){ io.observe(el); });
+</script>
+</body>
+</html>

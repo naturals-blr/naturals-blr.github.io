@@ -1,0 +1,1039 @@
+{% from "macros.j2" import full_footer, footer_css, wa_svg, fb_svg, ig_svg, theme_vars, theme_toggle,
+  theme_init_script, button_css, store_picker_modal, sticky_mobile_bar, store_picker_js,
+  hamburger_nav, tracking_head, tracking_body, stores_json, calendar_svg, call_svg, maps_svg, review_card, review_css, google_analytics, favicon_tags, format_phone %}
+{% from "action_buttons.j2" import action_buttons_css, action_buttons_js %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="description" content="{{ meta_description | default('Experience 5-star hair styling, coloring, and skin care at Naturals Elite Bangalore. Visit our premium studios in JP Nagar, Hennur, Frazer Town, Elements Mall, and our new Devasandra luxury location. Book your elite transformation today!') }}">
+<title>{{ seo_title | default('Naturals Elite Bangalore') }}</title>
+<meta name="google-site-verification" content="uYue97BBVQGUWI7yG8VmsZSIY_9-Pp2f8JFJbQ--7Rg" />
+<link rel="canonical" href="{{ canonical_url | default(site_url + '/') }}">
+<meta property="og:type" content="website">
+<meta property="og:title" content="{{ seo_title | default('Naturals Elite Bangalore') }}">
+<meta property="og:description" content="{{ meta_description | default('') }}">
+<meta property="og:image" content="{{ website_base_url }}{{ og_image | default('/images/og/og-home.jpg') }}">
+<meta property="og:url" content="{{ canonical_url | default(website_base_url + '/') }}">
+<meta property="og:site_name" content="Naturals Salon &amp; Spa Bangalore">
+<meta name="whatsapp-msg" content="{{ whatsapp_msg | default('') }}">
+{{ favicon_tags() }}
+<link rel="manifest" href="{{ website_base_url }}/site.webmanifest">
+<meta name="apple-mobile-web-app-title" content="Naturals Salon">
+<meta name="application-name" content="Naturals Salon">
+<meta name="msapplication-TileColor" content="#c9a84c">
+<meta name="theme-color" content="#c9a84c">
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=Jost:wght@300;400;500;600&display=swap" rel="stylesheet">
+{{ theme_init_script() }}
+{{ tracking_head(gtm_id, pixel_id) }}
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "{{ schema_type | default('Organization') }}",
+  "name": "{{ seo_title | default('Naturals Elite') }}",
+  "url": "{{ website_base_url }}",
+  "logo": "{{ website_base_url }}{{ og_image | default('/images/og/og-default.jpg') }}",
+  "description": "{{ meta_description | default('Bangalore\'s premier destination for luxury beauty and styling with 5 iconic locations.') }}",
+  "address": {
+    "@type": "PostalAddress",
+    "addressLocality": "{{ stores[0].address_city | default('Bangalore') }}",
+    "addressRegion": "{{ stores[0].address_state | default('Karnataka') }}",
+    "addressCountry": "IN"
+  },
+  "contactPoint": {
+    "@type": "ContactPoint",
+    "telephone": "+{{ stores[0].phone_mobile | default('918792642299') }}",
+    "contactType": "customer service"
+  },
+  "sameAs": [
+    "https://www.facebook.com/NaturalsSalon/",
+    "https://www.instagram.com/naturalssalon/"
+  ],
+  "subOrganization": [
+    {% for store in stores %}
+    {
+      "@type": "HairSalon",
+      "name": "Naturals Salon & Spa {{ store.store_display_name }}",
+      "url": "{{ website_base_url }}/stores/{{ (store.address_city|default('bangalore'))|lower|replace(' ', '-') }}/{{ store.slug|default(store.store_display_name)|lower|replace(' ', '-') }}/",
+      "image": "{{ website_base_url }}/images/stores/{{ store.slug|default(store.store_display_name)|lower|replace(' ', '-') }}/cover.jpg",
+      "address": {
+        "@type": "PostalAddress",
+        "streetAddress": "{{ store.address_full }}",
+        "addressLocality": "{{ store.address_city|default('Bangalore') }}",
+        "addressRegion": "{{ store.address_state|default('Karnataka') }}",
+        "postalCode": "{{ store.address_pincode }}",
+        "addressCountry": "IN"
+      },
+      "geo": {
+        "@type": "GeoCoordinates",
+        "latitude": {{ store.schema_latitude | default('12.971599') }},
+        "longitude": {{ store.schema_longitude | default('77.594562') }}
+      },
+      "telephone": "+{{ store.phone_mobile }}",
+      "areaServed": {{ store.nearby_landmarks.split(',') | map('trim') | list | tojson if store.nearby_landmarks else [] }},
+      "google_place_id": "{{ store.google_place_id | default('') }}"
+    }{% if not loop.last %},{% endif %}
+    {% endfor %}
+  ]
+}
+</script>
+
+<style>
+{{ theme_vars() }}
+*{margin:0;padding:0;box-sizing:border-box;}
+html{scroll-behavior:smooth;}
+body{font-family:'Jost',sans-serif;background:var(--cream);color:var(--text);overflow-x:hidden;}
+img{display:block;width:100%;object-fit:cover;}
+a{text-decoration:none;color:inherit;}
+
+/* HERO */
+.hero{height:100vh;min-height:700px;position:relative;display:flex;align-items:center;justify-content:center;overflow:hidden;}
+.hero-bg{position:absolute;inset:0;}
+.hero-bg img{height:100%;object-fit:cover;}
+.hero-ov{position:absolute;inset:0;background:linear-gradient(135deg,var(--hero-tint) 0%,var(--hero-tint2) 60%,rgba(0,0,0,0.1) 100%);}
+.hero-inner{position:relative;z-index:2;text-align:center;padding:0 24px;max-width:800px;}
+.hero-tag{display:inline-flex;align-items:center;gap:12px;font-size:9px;letter-spacing:5px;text-transform:uppercase;color:var(--gold);font-weight:600;margin-bottom:24px;}
+.hero-tag::before,.hero-tag::after{content:'';width:24px;height:1px;background:var(--gold);}
+.hero h1{font-family:'Cormorant Garamond',serif;font-size:clamp(36px,5vw,68px);font-weight:300;color:#fff;line-height:0.95;margin-bottom:16px;}
+.hero h1 em{font-style:italic;color:var(--gold);}
+.hero-sub{font-size:14px;color:rgba(255,255,255,0.7);font-weight:300;line-height:1.8;max-width:650px;margin:0 auto 40px;}
+.hero-btns{display:flex;gap:14px;justify-content:center;flex-wrap:wrap;}
+.hero .btn-secondary{background:transparent;color:#fff;border-color:rgba(255,255,255,0.4);}
+.hero .btn-secondary:hover{border-color:#fff;background:rgba(255,255,255,0.1);}
+
+.lbl{font-size:9px;letter-spacing:5px;text-transform:uppercase;color:var(--gold);font-weight:600;margin-bottom:16px;display:flex;align-items:center;gap:12px;}
+.lbl::before{content:'';width:18px;height:1px;background:var(--gold);}
+.sec-hdr{text-align:center;max-width:600px;margin:0 auto 52px;}
+.sec-hdr .lbl{justify-content:center;}
+.sec-hdr .lbl::before{display:none;}
+.sec-hdr h2{font-family:'Cormorant Garamond',serif;font-size:clamp(36px,5vw,60px);font-weight:300;line-height:1;margin-bottom:16px;}
+.sec-hdr h2 em{font-style:italic;color:var(--green-mid);}
+.sec-hdr p{font-size:14px;color:var(--text-mid);font-weight:300;line-height:1.8;}
+.reveal{opacity:0;transform:translateY(24px);transition:opacity 0.7s ease,transform 0.7s ease;}
+.reveal.visible{opacity:1;transform:translateY(0);}
+
+/* STORES */
+.stores-sec{background:var(--dark);}
+.stores-sec .sec-hdr h2{color:#fff;}
+.stores-sec .sec-hdr h2 em{color:var(--green-soft);}
+.stores-sec .sec-hdr p{color:rgba(255,255,255,0.4);}
+.st-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;max-width:1100px;margin:0 auto;}
+.st-card{background:#fff;overflow:hidden;transition:transform 0.3s,box-shadow 0.3s;display:flex;flex-direction:column;border:1px solid rgba(0,0,0,0.08);border-radius:14px;box-shadow:0 2px 12px rgba(0,0,0,0.07);min-height:300px;}
+.st-card:hover{transform:translateY(-4px);box-shadow:0 12px 48px rgba(0,0,0,0.3);}
+.st-card-head{
+  background:var(--dark);padding:20px 22px;border-bottom:2px solid var(--green);border-radius:14px 14px 0 0;
+  display:block;text-decoration:none;transition:background 0.2s;
+}
+.st-card-head:hover{background:#1e2b24;}
+[data-theme="naturals"] .st-card-head{border-bottom-color:var(--green-mid);}
+.st-card-num{font-family:'Cormorant Garamond',serif;font-size:13px;color:rgba(255,255,255,0.2);letter-spacing:3px;margin-bottom:4px;}
+.st-card-name{font-family:'Cormorant Garamond',serif;font-size:20px;color:#fff;font-weight:400;line-height:1.1;}
+.st-card-area{font-size:9px;letter-spacing:2px;text-transform:uppercase;color:var(--gold);margin-top:3px;}
+.st-card-body{padding:16px 22px 20px;flex:1;display:flex;flex-direction:column;}
+.st-card-addr{font-size:11px;color:var(--text-light);line-height:1.5;flex:1;margin-bottom:14px;}
+.st-card-actions{display:flex;flex-direction:column;gap:8px;}
+.st-icon-row{display:flex;gap:10px;justify-content:center;margin-bottom:10px;}
+.st-btn{
+  width:40px;height:40px;border-radius:12px;
+  display:inline-flex;align-items:center;justify-content:center;
+  border:1px solid rgba(0,0,0,0.10);
+  transition:transform 0.2s, box-shadow 0.2s, opacity 0.2s;
+  text-decoration:none;color:#fff;font-size:18px;
+}
+.st-btn:hover{transform:translateY(-1px);box-shadow:0 8px 18px rgba(0,0,0,0.12);}
+
+.st-btn-book{background:#1A73E8;border-color:rgba(26,115,232,0.45);}
+.st-btn-wa{background:#25D366;border-color:rgba(37,211,102,0.45);}
+.st-btn-call{background:#5F6368;border-color:rgba(95,99,104,0.45);}
+.st-btn-maps{background:#A82424;border-color:rgba(168,36,36,0.45);}
+.st-btn-ig{background:#fff;border-color:rgba(225,48,108,0.25);}
+.st-btn-fb{background:#fff;border-color:rgba(24,119,242,0.30);}
+.st-btn svg{width:18px;height:18px;display:block;}
+.st-btn-book svg{fill:#fff;}
+.st-btn-wa svg{fill:#fff;}
+.st-btn-call svg{fill:#fff;}
+.st-btn-maps svg{fill:#fff;}
+.st-btn-ph{background:transparent;border:none;pointer-events:none;visibility:hidden;}
+.st-info-row{display:flex;justify-content:center;}
+.st-view-btn{
+  border:1px solid rgba(0,0,0,0.14);color:var(--text-mid);
+  padding:9px 28px;font-size:10px;min-height:36px;
+  letter-spacing:1.5px;text-transform:uppercase;font-weight:700;
+  display:inline-flex;align-items:center;gap:6px;
+  transition:all 0.2s;border-radius:10px;background:#fff;text-decoration:none;
+}
+.st-view-btn:hover{border-color:var(--gold);color:var(--gold);}
+
+/* SERVICES (unchanged structure) */
+.services-sec{background:var(--cream);}
+.svc-cats-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;margin-bottom:48px;}
+.svc-cat-card{background:#fff;overflow:hidden;border-radius:14px;border:1px solid rgba(0,0,0,0.07);transition:all 0.3s;cursor:pointer;display:flex;flex-direction:column;}
+.svc-cat-card:hover{transform:translateY(-4px);box-shadow:0 12px 36px rgba(0,0,0,0.1);border-color:var(--gold);}
+.svc-cat-img{height:180px;overflow:hidden;flex-shrink:0;}
+.svc-cat-img img{width:100%;height:100%;object-fit:cover;transition:transform 0.6s ease;}
+.svc-cat-card:hover .svc-cat-img img{transform:scale(1.05);}
+.svc-cat-body{padding:20px 22px 24px;display:flex;flex-direction:column;flex:1;}
+.svc-cat-icon{font-size:22px;margin-bottom:8px;display:block;}
+.svc-cat-name{font-family:'Cormorant Garamond',serif;font-size:20px;font-weight:400;color:var(--text);margin-bottom:6px;line-height:1.1;}
+.svc-cat-desc{font-size:12px;color:var(--text-mid);line-height:1.7;font-weight:300;flex:1;}
+.svc-cat-price{margin-top:12px;font-size:13px;font-weight:700;color:var(--green-mid);}
+
+/* OFFERS (homepage) */
+.offers-sec{background:var(--dark);}
+.offers-sec .sec-hdr h2{color:#fff;}
+.offers-sec .sec-hdr h2 em{color:var(--gold);}
+.offers-sec .sec-hdr p{color:rgba(255,255,255,0.4);}
+.offers-sec .btn-secondary{background:transparent;color:#fff;border-color:rgba(255,255,255,0.4);}
+.offers-sec .btn-secondary:hover{border-color:#fff;background:rgba(255,255,255,0.1);}
+.home-offers-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;margin-bottom:32px;}
+.hoc{background:rgba(255,255,255,0.04);border:1px solid rgba(255,255,255,0.08);border-radius:14px;overflow:hidden;transition:all 0.25s;display:flex;flex-direction:column;}
+.hoc:hover{background:rgba(255,255,255,0.07);border-color:var(--gold);transform:translateY(-2px);}
+.hoc-media{height:180px;background:linear-gradient(135deg,var(--dark) 0%,var(--green) 100%);position:relative;overflow:hidden;}
+.hoc-media img{width:100%;height:100%;object-fit:cover;cursor:zoom-in;transition:transform 0.7s ease;}
+.hoc:hover .hoc-media img{transform:scale(1.04);}
+.hoc-body{padding:18px 18px 16px;display:flex;flex-direction:column;flex:1;}
+.hoc-badge{font-size:9px;letter-spacing:3px;text-transform:uppercase;color:var(--gold);font-weight:700;margin-bottom:10px;}
+.hoc-title{font-family:'Cormorant Garamond',serif;font-size:22px;color:#fff;font-weight:300;margin-bottom:8px;line-height:1.2;}
+.hoc-details{font-size:12px;color:rgba(255,255,255,0.42);line-height:1.7;font-weight:300;margin-bottom:12px;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden;}
+.hoc-meta{display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:8px;padding-top:12px;border-top:1px solid rgba(255,255,255,0.08);}
+.hoc-store{font-size:10px;color:rgba(255,255,255,0.35);letter-spacing:1px;text-transform:uppercase;}
+.hoc-store a{color:inherit;text-decoration:none;}
+.hoc-store a:hover{color:var(--gold);}
+.hoc-valid{font-size:11px;color:var(--green-soft);font-weight:700;}
+
+.offer-more{display:inline-flex;gap:6px;align-items:center;font-size:11px;color:var(--green-soft);cursor:pointer;margin-top:-6px;margin-bottom:12px;font-weight:600;}
+.offer-more:hover{text-decoration:underline;}
+
+.offers-view-all{text-align:center;}
+
+/* IMAGE-ONLY MODAL (gallery for featured offers) */
+#ho-img-overlay{position:fixed;inset:0;background:rgba(0,0,0,0.75);backdrop-filter:blur(6px);z-index:15000;display:none;}
+#ho-img-modal{position:fixed;inset:0;z-index:15001;display:none;align-items:center;justify-content:center;padding:18px;}
+#ho-img-inner{position:relative;max-width:min(980px,96vw);max-height:86vh;background:#000;border-radius:14px;overflow:hidden;box-shadow:0 24px 90px rgba(0,0,0,0.55);}
+#ho-img-inner img{width:100%;height:100%;max-height:86vh;object-fit:contain;background:#000;}
+.ho-x{position:absolute;top:10px;right:10px;width:40px;height:40px;border-radius:10px;background:rgba(255,255,255,0.12);border:1px solid rgba(255,255,255,0.22);color:#fff;font-size:20px;cursor:pointer;}
+.ho-x:hover{background:rgba(255,255,255,0.22);}
+.ho-nav{
+  position:absolute;top:50%;transform:translateY(-50%);
+  width:44px;height:44px;border-radius:12px;
+  background:rgba(255,255,255,0.12);border:1px solid rgba(255,255,255,0.22);
+  color:#fff;font-size:18px;cursor:pointer;
+  display:flex;align-items:center;justify-content:center;
+}
+.ho-prev{left:10px;} .ho-next{right:10px;}
+.ho-nav:hover{background:rgba(255,255,255,0.22);}
+
+</style>
+{{ button_css() }}
+{{ action_buttons_css() }}
+{{ footer_css() }}
+{{ review_css() }}
+<style>
+
+@media(max-width:992px){
+  .st-grid{grid-template-columns:1fr 1fr;}
+  .svc-cats-grid{grid-template-columns:1fr 1fr;}
+  .home-offers-grid{grid-template-columns:1fr;}
+  .rev-grid{grid-template-columns:repeat(auto-fill, minmax(300px, 1fr));gap:15px;}
+  .stores-sec,.services-sec,.offers-sec,.reviews-sec{padding:60px 20px;}
+}
+@media(max-width:600px){
+  .hero h1{font-size:clamp(32px,8vw,48px);}
+  .hero-btns{flex-direction:column;align-items:center;}
+  .st-grid{grid-template-columns:1fr;}
+  .svc-cats-grid{grid-template-columns:1fr;}
+  .rev-grid{grid-template-columns:1fr;}
+}
+
+/* Open Now Badge */
+.st-open-now{position:absolute;top:12px;right:12px;z-index:2;}
+.st-open-now .status-dot{width:6px;height:6px;border-radius:50%;background:var(--text-light);display:inline-block;margin-right:4px;}
+.st-open-now .status-text{font-size:10px;font-weight:600;color:var(--text-mid);display:inline-block;}
+.st-open-now.status-open .status-dot{background:#28a745;}
+.st-open-now.status-open .status-text{color:#28a745;}
+.st-open-now.status-closed .status-dot{background:#dc3545;}
+.st-open-now.status-closed .status-text{color:#dc3545;}
+</style>
+</head>
+<body>
+{{ tracking_body(gtm_id) }}
+
+{% set base_path = '' %}
+{% set active_page = 'home' %}
+{% include "header.j2" %}
+
+<section class="hero" aria-label="Hero">
+  <div class="hero-bg">
+    <img src="/images/heroes/home.jpg" alt="Naturals Salon & Spa Bangalore — premium beauty services"
+         width="1800" height="1200"
+         onerror="this.src='https://images.unsplash.com/photo-1522337360788-8b13dee7a37e?w=1800&q=85'"
+         loading="eager"
+         fetchpriority="high">
+  </div>
+  <div class="hero-ov" aria-hidden="true"></div>
+  <div class="hero-inner">
+    <div class="hero-tag">5 Iconic Locations. 1 Elite Standard of Excellence.</div>
+    <h1>{{ h1_heading | default("Bangalore's Premier Destination for Luxury Beauty &amp;<em>Styling</em>") }}</h1>
+    <p class="hero-sub">{{ stores|length }} locations &middot; Expert stylists &middot; World-class services</p>
+    <div class="hero-btns">
+      <button onclick="openStorePicker()" class="btn-primary">{{ calendar_svg(18) }} Book Now</button>
+      <button onclick="openStorePicker()" class="btn-secondary">{{ maps_svg(18) }} Choose Your Store</button>
+    </div>
+  </div>
+</section>
+
+<section class="stores-sec section" id="our-stores" aria-label="Our store locations">
+  <div class="sec-hdr reveal">
+    <div class="lbl">Our Locations</div>
+    <h2>{{ stores|length }} stores.<br><em>One city.</em></h2>
+    <p>Walk in or book online — premium beauty services across Bangalore.</p>
+  </div>
+
+  <div class="st-grid">
+  {% for store in stores %}
+    <div class="st-card reveal">
+      <a href="/stores/{{ store.address_city|lower|replace(' ', '-') if store.address_city else 'bangalore' }}/{{ store.slug|lower if store.slug else (store.store_display_name|lower|replace(' ', '-')) }}/" class="st-card-head" aria-label="View {{ store.store_display_name }}">
+        <div class="st-card-num">0{{ loop.index }}</div>
+        <div class="st-card-name">{{ store.store_display_name }}</div>
+        <div class="st-card-area">{{ store.store_display_name }} &middot; {{ store.Pincode }}</div>
+        {% if store.mon_fri_hours %}
+          <div class="st-open-now" data-store-id="{{ store.Store_ID }}" data-hours="{{ store.mon_fri_hours }}" data-sat-hours="{{ store.saturday_hours }}" data-sun-hours="{{ store.sunday_hours }}">
+            <span class="status-dot"></span>
+            <span class="status-text">Checking...</span>
+          </div>
+        {% endif %}
+      </a>
+
+      <div class="st-card-body">
+        <div class="st-card-addr">{{ maps_svg(14, 'var(--gold)') }} {{ store.Address_Full }}</div>
+
+        <div class="st-card-actions">
+          <div class="st-icon-row">
+            <a class="st-btn st-btn-book" href="{{ store.appointment_url }}" target="_blank" rel="noopener" aria-label="Book at {{ store.store_display_name }}">{{ calendar_svg(18) }}</a>
+            <a class="st-btn st-btn-wa" href="https://wa.me/+{{ store.phone_whatsapp }}" target="_blank" rel="noopener" aria-label="WhatsApp {{ store.store_display_name }}">{{ wa_svg(18) }}</a>
+            <a class="st-btn st-btn-call" href="tel:+{{ store.phone_mobile }}" aria-label="Call {{ store.store_display_name }}">{{ call_svg(18) }}</a>
+          </div>
+          <div class="st-icon-row">
+            {% if store.get('instagram_url') and store.instagram_url not in ('','https://instagram.com/','https://instagram.com') %}
+            <a class="st-btn st-btn-ig" href="{{ store.instagram_url }}" target="_blank" rel="noopener" aria-label="{{ store.store_display_name }} on Instagram">{{ ig_svg(18) }}</a>
+            {% else %}
+            <div class="st-btn st-btn-ph"></div>
+            {% endif %}
+            {% if store.get('facebook_url') and store.facebook_url not in ('','https://facebook.com/','https://facebook.com') %}
+            <a class="st-btn st-btn-fb" href="{{ store.facebook_url }}" target="_blank" rel="noopener" aria-label="{{ store.store_display_name }} on Facebook">{{ fb_svg(18) }}</a>
+            {% else %}
+            <div class="st-btn st-btn-ph"></div>
+            {% endif %}
+            <a class="st-btn st-btn-maps" href="{{ store.Google_Maps_URL }}" target="_blank" rel="noopener" aria-label="Directions to {{ store.store_display_name }}">{{ maps_svg(18) }}</a>
+          </div>
+          <div class="st-info-row">
+            <a class="st-view-btn" href="/stores/{{ store.address_city|lower|replace(' ', '-') if store.address_city else 'bangalore' }}/{{ store.slug|lower if store.slug else (store.store_display_name|lower|replace(' ', '-')) }}/" aria-label="View {{ store.store_display_name }}">Info &#8594;</a>
+          </div>
+        </div>
+      </div>
+    </div>
+  {% endfor %}
+  </div>
+</section>
+
+<section class="services-sec" id="services" aria-label="Our services">
+  <div class="sec-hdr reveal">
+    <div class="lbl">What We Offer</div>
+    <h2>Services crafted<br>for <em>every you.</em></h2>
+    <p>From precision cuts to bridal transformations — world-class beauty at every visit.</p>
+  </div>
+
+  {%- set svc_data = service_categories if service_categories else [
+    {'name': 'Haircuts & Styling', 'icon_name': 'service_default.jpg', 'href': 'services/'},
+    {'name': 'Hair Colour & Highlights', 'icon_name': 'service_default.jpg', 'href': 'services/'},
+    {'name': 'Hair Spa & Treatments', 'icon_name': 'service_default.jpg', 'href': 'services/'},
+    {'name': 'Skin Care & Facials', 'icon_name': 'service_default.jpg', 'href': 'services/'},
+    {'name': 'Bridal & Makeup', 'icon_name': 'service_default.jpg', 'href': 'services/'},
+] -%}
+
+  <div class="svc-cats-grid">
+    {% for svc in svc_data[:service_categories_count] %}
+    <a href="{{ svc.href }}" class="svc-cat-card reveal" aria-label="{{ svc.name }} services">
+      <div class="svc-cat-img">
+        <img src="/images/service-icon/{{ svc.icon_name }}" 
+             alt="{{ svc.name }}" 
+             width="400" height="300" 
+             loading="lazy" 
+             onerror="this.src='/images/service-icon/service_default.jpg'">
+      </div>
+      <div class="svc-cat-body">
+        <div class="svc-cat-name">{{ svc.name }}</div>
+        {% if min_prices.get(svc.name) %}
+        <div class="svc-cat-price">from &#8377;{{ min_prices[svc.name] }}</div>
+        {% endif %}
+      </div>
+    </a>
+    {% endfor %}
+  </div>
+
+  <div class="view-all reveal" style="text-align:center;">
+    <a href="about/index.html" class="btn-secondary">About Us</a>
+  </div>
+</section>
+
+<section class="offers-sec" id="offers" aria-label="Current offers">
+  <div class="sec-hdr reveal">
+    <div class="lbl">Exclusive Deals</div>
+    <h2>Current <em>offers</em></h2>
+    <p>Seasonal deals and promotions across all our Bangalore locations.</p>
+  </div>
+
+  <div class="home-offers-grid" id="home-offers-grid">
+  {% for offer in featured_offers %}
+    {% set offer_store = stores | selectattr('Store_ID','equalto',offer.get('Store_ID','')) | first %}
+    <div class="hoc reveal"
+         data-image-available="{{ offer.get('has_media','') }}"
+         data-image-name="{{ offer.get('media_asset_name','') }}"
+         data-offer-title="{{ offer.get('content_title','Offer') }}">
+      <div class="hoc-media">
+        {% if is_yes(offer.get('has_media','')) and offer.get('media_asset_name','') %}
+          <img class="home-offer-img"
+               data-img-base="/campaigns/offer/03_published/{{ offer.get('media_asset_name','') }}"
+               alt="{{ offer.get('content_title','Offer') }}"
+               width="400" height="300"
+               loading="lazy">
+          <div class="img-actions">
+            <button class="img-action-btn" onclick="downloadImage(this)" title="Download Image">
+              <svg viewBox="0 0 24 24"><path d="M19 9h-4V3H9v6H5l7 7 7-7zM5 18v2h14v-2H5z"/></svg>
+            </button>
+            <button class="img-action-btn" onclick="shareContent(this)" title="Share Offer">
+              <svg viewBox="0 0 24 24"><path d="M18 16.08c-.76 0-1.44.3-1.96.77L8.91 12.7c.05-.23.09-.46.09-.7s-.04-.47-.09-.7l7.05-4.11c.54.5 1.25.81 2.04.81 1.66 0 3-1.34 3-3s-1.34-3-3-3-3 1.34-3 3c0 .24.04.47.09.7L8.04 9.81C7.5 9.31 6.79 9 6 9c-1.66 0-3 1.34-3 3s1.34 3 3 3c.79 0 1.5-.31 2.04-.81l7.12 4.16c-.05.21-.08.43-.08.65 0 1.61 1.31 2.92 2.92 2.92 1.61 0 2.92-1.31 2.92-2.92s-1.31-2.92-2.92-2.92z"/></svg>
+            </button>
+          </div>
+        {% endif %}
+      </div>
+
+      <div class="hoc-body">
+        <div class="hoc-badge">Special Offer</div>
+        <div class="hoc-title">{{ offer.get('content_title','') }}</div>
+        {% set details = offer.get('content_body','') %}
+        <div class="hoc-details">{{ details }}</div>
+        {% if details and details|length > 60 %}
+          <div class="offer-more" onclick="openDetailsModal(this)" role="button" tabindex="0">Read more <span>&rarr;</span></div>
+        {% endif %}
+        <div class="hoc-meta">
+          <div class="hoc-store">
+            {% if offer_store %}
+              <a href="/stores/{{ offer_store.address_city|lower|replace(' ', '-') if offer_store.address_city else 'bangalore' }}/{{ offer_store.slug|lower if offer_store.slug else (offer_store.store_display_name|lower|replace(' ', '-')) }}/">{{ offer_store.store_display_name }}</a>
+            {% endif %}
+          </div>
+          <div class="hoc-valid">Valid till {{ offer.get('end_date','') }}</div>
+        </div>
+      </div>
+    </div>
+  {% else %}
+    <div class="hoc reveal" style="grid-column:1/-1;text-align:center;padding:40px;">
+      <div class="hoc-title" style="color:rgba(255,255,255,0.4);">Check back soon for new offers.</div>
+    </div>
+  {% endfor %}
+  </div>
+
+  <div class="offers-view-all">
+    <a href="/offers/" class="btn-secondary">View All Offers &#8594;</a>
+  </div>
+</section>
+
+{% if featured_reviews %}
+<section class="reviews-sec" id="testimonials" aria-label="Customer reviews" style="padding:100px 60px;">
+  <div class="sec-hdr reveal">
+    <div class="lbl">Social Proof</div>
+    <h2>Grateful <em>stories.</em></h2>
+    <p>Real experiences from our customers across Bangalore stores.</p>
+  </div>
+  
+  <!-- Review Snippets: Only show latest 4 reviews -->
+  <div class="reviews-snippet">
+    <div class="rev-grid">
+      {% for rev in featured_reviews[:4] %}
+        {% set rev_store = stores | selectattr('Store_ID','equalto',rev.Store_ID) | first %}
+        {{ review_card(rev, rev_store.store_display_name if rev_store else '') }}
+      {% endfor %}
+    </div>
+  </div>
+  
+  <!-- Read All Reviews Button -->
+  {% if featured_reviews|length > 2 %}
+  <button class="read-all-btn" onclick="openModal()">
+    <svg fill="currentColor" viewBox="0 0 24 24">
+      <path d="M12 2l3.09 6.26L22 9.27l-6.91 1.01L12 22l-3.09-5.72L2 9.27l6.91-1.01L12 2z"/>
+    </svg>
+    View All 5-Star Reviews
+  </button>
+  {% endif %}
+</section>
+{% endif %}
+
+<!-- Neighborhood Cluster Footer -->
+<section class="neighborhood-cluster" style="background:var(--dark);padding:60px 40px;text-align:center;">
+  <div class="sec-hdr" style="margin-bottom:40px;">
+    <div class="lbl" style="font-size:11px;letter-spacing:2px;text-transform:uppercase;color:var(--gold);font-weight:600;margin-bottom:12px;">Elite Locations</div>
+    <h2 style="font-family:'Cormorant Garamond',serif;font-size:38px;font-weight:300;color:#fff;line-height:1.2;">Serving Bangalore's <em style="color:var(--gold);font-style:italic;">Premium Neighborhoods</em></h2>
+    <p style="font-size:15px;color:rgba(255,255,255,0.6);max-width:600px;margin:16px auto 0;">Find Naturals Elite in these iconic Bangalore locations, each offering premium beauty experiences</p>
+  </div>
+  
+  <div class="stores-grid" style="display:grid;grid-template-columns:repeat(auto-fit,minmax(320px,1fr));gap:24px;max-width:1200px;margin:0 auto;">
+    {% for store in stores %}
+      {% if store.local_neighborhood %}
+        {% set store_slug = store.store_display_name | lower | replace(' ', '-') | replace('&', 'and') %}
+        {% set landmarks = store.nearby_landmarks | default('') %}
+        {% set landmarks_list = landmarks.split(',') if landmarks else [] %}
+        <div class="store-card" style="background:rgba(255,255,255,0.03);border:1px solid rgba(255,255,255,0.08);border-radius:16px;padding:28px;text-align:left;transition:all 0.3s ease;position:relative;overflow:hidden;" onmouseover="this.style.background='rgba(255,255,255,0.06)';this.style.borderColor='rgba(201,168,76,0.3)';this.style.transform='translateY(-4px)';" onmouseout="this.style.background='rgba(255,255,255,0.03)';this.style.borderColor='rgba(255,255,255,0.08)';this.style.transform='translateY(0)';">
+          <!-- Gold accent border-left -->
+          <div style="position:absolute;left:0;top:0;bottom:0;width:4px;background:var(--gold);"></div>
+          
+          <!-- Store Name -->
+          <h3 style="font-family:'Cormorant Garamond',serif;font-size:26px;font-weight:400;color:#fff;margin-bottom:6px;text-transform:capitalize;letter-spacing:0.5px;">{{ store.store_display_name }}</h3>
+          
+          <!-- Subtitle -->
+          <p style="font-size:12px;color:rgba(255,255,255,0.5);font-style:italic;margin-bottom:20px;">Serving {{ store.local_neighborhood }}</p>
+          
+          <!-- Landmark Badges - Minimalist Column Layout -->
+          <div style="margin-bottom:16px;">
+            <div style="font-size:10px;letter-spacing:2.5px;text-transform:uppercase;color:var(--gold);font-weight:600;margin-bottom:12px;">Near Key Landmarks</div>
+            <div class="landmark-badges" style="display:grid;grid-template-columns:1fr 1fr;gap:6px 12px;">
+              {% for landmark in landmarks_list %}
+                {% if landmark | trim %}
+                  <span style="display:flex;align-items:center;gap:6px;font-size:12px;color:rgba(255,255,255,0.7);white-space:nowrap;overflow:hidden;text-overflow:ellipsis;" title="{{ landmark | trim }}">
+                    <svg width="6" height="6" viewBox="0 0 24 24" fill="var(--gold)" style="flex-shrink:0;margin-top:1px;"><circle cx="12" cy="12" r="6"/></svg>
+                    {{ landmark | trim }}
+                  </span>
+                {% endif %}
+              {% endfor %}
+            </div>
+          </div>
+          
+          <!-- View on Maps Button -->
+          <a href="{{ store.google_maps_url | default('#') }}" target="_blank" rel="noopener" style="display:inline-flex;align-items:center;gap:8px;padding:10px 18px;background:transparent;border:1px solid var(--gold);border-radius:8px;color:var(--gold);font-size:12px;font-weight:500;text-decoration:none;transition:all 0.2s ease;" onmouseover="this.style.background='var(--gold)';this.style.color='var(--dark)';" onmouseout="this.style.background='transparent';this.style.color='var(--gold)';">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5c-1.38 0-2.5-1.12-2.5-2.5s1.12-2.5 2.5-2.5 2.5 1.12 2.5 2.5-1.12 2.5-2.5 2.5z"/></svg>
+            View on Maps
+          </a>
+        </div>
+      {% endif %}
+    {% endfor %}
+  </div>
+</section>
+
+<!-- Fix 3: Clearfix to reset layout before footer -->
+<div style="clear: both;"></div>
+
+<script>
+// Featured reviews data
+const featuredReviews = {{ featured_reviews | tojson }};
+
+// State management
+let isModalOpen = false;
+let currentReviews = [];
+let isLoading = false;
+
+// Open reviews modal
+function openModal() {
+  console.log('Checking Data:', typeof featuredReviews, featuredReviews?.length);
+  
+  // Add history state for back button handling
+  history.pushState({modalOpen: true}, "", "#reviews-modal");
+  
+  // Fix 3: The One-Time Guard - Prevent multiple executions
+  if (window.isModalOpening) return;
+  window.isModalOpening = true;
+  
+  // Clear previous content
+  let modalContent = document.getElementById('modalReviewsContent');
+  if (!modalContent) {
+    // Fallback: Try alternative target
+    modalContent = document.getElementById('modal-content') || document.getElementById('reviewsModal').querySelector('.modal-body');
+    console.log("Using fallback modal content element for clearing");
+  }
+  
+  if (modalContent) {
+    modalContent.innerHTML = '';
+  }
+  
+  isModalOpen = true;
+  isLoading = true;
+  
+  const modal = document.getElementById('reviewsModal');
+  
+  // Fallback: Find content element for loading state
+  let content = document.getElementById('modalReviewsContent');
+  if (!content) {
+    content = document.getElementById('modal-content') || document.getElementById('reviewsModal').querySelector('.modal-body');
+  }
+  
+  // Show modal
+  modal.classList.add('active');
+  document.body.style.overflow = 'hidden';
+  
+  // Bulletproof Change 1: Add loading state with delay
+  setTimeout(() => {
+    if (content && isLoading) {
+      content.innerHTML = '<div class="loading-spinner"></div>';
+    }
+    loadReviewsInBatches();
+    window.isModalOpening = false; // Reset guard after loading starts
+  }, 100); // Bulletproof Change 1: 100ms delay
+}
+  let content = document.getElementById('modalReviewsContent');
+  if (!content) {
+    content = document.getElementById('modal-content') || document.getElementById('reviewsModal').querySelector('.modal-body');
+  }
+  
+  // Show modal
+  modal.classList.add('active');
+  document.body.style.overflow = 'hidden';
+  
+  // Bulletproof Change 1: Add loading state with delay
+  setTimeout(() => {
+    if (content && isLoading) {
+      content.innerHTML = '<div class="loading-spinner"></div>';
+    }
+      loadReviewsInBatches();
+      window.isModalOpening = false; // Reset guard after loading starts
+    }, 300);
+  }, 100); // Bulletproof Change 1: 100ms delay
+}
+
+// Close reviews modal
+function closeReviewsModal() {
+  isModalOpen = false;
+  isLoading = false;
+  window.isModalOpening = false; // Reset guard when modal is closed
+  
+  // Remove modal history state
+  if (history.state && history.state.modalOpen) {
+    history.back();
+  }
+  
+  const modal = document.getElementById('reviewsModal');
+  modal.classList.remove('active');
+  document.body.style.overflow = '';
+}
+
+// Load reviews in batches for performance
+function loadReviewsInBatches() {
+  // Fix 2: Manual HTML Injection - Force injection directly into modal body
+  const modalBody = document.querySelector('.modal-body') || document.getElementById('modalReviewsContent');
+  if (modalBody && featuredReviews && featuredReviews.length > 0) {
+    console.log("Manual HTML Injection: Rendering all reviews at once");
+    modalBody.innerHTML = featuredReviews.map((r, index) => createReviewCard(r, index)).join('');
+    console.log("Manual injection completed - reviews should be visible now");
+    window.isModalOpening = false; // Reset guard
+    return; // Skip batch loading
+  }
+  
+  // Fallback: Try alternative target if main target not found
+  let content = document.getElementById('modalReviewsContent');
+  if (!content) {
+    content = document.getElementById('modal-content') || document.getElementById('reviewsModal').querySelector('.modal-body');
+    console.log("Using fallback modal content element");
+  }
+  
+  if (!content) {
+    console.error("Could not find modal content element!");
+    window.isModalOpening = false; // Reset guard
+    return;
+  }
+  
+  const batchSize = 20; // Load 20 reviews at a time
+  let currentIndex = 0;
+  
+  // Debug: Check if featuredReviews data exists
+  console.log("Featured reviews data:", featuredReviews);
+  console.log("Featured reviews count:", featuredReviews.length);
+  console.log("Target content element found:", !!content);
+  
+  // Sort reviews by date_posted descending
+  const sortedReviews = [...featuredReviews].sort((a, b) => {
+    // Handle empty or invalid dates
+    const dateA = a.date_posted ? new Date(a.date_posted) : new Date(0);
+    const dateB = b.date_posted ? new Date(b.date_posted) : new Date(0);
+    return dateB - dateA;
+  });
+  
+  console.log("Sorted reviews count:", sortedReviews.length);
+  currentReviews = sortedReviews;
+  
+  function loadBatch() {
+    if (currentIndex >= sortedReviews.length) {
+      isLoading = false;
+      return;
+    }
+    
+    const batch = sortedReviews.slice(currentIndex, currentIndex + batchSize);
+    
+    // Hard Reset 3: Manual Trigger
+    console.log("Rendering " + batch.length + " cards now...");
+    
+    const batchHtml = batch.map((review, index) => {
+      const globalIndex = currentIndex + index;
+      console.log("Rendering card " + (globalIndex + 1) + ": " + review.customer_name);
+      return createReviewCard(review, globalIndex);
+    }).join('');
+    
+    content.innerHTML += batchHtml;
+    currentIndex += batchSize;
+    
+    // Continue loading if more reviews
+    if (currentIndex < sortedReviews.length) {
+      setTimeout(loadBatch, 100);
+    } else {
+      isLoading = false;
+      console.log("All reviews loaded successfully!");
+    }
+  }
+  
+  // Load first batch immediately
+  loadBatch();
+  
+  // Add scroll listener for lazy loading
+  content?.addEventListener('scroll', () => {
+    if (content.scrollHeight - content.scrollTop <= content.clientHeight + 200) {
+      loadBatch();
+    }
+  });
+  
+  // Load first batch immediately
+  loadBatch();
+}
+
+// Close modal on escape key
+document.addEventListener('keydown', (e) => {
+  if (e.key === 'Escape' && isModalOpen) {
+    closeReviewsModal();
+  }
+});
+
+// ── Handle browser back button for reviews modal ──
+window.addEventListener('popstate', function(event) {
+  // If reviews modal is open and back button is pressed, close modal
+  const modal = document.getElementById('reviewsModal');
+  if (modal && modal.classList.contains('active')) {
+    closeReviewsModal();
+  }
+});
+
+// Create review card HTML
+function createReviewCard(review, index) {
+  // Safety check: Skip if review is missing basic info
+  if (!review || !review.customer_name) {
+    console.warn("Skipping invalid review:", review);
+    return '';
+  }
+  
+  // Handle stars field - it might be string or number
+  const starsCount = parseInt(review.stars || review.Stars || 5);
+  const stars = '★'.repeat(starsCount);
+  const initial = review.customer_name ? review.customer_name.charAt(0).toUpperCase() : 'A';
+  const comments = review.review_comments || review.comments || 'Great experience!';
+  
+  return `
+<div class="rev-card">
+    <div class="rev-header-row" style="display: block; width: 100%; clear: both;">
+        <div class="rev-header" style="display: flex; align-items: center; justify-content: space-between;">
+            <div class="rev-header-left" style="display: flex; align-items: center; gap: 10px;">
+                <div class="rev-avatar">${initial}</div>
+                <div class="rev-name-stars">
+                    <span class="rev-name">${review.customer_name}</span>
+                    <div class="rev-stars">${stars}</div>
+                </div>
+            </div>
+            <div class="google-icon"><img src="/images/icons/google.png" width="16"></div>
+        </div>
+    </div><div class="rev-content-row" style="display: block; width: 100%; margin-top: 0px;">
+        <div class="rev-content">
+            "${comments}"
+        </div>
+    </div>
+</div>`;
+}
+
+// Close modal on escape key
+document.addEventListener('keydown', (e) => {
+  if (e.key === 'Escape' && isModalOpen) {
+    closeReviewsModal();
+  }
+});
+
+// Close modal on background click
+document.getElementById('reviewsModal').addEventListener('click', (e) => {
+  if (e.target.id === 'reviewsModal') {
+    closeReviewsModal();
+  }
+});
+</script>
+
+{% include 'footer.j2' %}
+{{ stores_json(stores, '') }}
+{{ store_picker_modal(stores, '') }}
+{{ sticky_mobile_bar('homepage') }}
+{{ store_picker_js() }}
+{{ theme_toggle() }}
+
+<!-- Details Modal -->
+<div id="details-overlay" onclick="closeDetailsModal()" style="position:fixed;inset:0;background:rgba(0,0,0,0.6);backdrop-filter:blur(4px);z-index:11000;display:none;"></div>
+<div id="details-modal" role="dialog" aria-modal="true" aria-label="Offer details" style="position:fixed;top:50%;left:50%;transform:translate(-50%,-50%);width:92%;max-width:620px;max-height:84vh;overflow:auto;background:var(--cream);z-index:11001;display:none;border-radius:14px;box-shadow:0 24px 80px rgba(0,0,0,0.45);">
+  <div class="dm-head" style="background:var(--dark);padding:20px 22px;position:sticky;top:0;">
+    <div class="dm-title" id="dm-title" style="font-family:'Cormorant Garamond',serif;font-size:24px;font-weight:300;color:#fff;line-height:1.1;margin-bottom:4px;"></div>
+    <div class="dm-meta" id="dm-meta" style="font-size:10px;letter-spacing:2px;text-transform:uppercase;color:rgba(255,255,255,0.38);"></div>
+    <button class="dm-close" onclick="closeDetailsModal()" aria-label="Close" style="position:absolute;top:14px;right:14px;width:40px;height:40px;border-radius:10px;background:rgba(255,255,255,0.10);border:1px solid rgba(255,255,255,0.18);color:#fff;font-size:20px;cursor:pointer;">×</button>
+  </div>
+  <div class="dm-body" style="padding:18px 22px;">
+    <p id="dm-body" style="font-size:13px;color:var(--text-mid);line-height:1.85;font-weight:300;white-space:pre-wrap;"></p>
+  </div>
+</div>
+
+<script>
+function openDetailsModal(el){
+  var card=el.closest('.hoc'); if(!card) return;
+  var title=card.getAttribute('data-offer-title') || 'Offer';
+  var store=(card.querySelector('.hoc-store a')||{}).textContent || '';
+  var valid=(card.querySelector('.hoc-valid')||{}).textContent || '';
+  var details=(card.querySelector('.hoc-details')||{}).textContent || '';
+  document.getElementById('dm-title').textContent=title;
+  document.getElementById('dm-meta').textContent=(store?store+' • ':'')+valid;
+  document.getElementById('dm-body').textContent=details;
+  document.getElementById('details-overlay').style.display='block';
+  document.getElementById('details-modal').style.display='block';
+  document.body.style.overflow='hidden';
+}
+function closeDetailsModal(){
+  document.getElementById('details-overlay').style.display='none';
+  document.getElementById('details-modal').style.display='none';
+  document.body.style.overflow='';
+}
+</script>
+
+<!-- Image-only gallery modal -->
+<div id="ho-img-overlay" onclick="closeHomeOfferModal()"></div>
+<div id="ho-img-modal" role="dialog" aria-modal="true" aria-label="Offer image gallery">
+  <div id="ho-img-inner">
+    <button class="ho-x" onclick="closeHomeOfferModal()" aria-label="Close">×</button>
+    <button class="ho-nav ho-prev" onclick="prevHomeOffer()" aria-label="Previous">‹</button>
+    <button class="ho-nav ho-next" onclick="nextHomeOffer()" aria-label="Next">›</button>
+    <img id="ho-img-src" alt="Offer image">
+  </div>
+</div>
+
+<script>
+/* reveal */
+var io=new IntersectionObserver(function(entries){
+  entries.forEach(function(e,i){
+    if(e.isIntersecting){
+      setTimeout(function(){e.target.classList.add('visible');},i*80);
+      io.unobserve(e.target);
+    }
+  });
+},{threshold:0});
+document.querySelectorAll('.reveal').forEach(function(el){io.observe(el);});
+</script>
+
+<script>
+/* Offer image resolver (.jpg → .jpeg → .png) */
+(function(){
+  var EXT=['.jpg','.jpeg','.png'];
+  function hasExt(p){ return /\.[a-zA-Z0-9]{2,5}(\?.*)?$/.test(p||''); }
+
+  document.querySelectorAll('img.home-offer-img').forEach(function(img){
+    var base=img.getAttribute('data-img-base')||'';
+    if(!base) return;
+
+    if(hasExt(base)){
+      img.src=base;
+      return;
+    }
+    var i=0;
+    img.src=base + EXT[i];
+    img.onerror=function(){
+      i++;
+      if(i<EXT.length){ img.src=base + EXT[i]; }
+      else { img.style.display='none'; }
+    };
+  });
+})();
+</script>
+
+<script>
+/* Image-only gallery for featured offers (3 items) */
+var homeOfferSrcs = [];
+var homeOfferIndex = 0;
+
+function collectHomeOfferImages(){
+  homeOfferSrcs = [];
+  document.querySelectorAll('img.home-offer-img').forEach(function(img){
+    if(img.src) homeOfferSrcs.push(img.src);
+  });
+}
+function openHomeOfferModalAt(idx){
+  collectHomeOfferImages();
+  if(!homeOfferSrcs.length) return;
+  homeOfferIndex = Math.max(0, Math.min(idx, homeOfferSrcs.length-1));
+  document.getElementById('ho-img-src').src = homeOfferSrcs[homeOfferIndex];
+  document.getElementById('ho-img-overlay').style.display='block';
+  document.getElementById('ho-img-modal').style.display='flex';
+  document.body.style.overflow='hidden';
+  if(!window._hoImgModalHistoryPushed){
+    history.pushState({ hoImgModalOpen: true }, '');
+    window._hoImgModalHistoryPushed = true;
+  }
+}
+function closeHomeOfferModal(){
+  document.getElementById('ho-img-overlay').style.display='none';
+  document.getElementById('ho-img-modal').style.display='none';
+  document.getElementById('ho-img-src').src='';
+  document.body.style.overflow='';
+  window._hoImgModalHistoryPushed = false;
+}
+function nextHomeOffer(){
+  if(!homeOfferSrcs.length) return;
+  homeOfferIndex = (homeOfferIndex + 1) % homeOfferSrcs.length;
+  document.getElementById('ho-img-src').src = homeOfferSrcs[homeOfferIndex];
+}
+function prevHomeOffer(){
+  if(!homeOfferSrcs.length) return;
+  homeOfferIndex = (homeOfferIndex - 1 + homeOfferSrcs.length) % homeOfferSrcs.length;
+  document.getElementById('ho-img-src').src = homeOfferSrcs[homeOfferIndex];
+}
+
+/* click handlers */
+document.addEventListener('DOMContentLoaded', function(){
+  var imgs = Array.from(document.querySelectorAll('img.home-offer-img'));
+  imgs.forEach(function(img, idx){
+    img.addEventListener('click', function(){ openHomeOfferModalAt(idx); });
+  });
+
+  // swipe support (mobile)
+  var startX = null;
+  var modal = document.getElementById('ho-img-inner');
+  if(modal){
+    modal.addEventListener('touchstart', function(e){ startX = e.touches[0].clientX; }, {passive:true});
+    modal.addEventListener('touchend', function(e){
+      if(startX === null) return;
+      var endX = e.changedTouches[0].clientX;
+      var dx = endX - startX;
+      startX = null;
+      if(Math.abs(dx) < 40) return;
+      if(dx < 0) nextHomeOffer(); else prevHomeOffer();
+    }, {passive:true});
+  }
+});
+
+/* Open Now Status Checker */
+window.store_open_status = {}; // Global object to store status for all stores
+
+function checkOpenNowStatus() {
+  var now = new Date();
+  var day = now.getDay(); // 0 = Sunday, 1 = Monday, ..., 6 = Saturday
+  
+  // Force comparison using Asia/Kolkata time only (no local time conversion)
+  var istTime = new Date(now.toLocaleString("en-US", {timeZone: "Asia/Kolkata"}));
+  var istHours = istTime.getHours();
+  var istMinutes = istTime.getMinutes();
+  var currentTime = istHours * 60 + istMinutes;
+  
+  document.querySelectorAll('.st-open-now').forEach(function(el) {
+    var storeId = el.getAttribute('data-store-id');
+    var hours = el.getAttribute('data-hours');
+    var satHours = el.getAttribute('data-sat-hours');
+    var sunHours = el.getAttribute('data-sun-hours');
+    var dot = el.querySelector('.status-dot');
+    var text = el.querySelector('.status-text');
+    
+    if (!hours || !dot || !text) return;
+    
+    var todayHours = hours;
+    if (day === 6 && satHours) todayHours = satHours; // Saturday
+    if (day === 0 && sunHours) todayHours = sunHours; // Sunday
+    
+    // Parse hours like "10:00 AM – 9:00 PM"
+    var timeMatch = todayHours.match(/(\d+):(\d+)\s*(AM|PM)\s*–\s*(\d+):(\d+)\s*(AM|PM)/);
+    if (!timeMatch) return;
+    
+    var openTime = parseTime(timeMatch[1], timeMatch[2], timeMatch[3]);
+    var closeTime = parseTime(timeMatch[4], timeMatch[5], timeMatch[6]);
+    
+    // 24-hour comparison: if current time is after 9 PM, store is closed
+    var isOpen = currentTime >= openTime && currentTime < closeTime;
+    
+    // Store status globally
+    window.store_open_status[storeId] = isOpen;
+    
+    if (isOpen) {
+      dot.style.background = '#28a745'; // Green
+      text.textContent = 'Open Now';
+      text.style.color = '#28a745';
+      el.className = 'st-open-now status-open'; // Add class
+    } else {
+      dot.style.background = '#dc3545'; // Red
+      text.textContent = 'Closed';
+      text.style.color = '#dc3545';
+      el.className = 'st-open-now status-closed'; // Add class
+    }
+  });
+}
+
+function parseTime(hours, minutes, period) {
+  var h = parseInt(hours);
+  var m = parseInt(minutes);
+  if (period === 'PM' && h !== 12) h += 12;
+  if (period === 'AM' && h === 12) h = 0;
+  return h * 60 + m;
+}
+
+// Check status on page load and every minute
+document.addEventListener('DOMContentLoaded', function(){
+  checkOpenNowStatus();
+  setInterval(checkOpenNowStatus, 60000); // Update every minute
+});
+
+document.addEventListener('keydown', function(e){
+  if(e.key === 'Escape') closeHomeOfferModal();
+  if(document.getElementById('ho-img-modal').style.display === 'flex'){
+    if(e.key === 'ArrowRight') nextHomeOffer();
+    if(e.key === 'ArrowLeft') prevHomeOffer();
+  }
+});
+
+// Handle mobile back button - close home offer image modal instead of navigating back
+window.addEventListener('popstate', function(e){
+  var modal = document.getElementById('ho-img-modal');
+  if(modal && modal.style.display === 'flex'){
+    window._hoImgModalHistoryPushed = false;
+    closeHomeOfferModal();
+  }
+});
+
+// Bulletproof Alias: Ensure both function names work simultaneously
+window.openReviewsModal = openModal;
+</script>
+
+{{ action_buttons_js() }}
+
+<!-- Fix 2: Relocate Modal to bottom of page, outside main content container -->
+<!-- Wall of Love Modal -->
+<div id="reviewsModal" class="modal-overlay">
+  <div class="modal-content">
+    <div class="modal-header">
+      <h3 class="modal-title">Wall of <em>Love</em></h3>
+      <button class="modal-close" onclick="closeReviewsModal()" aria-label="Close reviews">
+        <svg fill="currentColor" viewBox="0 0 24 24">
+          <path d="M19 6.41L17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 10.59 17.59 19 17.59 13.41 12z"/>
+        </svg>
+      </button>
+    </div>
+    <div class="modal-body">
+      <div id="modalReviewsContent" class="modal-reviews">
+        <!-- Reviews will be loaded here -->
+      </div>
+    </div>
+  </div>
+</div>
+</body>
+</html>
