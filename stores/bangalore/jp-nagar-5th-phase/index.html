@@ -1591,7 +1591,7 @@ Directions</a>
 </span>
 <div style="min-width:0;overflow:hidden;">
 <div class="info-label">Address</div>
-<a href="https://g.page/Naturals_JPNagar5thPhase/" target="_blank" class="info-val" style="white-space:nowrap;overflow:hidden;text-overflow:ellipsis;"></a>
+<a href="" target="_blank" class="info-val" style="white-space:nowrap;overflow:hidden;text-overflow:ellipsis;"></a>
 </div>
 <div class="info-col">
 <div style="display: none !important;" aria-hidden="true">
@@ -1796,9 +1796,9 @@ alt="Sonam" width="300" height="400" loading="lazy">
 
 <div class="rev-header">
 <div class="rev-header-left">
-<div class="rev-user-img"></div>
+<div class="rev-user-img">A</div>
 <div class="rev-name">
-
+Alim Ahmad
 <div class="rev-stars">
 ★★★★★ </div>
 </div>
@@ -1811,7 +1811,7 @@ alt="Sonam" width="300" height="400" loading="lazy">
 
 
 <div class="rev-content">
-<div class="rev-text">"Great experience!"</div>
+<div class="rev-text">"I like the haircut and sharpness in style and perfection. Mohd Moin"</div>
 </div>
 </div>
 
@@ -1819,9 +1819,9 @@ alt="Sonam" width="300" height="400" loading="lazy">
 
 <div class="rev-header">
 <div class="rev-header-left">
-<div class="rev-user-img"></div>
+<div class="rev-user-img">M</div>
 <div class="rev-name">
-
+Moris Ahmed
 <div class="rev-stars">
 ★★★★★ </div>
 </div>
@@ -1834,7 +1834,7 @@ alt="Sonam" width="300" height="400" loading="lazy">
 
 
 <div class="rev-content">
-<div class="rev-text">"Great experience!"</div>
+<div class="rev-text">"I like perfection of Mohd Moin. How he cut my hair and specially fade part . I love it"</div>
 </div>
 </div>
 
@@ -1842,9 +1842,9 @@ alt="Sonam" width="300" height="400" loading="lazy">
 
 <div class="rev-header">
 <div class="rev-header-left">
-<div class="rev-user-img"></div>
+<div class="rev-user-img">M</div>
 <div class="rev-name">
-
+Moin Salmani
 <div class="rev-stars">
 ★★★★★ </div>
 </div>
@@ -1857,7 +1857,7 @@ alt="Sonam" width="300" height="400" loading="lazy">
 
 
 <div class="rev-content">
-<div class="rev-text">"Great experience!"</div>
+<div class="rev-text">"I like the professional experience and style of doing fade and style of hair. Mohd Moin"</div>
 </div>
 </div>
 
@@ -1865,9 +1865,9 @@ alt="Sonam" width="300" height="400" loading="lazy">
 
 <div class="rev-header">
 <div class="rev-header-left">
-<div class="rev-user-img"></div>
+<div class="rev-user-img">S</div>
 <div class="rev-name">
-
+Sushanth Kudrethaya
 <div class="rev-stars">
 ★★★★★ </div>
 </div>
@@ -1880,7 +1880,7 @@ alt="Sonam" width="300" height="400" loading="lazy">
 
 
 <div class="rev-content">
-<div class="rev-text">"Great experience!"</div>
+<div class="rev-text">"Excellent service by Moin here! Highly recommended👍"</div>
 </div>
 </div>
 
@@ -2590,14 +2590,18 @@ event.preventDefault();
 
 // CRITICAL FIX: Always show the modal, even with no data
 const modal = document.getElementById('reviewsModal');
+const content = document.getElementById('modalReviewsContent');
+
 if (modal) {
+// Add history state for mobile back button handling
+history.pushState({ modalOpen: true }, '', window.location.href);
+
 modal.classList.add('active');
 document.body.style.overflow = 'hidden';
 isModalOpen = true;
 console.log('Modal opened successfully');
 
 // Add content even if no reviews
-const content = document.getElementById('modalReviewsContent');
 if (content) {
 if (!storeReviews || storeReviews.length === 0) {
 content.innerHTML = `
@@ -2618,7 +2622,6 @@ content.innerHTML = '<div class="loading-spinner"></div>';
 }
 loadReviewsInBatches();
 window.isModalOpening = false; // Reset guard after loading starts
-window.isModalOpening = false; // Reset guard after loading starts
 }, 300);
 }
 
@@ -2628,14 +2631,16 @@ isModalOpen = false;
 isLoading = false;
 window.isModalOpening = false; // Reset guard when modal is closed
 
-// Remove modal history state
+const modal = document.getElementById('reviewsModal');
+if (modal) {
+modal.classList.remove('active');
+document.body.style.overflow = '';
+}
+
+// Go back in history to remove the modal state
 if (history.state && history.state.modalOpen) {
 history.back();
 }
-
-const modal = document.getElementById('reviewsModal');
-modal.classList.remove('active');
-document.body.style.overflow = '';
 }
 
 // Load reviews in batches for performance
@@ -2695,7 +2700,7 @@ console.log("Rendering " + batch.length + " cards now...");
 
 const batchHtml = batch.map((review, index) => {
 const globalIndex = currentIndex + index;
-console.log("Rendering card " + (globalIndex + 1) + ": " + review.customer_name);
+console.log("Rendering card " + (globalIndex + 1) + ": " + review.Customer_Name);
 return createReviewCard(review, globalIndex);
 }).join('');
 
@@ -2737,6 +2742,7 @@ window.addEventListener('popstate', function(event) {
 // If reviews modal is open and back button is pressed, close modal
 const modal = document.getElementById('reviewsModal');
 if (modal && modal.classList.contains('active')) {
+event.preventDefault(); // Prevent default back navigation
 closeReviewsModal();
 }
 });
@@ -2744,16 +2750,16 @@ closeReviewsModal();
 // Create review card HTML
 function createReviewCard(review, index) {
 // Safety check: Skip if review is missing basic info
-if (!review || !review.customer_name) {
+if (!review || !review.Customer_Name) {
 console.warn("Skipping invalid review:", review);
 return '';
 }
 
 // Handle stars field - it might be string or number
-const starsCount = parseInt(review.stars || review.Stars || 5);
+const starsCount = parseInt(review.Stars || review.stars || 5);
 const stars = '★'.repeat(starsCount);
-const initial = review.customer_name ? review.customer_name.charAt(0).toUpperCase() : 'A';
-const comments = review.review_comments || review.comments || 'Great experience!';
+const initial = review.Customer_Name ? review.Customer_Name.charAt(0).toUpperCase() : 'A';
+const comments = review.Review_Comments || review.review_comments || review.comments || 'Great experience!';
 
 return `
 <div class="rev-card">
@@ -2762,7 +2768,7 @@ return `
 <div class="rev-header-left" style="display: flex; align-items: center; gap: 10px;">
 <div class="rev-avatar">${initial}</div>
 <div class="rev-name-stars">
-<span class="rev-name">${review.customer_name}</span>
+<span class="rev-name">${review.Customer_Name}</span>
 <div class="rev-stars">${stars}</div>
 </div>
 </div>
@@ -2773,7 +2779,8 @@ return `
 "${comments}"
 </div>
 </div>
-</div>`;
+</div>
+`;
 }
 
 // Close modal on background click
