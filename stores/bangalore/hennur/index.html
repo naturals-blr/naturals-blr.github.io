@@ -417,21 +417,59 @@ img{display:block;width:100%;object-fit:cover;}
 .hero{height:70vh;min-height:500px;position:relative;display:flex;align-items:flex-end;overflow:hidden;}
 .hero-bg{position:absolute;inset:0;}
 .hero-bg img{height:100%;object-fit:cover;width:100%;}
-.hero-ov{position:absolute;inset:0;background:linear-gradient(135deg,var(--hero-tint) 0%,var(--hero-tint2) 60%,rgba(0,0,0,0.12) 100%);}
+.hero-ov{position:absolute;inset:0;background:rgba(0, 0, 0, 0.5);}
 .hero-content{position:relative;z-index:2;padding:60px 60px 48px;width:100%;max-width:100%;}
 .hero-badge{font-size:9px;letter-spacing:4px;text-transform:uppercase;color:var(--gold);font-weight:600;margin-bottom:12px;}
 .hero-content h1{font-family:'Cormorant Garamond',serif;font-size:clamp(36px,5vw,68px);font-weight:300;color:#fff;line-height:0.95;margin-bottom:12px;}
 .hero-content h1 em{font-style:italic;color:var(--gold);}
 .hero-sub{font-size:14px;color:rgba(255,255,255,0.7);font-weight:300;line-height:1.8;margin-bottom:28px;}
 
-/* ── ACTION BAR ── */
+/* Ghost Button Styles for Hero Section */
 .hero-cta-wrap{display:flex;flex-direction:column;gap:8px;max-width:520px;}
 .hero-cta-row{display:flex;gap:8px;width:100%;}
-.hero-cta-row a,.hero-cta-row .hero-cta-ph{flex:1;justify-content:center !important;font-size:10px !important;padding:10px 12px !important;min-height:44px !important;letter-spacing:1.2px !important;}
-.hero-cta-ig{background:#fff;border:1px solid rgba(225,48,108,0.45);border-radius:6px;display:inline-flex;align-items:center;justify-content:center;transition:all 0.3s;text-decoration:none;}
-.hero-cta-ig:hover{transform:translateY(-1px);box-shadow:0 6px 16px rgba(0,0,0,0.18);}
-.hero-cta-fb{background:#fff;border:1px solid rgba(24,119,242,0.45);border-radius:6px;display:inline-flex;align-items:center;justify-content:center;transition:all 0.3s;text-decoration:none;}
-.hero-cta-fb:hover{transform:translateY(-1px);box-shadow:0 6px 16px rgba(0,0,0,0.18);}
+.hero-cta-row a,.hero-cta-row .hero-cta-ph{flex:1;justify-content:center !important;font-size:10px !important;padding:10px 12px !important;min-height:44px !important;letter-spacing:1px !important;text-transform:uppercase !important;}
+
+/* Ghost Buttons - WhatsApp, Call Us, Instagram, Facebook, Directions */
+.btn-wa{background:transparent !important;border:1px solid #D4AF37 !important;border-radius:6px;display:inline-flex;align-items:center;justify-content:center;transition:all 0.3s;text-decoration:none;color:#fff !important;}
+.btn-wa:hover{background:rgba(212, 175, 55, 0.1) !important;transform:translateY(-1px);box-shadow:0 6px 16px rgba(212, 175, 55, 0.2);}
+
+.btn-call{background:transparent !important;border:1px solid #D4AF37 !important;border-radius:6px;display:inline-flex;align-items:center;justify-content:center;transition:all 0.3s;text-decoration:none;color:#fff !important;}
+.btn-call:hover{background:rgba(212, 175, 55, 0.1) !important;transform:translateY(-1px);box-shadow:0 6px 16px rgba(212, 175, 55, 0.2);}
+
+.hero-cta-ig{background:transparent !important;border:1px solid #D4AF37 !important;border-radius:6px;display:inline-flex;align-items:center;justify-content:center;transition:all 0.3s;text-decoration:none;color:#fff !important;}
+.hero-cta-ig:hover{background:rgba(212, 175, 55, 0.1) !important;transform:translateY(-1px);box-shadow:0 6px 16px rgba(212, 175, 55, 0.2);}
+
+.hero-cta-fb{background:transparent !important;border:1px solid #D4AF37 !important;border-radius:6px;display:inline-flex;align-items:center;justify-content:center;transition:all 0.3s;text-decoration:none;color:#fff !important;}
+.hero-cta-fb:hover{background:rgba(212, 175, 55, 0.1) !important;transform:translateY(-1px);box-shadow:0 6px 16px rgba(212, 175, 55, 0.2);}
+
+.btn-maps{background:transparent !important;border:1px solid #D4AF37 !important;border-radius:6px;display:inline-flex;align-items:center;justify-content:center;transition:all 0.3s;text-decoration:none;color:#fff !important;}
+.btn-maps:hover{background:rgba(212, 175, 55, 0.1) !important;transform:translateY(-1px);box-shadow:0 6px 16px rgba(212, 175, 55, 0.2);}
+
+/* Master Action Button - Book Now */
+.btn-book{background:#D4AF37 !important;border:1px solid #D4AF37 !important;border-radius:6px;display:inline-flex;align-items:center;justify-content:center;transition:all 0.3s;text-decoration:none;color:#000 !important;font-weight:600 !important;}
+.btn-book:hover{background:#B8941F !important;transform:translateY(-1px);box-shadow:0 6px 16px rgba(212, 175, 55, 0.3);}
+
+/* Light-themed store fallback - black text for legibility */
+.hero.light-theme .hero-badge{color:#000;}
+.hero.light-theme .hero-content h1{color:#000;}
+.hero.light-theme .hero-content h1 em{color:#D4AF37;}
+.hero.light-theme .hero-sub{color:rgba(0,0,0,0.8);}
+.hero.light-theme .btn-wa{border-color:#000 !important;color:#000 !important;}
+.hero.light-theme .btn-wa:hover{background:rgba(0,0,0,0.1) !important;box-shadow:0 6px 16px rgba(0,0,0,0.2) !important;}
+.hero.light-theme .btn-call{border-color:#000 !important;color:#000 !important;}
+.hero.light-theme .btn-call:hover{background:rgba(0,0,0,0.1) !important;box-shadow:0 6px 16px rgba(0,0,0,0.2) !important;}
+.hero.light-theme .hero-cta-ig{border-color:#000 !important;color:#000 !important;}
+.hero.light-theme .hero-cta-ig:hover{background:rgba(0,0,0,0.1) !important;box-shadow:0 6px 16px rgba(0,0,0,0.2) !important;}
+.hero.light-theme .hero-cta-fb{border-color:#000 !important;color:#000 !important;}
+.hero.light-theme .hero-cta-fb:hover{background:rgba(0,0,0,0.1) !important;box-shadow:0 6px 16px rgba(0,0,0,0.2) !important;}
+.hero.light-theme .btn-maps{border-color:#000 !important;color:#000 !important;}
+.hero.light-theme .btn-maps:hover{background:rgba(0,0,0,0.1) !important;box-shadow:0 6px 16px rgba(0,0,0,0.2) !important;}
+.hero.light-theme .btn-book{background:#000 !important;border-color:#000 !important;color:#fff !important;}
+.hero.light-theme .btn-book:hover{background:#333 !important;box-shadow:0 6px 16px rgba(0,0,0,0.3) !important;}
+
+/* Icon Sizing */
+.btn-wa svg, .btn-call svg, .btn-maps svg, .hero-cta-ig svg, .hero-cta-fb svg{width:18px;height:18px;flex-shrink:0;}
+
 .hero-cta-ph{visibility:hidden;pointer-events:none;}
 
 /* ── INFO BAR ── 
@@ -2423,31 +2461,43 @@ applyStoreModalScrollRule();
 #sticky-bar{
 display:none;position:fixed;bottom:0;left:0;right:0;
 height:76px;z-index:9999;
-background:rgba(8,15,11,0.94);backdrop-filter:blur(12px);
-border-top:1px solid rgba(255,255,255,0.08);
+background:rgba(18, 18, 18, 0.8);
+backdrop-filter:blur(12px);
+-webkit-backdrop-filter:blur(12px);
+border-top:0.5px solid rgba(212, 175, 55, 0.4);
 grid-template-columns:repeat(4,1fr);
-gap:10px;padding:12px 14px;
+gap:12px;padding:16px 20px;
 transform:translateY(100%);
 transition:transform 0.45s cubic-bezier(0.165, 0.84, 0.44, 1);
 }
 #sticky-bar.is-visible{transform:translateY(0);}
-[data-theme="naturals"] #sticky-bar{background:rgba(21,5,44,0.94);}
+[data-theme="naturals"] #sticky-bar{background:rgba(18, 18, 18, 0.8);}
 @media(max-width:992px){ #sticky-bar{display:grid;} }
 
 .sb-btn{
-display:flex;flex-direction:column;align-items:center;justify-content:center;gap:3px;
-font-family:'Jost',sans-serif;font-size:9px;letter-spacing:1px;text-transform:uppercase;font-weight:700;
-border:none;cursor:pointer;transition:all 0.2s;text-decoration:none;
-height:100%;border-radius:12px;padding:0 4px;color:#fff;
-box-shadow:0 4px 10px rgba(0,0,0,0.18);
+display:flex;flex-direction:column;align-items:center;justify-content:center;gap:4px;
+font-family:'Jost',sans-serif;font-size:9px;letter-spacing:1px;text-transform:uppercase;font-weight:600;
+border:0.5px solid rgba(212, 175, 55, 0.2);
+border-right:0.5px solid rgba(212, 175, 55, 0.2);
+cursor:pointer;transition:all 0.1s ease;text-decoration:none;
+height:100%;padding:12px 8px;color:#D4AF37;
+background:transparent;
+border-radius:8px;
+position:relative;
 }
-.sb-btn svg{width:16px;height:16px;}
-.sb-btn svg path{fill:#fff !important;}
-#sb-book{background:#1A73E8;border:1px solid rgba(255,255,255,0.1);}
-#sb-wa{background:#25D366;border:1px solid rgba(255,255,255,0.1);}
-#sb-call{background:#5F6368;border:1px solid rgba(255,255,255,0.1);}
-#sb-maps{background:#A82424;border:1px solid rgba(255,255,255,0.1);}
-.sb-btn:active{filter:brightness(0.9);transform:scale(0.96);}
+.sb-btn:last-child{
+border-right:none;
+}
+.sb-btn svg{width:18px;height:18px;stroke-width:2px;filter:drop-shadow(0 0 2px rgba(212, 175, 55, 0.3));}
+.sb-btn svg path{fill:#D4AF37 !important;stroke:#D4AF37 !important;}
+.sb-btn:active{
+background:rgba(212, 175, 55, 0.1);
+border-color:rgba(212, 175, 55, 1);
+}
+.sb-btn:hover{
+border-color:rgba(212, 175, 55, 0.6);
+background:rgba(212, 175, 55, 0.05);
+}
 </style>
 
 <script>

@@ -2443,31 +2443,43 @@ applyStoreModalScrollRule();
 #sticky-bar{
 display:none;position:fixed;bottom:0;left:0;right:0;
 height:76px;z-index:9999;
-background:rgba(8,15,11,0.94);backdrop-filter:blur(12px);
-border-top:1px solid rgba(255,255,255,0.08);
+background:rgba(18, 18, 18, 0.8);
+backdrop-filter:blur(12px);
+-webkit-backdrop-filter:blur(12px);
+border-top:0.5px solid rgba(212, 175, 55, 0.4);
 grid-template-columns:repeat(4,1fr);
-gap:10px;padding:12px 14px;
+gap:12px;padding:16px 20px;
 transform:translateY(100%);
 transition:transform 0.45s cubic-bezier(0.165, 0.84, 0.44, 1);
 }
 #sticky-bar.is-visible{transform:translateY(0);}
-[data-theme="naturals"] #sticky-bar{background:rgba(21,5,44,0.94);}
+[data-theme="naturals"] #sticky-bar{background:rgba(18, 18, 18, 0.8);}
 @media(max-width:992px){ #sticky-bar{display:grid;} }
 
 .sb-btn{
-display:flex;flex-direction:column;align-items:center;justify-content:center;gap:3px;
-font-family:'Jost',sans-serif;font-size:9px;letter-spacing:1px;text-transform:uppercase;font-weight:700;
-border:none;cursor:pointer;transition:all 0.2s;text-decoration:none;
-height:100%;border-radius:12px;padding:0 4px;color:#fff;
-box-shadow:0 4px 10px rgba(0,0,0,0.18);
+display:flex;flex-direction:column;align-items:center;justify-content:center;gap:4px;
+font-family:'Jost',sans-serif;font-size:9px;letter-spacing:1px;text-transform:uppercase;font-weight:600;
+border:0.5px solid rgba(212, 175, 55, 0.2);
+border-right:0.5px solid rgba(212, 175, 55, 0.2);
+cursor:pointer;transition:all 0.1s ease;text-decoration:none;
+height:100%;padding:12px 8px;color:#D4AF37;
+background:transparent;
+border-radius:8px;
+position:relative;
 }
-.sb-btn svg{width:16px;height:16px;}
-.sb-btn svg path{fill:#fff !important;}
-#sb-book{background:#1A73E8;border:1px solid rgba(255,255,255,0.1);}
-#sb-wa{background:#25D366;border:1px solid rgba(255,255,255,0.1);}
-#sb-call{background:#5F6368;border:1px solid rgba(255,255,255,0.1);}
-#sb-maps{background:#A82424;border:1px solid rgba(255,255,255,0.1);}
-.sb-btn:active{filter:brightness(0.9);transform:scale(0.96);}
+.sb-btn:last-child{
+border-right:none;
+}
+.sb-btn svg{width:18px;height:18px;stroke-width:2px;filter:drop-shadow(0 0 2px rgba(212, 175, 55, 0.3));}
+.sb-btn svg path{fill:#D4AF37 !important;stroke:#D4AF37 !important;}
+.sb-btn:active{
+background:rgba(212, 175, 55, 0.1);
+border-color:rgba(212, 175, 55, 1);
+}
+.sb-btn:hover{
+border-color:rgba(212, 175, 55, 0.6);
+background:rgba(212, 175, 55, 0.05);
+}
 </style>
 
 <script>
