@@ -21,7 +21,7 @@ gtag('config', 'G-6H5YGVGG1Q');
 <meta name="robots" content="noindex, nofollow">
 
 <link rel="preconnect" href="https://fonts.googleapis.com">
-<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=Jost:wght@300;400;500;600&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Cormorant+Garamond:ital,wght@0,300;0,400;1,300;1,400&display=swap" rel="stylesheet">
 
 <script>(function(){var t=localStorage.getItem('naturals-theme')||'luxury';document.documentElement.setAttribute('data-theme',t);})();</script>
 
@@ -154,74 +154,176 @@ margin-bottom: 60px;
 }
 
 .training-card {
-background: rgba(255,255,255,0.05);
-border: 1px solid rgba(255,255,255,0.1);
-border-radius: 16px;
+background: rgba(40, 40, 40, 0.7);
+backdrop-filter: blur(12px);
+border: 1px solid rgba(255, 255, 255, 0.1);
+border-radius: 20px;
 padding: 24px;
 transition: all 0.3s ease;
 cursor: pointer;
+display: flex;
+flex-direction: column;
+gap: 16px;
+position: relative;
 }
 
 .training-card:hover {
-background: rgba(255,255,255,0.08);
+background: rgba(50, 50, 50, 0.8);
 border-color: var(--gold);
-transform: translateY(-4px);
+transform: translateY(-5px);
+box-shadow: 0 8px 24px rgba(201,168,76,0.15), 0 0 10px rgba(201,168,76,0.2);
 }
 
 .training-card-header {
 display: flex;
 align-items: center;
-margin-bottom: 16px;
+gap: 16px;
+margin-bottom: 8px;
 }
 
 .training-icon {
-width: 48px;
-height: 48px;
-background: var(--gold);
-border-radius: 12px;
+width: 32px;
+height: 32px;
+border-radius: 8px;
 display: flex;
 align-items: center;
 justify-content: center;
-font-size: 24px;
-margin-right: 16px;
+font-size: 18px;
 flex-shrink: 0;
+margin-right: 12px;
+}
+
+.communication-icon { background: rgba(201, 168, 76, 0.2); }
+.appointments-icon { background: rgba(52, 183, 136, 0.2); }
+.service-icon { background: rgba(108, 117, 124, 0.2); }
+.techniques-icon { background: rgba(139, 69, 19, 0.2); }
+.trends-icon { background: rgba(255, 193, 7, 0.2); }
+.safety-icon { background: rgba(245, 158, 11, 0.2); }
+.retail-icon { background: rgba(220, 38, 38, 0.2); }
+.grooming-icon { background: rgba(156, 163, 108, 0.2); }
+
+.training-info {
+flex: 1;
+min-width: 0;
 }
 
 .training-category {
-font-size: 12px;
+font-family: 'Inter', sans-serif;
+font-size: 10px;
 text-transform: uppercase;
 color: var(--gold);
 font-weight: 600;
-letter-spacing: 1px;
+letter-spacing: 1.5px;
 margin-bottom: 4px;
+display: inline-block;
+padding: 3px 10px;
+background: rgba(201,168,76,0.15);
+border-radius: 20px;
 }
 
 .training-title {
-font-size: 20px;
+font-family: 'Inter', sans-serif;
+font-size: 1.1rem;
 font-weight: 600;
 color: #fff;
-margin: 0;
+margin: 0 0 8px 0;
+line-height: 1.3;
+letter-spacing: -0.01em;
 }
 
 .training-description {
-color: rgba(255,255,255,0.7);
+color: rgba(255,255,255,0.75);
 font-size: 14px;
-line-height: 1.6;
-margin-bottom: 20px;
+line-height: 1.5;
+margin: 0 0 16px 0;
+flex: 1;
+max-height: 60px;
+overflow: hidden;
+display: -webkit-box;
+-webkit-line-clamp: 3;
+-webkit-box-orient: vertical;
+text-overflow: ellipsis;
 }
 
 .training-meta {
 display: flex;
-justify-content: space-between;
+justify-content: center;
 align-items: center;
 font-size: 12px;
-color: rgba(255,255,255,0.5);
+color: rgba(255,255,255,0.6);
+gap: 12px;
+padding-top: 8px;
+border-top: 1px solid rgba(255,255,255,0.1);
+border-radius: 8px;
+margin-top: auto;
+}
+
+.training-meta-container {
+display: flex;
+justify-content: space-between;
+align-items: flex-end;
+gap: 16px;
+position: relative;
+margin-top: auto;
 }
 
 .training-duration {
 display: flex;
 align-items: center;
-gap: 4px;
+gap: 6px;
+background: rgba(255,255,255,0.08);
+padding: 4px 8px;
+border-radius: 12px;
+font-size: 11px;
+color: rgba(179, 179, 179, 0.7);
+}
+
+.training-level {
+padding: 4px 8px;
+background: rgba(255,255,255,0.08);
+border-radius: 12px;
+font-weight: 500;
+text-transform: uppercase;
+letter-spacing: 0.5px;
+font-size: 11px;
+color: rgba(179, 179, 179, 0.7);
+}
+
+.training-target {
+display: flex;
+align-items: center;
+gap: 6px;
+background: rgba(255,255,255,0.08);
+padding: 4px 8px;
+border-radius: 12px;
+font-size: 11px;
+color: rgba(179, 179, 179, 0.7);
+}
+
+.training-action-link {
+color: rgba(255,255,255,0.9);
+text-decoration: none;
+font-family: 'Inter', sans-serif;
+font-size: 12px;
+font-weight: 500;
+display: flex;
+align-items: center;
+gap: 6px;
+transition: all 0.3s ease;
+}
+
+.training-action-link:hover {
+color: #fff;
+text-decoration: underline;
+}
+
+.training-action-link span {
+font-size: 14px;
+transition: transform 0.2s ease;
+}
+
+.training-action-link:hover span {
+transform: translateX(4px);
 }
 
 .training-level {
@@ -229,11 +331,26 @@ padding: 4px 8px;
 background: rgba(255,255,255,0.1);
 border-radius: 12px;
 font-weight: 500;
+text-transform: uppercase;
+letter-spacing: 0.5px;
+font-size: 11px;
 }
 
-.training-level.beginner { background: rgba(82, 183, 136, 0.2); color: #52B788; }
-.training-level.intermediate { background: rgba(201, 168, 76, 0.2); color: var(--gold); }
-.training-level.advanced { background: rgba(225, 64, 95, 0.2); color: #E4405F; }
+.training-level.beginner { 
+background: rgba(82, 183, 136, 0.2); 
+color: #52B788; 
+border: 1px solid rgba(82, 183, 136, 0.3);
+}
+.training-level.intermediate { 
+background: rgba(201, 168, 76, 0.2); 
+color: var(--gold); 
+border: 1px solid rgba(201, 168, 76, 0.3);
+}
+.training-level.advanced { 
+background: rgba(225, 64, 95, 0.2); 
+color: #E4405F; 
+border: 1px solid rgba(225, 64, 95, 0.3);
+}
 
 /* Back Link */
 .back-link {
@@ -282,6 +399,16 @@ gap: 10px;
 padding: 8px 16px;
 font-size: 12px;
 }
+
+.training-meta-container {
+flex-direction: column;
+align-items: stretch;
+gap: 8px;
+}
+
+.training-action {
+align-self: flex-end;
+}
 }
 </style>
 </head>
@@ -311,16 +438,86 @@ Access curated video tutorials on advanced hair trends, tool handling, and profe
 // Training data from template
 const trainingModules = [{"is_active": "Yes", "is_featured": "No", "key_takeaways": "", "target_role": "All", "training_category": "Service Standards", "training_date_added": "4-Mar-2026", "training_description": "Effective communication techniques for customer consultations and service recommendations.", "training_duration": "75", "training_id": "TR20260304_SC_01", "training_level": "advanced", "training_link": "https://youtube.com", "training_source": "Youtube", "training_thumbnail_link": "na", "training_title": "Customer Consultation Skills"}, {"is_active": "Yes", "is_featured": "No", "key_takeaways": "", "target_role": "All", "training_category": "Latest Trends", "training_date_added": "6-Mar-2026", "training_description": "Effective communication techniques for customer consultations and service recommendations.", "training_duration": "35", "training_id": "TR20260306_LC_01", "training_level": "intermediate", "training_link": "https://youtube.com", "training_source": "Youtube", "training_thumbnail_link": "na", "training_title": "Customer Consultation Skills"}, {"is_active": "Yes", "is_featured": "No", "key_takeaways": "", "target_role": "All", "training_category": "Tool Handling", "training_date_added": "9-Mar-2026", "training_description": "Effective communication techniques for customer consultations and service recommendations.", "training_duration": "25", "training_id": "TR20260309_TC_01", "training_level": "beginner", "training_link": "https://youtube.com", "training_source": "Youtube", "training_thumbnail_link": "na", "training_title": "Customer Consultation Skills"}, {"is_active": "Yes", "is_featured": "No", "key_takeaways": "", "target_role": "All", "training_category": "Service Standards", "training_date_added": "12-Mar-2026", "training_description": "Effective communication techniques for customer consultations and service recommendations.", "training_duration": "15", "training_id": "TR20260312_SC_01", "training_level": "intermediate", "training_link": "https://youtube.com", "training_source": "Youtube", "training_thumbnail_link": "na", "training_title": "Customer Consultation Skills"}, {"is_active": "Yes", "is_featured": "No", "key_takeaways": "", "target_role": "All", "training_category": "Latest Trends", "training_date_added": "13-Mar-2026", "training_description": "Effective communication techniques for customer consultations and service recommendations.", "training_duration": "25", "training_id": "TR20260313_LC_01", "training_level": "advanced", "training_link": "https://youtube.com", "training_source": "Youtube", "training_thumbnail_link": "na", "training_title": "Customer Consultation Skills"}, {"is_active": "Yes", "is_featured": "No", "key_takeaways": "", "target_role": "All", "training_category": "Tool Handling", "training_date_added": "13-Mar-2026", "training_description": "Effective communication techniques for customer consultations and service recommendations.", "training_duration": "45", "training_id": "TR20260313_TC_01", "training_level": "beginner", "training_link": "https://youtube.com", "training_source": "Youtube", "training_thumbnail_link": "na", "training_title": "Customer Consultation Skills"}, {"is_active": "Yes", "is_featured": "No", "key_takeaways": "", "target_role": "All", "training_category": "Tool Handling", "training_date_added": "17-Mar-2026", "training_description": "Effective communication techniques for customer consultations and service recommendations.", "training_duration": "25", "training_id": "TR20260317_TC_01", "training_level": "advanced", "training_link": "https://youtube.com", "training_source": "Youtube", "training_thumbnail_link": "na", "training_title": "Customer Consultation Skills"}];
 
-// Category icons mapping - minimal fallback
-const categoryIcons = {
-'techniques': '✂️',
-'tools': '🔧',
-'service': '👥',
-'trends': '🌟',
-'safety': '⚠️',
-'retail': '💰',
-'grooming': '💈'
+// Generate dynamic category icons based on actual data
+function getCategoryIcon(category) {
+// High-quality SVG icons for categories
+const iconMap = {
+'communication': `<svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+<path d="M8 12h.01a2 2 0 0 0-2 2v8a2 2 0 0 0 2 2h-8a2 2 0 0 0 2 2v-8a2 2 0 0 0 2 2z"/>
+<path d="M3 12h18m0 0-6-6 0v12a6 6 0 0 0 6 6v-12a6 6 0 0 0-6 6z"/>
+</svg>`,
+'appointments': `<svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+<rect x="3" y="4" width="18" height="18" rx="2" ry="2"/>
+<path d="M8 6v1l4-4 4h-1l4 4v-1l4-4h1l4 4v1z"/>
+<path d="M12 14v1"/>
+</svg>`,
+'service': `<svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+<path d="M12 2l3.09 4.09L12 7l-3.09 4.09L12 2z"/>
+<path d="M3 12h18"/>
+<path d="M12 17v3"/>
+</svg>`,
+'techniques': `<svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+<path d="M14.7 6.3a2.828 2.828 0 0 0-5.656 5.656 5.656 5.656 0 0 0-2.828 2.828A2.828 2.828 0 0 0 2.828-2.828 2.828A2.828 2.828 0 0 0 2.828 2.828L14.7 14.7a2.828 2.828 0 0 0 2.828-2.828A2.828 2.828 2.828 2.828 0 0 0 2.828z"/>
+<path d="M3 12h18"/>
+<path d="M12 17v3"/>
+</svg>`,
+'trends': `<svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+<path d="M13 2.05a2.05 2.05 0 0 0-2.05 2.05v1.55a2.05 2.05 0 0 0 2.05 1.55 2.05 2.05 0 0 0 2.05 2.05z"/>
+<path d="M20.84 4.61a1.14 1.14 0 0 0-.9.9.9v6.7a1.14 1.14 0 0 0 .9.9 6.7a1.14 1.14 0 0 0 .9.9 6.7a1.14 1.14 0 0 0 .9.9 6.7z"/>
+<path d="M7 21a4 4 0 0 0-4 4v-1a4 4 0 0 0 4 4v1z"/>
+<path d="M3 12h18"/>
+<path d="M12 17v3"/>
+</svg>`,
+'safety': `<svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+<path d="M12 2l3.09 4.09L12 7l-3.09 4.09L12 2z"/>
+<path d="M12 22l-7-7h14"/>
+<path d="M22 11l-9-9"/>
+<path d="M2 11l9-9"/>
+<path d="M12 22v3"/>
+</svg>`,
+'retail': `<svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+<path d="M6 2l2-2h8l2 2v2h-8l-2-2z"/>
+<path d="M16 6l2-2h2v2h-2l16 8z"/>
+<path d="M12 13v1l4-4 4h-1l4 4v-1l4-4h1l4 4v1z"/>
+<path d="M3 12h18"/>
+<path d="M12 17v3"/>
+</svg>`,
+'grooming': `<svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+<path d="M7 3v2a4 4 0 0 0-4 4v8a4 4 0 0 0 4 4 4 4v2a4 4 0 0 0-4 4z"/>
+<path d="M20.84 4.61a1.14 1.14 0 0 0-.9.9.9v2a1.14 1.14 0 0 0 .9.9 2a1.14 1.14 0 0 0 .9.9 2z"/>
+<path d="M3 12h18"/>
+<path d="M12 17v3"/>
+</svg>`
 };
+
+const lowerCategory = category.toLowerCase();
+for (const [key, icon] of Object.entries(iconMap)) {
+if (lowerCategory.includes(key)) {
+return icon;
+}
+}
+// Default book icon
+return `<svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+<path d="M4 19.5A2.5 2.5 0 0 0-5 5v-7a2.5 2.5 0 0 0 2.5 2.5 2.5v7a2.5 2.5 0 0 0 2.5 2.5z"/>
+<path d="M9 9h6v1h-4v1h4v-1h6v1z"/>
+<path d="M9 14h6v1h-4v1h4v-1h6v1z"/>
+<path d="M3 12h18"/>
+<path d="M12 17v3"/>
+</svg>`;
+}
+
+function getCategoryIconClass(category) {
+const lowerCategory = category.toLowerCase();
+if (lowerCategory.includes('communication')) return 'communication-icon';
+if (lowerCategory.includes('appointments')) return 'appointments-icon';
+if (lowerCategory.includes('service')) return 'service-icon';
+if (lowerCategory.includes('techniques')) return 'techniques-icon';
+if (lowerCategory.includes('trends')) return 'trends-icon';
+if (lowerCategory.includes('safety')) return 'safety-icon';
+if (lowerCategory.includes('retail')) return 'retail-icon';
+if (lowerCategory.includes('grooming')) return 'grooming-icon';
+return 'default-icon';
+}
 
 let currentCategory = 'all';
 
@@ -385,24 +582,36 @@ if (isFeatured) {
 card.style.border = '2px solid var(--gold)';
 }
 
-const icon = categoryIcons[module.training_category] || '📚';
+const icon = getCategoryIcon(module.training_category || 'other');
+const iconClass = getCategoryIconClass(module.training_category || 'other');
 const categoryName = module.training_category ? 
 module.training_category.charAt(0).toUpperCase() + module.training_category.slice(1).replace('_', ' ') : 'Other';
 
 card.innerHTML = `
 <div class="training-card-header">
-<div class="training-icon">${icon}</div>
-<div>
+<div class="training-icon ${iconClass}">${icon}</div>
+<div class="training-info">
 <div class="training-category">${categoryName}</div>
 <h3 class="training-title">${module.training_title || 'Untitled Training'}</h3>
 </div>
 </div>
-<p class="training-description">${module.training_description || 'No description available.'}</p>
+<div class="training-description">${module.training_description || 'No description available.'}</div>
 <div class="training-meta">
 <div class="training-duration">
-⏱️ ${module.training_duration || 'Duration not specified'}
+⏱️ <strong>Duration:</strong> ${module.training_duration || 'Not specified'} min
 </div>
-<div class="training-level ${module.training_level || 'beginner'}">${module.training_level || 'beginner'}</div>
+<div class="training-level">
+<strong>Level:</strong> ${module.training_level || 'beginner'}
+</div>
+${module.target_role ? `<div class="training-target">
+👥 <strong>For:</strong> ${module.target_role}
+</div>` : ''}
+</div>
+<div class="training-action">
+<a href="${module.training_link}" target="_blank" class="training-action-link">
+Start Training <span>→</span>
+</a>
+</div>
 </div>
 `;
 
