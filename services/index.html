@@ -575,26 +575,153 @@ img{display:block;width:100%;object-fit:cover;}
 .filter-dropdown-item:hover{background:rgba(255,255,255,0.1);color:#fff;}
 .filter-dropdown-item.active{background:var(--gold);color:var(--dark);}
 
-/* FILTERS - Fixed z-index for hamburger menu */
-.filters-wrap{display:flex;flex-direction:column;gap:24px;background:var(--dark);padding:20px 60px;position:sticky;top:70px;z-index:100;border-bottom:1px solid rgba(255,255,255,0.06);box-shadow:0 4px 20px rgba(0,0,0,0.3);margin-top:0;}
-.filter-row{display:flex;align-items:center;justify-content:flex-start;}
-.filter-row.salon-row{margin-bottom:8px;}
-.filter-row.filters-row{justify-content:space-between;align-items:center;}
-.filter-group{display:flex;flex-direction:column;gap:8px;align-items:flex-start;}
-.filter-group.salon-group{width:100%;max-width:400px;}
-.filter-group.gender-group{flex:0 0 auto;}
-.filter-group.cat-group{flex:0 0 auto;}
-.filter-lbl{font-size:11px;letter-spacing:1.5px;text-transform:uppercase;font-weight:600;white-space:nowrap;margin-bottom:4px;}
-.filter-lbl-salon{color:var(--green-soft);}
-.filter-lbl-gender{color:var(--gold);}
-.filter-lbl-cat{color:rgba(255,255,255,0.3);}
+/* CSS Variables for consistent spacing */
+:root {
+--content-max-width: 1200px;
+--content-padding: 60px;
+}
+
+/* Responsive Filter Section */
+@media (max-width: 768px) {
+:root {
+--content-padding: 24px;
+}
+
+.filter-row.filters-row {
+flex-direction: column;
+align-items: stretch;
+gap: 20px;
+}
+
+.filter-group.gender-group {
+width: 100%;
+}
+
+.filter-group.cat-group {
+width: 100%;
+}
+
+.filter-pill {
+flex: 1;
+text-align: center;
+}
+
+.services-main {
+padding: 32px var(--content-padding);
+}
+}
+
+@media (max-width: 480px) {
+:root {
+--content-padding: 20px;
+}
+
+.filter-pill {
+padding: 8px 16px;
+font-size: 12px;
+}
+}
+
+/* FILTERS - Luxury editorial-style filter panel */
+.filters-sec{
+background:var(--dark);
+position:sticky;
+top:70px;
+z-index:100;
+border-bottom:1px solid rgba(255,255,255,0.06);
+box-shadow:0 2px 12px rgba(0,0,0,0.15);
+}
+
+.filters-wrap{
+max-width:var(--content-max-width);
+margin:0 auto;
+padding:20px var(--content-padding) 16px var(--content-padding);
+display:flex;
+flex-direction:column;
+gap:16px;
+}
+
+.filter-row{
+display:flex;
+align-items:center;
+justify-content:space-between;
+gap:24px;
+}
+
+.filter-row.salon-row{
+margin-bottom:0;
+}
+
+.filter-row.filters-row{
+justify-content:space-between;
+align-items:center;
+}
+
+.filter-group{
+display:flex;
+flex-direction:column;
+gap:6px;
+align-items:flex-start;
+}
+
+.filter-group.salon-group{
+width:100%;
+max-width:400px;
+}
+
+.filter-group.gender-group{
+flex:0 0 auto;
+}
+
+.filter-group.cat-group{
+flex:0 0 auto;
+}
+
+.filter-lbl{
+font-size:10px;
+letter-spacing:2px;
+text-transform:uppercase;
+font-weight:600;
+white-space:nowrap;
+margin-bottom:4px;
+}
+
+.filter-lbl-salon{
+color:rgba(201, 162, 39, 0.8);
+}
+
+.filter-lbl-gender{
+color:rgba(201, 162, 39, 0.9);
+}
+
+.filter-lbl-cat{
+color:rgba(255,255,255,0.5);
+}
 
 /* Hero-to-Filter Gap Removal */
-.page-hero{margin-bottom:0 !important;}
+.page-hero{margin-bottom:0 !important;padding-bottom:0 !important;}
+.filters-sec{margin-top:0 !important;padding-top:0 !important;}
 .services-main{padding-top:0 !important;margin-top:0;}
 
 /* Results Bar Gap Removal */
-.results-bar{margin-top:0;padding:10px 0;}
+.results-bar{
+max-width:var(--content-max-width);
+margin:0 auto;
+padding:12px var(--content-padding);
+display:flex;
+justify-content:space-between;
+align-items:center;
+font-size:12px;
+color:rgba(255,255,255,0.6);
+background:rgba(0,0,0,0.2);
+}
+
+/* Services Main Container */
+.services-main{
+max-width:var(--content-max-width);
+margin:0 auto;
+padding:24px var(--content-padding);
+}
 
 /* Empty State Gap Removal */
 .empty-state{margin-top:0;padding:60px 20px;}
@@ -605,27 +732,105 @@ img{display:block;width:100%;object-fit:cover;}
 .store-pill:hover{background:rgba(255,255,255,0.1);border-color:rgba(255,255,255,0.3);color:#fff;}
 .store-pill.active{background:var(--gold);border-color:var(--gold);color:var(--dark);font-weight:600;}
 
+/* Luxury Pill Filter Styling */
+.filter-pill{
+padding:10px 20px;
+border:1px solid rgba(201, 162, 39, 0.3);
+border-radius:25px;
+background:rgba(255,255,255,0.05);
+color:rgba(255,255,255,0.7);
+font-size:13px;
+font-weight:500;
+cursor:pointer;
+transition:all 0.25s cubic-bezier(0.4, 0, 0.2, 1);
+white-space:nowrap;
+}
+
+.filter-pill:hover{
+background:rgba(201, 162, 39, 0.1);
+border-color:rgba(201, 162, 39, 0.5);
+color:rgba(255,255,255,0.9);
+box-shadow:0 2px 8px rgba(201, 162, 39, 0.15);
+}
+
+.filter-pill.active{
+background:rgba(201, 162, 39, 0.95);
+border-color:rgba(201, 162, 39, 0.95);
+color:var(--dark);
+font-weight:600;
+box-shadow:0 2px 12px rgba(201, 162, 39, 0.25);
+}
+
 /* Select Dropdown Styling */
-.cat-select-wrap{position:relative;width:100%;}
-.cat-select-wrap select{appearance:none;background:rgba(255,255,255,0.1);border:1px solid rgba(255,255,255,0.2);border-radius:50px;padding:12px 20px;color:#fff;font-size:14px;font-weight:500;cursor:pointer;transition:all 0.2s;width:100%;}
-.cat-select-wrap select:hover{background:rgba(255,255,255,0.15);border-color:rgba(255,255,255,0.3);}
-.cat-select-wrap select:focus{outline:none;border-color:var(--gold);background:rgba(255,255,255,0.2);}
-.cat-select-wrap::after{content:'▾';position:absolute;right:20px;top:50%;transform:translateY(-50%);color:rgba(255,255,255,0.5);pointer-events:none;font-size:12px;}
+.cat-select-wrap{
+position:relative;
+width:100%;
+}
+
+.cat-select-wrap select{
+appearance:none;
+background:rgba(255,255,255,0.08);
+border:1px solid rgba(255,255,255,0.15);
+border-radius:25px;
+padding:12px 48px 12px 20px;
+color:rgba(255,255,255,0.9);
+font-size:13px;
+font-weight:500;
+cursor:pointer;
+transition:all 0.25s cubic-bezier(0.4, 0, 0.2, 1);
+width:100%;
+}
+
+.cat-select-wrap select:hover{
+background:rgba(255,255,255,0.12);
+border-color:rgba(201, 162, 39, 0.4);
+}
+
+.cat-select-wrap select:focus{
+outline:none;
+border-color:rgba(201, 162, 39, 0.6);
+background:rgba(255,255,255,0.15);
+box-shadow:0 0 0 3px rgba(201, 162, 39, 0.1);
+}
+
+.cat-select-wrap::after{
+content:'';
+position:absolute;
+right:20px;
+top:50%;
+transform:translateY(-50%);
+width:0;
+height:0;
+border-left:5px solid transparent;
+border-right:5px solid transparent;
+border-top:6px solid rgba(201, 162, 39, 0.7);
+pointer-events:none;
+transition:border-color 0.25s ease;
+}
+
+.cat-select-wrap:hover::after{
+border-top-color:rgba(201, 162, 39, 0.9);
+}
 
 /* Luxury Services Page Styling */
 .category-header {
-margin: 60px 0 40px 0;
+margin: 32px 0 24px 0;
 text-align: center;
+position: sticky;
+top: 0;
+background: #faf9f6;
+z-index: 10;
+padding: 16px 0 8px 0;
 }
 
 .category-title {
 font-family: 'Cormorant Garamond', serif;
-font-size: 3.5rem;
+font-size: 2.8rem;
 font-weight: 300;
 color: var(--dark);
-margin: 0 0 16px 0;
+margin: 0 0 12px 0;
 letter-spacing: 0.5px;
-text-transform: capitalize;
+text-transform: none;
 }
 
 .category-underline {
@@ -639,40 +844,38 @@ opacity: 0.8;
 .svc-grid {
 display: grid;
 grid-template-columns: repeat(3, 1fr);
-gap: 32px;
+gap: 24px;
 margin-bottom: 60px;
 }
 
 .svc-card {
-background: rgba(255, 255, 255, 0.95);
-border: 1px solid rgba(0, 0, 0, 0.08);
+background: #faf9f6;
+border: none;
 border-radius: 12px;
-padding: 32px;
-transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
-box-shadow: 0 4px 24px rgba(0, 0, 0, 0.06);
+padding: 14px 20px;
+transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+box-shadow: 0 2px 8px rgba(0, 0, 0, 0.04);
+cursor: pointer;
+overflow: hidden;
 }
 
 .svc-card:hover {
-transform: translateY(-4px);
-box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
-border-color: var(--gold);
+box-shadow: 0 4px 16px rgba(212, 175, 55, 0.12);
+transform: translateY(-2px);
 }
 
 .svc-top-row {
-display: flex;
-justify-content: space-between;
-align-items: flex-start;
-margin-bottom: 12px;
+margin-bottom: 8px;
 }
 
 .svc-title {
 font-family: 'Cormorant Garamond', serif;
-font-size: 22px;
+font-size: 17px;
 font-weight: 600;
-color: var(--dark);
+color: #2c2c2c;
 margin: 0;
 line-height: 1.2;
-flex: 1;
+text-transform: none;
 }
 
 .svc-icon {
@@ -696,17 +899,97 @@ opacity: 0.6;
 .svc-meta-bar {
 display: flex;
 align-items: center;
-gap: 8px;
-margin-bottom: 20px;
-font-size: 10px;
-font-weight: 600;
-color: var(--text-mid);
+gap: 16px;
+margin-bottom: 0;
+font-size: 13px;
+font-weight: 400;
+color: #8a8a8a;
 font-family: 'Jost', sans-serif;
 }
 
 .meta-separator {
-color: var(--text-mid);
-opacity: 0.5;
+color: rgba(212, 175, 55, 0.3);
+font-weight: 300;
+}
+
+.svc-price {
+color: #2c2c2c;
+font-weight: 500;
+font-size: 14px;
+}
+
+.svc-duration {
+color: #8a8a8a;
+font-weight: 400;
+font-size: 13px;
+}
+
+.svc-toggle {
+margin-left: auto;
+color: #c9a227;
+font-size: 24px;
+font-weight: 300;
+cursor: pointer;
+transition: all 0.3s ease;
+user-select: none;
+line-height: 1;
+width: 32px;
+height: 32px;
+display: flex;
+align-items: center;
+justify-content: center;
+border-radius: 50%;
+background: rgba(201, 162, 39, 0.08);
+}
+
+.svc-toggle:hover {
+background: rgba(201, 162, 39, 0.15);
+transform: scale(1.05);
+}
+
+.svc-toggle.expanded {
+background: rgba(201, 162, 39, 0.2);
+}
+
+.svc-description {
+max-height: 0;
+overflow: hidden;
+margin-top: 0;
+padding-top: 0;
+border-top: none;
+font-family: 'Jost', sans-serif;
+font-size: 14px;
+font-weight: 300;
+color: #6b6b6b;
+line-height: 1.6;
+text-transform: none;
+transition: max-height 0.3s ease-out, margin-top 0.3s ease-out, padding-top 0.3s ease-out, opacity 0.3s ease-out;
+opacity: 0;
+}
+
+.svc-description.visible {
+max-height: 500px;
+margin-top: 16px;
+padding-top: 16px;
+border-top: 1px solid rgba(212, 175, 55, 0.15);
+opacity: 1;
+transition: max-height 0.4s ease-in, margin-top 0.3s ease-in, padding-top 0.3s ease-in, opacity 0.3s ease-in;
+}
+
+.svc-inclusions {
+margin-top: 12px;
+padding-top: 12px;
+border-top: 1px solid rgba(212, 175, 55, 0.1);
+font-family: 'Jost', sans-serif;
+font-size: 13px;
+font-weight: 400;
+color: #8a8a8a;
+line-height: 1.5;
+}
+
+.svc-inclusions strong {
+color: #c9a227;
+font-weight: 500;
 }
 
 .svc-desc {
@@ -1817,21 +2100,6 @@ loading="eager">
 <section class="filters-sec section">
 <div class="filters-wrap">
 
-<div class="filter-row salon-row">
-<div class="filter-group salon-group">
-<span class="filter-lbl filter-lbl-salon">Select Your Salon</span>
-<div class="store-pills-container">
-<button class="store-pill active" data-store="all" onclick="handleStorePill(this)">All</button>
-<button class="store-pill" data-store="" onclick="handleStorePill(this)">JP Nagar 5th Phase</button>
-<button class="store-pill" data-store="" onclick="handleStorePill(this)">Elements Mall</button>
-<button class="store-pill" data-store="" onclick="handleStorePill(this)">Devasandra</button>
-<button class="store-pill" data-store="" onclick="handleStorePill(this)">Frazer Town</button>
-<button class="store-pill" data-store="" onclick="handleStorePill(this)">Hennur</button>
-</div>
-</div>
-</div>
-
-
 <div class="filter-row filters-row">
 <div class="filter-group gender-group">
 <span class="filter-lbl filter-lbl-gender">Gender</span>
@@ -2167,7 +2435,6 @@ serviceElement.textContent = filterValue;
 
 <div class="results-bar">
 <div id="results-count">Loading...</div>
-<div id="results-store">All 5 Bangalore stores</div>
 </div>
 
 <main class="services-main section">
@@ -2377,14 +2644,139 @@ trigger.addEventListener('click', handleTriggerClick);
 });
 })();
 </script>
+<div id="sticky-bar" data-page-type="services">
+<button class="sb-btn" id="sb-book" aria-label="Book appointment" title="Book"><svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-calendar" style="flex-shrink:0" aria-hidden="true"><rect width="18" height="18" x="3" y="4" rx="2" ry="2"/><path d="M16 2v4"/><path d="M8 2v4"/><path d="M3 10h18"/></svg>
+</button>
+<button class="sb-btn" id="sb-wa" aria-label="WhatsApp us" title="WhatsApp"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="#25D366" width="20" height="20" style="flex-shrink:0" aria-hidden="true"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+</button>
+<button class="sb-btn" id="sb-call" aria-label="Call us" title="Call"><svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-phone" style="flex-shrink:0" aria-hidden="true"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
+</button>
+<button class="sb-btn" id="sb-maps" aria-label="Get directions" title="Directions"><svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-map-pin" style="flex-shrink:0" aria-hidden="true"><path d="M20 10c0 6-8 12-8 12s-8-6-8-12a8 8 0 0 1 16 0Z"/><circle cx="12" cy="10" r="3"/></svg>
+</button>
+</div>
+<style>
+#sticky-bar{
+display:none;position:fixed;bottom:0;left:0;right:0;
+height:76px;z-index:9999;
+background:rgba(18, 18, 18, 0.8);
+backdrop-filter:blur(12px);
+-webkit-backdrop-filter:blur(12px);
+border-top:0.5px solid rgba(212, 175, 55, 0.4);
+grid-template-columns:repeat(4,1fr);
+gap:12px;padding:16px 20px;
+transform:translateY(100%);
+transition:transform 0.45s cubic-bezier(0.165, 0.84, 0.44, 1);
+max-width:100vw;
+}
+#sticky-bar.is-visible{transform:translateY(0);}
+[data-theme="naturals"] #sticky-bar{background:rgba(18, 18, 18, 0.8);}
+@media(max-width:992px){ #sticky-bar{display:grid;} }
+@media(max-width:480px){ #sticky-bar{grid-template-columns:repeat(4,1fr);gap:8px;padding:12px 14px;} }
+
+.sb-btn{
+display:flex;flex-direction:column;align-items:center;justify-content:center;gap:4px;
+font-family:'Jost',sans-serif;font-size:9px;letter-spacing:1px;text-transform:uppercase;font-weight:600;
+border:0.5px solid rgba(212, 175, 55, 0.2);
+border-right:0.5px solid rgba(212, 175, 55, 0.2);
+cursor:pointer;transition:all 0.1s ease;text-decoration:none;
+height:100%;padding:12px 10px;color:#D4AF37;
+background:transparent;
+border-radius:8px;
+position:relative;
+min-width:0;
+}
+@media(max-width:480px){ .sb-btn{padding:12px 6px;font-size:8px;} }
+.sb-btn:last-child{
+border-right:none;
+}
+.sb-btn svg{width:18px;height:18px;stroke-width:2px;filter:drop-shadow(0 0 2px rgba(212, 175, 55, 0.3));flex-shrink:0;}
+.sb-btn svg path{fill:#D4AF37 !important;stroke:#D4AF37 !important;}
+.sb-btn:active{
+background:rgba(212, 175, 55, 0.1);
+border-color:rgba(212, 175, 55, 1);
+}
+.sb-btn:hover{
+border-color:rgba(212, 175, 55, 0.6);
+background:rgba(212, 175, 55, 0.05);
+}
+</style>
+
+<script>
+(function(){
+function performAction(sd, action){
+if(!sd) return;
+if(action==='book' && sd.book) window.open(sd.book,'_blank');
+if(action==='wa' && sd.wa) window.open('https://wa.me/' + sd.wa,'_blank');
+if(action==='call' && sd.call) window.location.href='tel:' + sd.call;
+if(action==='maps' && sd.maps) window.open(sd.maps,'_blank');
+}
+
+window._naturalsPendingAction = null;
+window._naturalsPerformPendingAction = function(sd){
+if(!window._naturalsPendingAction) return;
+var act = window._naturalsPendingAction;
+window._naturalsPendingAction = null;
+performAction(sd, act);
+};
+
+var bookBtn=document.getElementById('sb-book');
+var waBtn=document.getElementById('sb-wa');
+var callBtn=document.getElementById('sb-call');
+var mapsBtn=document.getElementById('sb-maps');
+
+function openPickerFor(action){
+window._naturalsPendingAction = action;
+if(typeof openStorePicker==='function') openStorePicker();
+}
+bookBtn && bookBtn.addEventListener('click', function(){ openPickerFor('book'); });
+waBtn && waBtn.addEventListener('click', function(){ openPickerFor('wa'); });
+callBtn && callBtn.addEventListener('click', function(){ openPickerFor('call'); });
+mapsBtn && mapsBtn.addEventListener('click', function(){ openPickerFor('maps'); });
+
+/* Visibility Toggle logic */
+var bar = document.getElementById('sticky-bar');
+if(bar && 'IntersectionObserver' in window){
+var observer = new IntersectionObserver(function(entries) {
+entries.forEach(function(entry) {
+if(!entry.isIntersecting) bar.classList.add('is-visible');
+else bar.classList.remove('is-visible');
+});
+}, { threshold: 0 });
+
+var target = document.querySelector('.hero-btns, .hero-cta-wrap, .page-hero-inner');
+var isHomeOrStore = bar.getAttribute('data-page-type') === 'homepage' || bar.getAttribute('data-page-type') === 'store' || bar.getAttribute('data-page-type') === 'offers';
+
+if(target && isHomeOrStore){
+observer.observe(target);
+} else {
+bar.classList.add('is-visible'); /* Show on load for other pages */
+}
+} else if (bar) {
+bar.classList.add('is-visible'); /* Legacy fallback */
+}
+})();
+</script>
+
 <script>
 (function() {
 // 1. DATA INJECTION (Crucial!)
 const ALL_SERVICES = [{"Category": "HAIR STYLING - MENS", "Service_Name": "HAIR CUT(INCLUDES WAS AND BLAST DRY)", "Duration": "30 m", "Regular_Cost": "275", "Member_Cost": "225", "Gender": "Male", "Store_N78": "Yes", "Store_N77": "Yes", "Store_N36": "Yes", "Store_N05": "Yes", "Store_N43": "Yes", "Description": "DELIVERING SHARP, CLEAN, AND TRENDY STYLES CRAFTED BY SKILLED PROFESSIONALS WHO CUSTOMIZE EVERY CUT TO SUIT FACE SHAPE AND PERSONALITY, FEATURING MODERN FADES, TEXTURED LOOKS, AND CLASSIC STYLES FOR A CONFIDENT, FRESH, AND POLISHED APPEARANCE.", "service_icon_name": "hair_styling_mens.jpg", "show_in_seo_json": "yes", "Service_Icon_Name": "hair_styling_mens.jpg"}, {"Category": "HAIR STYLING - MENS", "Service_Name": "SHAVE", "Duration": "20m", "Regular_Cost": "100", "Member_Cost": "80", "Gender": "Male", "Store_N78": "Yes", "Store_N77": "Yes", "Store_N36": "Yes", "Store_N05": "Yes", "Store_N43": "Yes", "Description": "PROVIDING A SMOOTH, PRECISE, AND REFRESHING GROOMING EXPERIENCE USING PROFESSIONAL TECHNIQUES THAT ENSURE CLEAN LINES AND SKIN COMFORT, FOCUSED ON HYGIENE, SHARP DETAILING, AND A POLISHED FINISH FOR A CONFIDENT, WELL-GROOMED LOOK.", "service_icon_name": "hair_styling_mens.jpg", "show_in_seo_json": "yes", "Service_Icon_Name": "hair_styling_mens.jpg"}, {"Category": "HAIR STYLING - MENS", "Service_Name": "EXECUTIVE SHAVE(SHAVE AND EXPRESS FRESH UP - INCLUDES CLEANSING AND FRUIT PACK)", "Duration": "30m", "Regular_Cost": "800", "Member_Cost": "750", "Gender": "Male", "Store_N78": "Yes", "Store_N77": "Yes", "Store_N36": "Yes", "Store_N05": "Yes", "Store_N43": "Yes", "Description": "A PREMIUM GROOMING EXPERIENCE COMBINING A PRECISE, SMOOTH SHAVE WITH AN EXPRESS FRESH-UP, INCLUDING DEEP CLEANSING AND A REVITALIZING FRUIT PACK TO REFRESH THE SKIN, ENHANCE GLOW, AND DELIVER A CLEAN, CONFIDENT, AND WELL-POLISHED LOOK.", "service_icon_name": "hair_styling_mens.jpg", "show_in_seo_json": "yes", "Service_Icon_Name": "hair_styling_mens.jpg"}, {"Category": "HAIR STYLING - MENS", "Service_Name": "CHANGE OF STYLE", "Duration": "40m", "Regular_Cost": "400", "Member_Cost": "350", "Gender": "Male", "Store_N78": "Yes", "Store_N77": "Yes", "Store_N36": "Yes", "Store_N05": "Yes", "Store_N43": "Yes", "Description": "A COMPLETE TRANSFORMATION EXPERIENCE DESIGNED TO REFRESH YOUR LOOK WITH EXPERT GUIDANCE AND PERSONALIZED STYLING, INCORPORATING MODERN TRENDS TO HELP YOU STEP OUT WITH RENEWED CONFIDENCE, A BOLD NEW APPEARANCE, AND A STYLE THAT TRULY REFLECTS YOUR PERSONALITY.", "service_icon_name": "hair_styling_mens.jpg", "show_in_seo_json": "yes", "Service_Icon_Name": "hair_styling_mens.jpg"}, {"Category": "HAIR STYLING - MENS", "Service_Name": "ADVANCES HAIR WASH(INCLUDES WASH / CONDITIONING / HAIR SETTING)", "Duration": "20m", "Regular_Cost": "350", "Member_Cost": "300", "Gender": "Male", "Store_N78": "Yes", "Store_N77": "Yes", "Store_N36": "Yes", "Store_N05": "Yes", "Store_N43": "Yes", "Description": "A REFRESHING CARE EXPERIENCE INCLUDING THOROUGH WASHING, DEEP CONDITIONING, AND PROFESSIONAL HAIR SETTING, DESIGNED TO RESTORE SOFTNESS, SHINE, AND MANAGEABILITY WHILE LEAVING YOUR HAIR PERFECTLY STYLED FOR A CLEAN, POLISHED, AND CONFIDENT LOOK.", "service_icon_name": "hair_styling_mens.jpg", "show_in_seo_json": "yes", "Service_Icon_Name": "hair_styling_mens.jpg"}, {"Category": "HAIR STYLING - MENS", "Service_Name": "HEAD SHAVE", "Duration": "20M", "Regular_Cost": "500", "Member_Cost": "400", "Gender": "Male", "Store_N78": "Yes", "Store_N77": "Yes", "Store_N36": "Yes", "Store_N05": "Yes", "Store_N43": "Yes", "Description": "DELIVERING A CLEAN, SMOOTH, AND PRECISE HEAD SHAVING EXPERIENCE USING PROFESSIONAL TECHNIQUES THAT ENSURE COMFORT, HYGIENE, AND A FLAWLESS FINISH, GIVING A BOLD, FRESH, AND CONFIDENT LOOK WITH A NEAT, WELL-GROOMED APPEARANCE.", "service_icon_name": "hair_styling_mens.jpg", "show_in_seo_json": "yes", "Service_Icon_Name": "hair_styling_mens.jpg"}, {"Category": "HAIR STYLING - KIDS", "Service_Name": "KIDS CUT", "Duration": "20M", "Regular_Cost": "150", "Member_Cost": "120", "Gender": "Male", "Store_N78": "Yes", "Store_N77": "Yes", "Store_N36": "Yes", "Store_N05": "Yes", "Store_N43": "Yes", "Description": "CREATING FUN, SAFE, AND STYLISH HAIRCUTS TAILORED FOR CHILDREN, WITH EXPERT STYLING THAT COMBINES COMFORT, TRENDY LOOKS, AND EASY MANAGEABILITY, ENSURING A HAPPY EXPERIENCE AND A NEAT, CONFIDENT, AND PLAYFUL APPEARANCE.", "service_icon_name": "hair_styling_kids.jpg", "show_in_seo_json": "no", "Service_Icon_Name": "hair_styling_kids.jpg"}, {"Category": "HAIR STYLING - MENS", "Service_Name": "BEARD STYLING", "Duration": "20M", "Regular_Cost": "200", "Member_Cost": "180", "Gender": "Male", "Store_N78": "Yes", "Store_N77": "Yes", "Store_N36": "Yes", "Store_N05": "Yes", "Store_N43": "Yes", "Description": "CRAFTING SHARP, WELL-GROOMED, AND TRENDY BEARD LOOKS WITH EXPERT SHAPING, TRIMMING, AND DETAILING, DESIGNED TO ENHANCE FACIAL FEATURES, MAINTAIN CLEANLINES, AND DELIVER A CONFIDENT, POLISHED, AND STYLISH APPEARANCE.", "service_icon_name": "hair_styling_mens.jpg", "show_in_seo_json": "no", "Service_Icon_Name": "hair_styling_mens.jpg"}, {"Category": "HAIR STYLING - MENS", "Service_Name": "HAIR WASH(INCLUDES WASH AND BLAST DRY)", "Duration": "20M", "Regular_Cost": "100", "Member_Cost": "80", "Gender": "Male", "Store_N78": "Yes", "Store_N77": "Yes", "Store_N36": "Yes", "Store_N05": "Yes", "Store_N43": "Yes", "Description": "PROVIDING A REFRESHING HAIR CARE EXPERIENCE WITH THOROUGH WASHING AND PROFESSIONAL BLAST DRY, DESIGNED TO RESTORE CLEANLINESS, SHINE, AND VOLUME, LEAVING HAIR SOFT, MANAGEABLE, AND PERFECTLY STYLED FOR A FRESH, POLISHED LOOK.", "service_icon_name": "hair_styling_mens.jpg", "show_in_seo_json": "yes", "Service_Icon_Name": "hair_styling_mens.jpg"}, {"Category": "MENS - COLOURING", "Service_Name": "PREMIUM COLOR + HYDRATE HAIR SPA", "Duration": "60M", "Regular_Cost": "2100", "Member_Cost": "1800", "Gender": "Male", "Store_N78": "Yes", "Store_N77": "Yes", "Store_N36": "Yes", "Store_N05": "Yes", "Store_N43": "Yes", "Description": "COMBINING LUXURIOUS HAIR COLORING WITH DEEP HYDRATION TREATMENT, THIS SERVICE ENHANCES VIBRANCY, SOFTNESS, AND SHINE, LEAVING HAIR RICHLY NOURISHED, STYLISHLY COLORED, AND HEALTHY WITH A LUXURIOUS, POLISHED FINISH.", "service_icon_name": "mens_colouring.jpg", "show_in_seo_json": "no", "Service_Icon_Name": "mens_colouring.jpg"}, {"Category": "MENS - COLOURING", "Service_Name": "CLASSIC COLOR WITH AMMONIA", "Duration": "40M", "Regular_Cost": "1000", "Member_Cost": "900", "Gender": "Male", "Store_N78": "Yes", "Store_N77": "Yes", "Store_N36": "Yes", "Store_N05": "Yes", "Store_N43": "Yes", "Description": "PROVIDING RICH, LONG-LASTING HAIR COLOR WITH PROFESSIONAL APPLICATION, DESIGNED TO ENHANCE SHINE, COVER GREYS, AND DELIVER A VIBRANT, POLISHED LOOK WHILE MAINTAINING HAIR HEALTH AND STYLE.", "service_icon_name": "mens_colouring.jpg", "show_in_seo_json": "no", "Service_Icon_Name": "mens_colouring.jpg"}, {"Category": "MENS - COLOURING", "Service_Name": "PREMIUM COLOR AMMONIA FREE", "Duration": "60M", "Regular_Cost": "1200", "Member_Cost": "1100", "Gender": "Male", "Store_N78": "Yes", "Store_N77": "Yes", "Store_N36": "Yes", "Store_N05": "Yes", "Store_N43": "Yes", "Description": "OFFERING A GENTLE, AMMONIA-FREE HAIR COLORING EXPERIENCE THAT PROTECTS HAIR HEALTH WHILE DELIVERING RICH, VIBRANT, AND LONG-LASTING COLOR, LEAVING HAIR SOFT, SHINY, AND POLISHED FOR A LUXURIOUS, STYLISH LOOK.", "service_icon_name": "mens_colouring.jpg", "show_in_seo_json": "yes", "Service_Icon_Name": "mens_colouring.jpg"}, {"Category": "MENS - COLOURING", "Service_Name": "FASHION COLOR", "Duration": "60M", "Regular_Cost": "2000", "Member_Cost": "1800", "Gender": "Male", "Store_N78": "Yes", "Store_N77": "Yes", "Store_N36": "Yes", "Store_N05": "Yes", "Store_N43": "Yes", "Description": "CREATING BOLD, TRENDY, AND VIBRANT HAIR COLORS DESIGNED TO EXPRESS PERSONALITY AND STYLE, USING PROFESSIONAL TECHNIQUES TO ENSURE EVEN, LONG-LASTING RESULTS WITH SHINE, SOFTNESS, AND A STYLISH, HEAD-TURNING FINISH.", "service_icon_name": "mens_colouring.jpg", "show_in_seo_json": "no", "Service_Icon_Name": "mens_colouring.jpg"}, {"Category": "MENS - COLOURING", "Service_Name": "STREAK(PER STREAK)", "Duration": "40M", "Regular_Cost": "200", "Member_Cost": "", "Gender": "Male", "Store_N78": "Yes", "Store_N77": "Yes", "Store_N36": "Yes", "Store_N05": "Yes", "Store_N43": "Yes", "Description": "ADDING DYNAMIC, TRENDY HIGHLIGHTS TO HAIR WITH PRECISION AND EXPERT TECHNIQUE, DESIGNED TO ENHANCE TEXTURE, VOLUME, AND STYLE, PROVIDING A VIBRANT, POLISHED, AND FASHION-FORWARD LOOK.", "service_icon_name": "mens_colouring.jpg", "show_in_seo_json": "no", "Service_Icon_Name": "mens_colouring.jpg"}, {"Category": "MENS - COLOURING", "Service_Name": "MOUSTACHE COLOR", "Duration": "20M", "Regular_Cost": "200", "Member_Cost": "150", "Gender": "Male", "Store_N78": "Yes", "Store_N77": "Yes", "Store_N36": "Yes", "Store_N05": "Yes", "Store_N43": "Yes", "Description": "PROVIDING EXPERT COLORING FOR A NEAT, UNIFORM, AND NATURAL-LOOKING MOUSTACHE, DESIGNED TO ENHANCE FACIAL FEATURES, COVER GREYS, AND DELIVER A SHARP, WELL-GROOMED, AND POLISHED APPEARANCE.", "service_icon_name": "mens_colouring.jpg", "show_in_seo_json": "yes", "Service_Icon_Name": "mens_colouring.jpg"}, {"Category": "MENS - COLOURING", "Service_Name": "BEARD COLORING", "Duration": "30M", "Regular_Cost": "275", "Member_Cost": "250", "Gender": "Male", "Store_N78": "Yes", "Store_N77": "Yes", "Store_N36": "Yes", "Store_N05": "Yes", "Store_N43": "Yes", "Description": "DELIVERING PRECISE, EVEN, AND NATURAL-LOOKING COLOR TO THE BEARD, DESIGNED TO COVER GREYS, ENHANCE FACIAL FEATURES, AND PROVIDE A SHARP, WELL-GROOMED, AND POLISHED APPEARANCE.", "service_icon_name": "mens_colouring.jpg", "show_in_seo_json": "no", "Service_Icon_Name": "mens_colouring.jpg"}, {"Category": "MENS - COLOURING", "Service_Name": "BEARD + MOUSTACHE COLORING", "Duration": "50M", "Regular_Cost": "350", "Member_Cost": "300", "Gender": "Male", "Store_N78": "Yes", "Store_N77": "Yes", "Store_N36": "Yes", "Store_N05": "Yes", "Store_N43": "Yes", "Description": "PROVIDING COMPLETE FACIAL HAIR COLORING FOR A UNIFORM, NATURAL, AND WELL-GROOMED LOOK, ENHANCING FACIAL FEATURES, COVERING GREYS, AND DELIVERING A SHARP, POLISHED, AND CONFIDENT APPEARANCE.", "service_icon_name": "mens_colouring.jpg", "show_in_seo_json": "no", "Service_Icon_Name": "mens_colouring.jpg"}, {"Category": "HAIR TREATMENT", "Service_Name": "SMOOTHENING | STRAIGHTENING", "Duration": "2HRS", "Regular_Cost": "4500", "Member_Cost": "4000", "Gender": "Male", "Store_N78": "Yes", "Store_N77": "Yes", "Store_N36": "Yes", "Store_N05": "Yes", "Store_N43": "Yes", "Description": "TRANSFORMING HAIR TO A SILKY, STRAIGHT, AND MANAGEABLE TEXTURE USING PROFESSIONAL TECHNIQUES, ENHANCING SHINE, REDUCING FRIZZ, AND PROVIDING A POLISHED, LUXURIOUS, AND EFFORTLESSLY STYLISH LOOK.", "service_icon_name": "hair_treatment.jpg", "show_in_seo_json": "yes", "Service_Icon_Name": "hair_treatment.jpg"}, {"Category": "HAIR TREATMENT", "Service_Name": "KERATIN | BOTOX", "Duration": "2HRS", "Regular_Cost": "5500", "Member_Cost": "5000", "Gender": "Male", "Store_N78": "Yes", "Store_N77": "Yes", "Store_N36": "Yes", "Store_N05": "Yes", "Store_N43": "Yes", "Description": "PROVIDING INTENSE HAIR REJUVENATION AND SMOOTHING TREATMENT TO REPAIR DAMAGE, ELIMINATE FRIZZ, AND ENHANCE SHINE, LEAVING HAIR HEALTHY, SOFT, MANAGEABLE, AND LUXURIOUSLY POLISHED.", "service_icon_name": "hair_treatment.jpg", "show_in_seo_json": "no", "Service_Icon_Name": "hair_treatment.jpg"}, {"Category": "HAIR TREATMENT", "Service_Name": "HEAD MASSAGE - COCONUT/ALMOND(INCLUDES HAIR WASH)", "Duration": "30M", "Regular_Cost": "", "Member_Cost": "", "Gender": "Male", "Store_N78": "Yes", "Store_N77": "Yes", "Store_N36": "Yes", "Store_N05": "Yes", "Store_N43": "Yes", "Description": "OFFERING A RELAXING AND REJUVENATING EXPERIENCE COMBINING SOOTHING HEAD MASSAGE WITH THOROUGH HAIR WASH, DESIGNED TO IMPROVE BLOOD CIRCULATION, RELIEVE STRESS, AND LEAVE HAIR CLEAN, FRESH, AND POLISHED.", "service_icon_name": "hair_treatment.jpg", "show_in_seo_json": "no", "Service_Icon_Name": "hair_treatment.jpg"}, {"Category": "HAIR TEXTURE AND TREATMENT", "Service_Name": "MOISTURISING", "Duration": "30M", "Regular_Cost": "900", "Member_Cost": "800", "Gender": "Male", "Store_N78": "Yes", "Store_N77": "Yes", "Store_N36": "Yes", "Store_N05": "Yes", "Store_N43": "Yes", "Description": "DELIVERING DEEP HYDRATION AND NOURISHMENT TO RESTORE SOFTNESS, SHINE, AND MANAGEABILITY, USING PROFESSIONAL TECHNIQUES TO REVITALIZE HAIR, REDUCE FRIZZ, AND LEAVE IT HEALTHY, LUXURIOUS, AND POLISHED.", "service_icon_name": "hair_texture_and_treatment.jpg", "show_in_seo_json": "yes", "Service_Icon_Name": "hair_texture_and_treatment.jpg"}, {"Category": "HAIR TEXTURE AND TREATMENT", "Service_Name": "COLOR SAVE", "Duration": "30M", "Regular_Cost": "1000", "Member_Cost": "900", "Gender": "Male", "Store_N78": "Yes", "Store_N77": "Yes", "Store_N36": "Yes", "Store_N05": "Yes", "Store_N43": "Yes", "Description": "A REVITALIZING TREATMENT COMBINING COLOR PROTECTION WITH DEEP HAIR NOURISHMENT, DESIGNED TO MAINTAIN VIBRANCY, ENHANCE SHINE, REDUCE DAMAGE, AND LEAVE HAIR SOFT, HEALTHY, AND LUXURIOUSLY POLISHED.", "service_icon_name": "hair_texture_and_treatment.jpg", "show_in_seo_json": "no", "Service_Icon_Name": "hair_texture_and_treatment.jpg"}, {"Category": "HAIR TEXTURE AND TREATMENT", "Service_Name": "FRIZZ CONTROL", "Duration": "40M", "Regular_Cost": "1200", "Member_Cost": "1100", "Gender": "Male", "Store_N78": "Yes", "Store_N77": "Yes", "Store_N36": "Yes", "Store_N05": "Yes", "Store_N43": "Yes", "Description": "A LUXURIOUS TREATMENT COMBINING DEEP NOURISHMENT AND FRIZZ MANAGEMENT, DESIGNED TO SMOOTH HAIR, ENHANCE SHINE, AND IMPROVE MANAGEABILITY, LEAVING HAIR SOFT, POLISHED, AND EFFORTLESSLY STYLISH.", "service_icon_name": "hair_texture_and_treatment.jpg", "show_in_seo_json": "no", "Service_Icon_Name": "hair_texture_and_treatment.jpg"}, {"Category": "HAIR TEXTURE AND TREATMENT", "Service_Name": "REPAIR AND REJUVENATE", "Duration": "40M", "Regular_Cost": "1400", "Member_Cost": "1200", "Gender": "Male", "Store_N78": "Yes", "Store_N77": "Yes", "Store_N36": "Yes", "Store_N05": "Yes", "Store_N43": "Yes", "Description": "A DEEP HAIR TREATMENT TARGETING DAMAGE REPAIR AND FIBER REJUVENATION, DESIGNED TO RESTORE STRENGTH, SHINE, AND SOFTNESS, LEAVING HAIR HEALTHY, MANAGEABLE, AND LUXURIOUSLY POLISHED.", "service_icon_name": "hair_texture_and_treatment.jpg", "show_in_seo_json": "yes", "Service_Icon_Name": "hair_texture_and_treatment.jpg"}, {"Category": "HAIR TEXTURE AND TREATMENT", "Service_Name": "SMOOTHENING / STRAIGHTENTING TREATED HAIR", "Duration": "50M", "Regular_Cost": "1400", "Member_Cost": "1200", "Gender": "Male", "Store_N78": "Yes", "Store_N77": "Yes", "Store_N36": "Yes", "Store_N05": "Yes", "Store_N43": "Yes", "Description": "PROFESSIONALLY ENHANCING HAIR THAT HAS UNDERGONE PREVIOUS TREATMENTS, PROVIDING SILKY, STRAIGHT, AND FRIZZ-FREE TEXTURE WHILE MAINTAINING HAIR HEALTH, SHINE, AND A POLISHED, LUXURIOUS LOOK.", "service_icon_name": "hair_texture_and_treatment.jpg", "show_in_seo_json": "no", "Service_Icon_Name": "hair_texture_and_treatment.jpg"}, {"Category": "HAIR TEXTURE AND TREATMENT", "Service_Name": "KERATIN TREATED HAIR", "Duration": "50M", "Regular_Cost": "1600", "Member_Cost": "1400", "Gender": "Male", "Store_N78": "Yes", "Store_N77": "Yes", "Store_N36": "Yes", "Store_N05": "Yes", "Store_N43": "Yes", "Description": "PROFESSIONAL CARE FOR HAIR THAT HAS UNDERGONE KERATIN TREATMENT, DESIGNED TO MAINTAIN SMOOTHNESS, REDUCE FRIZZ, ENHANCE SHINE, AND KEEP HAIR SOFT, MANAGEABLE, AND LUXURIOUSLY POLISHED.", "service_icon_name": "hair_texture_and_treatment.jpg", "show_in_seo_json": "no", "Service_Icon_Name": "hair_texture_and_treatment.jpg"}, {"Category": "HAIR TEXTURE AND TREATMENT", "Service_Name": "ABSOLUTE REPAIR MOLECULAR CARE", "Duration": "60M", "Regular_Cost": "2500", "Member_Cost": "2000", "Gender": "Male", "Store_N78": "Yes", "Store_N77": "Yes", "Store_N36": "Yes", "Store_N05": "Yes", "Store_N43": "Yes", "Description": "AN ADVANCED HAIR TREATMENT TARGETING DEEP DAMAGE AT THE MOLECULAR LEVEL, DESIGNED TO REPAIR, STRENGTHEN, AND REJUVENATE HAIR, LEAVING IT HEALTHY, STRONG, SOFT, AND LUXURIOUSLY POLISHED.", "service_icon_name": "hair_texture_and_treatment.jpg", "show_in_seo_json": "yes", "Service_Icon_Name": "hair_texture_and_treatment.jpg"}, {"Category": "SCALP TREATMENT", "Service_Name": "ANTI HAIRFALL TREATMENT", "Duration": "40M", "Regular_Cost": "1400", "Member_Cost": "1300", "Gender": "Male", "Store_N78": "Yes", "Store_N77": "Yes", "Store_N36": "Yes", "Store_N05": "Yes", "Store_N43": "Yes", "Description": "A SPECIALIZED TREATMENT DESIGNED TO STRENGTHEN HAIR ROOTS, REDUCE HAIR FALL, AND PROMOTE HEALTHY GROWTH, LEAVING HAIR STRONG, THICK, NOURISHED, AND POLISHED WITH IMPROVED VITALITY.", "service_icon_name": "scalp_treatment.jpg", "show_in_seo_json": "no", "Service_Icon_Name": "scalp_treatment.jpg"}, {"Category": "SCALP TREATMENT", "Service_Name": "DANDRUFF CONTROL(INCLUDES BASIC HAIR SPA)", "Duration": "40M", "Regular_Cost": "1500", "Member_Cost": "1400", "Gender": "Male", "Store_N78": "Yes", "Store_N77": "Yes", "Store_N36": "Yes", "Store_N05": "Yes", "Store_N43": "Yes", "Description": "A TARGETED TREATMENT COMBINING DANDRUFF MANAGEMENT WITH A BASIC HAIR SPA, DESIGNED TO CLEANSE SCALP, REDUCE FLAKES, NOURISH HAIR, AND LEAVE IT HEALTHY, SOFT, AND POLISHED.", "service_icon_name": "scalp_treatment.jpg", "show_in_seo_json": "no", "Service_Icon_Name": "scalp_treatment.jpg"}, {"Category": "SKIN CARE", "Service_Name": "ACNE CLEAN UP", "Duration": "(20-30MINS)", "Regular_Cost": "1100", "Member_Cost": "1000", "Gender": "Male", "Store_N78": "Yes", "Store_N77": "Yes", "Store_N36": "Yes", "Store_N05": "Yes", "Store_N43": "Yes", "Description": "A PROFESSIONAL SKIN TREATMENT FOCUSED ON DEEP CLEANSING, REMOVING IMPURITIES, AND TREATING ACNE, DESIGNED TO REFRESH THE SKIN, REDUCE BREAKOUTS, AND LEAVE IT CLEAR, SMOOTH, AND POLISHED.", "service_icon_name": "skin_care.jpg", "show_in_seo_json": "yes", "Service_Icon_Name": "skin_care.jpg"}, {"Category": "SKIN CARE", "Service_Name": "BASIC TAN CLEAR", "Duration": "(30-40MINS)", "Regular_Cost": "1300", "Member_Cost": "1200", "Gender": "Male", "Store_N78": "Yes", "Store_N77": "Yes", "Store_N36": "Yes", "Store_N05": "Yes", "Store_N43": "Yes", "Description": "A GENTLE AND EFFECTIVE TREATMENT DESIGNED TO REMOVE SUN TAN, CLEANSE AND BRIGHTEN THE SKIN, LEAVING IT FRESH, EVEN-TONED, AND POLISHED.", "service_icon_name": "skin_care.jpg", "show_in_seo_json": "yes", "Service_Icon_Name": "skin_care.jpg"}, {"Category": "SKIN CARE", "Service_Name": "FRUIT BLASTER", "Duration": "(20-30MINS)", "Regular_Cost": "1400", "Member_Cost": "1300", "Gender": "Male", "Store_N78": "Yes", "Store_N77": "Yes", "Store_N36": "Yes", "Store_N05": "Yes", "Store_N43": "Yes", "Description": "A REVITALIZING FACIAL TREATMENT USING FRESH FRUIT EXTRACTS TO NOURISH, HYDRATE, AND REJUVENATE THE SKIN, LEAVING IT GLOWING, REFRESHED, AND POLISHED.", "service_icon_name": "skin_care.jpg", "show_in_seo_json": "yes", "Service_Icon_Name": "skin_care.jpg"}, {"Category": "SKIN CARE", "Service_Name": "FACE REFLEXOLOGY", "Duration": "10M", "Regular_Cost": "400", "Member_Cost": "350", "Gender": "Male", "Store_N78": "Yes", "Store_N77": "Yes", "Store_N36": "Yes", "Store_N05": "Yes", "Store_N43": "Yes", "Description": "A THERAPEUTIC TREATMENT FOCUSING ON PRESSURE POINTS TO RELIEVE STRESS, IMPROVE BLOOD CIRCULATION, AND PROMOTE SKIN HEALTH, LEAVING THE FACE RELAXED, REVITALIZED, AND POLISHED.", "service_icon_name": "skin_care.jpg", "show_in_seo_json": "yes", "Service_Icon_Name": "skin_care.jpg"}, {"Category": "FACIAL", "Service_Name": "CHOCOHOLIC", "Duration": "(35-45MINS)", "Regular_Cost": "1600", "Member_Cost": "1400", "Gender": "Male", "Store_N78": "Yes", "Store_N77": "Yes", "Store_N36": "Yes", "Store_N05": "Yes", "Store_N43": "Yes", "Description": "THIS IS A REPLENISHING AND HYDRATING SKIN TREATMENT WITH THE LUXUARY OF CHOCOLATE THAT REDUCES DARK SPOTS AND QUITE SIMPLY REJUVENATES THE SKIN", "service_icon_name": "facial.jpg", "show_in_seo_json": "yes", "Service_Icon_Name": "facial.jpg"}, {"Category": "FACIAL", "Service_Name": "DETAN 100", "Duration": "(35-45MINS)", "Regular_Cost": "1800", "Member_Cost": "1700", "Gender": "Male", "Store_N78": "Yes", "Store_N77": "Yes", "Store_N36": "Yes", "Store_N05": "Yes", "Store_N43": "Yes", "Description": "THIS REGIME COMBINES A CRAFTED FACIAL THAT RESTORES THE SKIN'S BALANCE, REMOVES TAN AND EXFOLIATES GENTLY AND LEAVES IT GLOWING WITH FRESHNESS", "service_icon_name": "facial.jpg", "show_in_seo_json": "yes", "Service_Icon_Name": "facial.jpg"}, {"Category": "FACIAL", "Service_Name": "GOLD AND GLOW", "Duration": "(35-45MINS)", "Regular_Cost": "1900", "Member_Cost": "1700", "Gender": "Male", "Store_N78": "Yes", "Store_N77": "Yes", "Store_N36": "Yes", "Store_N05": "Yes", "Store_N43": "Yes", "Description": "AN EXCLUSIVE FACIAL THAT USES THE GOODNESS OF GOLD TO REVEAL AN UNSTOPPABLE GLOW", "service_icon_name": "facial.jpg", "show_in_seo_json": "no", "Service_Icon_Name": "facial.jpg"}, {"Category": "FACIAL", "Service_Name": "NATURAL BRIGHTENING", "Duration": "(35-45MINS)", "Regular_Cost": "2100", "Member_Cost": "1900", "Gender": "Male", "Store_N78": "Yes", "Store_N77": "Yes", "Store_N36": "Yes", "Store_N05": "Yes", "Store_N43": "Yes", "Description": "A GENTLE FACIAL TREATMENT USING NATURAL INGREDIENTS TO ENHANCE SKIN RADIANCE, EVEN OUT TONE, AND NOURISH DEEPLY, LEAVING THE SKIN FRESH, GLOWING, AND POLISHED.", "service_icon_name": "facial.jpg", "show_in_seo_json": "no", "Service_Icon_Name": "facial.jpg"}, {"Category": "FACIAL", "Service_Name": "CHARCOAL BRIGHTENING", "Duration": "60-70MINS", "Regular_Cost": "2800", "Member_Cost": "2600", "Gender": "Male", "Store_N78": "Yes", "Store_N77": "Yes", "Store_N36": "Yes", "Store_N05": "Yes", "Store_N43": "Yes", "Description": "A DEEP-CLEANSING FACIAL TREATMENT USING CHARCOAL TO REMOVE IMPURITIES, TOXINS, AND EXCESS OIL, DESIGNED TO BRIGHTEN AND REFRESH THE SKIN, LEAVING IT CLEAN, GLOWING, AND POLISHED.", "service_icon_name": "facial.jpg", "show_in_seo_json": "yes", "Service_Icon_Name": "facial.jpg"}, {"Category": "FACIAL", "Service_Name": "DEAD SEA HYDRATION", "Duration": "45-55MINS", "Regular_Cost": "2500", "Member_Cost": "2400", "Gender": "Male", "Store_N78": "Yes", "Store_N77": "Yes", "Store_N36": "Yes", "Store_N05": "Yes", "Store_N43": "Yes", "Description": "DEAD SEA MUD MASKS WORK TO REMOVE IMPURITIES AND DEAD SKIN WITH AN ADDED BENEFIT OF SPECIAL MINERALS TO IMPROVE SKIN TONE AND ELASTICITY", "service_icon_name": "facial.jpg", "show_in_seo_json": "no", "Service_Icon_Name": "facial.jpg"}, {"Category": "FACIAL", "Service_Name": "SENSIGLOW", "Duration": "45-55MINS", "Regular_Cost": "2500", "Member_Cost": "2300", "Gender": "Male", "Store_N78": "Yes", "Store_N77": "Yes", "Store_N36": "Yes", "Store_N05": "Yes", "Store_N43": "Yes", "Description": "A FACIAL WHICH CALMS AND HARMONIZES SENSITIVE SKIN AND GIVES NOURISHING GLOW", "service_icon_name": "facial.jpg", "show_in_seo_json": "no", "Service_Icon_Name": "facial.jpg"}, {"Category": "FACIAL", "Service_Name": "NATURAL AGE REVERSAL", "Duration": "45-55MINS", "Regular_Cost": "2600", "Member_Cost": "2400", "Gender": "Male", "Store_N78": "Yes", "Store_N77": "Yes", "Store_N36": "Yes", "Store_N05": "Yes", "Store_N43": "Yes", "Description": "A LUXURIOUS SLOW-PACED FACIAL WITH PRODUCTS RICH IN VITAMINS THAT SOOTHE AND BRIGHTEN THE SKIN. SUITABLE FOR ALL SKIN TYPES", "service_icon_name": "facial.jpg", "show_in_seo_json": "yes", "Service_Icon_Name": "facial.jpg"}, {"Category": "FACIAL", "Service_Name": "SKIN BRIGHTENING", "Duration": "60-70MINS", "Regular_Cost": "2800", "Member_Cost": "2600", "Gender": "Male", "Store_N78": "Yes", "Store_N77": "Yes", "Store_N36": "Yes", "Store_N05": "Yes", "Store_N43": "Yes", "Description": "A FACIAL TREATMENT DESIGNED TO ENHANCE SKIN RADIANCE, EVEN OUT COMPLEXION, AND REMOVE DULLNESS, LEAVING THE SKIN FRESH, GLOWING, AND POLISHED.", "service_icon_name": "facial.jpg", "show_in_seo_json": "no", "Service_Icon_Name": "facial.jpg"}, {"Category": "FACIAL", "Service_Name": "7 STEP DERMA ICE", "Duration": "45-55MINS", "Regular_Cost": "3800", "Member_Cost": "3500", "Gender": "Male", "Store_N78": "Yes", "Store_N77": "Yes", "Store_N36": "Yes", "Store_N05": "Yes", "Store_N43": "Yes", "Description": "A NEW AGE COOL FACIAL THAT COMBINES EXOTIC FRUITS LIKE NONI, GLUTATHIONE AND PLUM GIVING AN INSTANT GLOW AND CLEAR SKIN", "service_icon_name": "facial.jpg", "show_in_seo_json": "no", "Service_Icon_Name": "facial.jpg"}, {"Category": "FACIAL", "Service_Name": "RE - ENNERGIZING", "Duration": "45-55MINS", "Regular_Cost": "3900", "Member_Cost": "3600", "Gender": "Male", "Store_N78": "Yes", "Store_N77": "Yes", "Store_N36": "Yes", "Store_N05": "Yes", "Store_N43": "Yes", "Description": "A REVITALIZING FACIAL TREATMENT DESIGNED TO BOOST SKIN ENERGY, REFRESH DULLNESS, AND RESTORE VITALITY, LEAVING THE SKIN GLOWING, FIRM, AND POLISHED.", "service_icon_name": "facial.jpg", "show_in_seo_json": "yes", "Service_Icon_Name": "facial.jpg"}, {"Category": "LUXUARY FACIALS", "Service_Name": "FRUITY MARMALADE", "Duration": "50-60MINS", "Regular_Cost": "4000", "Member_Cost": "3700", "Gender": "Male", "Store_N78": "Yes", "Store_N77": "Yes", "Store_N36": "Yes", "Store_N05": "Yes", "Store_N43": "Yes", "Description": "AN EXCLUSIVE FACIAL THAT USES EXTRACTS OF FRUITS LIKE BEARBERRY, GRAPE, PINEAPPLE, KIWI AND PAPAYA TO FORMULATE A PROCESS INVOLVING NUTRIENTS, ENZYMES AND VITAMINS THAT ENSURE AN OPTIMUM SKIN GLOW", "service_icon_name": "luxuary_facials.jpg", "show_in_seo_json": "no", "Service_Icon_Name": "luxuary_facials.jpg"}, {"Category": "LUXUARY FACIALS", "Service_Name": "ULTIMO GOLD", "Duration": "50-60MINS", "Regular_Cost": "5000", "Member_Cost": "4700", "Gender": "Male", "Store_N78": "Yes", "Store_N77": "Yes", "Store_N36": "Yes", "Store_N05": "Yes", "Store_N43": "Yes", "Description": "THE REVOLUTIONARY SKIN TRANSFORMATION TREATMENT PENETRATES 24KARATS GOLD INTO THE SKIN'S DEEPEST LAYER ACCELERATING CELL RENEWAL, PROMOTING THE CLEARANCE OF STAGNANT MELANIN TO BRIGHTEN THE SKIN", "service_icon_name": "luxuary_facials.jpg", "show_in_seo_json": "no", "Service_Icon_Name": "luxuary_facials.jpg"}, {"Category": "LUXUARY FACIALS", "Service_Name": "ILLUMANATING FACIAL", "Duration": "50-60MINS", "Regular_Cost": "6500", "Member_Cost": "6000", "Gender": "Male", "Store_N78": "Yes", "Store_N77": "Yes", "Store_N36": "Yes", "Store_N05": "Yes", "Store_N43": "Yes", "Description": "THIS FACIAL WITH THE EXTRACT OF GOJIBERRY, FRUIT OG LONGEVITY HELPS IN BALANCING THE NATURAL CONDITION OF THE SKIN AND PROTECTS IT FROM EXTERNAL AGENTS THE ALGAE PEEL-OFF GOJI MASK HAS HIGH ANTIOXIDANT POWER AIDING IN SKIN REPLENISHMENT", "service_icon_name": "luxuary_facials.jpg", "show_in_seo_json": "yes", "Service_Icon_Name": "luxuary_facials.jpg"}, {"Category": "LUXUARY FACIALS", "Service_Name": "RED CARPET DNA FACIAL", "Duration": "70-90MINS", "Regular_Cost": "7500", "Member_Cost": "6900", "Gender": "Male", "Store_N78": "Yes", "Store_N77": "Yes", "Store_N36": "Yes", "Store_N05": "Yes", "Store_N43": "Yes", "Description": "THIS 5 LAYER FACIAL IS AN ULTIMATE WAY TO INFUSE PUREST FORMS OF VITAMINS AND MINERALS INTO THE SKIN AT -300F ENTERING THE DEEPER LAYERS OF SKIN AND SEALED", "service_icon_name": "luxuary_facials.jpg", "show_in_seo_json": "no", "Service_Icon_Name": "luxuary_facials.jpg"}, {"Category": "LUXUARY FACIALS", "Service_Name": "HYDRAFACIAL", "Duration": "70-90MINS", "Regular_Cost": "8000", "Member_Cost": "", "Gender": "Male", "Store_N78": "Yes", "Store_N77": "Yes", "Store_N36": "Yes", "Store_N05": "Yes", "Store_N43": "Yes", "Description": "POPULAR COSMETIC TREATMENT THAT COMBINES EXFOLIATION EXTRACTION, HYDRATION AND ANTIOXIDANT PROTECTION SIMULTANEOUSLY, RESULTING IN CLEARNER, MORE HYDRATED, AND YOUTHFUL-LOOKING SKIN.", "service_icon_name": "luxuary_facials.jpg", "show_in_seo_json": "no", "Service_Icon_Name": "luxuary_facials.jpg"}, {"Category": "LUXUARY FACIALS", "Service_Name": "DERMA SAGE 360", "Duration": "70-90MINS", "Regular_Cost": "8000", "Member_Cost": "", "Gender": "Male", "Store_N78": "Yes", "Store_N77": "Yes", "Store_N36": "Yes", "Store_N05": "Yes", "Store_N43": "Yes", "Description": "THIS METICULOUSLY CRAFTED SKINCARE TREATMENT COMBINES THE LATEST ADVANCEMENTS IN DERMAL SCIENCE WITH THE NURTURING PROPERTIES OF BOTANICAL EXTRACTS.", "service_icon_name": "luxuary_facials.jpg", "show_in_seo_json": "yes", "Service_Icon_Name": "luxuary_facials.jpg"}, {"Category": "HAIR SPA", "Service_Name": "EXPRESS ALCHEMY (NO MASSAGE / NO STEAM)", "Duration": "30M", "Regular_Cost": "1000", "Member_Cost": "900", "Gender": "Male", "Store_N78": "Yes", "Store_N77": "Yes", "Store_N36": "Yes", "Store_N05": "Yes", "Store_N43": "Yes", "Description": "A QUICK HAIR REVITALIZATION TREATMENT FOCUSED ON CLEANSING AND NOURISHMENT WITHOUT MASSAGE OR STEAM, DESIGNED TO LEAVE HAIR SOFT, SHINY, MANAGEABLE, AND POLISHED IN MINIMAL TIME.", "service_icon_name": "hair_spa.jpg", "show_in_seo_json": "no", "Service_Icon_Name": "hair_spa.jpg"}, {"Category": "HAIR SPA", "Service_Name": "INTENCES ALCHEMY", "Duration": "40M", "Regular_Cost": "1500", "Member_Cost": "1400", "Gender": "Male", "Store_N78": "Yes", "Store_N77": "Yes", "Store_N36": "Yes", "Store_N05": "Yes", "Store_N43": "Yes", "Description": "A DEEP REJUVENATING FACIAL TREATMENT DESIGNED TO NOURISH, HYDRATE, AND REVITALIZE THE SKIN INTENSELY, ENHANCING RADIANCE, FIRMNESS, AND LEAVING THE SKIN GLOWING, SMOOTH, AND POLISHED.", "service_icon_name": "hair_spa.jpg", "show_in_seo_json": "no", "Service_Icon_Name": "hair_spa.jpg"}, {"Category": "HAIR SPA AND TREATMENT", "Service_Name": "EXPRESS KERATIN RESTORE(NO MASSAGE / NO STEAM)", "Duration": "30M", "Regular_Cost": "1300", "Member_Cost": "1200", "Gender": "Male", "Store_N78": "Yes", "Store_N77": "Yes", "Store_N36": "Yes", "Store_N05": "Yes", "Store_N43": "Yes", "Description": "A QUICK HAIR TREATMENT FOCUSED ON RESTORING KERATIN, STRENGTH, AND SHINE WITHOUT MASSAGE OR STEAM, LEAVING HAIR SMOOTH, MANAGEABLE, AND POLISHED IN MINIMAL TIME.", "service_icon_name": "hair_spa_and_treatment.jpg", "show_in_seo_json": "yes", "Service_Icon_Name": "hair_spa_and_treatment.jpg"}, {"Category": "HAIR SPA AND TREATMENT", "Service_Name": "KERATIN RESTORE", "Duration": "45M", "Regular_Cost": "1800", "Member_Cost": "1600", "Gender": "Male", "Store_N78": "Yes", "Store_N77": "Yes", "Store_N36": "Yes", "Store_N05": "Yes", "Store_N43": "Yes", "Description": "A PROFESSIONAL HAIR TREATMENT DESIGNED TO REPLENISH KERATIN, REPAIR DAMAGE, AND ELIMINATE FRIZZ, LEAVING HAIR SMOOTH, SHINY, MANAGEABLE, AND LUXURIOUSLY POLISHED.", "service_icon_name": "hair_spa_and_treatment.jpg", "show_in_seo_json": "no", "Service_Icon_Name": "hair_spa_and_treatment.jpg"}, {"Category": "ADVANCE HAIR SPA AND TREATMENT", "Service_Name": "SP PRIVE (TREATMENT FOR BOTH SCALP AND HAIR)", "Duration": "60M", "Regular_Cost": "2500", "Member_Cost": "", "Gender": "Male", "Store_N78": "Yes", "Store_N77": "Yes", "Store_N36": "Yes", "Store_N05": "Yes", "Store_N43": "Yes", "Description": "A LUXURIOUS HAIR AND SCALP TREATMENT DESIGNED TO NOURISH, STRENGTHEN, AND REVITALIZE, IMPROVING HAIR HEALTH, REDUCING DAMAGE, AND LEAVING HAIR SOFT, SHINY, AND POLISHED FROM ROOT TO TIP.", "service_icon_name": "advance_hair_spa_and_treatment.jpg", "show_in_seo_json": "no", "Service_Icon_Name": "advance_hair_spa_and_treatment.jpg"}, {"Category": "ADVANCE HAIR SPA AND TREATMENT", "Service_Name": "SP WELLA PLEX (RECONSTRUCT HAIR BONDS FOR STRONGER HAIR AND KEEP THE HAIR STRONG, SMOOTH AND SOFT)", "Duration": "60M", "Regular_Cost": "2600", "Member_Cost": "", "Gender": "Male", "Store_N78": "Yes", "Store_N77": "Yes", "Store_N36": "Yes", "Store_N05": "Yes", "Store_N43": "Yes", "Description": "A PROFESSIONAL HAIR TREATMENT THAT RECONSTRUCTS HAIR BONDS TO STRENGTHEN AND REPAIR, DESIGNED TO KEEP HAIR STRONG, SMOOTH, SOFT, AND LUXURIOUSLY POLISHED.", "service_icon_name": "advance_hair_spa_and_treatment.jpg", "show_in_seo_json": "yes", "Service_Icon_Name": "advance_hair_spa_and_treatment.jpg"}, {"Category": "ADD ON MASK", "Service_Name": "FRUIT REFRESHMENT", "Duration": "20M", "Regular_Cost": "250", "Member_Cost": "", "Gender": "Male", "Store_N78": "Yes", "Store_N77": "Yes", "Store_N36": "Yes", "Store_N05": "Yes", "Store_N43": "Yes", "Description": "A NOURISHING FACIAL MASK USING FRESH FRUIT EXTRACTS TO HYDRATE, REVITALIZE, AND REJUVENATE THE SKIN, LEAVING IT FRESH, GLOWING, AND POLISHED.", "service_icon_name": "add_on_mask.jpg", "show_in_seo_json": "no", "Service_Icon_Name": "add_on_mask.jpg"}, {"Category": "ADD ON MASK", "Service_Name": "CHAR-COAL MASK", "Duration": "20M", "Regular_Cost": "400", "Member_Cost": "", "Gender": "Male", "Store_N78": "Yes", "Store_N77": "Yes", "Store_N36": "Yes", "Store_N05": "Yes", "Store_N43": "Yes", "Description": "A DEEP-CLEANSING FACIAL MASK USING CHARCOAL TO REMOVE IMPURITIES, TOXINS, AND EXCESS OIL, DESIGNED TO PURIFY, REFRESH, AND BRIGHTEN THE SKIN, LEAVING IT CLEAN, SMOOTH, AND POLISHED.", "service_icon_name": "add_on_mask.jpg", "show_in_seo_json": "no", "Service_Icon_Name": "add_on_mask.jpg"}, {"Category": "ADD ON MASK", "Service_Name": "WHITENING", "Duration": "20M", "Regular_Cost": "350", "Member_Cost": "", "Gender": "Male", "Store_N78": "Yes", "Store_N77": "Yes", "Store_N36": "Yes", "Store_N05": "Yes", "Store_N43": "Yes", "Description": "A FACIAL MASK DESIGNED TO BRIGHTEN AND EVEN OUT SKIN TONE, REDUCE DULLNESS, AND ENHANCE RADIANCE, LEAVING THE SKIN GLOWING, FRESH, AND POLISHED.", "service_icon_name": "add_on_mask.jpg", "show_in_seo_json": "yes", "Service_Icon_Name": "add_on_mask.jpg"}, {"Category": "ADD ON MASK", "Service_Name": "REJUVINATE", "Duration": "20M", "Regular_Cost": "550", "Member_Cost": "", "Gender": "Male", "Store_N78": "Yes", "Store_N77": "Yes", "Store_N36": "Yes", "Store_N05": "Yes", "Store_N43": "Yes", "Description": "A NOURISHING FACIAL MASK DESIGNED TO REVITALIZE AND RESTORE SKIN HEALTH, BOOSTING HYDRATION, FIRMNESS, AND GLOW, LEAVING THE SKIN FRESH, SMOOTH, AND POLISHED.", "service_icon_name": "add_on_mask.jpg", "show_in_seo_json": "yes", "Service_Icon_Name": "add_on_mask.jpg"}, {"Category": "ADD ON MASK", "Service_Name": "BRIGHTENING", "Duration": "20M", "Regular_Cost": "600", "Member_Cost": "", "Gender": "Male", "Store_N78": "Yes", "Store_N77": "Yes", "Store_N36": "Yes", "Store_N05": "Yes", "Store_N43": "Yes", "Description": "A REVITALIZING FACIAL MASK DESIGNED TO ENHANCE SKIN RADIANCE, REDUCE DULLNESS, AND EVEN OUT TONE, LEAVING THE SKIN FRESH, GLOWING, AND POLISHED.", "service_icon_name": "add_on_mask.jpg", "show_in_seo_json": "yes", "Service_Icon_Name": "add_on_mask.jpg"}, {"Category": "ADD ON SKIN CARE", "Service_Name": "UNDERARM", "Duration": "20M", "Regular_Cost": "700", "Member_Cost": "", "Gender": "Male", "Store_N78": "Yes", "Store_N77": "Yes", "Store_N36": "Yes", "Store_N05": "Yes", "Store_N43": "Yes", "Description": "-", "service_icon_name": "add_on_skin_care.jpg", "show_in_seo_json": "no", "Service_Icon_Name": "add_on_skin_care.jpg"}, {"Category": "ADD ON SKIN CARE", "Service_Name": "NECK | ELBOW", "Duration": "20M", "Regular_Cost": "800", "Member_Cost": "", "Gender": "Male", "Store_N78": "Yes", "Store_N77": "Yes", "Store_N36": "Yes", "Store_N05": "Yes", "Store_N43": "Yes", "Description": "-", "service_icon_name": "add_on_skin_care.jpg", "show_in_seo_json": "no", "Service_Icon_Name": "add_on_skin_care.jpg"}, {"Category": "ADD ON SKIN CARE", "Service_Name": "UNDER EYE", "Duration": "20M", "Regular_Cost": "900", "Member_Cost": "", "Gender": "Male", "Store_N78": "Yes", "Store_N77": "Yes", "Store_N36": "Yes", "Store_N05": "Yes", "Store_N43": "Yes", "Description": "-", "service_icon_name": "add_on_skin_care.jpg", "show_in_seo_json": "no", "Service_Icon_Name": "add_on_skin_care.jpg"}, {"Category": "THREADING", "Service_Name": "EYEBROW", "Duration": "15M", "Regular_Cost": "50", "Member_Cost": "50", "Gender": "Male", "Store_N78": "Yes", "Store_N77": "Yes", "Store_N36": "Yes", "Store_N05": "Yes", "Store_N43": "Yes", "Description": "-", "service_icon_name": "threading.jpg", "show_in_seo_json": "no", "Service_Icon_Name": "threading.jpg"}, {"Category": "THREADING", "Service_Name": "UPPERLIP | LOWERLIP", "Duration": "15M", "Regular_Cost": "", "Member_Cost": "", "Gender": "Male", "Store_N78": "Yes", "Store_N77": "Yes", "Store_N36": "Yes", "Store_N05": "Yes", "Store_N43": "Yes", "Description": "-", "service_icon_name": "threading.jpg", "show_in_seo_json": "no", "Service_Icon_Name": "threading.jpg"}, {"Category": "THREADING", "Service_Name": "CHIN | FOREHEAD", "Duration": "15M", "Regular_Cost": "", "Member_Cost": "", "Gender": "Male", "Store_N78": "Yes", "Store_N77": "Yes", "Store_N36": "Yes", "Store_N05": "Yes", "Store_N43": "Yes", "Description": "-", "service_icon_name": "threading.jpg", "show_in_seo_json": "no", "Service_Icon_Name": "threading.jpg"}, {"Category": "THREADING", "Service_Name": "FACE SIDES", "Duration": "15M", "Regular_Cost": "40", "Member_Cost": "40", "Gender": "Male", "Store_N78": "Yes", "Store_N77": "Yes", "Store_N36": "Yes", "Store_N05": "Yes", "Store_N43": "Yes", "Description": "-", "service_icon_name": "threading.jpg", "show_in_seo_json": "no", "Service_Icon_Name": "threading.jpg"}, {"Category": "THREADING", "Service_Name": "FULL FACE", "Duration": "15M", "Regular_Cost": "", "Member_Cost": "", "Gender": "Male", "Store_N78": "Yes", "Store_N77": "Yes", "Store_N36": "Yes", "Store_N05": "Yes", "Store_N43": "Yes", "Description": "-", "service_icon_name": "threading.jpg", "show_in_seo_json": "no", "Service_Icon_Name": "threading.jpg"}, {"Category": "DETAN", "Service_Name": "FACE & NECK | FEET | UNDER ARM", "Duration": "20M", "Regular_Cost": "", "Member_Cost": "", "Gender": "Male", "Store_N78": "Yes", "Store_N77": "Yes", "Store_N36": "Yes", "Store_N05": "Yes", "Store_N43": "Yes", "Description": "-", "service_icon_name": "detan.jpg", "show_in_seo_json": "no", "Service_Icon_Name": "detan.jpg"}, {"Category": "DETAN", "Service_Name": "HALF ARMS | LEGS", "Duration": "20M", "Regular_Cost": "", "Member_Cost": "", "Gender": "Male", "Store_N78": "Yes", "Store_N77": "Yes", "Store_N36": "Yes", "Store_N05": "Yes", "Store_N43": "Yes", "Description": "-", "service_icon_name": "detan.jpg", "show_in_seo_json": "no", "Service_Icon_Name": "detan.jpg"}, {"Category": "DETAN", "Service_Name": "FULL ARMS | LEGS", "Duration": "30M", "Regular_Cost": "", "Member_Cost": "", "Gender": "Male", "Store_N78": "Yes", "Store_N77": "Yes", "Store_N36": "Yes", "Store_N05": "Yes", "Store_N43": "Yes", "Description": "-", "service_icon_name": "detan.jpg", "show_in_seo_json": "no", "Service_Icon_Name": "detan.jpg"}, {"Category": "DETAN", "Service_Name": "MIDRIFF | BACK", "Duration": "30M", "Regular_Cost": "", "Member_Cost": "", "Gender": "Male", "Store_N78": "Yes", "Store_N77": "Yes", "Store_N36": "Yes", "Store_N05": "Yes", "Store_N43": "Yes", "Description": "-", "service_icon_name": "detan.jpg", "show_in_seo_json": "no", "Service_Icon_Name": "detan.jpg"}, {"Category": "DETAN", "Service_Name": "FULL BODY", "Duration": "40M", "Regular_Cost": "3000", "Member_Cost": "3000", "Gender": "Male", "Store_N78": "Yes", "Store_N77": "Yes", "Store_N36": "Yes", "Store_N05": "Yes", "Store_N43": "Yes", "Description": "-", "service_icon_name": "detan.jpg", "show_in_seo_json": "no", "Service_Icon_Name": "detan.jpg"}, {"Category": "BODY CARE", "Service_Name": "BACK | FRONT POLISH", "Duration": "40M", "Regular_Cost": "800", "Member_Cost": "", "Gender": "Male", "Store_N78": "Yes", "Store_N77": "Yes", "Store_N36": "Yes", "Store_N05": "Yes", "Store_N43": "Yes", "Description": "-", "service_icon_name": "body_care.jpg", "show_in_seo_json": "no", "Service_Icon_Name": "body_care.jpg"}, {"Category": "BODY CARE", "Service_Name": "FULL ARM | FULL LEG POLISH", "Duration": "60M", "Regular_Cost": "", "Member_Cost": "", "Gender": "Male", "Store_N78": "Yes", "Store_N77": "Yes", "Store_N36": "Yes", "Store_N05": "Yes", "Store_N43": "Yes", "Description": "-", "service_icon_name": "body_care.jpg", "show_in_seo_json": "no", "Service_Icon_Name": "body_care.jpg"}, {"Category": "BODY CARE", "Service_Name": "FULL BODY POLISH", "Duration": "60M", "Regular_Cost": "3500", "Member_Cost": "3200", "Gender": "Male", "Store_N78": "Yes", "Store_N77": "Yes", "Store_N36": "Yes", "Store_N05": "Yes", "Store_N43": "Yes", "Description": "-", "service_icon_name": "body_care.jpg", "show_in_seo_json": "no", "Service_Icon_Name": "body_care.jpg"}, {"Category": "REFLEXOLOGY", "Service_Name": "NECK AND SHOULDER", "Duration": "20MIN", "Regular_Cost": "500", "Member_Cost": "", "Gender": "Male", "Store_N78": "Yes", "Store_N77": "Yes", "Store_N36": "Yes", "Store_N05": "Yes", "Store_N43": "Yes", "Description": "-", "service_icon_name": "reflexology.jpg", "show_in_seo_json": "no", "Service_Icon_Name": "reflexology.jpg"}, {"Category": "REFLEXOLOGY", "Service_Name": "HAND", "Duration": "20MIN", "Regular_Cost": "500", "Member_Cost": "", "Gender": "Male", "Store_N78": "Yes", "Store_N77": "Yes", "Store_N36": "Yes", "Store_N05": "Yes", "Store_N43": "Yes", "Description": "-", "service_icon_name": "reflexology.jpg", "show_in_seo_json": "no", "Service_Icon_Name": "reflexology.jpg"}, {"Category": "REFLEXOLOGY", "Service_Name": "FEET", "Duration": "20MIN", "Regular_Cost": "500", "Member_Cost": "", "Gender": "Male", "Store_N78": "Yes", "Store_N77": "Yes", "Store_N36": "Yes", "Store_N05": "Yes", "Store_N43": "Yes", "Description": "-", "service_icon_name": "reflexology.jpg", "show_in_seo_json": "no", "Service_Icon_Name": "reflexology.jpg"}, {"Category": "REFLEXOLOGY", "Service_Name": "FULL BACK", "Duration": "20MIN", "Regular_Cost": "1000", "Member_Cost": "", "Gender": "Male", "Store_N78": "Yes", "Store_N77": "Yes", "Store_N36": "Yes", "Store_N05": "Yes", "Store_N43": "Yes", "Description": "-", "service_icon_name": "reflexology.jpg", "show_in_seo_json": "no", "Service_Icon_Name": "reflexology.jpg"}, {"Category": "MENICURE / PEDICURE", "Service_Name": "COCOA BUTTER - MANI | PEDI", "Duration": "30M", "Regular_Cost": "", "Member_Cost": "", "Gender": "Male", "Store_N78": "Yes", "Store_N77": "Yes", "Store_N36": "Yes", "Store_N05": "Yes", "Store_N43": "Yes", "Description": "-", "service_icon_name": "menicure_pedicure.jpg", "show_in_seo_json": "no", "Service_Icon_Name": "menicure_pedicure.jpg"}, {"Category": "MENICURE / PEDICURE", "Service_Name": "COFFEE & CRÈME - MANI | PEDI", "Duration": "30M", "Regular_Cost": "", "Member_Cost": "", "Gender": "Male", "Store_N78": "Yes", "Store_N77": "Yes", "Store_N36": "Yes", "Store_N05": "Yes", "Store_N43": "Yes", "Description": "-", "service_icon_name": "menicure_pedicure.jpg", "show_in_seo_json": "no", "Service_Icon_Name": "menicure_pedicure.jpg"}, {"Category": "MENICURE / PEDICURE", "Service_Name": "ORGANIC SPA - MANI | PEDI", "Duration": "40M", "Regular_Cost": "", "Member_Cost": "", "Gender": "Male", "Store_N78": "Yes", "Store_N77": "Yes", "Store_N36": "Yes", "Store_N05": "Yes", "Store_N43": "Yes", "Description": "-", "service_icon_name": "menicure_pedicure.jpg", "show_in_seo_json": "no", "Service_Icon_Name": "menicure_pedicure.jpg"}, {"Category": "MENICURE / PEDICURE", "Service_Name": "CRYSTAL SPA - MANI | PEDI", "Duration": "40M", "Regular_Cost": "", "Member_Cost": "", "Gender": "Male", "Store_N78": "Yes", "Store_N77": "Yes", "Store_N36": "Yes", "Store_N05": "Yes", "Store_N43": "Yes", "Description": "-", "service_icon_name": "menicure_pedicure.jpg", "show_in_seo_json": "no", "Service_Icon_Name": "menicure_pedicure.jpg"}, {"Category": "MENICURE / PEDICURE", "Service_Name": "DEAD SEA - MANI | PEDI", "Duration": "40M", "Regular_Cost": "", "Member_Cost": "", "Gender": "Male", "Store_N78": "Yes", "Store_N77": "Yes", "Store_N36": "Yes", "Store_N05": "Yes", "Store_N43": "Yes", "Description": "-", "service_icon_name": "menicure_pedicure.jpg", "show_in_seo_json": "no", "Service_Icon_Name": "menicure_pedicure.jpg"}, {"Category": "MENICURE / PEDICURE", "Service_Name": "BUBBLE GUM - MANI | PEDI", "Duration": "60M", "Regular_Cost": "", "Member_Cost": "", "Gender": "Male", "Store_N78": "Yes", "Store_N77": "Yes", "Store_N36": "Yes", "Store_N05": "Yes", "Store_N43": "Yes", "Description": "-", "service_icon_name": "menicure_pedicure.jpg", "show_in_seo_json": "no", "Service_Icon_Name": "menicure_pedicure.jpg"}, {"Category": "MENICURE / PEDICURE", "Service_Name": "AVL - MANI + PEDI (COMBO)", "Duration": "60M", "Regular_Cost": "2000", "Member_Cost": "", "Gender": "Male", "Store_N78": "Yes", "Store_N77": "Yes", "Store_N36": "Yes", "Store_N05": "Yes", "Store_N43": "Yes", "Description": "-", "service_icon_name": "menicure_pedicure.jpg", "show_in_seo_json": "no", "Service_Icon_Name": "menicure_pedicure.jpg"}, {"Category": "MENICURE / PEDICURE", "Service_Name": "ICE CREAM - MANI + PEDI (COMBO)", "Duration": "60M", "Regular_Cost": "2500", "Member_Cost": "", "Gender": "Male", "Store_N78": "Yes", "Store_N77": "Yes", "Store_N36": "Yes", "Store_N05": "Yes", "Store_N43": "Yes", "Description": "-", "service_icon_name": "menicure_pedicure.jpg", "show_in_seo_json": "no", "Service_Icon_Name": "menicure_pedicure.jpg"}, {"Category": "PEDICURE", "Service_Name": "HEEL PEEL TREATMENT", "Duration": "30M", "Regular_Cost": "2400", "Member_Cost": "2000", "Gender": "Male", "Store_N78": "Yes", "Store_N77": "Yes", "Store_N36": "Yes", "Store_N05": "Yes", "Store_N43": "Yes", "Description": "-", "service_icon_name": "pedicure.jpg", "show_in_seo_json": "no", "Service_Icon_Name": "pedicure.jpg"}, {"Category": "HAIR STYLING - FEMALE", "Service_Name": "CLASSIC CUT - BASIC CUTS | U-CUT | V-CUT | STRAIGHT CUT (NOT INCLUDING WASH) (SHORT | LONG)", "Duration": "30M", "Regular_Cost": "", "Member_Cost": "", "Gender": "Female", "Store_N78": "Yes", "Store_N77": "Yes", "Store_N36": "Yes", "Store_N05": "Yes", "Store_N43": "Yes", "Description": "OFFERING BASIC HAIR CUTTING STYLES LIKE U-CUT, V-CUT, AND STRAIGHT CUT, CRAFTED WITH PRECISION TO MAINTAIN LENGTH AND SHAPE, DELIVERING A NEAT, ELEGANT, AND WELL-DEFINED LOOK (WASH NOT INCLUDED).", "service_icon_name": "hair_styling_female.jpg", "show_in_seo_json": "yes", "Service_Icon_Name": "hair_styling_female.jpg"}, {"Category": "HAIR STYLING - FEMALE", "Service_Name": "LAYER TRIM (WITH WASH - NO ADVANCE BLOW DRY) (SHORT | LONG)", "Duration": "30M", "Regular_Cost": "", "Member_Cost": "", "Gender": "Female", "Store_N78": "Yes", "Store_N77": "Yes", "Store_N36": "Yes", "Store_N05": "Yes", "Store_N43": "Yes", "Description": "A PRECISION TRIMMING SERVICE DESIGNED TO MAINTAIN AND REFRESH LAYERS, INCLUDING A BASIC HAIR WASH WITHOUT ADVANCED BLOW DRY, LEAVING HAIR LIGHT, SHAPED, AND NEAT WITH A NATURAL, POLISHED FINISH.", "service_icon_name": "hair_styling_female.jpg", "show_in_seo_json": "yes", "Service_Icon_Name": "hair_styling_female.jpg"}, {"Category": "HAIR STYLING - FEMALE", "Service_Name": "CHANGE OF STYLE (SHAMPOO, CONDITIONING AND ADVANCE BLOW DRY) T/C APPLY", "Duration": "50M", "Regular_Cost": "1500", "Member_Cost": "1300", "Gender": "Female", "Store_N78": "Yes", "Store_N77": "Yes", "Store_N36": "Yes", "Store_N05": "Yes", "Store_N43": "Yes", "Description": "A COMPLETE HAIR TRANSFORMATION EXPERIENCE INCLUDING SHAMPOO, CONDITIONING, AND ADVANCED BLOW DRY, DESIGNED TO REFRESH YOUR LOOK WITH EXPERT STYLING, MODERN TRENDS, AND A CONFIDENT, POLISHED FINISH.", "service_icon_name": "hair_styling_female.jpg", "show_in_seo_json": "yes", "Service_Icon_Name": "hair_styling_female.jpg"}, {"Category": "HAIR STYLING - FEMALE", "Service_Name": "FRINGE | BANGS", "Duration": "10M", "Regular_Cost": "150", "Member_Cost": "120", "Gender": "Female", "Store_N78": "Yes", "Store_N77": "Yes", "Store_N36": "Yes", "Store_N05": "Yes", "Store_N43": "Yes", "Description": "A STYLISH HAIR DETAILING SERVICE FOCUSED ON CREATING PERFECTLY SHAPED FRINGES OR BANGS, TAILORED TO FACE SHAPE AND STYLE, ADDING A FRESH, TRENDY TOUCH WITH A NEAT, POLISHED FINISH.", "service_icon_name": "hair_styling_female.jpg", "show_in_seo_json": "no", "Service_Icon_Name": "hair_styling_female.jpg"}, {"Category": "HAIR STYLING - FEMALE", "Service_Name": "KIDS CUT (NOT INCLUDING WASH)", "Duration": "20M", "Regular_Cost": "400", "Member_Cost": "350", "Gender": "Female", "Store_N78": "Yes", "Store_N77": "Yes", "Store_N36": "Yes", "Store_N05": "Yes", "Store_N43": "Yes", "Description": "A FUN AND COMFORTABLE HAIRCUT EXPERIENCE FOR CHILDREN, DESIGNED WITH SAFE, GENTLE TECHNIQUES TO CREATE NEAT, STYLISH, AND EASY-TO-MANAGE LOOKS, ENSURING A HAPPY EXPERIENCE AND A CLEAN, POLISHED APPEARANCE.", "service_icon_name": "hair_styling_female.jpg", "show_in_seo_json": "no", "Service_Icon_Name": "hair_styling_female.jpg"}, {"Category": "HAIR WASH AND BLOW DRY", "Service_Name": "BASIC HAIR WASH - BLAST DRY (SHORT | LONG)", "Duration": "20M", "Regular_Cost": "", "Member_Cost": "", "Gender": "Female", "Store_N78": "Yes", "Store_N77": "Yes", "Store_N36": "Yes", "Store_N05": "Yes", "Store_N43": "Yes", "Description": "A QUICK AND REFRESHING HAIR CARE SERVICE INCLUDING CLEANSING AND BLAST DRY, DESIGNED TO REMOVE IMPURITIES, ADD LIGHT VOLUME, AND LEAVE HAIR CLEAN, NEAT, AND POLISHED FOR A FRESH EVERYDAY LOOK.", "service_icon_name": "hair_wash_and_blow_dry.jpg", "show_in_seo_json": "yes", "Service_Icon_Name": "hair_wash_and_blow_dry.jpg"}, {"Category": "HAIR WASH AND BLOW DRY", "Service_Name": "BLOW DRY -STRAIGHT FINISH (SHORT | MEDIUM | LONG)", "Duration": "30M", "Regular_Cost": "", "Member_Cost": "", "Gender": "Female", "Store_N78": "Yes", "Store_N77": "Yes", "Store_N36": "Yes", "Store_N05": "Yes", "Store_N43": "Yes", "Description": "A PROFESSIONAL STYLING SERVICE FOCUSED ON ACHIEVING A SLEEK, STRAIGHT, AND SMOOTH LOOK, ENHANCING SHINE AND MANAGEABILITY WHILE DELIVERING A CLEAN, POLISHED, AND ELEGANT FINISH.", "service_icon_name": "hair_wash_and_blow_dry.jpg", "show_in_seo_json": "no", "Service_Icon_Name": "hair_wash_and_blow_dry.jpg"}, {"Category": "HAIR WASH AND BLOW DRY", "Service_Name": "ADVANCE BLOW DRY - IN CURLS | OUT CURLS | SETTING AS-PRE HAIR CUT - USING ONLY BLOW DRY (SHORT | MEDIUM | LONG)", "Duration": "40M", "Regular_Cost": "", "Member_Cost": "", "Gender": "Female", "Store_N78": "Yes", "Store_N77": "Yes", "Store_N36": "Yes", "Store_N05": "Yes", "Store_N43": "Yes", "Description": "A PROFESSIONAL STYLING SERVICE USING ONLY BLOW DRY TECHNIQUES TO CREATE IN CURLS, OUT CURLS, OR PERFECT SETTING AS PER THE HAIR CUT, ENHANCING SHAPE, VOLUME, AND A POLISHED, SALON-FINISHED LOOK.", "service_icon_name": "hair_wash_and_blow_dry.jpg", "show_in_seo_json": "no", "Service_Icon_Name": "hair_wash_and_blow_dry.jpg"}, {"Category": "COLOURING AND HIGHLIGHTS", "Service_Name": "ROOT TOUCH UP AMMONIA | AMMONIA FREE", "Duration": "40M", "Regular_Cost": "", "Member_Cost": "", "Gender": "Female", "Store_N78": "Yes", "Store_N77": "Yes", "Store_N36": "Yes", "Store_N05": "Yes", "Store_N43": "Yes", "Description": "A PRECISION COLOR SERVICE DESIGNED TO COVER REGROWTH SEAMLESSLY USING AMMONIA OR AMMONIA-FREE OPTIONS, MAINTAINING EVEN TONE, NATURAL BLEND, AND A FRESH, POLISHED LOOK.", "service_icon_name": "colouring_and_highlights.jpg", "show_in_seo_json": "yes", "Service_Icon_Name": "colouring_and_highlights.jpg"}, {"Category": "COLOURING AND HIGHLIGHTS", "Service_Name": "GLOBAL AMMONIA (SHORT | MEDIUM | LONG)", "Duration": "1HR", "Regular_Cost": "", "Member_Cost": "", "Gender": "Female", "Store_N78": "Yes", "Store_N77": "Yes", "Store_N36": "Yes", "Store_N05": "Yes", "Store_N43": "Yes", "Description": "A COMPLETE HAIR COLORING SERVICE USING AMMONIA-BASED FORMULA TO ACHIEVE UNIFORM, RICH, AND LONG-LASTING COLOR FROM ROOT TO TIP, ENHANCING COVERAGE, SHINE, AND A BOLD, POLISHED FINISH.", "service_icon_name": "colouring_and_highlights.jpg", "show_in_seo_json": "no", "Service_Icon_Name": "colouring_and_highlights.jpg"}, {"Category": "COLOURING AND HIGHLIGHTS", "Service_Name": "GLOBAL AMMONIA FREE (SHORT | MEDIUM | LONG)", "Duration": "1HR", "Regular_Cost": "", "Member_Cost": "", "Gender": "Female", "Store_N78": "Yes", "Store_N77": "Yes", "Store_N36": "Yes", "Store_N05": "Yes", "Store_N43": "Yes", "Description": "A FULL HAIR COLORING SERVICE USING AMMONIA-FREE FORMULA TO DELIVER RICH, EVEN, AND LONG-LASTING COLOR, ENSURING GENTLE CARE, ENHANCED SHINE, AND A HEALTHY, POLISHED FINISH FROM ROOT TO TIP.", "service_icon_name": "colouring_and_highlights.jpg", "show_in_seo_json": "no", "Service_Icon_Name": "colouring_and_highlights.jpg"}, {"Category": "COLOURING AND HIGHLIGHTS", "Service_Name": "GLOBAL FASHION COLOUR (SHORT | MEDIUM | LONG)", "Duration": "1HR", "Regular_Cost": "", "Member_Cost": "", "Gender": "Female", "Store_N78": "Yes", "Store_N77": "Yes", "Store_N36": "Yes", "Store_N05": "Yes", "Store_N43": "Yes", "Description": "A BOLD, TREND-DRIVEN HAIR COLORING SERVICE DESIGNED TO CREATE VIBRANT, STATEMENT LOOKS FROM ROOT TO TIP, USING PROFESSIONAL TECHNIQUES TO ENSURE INTENSE COLOR, SHINE, AND A STRIKING, POLISHED FINISH.", "service_icon_name": "colouring_and_highlights.jpg", "show_in_seo_json": "yes", "Service_Icon_Name": "colouring_and_highlights.jpg"}, {"Category": "COLOURING AND HIGHLIGHTS", "Service_Name": "OMBRE WITH HIGHLIGHTS - BALAYAGE TECHNIQUE", "Duration": "2HR", "Regular_Cost": "7000", "Member_Cost": "6500", "Gender": "Female", "Store_N78": "Yes", "Store_N77": "Yes", "Store_N36": "Yes", "Store_N05": "Yes", "Store_N43": "Yes", "Description": "A HAND-PAINTED COLOR SERVICE COMBINING SOFT OMBRE BLENDS WITH NATURAL-LOOKING HIGHLIGHTS USING BALAYAGE, DESIGNED TO CREATE SEAMLESS TRANSITIONS, DIMENSION, AND A SUN-KISSED, POLISHED FINISH.", "service_icon_name": "colouring_and_highlights.jpg", "show_in_seo_json": "no", "Service_Icon_Name": "colouring_and_highlights.jpg"}, {"Category": "COLOURING AND HIGHLIGHTS", "Service_Name": "HIGHLIGHTS - SHORT | LONG", "Duration": "2HR", "Regular_Cost": "", "Member_Cost": "", "Gender": "Female", "Store_N78": "Yes", "Store_N77": "Yes", "Store_N36": "Yes", "Store_N05": "Yes", "Store_N43": "Yes", "Description": "A PROFESSIONAL COLORING SERVICE DESIGNED TO ADD DIMENSION, DEPTH, AND BRIGHTNESS TO HAIR, CREATING A NATURAL OR BOLD EFFECT WITH SEAMLESS BLENDING AND A SHINY, POLISHED FINISH.", "service_icon_name": "colouring_and_highlights.jpg", "show_in_seo_json": "no", "Service_Icon_Name": "colouring_and_highlights.jpg"}, {"Category": "COLOURING AND HIGHLIGHTS", "Service_Name": "HIGHLIGHTS - PER STREAK (SHORT | MEDIUM | LONG)", "Duration": "30M", "Regular_Cost": "", "Member_Cost": "", "Gender": "Female", "Store_N78": "Yes", "Store_N77": "Yes", "Store_N36": "Yes", "Store_N05": "Yes", "Store_N43": "Yes", "Description": "A PRECISE COLORING SERVICE ADDING INDIVIDUAL HIGHLIGHTS TO CREATE DIMENSION AND BRIGHTNESS, ENHANCING HAIR TEXTURE AND STYLE WITH A NATURAL, POLISHED FINISH.", "service_icon_name": "colouring_and_highlights.jpg", "show_in_seo_json": "yes", "Service_Icon_Name": "colouring_and_highlights.jpg"}, {"Category": "COLOURING AND HIGHLIGHTS", "Service_Name": "ROOT TOUCH UP + CLASSIC HAIR SPA (AMMONIA FREE)", "Duration": "1HR", "Regular_Cost": "2500", "Member_Cost": "", "Gender": "Female", "Store_N78": "Yes", "Store_N77": "Yes", "Store_N36": "Yes", "Store_N05": "Yes", "Store_N43": "Yes", "Description": "A COMBINED SERVICE COVERING REGROWTH WITH GENTLE, AMMONIA-FREE COLOR AND A NOURISHING CLASSIC HAIR SPA, DESIGNED TO REFRESH COLOR, STRENGTHEN HAIR, AND LEAVE IT SOFT, SHINY, AND POLISHED.", "service_icon_name": "colouring_and_highlights.jpg", "show_in_seo_json": "no", "Service_Icon_Name": "colouring_and_highlights.jpg"}, {"Category": "ADD ON", "Service_Name": "BOND STRENGTHENER / CONCENTRATER (WITH HAIR COLOR | SPA)", "Duration": "-", "Regular_Cost": "", "Member_Cost": "", "Gender": "Female", "Store_N78": "Yes", "Store_N77": "Yes", "Store_N36": "Yes", "Store_N05": "Yes", "Store_N43": "Yes", "Description": "A SPECIALIZED TREATMENT DESIGNED TO REINFORCE HAIR BONDS DURING COLORING OR SPA SERVICES, ENHANCING STRENGTH, REDUCING BREAKAGE, AND LEAVING HAIR STRONG, SMOOTH, AND POLISHED.", "service_icon_name": "add_on.jpg", "show_in_seo_json": "no", "Service_Icon_Name": "add_on.jpg"}, {"Category": "TEXTURE", "Service_Name": "SMOOTHENING (MEDIUM | LONG)", "Duration": "3HRS", "Regular_Cost": "", "Member_Cost": "", "Gender": "Female", "Store_N78": "Yes", "Store_N77": "Yes", "Store_N36": "Yes", "Store_N05": "Yes", "Store_N43": "Yes", "Description": "A PROFESSIONAL HAIR TREATMENT DESIGNED TO ELIMINATE FRIZZ, ENHANCE SHINE, AND PROVIDE SILKY, MANAGEABLE TEXTURE, LEAVING HAIR SMOOTH, SOFT, AND POLISHED WITH A LUXURIOUS FINISH.", "service_icon_name": "texture.jpg", "show_in_seo_json": "yes", "Service_Icon_Name": "texture.jpg"}, {"Category": "TEXTURE", "Service_Name": "KERATIN / BOTOX (MEDIUM | LONG)", "Duration": "3HRS", "Regular_Cost": "", "Member_Cost": "", "Gender": "Female", "Store_N78": "Yes", "Store_N77": "Yes", "Store_N36": "Yes", "Store_N05": "Yes", "Store_N43": "Yes", "Description": "ADVANCED HAIR TREATMENTS DESIGNED TO REPAIR DAMAGE, REDUCE FRIZZ, AND RESTORE SMOOTHNESS, LEAVING HAIR STRONG, HYDRATED, SOFT, AND LUXURIOUSLY POLISHED.", "service_icon_name": "texture.jpg", "show_in_seo_json": "no", "Service_Icon_Name": "texture.jpg"}, {"Category": "TEXTURE", "Service_Name": "RE - GROWTH | RE - BONDING | PARTIAL STRAIGHTENING", "Duration": "2HRS", "Regular_Cost": "5500", "Member_Cost": "", "Gender": "Female", "Store_N78": "Yes", "Store_N77": "Yes", "Store_N36": "Yes", "Store_N05": "Yes", "Store_N43": "Yes", "Description": "PROFESSIONAL HAIR TREATMENTS DESIGNED TO MAINTAIN PREVIOUSLY TREATED HAIR, ENHANCING SMOOTHNESS, RESTORING BONDS, AND PROVIDING STRAIGHT, MANAGEABLE TEXTURE FOR A POLISHED, SALON-FINISHED LOOK.", "service_icon_name": "texture.jpg", "show_in_seo_json": "no", "Service_Icon_Name": "texture.jpg"}, {"Category": "ADD ON", "Service_Name": "ANY ADVANCES TREATMENT | HAIR SPA (WITH SMOOTHENING / KERATIN / COLOURING SERVICES) T/C APPLY", "Duration": "60M", "Regular_Cost": "", "Member_Cost": "", "Gender": "Female", "Store_N78": "Yes", "Store_N77": "Yes", "Store_N36": "Yes", "Store_N05": "Yes", "Store_N43": "Yes", "Description": "A COMBINED LUXURIOUS HAIR EXPERIENCE INCORPORATING ADVANCED TREATMENTS OR HAIR SPA WITH SMOOTHENING, KERATIN, OR COLOR SERVICES, DESIGNED TO NOURISH, REPAIR, AND ENHANCE HAIR HEALTH, LEAVING IT SOFT, SHINY, MANAGEABLE, AND POLISHED.", "service_icon_name": "add_on.jpg", "show_in_seo_json": "yes", "Service_Icon_Name": "add_on.jpg"}, {"Category": "HAIR STYLING", "Service_Name": "IRONING (SHORT | MEDIUM | LONG)", "Duration": "40M", "Regular_Cost": "", "Member_Cost": "", "Gender": "Female", "Store_N78": "Yes", "Store_N77": "Yes", "Store_N36": "Yes", "Store_N05": "Yes", "Store_N43": "Yes", "Description": "A PROFESSIONAL HAIR STYLING SERVICE DESIGNED TO STRAIGHTEN AND SMOOTH HAIR USING HEATED IRONS, ENHANCING SHINE, MANAGEABILITY, AND LEAVING HAIR SLEEK, POLISHED, AND SALON-READY.", "service_icon_name": "hair_styling.jpg", "show_in_seo_json": "no", "Service_Icon_Name": "hair_styling.jpg"}, {"Category": "HAIR STYLING", "Service_Name": "TONGS - INCLUDES WASH (SHORT | MEDIUM | LONG)", "Duration": "40M", "Regular_Cost": "", "Member_Cost": "", "Gender": "Female", "Store_N78": "Yes", "Store_N77": "Yes", "Store_N36": "Yes", "Store_N05": "Yes", "Store_N43": "Yes", "Description": "A HAIR STYLING SERVICE COMBINING WASH WITH PROFESSIONAL TONGING TO CREATE IN CURLS, OUT CURLS, OR VOLUME, ENHANCING TEXTURE AND SHAPE, LEAVING HAIR POLISHED, BOUNCY, AND SALON-FINISHED.", "service_icon_name": "hair_styling.jpg", "show_in_seo_json": "no", "Service_Icon_Name": "hair_styling.jpg"}, {"Category": "HEAD MASSAGE", "Service_Name": "ALMOND / OLIVE / MENTHOL /COCONUT - INCLUDES HAIR WASH (SHORT | MEDIUM)", "Duration": "40M", "Regular_Cost": "", "Member_Cost": "", "Gender": "Female", "Store_N78": "Yes", "Store_N77": "Yes", "Store_N36": "Yes", "Store_N05": "Yes", "Store_N43": "Yes", "Description": "A RELAXING HAIR AND SCALP TREATMENT COMBINING SOOTHING MASSAGE WITH THOROUGH HAIR WASH, DESIGNED TO IMPROVE BLOOD CIRCULATION, RELIEVE STRESS, AND LEAVE HAIR CLEAN, FRESH, AND POLISHED.", "service_icon_name": "head_massage.jpg", "show_in_seo_json": "yes", "Service_Icon_Name": "head_massage.jpg"}, {"Category": "HEAD MASSAGE", "Service_Name": "ALMOND / OLIVE / MENTHOL /COCONUT - WITHOUT HAIR WASH (SHORT | MEDIUM)", "Duration": "30M", "Regular_Cost": "", "Member_Cost": "", "Gender": "Female", "Store_N78": "Yes", "Store_N77": "Yes", "Store_N36": "Yes", "Store_N05": "Yes", "Store_N43": "Yes", "Description": "A RELAXING SCALP TREATMENT FOCUSED ON SOOTHING MASSAGE TO RELIEVE STRESS, IMPROVE BLOOD CIRCULATION, AND REVITALIZE THE SCALP, LEAVING HAIR AND MIND REFRESHED AND POLISHED.", "service_icon_name": "head_massage.jpg", "show_in_seo_json": "no", "Service_Icon_Name": "head_massage.jpg"}, {"Category": "HAIR SPA TREATMENT", "Service_Name": "MOISTURING HAIR SPA (SHORT | MEDIUM | LONG)", "Duration": "30M", "Regular_Cost": "", "Member_Cost": "", "Gender": "Female", "Store_N78": "Yes", "Store_N77": "Yes", "Store_N36": "Yes", "Store_N05": "Yes", "Store_N43": "Yes", "Description": "A DEEP HYDRATION TREATMENT DESIGNED TO NOURISH DRY OR DAMAGED HAIR, RESTORE SOFTNESS, SHINE, AND MANAGEABILITY, LEAVING HAIR HEALTHY, SMOOTH, AND LUXURIOUSLY POLISHED.", "service_icon_name": "hair_spa_treatment.jpg", "show_in_seo_json": "no", "Service_Icon_Name": "hair_spa_treatment.jpg"}, {"Category": "HAIR SPA TREATMENT", "Service_Name": "COLOR SAVE (SHORT | MEDIUM | LONG)", "Duration": "30M", "Regular_Cost": "", "Member_Cost": "", "Gender": "Female", "Store_N78": "Yes", "Store_N77": "Yes", "Store_N36": "Yes", "Store_N05": "Yes", "Store_N43": "Yes", "Description": "A REVITALIZING TREATMENT COMBINING COLOR PROTECTION WITH DEEP HAIR NOURISHMENT, DESIGNED TO MAINTAIN VIBRANCY, ENHANCE SHINE, REDUCE DAMAGE, AND LEAVE HAIR SOFT, HEALTHY, AND LUXURIOUSLY POLISHED.", "service_icon_name": "hair_spa_treatment.jpg", "show_in_seo_json": "yes", "Service_Icon_Name": "hair_spa_treatment.jpg"}, {"Category": "HAIR SPA TREATMENT", "Service_Name": "REPAIR AND REJUVENATE (SHORT | MEDIUM | LONG)", "Duration": "40M", "Regular_Cost": "", "Member_Cost": "", "Gender": "Female", "Store_N78": "Yes", "Store_N77": "Yes", "Store_N36": "Yes", "Store_N05": "Yes", "Store_N43": "Yes", "Description": "A DEEP HAIR TREATMENT TARGETING DAMAGE REPAIR AND FIBER REJUVENATION, DESIGNED TO RESTORE STRENGTH, SHINE, AND SOFTNESS, LEAVING HAIR HEALTHY, MANAGEABLE, AND LUXURIOUSLY POLISHED.", "service_icon_name": "hair_spa_treatment.jpg", "show_in_seo_json": "yes", "Service_Icon_Name": "hair_spa_treatment.jpg"}, {"Category": "HAIR SPA TREATMENT", "Service_Name": "FRIZZ CONTROL (SHORT | MEDIUM | LONG)", "Duration": "40M", "Regular_Cost": "", "Member_Cost": "", "Gender": "Female", "Store_N78": "Yes", "Store_N77": "Yes", "Store_N36": "Yes", "Store_N05": "Yes", "Store_N43": "Yes", "Description": "A LUXURIOUS TREATMENT COMBINING DEEP NOURISHMENT AND FRIZZ MANAGEMENT, DESIGNED TO SMOOTH HAIR, ENHANCE SHINE, AND IMPROVE MANAGEABILITY, LEAVING HAIR SOFT, POLISHED, AND EFFORTLESSLY STYLISH.", "service_icon_name": "hair_spa_treatment.jpg", "show_in_seo_json": "yes", "Service_Icon_Name": "hair_spa_treatment.jpg"}, {"Category": "HAIR SPA TREATMENT", "Service_Name": "SMOOTHENING / STRAIGHTENTING TREATED HAIR (SHORT | MEDIUM | LONG)", "Duration": "50M", "Regular_Cost": "", "Member_Cost": "", "Gender": "Female", "Store_N78": "Yes", "Store_N77": "Yes", "Store_N36": "Yes", "Store_N05": "Yes", "Store_N43": "Yes", "Description": "PROFESSIONALLY ENHANCING HAIR THAT HAS UNDERGONE PREVIOUS TREATMENTS, PROVIDING SILKY, STRAIGHT, AND FRIZZ-FREE TEXTURE WHILE MAINTAINING HAIR HEALTH, SHINE, AND A POLISHED, LUXURIOUS LOOK.", "service_icon_name": "hair_spa_treatment.jpg", "show_in_seo_json": "yes", "Service_Icon_Name": "hair_spa_treatment.jpg"}, {"Category": "HAIR SPA TREATMENT", "Service_Name": "KERATIN TREATED HAIR (SHORT | MEDIUM | LONG)", "Duration": "50M", "Regular_Cost": "", "Member_Cost": "", "Gender": "Female", "Store_N78": "Yes", "Store_N77": "Yes", "Store_N36": "Yes", "Store_N05": "Yes", "Store_N43": "Yes", "Description": "PROFESSIONAL CARE FOR HAIR THAT HAS UNDERGONE KERATIN TREATMENT, DESIGNED TO MAINTAIN SMOOTHNESS, REDUCE FRIZZ, ENHANCE SHINE, AND KEEP HAIR SOFT, MANAGEABLE, AND LUXURIOUSLY POLISHED.", "service_icon_name": "hair_spa_treatment.jpg", "show_in_seo_json": "yes", "Service_Icon_Name": "hair_spa_treatment.jpg"}, {"Category": "HAIR SPA TREATMENT", "Service_Name": "ABSOLUTE REPAIR MOLECULAR CARE (SHORT | MEDIUM | LONG)", "Duration": "60M", "Regular_Cost": "", "Member_Cost": "", "Gender": "Female", "Store_N78": "Yes", "Store_N77": "Yes", "Store_N36": "Yes", "Store_N05": "Yes", "Store_N43": "Yes", "Description": "AN ADVANCED HAIR TREATMENT TARGETING DEEP DAMAGE AT THE MOLECULAR LEVEL, DESIGNED TO REPAIR, STRENGTHEN, AND REJUVENATE HAIR, LEAVING IT HEALTHY, STRONG, SOFT, AND LUXURIOUSLY POLISHED.", "service_icon_name": "hair_spa_treatment.jpg", "show_in_seo_json": "yes", "Service_Icon_Name": "hair_spa_treatment.jpg"}, {"Category": "HAIR SPA TREATMENT", "Service_Name": "CONCENTRATER / INFUSION (DEPENDS ON CONCERN PRICES VARIES)", "Duration": "40M", "Regular_Cost": "", "Member_Cost": "", "Gender": "Female", "Store_N78": "Yes", "Store_N77": "Yes", "Store_N36": "Yes", "Store_N05": "Yes", "Store_N43": "Yes", "Description": "-", "service_icon_name": "hair_spa_treatment.jpg", "show_in_seo_json": "no", "Service_Icon_Name": "hair_spa_treatment.jpg"}, {"Category": "SCALP TREATMENT", "Service_Name": "ANTI HAIRFALL TREATMENT", "Duration": "40M", "Regular_Cost": "2200", "Member_Cost": "2000", "Gender": "Female", "Store_N78": "Yes", "Store_N77": "Yes", "Store_N36": "Yes", "Store_N05": "Yes", "Store_N43": "Yes", "Description": "A SPECIALIZED TREATMENT DESIGNED TO STRENGTHEN HAIR ROOTS, REDUCE HAIR FALL, AND PROMOTE HEALTHY GROWTH, LEAVING HAIR STRONG, THICK, NOURISHED, AND POLISHED WITH IMPROVED VITALITY.", "service_icon_name": "scalp_treatment.jpg", "show_in_seo_json": "no", "Service_Icon_Name": "scalp_treatment.jpg"}, {"Category": "SCALP TREATMENT", "Service_Name": "DANDRUFF CONTROL", "Duration": "40M", "Regular_Cost": "2200", "Member_Cost": "2000", "Gender": "Female", "Store_N78": "Yes", "Store_N77": "Yes", "Store_N36": "Yes", "Store_N05": "Yes", "Store_N43": "Yes", "Description": "A TARGETED TREATMENT COMBINING DANDRUFF MANAGEMENT WITH A BASIC HAIR SPA, DESIGNED TO CLEANSE SCALP, REDUCE FLAKES, NOURISH HAIR, AND LEAVE IT HEALTHY, SOFT, AND POLISHED.", "service_icon_name": "scalp_treatment.jpg", "show_in_seo_json": "yes", "Service_Icon_Name": "scalp_treatment.jpg"}, {"Category": "SKIN CARE", "Service_Name": "ACNE CLEAN UP", "Duration": "(20-30MINS)", "Regular_Cost": "0.12", "Member_Cost": "1100", "Gender": "Female", "Store_N78": "Yes", "Store_N77": "Yes", "Store_N36": "Yes", "Store_N05": "Yes", "Store_N43": "Yes", "Description": "A PROFESSIONAL SKIN TREATMENT FOCUSED ON DEEP CLEANSING, REMOVING IMPURITIES, AND TREATING ACNE, DESIGNED TO REFRESH THE SKIN, REDUCE BREAKOUTS, AND LEAVE IT CLEAR, SMOOTH, AND POLISHED.", "service_icon_name": "skin_care.jpg", "show_in_seo_json": "no", "Service_Icon_Name": "skin_care.jpg"}, {"Category": "SKIN CARE", "Service_Name": "BASIC TAN CLEAR", "Duration": "(30-40MINS)", "Regular_Cost": "1300", "Member_Cost": "1200", "Gender": "Female", "Store_N78": "Yes", "Store_N77": "Yes", "Store_N36": "Yes", "Store_N05": "Yes", "Store_N43": "Yes", "Description": "A GENTLE AND EFFECTIVE TREATMENT DESIGNED TO REMOVE SUN TAN, CLEANSE AND BRIGHTEN THE SKIN, LEAVING IT FRESH, EVEN-TONED, AND POLISHED.", "service_icon_name": "skin_care.jpg", "show_in_seo_json": "no", "Service_Icon_Name": "skin_care.jpg"}, {"Category": "SKIN CARE", "Service_Name": "FRUIT BLASTER", "Duration": "(20-30MINS)", "Regular_Cost": "1400", "Member_Cost": "1300", "Gender": "Female", "Store_N78": "Yes", "Store_N77": "Yes", "Store_N36": "Yes", "Store_N05": "Yes", "Store_N43": "Yes", "Description": "A REVITALIZING FACIAL TREATMENT USING FRESH FRUIT EXTRACTS TO NOURISH, HYDRATE, AND REJUVENATE THE SKIN, LEAVING IT GLOWING, REFRESHED, AND POLISHED.", "service_icon_name": "skin_care.jpg", "show_in_seo_json": "yes", "Service_Icon_Name": "skin_care.jpg"}, {"Category": "SKIN CARE", "Service_Name": "FACE REFLEXOLOGY", "Duration": "10M", "Regular_Cost": "500", "Member_Cost": "", "Gender": "Female", "Store_N78": "Yes", "Store_N77": "Yes", "Store_N36": "Yes", "Store_N05": "Yes", "Store_N43": "Yes", "Description": "A THERAPEUTIC TREATMENT FOCUSING ON PRESSURE POINTS TO RELIEVE STRESS, IMPROVE BLOOD CIRCULATION, AND PROMOTE SKIN HEALTH, LEAVING THE FACE RELAXED, REVITALIZED, AND POLISHED.", "service_icon_name": "skin_care.jpg", "show_in_seo_json": "no", "Service_Icon_Name": "skin_care.jpg"}, {"Category": "FACIAL", "Service_Name": "CHOCOHOLIC", "Duration": "(35-45MINS)", "Regular_Cost": "1600", "Member_Cost": "1400", "Gender": "Female", "Store_N78": "Yes", "Store_N77": "Yes", "Store_N36": "Yes", "Store_N05": "Yes", "Store_N43": "Yes", "Description": "THIS IS A REPLENISHING AND HYDRATING SKIN TREATMENT WITH THE LUXUARY OF CHOCOLATE THAT REDUCES DARK SPOTS AND QUITE SIMPLY REJUVENATES THE SKIN", "service_icon_name": "facial.jpg", "show_in_seo_json": "no", "Service_Icon_Name": "facial.jpg"}, {"Category": "FACIAL", "Service_Name": "DETAN 100", "Duration": "(35-45MINS)", "Regular_Cost": "1800", "Member_Cost": "1700", "Gender": "Female", "Store_N78": "Yes", "Store_N77": "Yes", "Store_N36": "Yes", "Store_N05": "Yes", "Store_N43": "Yes", "Description": "THIS REGIME COMBINES A CRAFTED FACIAL THAT RESTORES THE SKIN'S BALANCE, REMOVES TAN AND EXFOLIATES GENTLY AND LEAVES IT GLOWING WITH FRESHNESS", "service_icon_name": "facial.jpg", "show_in_seo_json": "yes", "Service_Icon_Name": "facial.jpg"}, {"Category": "FACIAL", "Service_Name": "GOLD AND GLOW", "Duration": "(35-45MINS)", "Regular_Cost": "1900", "Member_Cost": "1700", "Gender": "Female", "Store_N78": "Yes", "Store_N77": "Yes", "Store_N36": "Yes", "Store_N05": "Yes", "Store_N43": "Yes", "Description": "AN EXCLUSIVE FACIAL THAT USES THE GOODNESS OF GOLD TO REVEAL AN UNSTOPPABLE GLOW", "service_icon_name": "facial.jpg", "show_in_seo_json": "no", "Service_Icon_Name": "facial.jpg"}, {"Category": "FACIAL", "Service_Name": "NATURAL BRIGHTENING", "Duration": "(35-45MINS)", "Regular_Cost": "2100", "Member_Cost": "2000", "Gender": "Female", "Store_N78": "Yes", "Store_N77": "Yes", "Store_N36": "Yes", "Store_N05": "Yes", "Store_N43": "Yes", "Description": "A GENTLE FACIAL TREATMENT USING NATURAL INGREDIENTS TO ENHANCE SKIN RADIANCE, EVEN OUT TONE, AND NOURISH DEEPLY, LEAVING THE SKIN FRESH, GLOWING, AND POLISHED.", "service_icon_name": "facial.jpg", "show_in_seo_json": "no", "Service_Icon_Name": "facial.jpg"}, {"Category": "FACIAL", "Service_Name": "CHARCOAL BRIGHTENING", "Duration": "60-70MINS", "Regular_Cost": "2800", "Member_Cost": "2600", "Gender": "Female", "Store_N78": "Yes", "Store_N77": "Yes", "Store_N36": "Yes", "Store_N05": "Yes", "Store_N43": "Yes", "Description": "A DEEP-CLEANSING FACIAL TREATMENT USING CHARCOAL TO REMOVE IMPURITIES, TOXINS, AND EXCESS OIL, DESIGNED TO BRIGHTEN AND REFRESH THE SKIN, LEAVING IT CLEAN, GLOWING, AND POLISHED.", "service_icon_name": "facial.jpg", "show_in_seo_json": "yes", "Service_Icon_Name": "facial.jpg"}, {"Category": "FACIAL", "Service_Name": "DEAD SEA HYDRATION", "Duration": "45-55MINS", "Regular_Cost": "2500", "Member_Cost": "2400", "Gender": "Female", "Store_N78": "Yes", "Store_N77": "Yes", "Store_N36": "Yes", "Store_N05": "Yes", "Store_N43": "Yes", "Description": "DEAD SEA MUD MASKS WORK TO REMOVE IMPURITIES AND DEAD SKIN WITH AN ADDED BENEFIT OF SPECIAL MINERALS TO IMPROVE SKIN TONE AND ELASTICITY", "service_icon_name": "facial.jpg", "show_in_seo_json": "no", "Service_Icon_Name": "facial.jpg"}, {"Category": "FACIAL", "Service_Name": "SENSIGLOW", "Duration": "45-55MINS", "Regular_Cost": "2500", "Member_Cost": "2300", "Gender": "Female", "Store_N78": "Yes", "Store_N77": "Yes", "Store_N36": "Yes", "Store_N05": "Yes", "Store_N43": "Yes", "Description": "A FACIAL WHICH CALMS AND HARMONIZES SENSITIVE SKIN AND GIVES NOURISHING GLOW", "service_icon_name": "facial.jpg", "show_in_seo_json": "no", "Service_Icon_Name": "facial.jpg"}, {"Category": "FACIAL", "Service_Name": "NATURAL AGE REVERSAL", "Duration": "45-55MINS", "Regular_Cost": "2600", "Member_Cost": "2400", "Gender": "Female", "Store_N78": "Yes", "Store_N77": "Yes", "Store_N36": "Yes", "Store_N05": "Yes", "Store_N43": "Yes", "Description": "A LUXURIOUS SLOW-PACED FACIAL WITH PRODUCTS RICH IN VITAMINS THAT SOOTHE AND BRIGHTEN THE SKIN. SUITABLE FOR ALL SKIN TYPES", "service_icon_name": "facial.jpg", "show_in_seo_json": "yes", "Service_Icon_Name": "facial.jpg"}, {"Category": "FACIAL", "Service_Name": "SKIN BRIGHTENING", "Duration": "60-70MINS", "Regular_Cost": "2800", "Member_Cost": "2600", "Gender": "Female", "Store_N78": "Yes", "Store_N77": "Yes", "Store_N36": "Yes", "Store_N05": "Yes", "Store_N43": "Yes", "Description": "A FACIAL TREATMENT DESIGNED TO ENHANCE SKIN RADIANCE, EVEN OUT COMPLEXION, AND REMOVE DULLNESS, LEAVING THE SKIN FRESH, GLOWING, AND POLISHED.", "service_icon_name": "facial.jpg", "show_in_seo_json": "no", "Service_Icon_Name": "facial.jpg"}, {"Category": "FACIAL", "Service_Name": "7 STEP DERMA ICE", "Duration": "45-55MINS", "Regular_Cost": "3800", "Member_Cost": "3500", "Gender": "Female", "Store_N78": "Yes", "Store_N77": "Yes", "Store_N36": "Yes", "Store_N05": "Yes", "Store_N43": "Yes", "Description": "A NEW AGE COOL FACIAL THAT COMBINES EXOTIC FRUITS LIKE NONI, GLUTATHIONE AND PLUM GIVING AN INSTANT GLOW AND CLEAR SKIN", "service_icon_name": "facial.jpg", "show_in_seo_json": "no", "Service_Icon_Name": "facial.jpg"}, {"Category": "FACIAL", "Service_Name": "RE - ENNERGIZING", "Duration": "45-55MINS", "Regular_Cost": "3900", "Member_Cost": "3600", "Gender": "Female", "Store_N78": "Yes", "Store_N77": "Yes", "Store_N36": "Yes", "Store_N05": "Yes", "Store_N43": "Yes", "Description": "A REVITALIZING FACIAL TREATMENT DESIGNED TO BOOST SKIN ENERGY, REFRESH DULLNESS, AND RESTORE VITALITY, LEAVING THE SKIN GLOWING, FIRM, AND POLISHED.", "service_icon_name": "facial.jpg", "show_in_seo_json": "yes", "Service_Icon_Name": "facial.jpg"}, {"Category": "LUXUARY FACIALS", "Service_Name": "FRUITY MARMALADE", "Duration": "50-60MINS", "Regular_Cost": "4000", "Member_Cost": "3700", "Gender": "Female", "Store_N78": "Yes", "Store_N77": "Yes", "Store_N36": "Yes", "Store_N05": "Yes", "Store_N43": "Yes", "Description": "AN EXCLUSIVE FACIAL THAT USES EXTRACTS OF FRUITS LIKE BEARBERRY, GRAPE, PINEAPPLE, KIWI AND PAPAYA TO FORMULATE A PROCESS INVOLVING NUTRIENTS, ENZYMES AND VITAMINS THAT ENSURE AN OPTIMUM SKIN GLOW", "service_icon_name": "luxuary_facials.jpg", "show_in_seo_json": "no", "Service_Icon_Name": "luxuary_facials.jpg"}, {"Category": "LUXUARY FACIALS", "Service_Name": "ULTIMO GOLD", "Duration": "50-60MINS", "Regular_Cost": "5000", "Member_Cost": "4700", "Gender": "Female", "Store_N78": "Yes", "Store_N77": "Yes", "Store_N36": "Yes", "Store_N05": "Yes", "Store_N43": "Yes", "Description": "THE REVOLUTIONARY SKIN TRANSFORMATION TREATMENT PENETRATES 24KARATS GOLD INTO THE SKIN'S DEEPEST LAYER ACCELERATING CELL RENEWAL, PROMOTING THE CLEARANCE OF STAGNANT MELANIN TO BRIGHTEN THE SKIN", "service_icon_name": "luxuary_facials.jpg", "show_in_seo_json": "no", "Service_Icon_Name": "luxuary_facials.jpg"}, {"Category": "LUXUARY FACIALS", "Service_Name": "ILLUMANATING FACIAL", "Duration": "50-60MINS", "Regular_Cost": "6500", "Member_Cost": "6000", "Gender": "Female", "Store_N78": "Yes", "Store_N77": "Yes", "Store_N36": "Yes", "Store_N05": "Yes", "Store_N43": "Yes", "Description": "THIS FACIAL WITH THE EXTRACT OF GOJIBERRY, FRUIT OG LONGEVITY HELPS IN BALANCING THE NATURAL CONDITION OF THE SKIN AND PROTECTS IT FROM EXTERNAL AGENTS THE ALGAE PEEL-OFF GOJI MASK HAS HIGH ANTIOXIDANT POWER AIDING IN SKIN REPLENISHMENT", "service_icon_name": "luxuary_facials.jpg", "show_in_seo_json": "yes", "Service_Icon_Name": "luxuary_facials.jpg"}, {"Category": "LUXUARY FACIALS", "Service_Name": "RED CARPET DNA FACIAL", "Duration": "70-90MINS", "Regular_Cost": "7500", "Member_Cost": "6900", "Gender": "Female", "Store_N78": "Yes", "Store_N77": "Yes", "Store_N36": "Yes", "Store_N05": "Yes", "Store_N43": "Yes", "Description": "THIS 5 LAYER FACIAL IS AN ULTIMATE WAY TO INFUSE PUREST FORMS OF VITAMINS AND MINERALS INTO THE SKIN AT -300F ENTERING THE DEEPER LAYERS OF SKIN AND SEALED", "service_icon_name": "luxuary_facials.jpg", "show_in_seo_json": "no", "Service_Icon_Name": "luxuary_facials.jpg"}, {"Category": "LUXUARY FACIALS", "Service_Name": "HYDRAFACIAL", "Duration": "70-90MINS", "Regular_Cost": "8000", "Member_Cost": "", "Gender": "Female", "Store_N78": "Yes", "Store_N77": "Yes", "Store_N36": "Yes", "Store_N05": "Yes", "Store_N43": "Yes", "Description": "POPULAR COSMETIC TREATMENT THAT COMBINES EXFOLIATION EXTRACTION, HYDRATION AND ANTIOXIDANT PROTECTION SIMULTANEOUSLY, RESULTING IN CLEARNER, MORE HYDRATED, AND YOUTHFUL-LOOKING SKIN.", "service_icon_name": "luxuary_facials.jpg", "show_in_seo_json": "no", "Service_Icon_Name": "luxuary_facials.jpg"}, {"Category": "LUXUARY FACIALS", "Service_Name": "DERMA SAGE 360", "Duration": "70-90MINS", "Regular_Cost": "8000", "Member_Cost": "", "Gender": "Female", "Store_N78": "Yes", "Store_N77": "Yes", "Store_N36": "Yes", "Store_N05": "Yes", "Store_N43": "Yes", "Description": "THIS METICULOUSLY CRAFTED SKINCARE TREATMENT COMBINES THE LATEST ADVANCEMENTS IN DERMAL SCIENCE WITH THE NURTURING PROPERTIES OF BOTANICAL EXTRACTS.", "service_icon_name": "luxuary_facials.jpg", "show_in_seo_json": "yes", "Service_Icon_Name": "luxuary_facials.jpg"}, {"Category": "ADD ON MASK", "Service_Name": "FRUIT REFRESHMENT", "Duration": "20M", "Regular_Cost": "250", "Member_Cost": "", "Gender": "Female", "Store_N78": "Yes", "Store_N77": "Yes", "Store_N36": "Yes", "Store_N05": "Yes", "Store_N43": "Yes", "Description": "A NOURISHING FACIAL MASK USING FRESH FRUIT EXTRACTS TO HYDRATE, REVITALIZE, AND REJUVENATE THE SKIN, LEAVING IT FRESH, GLOWING, AND POLISHED.", "service_icon_name": "add_on_mask.jpg", "show_in_seo_json": "yes", "Service_Icon_Name": "add_on_mask.jpg"}, {"Category": "ADD ON MASK", "Service_Name": "CHAR-COAL MASK", "Duration": "20M", "Regular_Cost": "600", "Member_Cost": "", "Gender": "Female", "Store_N78": "Yes", "Store_N77": "Yes", "Store_N36": "Yes", "Store_N05": "Yes", "Store_N43": "Yes", "Description": "A DEEP-CLEANSING FACIAL MASK USING CHARCOAL TO REMOVE IMPURITIES, TOXINS, AND EXCESS OIL, DESIGNED TO PURIFY, REFRESH, AND BRIGHTEN THE SKIN, LEAVING IT CLEAN, SMOOTH, AND POLISHED.", "service_icon_name": "add_on_mask.jpg", "show_in_seo_json": "yes", "Service_Icon_Name": "add_on_mask.jpg"}, {"Category": "ADD ON MASK", "Service_Name": "WHITENING", "Duration": "20M", "Regular_Cost": "500", "Member_Cost": "", "Gender": "Female", "Store_N78": "Yes", "Store_N77": "Yes", "Store_N36": "Yes", "Store_N05": "Yes", "Store_N43": "Yes", "Description": "A FACIAL MASK DESIGNED TO BRIGHTEN AND EVEN OUT SKIN TONE, REDUCE DULLNESS, AND ENHANCE RADIANCE, LEAVING THE SKIN GLOWING, FRESH, AND POLISHED.", "service_icon_name": "add_on_mask.jpg", "show_in_seo_json": "yes", "Service_Icon_Name": "add_on_mask.jpg"}, {"Category": "ADD ON MASK", "Service_Name": "REJUVINATE", "Duration": "20M", "Regular_Cost": "550", "Member_Cost": "", "Gender": "Female", "Store_N78": "Yes", "Store_N77": "Yes", "Store_N36": "Yes", "Store_N05": "Yes", "Store_N43": "Yes", "Description": "A NOURISHING FACIAL MASK DESIGNED TO REVITALIZE AND RESTORE SKIN HEALTH, BOOSTING HYDRATION, FIRMNESS, AND GLOW, LEAVING THE SKIN FRESH, SMOOTH, AND POLISHED.", "service_icon_name": "add_on_mask.jpg", "show_in_seo_json": "yes", "Service_Icon_Name": "add_on_mask.jpg"}, {"Category": "ADD ON MASK", "Service_Name": "CHAR-COAL PEEL OFF MASK", "Duration": "20M", "Regular_Cost": "600", "Member_Cost": "", "Gender": "Female", "Store_N78": "Yes", "Store_N77": "Yes", "Store_N36": "Yes", "Store_N05": "Yes", "Store_N43": "Yes", "Description": "A DEEP-CLEANSING FACIAL TREATMENT USING CHARCOAL TO REMOVE IMPURITIES, TOXINS, AND EXCESS OIL, DESIGNED TO PURIFY, REFRESH, AND BRIGHTEN THE SKIN, LEAVING IT CLEAN, SMOOTH, AND POLISHED.", "service_icon_name": "add_on_mask.jpg", "show_in_seo_json": "yes", "Service_Icon_Name": "add_on_mask.jpg"}, {"Category": "ADD ON SKIN CARE", "Service_Name": "UNDERARM", "Duration": "20M", "Regular_Cost": "700", "Member_Cost": "", "Gender": "Female", "Store_N78": "Yes", "Store_N77": "Yes", "Store_N36": "Yes", "Store_N05": "Yes", "Store_N43": "Yes", "Description": "-", "service_icon_name": "add_on_skin_care.jpg", "show_in_seo_json": "no", "Service_Icon_Name": "add_on_skin_care.jpg"}, {"Category": "ADD ON SKIN CARE", "Service_Name": "NECK | ELBOW", "Duration": "20M", "Regular_Cost": "800", "Member_Cost": "", "Gender": "Female", "Store_N78": "Yes", "Store_N77": "Yes", "Store_N36": "Yes", "Store_N05": "Yes", "Store_N43": "Yes", "Description": "-", "service_icon_name": "add_on_skin_care.jpg", "show_in_seo_json": "no", "Service_Icon_Name": "add_on_skin_care.jpg"}, {"Category": "ADD ON SKIN CARE", "Service_Name": "UNDER EYE", "Duration": "20M", "Regular_Cost": "900", "Member_Cost": "", "Gender": "Female", "Store_N78": "Yes", "Store_N77": "Yes", "Store_N36": "Yes", "Store_N05": "Yes", "Store_N43": "Yes", "Description": "-", "service_icon_name": "add_on_skin_care.jpg", "show_in_seo_json": "no", "Service_Icon_Name": "add_on_skin_care.jpg"}, {"Category": "THREADING", "Service_Name": "EYEBROW", "Duration": "15M", "Regular_Cost": "50", "Member_Cost": "50", "Gender": "Female", "Store_N78": "Yes", "Store_N77": "Yes", "Store_N36": "Yes", "Store_N05": "Yes", "Store_N43": "Yes", "Description": "-", "service_icon_name": "threading.jpg", "show_in_seo_json": "no", "Service_Icon_Name": "threading.jpg"}, {"Category": "THREADING", "Service_Name": "UPPERLIP | LOWERLIP", "Duration": "15M", "Regular_Cost": "", "Member_Cost": "", "Gender": "Female", "Store_N78": "Yes", "Store_N77": "Yes", "Store_N36": "Yes", "Store_N05": "Yes", "Store_N43": "Yes", "Description": "-", "service_icon_name": "threading.jpg", "show_in_seo_json": "no", "Service_Icon_Name": "threading.jpg"}, {"Category": "THREADING", "Service_Name": "CHIN | FOREHEAD", "Duration": "15M", "Regular_Cost": "", "Member_Cost": "", "Gender": "Female", "Store_N78": "Yes", "Store_N77": "Yes", "Store_N36": "Yes", "Store_N05": "Yes", "Store_N43": "Yes", "Description": "-", "service_icon_name": "threading.jpg", "show_in_seo_json": "no", "Service_Icon_Name": "threading.jpg"}, {"Category": "THREADING", "Service_Name": "FACE SIDES", "Duration": "15M", "Regular_Cost": "40", "Member_Cost": "40", "Gender": "Female", "Store_N78": "Yes", "Store_N77": "Yes", "Store_N36": "Yes", "Store_N05": "Yes", "Store_N43": "Yes", "Description": "-", "service_icon_name": "threading.jpg", "show_in_seo_json": "no", "Service_Icon_Name": "threading.jpg"}, {"Category": "THREADING", "Service_Name": "FULL FACE", "Duration": "15M", "Regular_Cost": "400", "Member_Cost": "", "Gender": "Female", "Store_N78": "Yes", "Store_N77": "Yes", "Store_N36": "Yes", "Store_N05": "Yes", "Store_N43": "Yes", "Description": "-", "service_icon_name": "threading.jpg", "show_in_seo_json": "no", "Service_Icon_Name": "threading.jpg"}, {"Category": "HAIR SPA", "Service_Name": "EXPRESS ALCHEMY - NO MASSAGE / NO STEAM (SHORT | MEDIUM | LARGE)", "Duration": "30M", "Regular_Cost": "", "Member_Cost": "", "Gender": "Female", "Store_N78": "Yes", "Store_N77": "Yes", "Store_N36": "Yes", "Store_N05": "Yes", "Store_N43": "Yes", "Description": "A QUICK HAIR REVITALIZATION TREATMENT FOCUSED ON CLEANSING AND NOURISHMENT WITHOUT MASSAGE OR STEAM, DESIGNED TO LEAVE HAIR SOFT, SHINY, MANAGEABLE, AND POLISHED IN MINIMAL TIME.", "service_icon_name": "hair_spa.jpg", "show_in_seo_json": "yes", "Service_Icon_Name": "hair_spa.jpg"}, {"Category": "HAIR SPA", "Service_Name": "INTENCES ALCHEMY (SHORT | MEDIUM | LARGE)", "Duration": "40M", "Regular_Cost": "", "Member_Cost": "", "Gender": "Female", "Store_N78": "Yes", "Store_N77": "Yes", "Store_N36": "Yes", "Store_N05": "Yes", "Store_N43": "Yes", "Description": "A DEEP REJUVENATING FACIAL TREATMENT DESIGNED TO NOURISH, HYDRATE, AND REVITALIZE THE SKIN INTENSELY, ENHANCING RADIANCE, FIRMNESS, AND LEAVING THE SKIN GLOWING, SMOOTH, AND POLISHED.", "service_icon_name": "hair_spa.jpg", "show_in_seo_json": "no", "Service_Icon_Name": "hair_spa.jpg"}, {"Category": "HAIR SPA AND TREATMENT", "Service_Name": "EXPRESS KERATIN RESTORE - NO MASSAGE / NO STEAM (SHORT | MEDIUM | LARGE)", "Duration": "30M", "Regular_Cost": "", "Member_Cost": "", "Gender": "Female", "Store_N78": "Yes", "Store_N77": "Yes", "Store_N36": "Yes", "Store_N05": "Yes", "Store_N43": "Yes", "Description": "A QUICK HAIR TREATMENT FOCUSED ON RESTORING KERATIN, STRENGTH, AND SHINE WITHOUT MASSAGE OR STEAM, LEAVING HAIR SMOOTH, MANAGEABLE, AND POLISHED IN MINIMAL TIME.", "service_icon_name": "hair_spa_and_treatment.jpg", "show_in_seo_json": "no", "Service_Icon_Name": "hair_spa_and_treatment.jpg"}, {"Category": "HAIR SPA AND TREATMENT", "Service_Name": "KERATIN RESTORE (SHORT | MEDIUM | LARGE)", "Duration": "45M", "Regular_Cost": "", "Member_Cost": "", "Gender": "Female", "Store_N78": "Yes", "Store_N77": "Yes", "Store_N36": "Yes", "Store_N05": "Yes", "Store_N43": "Yes", "Description": "A PROFESSIONAL HAIR TREATMENT DESIGNED TO REPLENISH KERATIN, REPAIR DAMAGE, AND ELIMINATE FRIZZ, LEAVING HAIR SMOOTH, SHINY, MANAGEABLE, AND LUXURIOUSLY POLISHED.", "service_icon_name": "hair_spa_and_treatment.jpg", "show_in_seo_json": "yes", "Service_Icon_Name": "hair_spa_and_treatment.jpg"}, {"Category": "ADVANCE HAIR SPA AND TREATMENT", "Service_Name": "SP PRIVE - TREATMENT FOR BOTH SCALP AND HAIR (SHORT | MEDIUM | LARGE)", "Duration": "60M", "Regular_Cost": "", "Member_Cost": "", "Gender": "Female", "Store_N78": "Yes", "Store_N77": "Yes", "Store_N36": "Yes", "Store_N05": "Yes", "Store_N43": "Yes", "Description": "A LUXURIOUS HAIR AND SCALP TREATMENT DESIGNED TO NOURISH, STRENGTHEN, AND REVITALIZE, IMPROVING HAIR HEALTH, REDUCING DAMAGE, AND LEAVING HAIR SOFT, SHINY, AND POLISHED FROM ROOT TO TIP.", "service_icon_name": "advance_hair_spa_and_treatment.jpg", "show_in_seo_json": "no", "Service_Icon_Name": "advance_hair_spa_and_treatment.jpg"}, {"Category": "ADVANCE HAIR SPA AND TREATMENT", "Service_Name": "SP WELLA PLEX (RECONSTRUCT HAIR BONDS FOR STRONGER HAIR AND KEEP THE HAIR STRONG, SMOOTH AND SOFT) (SHORT | MEDIUM | LARGE)", "Duration": "60M", "Regular_Cost": "", "Member_Cost": "", "Gender": "Female", "Store_N78": "Yes", "Store_N77": "Yes", "Store_N36": "Yes", "Store_N05": "Yes", "Store_N43": "Yes", "Description": "A PROFESSIONAL HAIR TREATMENT THAT RECONSTRUCTS HAIR BONDS TO STRENGTHEN AND REPAIR, DESIGNED TO KEEP HAIR STRONG, SMOOTH, SOFT, AND LUXURIOUSLY POLISHED.", "service_icon_name": "advance_hair_spa_and_treatment.jpg", "show_in_seo_json": "no", "Service_Icon_Name": "advance_hair_spa_and_treatment.jpg"}, {"Category": "FLAVORED WAXING - RICA WAX", "Service_Name": "HALF ARMS | LEGS", "Duration": "30M", "Regular_Cost": "", "Member_Cost": "", "Gender": "Female", "Store_N78": "Yes", "Store_N77": "Yes", "Store_N36": "Yes", "Store_N05": "Yes", "Store_N43": "Yes", "Description": "-", "service_icon_name": "flavored_waxing_rica_wax.jpg", "show_in_seo_json": "no", "Service_Icon_Name": "flavored_waxing_rica_wax.jpg"}, {"Category": "FLAVORED WAXING - RICA WAX", "Service_Name": "FULL ARMS | LEGS", "Duration": "40M", "Regular_Cost": "", "Member_Cost": "", "Gender": "Female", "Store_N78": "Yes", "Store_N77": "Yes", "Store_N36": "Yes", "Store_N05": "Yes", "Store_N43": "Yes", "Description": "-", "service_icon_name": "flavored_waxing_rica_wax.jpg", "show_in_seo_json": "no", "Service_Icon_Name": "flavored_waxing_rica_wax.jpg"}, {"Category": "FLAVORED WAXING - RICA WAX", "Service_Name": "FULL WAXING (FA+FL+UA)", "Duration": "60M", "Regular_Cost": "1300", "Member_Cost": "", "Gender": "Female", "Store_N78": "Yes", "Store_N77": "Yes", "Store_N36": "Yes", "Store_N05": "Yes", "Store_N43": "Yes", "Description": "-", "service_icon_name": "flavored_waxing_rica_wax.jpg", "show_in_seo_json": "no", "Service_Icon_Name": "flavored_waxing_rica_wax.jpg"}, {"Category": "FLAVORED WAXING - RICA WAX", "Service_Name": "FULL BACK | MIDRIFF", "Duration": "15M", "Regular_Cost": "", "Member_Cost": "", "Gender": "Female", "Store_N78": "Yes", "Store_N77": "Yes", "Store_N36": "Yes", "Store_N05": "Yes", "Store_N43": "Yes", "Description": "-", "service_icon_name": "flavored_waxing_rica_wax.jpg", "show_in_seo_json": "no", "Service_Icon_Name": "flavored_waxing_rica_wax.jpg"}, {"Category": "FLAVORED WAXING - RICA WAX", "Service_Name": "FULL BODY (DOESN'T INCLUDE BIKINI LINE) CARTRIDGE WAXING 20% EXTRA)", "Duration": "1HR", "Regular_Cost": "3000", "Member_Cost": "", "Gender": "Female", "Store_N78": "Yes", "Store_N77": "Yes", "Store_N36": "Yes", "Store_N05": "Yes", "Store_N43": "Yes", "Description": "-", "service_icon_name": "flavored_waxing_rica_wax.jpg", "show_in_seo_json": "no", "Service_Icon_Name": "flavored_waxing_rica_wax.jpg"}, {"Category": "PEEL OFF", "Service_Name": "UPPER LIP", "Duration": "10M", "Regular_Cost": "100", "Member_Cost": "80", "Gender": "Female", "Store_N78": "Yes", "Store_N77": "Yes", "Store_N36": "Yes", "Store_N05": "Yes", "Store_N43": "Yes", "Description": "-", "service_icon_name": "peel_off.jpg", "show_in_seo_json": "no", "Service_Icon_Name": "peel_off.jpg"}, {"Category": "PEEL OFF", "Service_Name": "CHIN / NECK", "Duration": "10M", "Regular_Cost": "", "Member_Cost": "", "Gender": "Female", "Store_N78": "Yes", "Store_N77": "Yes", "Store_N36": "Yes", "Store_N05": "Yes", "Store_N43": "Yes", "Description": "-", "service_icon_name": "peel_off.jpg", "show_in_seo_json": "no", "Service_Icon_Name": "peel_off.jpg"}, {"Category": "PEEL OFF", "Service_Name": "FACE SIDES", "Duration": "10M", "Regular_Cost": "150", "Member_Cost": "12", "Gender": "Female", "Store_N78": "Yes", "Store_N77": "Yes", "Store_N36": "Yes", "Store_N05": "Yes", "Store_N43": "Yes", "Description": "-", "service_icon_name": "peel_off.jpg", "show_in_seo_json": "no", "Service_Icon_Name": "peel_off.jpg"}, {"Category": "PEEL OFF", "Service_Name": "FACE", "Duration": "20M", "Regular_Cost": "500", "Member_Cost": "450", "Gender": "Female", "Store_N78": "Yes", "Store_N77": "Yes", "Store_N36": "Yes", "Store_N05": "Yes", "Store_N43": "Yes", "Description": "-", "service_icon_name": "peel_off.jpg", "show_in_seo_json": "no", "Service_Icon_Name": "peel_off.jpg"}, {"Category": "PEEL OFF", "Service_Name": "UNDERARMS", "Duration": "15M", "Regular_Cost": "200", "Member_Cost": "150", "Gender": "Female", "Store_N78": "Yes", "Store_N77": "Yes", "Store_N36": "Yes", "Store_N05": "Yes", "Store_N43": "Yes", "Description": "-", "service_icon_name": "peel_off.jpg", "show_in_seo_json": "no", "Service_Icon_Name": "peel_off.jpg"}, {"Category": "PEEL OFF", "Service_Name": "BIKINI LINE", "Duration": "40M", "Regular_Cost": "700", "Member_Cost": "600", "Gender": "Female", "Store_N78": "Yes", "Store_N77": "Yes", "Store_N36": "Yes", "Store_N05": "Yes", "Store_N43": "Yes", "Description": "-", "service_icon_name": "peel_off.jpg", "show_in_seo_json": "no", "Service_Icon_Name": "peel_off.jpg"}, {"Category": "PEEL OFF", "Service_Name": "FULL BIKINI", "Duration": "50M", "Regular_Cost": "2500", "Member_Cost": "", "Gender": "Female", "Store_N78": "Yes", "Store_N77": "Yes", "Store_N36": "Yes", "Store_N05": "Yes", "Store_N43": "Yes", "Description": "-", "service_icon_name": "peel_off.jpg", "show_in_seo_json": "no", "Service_Icon_Name": "peel_off.jpg"}, {"Category": "DETAN/BLEACH", "Service_Name": "UPPER LIP", "Duration": "10M", "Regular_Cost": "75", "Member_Cost": "75", "Gender": "Female", "Store_N78": "Yes", "Store_N77": "Yes", "Store_N36": "Yes", "Store_N05": "Yes", "Store_N43": "Yes", "Description": "-", "service_icon_name": "detan_bleach.jpg", "show_in_seo_json": "no", "Service_Icon_Name": "detan_bleach.jpg"}, {"Category": "DETAN/BLEACH", "Service_Name": "UNDERARMS", "Duration": "20M", "Regular_Cost": "120", "Member_Cost": "110", "Gender": "Female", "Store_N78": "Yes", "Store_N77": "Yes", "Store_N36": "Yes", "Store_N05": "Yes", "Store_N43": "Yes", "Description": "-", "service_icon_name": "detan_bleach.jpg", "show_in_seo_json": "no", "Service_Icon_Name": "detan_bleach.jpg"}, {"Category": "DETAN/BLEACH", "Service_Name": "FEET", "Duration": "15M", "Regular_Cost": "220", "Member_Cost": "180", "Gender": "Female", "Store_N78": "Yes", "Store_N77": "Yes", "Store_N36": "Yes", "Store_N05": "Yes", "Store_N43": "Yes", "Description": "-", "service_icon_name": "detan_bleach.jpg", "show_in_seo_json": "no", "Service_Icon_Name": "detan_bleach.jpg"}, {"Category": "DETAN/BLEACH", "Service_Name": "FACE & NECK", "Duration": "20M", "Regular_Cost": "550", "Member_Cost": "500", "Gender": "Female", "Store_N78": "Yes", "Store_N77": "Yes", "Store_N36": "Yes", "Store_N05": "Yes", "Store_N43": "Yes", "Description": "-", "service_icon_name": "detan_bleach.jpg", "show_in_seo_json": "no", "Service_Icon_Name": "detan_bleach.jpg"}, {"Category": "DETAN/BLEACH", "Service_Name": "FACE, NECK & BLOUSELINE", "Duration": "20M", "Regular_Cost": "700", "Member_Cost": "650", "Gender": "Female", "Store_N78": "Yes", "Store_N77": "Yes", "Store_N36": "Yes", "Store_N05": "Yes", "Store_N43": "Yes", "Description": "-", "service_icon_name": "detan_bleach.jpg", "show_in_seo_json": "no", "Service_Icon_Name": "detan_bleach.jpg"}, {"Category": "DETAN/BLEACH", "Service_Name": "HALF ARMS | LEGS", "Duration": "30M", "Regular_Cost": "", "Member_Cost": "", "Gender": "Female", "Store_N78": "Yes", "Store_N77": "Yes", "Store_N36": "Yes", "Store_N05": "Yes", "Store_N43": "Yes", "Description": "-", "service_icon_name": "detan_bleach.jpg", "show_in_seo_json": "no", "Service_Icon_Name": "detan_bleach.jpg"}, {"Category": "DETAN/BLEACH", "Service_Name": "FULL ARMS | LEGS", "Duration": "40M", "Regular_Cost": "", "Member_Cost": "", "Gender": "Female", "Store_N78": "Yes", "Store_N77": "Yes", "Store_N36": "Yes", "Store_N05": "Yes", "Store_N43": "Yes", "Description": "-", "service_icon_name": "detan_bleach.jpg", "show_in_seo_json": "no", "Service_Icon_Name": "detan_bleach.jpg"}, {"Category": "DETAN/BLEACH", "Service_Name": "MIDRIFF | BACK", "Duration": "10M", "Regular_Cost": "", "Member_Cost": "", "Gender": "Female", "Store_N78": "Yes", "Store_N77": "Yes", "Store_N36": "Yes", "Store_N05": "Yes", "Store_N43": "Yes", "Description": "-", "service_icon_name": "detan_bleach.jpg", "show_in_seo_json": "no", "Service_Icon_Name": "detan_bleach.jpg"}, {"Category": "DETAN/BLEACH", "Service_Name": "FULL BODY", "Duration": "1HR", "Regular_Cost": "3000", "Member_Cost": "3000", "Gender": "Female", "Store_N78": "Yes", "Store_N77": "Yes", "Store_N36": "Yes", "Store_N05": "Yes", "Store_N43": "Yes", "Description": "-", "service_icon_name": "detan_bleach.jpg", "show_in_seo_json": "no", "Service_Icon_Name": "detan_bleach.jpg"}, {"Category": "BODY CARE", "Service_Name": "BACK POLISH | FRONT POLISH", "Duration": "1HR", "Regular_Cost": "1000", "Member_Cost": "", "Gender": "Female", "Store_N78": "Yes", "Store_N77": "Yes", "Store_N36": "Yes", "Store_N05": "Yes", "Store_N43": "Yes", "Description": "-", "service_icon_name": "body_care.jpg", "show_in_seo_json": "no", "Service_Icon_Name": "body_care.jpg"}, {"Category": "BODY CARE", "Service_Name": "FULL ARM | FULL LEG POLISH", "Duration": "40M", "Regular_Cost": "", "Member_Cost": "", "Gender": "Female", "Store_N78": "Yes", "Store_N77": "Yes", "Store_N36": "Yes", "Store_N05": "Yes", "Store_N43": "Yes", "Description": "-", "service_icon_name": "body_care.jpg", "show_in_seo_json": "no", "Service_Icon_Name": "body_care.jpg"}, {"Category": "BODY CARE", "Service_Name": "FULL BODY POLISH", "Duration": "1HR", "Regular_Cost": "4000", "Member_Cost": "3500", "Gender": "Female", "Store_N78": "Yes", "Store_N77": "Yes", "Store_N36": "Yes", "Store_N05": "Yes", "Store_N43": "Yes", "Description": "-", "service_icon_name": "body_care.jpg", "show_in_seo_json": "no", "Service_Icon_Name": "body_care.jpg"}, {"Category": "REFLEXOLOGY", "Service_Name": "NECK & SHOULDER", "Duration": "30M", "Regular_Cost": "500", "Member_Cost": "", "Gender": "Female", "Store_N78": "Yes", "Store_N77": "Yes", "Store_N36": "Yes", "Store_N05": "Yes", "Store_N43": "Yes", "Description": "-", "service_icon_name": "reflexology.jpg", "show_in_seo_json": "no", "Service_Icon_Name": "reflexology.jpg"}, {"Category": "REFLEXOLOGY", "Service_Name": "HAND", "Duration": "15M", "Regular_Cost": "500", "Member_Cost": "", "Gender": "Female", "Store_N78": "Yes", "Store_N77": "Yes", "Store_N36": "Yes", "Store_N05": "Yes", "Store_N43": "Yes", "Description": "-", "service_icon_name": "reflexology.jpg", "show_in_seo_json": "no", "Service_Icon_Name": "reflexology.jpg"}, {"Category": "REFLEXOLOGY", "Service_Name": "FEET", "Duration": "15M", "Regular_Cost": "500", "Member_Cost": "", "Gender": "Female", "Store_N78": "Yes", "Store_N77": "Yes", "Store_N36": "Yes", "Store_N05": "Yes", "Store_N43": "Yes", "Description": "-", "service_icon_name": "reflexology.jpg", "show_in_seo_json": "no", "Service_Icon_Name": "reflexology.jpg"}, {"Category": "REFLEXOLOGY", "Service_Name": "FULL BACK", "Duration": "30M", "Regular_Cost": "1000", "Member_Cost": "", "Gender": "Female", "Store_N78": "Yes", "Store_N77": "Yes", "Store_N36": "Yes", "Store_N05": "Yes", "Store_N43": "Yes", "Description": "-", "service_icon_name": "reflexology.jpg", "show_in_seo_json": "no", "Service_Icon_Name": "reflexology.jpg"}, {"Category": "MENICURE / PEDICURE", "Service_Name": "COCOA BUTTER - MANI | PEDI", "Duration": "30M", "Regular_Cost": "", "Member_Cost": "", "Gender": "Female", "Store_N78": "Yes", "Store_N77": "Yes", "Store_N36": "Yes", "Store_N05": "Yes", "Store_N43": "Yes", "Description": "-", "service_icon_name": "menicure_pedicure.jpg", "show_in_seo_json": "no", "Service_Icon_Name": "menicure_pedicure.jpg"}, {"Category": "MENICURE / PEDICURE", "Service_Name": "COFFEE & CRÈME - MANI | PEDI", "Duration": "30M", "Regular_Cost": "", "Member_Cost": "", "Gender": "Female", "Store_N78": "Yes", "Store_N77": "Yes", "Store_N36": "Yes", "Store_N05": "Yes", "Store_N43": "Yes", "Description": "-", "service_icon_name": "menicure_pedicure.jpg", "show_in_seo_json": "no", "Service_Icon_Name": "menicure_pedicure.jpg"}, {"Category": "MENICURE / PEDICURE", "Service_Name": "ORGANIC SPA - MANI | PEDI", "Duration": "40M", "Regular_Cost": "", "Member_Cost": "", "Gender": "Female", "Store_N78": "Yes", "Store_N77": "Yes", "Store_N36": "Yes", "Store_N05": "Yes", "Store_N43": "Yes", "Description": "-", "service_icon_name": "menicure_pedicure.jpg", "show_in_seo_json": "no", "Service_Icon_Name": "menicure_pedicure.jpg"}, {"Category": "MENICURE / PEDICURE", "Service_Name": "CRYSTAL SPA - MANI | PEDI", "Duration": "40M", "Regular_Cost": "", "Member_Cost": "", "Gender": "Female", "Store_N78": "Yes", "Store_N77": "Yes", "Store_N36": "Yes", "Store_N05": "Yes", "Store_N43": "Yes", "Description": "-", "service_icon_name": "menicure_pedicure.jpg", "show_in_seo_json": "no", "Service_Icon_Name": "menicure_pedicure.jpg"}, {"Category": "MENICURE / PEDICURE", "Service_Name": "DEAD SEA - MANI | PEDI", "Duration": "40M", "Regular_Cost": "", "Member_Cost": "", "Gender": "Female", "Store_N78": "Yes", "Store_N77": "Yes", "Store_N36": "Yes", "Store_N05": "Yes", "Store_N43": "Yes", "Description": "-", "service_icon_name": "menicure_pedicure.jpg", "show_in_seo_json": "no", "Service_Icon_Name": "menicure_pedicure.jpg"}, {"Category": "MENICURE / PEDICURE", "Service_Name": "BUBBLE GUM - MANI | PEDI", "Duration": "60M", "Regular_Cost": "", "Member_Cost": "", "Gender": "Female", "Store_N78": "Yes", "Store_N77": "Yes", "Store_N36": "Yes", "Store_N05": "Yes", "Store_N43": "Yes", "Description": "-", "service_icon_name": "menicure_pedicure.jpg", "show_in_seo_json": "no", "Service_Icon_Name": "menicure_pedicure.jpg"}, {"Category": "MENICURE / PEDICURE", "Service_Name": "AVL - MANI + PEDI (COMBO)", "Duration": "60M", "Regular_Cost": "2000", "Member_Cost": "", "Gender": "Female", "Store_N78": "Yes", "Store_N77": "Yes", "Store_N36": "Yes", "Store_N05": "Yes", "Store_N43": "Yes", "Description": "-", "service_icon_name": "menicure_pedicure.jpg", "show_in_seo_json": "no", "Service_Icon_Name": "menicure_pedicure.jpg"}, {"Category": "MENICURE / PEDICURE", "Service_Name": "ICE CREAM - MANI + PEDI (COMBO)", "Duration": "60M", "Regular_Cost": "2500", "Member_Cost": "", "Gender": "Female", "Store_N78": "Yes", "Store_N77": "Yes", "Store_N36": "Yes", "Store_N05": "Yes", "Store_N43": "Yes", "Description": "-", "service_icon_name": "menicure_pedicure.jpg", "show_in_seo_json": "no", "Service_Icon_Name": "menicure_pedicure.jpg"}, {"Category": "PEDICURE", "Service_Name": "HEEL PEEL TREATMENT", "Duration": "30M", "Regular_Cost": "2400", "Member_Cost": "2000", "Gender": "Female", "Store_N78": "Yes", "Store_N77": "Yes", "Store_N36": "Yes", "Store_N05": "Yes", "Store_N43": "Yes", "Description": "-", "service_icon_name": "pedicure.jpg", "show_in_seo_json": "no", "Service_Icon_Name": "pedicure.jpg"}, {"Category": "NAIL POLISH", "Service_Name": "CHANGE OF NAIL COLOUR", "Duration": "10M", "Regular_Cost": "100", "Member_Cost": "", "Gender": "Female", "Store_N78": "Yes", "Store_N77": "Yes", "Store_N36": "Yes", "Store_N05": "Yes", "Store_N43": "Yes", "Description": "-", "service_icon_name": "nail_polish.jpg", "show_in_seo_json": "no", "Service_Icon_Name": "nail_polish.jpg"}, {"Category": "NAIL POLISH", "Service_Name": "CUT, FILE & POLISH", "Duration": "20M", "Regular_Cost": "200", "Member_Cost": "", "Gender": "Female", "Store_N78": "Yes", "Store_N77": "Yes", "Store_N36": "Yes", "Store_N05": "Yes", "Store_N43": "Yes", "Description": "-", "service_icon_name": "nail_polish.jpg", "show_in_seo_json": "no", "Service_Icon_Name": "nail_polish.jpg"}, {"Category": "NAIL POLISH", "Service_Name": "FRENCH POLISH (FINGERS | TOES)", "Duration": "15M", "Regular_Cost": "300", "Member_Cost": "", "Gender": "Female", "Store_N78": "Yes", "Store_N77": "Yes", "Store_N36": "Yes", "Store_N05": "Yes", "Store_N43": "Yes", "Description": "-", "service_icon_name": "nail_polish.jpg", "show_in_seo_json": "no", "Service_Icon_Name": "nail_polish.jpg"}, {"Category": "NAIL POLISH", "Service_Name": "FRENCH POLISH (FINGERS | TOES)", "Duration": "15M", "Regular_Cost": "300", "Member_Cost": "", "Gender": "Female", "Store_N78": "Yes", "Store_N77": "Yes", "Store_N36": "Yes", "Store_N05": "Yes", "Store_N43": "Yes", "Description": "-", "service_icon_name": "nail_polish.jpg", "show_in_seo_json": "no", "Service_Icon_Name": "nail_polish.jpg"}];
 const ACTIVE_STORES = [{"about_store_text": "Welcome to Naturals Unisex Salon JP Nagar 5th Phase \u2014 south Bangalore\u0027s premium beauty destination on 100 Ft Ring Road. Nestled in the heart of JP Nagar\u0027s 5th Phase, our salon has been the go-to choice for residents of JP Nagar, Banashankari, Jayanagar and Uttarahalli for expert hair care, radiant skin treatments and flawless bridal packages.\n \n Our team of certified stylists specialises in precision haircuts, balayage and global colour, keratin smoothening, hair spa therapies, and a full range of facials tailored to Bangalore\u0027s climate and skin types. Whether you\u0027re preparing for a wedding, a corporate event, or simply your weekly self-care ritual, every visit at our JP Nagar salon is crafted around you.\n \n Part of India\u0027s most trusted salon network with over 25 years of expertise across 1,000+ outlets, Naturals brings national-standard beauty services to your neighbourhood \u2014 with transparent pricing, premium products, and no surprises. Book your appointment online or walk in at Anand Onyx, 1st Floor, 15th Cross, 100 Ft Ring Road.\n\nDiscover a sanctuary of beauty in South Bangalore. Our JP Nagar 5th Phase stylists specialize in global hair trends and rejuvenating skin therapies.", "active_status": "Yes", "address_city": "Bangalore", "address_full": "1st Floor, Anand Onyx, No 305, 15th Cross Rd, near Outer Ring Road, 5th Phase, J P Nagar Phase 5, J. P. Nagar, Bangalore, Karnataka 560078, India", "address_line_1": "1st Floor, Anand Onyx, No 305, 15th Cross Rd, near Outer Ring Road, 5th Phase, J P Nagar Phase 5, J. P. Nagar", "address_pincode": "560078", "address_state": "Karnataka", "appointment_url": "https://naturals-salon-jpnagar5phase.setmore.com/", "booking_platform": "Setmore", "brand_store_name": "Naturals Unisex Salon - JP Nagar 5th Phase", "email": "jpnagar2.naturals@gmail.com", "escalation_contact": "Sophia", "escalation_email": "sophiaaxon@gmail.com", "escalation_whatsapp": "919741115349", "facebook_id": "Naturals.Salon.JPNagar5Phase", "facebook_page_id": "715840311849516", "facebook_url": "https://facebook.com/Naturals.Salon.JPNagar5Phase", "google_location_id": "locations/11456061934238062921", "google_maps_url": "https://g.page/Naturals_JPNagar5thPhase/", "google_place_id": "ChIJD_AjPBEVrjsRyrGhTRo9qvw", "google_review_link": "https://g.page/Naturals_JPNagar5thPhase/review?rc/", "h1_heading": "Naturals Unisex Salon - JP Nagar 5th Phase", "hero_tagline": "Elevate Your Style in South Bangalore", "instagram_business_account_id": "17841425192935961", "instagram_id": "Naturals.Salon.JPNagar5Phase", "instagram_url": "https://instagram.com/Naturals.Salon.JPNagar5Phase/", "local_neighborhood": "JP Nagar 5th Phase", "meta_description": "Experience luxury hair styling \u0026 skin care in JP Nagar. 5-star services from expert stylists. Book your premium makeover today!", "mon_fri_hours": "10:00 AM \u2013 9:00 PM", "nearby_landmarks": "Near Puttenahalli Lake, Ragigudda Sri Prasanna Anjaneyaswamy Temple, Ranga Shankara, Sarakki Lake, Indian Music Experience Museum, Lalbagh Botanical Garden, Bull Temple, Jayanagar 4th Block Market, ISKCON Vaikuntha Hill, Ranadheera Kanteerava Park", "phone_landline": "918041304444", "phone_mobile": "918792642299", "phone_whatsapp": "918792642299", "pincode": "560078", "price_range": "\u20b9\u20b9", "saturday_hours": "10:00 AM \u2013 9:00 PM", "schema_latitude": "12.9055", "schema_longitude": "77.5945", "seo_title": "Best Hair Salon in JP Nagar 5th Phase | Naturals Unisex Salon", "store_display_name": "JP Nagar 5th Phase", "store_id": "Store_N78", "store_id_short": "N78", "store_manager_name": "Nisha", "sunday_hours": "10:00 AM \u2013 9:00 PM"}, {"about_store_text": "Welcome to Naturals Unisex Salon at Elements Mall, Nagavara \u2014 north Bangalore\u0027s most convenient premium salon, located on the 3rd Floor of Elements Mall on Thanisandra Main Road, just minutes from Manyata Tech Park and Hebbal.\n \n Designed for the busy professional, our Elements Mall salon offers express and full-service beauty treatments that fit your schedule \u2014 from quick blowouts and express facials to full hair colour sessions and relaxing spa therapies. Whether you\u0027re a tech professional stepping away from the office, or a weekend shopper looking to unwind, our certified stylists deliver precision results with premium products every time.\n \n Our services include haircuts and styling for all hair types, global and fashion hair colour, keratin and smoothening treatments, deep conditioning hair spas, advanced facials, and de-tan and clean-up treatments perfect for Bangalore\u0027s sun and pollution. As part of India\u0027s most trusted salon network \u2014 with 25 years of expertise \u2014 Naturals brings world-class beauty services to your neighbourhood mall. Book online or visit us on the 3rd Floor at Elements Mall.\n\nLocated inside the premier Elements Mall, our salon offers high-end grooming and beauty solutions tailored for the sophisticated urban lifestyle.", "active_status": "Yes", "address_city": "Bangalore", "address_full": "Shop No 26, 3rd Floor, Elements Mall, 100 Ft Rd, near Manyata Tech Park Road, MS Ramaiah North City, Manayata Tech Park, Nagavara, Bangalore, Karnataka 560077, India", "address_line_1": "Shop No 26, 3rd Floor, Elements Mall, 100 Ft Rd, near Manyata Tech Park Road, MS Ramaiah North City, Manayata Tech Park, Nagavara", "address_pincode": "560077", "address_state": "Karnataka", "appointment_url": "https://naturals-salon-elementsmall.setmore.com/", "booking_platform": "Setmore", "brand_store_name": "Naturals Unisex Salon - Elements Mall", "email": "naturalsnagavara@gmail.com", "escalation_contact": "Sophia", "escalation_email": "sophiaaxon@gmail.com", "escalation_whatsapp": "919741115349", "facebook_id": "Naturals.Salon.ElementsMall", "facebook_page_id": "318850925297093", "facebook_url": "https://facebook.com/Naturals.Salon.ElementsMall/", "google_location_id": "locations/5858391068390788403", "google_maps_url": "https://maps.google.com/?q=Naturals+Salon+Elements+Mall", "google_place_id": "ChIJo_js4GgXrjsR3LgZhMNOPz4", "google_review_link": "https://g.page/Naturals-ElementsMall/review?rc/", "h1_heading": "Naturals Unisex Salon - Elements Mall", "hero_tagline": "Luxury Beauty Meets Ultimate Convenience", "instagram_business_account_id": "17841437507959021", "instagram_id": "Naturals.Salon.ElementsMall", "instagram_url": "https://instagram.com/Naturals.Salon.ElementsMall/", "local_neighborhood": "Thanisandra / Nagawara", "meta_description": "Premium hair coloring \u0026 spa services at Elements Mall. Visit North Bangalore\u0027s elite salon for a luxury transformation. Book now!", "mon_fri_hours": "10:00 AM \u2013 9:00 PM", "nearby_landmarks": "Near Manyata Tech Park, Hebbal Flyover, Nagavara Lake, Rachenahalli Lake, Phoenix Mall of Asia, Snow City Bengaluru, Bengaluru Palace, Hennur Biodiversity Park, Aster CMI Hospital, Jakkur Lake", "phone_landline": "918046514422", "phone_mobile": "919901000017", "phone_whatsapp": "919901000017", "pincode": "560077", "price_range": "\u20b9\u20b9", "saturday_hours": "10:00 AM \u2013 9:00 PM", "schema_latitude": "13.053", "schema_longitude": "77.62", "seo_title": "Top Rated Salon in Elements Mall | Naturals Unisex Salon", "store_display_name": "Elements Mall", "store_id": "Store_N77", "store_id_short": "N77", "store_manager_name": "Sandesh Kumar", "sunday_hours": "10:00 AM \u2013 9:00 PM"}, {"about_store_text": "Welcome to Naturals Unisex Salon Devasandra \u2014 east Bangalore\u0027s trusted beauty destination, conveniently located on Devasandra Main Road, KR Puram, opposite the landmark Lulu\u0027s Bakery in Basavanapura.\n \n Our Devasandra salon serves the rapidly growing communities of KR Puram, Mahadevapura, ITPL Road, Hoodi and Varthur with a full range of professional beauty services \u2014 from everyday haircuts and hair colour to bridal packages, deep conditioning treatments, skin care and body wellness therapies. Our team of experienced stylists knows that every client is unique, which is why each visit begins with a personalised consultation to understand your hair type, skin concerns and lifestyle.\n \n Families in KR Puram have trusted Naturals for premium-quality beauty services at honest, transparent prices. Whether you\u0027re looking for a weekend blow-dry, a pre-festival makeover, or a full bridal preparation, our Devasandra team is here to deliver results that last. Part of India\u0027s most respected salon network, Naturals brings 25 years of national expertise to your neighbourhood. Book your appointment online or walk in at Maruthi Tower, 1st Floor.\n\nWelcome to our brand new, state-of-the-art luxury location in Devasandra. We bring international styling standards and elite skin care to the KR Puram community.", "active_status": "Yes", "address_city": "Bangalore", "address_full": "2,3, 1st Floor, Maruthi Tower, No. 1, Devasandra Main Rd, opp. Lulu\u0027s Bakery, Basavanapura, KRPuram, Bangalore, Karnataka 560036, India", "address_line_1": "2,3, 1st Floor, Maruthi Tower, No. 1, Devasandra Main Rd, opp. Lulu\u0027s Bakery, Basavanapura, KRPuram", "address_pincode": "560036", "address_state": "Karnataka", "appointment_url": "https://naturals-salon-devasandra.setmore.com/", "booking_platform": "Setmore", "brand_store_name": "Naturals Unisex Salon - Devasandra", "email": "naturalsdevasandra@gmail.com", "escalation_contact": "Sophia", "escalation_email": "sophiaaxon@gmail.com", "escalation_whatsapp": "919741115349", "facebook_id": "Naturals.Salon.Devasandra", "facebook_page_id": "922849001248263", "facebook_url": "https://facebook.com/Naturals.Salon.Devasandra/", "google_location_id": "locations/2727661342173271867", "google_maps_url": "https://maps.google.com/?q=Naturals+Salon+Devasandra", "google_place_id": "ChIJoWUOlAARrjsREnWUrR3DWfk", "google_review_link": "https://g.page/Naturals-Devasandra/review?rc/", "h1_heading": "Naturals Unisex Salon - Devasandra", "hero_tagline": "A New Era of Luxury in Devasandra", "instagram_business_account_id": "17841437347582520", "instagram_id": "Naturals.Salon.Devasandra", "instagram_url": "https://instagram.com/Naturals.Salon.Devasandra/", "local_neighborhood": "Devasandra / KR Puram", "meta_description": "Visit our brand new luxury salon in Devasandra for expert haircuts \u0026 bridal makeup. Experience 5-star service near KR Puram. Book today!", "mon_fri_hours": "10:00 AM \u2013 9:00 PM", "nearby_landmarks": "Near Phoenix Marketcity, VR Bengaluru, Krishnarajapuram Railway Station, Bagmane World Technology Center, ITPL Whitefield, Marathahalli Bridge, Ulsoor Lake, RMZ Infinity, Commercial Street, Indira Nagar 100 Feet Road", "phone_landline": "", "phone_mobile": "917259490009", "phone_whatsapp": "917259490009", "pincode": "560036", "price_range": "\u20b9\u20b9", "saturday_hours": "10:00 AM \u2013 9:00 PM", "schema_latitude": "13.005", "schema_longitude": "77.698", "seo_title": "Best Salon in Devasandra KR Puram | Naturals Unisex Salon", "store_display_name": "Devasandra", "store_id": "Store_N36", "store_id_short": "N36", "store_manager_name": "Devasandra Store Manager", "sunday_hours": "10:00 AM \u2013 9:00 PM"}, {"about_store_text": "Welcome to Naturals Unisex Salon Frazer Town \u2014 centrally located on Mosque Road, Pulikeshi Nagar, above Poorvika Mobile Store, in the heart of one of Bangalore\u0027s most vibrant and well-connected neighbourhoods.\n \n Our Frazer Town salon caters to Bangalore\u0027s most diverse clientele \u2014 from professionals working in the CBD and Shivajinagar, to residents of Frazer Town, Richards Town, Lingarajapuram and Ulsoor. We offer a comprehensive range of beauty services including precision haircuts, global and highlight hair colour, keratin and rebonding treatments, hair spa, advanced facials, bridal and party makeup, mehendi and full bridal packages for all communities.\n \n What sets our Frazer Town salon apart is our team\u0027s deep experience with diverse hair textures and skin tones \u2014 from fine straight hair to thick curly and wavy types, and from fair to deep skin tones. Every treatment is selected and adapted to give you the best possible result. Transparent pricing, premium products, and a warm, welcoming space \u2014 that\u0027s the Naturals promise. Visit us on Mosque Road or book your appointment online.\n\nNestled in the heart of heritage Bangalore, our Frazer Town salon combines classic elegance with modern hair and skin innovations for an elite experience.", "active_status": "Yes", "address_city": "Bangalore", "address_full": "1st floor, No.94, Mosque Rd, above Poorvika Mobile Store, Cleveland Town, Frazer Town, Bangalore, Karnataka 560005, India", "address_line_1": "1st floor, No.94, Mosque Rd, above Poorvika Mobile Store, Cleveland Town, Frazer Town", "address_pincode": "560005", "address_state": "Karnataka", "appointment_url": "https://naturals-salon-frazertown.setmore.com/", "booking_platform": "Setmore", "brand_store_name": "Naturals Unisex Salon - Frazer Town", "email": "frazertown.naturals@gmail.com", "escalation_contact": "Sophia", "escalation_email": "sophiaaxon@gmail.com", "escalation_whatsapp": "919741115349", "facebook_id": "Naturals.Salon.FrazerTown", "facebook_page_id": "526783314021240", "facebook_url": "https://www.facebook.com/Naturals.Salon.FrazerTown/", "google_location_id": "locations/4210460996377672562", "google_maps_url": "https://maps.google.com/?q=Naturals+Salon+Frazer+Town", "google_place_id": "ChIJcfViGvEWrjsRUuIzB28viSc", "google_review_link": "https://g.page/Naturals-FrazerTown/review?rc/", "h1_heading": "Naturals Unisex Salon - Frazer Town", "hero_tagline": "Timeless Elegance \u0026 Expert Styling", "instagram_business_account_id": "17841447241612437", "instagram_id": "Naturals.Salon.FrazerTown", "instagram_url": "https://instagram.com/Naturals.Salon.FrazerTown/", "local_neighborhood": "Frazer Town / Pulikeshi Nagar", "meta_description": "Professional hair styling \u0026 luxury beauty in Frazer Town. Expert services in a heritage neighborhood. Book your appointment today!", "mon_fri_hours": "10:00 AM \u2013 9:00 PM", "nearby_landmarks": "Near Mosque Road, Albert Bakery, St. Francis Xavier\u2019s Cathedral, Coles Park, Thom\u2019s Bakery \u0026 Supermarket, Bangalore East Railway Station, Bangalore Palace, Ulsoor Lake, Commercial Street, Vidhana Soudha", "phone_landline": "918040948040", "phone_mobile": "919606333017", "phone_whatsapp": "919606333017", "pincode": "560005", "price_range": "\u20b9\u20b9", "saturday_hours": "10:00 AM \u2013 9:00 PM", "schema_latitude": "12.99", "schema_longitude": "77.605", "seo_title": "Premium Salon in Frazer Town | Naturals Unisex Salon", "store_display_name": "Frazer Town", "store_id": "Store_N05", "store_id_short": "N05", "store_manager_name": "Rethika", "sunday_hours": "10:00 AM \u2013 9:00 PM"}, {"about_store_text": "Welcome to Naturals Unisex Salon Hennur \u2014 north Bangalore\u0027s trusted beauty salon, conveniently located above SBI Bank on Hennur Main Road at Hennur Cross, serving the fast-growing communities of Hennur, Kalyan Nagar, HBR Layout, Horamavu and Banaswadi.\n \n Hennur has transformed into one of Bangalore\u0027s most dynamic residential hubs, and our salon has grown with it \u2014 offering the neighbourhood access to premium salon services that were once only available in central Bangalore. From expert haircuts and the latest hair colour techniques, to relaxing hair spa therapies, brightening facials, de-tan treatments and full bridal packages, our certified team delivers outstanding results at honest, transparent prices.\n \n Our Hennur team is passionate about making every client feel pampered and confident \u2014 whether you\u0027re a working professional looking for a quick style refresh, a new bride preparing for your big day, or a family visiting together for the weekend. As part of India\u0027s most trusted salon chain with 25+ years of experience, Naturals brings the gold standard in beauty to your doorstep. Book online or walk in at Hennur Main Road.\n\nDedicated to excellence, our Hennur team provides personalized beauty consultations and advanced treatments designed for the modern resident of North Bangalore.", "active_status": "Yes", "address_city": "Bangalore", "address_full": "1st Floor, No 40/A, 40/C, Main Road, above SBI Bank, Hennur Gardens, Bangalore, Karnataka 560043, India", "address_line_1": "1st Floor, No 40/A, 40/C, Main Road, above SBI Bank, Hennur Gardens", "address_pincode": "560043", "address_state": "Karnataka", "appointment_url": "https://naturals-salon-hennur.setmore.com/", "booking_platform": "Setmore", "brand_store_name": "Naturals Unisex Salon - Hennur", "email": "naturalshennur@gmail.com", "escalation_contact": "Sophia", "escalation_email": "sophiaaxon@gmail.com", "escalation_whatsapp": "919741115349", "facebook_id": "Naturals.Salon.Hennur", "facebook_page_id": "111143220365821", "facebook_url": "https://facebook.com/Naturals.Salon.Hennur/", "google_location_id": "locations/10326220211235668452", "google_maps_url": "https://maps.google.com/?q=Naturals+Salon+Hennur", "google_place_id": "ChIJb03gT58XrjsRv0Rytrv60BM", "google_review_link": "https://g.page/Naturals-Hennur/review?rc/", "h1_heading": "Naturals Unisex Salon - Hennur", "hero_tagline": "Your Neighborhood Destination for Elite Beauty", "instagram_business_account_id": "17841426843499448", "instagram_id": "Naturals.Salon.Hennur", "instagram_url": "https://instagram.com/Naturals.Salon.Hennur/", "local_neighborhood": "Hennur / North Bangalore", "meta_description": "Expert hair styling \u0026 skin treatments in Hennur. Premium salon services for gated communities in North Bangalore. Book your visit!", "mon_fri_hours": "10:00 AM \u2013 8:00 PM", "nearby_landmarks": "Near Hennur Cross, Mantri Splendor, Manyata Tech Park, Hennur Lake Biodiversity Park, Elements Mall, Bagalur Main Road, Bangalore Palace, Hebbal Flyover, Lumbini Gardens, Horamavu Agara Lake, XLR8 Indoor Sports Arena, Byg Brewski Brewing Company", "phone_landline": "", "phone_mobile": "919606900069", "phone_whatsapp": "919606900069", "pincode": "560043", "price_range": "\u20b9\u20b9", "saturday_hours": "10:00 AM \u2013 8:00 PM", "schema_latitude": "13.042", "schema_longitude": "77.648", "seo_title": "Best Beauty Salon in Hennur | Naturals Unisex Salon", "store_display_name": "Hennur", "store_id": "Store_N43", "store_id_short": "N43", "store_manager_name": "Tresa Mary", "sunday_hours": "10:00 AM \u2013 8:00 PM"}];
 
+// Helper function to convert string to Title Case (Init Caps)
+function toTitleCase(str) {
+if (!str) return '';
+const smallWords = ['and', 'at', 'by', 'for', 'in', 'of', 'on', 'or', 'the', 'to', 'with', '&'];
+return str.toLowerCase().split(' ').map((word, index) => {
+if (index === 0 || !smallWords.includes(word)) {
+return word.charAt(0).toUpperCase() + word.slice(1);
+}
+return word;
+}).join(' ');
+}
+
 // 2. STATE
-let currentFilters = { store: 'all', gender: 'all', category: 'all', sort: 'asc' };
+let currentFilters = { gender: 'all', category: 'all', sort: 'asc' };
 
 // 3. CORE FUNCTIONS
 window.toggleFilter = function(element) {
@@ -2397,12 +2789,10 @@ currentFilters[filterType] = filterValue;
 // Reset category to 'All' and repopulate when gender changes
 if (filterType === 'gender') {
 currentFilters.category = 'all';
-// Reset category dropdown to 'All Categories'
 const catSelect = document.getElementById('cat-select');
 if (catSelect) {
 catSelect.value = 'all';
 }
-// Repopulate categories based on new gender selection
 populateCategoryDropdown();
 }
 
@@ -2413,53 +2803,38 @@ el.classList.remove('active');
 element.classList.add('active');
 
 renderServices();
-};
 
-window.handleStorePill = function(pill) {
-const storeValue = pill.dataset.store;
-
-// Update filter state
-currentFilters.store = storeValue;
-
-// Reset category to 'All' and repopulate based on store + gender
-currentFilters.category = 'all';
-// Reset category dropdown to 'All Categories'
-const catSelect = document.getElementById('cat-select');
-if (catSelect) {
-catSelect.value = 'all';
+// Scroll to results bar after filter change
+setTimeout(() => {
+const resultsBar = document.querySelector('.results-bar');
+if (resultsBar) {
+resultsBar.scrollIntoView({ behavior: 'smooth', block: 'start' });
 }
-// Repopulate categories based on new store + gender selection
-populateCategoryDropdown();
-
-// Update active states
-document.querySelectorAll('.store-pill').forEach(el => {
-el.classList.remove('active');
-});
-pill.classList.add('active');
-
-renderServices();
+}, 100);
 };
 
 window.handleCategoryChange = function(select) {
 currentFilters.category = select.value;
 renderServices();
+
+// Scroll to results bar after filter change
+setTimeout(() => {
+const resultsBar = document.querySelector('.results-bar');
+if (resultsBar) {
+resultsBar.scrollIntoView({ behavior: 'smooth', block: 'start' });
+}
+}, 100);
 };
 
-// Function to populate category dropdown dynamically based on selected store and gender
+// Function to populate category dropdown dynamically based on selected gender
 function populateCategoryDropdown() {
 const catSelect = document.getElementById('cat-select');
 if (!catSelect) return;
 
-// Get all unique categories from services that match both store and gender selection
+// Get all unique categories from services that match gender selection
 const categories = new Set();
 ALL_SERVICES.forEach(service => {
 if (service.Category) {
-// Check if service matches current store selection
-let storeMatch = true;
-if (currentFilters.store !== 'all') {
-storeMatch = service[currentFilters.store] === 'Yes';
-}
-
 // Check if service matches current gender selection
 let genderMatch = true;
 if (currentFilters.gender !== 'all') {
@@ -2469,8 +2844,8 @@ genderMatch = serviceGender === currentFilters.gender ||
 (currentFilters.gender === 'female' && (serviceGender === 'women' || serviceGender === 'female'));
 }
 
-// Add category only if service matches both store and gender criteria
-if (storeMatch && genderMatch) {
+// Add category only if service matches gender criteria
+if (genderMatch) {
 categories.add(service.Category);
 }
 }
@@ -2479,8 +2854,9 @@ categories.add(service.Category);
 // Clear existing options except "All Categories"
 catSelect.innerHTML = '<option value="all">All Categories</option>';
 
-// Add category options sorted alphabetically
-Array.from(categories).sort().forEach(category => {
+// Add category options in database order (preserve original order)
+const categoryArray = Array.from(categories);
+categoryArray.forEach(category => {
 const option = document.createElement('option');
 option.value = category;
 option.textContent = category;
@@ -2526,11 +2902,6 @@ countEl.textContent = '';
 
 // Filter services based on current filters
 let filtered = ALL_SERVICES.filter(service => {
-// Store filter - check specific store field (Technical Card Logic)
-if (currentFilters.store !== 'all') {
-if (!service[currentFilters.store] || service[currentFilters.store] !== 'Yes') return false;
-}
-
 // Gender filter - Default to 'All' logic
 if (currentFilters.gender !== 'all') {
 const serviceGender = (service.Gender || '').toLowerCase().trim();
@@ -2551,12 +2922,14 @@ return false;
 return true;
 });
 
-// Group services by category
+// Group services by category preserving database order
 const groupedServices = {};
+const categoryOrder = []; // Track order of first appearance
 filtered.forEach(service => {
 const category = service.Category || 'Other Services';
 if (!groupedServices[category]) {
 groupedServices[category] = [];
+categoryOrder.push(category);
 }
 groupedServices[category].push(service);
 });
@@ -2568,8 +2941,8 @@ countEl.textContent = `Showing ${filtered.length} service${filtered.length !== 1
 container.innerHTML = '';
 const fragment = document.createDocumentFragment();
 
-// Generate HTML for grouped services
-Object.keys(groupedServices).sort().forEach(category => {
+// Generate HTML for grouped services in database order
+categoryOrder.forEach(category => {
 const services = groupedServices[category];
 
 // Skip categories with no services (empty handling)
@@ -2594,65 +2967,57 @@ const memberCost = service.Member_Cost || '';
 const duration = service.Duration || '';
 const description = service.Description || '';
 const serviceName = service.Service_Name || '';
-const serviceIconName = service.service_icon_name || '';
-const gender = service.Gender || '';
+const serviceId = service.Service_Name ? service.Service_Name.replace(/\s+/g, '-').toLowerCase() : Math.random().toString(36).substr(2, 9);
 
-// Icon handling
-let iconHtml = '';
-if (serviceIconName && serviceIconName !== 'NA') {
-iconHtml = `<img src="/images/service-icon/${serviceIconName}" alt="${serviceName}" class="svc-icon" onerror="this.style.display='none'">`;
-} else {
-iconHtml = `<div class="svc-icon-placeholder">✨</div>`;
-}
+// Apply Title Case to service name and description
+const formattedServiceName = toTitleCase(serviceName);
+const formattedDescription = toTitleCase(description);
 
-// Price Highlight: Luxury template
-let priceHtml = '';
+// Price formatting for Apex Elite
+let priceText = '';
 if (memberCost) {
 if (regularCost) {
-priceHtml = `
-<div class="svc-pricing">
-<div class="price-row">
-<span style="color: var(--gold); font-weight: bold;">₹${memberCost}</span>
-<small style="text-decoration: line-through; opacity: 0.6;">₹${regularCost}</small>
-</div>
-<div class="price-label">ELITE MEMBER PRICE</div>
-</div>
-`;
+priceText = `<span class="svc-price">₹${memberCost}</span><span class="meta-separator">|</span><small style="text-decoration: line-through; opacity: 0.5;">₹${regularCost}</small>`;
 } else {
-priceHtml = `
-<div class="svc-pricing">
-<div class="price-row">
-<span style="color: var(--gold); font-weight: bold;">₹${memberCost}</span>
-</div>
-<div class="price-label">ELITE MEMBER PRICE</div>
-</div>
-`;
+priceText = `<span class="svc-price">₹${memberCost}</span>`;
 }
 } else if (regularCost) {
-priceHtml = `
-<div class="svc-pricing">
-<div class="price-row">
-<span class="price-regular-only">₹${regularCost}</span>
-</div>
-</div>
-`;
+priceText = `<span class="svc-price">₹${regularCost}</span>`;
 }
 
 const serviceCard = document.createElement('article');
 serviceCard.className = 'svc-card';
+serviceCard.setAttribute('data-service-id', serviceId);
+serviceCard.setAttribute('role', 'button');
+serviceCard.setAttribute('tabindex', '0');
+serviceCard.setAttribute('aria-expanded', 'false');
 serviceCard.innerHTML = `
 <div class="svc-top-row">
-<h3 class="svc-title">${serviceName}</h3>
-${iconHtml}
+<h3 class="svc-title">${formattedServiceName}</h3>
 </div>
 <div class="svc-meta-bar">
-<span>${duration}</span>
-<span class="meta-separator">|</span>
-<span>${gender}</span>
+${priceText}
+${duration ? `<span class="meta-separator">|</span><span class="svc-duration">${duration}</span>` : ''}
+${description ? `<span class="svc-toggle" onclick="event.stopPropagation(); toggleDescription('${serviceId}')" data-service-id="${serviceId}">+</span>` : ''}
 </div>
-${description ? `<div class="svc-desc">${description}</div>` : ''}
-${priceHtml}
+${description ? `<div class="svc-description" id="desc-${serviceId}">${formattedDescription}</div>` : ''}
 `;
+
+// Add click handler to entire card for mobile
+serviceCard.addEventListener('click', (e) => {
+// Prevent triggering if clicking on the toggle directly (it has its own handler)
+if (!e.target.classList.contains('svc-toggle')) {
+toggleDescription(serviceId);
+}
+});
+
+// Add keyboard support for accessibility
+serviceCard.addEventListener('keydown', (e) => {
+if (e.key === 'Enter' || e.key === ' ') {
+e.preventDefault();
+toggleDescription(serviceId);
+}
+});
 grid.appendChild(serviceCard);
 });
 
@@ -2679,14 +3044,39 @@ emptyState.style.display = 'none';
 // Filters should update instantly and silently without moving scroll position
 }
 
+// Toggle description visibility
+window.toggleDescription = function(serviceId) {
+const descEl = document.getElementById(`desc-${serviceId}`);
+const toggleEl = document.querySelector(`.svc-toggle[data-service-id="${serviceId}"]`);
+const cardEl = document.querySelector(`.svc-card[data-service-id="${serviceId}"]`);
+
+if (descEl && toggleEl && cardEl) {
+const isExpanded = descEl.classList.contains('visible');
+
+// Close all other descriptions first (accordion behavior)
+document.querySelectorAll('.svc-description.visible').forEach(el => {
+el.classList.remove('visible');
+});
+document.querySelectorAll('.svc-toggle.expanded').forEach(el => {
+el.classList.remove('expanded');
+el.textContent = '+';
+});
+document.querySelectorAll('.svc-card[aria-expanded="true"]').forEach(el => {
+el.setAttribute('aria-expanded', 'false');
+});
+
+// Now toggle the clicked one
+if (!isExpanded) {
+descEl.classList.add('visible');
+toggleEl.classList.add('expanded');
+toggleEl.textContent = '−';
+cardEl.setAttribute('aria-expanded', 'true');
+}
+}
+};
+
 // 4. INIT
 document.addEventListener('DOMContentLoaded', function() {
-// Ensure 'All' store pill has active class visually applied
-const allStoreBtn = document.querySelector('.store-pill[data-store="all"]');
-if (allStoreBtn) {
-allStoreBtn.classList.add('active');
-}
-
 // Ensure 'All' gender button has active class visually applied
 const allGenderBtn = document.querySelector('[data-filter-type="gender"][data-filter-value="all"]');
 if (allGenderBtn) {
