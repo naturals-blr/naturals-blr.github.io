@@ -1801,5 +1801,32 @@ trigger.addEventListener('click', handleTriggerClick);
 })();
 </script>
 
+<script>
+(function(){
+var EXT=['.jpg','.jpeg','.png'];
+document.querySelectorAll('img.hero-resolver-img').forEach(function(img){
+var slug = img.getAttribute('data-slug');
+var fallback = img.getAttribute('data-fallback');
+if(!slug) return;
+
+var i=0;
+var base = '/images/heroes/' + slug;
+img.src = base + EXT[i];
+
+img.onerror = function(){
+i++;
+if(i < EXT.length) {
+img.src = base + EXT[i];
+} else if(fallback) {
+img.src = fallback;
+img.onerror = null;
+} else {
+img.style.display = 'none';
+}
+};
+});
+})();
+</script>
+
 </body>
 </html>
