@@ -41,7 +41,7 @@ gtag('config', 'G-6H5YGVGG1Q');
 "description": "Exclusive Luxury Beauty Deals at Devasandra, Bangalore",
 "url": "https://naturals-blr.github.io/stores/bangalore/devasandra/offers/",
 "category": "Beauty and Grooming Promotions",
-"datePosted": "2026-04-30 08:17:49.626908T09:00:00+05:30",
+"datePosted": "2026-04-30 08:23:54.088450T09:00:00+05:30",
 "provider": {
 "@type": "HairSalon",
 "name": "Naturals Salon & Spa Devasandra",
@@ -341,7 +341,8 @@ footer{background:#080f0b;}
 <img src="https://naturals-blr.github.io/images/logo/naturals_header_logo.png"
 alt="Naturals Salon & Spa"
 width="200" height="68"
-loading="lazy"
+loading="eager"
+fetchpriority="high"
 onerror="this.style.display='none'">
 </a>
 
@@ -703,10 +704,12 @@ var drawer=document.getElementById('drawer');
 
 function openDrawer(){
 body.classList.add('drawer-open');
+document.documentElement.style.overflow = 'hidden'; // ← add this
 hamburger && hamburger.setAttribute('aria-expanded','true');
 }
 function closeDrawer(){
 body.classList.remove('drawer-open');
+document.documentElement.style.overflow = ''; // ← add this
 hamburger && hamburger.setAttribute('aria-expanded','false');
 }
 function toggle(){ body.classList.contains('drawer-open') ? closeDrawer() : openDrawer(); }
@@ -748,7 +751,7 @@ style="display:none;">
 
 <div class="spm-cards" id="spm-cards">
 <div class="spm-card"
-onclick="selectStore('N78','JP Nagar 5th Phase','https://naturals-salon-jpnagar5phase.setmore.com/','+918792642299','+918792642299','https://g.page/Naturals_JPNagar5thPhase/','..//stores/bangalore/jp-nagar-5th-phase/')"
+onclick="selectStore('N78','JP Nagar 5th Phase','https://naturals-salon-jpnagar5phase.setmore.com/','+918792642299','+918792642299','https://g.page/Naturals_JPNagar5thPhase/','https://naturals-blr.github.io/stores/bangalore/jp-nagar-5th-phase/')"
 role="button" tabindex="0">
 <div class="spm-card-num">1</div>
 <div class="spm-card-info">
@@ -759,7 +762,7 @@ role="button" tabindex="0">
 <div class="spm-card-cta">Select &#8594;</div>
 </div>
 <div class="spm-card"
-onclick="selectStore('N77','Elements Mall','https://naturals-salon-elementsmall.setmore.com/','+919901000017','+919901000017','https://maps.google.com/?q=Naturals+Salon+Elements+Mall','..//stores/bangalore/elements-mall/')"
+onclick="selectStore('N77','Elements Mall','https://naturals-salon-elementsmall.setmore.com/','+919901000017','+919901000017','https://maps.google.com/?q=Naturals+Salon+Elements+Mall','https://naturals-blr.github.io/stores/bangalore/elements-mall/')"
 role="button" tabindex="0">
 <div class="spm-card-num">2</div>
 <div class="spm-card-info">
@@ -770,7 +773,7 @@ role="button" tabindex="0">
 <div class="spm-card-cta">Select &#8594;</div>
 </div>
 <div class="spm-card"
-onclick="selectStore('N36','Devasandra','https://naturals-salon-devasandra.setmore.com/','+917259490009','+917259490009','https://maps.google.com/?q=Naturals+Salon+Devasandra','..//stores/bangalore/devasandra/')"
+onclick="selectStore('N36','Devasandra','https://naturals-salon-devasandra.setmore.com/','+917259490009','+917259490009','https://maps.google.com/?q=Naturals+Salon+Devasandra','https://naturals-blr.github.io/stores/bangalore/devasandra/')"
 role="button" tabindex="0">
 <div class="spm-card-num">3</div>
 <div class="spm-card-info">
@@ -781,7 +784,7 @@ role="button" tabindex="0">
 <div class="spm-card-cta">Select &#8594;</div>
 </div>
 <div class="spm-card"
-onclick="selectStore('N05','Frazer Town','https://naturals-salon-frazertown.setmore.com/','+919606333017','+919606333017','https://maps.google.com/?q=Naturals+Salon+Frazer+Town','..//stores/bangalore/frazer-town/')"
+onclick="selectStore('N05','Frazer Town','https://naturals-salon-frazertown.setmore.com/','+919606333017','+919606333017','https://maps.google.com/?q=Naturals+Salon+Frazer+Town','https://naturals-blr.github.io/stores/bangalore/frazer-town/')"
 role="button" tabindex="0">
 <div class="spm-card-num">4</div>
 <div class="spm-card-info">
@@ -792,7 +795,7 @@ role="button" tabindex="0">
 <div class="spm-card-cta">Select &#8594;</div>
 </div>
 <div class="spm-card"
-onclick="selectStore('N43','Hennur','https://naturals-salon-hennur.setmore.com/','+919606900069','+919606900069','https://maps.google.com/?q=Naturals+Salon+Hennur','..//stores/bangalore/hennur/')"
+onclick="selectStore('N43','Hennur','https://naturals-salon-hennur.setmore.com/','+919606900069','+919606900069','https://maps.google.com/?q=Naturals+Salon+Hennur','https://naturals-blr.github.io/stores/bangalore/hennur/')"
 role="button" tabindex="0">
 <div class="spm-card-num">5</div>
 <div class="spm-card-info">
@@ -1095,7 +1098,7 @@ filter:brightness(0) invert(1);
 }
 
 /* Hamburger (new look) */
-#hamburger.hamburger-btn{
+#hamburger{
 position:relative;
 z-index:10002;
 width:46px;
@@ -1118,32 +1121,6 @@ transform:translateY(-1px);
 .hamburger-lines span{
 width:20px;height:2px;border-radius:2px;background:#fff;display:block;opacity:0.9;
 }
-
-/* Drawer */
-.mobile-drawer{
-position:fixed;top:0;right:0;height:100vh;width:min(340px, 88vw);
-background:var(--dark);
-transform:translateX(110%);
-transition:transform 0.28s ease;
-z-index:10001;
-box-shadow:-24px 0 80px rgba(0,0,0,0.45);
-border-left:1px solid rgba(255,255,255,0.08);
-}
-.mobile-drawer.open{transform:translateX(0);}
-.md-top{display:flex;align-items:center;justify-content:space-between;padding:18px 18px;border-bottom:1px solid rgba(255,255,255,0.08);}
-.md-home{color:#fff;font-size:12px;letter-spacing:2px;text-transform:uppercase;opacity:0.85;}
-.md-close{width:40px;height:40px;border-radius:10px;border:1px solid rgba(255,255,255,0.14);background:rgba(255,255,255,0.08);color:#fff;font-size:20px;cursor:pointer;}
-.md-close:hover{background:rgba(255,255,255,0.16);}
-.md-nav{padding:14px 10px;display:flex;flex-direction:column;gap:6px;}
-.md-link{
-padding:12px 12px;border-radius:10px;
-color:rgba(255,255,255,0.78);
-font-size:12px;letter-spacing:1.5px;text-transform:uppercase;
-border:1px solid rgba(255,255,255,0.06);
-background:rgba(255,255,255,0.03);
-}
-.md-link:hover{border-color:rgba(201,168,76,0.35);color:var(--gold);}
-.md-link.is-active{border-color:rgba(201,168,76,0.65);color:var(--gold);}
 
 body{
 padding-top:78px;
