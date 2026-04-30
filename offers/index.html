@@ -384,12 +384,18 @@ BOOK APPOINTMENT
 
 <style>
 #hamburger{
-width:44px;height:40px;border-radius:10px;
+width:46px;height:42px;border-radius:10px;
 background:rgba(255,255,255,0.10);
 border:1px solid rgba(255,255,255,0.14);
 padding:9px 10px;cursor:pointer;
 display:flex;flex-direction:column;justify-content:center;gap:6px;
 transition:background 0.2s,border-color 0.2s,transform 0.2s;
+}
+@media(max-width:768px){
+#hamburger{width:40px;height:36px;}
+}
+@media(max-width:480px){
+#hamburger{width:36px;height:32px;}
 }
 #hamburger:hover{background:rgba(255,255,255,0.18);border-color:rgba(255,255,255,0.22);transform:translateY(-1px);}
 

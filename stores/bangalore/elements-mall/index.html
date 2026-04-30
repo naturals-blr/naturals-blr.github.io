@@ -707,6 +707,9 @@ border-top:1px solid rgba(255,255,255,0.06);
 .page-wrap{padding:28px 20px;}
 .store-nav{padding:14px 20px;}
 .rating-wrap-outer{padding:12px 20px;}
+/* Mobile header menu fixes */
+#hamburger{width:40px;height:36px;}
+#hamburger.hamburger-btn{width:40px;height:36px;}
 }
 @media(max-width:480px){
 .stylists-grid{grid-template-columns:1fr;}
@@ -718,6 +721,10 @@ border-top:1px solid rgba(255,255,255,0.06);
 .store-nav{padding:14px 16px;}
 .bl-social-row{gap:16px;}
 .bl-soc-link{min-width:140px;}
+/* Mobile header menu fixes */
+.hdr-inner{padding:0 12px;}
+#hamburger{width:36px;height:32px;}
+#hamburger.hamburger-btn{width:36px;height:32px;}
 }
 </style>
 
@@ -1007,12 +1014,18 @@ BOOK APPOINTMENT
 
 <style>
 #hamburger{
-width:44px;height:40px;border-radius:10px;
+width:46px;height:42px;border-radius:10px;
 background:rgba(255,255,255,0.10);
 border:1px solid rgba(255,255,255,0.14);
 padding:9px 10px;cursor:pointer;
 display:flex;flex-direction:column;justify-content:center;gap:6px;
 transition:background 0.2s,border-color 0.2s,transform 0.2s;
+}
+@media(max-width:768px){
+#hamburger{width:40px;height:36px;}
+}
+@media(max-width:480px){
+#hamburger{width:36px;height:32px;}
 }
 #hamburger:hover{background:rgba(255,255,255,0.18);border-color:rgba(255,255,255,0.22);transform:translateY(-1px);}
 
