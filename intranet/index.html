@@ -1,0 +1,624 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+
+
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-6H5YGVGG1Q"></script>
+<script>
+window.dataLayer = window.dataLayer || [];
+function gtag(){dataLayer.push(arguments);}
+gtag('js', new Date());
+
+gtag('config', 'G-6H5YGVGG1Q');
+</script>
+
+
+<title>Naturals Staff Portal - Intranet</title>
+<meta name="description" content="Staff portal for Naturals Salon & Spa team members">
+<meta name="robots" content="noindex, nofollow">
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=Jost:wght@300;400;500;600&display=swap" rel="stylesheet">
+
+<script>(function(){var t=localStorage.getItem('naturals-theme')||'luxury';document.documentElement.setAttribute('data-theme',t);})();</script>
+
+<style>
+.btn-book{background:#1A73E8;color:#fff;padding:13px 22px;min-height:48px;font-size:11px;letter-spacing:1.5px;text-transform:uppercase;font-weight:600;display:inline-flex;align-items:center;gap:8px;transition:all 0.3s;border-radius:6px;white-space:nowrap;text-decoration:none;}
+.btn-book:hover{background:#1557B0;transform:translateY(-1px);}
+.btn-wa{background:#25D366;color:#fff;padding:13px 22px;min-height:48px;font-size:11px;letter-spacing:1.5px;text-transform:uppercase;font-weight:600;display:inline-flex;align-items:center;gap:8px;transition:all 0.3s;border-radius:6px;white-space:nowrap;text-decoration:none;}
+.btn-wa:hover{background:#1da851;transform:translateY(-1px);}
+.btn-call{background:#5F6368;color:#fff;padding:13px 22px;min-height:48px;font-size:11px;letter-spacing:1.5px;text-transform:uppercase;font-weight:600;display:inline-flex;align-items:center;gap:8px;transition:all 0.3s;border-radius:6px;white-space:nowrap;text-decoration:none;}
+.btn-call:hover{background:#474c52;transform:translateY(-1px);}
+.btn-maps{background:#A82424;color:#fff;border:none;padding:13px 18px;min-height:48px;font-size:11px;letter-spacing:1px;text-transform:uppercase;font-weight:600;display:inline-flex;align-items:center;gap:7px;transition:all 0.3s;border-radius:6px;white-space:nowrap;text-decoration:none;}
+.btn-maps:hover{background:#8e1f1f;transform:translateY(-1px);}
+.btn-gold{background:var(--gold);color:var(--dark);padding:12px 24px;font-size:11px;letter-spacing:2px;text-transform:uppercase;font-weight:700;display:inline-flex;align-items:center;gap:8px;transition:all 0.3s;text-decoration:none;}
+.btn-gold:hover{background:var(--gold-pale);transform:translateY(-1px);}
+
+/* UNIFIED BUTTON SYSTEM */
+.btn-primary{background:var(--gold);color:var(--dark);padding:14px 28px;min-height:48px;font-family:'Jost',sans-serif;font-size:11px;letter-spacing:2px;text-transform:uppercase;font-weight:700;display:inline-flex;align-items:center;justify-content:center;gap:8px;transition:all 0.3s;border-radius:6px;text-decoration:none;border:1px solid transparent;cursor:pointer;}
+.btn-primary:hover{background:#b5943b;transform:translateY(-2px);box-shadow:0 8px 16px rgba(0,0,0,0.12);}
+
+.btn-secondary{background:transparent;color:var(--text);padding:10px 20px;min-height:40px;font-family:'Jost',sans-serif;font-size:11px;letter-spacing:1.5px;text-transform:uppercase;font-weight:600;display:inline-flex;align-items:center;justify-content:center;gap:6px;transition:all 0.3s;border-radius:6px;text-decoration:none;border:1px solid rgba(0,0,0,0.12);cursor:pointer;}
+.btn-secondary:hover{border-color:var(--gold);color:var(--gold);background:rgba(201,168,76,0.04);}
+.page-hero-inner .btn-secondary{color:#fff;border-color:rgba(255,255,255,0.4);}
+.page-hero-inner .btn-secondary:hover{border-color:#fff;background:rgba(255,255,255,0.1);}
+
+/* Offer Card */
+.offer-card { display:flex; flex-direction:column; overflow:hidden; }
+.offer-img img { width:100%; height:260px; object-fit:cover; }
+.offer-body { padding:18px; }
+.offer-title { font-family:'Cormorant Garamond',serif; font-size:22px; margin-bottom:6px; }
+.offer-desc { font-size:13px; color:var(--text-mid); margin-bottom:10px; }
+.offer-validity { font-size:10px; letter-spacing:1px; text-transform:uppercase; color:var(--gold); }
+</style>
+
+<style>
+footer{background:#080f0b;}
+[data-theme="naturals"] footer{background:#0D0120;}
+.ft-top{padding:60px 60px 40px;display:grid;grid-template-columns:2fr 1fr 1fr 1fr;gap:48px;border-bottom:1px solid rgba(255,255,255,0.07);}
+.ft-brand{font-family:'Cormorant Garamond',serif;font-size:28px;color:#fff;font-weight:300;margin-bottom:10px;}
+.ft-brand span{color:var(--gold);font-style:italic;}
+.ft-tagline{font-size:12px;color:rgba(255,255,255,0.28);font-weight:300;line-height:1.7;margin-bottom:18px;}
+.ft-col-title{font-size:9px;letter-spacing:3px;text-transform:uppercase;color:var(--gold);font-weight:600;margin-bottom:16px;}
+.ft-col ul{list-style:none;display:flex;flex-direction:column;gap:9px;}
+.ft-col ul a{font-size:12px;color:rgba(255,255,255,0.32);font-weight:300;transition:color 0.3s;text-decoration:none;}
+.ft-col ul a:hover{color:rgba(255,255,255,0.72);}
+.ft-bottom{padding:18px 60px;display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:8px;}
+.ft-copy{font-size:11px;color:rgba(255,255,255,0.16);}
+.ft-url{font-size:11px;color:rgba(255,255,255,0.18);letter-spacing:1px;}
+@media(max-width:960px){.ft-top{grid-template-columns:1fr 1fr;gap:28px;padding:36px 20px 24px;}.ft-bottom{padding:14px 20px;flex-direction:column;text-align:center;}}
+@media(max-width:600px){.ft-top{grid-template-columns:1fr;padding:28px 16px 20px;}}
+</style>
+
+
+<style>
+:root{ --dark:#111714;--green:#1B4332;--green-mid:#2D6A4F;--green-soft:#52B788; --cream:#F8F4EE;--gold:#C9A84C;--gold-pale:#EDD9A3; --text:#1A1A1A;--text-mid:#555;--text-light:#999; --hero-tint:rgba(17,23,20,0.88);--hero-tint2:rgba(17,23,20,0.45); --filter-bg:#111714;--card-hover-border:#C9A84C; --nav-bg:rgba(17,23,20,0.97); } [data-theme="naturals"]{ --dark:#1A0533;--green:#2596BE;--green-mid:#7B2FBE;--green-soft:#B678F0; --cream:#FAF7FF;--gold:#C9A84C;--gold-pale:#EDD9A3; --text:#1A1A1A;--text-mid:#4A4458;--text-light:#8B7FA8; --hero-tint:rgba(26,5,51,0.87);--hero-tint2:rgba(58,10,100,0.45); --filter-bg:#1A0533;--card-hover-border:#7B2FBE; --nav-bg:rgba(26,5,51,0.97); }
+
+/* ── Intranet Layout ── */
+body {
+background: var(--dark);
+color: #fff;
+font-family: 'Jost', sans-serif;
+margin: 0;
+padding: 0;
+min-height: 100vh;
+}
+[data-theme="naturals"] body {
+background: #0D0120;
+}
+
+.intranet-container {
+max-width: 1200px;
+margin: 0 auto;
+padding: 40px 20px;
+}
+
+/* ── Header ── */
+.intranet-header {
+text-align: center;
+margin-bottom: 60px;
+}
+
+.intranet-title {
+font-family: 'Cormorant Garamond', serif;
+font-size: clamp(32px, 5vw, 48px);
+font-weight: 300;
+color: #fff;
+margin-bottom: 8px;
+}
+
+.intranet-title em {
+font-style: italic;
+color: var(--gold);
+}
+
+.intranet-subtitle {
+font-size: 14px;
+color: rgba(255,255,255,0.6);
+letter-spacing: 1px;
+text-transform: uppercase;
+}
+
+/* ── Tiles Grid ── */
+.tiles-grid {
+display: grid;
+grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+gap: 24px;
+margin-bottom: 60px;
+}
+
+.tile {
+background: rgba(255,255,255,0.05);
+border: 1px solid rgba(255,255,255,0.1);
+border-radius: 16px;
+padding: 32px;
+text-decoration: none;
+color: #fff;
+transition: all 0.3s ease;
+display: block;
+position: relative;
+overflow: hidden;
+}
+
+.tile:hover {
+background: rgba(255,255,255,0.08);
+border-color: rgba(255,255,255,0.2);
+transform: translateY(-4px);
+box-shadow: 0 8px 32px rgba(0,0,0,0.3);
+}
+
+.tile-icon {
+font-size: 48px;
+margin-bottom: 16px;
+display: block;
+}
+
+.tile-title {
+font-size: 20px;
+font-weight: 600;
+margin-bottom: 8px;
+color: #fff;
+}
+
+.tile-description {
+font-size: 14px;
+color: rgba(255,255,255,0.7);
+line-height: 1.6;
+}
+
+.tile-arrow {
+position: absolute;
+bottom: 24px;
+right: 24px;
+font-size: 20px;
+color: var(--gold);
+opacity: 0;
+transition: opacity 0.3s ease;
+}
+
+.tile:hover .tile-arrow {
+opacity: 1;
+}
+
+/* ── User Info ── */
+.user-info {
+background: rgba(255,255,255,0.03);
+border: 1px solid rgba(255,255,255,0.08);
+border-radius: 12px;
+padding: 20px;
+text-align: center;
+margin-bottom: 40px;
+}
+
+.user-welcome {
+font-size: 16px;
+color: rgba(255,255,255,0.8);
+margin-bottom: 8px;
+}
+
+.user-role {
+font-size: 12px;
+color: var(--gold);
+text-transform: uppercase;
+letter-spacing: 1px;
+}
+
+/* ── Responsive ── */
+@media (max-width: 768px) {
+.intranet-container {
+padding: 20px 16px;
+}
+
+.tiles-grid {
+grid-template-columns: 1fr;
+gap: 16px;
+}
+
+.tile {
+padding: 24px;
+}
+}
+
+/* ── Staff Name Personalization ── */
+.change-name-container {
+margin-top: 12px;
+}
+
+.change-name-btn {
+background: rgba(255,255,255,0.1);
+border: 1px solid rgba(255,255,255,0.2);
+border-radius: 20px;
+color: rgba(255,255,255,0.7);
+font-size: 12px;
+padding: 6px 12px;
+cursor: pointer;
+transition: all 0.3s ease;
+font-family: 'Jost', sans-serif;
+}
+
+.change-name-btn:hover {
+background: rgba(255,255,255,0.2);
+color: #fff;
+border-color: rgba(255,255,255,0.3);
+}
+
+.name-modal {
+position: fixed;
+top: 0;
+left: 0;
+width: 100%;
+height: 100%;
+background: rgba(0,0,0,0.8);
+display: none;
+align-items: center;
+justify-content: center;
+z-index: 10000;
+}
+
+.name-modal-content {
+background: var(--dark);
+border: 1px solid rgba(255,255,255,0.2);
+border-radius: 16px;
+padding: 32px;
+text-align: center;
+max-width: 400px;
+width: 90%;
+}
+
+.name-modal-title {
+font-size: 24px;
+margin-bottom: 16px;
+color: #fff;
+}
+
+.name-modal-subtitle {
+font-size: 14px;
+color: rgba(255,255,255,0.7);
+margin-bottom: 24px;
+line-height: 1.5;
+}
+
+.name-input {
+width: 100%;
+padding: 12px 16px;
+background: rgba(255,255,255,0.1);
+border: 1px solid rgba(255,255,255,0.3);
+border-radius: 8px;
+color: #fff;
+font-size: 16px;
+font-family: 'Jost', sans-serif;
+margin-bottom: 20px;
+}
+
+.name-input:focus {
+outline: none;
+border-color: var(--gold);
+background: rgba(255,255,255,0.15);
+}
+
+.name-submit-btn {
+background: var(--gold);
+color: var(--dark);
+border: none;
+border-radius: 8px;
+padding: 12px 24px;
+font-size: 14px;
+font-weight: 600;
+cursor: pointer;
+transition: all 0.3s ease;
+font-family: 'Jost', sans-serif;
+}
+
+.name-submit-btn:hover {
+background: #B8943A;
+transform: translateY(-2px);
+}
+</style>
+</head>
+<body>
+<div class="intranet-container">
+<header class="intranet-header">
+<h1 class="intranet-title">Naturals <em>Staff Portal</em></h1>
+<p class="intranet-subtitle">Team Resources & Tools</p>
+</header>
+
+<div class="user-info">
+<div class="user-welcome">
+<span id="staffGreeting">Welcome 👋</span>
+</div>
+<div class="user-role">The Naturals Professional Team</div>
+<div class="change-name-container">
+<button onclick="resetStaffName()" class="change-name-btn">Change Name</button>
+</div>
+</div>
+
+<main class="tiles-grid">
+<a href="qrcode/" class="tile">
+<span class="tile-icon">📱</span>
+<h2 class="tile-title">Store QR Library</h2>
+<p class="tile-description">View and share the correct QR codes for customer check-ins, social follows, and instant review links.</p>
+<span class="tile-arrow">→</span>
+</a>
+
+<a href="training/" class="tile">
+<span class="tile-icon">📺</span>
+<h2 class="tile-title">Stylist Training Hub</h2>
+<p class="tile-description">Access curated video tutorials on advanced hair trends, tool handling, and professional service standards for all 5 store locations.</p>
+<span class="tile-arrow">→</span>
+</a>
+
+</main>
+</div>
+
+
+<div id="nameModal" class="name-modal">
+<div class="name-modal-content">
+<h3 class="name-modal-title">👋 Welcome!</h3>
+<p class="name-modal-subtitle">
+Please enter your name (this stays on your device only)<br>
+This helps personalize the screen while you assist guests.
+</p>
+<input type="text" id="nameInput" class="name-input" placeholder="Enter your name" maxlength="50">
+<button onclick="saveStaffName()" class="name-submit-btn">Continue</button>
+</div>
+</div>
+
+<script>
+document.addEventListener("DOMContentLoaded", () => {
+const staffName = localStorage.getItem("staff_name");
+
+if (!staffName) {
+askStaffName();
+} else {
+greetStaff(staffName);
+}
+});
+
+function askStaffName() {
+const modal = document.getElementById("nameModal");
+const input = document.getElementById("nameInput");
+
+modal.style.display = "flex";
+input.focus();
+
+// Handle Enter key
+input.addEventListener("keypress", function(e) {
+if (e.key === "Enter") {
+saveStaffName();
+}
+});
+}
+
+function saveStaffName() {
+const input = document.getElementById("nameInput");
+const name = input.value.trim();
+
+if (name && name.length > 0) {
+localStorage.setItem("staff_name", name);
+document.getElementById("nameModal").style.display = "none";
+greetStaff(name);
+} else {
+input.focus();
+input.style.borderColor = "#ff6b6b";
+setTimeout(() => {
+input.style.borderColor = "rgba(255,255,255,0.3)";
+}, 2000);
+}
+}
+
+function greetStaff(name) {
+const el = document.getElementById("staffGreeting");
+if (el) {
+el.innerText = `Hi ${name} 👋`;
+}
+}
+
+function resetStaffName() {
+if (confirm("Are you sure you want to change your name?")) {
+localStorage.removeItem("staff_name");
+location.reload();
+}
+}
+</script>
+</body>
+
+<footer>
+<div class="ft-top">
+
+<div class="ft-brand-col">
+<div class="ft-brand"><span id="staffTriggerBrand" style="cursor: pointer; position: relative;" title="Staff Portal - Click 5 times for access">N</span>aturals <span>Salon &amp; Spa</span></div>
+<div class="ft-tagline">India's most trusted salon network.<br>Premium beauty services across Bangalore.</div>
+</div>
+
+<div class="ft-col">
+<div class="ft-col-title">Explore</div>
+<ul>
+<li><a href="/services/">Services &amp; Pricing</a></li>
+<li><a href="/offers/">Offers</a></li>
+<li><a href="/careers/bangalore/">Join our Team</a></li>
+<li><a href="/contact/">Contact Us</a></li>
+<li><a href="/about/">About Us</a></li>
+</ul>
+</div>
+
+<div class="ft-col">
+<div class="ft-col-title">Locations</div>
+<ul>
+<li><a href="/stores/bangalore/jp-nagar-5th-phase/">JP Nagar 5th Phase</a></li>
+<li><a href="/stores/bangalore/elements-mall/">Elements Mall</a></li>
+<li><a href="/stores/bangalore/devasandra/">Devasandra</a></li>
+<li><a href="/stores/bangalore/frazer-town/">Frazer Town</a></li>
+<li><a href="/stores/bangalore/hennur/">Hennur</a></li>
+</ul>
+</div>
+
+<div class="ft-col">
+<div class="ft-col-title">Policies</div>
+<ul>
+<li><a href="/booking-policy/">Booking Policy</a></li>
+<li><a href="/cancellation-policy/">Cancellation Policy</a></li>
+<li><a href="https://naturals.in" target="_blank" rel="noopener">Naturals India &#8599;</a></li>
+</ul>
+</div>
+
+</div>
+<div class="ft-bottom">
+<div class="ft-copy">&copy; 2026 Naturals Salon &amp; Spa, Bangalore. All rights reserved.</div>
+<div class="ft-url">naturals-blr.github.io</div>
+</div>
+</footer>
+
+<style>
+/* ── Footer shell: full viewport width, always dark ─────────────── */
+footer {
+background: #080f0b;
+width: 100%;
+margin: 0;
+padding: 40px 0;
+display: block;
+}
+[data-theme="naturals"] footer { background: #0D0120; }
+
+/* Fix 2: Apply Full-Width CSS - ensure footer stretches full viewport */
+.footer-section {
+width: 100% !important;
+margin: 0 !important;
+padding: 40px 0 !important;
+background-color: #080f0b !important;
+}
+
+/* ── ft-top: 4-col grid, padding mirrors page gutters (60px) ────── */
+.ft-top {
+padding: 60px 60px 40px;
+display: grid;
+grid-template-columns: 2fr 1fr 1fr 1fr;
+gap: 48px;
+border-bottom: 1px solid rgba(255,255,255,0.07);
+/* No max-width — fills full footer width like all other page sections */
+}
+
+/* ── Brand column ───────────────────────────────────────────────── */
+.ft-brand-col {
+display: flex;
+flex-direction: column;
+}
+.ft-brand {
+font-family: 'Cormorant Garamond', serif;
+font-size: 28px;
+color: #fff;
+font-weight: 300;
+margin-bottom: 10px;
+}
+.ft-brand span { color: var(--gold); font-style: italic; }
+.ft-tagline {
+font-size: 12px;
+color: rgba(255,255,255,0.28);
+font-weight: 300;
+line-height: 1.7;
+}
+
+/* ── Nav columns ────────────────────────────────────────────────── */
+.ft-col { display: flex; flex-direction: column; }
+.ft-col-title {
+font-size: 9px;
+letter-spacing: 3px;
+text-transform: uppercase;
+color: var(--gold);
+font-weight: 600;
+margin-bottom: 16px;
+}
+.ft-col ul {
+list-style: none;
+padding: 0; margin: 0;
+display: flex;
+flex-direction: column;
+gap: 9px;
+}
+.ft-col li { margin: 0; }
+.ft-col ul a {
+font-size: 12px;
+color: rgba(255,255,255,0.32);
+font-weight: 300;
+text-decoration: none;
+transition: color 0.3s;
+/* Truncate long store names gracefully */
+display: block;
+white-space: nowrap;
+overflow: hidden;
+text-overflow: ellipsis;
+max-width: 160px;
+}
+.ft-col ul a:hover { color: rgba(255,255,255,0.72); }
+
+/* ── Bottom bar: same 60px gutter as ft-top ─────────────────────── */
+.ft-bottom {
+padding: 18px 60px;
+display: flex;
+justify-content: space-between;
+align-items: center;
+flex-wrap: wrap;
+gap: 8px;
+}
+.ft-copy { font-size: 11px; color: rgba(255,255,255,0.16); }
+.ft-url { font-size: 11px; color: rgba(255,255,255,0.18); letter-spacing: 1px; }
+
+/* ── Responsive ─────────────────────────────────────────────────── */
+@media (max-width: 960px) {
+.ft-top {
+grid-template-columns: 1fr 1fr;
+gap: 28px;
+padding: 36px 20px 24px;
+}
+.ft-bottom {
+padding: 14px 20px;
+flex-direction: column;
+text-align: center;
+}
+}
+@media (max-width: 600px) {
+.ft-top {
+grid-template-columns: 1fr;
+padding: 28px 16px 20px;
+}
+.ft-col ul a { max-width: 100%; }
+}
+</style>
+
+<div id="staffTrigger" style="position: fixed; bottom: 10px; right: 10px; width: 24px; height: 24px; opacity: 0.2; z-index: 9999; cursor: pointer;">
+⚙️
+</div>
+
+<script>
+(function() {
+let tapCount = 0;
+let lastTap = 0;
+const triggers = [
+document.getElementById('staffTrigger'),
+document.getElementById('staffTriggerBrand')
+].filter(Boolean); // Remove null elements
+
+function handleTriggerClick() {
+const now = new Date().getTime();
+
+// Reset if delay too long
+if (now - lastTap > 2000) {
+tapCount = 0;
+}
+
+tapCount++;
+lastTap = now;
+
+if (tapCount >= 5) {
+window.location.href = "/intranet"; // change dynamically if needed
+}
+}
+
+// Add click listeners to all trigger elements
+triggers.forEach(trigger => {
+trigger.addEventListener('click', handleTriggerClick);
+});
+})();
+</script></html>
