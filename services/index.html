@@ -5,26 +5,203 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Our Services - Naturals Salon & Spa - Naturals Salon & Spa</title>
     <meta name="description" content="Explore our wide range of beauty and wellness services">
-    <link rel="stylesheet" href="/styles/main.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.6;
+            color: #333;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+            background: rgba(255, 255, 255, 0.95);
+            border-radius: 15px;
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
+            margin-top: 20px;
+            margin-bottom: 20px;
+        }
+        
+        header {
+            background: linear-gradient(45deg, #ff6b6b, #ee5a24);
+            color: white;
+            padding: 20px 0;
+            border-radius: 15px 15px 0 0;
+            margin-bottom: 30px;
+            box-shadow: 0 10px 30px rgba(238, 90, 36, 0.3);
+        }
+        
+        nav {
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
+            gap: 20px;
+        }
+        
+        nav a {
+            color: white;
+            text-decoration: none;
+            padding: 12px 24px;
+            border-radius: 25px;
+            background: rgba(255, 255, 255, 0.2);
+            transition: all 0.3s ease;
+            font-weight: 500;
+            border: 2px solid rgba(255, 255, 255, 0.3);
+        }
+        
+        nav a:hover {
+            background: rgba(255, 255, 255, 0.3);
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+        }
+        
+        main {
+            padding: 20px 0;
+        }
+        
+        h1 {
+            color: #2c3e50;
+            font-size: 2.5rem;
+            margin-bottom: 20px;
+            text-align: center;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.1);
+        }
+        
+        .offers-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 25px;
+            margin-top: 30px;
+        }
+        
+        .offer-card {
+            background: white;
+            padding: 25px;
+            border-radius: 12px;
+            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.1);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            border: 1px solid #e1e8ed;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .offer-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 4px;
+            background: linear-gradient(90deg, #ff6b6b, #ee5a24);
+            border-radius: 12px 12px 0 0;
+        }
+        
+        .offer-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.15);
+        }
+        
+        .offer-card h3 {
+            color: #2c3e50;
+            margin-bottom: 15px;
+            font-size: 1.4rem;
+            font-weight: 600;
+        }
+        
+        .offer-card p {
+            color: #7f8c8d;
+            margin-bottom: 10px;
+            line-height: 1.6;
+        }
+        
+        .valid-dates {
+            font-weight: bold;
+            color: #e74c3c;
+            font-size: 0.9rem;
+            padding: 8px 12px;
+            background: #fff5f5;
+            border-radius: 6px;
+            border: 1px solid #fed7d7;
+            display: inline-block;
+        }
+        
+        .campaign-id {
+            font-size: 0.85rem;
+            color: #95a5a6;
+            font-family: 'Courier New', monospace;
+            background: #f8f9fa;
+            padding: 6px 10px;
+            border-radius: 4px;
+            border: 1px solid #dee2e6;
+        }
+        
+        footer {
+            text-align: center;
+            padding: 30px 20px;
+            background: #2c3e50;
+            color: white;
+            border-radius: 0 0 15px 15px;
+            margin-top: 40px;
+        }
+        
+        @media (max-width: 768px) {
+            .container {
+                margin: 10px;
+                padding: 15px;
+                border-radius: 10px;
+            }
+            
+            nav {
+                flex-direction: column;
+                align-items: center;
+                gap: 10px;
+            }
+            
+            nav a {
+                padding: 10px 20px;
+                font-size: 0.9rem;
+            }
+            
+            .offers-grid {
+                grid-template-columns: 1fr;
+                gap: 15px;
+            }
+            
+            h1 {
+                font-size: 2rem;
+            }
+        }
+    </style>
 </head>
 <body>
     <header>
         <nav>
-            <a href="/">Home</a>
-            <a href="/offers/">Offers</a>
-            <a href="/services/">Services</a>
-            <a href="/stores/">Stores</a>
-            <a href="/careers/">Careers</a>
-            <a href="/contact/">Contact</a>
+            <a href="/">🏠 Home</a>
+            <a href="/offers/">🎯 Offers</a>
+            <a href="/services/">💇 Services</a>
+            <a href="/stores/">📍 Stores</a>
+            <a href="/careers/">💼 Careers</a>
+            <a href="/contact/">📞 Contact</a>
         </nav>
     </header>
-    <main>
-        <h1>Our Services - Naturals Salon & Spa</h1>
-        <p>Our Services</p>
-        <p>We offer comprehensive beauty services including hair care, skin care, and wellness treatments.</p>
-    </main>
+    <div class="container">
+        <main>
+            <h1>Our Services - Naturals Salon & Spa</h1>
+            <p>Our Services</p>
+            <p>We offer comprehensive beauty services including hair care, skin care, and wellness treatments.</p>
+        </main>
+    </div>
     <footer>
-        <p>&copy; 2026 Naturals Salon & Spa. All rights reserved.</p>
+        <p>&copy; 2026 Naturals Salon & Spa. All rights reserved. | 🌿 Premium Beauty Services</p>
     </footer>
 </body>
 </html>
