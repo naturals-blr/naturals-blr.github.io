@@ -308,6 +308,7 @@ transition:all 0.2s;border-radius:10px;background:#fff;text-decoration:none;
 .home-offers-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;margin-bottom:32px;}
 .hoc{background:rgba(255,255,255,0.04);border:1px solid rgba(255,255,255,0.08);border-radius:14px;overflow:hidden;transition:all 0.25s;display:flex;flex-direction:column;}
 .hoc:hover{background:rgba(255,255,255,0.07);border-color:var(--gold);transform:translateY(-2px);}
+.hoc:only-child{margin:0 auto;min-height:200px;max-width:400px;justify-self:center;align-items:center;}
 .hoc-media{height:180px;background:linear-gradient(135deg,var(--dark) 0%,var(--green) 100%);position:relative;overflow:hidden;}
 .hoc-media img{width:100%;height:100%;object-fit:cover;cursor:zoom-in;transition:transform 0.7s ease;}
 .hoc:hover .hoc-media img{transform:scale(1.04);}
@@ -320,11 +321,35 @@ transition:all 0.2s;border-radius:10px;background:#fff;text-decoration:none;
 .hoc-store a{color:inherit;text-decoration:none;}
 .hoc-store a:hover{color:var(--gold);}
 .hoc-valid{font-size:11px;color:var(--green-soft);font-weight:700;}
-
 .offer-more{display:inline-flex;gap:6px;align-items:center;font-size:11px;color:var(--green-soft);cursor:pointer;margin-top:-6px;margin-bottom:12px;font-weight:600;}
 .offer-more:hover{text-decoration:underline;}
-
 .offers-view-all{text-align:center;}
+
+/* MEDIA SECTION - All Campaign Types */
+.media-sec{background:var(--dark);}
+.media-sec .sec-hdr h2{color:#fff;}
+.media-sec .sec-hdr h2 em{color:var(--gold);}
+.media-sec .sec-hdr p{color:rgba(255,255,255,0.4);}
+.media-sec .btn-secondary{background:transparent;color:#fff;border-color:rgba(255,255,255,0.4);}
+.media-sec .btn-secondary:hover{border-color:#fff;background:rgba(255,255,255,0.1);}
+.media-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;margin-bottom:32px;}
+.media-card{background:rgba(255,255,255,0.04);border:1px solid rgba(255,255,255,0.08);border-radius:14px;overflow:hidden;transition:all 0.25s;display:flex;flex-direction:column;}
+.media-card:hover{background:rgba(255,255,255,0.07);border-color:var(--gold);transform:translateY(-2px);}
+.media-media{height:180px;background:linear-gradient(135deg,var(--dark) 0%,var(--green) 100%);position:relative;overflow:hidden;}
+.media-media img{width:100%;height:100%;object-fit:cover;cursor:zoom-in;transition:transform 0.7s ease;}
+.media-card:hover .media-media img{transform:scale(1.04);}
+.media-body{padding:18px 18px 16px;display:flex;flex-direction:column;flex:1;}
+.media-badge{font-size:9px;letter-spacing:3px;text-transform:uppercase;color:var(--gold);font-weight:700;margin-bottom:10px;}
+.media-title{font-family:'Cormorant Garamond',serif;font-size:22px;color:#fff;font-weight:300;margin-bottom:8px;line-height:1.2;}
+.media-details{font-size:12px;color:rgba(255,255,255,0.42);line-height:1.7;font-weight:300;margin-bottom:12px;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden;}
+.media-meta{display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:8px;padding-top:12px;border-top:1px solid rgba(255,255,255,0.08);}
+.media-store{font-size:10px;color:rgba(255,255,255,0.35);letter-spacing:1px;text-transform:uppercase;}
+.media-store a{color:inherit;text-decoration:none;}
+.media-store a:hover{color:var(--gold);}
+.media-valid{font-size:11px;color:var(--green-soft);font-weight:700;}
+.media-no-image{display:flex;flex-direction:column;align-items:center;justify-content:center;padding:20px;background:rgba(255,255,255,0.02);border:1px solid rgba(255,255,255,0.05);border-radius:8px;}
+.media-icon{font-size:24px;color:var(--gold);margin-bottom:8px;}
+.media-no-image .media-title{font-family:'Cormorant Garamond',serif;font-size:18px;color:#fff;font-weight:300;margin-bottom:4px;text-align:center;}
 
 /* IMAGE-ONLY MODAL (gallery for featured offers) */
 #ho-img-overlay{position:fixed;inset:0;background:rgba(0,0,0,0.75);backdrop-filter:blur(6px);z-index:15000;display:none;}
@@ -1760,106 +1785,23 @@ onerror="this.src='/images/service-icon/service_default.jpg'">
 </div>
 
 <div class="home-offers-grid" id="home-offers-grid">
-<div class="hoc reveal"
-data-image-available="Yes"
-data-image-name="20260507_OFFER_BridalBeautyPackag"
-data-offer-title="Bridal Beauty Packages Starting ₹4999">
-<div class="hoc-media">
-<img class="home-offer-img"
-data-img-base="/campaigns/offer/03_published/20260507_OFFER_BridalBeautyPackag"
-alt="Bridal Beauty Packages Starting ₹4999"
-width="400" height="300"
-loading="lazy">
-<div class="img-actions">
-<button class="img-action-btn" onclick="downloadImage(this)" title="Download Image">
-<svg viewBox="0 0 24 24"><path d="M19 9h-4V3H9v6H5l7 7 7-7zM5 18v2h14v-2H5z"/></svg>
-</button>
-<button class="img-action-btn" onclick="shareContent(this)" title="Share Offer">
-<svg viewBox="0 0 24 24"><path d="M18 16.08c-.76 0-1.44.3-1.96.77L8.91 12.7c.05-.23.09-.46.09-.7s-.04-.47-.09-.7l7.05-4.11c.54.5 1.25.81 2.04.81 1.66 0 3-1.34 3-3s-1.34-3-3-3-3 1.34-3 3c0 .24.04.47.09.7L8.04 9.81C7.5 9.31 6.79 9 6 9c-1.66 0-3 1.34-3 3s1.34 3 3 3c.79 0 1.5-.31 2.04-.81l7.12 4.16c-.05.21-.08.43-.08.65 0 1.61 1.31 2.92 2.92 2.92 1.61 0 2.92-1.31 2.92-2.92s-1.31-2.92-2.92-2.92z"/></svg>
-</button>
+<div class="hoc reveal" style="grid-column:1/-1;text-align:center;padding:40px;min-height:200px;">
+<div class="hoc-title" style="color:rgba(255,255,255,0.4);">Check back soon for new offers.</div>
 </div>
 </div>
-
-<div class="hoc-body">
-<div class="hoc-badge">Special Offer</div>
-<div class="hoc-title">Bridal Beauty Packages Starting ₹4999</div>
-<div class="hoc-details">Get your dream bridal look with our premium bridal packages starting at just ₹4999. Book your special day now.</div>
-<div class="offer-more" onclick="openDetailsModal(this)" role="button" tabindex="0">Read more <span>&rarr;</span></div>
-<div class="hoc-meta">
-<div class="hoc-store">
-</div>
-<div class="hoc-valid">Valid till 30-May-2026</div>
-</div>
-</div>
-</div>
-<div class="hoc reveal"
-data-image-available="Yes"
-data-image-name="20260505_OFFER_Flat30OffonHair"
-data-offer-title="Flat 30% Off on Hair Smoothening">
-<div class="hoc-media">
-<img class="home-offer-img"
-data-img-base="/campaigns/offer/03_published/20260505_OFFER_Flat30OffonHair"
-alt="Flat 30% Off on Hair Smoothening"
-width="400" height="300"
-loading="lazy">
-<div class="img-actions">
-<button class="img-action-btn" onclick="downloadImage(this)" title="Download Image">
-<svg viewBox="0 0 24 24"><path d="M19 9h-4V3H9v6H5l7 7 7-7zM5 18v2h14v-2H5z"/></svg>
-</button>
-<button class="img-action-btn" onclick="shareContent(this)" title="Share Offer">
-<svg viewBox="0 0 24 24"><path d="M18 16.08c-.76 0-1.44.3-1.96.77L8.91 12.7c.05-.23.09-.46.09-.7s-.04-.47-.09-.7l7.05-4.11c.54.5 1.25.81 2.04.81 1.66 0 3-1.34 3-3s-1.34-3-3-3-3 1.34-3 3c0 .24.04.47.09.7L8.04 9.81C7.5 9.31 6.79 9 6 9c-1.66 0-3 1.34-3 3s1.34 3 3 3c.79 0 1.5-.31 2.04-.81l7.12 4.16c-.05.21-.08.43-.08.65 0 1.61 1.31 2.92 2.92 2.92 1.61 0 2.92-1.31 2.92-2.92s-1.31-2.92-2.92-2.92z"/></svg>
-</button>
-</div>
-</div>
-
-<div class="hoc-body">
-<div class="hoc-badge">Special Offer</div>
-<div class="hoc-title">Flat 30% Off on Hair Smoothening</div>
-<div class="hoc-details">Get silky smooth hair with our professional smoothening service and enjoy flat 30% off. Limited period only.</div>
-<div class="offer-more" onclick="openDetailsModal(this)" role="button" tabindex="0">Read more <span>&rarr;</span></div>
-<div class="hoc-meta">
-<div class="hoc-store">
-</div>
-<div class="hoc-valid">Valid till 30-May-2026</div>
-</div>
-</div>
-</div>
-<div class="hoc reveal"
-data-image-available="Yes"
-data-image-name="20260429_OFFER_GetGlowingSkin–2"
-data-offer-title="Get Glowing Skin – 25% Off on Facials">
-<div class="hoc-media">
-<img class="home-offer-img"
-data-img-base="/campaigns/offer/03_published/20260429_OFFER_GetGlowingSkin–2"
-alt="Get Glowing Skin – 25% Off on Facials"
-width="400" height="300"
-loading="lazy">
-<div class="img-actions">
-<button class="img-action-btn" onclick="downloadImage(this)" title="Download Image">
-<svg viewBox="0 0 24 24"><path d="M19 9h-4V3H9v6H5l7 7 7-7zM5 18v2h14v-2H5z"/></svg>
-</button>
-<button class="img-action-btn" onclick="shareContent(this)" title="Share Offer">
-<svg viewBox="0 0 24 24"><path d="M18 16.08c-.76 0-1.44.3-1.96.77L8.91 12.7c.05-.23.09-.46.09-.7s-.04-.47-.09-.7l7.05-4.11c.54.5 1.25.81 2.04.81 1.66 0 3-1.34 3-3s-1.34-3-3-3-3 1.34-3 3c0 .24.04.47.09.7L8.04 9.81C7.5 9.31 6.79 9 6 9c-1.66 0-3 1.34-3 3s1.34 3 3 3c.79 0 1.5-.31 2.04-.81l7.12 4.16c-.05.21-.08.43-.08.65 0 1.61 1.31 2.92 2.92 2.92 1.61 0 2.92-1.31 2.92-2.92s-1.31-2.92-2.92-2.92z"/></svg>
-</button>
-</div>
-</div>
-
-<div class="hoc-body">
-<div class="hoc-badge">Special Offer</div>
-<div class="hoc-title">Get Glowing Skin – 25% Off on Facials</div>
-<div class="hoc-details">Rejuvenate your skin with our premium facial services and get 25% off. Book today.</div>
-<div class="offer-more" onclick="openDetailsModal(this)" role="button" tabindex="0">Read more <span>&rarr;</span></div>
-<div class="hoc-meta">
-<div class="hoc-store">
-</div>
-<div class="hoc-valid">Valid till 15-May-2026</div>
-</div>
-</div>
-</div>
-</div>
-
 <div class="offers-view-all">
 <a href="/offers/" class="btn-secondary">View All Offers &#8594;</a>
+</div>
+</section>
+
+<section class="media-sec" id="media" aria-label="All campaigns and announcements">
+<div class="sec-hdr reveal">
+<div class="lbl">Media</div>
+<h2>Latest <em>campaigns</em></h2>
+<p>View all current campaigns, announcements, and updates across our Bangalore locations.</p>
+</div>
+
+<div class="media-grid" id="media-grid">
 </div>
 </section>
 
