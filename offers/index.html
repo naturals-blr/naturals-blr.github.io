@@ -1152,10 +1152,50 @@ loading="eager">
 <h2 style="font-family:'Cormorant Garamond',serif;font-size:32px;font-weight:300;color:var(--text);margin-bottom:8px;">Store-Specific Offers</h2>
 
 <div class="results-bar">
-<div id="results-count">5 stores with offers</div>
+<div id="results-count">5 store offer pages</div>
 </div>
 
 <div class="store-offers-grid">
+<article class="store-offer-tile">
+<div class="store-tile-name">JP Nagar 5th Phase</div>
+<div class="store-tile-landmarks">Bangalore · 1st Floor, Anand Onyx, No 305, 15th Cross Rd, near Outer Ring Road, 5th Phase...</div>
+<div class="offer-details">
+6 offers available
+</div>
+<a href="https://naturals-blr.github.io/stores/bangalore/jp-nagar-5th-phase/offers/" class="store-tile-btn">View JP Nagar 5th Phase Offers</a>
+</article>
+<article class="store-offer-tile">
+<div class="store-tile-name">Nagavara</div>
+<div class="store-tile-landmarks">Bangalore · 22-26/B11, R.K. Tower, 1st Cross, Chanukya Layout, Near Skywalk Exit, Nagavar...</div>
+<div class="offer-details">
+3 offers available
+</div>
+<a href="https://naturals-blr.github.io/stores/bangalore/nagavara/offers/" class="store-tile-btn">View Nagavara Offers</a>
+</article>
+<article class="store-offer-tile">
+<div class="store-tile-name">Devasandra</div>
+<div class="store-tile-landmarks">Bangalore · 2,3, 1st Floor, Maruthi Tower, No. 1, Devasandra Main Rd, opp. Lulu's Bakery,...</div>
+<div class="offer-details">
+3 offers available
+</div>
+<a href="https://naturals-blr.github.io/stores/bangalore/devasandra/offers/" class="store-tile-btn">View Devasandra Offers</a>
+</article>
+<article class="store-offer-tile">
+<div class="store-tile-name">Frazer Town</div>
+<div class="store-tile-landmarks">Bangalore · 1st floor, No.94, Mosque Rd, above Poorvika Mobile Store, Cleveland Town, Fra...</div>
+<div class="offer-details">
+6 offers available
+</div>
+<a href="https://naturals-blr.github.io/stores/bangalore/frazer-town/offers/" class="store-tile-btn">View Frazer Town Offers</a>
+</article>
+<article class="store-offer-tile">
+<div class="store-tile-name">Hennur</div>
+<div class="store-tile-landmarks">Bangalore · 1st Floor, No 40/A, 40/C, Main Road, above SBI Bank, Hennur Gardens, Bangalor...</div>
+<div class="offer-details">
+6 offers available
+</div>
+<a href="https://naturals-blr.github.io/stores/bangalore/hennur/offers/" class="store-tile-btn">View Hennur Offers</a>
+</article>
 </div>
 
 <div class="store-tile-subtext">Premium beauty transformations, starting at special local rates.</div>
@@ -1794,6 +1834,26 @@ window.location.href = "/intranet"; // change dynamically if needed
 triggers.forEach(trigger => {
 trigger.addEventListener('click', handleTriggerClick);
 });
+})();
+</script><script>
+/* Campaign image resolver: .jpg, .jpeg, .png, .webp */
+(function(){
+var EXT=['.jpg','.jpeg','.png','.webp'];
+function hasExt(path){ return /\.[a-zA-Z0-9]{2,5}(\?.*)?$/.test(path||''); }
+function attach(){
+document.querySelectorAll('img[data-img-base]').forEach(function(img){
+var base=img.getAttribute('data-img-base')||'';
+if(!base) return;
+if(hasExt(base)){ img.src=base; return; }
+var i=0; img.src=base + EXT[i];
+img.onerror=function(){
+i++;
+if(i<EXT.length) img.src=base + EXT[i];
+else img.style.display='none';
+};
+});
+}
+(document.readyState==='loading') ? document.addEventListener('DOMContentLoaded', attach) : attach();
 })();
 </script>
 

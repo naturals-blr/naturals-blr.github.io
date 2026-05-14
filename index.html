@@ -1890,7 +1890,8 @@ data-image-name="20260510_ANNOU_NewLocationNewLo"
 data-campaign-title="New Location, New Look, New Handle! 🌿✨">
 <div class="media-media">
 <img class="media-img"
-src="https://naturals-blr.github.io/campaigns/announcement/03_published/20260510_ANNOU_NewLocationNewLo.jpg"
+src="https://naturals-blr.github.io/campaigns/announcement/03_published/20260510_ANNOU_NewLocationNewLo.png"
+data-img-base="https://naturals-blr.github.io/campaigns/announcement/03_published/20260510_ANNOU_NewLocationNewLo.png"
 alt="New Location, New Look, New Handle! 🌿✨"
 width="400" height="300"
 loading="lazy">
@@ -3324,27 +3325,24 @@ document.querySelectorAll('.reveal').forEach(function(el){io.observe(el);});
 </script>
 
 <script>
-/* Offer image resolver (.jpg → .jpeg → .png) */
+/* Campaign image resolver: .jpg, .jpeg, .png, .webp */
 (function(){
-var EXT=['.jpg','.jpeg','.png'];
-function hasExt(p){ return /\.[a-zA-Z0-9]{2,5}(\?.*)?$/.test(p||''); }
-
-document.querySelectorAll('img.home-offer-img').forEach(function(img){
+var EXT=['.jpg','.jpeg','.png','.webp'];
+function hasExt(path){ return /\.[a-zA-Z0-9]{2,5}(\?.*)?$/.test(path||''); }
+function attach(){
+document.querySelectorAll('img[data-img-base]').forEach(function(img){
 var base=img.getAttribute('data-img-base')||'';
 if(!base) return;
-
-if(hasExt(base)){
-img.src=base;
-return;
-}
-var i=0;
-img.src=base + EXT[i];
+if(hasExt(base)){ img.src=base; return; }
+var i=0; img.src=base + EXT[i];
 img.onerror=function(){
 i++;
-if(i<EXT.length){ img.src=base + EXT[i]; }
-else { img.style.display='none'; }
+if(i<EXT.length) img.src=base + EXT[i];
+else img.style.display='none';
 };
 });
+}
+(document.readyState==='loading') ? document.addEventListener('DOMContentLoaded', attach) : attach();
 })();
 </script>
 

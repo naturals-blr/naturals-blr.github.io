@@ -41,7 +41,7 @@ gtag('config', 'G-6H5YGVGG1Q');
 "description": "Exclusive Luxury Beauty Deals at Hennur, Bangalore",
 "url": "https://naturals-blr.github.io/stores/bangalore/hennur/offers/",
 "category": "Beauty and Grooming Promotions",
-"datePosted": "2026-05-14 21:51:56.973808T09:00:00+05:30",
+"datePosted": "2026-05-14 22:38:58.280406T09:00:00+05:30",
 "provider": {
 "@type": "HairSalon",
 "name": "Naturals Salon & Spa Hennur",
@@ -1187,7 +1187,9 @@ loading="eager">
 <article class="offer-card" data-store-id="" data-store-name="hennur">
 <div class="offer-media">
 <span class="ribbon urgent">Featured</span>
-<img src="/campaigns/offer/03_published/20260428_OFFER_Flat20OffonHair.jpg" alt="Flat 20% Off on Hair Spa" loading="lazy" onclick="openModal(this)">
+<img src="https://naturals-blr.github.io/campaigns/offer/03_published/20260428_OFFER_Flat20OffonHair.jpg"
+data-img-base="https://naturals-blr.github.io/campaigns/offer/03_published/20260428_OFFER_Flat20OffonHair.jpg"
+alt="Flat 20% Off on Hair Spa" loading="lazy" onclick="openModal(this)">
 <div class="img-actions">
 <button class="img-action-btn" onclick="downloadImage(this)" title="Download Image">
 <svg viewBox="0 0 24 24"><path d="M19 9h-4V3H9v6H5l7 7 7-7zM5 18v2h14v-2H5z"/></svg>
@@ -1228,7 +1230,9 @@ loading="eager">
 <article class="offer-card" data-store-id="" data-store-name="hennur">
 <div class="offer-media">
 <span class="ribbon urgent">Featured</span>
-<img src="/campaigns/offer/03_published/20260429_OFFER_GetGlowingSkin–2.jpg" alt="Get Glowing Skin – 25% Off on Facials" loading="lazy" onclick="openModal(this)">
+<img src="https://naturals-blr.github.io/campaigns/offer/03_published/20260429_OFFER_GetGlowingSkin–2.jpg"
+data-img-base="https://naturals-blr.github.io/campaigns/offer/03_published/20260429_OFFER_GetGlowingSkin–2.jpg"
+alt="Get Glowing Skin – 25% Off on Facials" loading="lazy" onclick="openModal(this)">
 <div class="img-actions">
 <button class="img-action-btn" onclick="downloadImage(this)" title="Download Image">
 <svg viewBox="0 0 24 24"><path d="M19 9h-4V3H9v6H5l7 7 7-7zM5 18v2h14v-2H5z"/></svg>
@@ -1269,7 +1273,9 @@ loading="eager">
 <article class="offer-card" data-store-id="" data-store-name="hennur">
 <div class="offer-media">
 <span class="ribbon urgent">Featured</span>
-<img src="/campaigns/offer/03_published/20260510_OFFER_Flat₹1000OffonHa.jpg" alt="Flat ₹1000 Off on Hair Coloring" loading="lazy" onclick="openModal(this)">
+<img src="https://naturals-blr.github.io/campaigns/offer/03_published/20260510_OFFER_Flat₹1000OffonHa.png"
+data-img-base="https://naturals-blr.github.io/campaigns/offer/03_published/20260510_OFFER_Flat₹1000OffonHa.png"
+alt="Flat ₹1000 Off on Hair Coloring" loading="lazy" onclick="openModal(this)">
 <div class="img-actions">
 <button class="img-action-btn" onclick="downloadImage(this)" title="Download Image">
 <svg viewBox="0 0 24 24"><path d="M19 9h-4V3H9v6H5l7 7 7-7zM5 18v2h14v-2H5z"/></svg>
@@ -1320,7 +1326,9 @@ loading="eager">
 <article class="expired-card">
 <div class="expired-media">
 <span class="expired-ribbon">Expired</span>
-<img src="/campaigns/offer/04_archived/20260226_OFFER_Pay20000Get30000.jpg" alt="Pay 20000, Get 30000" loading="lazy">
+<img src="https://naturals-blr.github.io/campaigns/offer/04_archived/20260226_OFFER_Pay20000Get30000.jpg"
+data-img-base="https://naturals-blr.github.io/campaigns/offer/04_archived/20260226_OFFER_Pay20000Get30000"
+alt="Pay 20000, Get 30000" loading="lazy">
 </div>
 <div class="expired-body">
 <div class="expired-title">Pay 20000, Get 30000</div>
@@ -1331,7 +1339,9 @@ loading="eager">
 <article class="expired-card">
 <div class="expired-media">
 <span class="expired-ribbon">Expired</span>
-<img src="/campaigns/offer/04_archived/20260322_OFFER_25percentmorewort.jpg" alt="25 percent more worth" loading="lazy">
+<img src="/campaigns/offer/04_archived/20260322_OFFER_25percentmorewort.jpg"
+data-img-base="/campaigns/offer/04_archived/20260322_OFFER_25percentmorewort.jpg"
+alt="25 percent more worth" loading="lazy">
 </div>
 <div class="expired-body">
 <div class="expired-title">25 percent more worth</div>
@@ -1342,7 +1352,9 @@ loading="eager">
 <article class="expired-card">
 <div class="expired-media">
 <span class="expired-ribbon">Expired</span>
-<img src="/campaigns/offer/04_archived/20260409_OFFER_ImagineenjoyingPre.jpg" alt="Imagine enjoying Premium Hair & Skin Services worth ₹10,000" loading="lazy">
+<img src="/campaigns/offer/04_archived/20260409_OFFER_ImagineenjoyingPre.jpg"
+data-img-base="/campaigns/offer/04_archived/20260409_OFFER_ImagineenjoyingPre.jpg"
+alt="Imagine enjoying Premium Hair & Skin Services worth ₹10,000" loading="lazy">
 </div>
 <div class="expired-body">
 <div class="expired-title">Imagine enjoying Premium Hair & Skin Services worth ₹10,000</div>
@@ -1560,6 +1572,28 @@ trigger.addEventListener('click', handleTriggerClick);
 });
 })();
 </script>
+<script>
+/* Campaign image resolver: .jpg, .jpeg, .png, .webp */
+(function(){
+var EXT=['.jpg','.jpeg','.png','.webp'];
+function hasExt(path){ return /\.[a-zA-Z0-9]{2,5}(\?.*)?$/.test(path||''); }
+function attach(){
+document.querySelectorAll('img[data-img-base]').forEach(function(img){
+var base=img.getAttribute('data-img-base')||'';
+if(!base) return;
+if(hasExt(base)){ img.src=base; return; }
+var i=0; img.src=base + EXT[i];
+img.onerror=function(){
+i++;
+if(i<EXT.length) img.src=base + EXT[i];
+else img.style.display='none';
+};
+});
+}
+(document.readyState==='loading') ? document.addEventListener('DOMContentLoaded', attach) : attach();
+})();
+</script>
+
 <script>
 // Image Modal Functions
 let currentImageIndex = 0;

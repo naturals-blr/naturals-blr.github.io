@@ -1902,6 +1902,7 @@ data-image-name="20260428_OFFER_Flat20OffonHair"
 <div class="ribbon" style="display:none;"></div>
 <img class="offer-img"
 src="https://naturals-blr.github.io/campaigns/offer/03_published/20260428_OFFER_Flat20OffonHair.jpg"
+data-img-base="https://naturals-blr.github.io/campaigns/offer/03_published/20260428_OFFER_Flat20OffonHair.jpg"
 alt="Flat 20% Off on Hair Spa"
 width="400" height="300" loading="lazy">
 <div class="img-actions">
@@ -1931,6 +1932,7 @@ data-image-name="20260429_OFFER_GetGlowingSkin–2"
 <div class="ribbon" style="display:none;"></div>
 <img class="offer-img"
 src="https://naturals-blr.github.io/campaigns/offer/03_published/20260429_OFFER_GetGlowingSkin–2.jpg"
+data-img-base="https://naturals-blr.github.io/campaigns/offer/03_published/20260429_OFFER_GetGlowingSkin–2.jpg"
 alt="Get Glowing Skin – 25% Off on Facials"
 width="400" height="300" loading="lazy">
 <div class="img-actions">
@@ -3042,11 +3044,12 @@ closeReviewsModal();
 </div>
 
 <script>
+/* Campaign image resolver: .jpg, .jpeg, .png, .webp */
 (function(){
-var EXT=['.jpg','.jpeg','.png'];
+var EXT=['.jpg','.jpeg','.png','.webp'];
 function hasExt(path){ return /\.[a-zA-Z0-9]{2,5}(\?.*)?$/.test(path||''); }
 function attach(){
-document.querySelectorAll('img.offer-img').forEach(function(img){
+document.querySelectorAll('img[data-img-base]').forEach(function(img){
 var base=img.getAttribute('data-img-base')||'';
 if(!base) return;
 if(hasExt(base)){ img.src=base; return; }
@@ -3060,7 +3063,9 @@ else img.style.display='none';
 }
 (document.readyState==='loading') ? document.addEventListener('DOMContentLoaded', attach) : attach();
 })();
+</script>
 
+<script>
 /* Store Open Status System - Global timezone-aware status tracking */
 window.store_open_status = {}; // Global object to store status for all stores
 
