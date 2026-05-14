@@ -1416,18 +1416,12 @@ trackEvent("show_qr", store, platform);
 
 function closeQR() {
 document.getElementById("qrOverlay").style.display = "none";
-
-// Handle back button - if modal is open, go back to previous state
-if (window.location.hash === "#qr-modal") {
-history.back();
-}
 }
 
 // Mobile back-button logic
-window.addEventListener('popstate', function(event) {
-// Check if we're coming back from the modal state
-if (event.state && event.state.modalOpen) {
-// Close the modal
+window.addEventListener('popstate', function() {
+const overlay = document.getElementById("qrOverlay");
+if (overlay && overlay.style.display === "flex") {
 document.getElementById("qrOverlay").style.display = "none";
 }
 });
@@ -1450,18 +1444,12 @@ showQR(img, store, platform);
 
 function closeQR() {
 document.getElementById("qrOverlay").style.display = "none";
-
-// Handle back button - if modal is open, go back to previous state
-if (window.location.hash === "#qr-modal") {
-history.back();
-}
 }
 
 // Mobile back-button logic
-window.addEventListener('popstate', function(event) {
-// Check if we're coming back from the modal state
-if (event.state && event.state.modalOpen) {
-// Close the modal
+window.addEventListener('popstate', function() {
+const overlay = document.getElementById("qrOverlay");
+if (overlay && overlay.style.display === "flex") {
 document.getElementById("qrOverlay").style.display = "none";
 }
 });

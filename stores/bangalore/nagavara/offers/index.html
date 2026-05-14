@@ -41,7 +41,7 @@ gtag('config', 'G-6H5YGVGG1Q');
 "description": "Exclusive Luxury Beauty Deals at Nagavara, Bangalore",
 "url": "https://naturals-blr.github.io/stores/bangalore/nagavara/offers/",
 "category": "Beauty and Grooming Promotions",
-"datePosted": "2026-05-15 01:11:32.204382T09:00:00+05:30",
+"datePosted": "2026-05-15 01:46:26.567737T09:00:00+05:30",
 "provider": {
 "@type": "HairSalon",
 "name": "Naturals Salon & Spa Nagavara",
@@ -200,7 +200,7 @@ a{text-decoration:none;color:inherit;}img{display:block;width:100%;object-fit:co
 .offer-card{background:#fff;overflow:hidden;transition:box-shadow 0.25s,transform 0.25s;border:1px solid rgba(0,0,0,0.06);min-height:360px;display:flex;flex-direction:column;border-radius:14px;}
 .offer-card:hover{box-shadow:0 10px 34px rgba(0,0,0,0.10);transform:translateY(-2px);}
 .offer-media{height:200px;position:relative;background:linear-gradient(135deg,var(--dark) 0%,var(--green) 100%);overflow:hidden;}
-.offer-media img{width:100%;height:100%;object-fit:cover;transition:transform 0.7s ease;cursor:zoom-in;}
+.offer-media img,.announcement-media img{width:100%;height:100%;object-fit:cover;transition:transform 0.7s ease;cursor:zoom-in;}
 .offer-card:hover .offer-media img{transform:scale(1.04);}
 .ribbon{position:absolute;top:14px;left:14px;z-index:2;background:rgba(201,168,76,0.92);color:var(--dark);font-size:9px;letter-spacing:2px;text-transform:uppercase;font-weight:800;padding:7px 10px;border-radius:999px;box-shadow:0 8px 18px rgba(0,0,0,0.18);}
 .ribbon.urgent{background:rgba(217,48,37,0.92);color:#fff;}
@@ -210,8 +210,6 @@ a{text-decoration:none;color:inherit;}img{display:block;width:100%;object-fit:co
 .offer-title{font-family:'Cormorant Garamond',serif;font-size:20px;font-weight:400;margin-bottom:8px;color:var(--text);line-height:1.2;}
 .offer-details{font-size:12px;color:var(--text-mid);line-height:1.7;font-weight:300;margin-bottom:12px;}
 .offer-details.clamp{display:-webkit-box;-webkit-line-clamp:1;-webkit-box-orient:vertical;overflow:hidden;}
-.offer-more{display:inline-flex;gap:6px;align-items:center;font-size:11px;color:var(--green-mid);cursor:pointer;margin-top:-6px;margin-bottom:12px;}
-.offer-more:hover{text-decoration:underline;}
 .offer-footer{margin-top:auto;display:flex;justify-content:space-between;align-items:center;gap:10px;flex-wrap:wrap;padding-top:12px;border-top:1px solid rgba(0,0,0,0.06);}
 .offer-valid{font-size:11px;color:var(--green-soft);font-weight:800;white-space:nowrap;}
 .offer-ctas{display:flex;gap:8px;align-items:center;flex-wrap:wrap;}
@@ -268,7 +266,7 @@ a{text-decoration:none;color:inherit;}img{display:block;width:100%;object-fit:co
 .expired-card{background:#fff;border:1px solid rgba(0,0,0,0.06);border-radius:14px;overflow:hidden;display:flex;flex-direction:column;opacity:0.82;}
 .expired-card:hover{opacity:1;box-shadow:0 6px 20px rgba(0,0,0,0.08);}
 .expired-media{height:180px;position:relative;background:#ddd;overflow:hidden;}
-.expired-media img{width:100%;height:100%;object-fit:cover;filter:grayscale(60%);transition:filter 0.3s;}
+.expired-media img{width:100%;height:100%;object-fit:cover;filter:grayscale(60%);transition:filter 0.3s;cursor:zoom-in;}
 .expired-card:hover .expired-media img{filter:grayscale(20%);}
 .expired-ribbon{position:absolute;top:12px;left:12px;z-index:2;background:rgba(108,117,125,0.92);color:#fff;font-size:9px;letter-spacing:2px;text-transform:uppercase;font-weight:800;padding:6px 10px;border-radius:999px;}
 .expired-body{padding:16px;display:flex;flex-direction:column;flex:1;}
@@ -338,6 +336,190 @@ footer{background:#080f0b;}
 .img-action-btn{width:36px;height:36px;border-radius:10px;background:rgba(255,255,255,0.95);border:1px solid rgba(0,0,0,0.10);cursor:pointer;display:flex;align-items:center;justify-content:center;transition:transform 0.2s,box-shadow 0.2s;}
 .img-action-btn:hover{transform:translateY(-2px);box-shadow:0 4px 12px rgba(0,0,0,0.15);}
 .img-action-btn svg{width:18px;height:18px;fill:var(--text);}
+</style>
+
+<style>
+/* Shared campaign tile sizing and inline description expansion */
+.home-offers-grid,
+.media-grid,
+.offers-grid,
+.announcements-grid,
+.expired-grid{
+align-items:stretch;
+}
+
+.announcements-grid{
+display:grid;
+grid-template-columns:repeat(3,1fr);
+gap:20px;
+margin-bottom:32px;
+}
+
+.hoc,
+.media-card,
+.offer-card,
+.announcement-card,
+.expired-card{
+min-height:420px;
+}
+
+.announcement-card{
+background:#fff;
+overflow:hidden;
+transition:box-shadow 0.25s,transform 0.25s;
+border:1px solid rgba(0,0,0,0.06);
+display:flex;
+flex-direction:column;
+border-radius:14px;
+}
+
+.announcement-card:hover{
+box-shadow:0 10px 34px rgba(0,0,0,0.10);
+transform:translateY(-2px);
+}
+
+.hoc-media,
+.media-media,
+.offer-media,
+.announcement-media,
+.expired-media{
+height:220px !important;
+min-height:220px;
+aspect-ratio:4 / 3;
+}
+
+.hoc-media img,
+.media-media img,
+.offer-media img,
+.announcement-media img,
+.expired-media img{
+cursor:zoom-in;
+}
+
+.announcement-card:hover .announcement-media img{
+transform:scale(1.04);
+}
+
+.hoc-body,
+.media-body,
+.offer-body,
+.announcement-body,
+.expired-body{
+display:flex;
+flex-direction:column;
+flex:1;
+}
+
+.announcement-body{
+padding:18px 18px 16px;
+}
+
+.announcement-badge{
+font-size:9px;
+letter-spacing:3px;
+text-transform:uppercase;
+color:var(--gold);
+font-weight:700;
+margin-bottom:8px;
+}
+
+.announcement-title{
+font-family:'Cormorant Garamond',serif;
+font-size:20px;
+font-weight:400;
+margin-bottom:8px;
+color:var(--text);
+line-height:1.2;
+}
+
+.announcement-details{
+font-size:12px;
+color:var(--text-mid);
+line-height:1.7;
+font-weight:300;
+margin-bottom:12px;
+}
+
+.announcement-footer{
+margin-top:auto;
+padding-top:12px;
+border-top:1px solid rgba(0,0,0,0.06);
+}
+
+.announcement-valid{
+font-size:11px;
+color:var(--green-soft);
+font-weight:800;
+}
+
+.campaign-description{
+display:-webkit-box !important;
+-webkit-line-clamp:2;
+-webkit-box-orient:vertical;
+overflow:hidden;
+}
+
+.campaign-description.is-expanded{
+display:block !important;
+-webkit-line-clamp:unset;
+overflow:visible;
+}
+
+.campaign-desc-toggle{
+align-self:flex-start;
+margin:-2px 0 12px;
+padding:0;
+border:0;
+background:transparent;
+color:var(--green-soft);
+font:600 11px/1.2 'Jost',sans-serif;
+letter-spacing:1.2px;
+text-transform:uppercase;
+cursor:pointer;
+}
+
+.campaign-desc-toggle:hover{
+color:var(--gold);
+text-decoration:underline;
+}
+
+.hoc .campaign-desc-toggle,
+.media-card .campaign-desc-toggle{
+color:var(--green-soft);
+}
+
+.expired-card .campaign-desc-toggle{
+color:#777;
+}
+
+@media(max-width:900px){
+.announcements-grid{
+grid-template-columns:1fr 1fr;
+}
+}
+
+@media(max-width:600px){
+.announcements-grid{
+grid-template-columns:1fr;
+}
+
+.hoc,
+.media-card,
+.offer-card,
+.announcement-card,
+.expired-card{
+min-height:400px;
+}
+
+.hoc-media,
+.media-media,
+.offer-media,
+.announcement-media,
+.expired-media{
+height:200px !important;
+min-height:200px;
+}
+}
 </style>
 
 </head>
@@ -724,11 +906,16 @@ function openDrawer(){
 body.classList.add('drawer-open');
 document.documentElement.style.overflow = 'hidden'; // ← add this
 hamburger && hamburger.setAttribute('aria-expanded','true');
+if(!window._drawerHistoryPushed){
+history.pushState({ drawerOpen: true }, '', window.location.href);
+window._drawerHistoryPushed = true;
+}
 }
 function closeDrawer(){
 body.classList.remove('drawer-open');
 document.documentElement.style.overflow = ''; // ← add this
 hamburger && hamburger.setAttribute('aria-expanded','false');
+window._drawerHistoryPushed = false;
 }
 function toggle(){ body.classList.contains('drawer-open') ? closeDrawer() : openDrawer(); }
 
@@ -745,6 +932,12 @@ if(a) closeDrawer();
 
 document.addEventListener('keydown', function(e){
 if(e.key==='Escape') closeDrawer();
+});
+window.addEventListener('popstate', function(){
+if(body.classList.contains('drawer-open')){
+window._drawerHistoryPushed = false;
+closeDrawer();
+}
 });
 })();
 </script>
@@ -899,15 +1092,56 @@ applyStoreModalScrollRule();
 </script>
 
 <script>
+(function(){
+if(window.naturalsModalHistoryReady) return;
+window.naturalsModalHistoryReady = true;
+window.naturalsModalStack = [];
+
+window.naturalsPushModalState = function(id, closeFn){
+if(!id || typeof closeFn !== 'function') return;
+window.naturalsModalStack = window.naturalsModalStack.filter(function(item){ return item.id !== id; });
+window.naturalsModalStack.push({ id: id, closeFn: closeFn });
+if(!(history.state && history.state.naturalsModal === id)){
+history.pushState({ naturalsModal: id }, '', window.location.href);
+}
+};
+
+window.naturalsClearModalState = function(id){
+window.naturalsModalStack = window.naturalsModalStack.filter(function(item){ return item.id !== id; });
+};
+
+function closeTopModalFromHistory(){
+var item = window.naturalsModalStack.pop();
+if(!item) return false;
+item.closeFn(true);
+return true;
+}
+
+window.addEventListener('popstate', function(){
+closeTopModalFromHistory();
+});
+
+document.addEventListener('keydown', function(e){
+if(e.key !== 'Escape') return;
+if(!window.naturalsModalStack.length) return;
+e.preventDefault();
+closeTopModalFromHistory();
+});
+})();
+
 function openStorePicker(){
 document.getElementById('store-modal-overlay').style.display='block';
 document.getElementById('store-modal').style.display='block';
 document.body.style.overflow='hidden';
+if(window.naturalsPushModalState){
+window.naturalsPushModalState('store-picker', function(){ closeStorePicker(true); });
 }
-function closeStorePicker(){
+}
+function closeStorePicker(fromHistory){
 document.getElementById('store-modal-overlay').style.display='none';
 document.getElementById('store-modal').style.display='none';
 document.body.style.overflow='';
+if(!fromHistory && window.naturalsClearModalState) window.naturalsClearModalState('store-picker');
 }
 
 /* Ensure sticky buttons use selected store on non-store pages */
@@ -1083,6 +1317,8 @@ position:fixed;
 top:0;
 left:0;
 right:0;
+width:100%;
+max-width:100vw;
 height:78px;
 background:var(--nav-bg); /* ALWAYS dark */
 z-index:9999;
@@ -1096,29 +1332,35 @@ padding:0 40px;
 display:flex;
 align-items:center;
 justify-content:space-between;
-max-width:1440px;
+max-width:min(1440px, 100vw);
 margin:0 auto;
 width:100%;
 min-width:0;
 }
 
-.hdr-logo{display:flex;align-items:center;gap:10px;flex-shrink:0;}
+.hdr-logo{display:flex;align-items:center;gap:10px;flex-shrink:1;min-width:0;}
 .hdr-logo img{
 height:68px !important;
 width:auto !important;
 max-height:68px;
+max-width:min(200px, calc(100vw - 112px));
 filter:brightness(0) invert(1);
 }
 @media(max-width:768px){
 #site-header, .hdr-inner{height:58px;}
 .hdr-inner{padding:0 16px;}
-.hdr-logo img{height:48px !important; max-height:48px;}
+.hdr-logo img{height:48px !important; max-height:48px; max-width:calc(100vw - 88px);}
+}
+@media(max-width:480px){
+.hdr-inner{padding:0 12px;}
+.hdr-logo img{max-width:calc(100vw - 76px);}
 }
 
 /* Hamburger (new look) */
 #hamburger{
 position:relative;
 z-index:10002;
+flex-shrink:0;
 width:46px;
 height:42px;
 border-radius:10px;
@@ -1202,7 +1444,8 @@ alt="Flat 20% Off on Hair Spa" loading="lazy" onclick="openModal(this)">
 <div class="offer-body">
 <div class="offer-badge">OFFER</div>
 <h3 class="offer-title">Flat 20% Off on Hair Spa</h3>
-<p class="offer-details clamp">Pamper your hair with our nourishing Hair Spa treatment and enjoy 20% off. Limited time offer.</p>
+<p class="offer-details campaign-description">Pamper your hair with our nourishing Hair Spa treatment and enjoy 20% off. Limited time offer.</p>
+<button class="campaign-desc-toggle" type="button" aria-expanded="false" onclick="toggleCampaignDescription(this)">+ More</button>
 <div class="offer-footer">
 <span class="offer-valid">Valid until 15-May-2026</span>
 <div class="offer-ctas">
@@ -1245,7 +1488,7 @@ alt="Get Glowing Skin – 25% Off on Facials" loading="lazy" onclick="openModal(
 <div class="offer-body">
 <div class="offer-badge">OFFER</div>
 <h3 class="offer-title">Get Glowing Skin – 25% Off on Facials</h3>
-<p class="offer-details clamp">Rejuvenate your skin with our premium facial services and get 25% off. Book today.</p>
+<p class="offer-details campaign-description">Rejuvenate your skin with our premium facial services and get 25% off. Book today.</p>
 <div class="offer-footer">
 <span class="offer-valid">Valid until 15-May-2026</span>
 <div class="offer-ctas">
@@ -1288,7 +1531,7 @@ alt="Flat ₹1000 Off on Hair Coloring" loading="lazy" onclick="openModal(this)"
 <div class="offer-body">
 <div class="offer-badge">OFFER</div>
 <h3 class="offer-title">Flat ₹1000 Off on Hair Coloring</h3>
-<p class="offer-details clamp">Add a fresh new look with our expert hair coloring services and get flat ₹1000 off today.</p>
+<p class="offer-details campaign-description">Add a fresh new look with our expert hair coloring services and get flat ₹1000 off today.</p>
 <div class="offer-footer">
 <span class="offer-valid">Valid until 30-May-2026</span>
 <div class="offer-ctas">
@@ -1317,11 +1560,11 @@ alt="Flat ₹1000 Off on Hair Coloring" loading="lazy" onclick="openModal(this)"
 </main>
 
 <div id="img-modal-overlay" onclick="closeModal()"></div>
-<div id="img-modal" onclick="closeModal()">
+<div id="img-modal" role="dialog" aria-modal="true" aria-label="Campaign image gallery" onclick="closeModal()">
 <div id="img-modal-inner" onclick="event.stopPropagation()">
 <button id="img-close" onclick="closeModal()">&times;</button>
 <button id="img-prev" onclick="prevImage()">&larr;</button>
-<img id="modal-img" src="" alt="">
+<img id="modal-img" src="" alt="Campaign image">
 <button id="img-next" onclick="nextImage()">&rarr;</button>
 </div>
 </div>
@@ -1546,18 +1789,35 @@ else img.style.display='none';
 </script>
 
 <script>
-// Image Modal Functions
+function toggleCampaignDescription(btn){
+var card = btn.closest('.hoc, .media-card, .offer-card, .announcement-card, .expired-card');
+if(!card) return;
+var desc = card.querySelector('.campaign-description');
+if(!desc) return;
+var expanded = desc.classList.toggle('is-expanded');
+btn.setAttribute('aria-expanded', expanded ? 'true' : 'false');
+btn.textContent = expanded ? '- Less' : '+ More';
+}
+</script>
+
+<script>
+// Campaign image gallery modal
 let currentImageIndex = 0;
 let allImages = [];
+
+function getCampaignImages() {
+return Array.from(document.querySelectorAll('.announcement-media img, .offer-media img, .expired-media img'));
+}
 
 function openModal(img) {
 const overlay = document.getElementById('img-modal-overlay');
 const modal = document.getElementById('img-modal');
 const modalImg = document.getElementById('modal-img');
 
-// Collect all images
-allImages = Array.from(document.querySelectorAll('.offer-media img'));
+allImages = getCampaignImages().filter(function(image) { return !!image.src; });
+if (!img || !img.src || !allImages.length) return;
 currentImageIndex = allImages.indexOf(img);
+if (currentImageIndex < 0) currentImageIndex = 0;
 
 modalImg.src = img.src;
 overlay.style.display = 'block';
@@ -1571,11 +1831,21 @@ window._modalHistoryPushed = true;
 }
 }
 
+document.addEventListener('DOMContentLoaded', function() {
+getCampaignImages().forEach(function(img) {
+if (!img.getAttribute('onclick')) {
+img.addEventListener('click', function() { openModal(img); });
+}
+});
+});
+
 function closeModal() {
 const overlay = document.getElementById('img-modal-overlay');
 const modal = document.getElementById('img-modal');
+const modalImg = document.getElementById('modal-img');
 overlay.style.display = 'none';
 modal.style.display = 'none';
+modalImg.src = '';
 document.body.style.overflow = '';
 
 // Reset history state flag
@@ -1583,11 +1853,13 @@ window._modalHistoryPushed = false;
 }
 
 function prevImage() {
+if (!allImages.length) return;
 currentImageIndex = (currentImageIndex - 1 + allImages.length) % allImages.length;
 document.getElementById('modal-img').src = allImages[currentImageIndex].src;
 }
 
 function nextImage() {
+if (!allImages.length) return;
 currentImageIndex = (currentImageIndex + 1) % allImages.length;
 document.getElementById('modal-img').src = allImages[currentImageIndex].src;
 }
@@ -1814,15 +2086,56 @@ applyStoreModalScrollRule();
 </script>
 
 <script>
+(function(){
+if(window.naturalsModalHistoryReady) return;
+window.naturalsModalHistoryReady = true;
+window.naturalsModalStack = [];
+
+window.naturalsPushModalState = function(id, closeFn){
+if(!id || typeof closeFn !== 'function') return;
+window.naturalsModalStack = window.naturalsModalStack.filter(function(item){ return item.id !== id; });
+window.naturalsModalStack.push({ id: id, closeFn: closeFn });
+if(!(history.state && history.state.naturalsModal === id)){
+history.pushState({ naturalsModal: id }, '', window.location.href);
+}
+};
+
+window.naturalsClearModalState = function(id){
+window.naturalsModalStack = window.naturalsModalStack.filter(function(item){ return item.id !== id; });
+};
+
+function closeTopModalFromHistory(){
+var item = window.naturalsModalStack.pop();
+if(!item) return false;
+item.closeFn(true);
+return true;
+}
+
+window.addEventListener('popstate', function(){
+closeTopModalFromHistory();
+});
+
+document.addEventListener('keydown', function(e){
+if(e.key !== 'Escape') return;
+if(!window.naturalsModalStack.length) return;
+e.preventDefault();
+closeTopModalFromHistory();
+});
+})();
+
 function openStorePicker(){
 document.getElementById('store-modal-overlay').style.display='block';
 document.getElementById('store-modal').style.display='block';
 document.body.style.overflow='hidden';
+if(window.naturalsPushModalState){
+window.naturalsPushModalState('store-picker', function(){ closeStorePicker(true); });
 }
-function closeStorePicker(){
+}
+function closeStorePicker(fromHistory){
 document.getElementById('store-modal-overlay').style.display='none';
 document.getElementById('store-modal').style.display='none';
 document.body.style.overflow='';
+if(!fromHistory && window.naturalsClearModalState) window.naturalsClearModalState('store-picker');
 }
 
 /* Ensure sticky buttons use selected store on non-store pages */
