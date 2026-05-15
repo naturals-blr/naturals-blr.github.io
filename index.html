@@ -239,21 +239,21 @@ a{text-decoration:none;color:inherit;}
 .stores-sec .sec-hdr h2{color:#fff;}
 .stores-sec .sec-hdr h2 em{color:var(--green-soft);}
 .stores-sec .sec-hdr p{color:rgba(255,255,255,0.4);}
-.st-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;max-width:1100px;margin:0 auto;}
-.st-card{background:#fff;overflow:hidden;transition:transform 0.3s,box-shadow 0.3s;display:flex;flex-direction:column;border:1px solid rgba(0,0,0,0.08);border-radius:14px;box-shadow:0 2px 12px rgba(0,0,0,0.07);min-height:300px;}
-.st-card:hover{transform:translateY(-4px);box-shadow:0 12px 48px rgba(0,0,0,0.3);}
+.st-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:16px;max-width:1120px;margin:0 auto;}
+.st-card{background:#fff;overflow:hidden;transition:transform 0.3s,box-shadow 0.3s,border-color 0.3s;display:flex;flex-direction:column;border:1px solid rgba(201,168,76,0.18);border-radius:16px;box-shadow:0 14px 36px rgba(0,0,0,0.16);min-height:370px;position:relative;}
+.st-card:hover{transform:translateY(-5px);box-shadow:0 22px 60px rgba(0,0,0,0.34);border-color:rgba(201,168,76,0.42);}
 .st-card-head{
-background:var(--dark);padding:20px 22px;border-bottom:2px solid var(--green);border-radius:14px 14px 0 0;
-display:block;text-decoration:none;transition:background 0.2s;
+background:linear-gradient(135deg,#0b1812 0%,#183328 58%,#23372d 100%);padding:22px 22px 18px;border-bottom:1px solid rgba(201,168,76,0.45);border-radius:16px 16px 0 0;
+display:block;text-decoration:none;transition:background 0.2s;position:relative;min-height:126px;
 }
 .st-card-head:hover{background:#1e2b24;}
 [data-theme="naturals"] .st-card-head{border-bottom-color:var(--green-mid);}
-.st-card-num{font-family:'Cormorant Garamond',serif;font-size:13px;color:rgba(255,255,255,0.2);letter-spacing:3px;margin-bottom:4px;}
-.st-card-name{font-family:'Cormorant Garamond',serif;font-size:20px;color:#fff;font-weight:400;line-height:1.1;}
-.st-card-area{font-size:9px;letter-spacing:2px;text-transform:uppercase;color:var(--gold);margin-top:3px;}
-.st-card-body{padding:16px 22px 20px;flex:1;display:flex;flex-direction:column;}
-.st-card-addr{font-size:11px;color:var(--text-light);line-height:1.5;flex:1;margin-bottom:14px;}
-.st-neighborhood{border:1px solid rgba(0,0,0,0.08);border-radius:12px;margin:0 0 14px;background:#fbfaf7;overflow:hidden;}
+.st-card-num{display:inline-flex;align-items:center;border:1px solid rgba(255,255,255,0.14);border-radius:999px;padding:5px 9px;font-size:9px;color:rgba(255,255,255,0.64);letter-spacing:2px;text-transform:uppercase;margin-bottom:14px;}
+.st-card-name{font-family:'Cormorant Garamond',serif;font-size:25px;color:#fff;font-weight:400;line-height:1.05;max-width:76%;}
+.st-card-area{font-size:9px;letter-spacing:2px;text-transform:uppercase;color:var(--gold);margin-top:8px;font-weight:700;}
+.st-card-body{padding:18px 18px 20px;flex:1;display:flex;flex-direction:column;}
+.st-card-addr{font-size:12px;color:var(--text-mid);line-height:1.55;margin-bottom:14px;background:#fbfaf7;border:1px solid rgba(0,0,0,0.06);border-radius:12px;padding:12px 12px;min-height:74px;}
+.st-neighborhood{border:1px solid rgba(0,0,0,0.08);border-radius:12px;margin:14px 0 0;background:#fbfaf7;overflow:hidden;}
 .st-neighborhood summary{list-style:none;cursor:pointer;padding:10px 12px;font-size:10px;letter-spacing:1.5px;text-transform:uppercase;font-weight:800;color:var(--green-mid);display:flex;justify-content:space-between;align-items:center;gap:12px;}
 .st-neighborhood summary::-webkit-details-marker{display:none;}
 .st-neighborhood summary::after{content:'+';font-size:16px;color:var(--gold);line-height:1;}
@@ -262,8 +262,18 @@ display:block;text-decoration:none;transition:background 0.2s;
 .st-neighborhood-body strong{display:block;color:var(--text);font-weight:600;margin-bottom:8px;}
 .st-landmarks{display:flex;flex-wrap:wrap;gap:6px;margin-top:8px;}
 .st-landmarks span{border:1px solid rgba(0,0,0,0.08);border-radius:999px;padding:4px 8px;background:#fff;font-size:10px;color:var(--text-mid);}
-.st-card-actions{display:flex;flex-direction:column;gap:8px;}
-.st-icon-row{display:flex;gap:10px;justify-content:center;margin-bottom:10px;}
+.st-card-actions{display:flex;flex-direction:column;gap:10px;margin-top:auto;}
+.st-primary-row{display:grid;grid-template-columns:1fr 40px 40px;gap:8px;align-items:center;}
+.st-icon-row{display:flex;gap:10px;justify-content:center;}
+.st-secondary-row{margin-top:0;}
+.st-book-primary{
+min-height:40px;border-radius:12px;background:var(--gold);color:var(--dark);
+display:inline-flex;align-items:center;justify-content:center;gap:8px;
+padding:0 13px;font-size:10px;letter-spacing:1.1px;text-transform:uppercase;font-weight:800;
+border:1px solid rgba(201,168,76,0.58);text-decoration:none;transition:transform 0.2s,box-shadow 0.2s,opacity 0.2s;
+}
+.st-book-primary svg{width:16px;height:16px;fill:currentColor;}
+.st-book-primary:hover{transform:translateY(-1px);box-shadow:0 10px 22px rgba(201,168,76,0.28);}
 .st-btn{
 width:40px;height:40px;border-radius:12px;
 display:inline-flex;align-items:center;justify-content:center;
@@ -288,7 +298,7 @@ text-decoration:none;color:#fff;font-size:18px;
 .st-info-row{display:flex;justify-content:center;}
 .st-view-btn{
 border:1px solid rgba(0,0,0,0.14);color:var(--text-mid);
-padding:9px 28px;font-size:10px;min-height:36px;
+padding:9px 18px;font-size:10px;min-height:36px;width:100%;justify-content:center;
 letter-spacing:1.5px;text-transform:uppercase;font-weight:700;
 display:inline-flex;align-items:center;gap:6px;
 transition:all 0.2s;border-radius:10px;background:#fff;text-decoration:none;
@@ -970,13 +980,15 @@ readMoreLink.textContent = textElement.classList.contains('expanded') ? 'Read Le
 }
 
 /* Open Now Badge */
-.st-open-now{position:absolute;top:12px;right:12px;z-index:2;}
-.st-open-now .status-dot{width:6px;height:6px;border-radius:50%;background:var(--text-light);display:inline-block;margin-right:4px;}
-.st-open-now .status-text{font-size:10px;font-weight:600;color:var(--text-mid);display:inline-block;}
-.st-open-now.status-open .status-dot{background:#28a745;}
-.st-open-now.status-open .status-text{color:#28a745;}
-.st-open-now.status-closed .status-dot{background:#dc3545;}
-.st-open-now.status-closed .status-text{color:#dc3545;}
+.st-open-now{position:absolute;top:14px;right:14px;z-index:2;display:inline-flex;align-items:center;gap:6px;padding:6px 9px;border-radius:999px;background:rgba(255,255,255,0.10);border:1px solid rgba(255,255,255,0.16);backdrop-filter:blur(8px);}
+.st-open-now .status-dot{width:7px;height:7px;border-radius:50%;background:rgba(255,255,255,0.45);display:inline-block;}
+.st-open-now .status-text{font-size:9px;font-weight:800;color:rgba(255,255,255,0.72);display:inline-block;letter-spacing:1px;text-transform:uppercase;}
+.st-open-now.status-open{background:rgba(40,167,69,0.14);border-color:rgba(40,167,69,0.30);}
+.st-open-now.status-open .status-dot{background:#31d06d;}
+.st-open-now.status-open .status-text{color:#dff8e8;}
+.st-open-now.status-closed{background:rgba(220,53,69,0.14);border-color:rgba(220,53,69,0.30);}
+.st-open-now.status-closed .status-dot{background:#ff6b7a;}
+.st-open-now.status-closed .status-text{color:#ffe3e6;}
 </style>
 </head>
 <body>
@@ -1884,9 +1896,9 @@ Choose Store</button>
 <div class="st-grid">
 <div class="st-card reveal">
 <a href="/stores/bangalore/jp-nagar-5th-phase/" class="st-card-head" aria-label="View JP Nagar 5th Phase">
-<div class="st-card-num">01</div>
+<div class="st-card-num">Location 01</div>
 <div class="st-card-name">JP Nagar 5th Phase</div>
-<div class="st-card-area">JP Nagar 5th Phase &middot; </div>
+<div class="st-card-area">Bangalore &middot; </div>
 <div class="st-open-now" data-store-id="" data-hours="10:00 AM – 9:00 PM" data-sat-hours="10:00 AM – 9:00 PM" data-sun-hours="10:00 AM – 9:00 PM">
 <span class="status-dot"></span>
 <span class="status-text">Checking...</span>
@@ -1896,6 +1908,29 @@ Choose Store</button>
 <div class="st-card-body">
 <div class="st-card-addr"><svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="var(--gold)" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-map-pin" style="flex-shrink:0" aria-hidden="true"><path d="M20 10c0 6-8 12-8 12s-8-6-8-12a8 8 0 0 1 16 0Z"/><circle cx="12" cy="10" r="3"/></svg>
 </div>
+
+<div class="st-card-actions">
+<div class="st-primary-row">
+<a class="st-book-primary" href="https://naturals-salon-jpnagar5phase.setmore.com/" target="_blank" rel="noopener" aria-label="Book at JP Nagar 5th Phase"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-calendar" style="flex-shrink:0" aria-hidden="true"><rect width="18" height="18" x="3" y="4" rx="2" ry="2"/><path d="M16 2v4"/><path d="M8 2v4"/><path d="M3 10h18"/></svg>
+Book</a>
+<a class="st-btn st-btn-wa" href="https://wa.me/+918792642299" target="_blank" rel="noopener" aria-label="WhatsApp JP Nagar 5th Phase"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="#25D366" width="18" height="18" style="flex-shrink:0" aria-hidden="true"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+</a>
+<a class="st-btn st-btn-call" href="tel:+918792642299" aria-label="Call JP Nagar 5th Phase"><svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-phone" style="flex-shrink:0" aria-hidden="true"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
+</a>
+</div>
+<div class="st-icon-row st-secondary-row">
+<a class="st-btn st-btn-ig" href="https://instagram.com/Naturals.Salon.JPNagar5Phase/" target="_blank" rel="noopener" aria-label="JP Nagar 5th Phase on Instagram"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="18" height="18" aria-hidden="true" style="flex-shrink:0"><defs><linearGradient id="ig-grad" x1="0%" y1="100%" x2="100%" y2="0%"><stop offset="0%" stop-color="#FFDC80"/><stop offset="25%" stop-color="#FCAF45"/><stop offset="50%" stop-color="#F77737"/><stop offset="75%" stop-color="#C13584"/><stop offset="100%" stop-color="#833AB4"/></linearGradient></defs><path fill="url(#ig-grad)" d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zM12 0C8.741 0 8.333.014 7.053.072 2.695.272.273 2.69.073 7.052.014 8.333 0 8.741 0 12c0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98C8.333 23.986 8.741 24 12 24c3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98C15.668.014 15.259 0 12 0zm0 5.838a6.162 6.162 0 100 12.324 6.162 6.162 0 000-12.324zM12 16a4 4 0 110-8 4 4 0 010 8zm6.406-11.845a1.44 1.44 0 100 2.881 1.44 1.44 0 000-2.881z"/></svg>
+</a>
+<a class="st-btn st-btn-fb" href="https://facebook.com/Naturals.Salon.JPNagar5Phase" target="_blank" rel="noopener" aria-label="JP Nagar 5th Phase on Facebook"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="18" height="18" fill="#1877F2" aria-hidden="true" style="flex-shrink:0"><path d="M24 12.073C24 5.405 18.627 0 12 0S0 5.405 0 12.073C0 18.1 4.388 23.094 10.125 24v-8.437H7.078v-3.49h3.047V9.41c0-3.025 1.792-4.697 4.533-4.697 1.313 0 2.686.236 2.686.236v2.97h-1.513c-1.491 0-1.956.93-1.956 1.883v2.271h3.328l-.532 3.49h-2.796V24C19.612 23.094 24 18.1 24 12.073z"/></svg>
+</a>
+<a class="st-btn st-btn-maps" href="" target="_blank" rel="noopener" aria-label="Directions to JP Nagar 5th Phase"><svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-map-pin" style="flex-shrink:0" aria-hidden="true"><path d="M20 10c0 6-8 12-8 12s-8-6-8-12a8 8 0 0 1 16 0Z"/><circle cx="12" cy="10" r="3"/></svg>
+</a>
+</div>
+<div class="st-info-row">
+<a class="st-view-btn" href="/stores/bangalore/jp-nagar-5th-phase/" aria-label="View JP Nagar 5th Phase">Store details &#8594;</a>
+</div>
+</div>
+
 <details class="st-neighborhood">
 <summary>Areas served</summary>
 <div class="st-neighborhood-body">
@@ -1914,35 +1949,13 @@ Choose Store</button>
 </div>
 </div>
 </details>
-
-<div class="st-card-actions">
-<div class="st-icon-row">
-<a class="st-btn st-btn-book" href="https://naturals-salon-jpnagar5phase.setmore.com/" target="_blank" rel="noopener" aria-label="Book at JP Nagar 5th Phase"><svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-calendar" style="flex-shrink:0" aria-hidden="true"><rect width="18" height="18" x="3" y="4" rx="2" ry="2"/><path d="M16 2v4"/><path d="M8 2v4"/><path d="M3 10h18"/></svg>
-</a>
-<a class="st-btn st-btn-wa" href="https://wa.me/+918792642299" target="_blank" rel="noopener" aria-label="WhatsApp JP Nagar 5th Phase"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="#25D366" width="18" height="18" style="flex-shrink:0" aria-hidden="true"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
-</a>
-<a class="st-btn st-btn-call" href="tel:+918792642299" aria-label="Call JP Nagar 5th Phase"><svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-phone" style="flex-shrink:0" aria-hidden="true"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
-</a>
-</div>
-<div class="st-icon-row">
-<a class="st-btn st-btn-ig" href="https://instagram.com/Naturals.Salon.JPNagar5Phase/" target="_blank" rel="noopener" aria-label="JP Nagar 5th Phase on Instagram"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="18" height="18" aria-hidden="true" style="flex-shrink:0"><defs><linearGradient id="ig-grad" x1="0%" y1="100%" x2="100%" y2="0%"><stop offset="0%" stop-color="#FFDC80"/><stop offset="25%" stop-color="#FCAF45"/><stop offset="50%" stop-color="#F77737"/><stop offset="75%" stop-color="#C13584"/><stop offset="100%" stop-color="#833AB4"/></linearGradient></defs><path fill="url(#ig-grad)" d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zM12 0C8.741 0 8.333.014 7.053.072 2.695.272.273 2.69.073 7.052.014 8.333 0 8.741 0 12c0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98C8.333 23.986 8.741 24 12 24c3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98C15.668.014 15.259 0 12 0zm0 5.838a6.162 6.162 0 100 12.324 6.162 6.162 0 000-12.324zM12 16a4 4 0 110-8 4 4 0 010 8zm6.406-11.845a1.44 1.44 0 100 2.881 1.44 1.44 0 000-2.881z"/></svg>
-</a>
-<a class="st-btn st-btn-fb" href="https://facebook.com/Naturals.Salon.JPNagar5Phase" target="_blank" rel="noopener" aria-label="JP Nagar 5th Phase on Facebook"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="18" height="18" fill="#1877F2" aria-hidden="true" style="flex-shrink:0"><path d="M24 12.073C24 5.405 18.627 0 12 0S0 5.405 0 12.073C0 18.1 4.388 23.094 10.125 24v-8.437H7.078v-3.49h3.047V9.41c0-3.025 1.792-4.697 4.533-4.697 1.313 0 2.686.236 2.686.236v2.97h-1.513c-1.491 0-1.956.93-1.956 1.883v2.271h3.328l-.532 3.49h-2.796V24C19.612 23.094 24 18.1 24 12.073z"/></svg>
-</a>
-<a class="st-btn st-btn-maps" href="" target="_blank" rel="noopener" aria-label="Directions to JP Nagar 5th Phase"><svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-map-pin" style="flex-shrink:0" aria-hidden="true"><path d="M20 10c0 6-8 12-8 12s-8-6-8-12a8 8 0 0 1 16 0Z"/><circle cx="12" cy="10" r="3"/></svg>
-</a>
-</div>
-<div class="st-info-row">
-<a class="st-view-btn" href="/stores/bangalore/jp-nagar-5th-phase/" aria-label="View JP Nagar 5th Phase">Info &#8594;</a>
-</div>
-</div>
 </div>
 </div>
 <div class="st-card reveal">
 <a href="/stores/bangalore/nagavara/" class="st-card-head" aria-label="View Nagavara">
-<div class="st-card-num">02</div>
+<div class="st-card-num">Location 02</div>
 <div class="st-card-name">Nagavara</div>
-<div class="st-card-area">Nagavara &middot; </div>
+<div class="st-card-area">Bangalore &middot; </div>
 <div class="st-open-now" data-store-id="" data-hours="10:00 AM – 9:00 PM" data-sat-hours="10:00 AM – 9:00 PM" data-sun-hours="10:00 AM – 9:00 PM">
 <span class="status-dot"></span>
 <span class="status-text">Checking...</span>
@@ -1952,6 +1965,29 @@ Choose Store</button>
 <div class="st-card-body">
 <div class="st-card-addr"><svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="var(--gold)" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-map-pin" style="flex-shrink:0" aria-hidden="true"><path d="M20 10c0 6-8 12-8 12s-8-6-8-12a8 8 0 0 1 16 0Z"/><circle cx="12" cy="10" r="3"/></svg>
 </div>
+
+<div class="st-card-actions">
+<div class="st-primary-row">
+<a class="st-book-primary" href="https://naturals-salon-elementsmall.setmore.com/" target="_blank" rel="noopener" aria-label="Book at Nagavara"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-calendar" style="flex-shrink:0" aria-hidden="true"><rect width="18" height="18" x="3" y="4" rx="2" ry="2"/><path d="M16 2v4"/><path d="M8 2v4"/><path d="M3 10h18"/></svg>
+Book</a>
+<a class="st-btn st-btn-wa" href="https://wa.me/+919901000017" target="_blank" rel="noopener" aria-label="WhatsApp Nagavara"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="#25D366" width="18" height="18" style="flex-shrink:0" aria-hidden="true"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+</a>
+<a class="st-btn st-btn-call" href="tel:+919901000017" aria-label="Call Nagavara"><svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-phone" style="flex-shrink:0" aria-hidden="true"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
+</a>
+</div>
+<div class="st-icon-row st-secondary-row">
+<a class="st-btn st-btn-ig" href="https://instagram.com/Naturals.Salon.Nagavara/" target="_blank" rel="noopener" aria-label="Nagavara on Instagram"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="18" height="18" aria-hidden="true" style="flex-shrink:0"><defs><linearGradient id="ig-grad" x1="0%" y1="100%" x2="100%" y2="0%"><stop offset="0%" stop-color="#FFDC80"/><stop offset="25%" stop-color="#FCAF45"/><stop offset="50%" stop-color="#F77737"/><stop offset="75%" stop-color="#C13584"/><stop offset="100%" stop-color="#833AB4"/></linearGradient></defs><path fill="url(#ig-grad)" d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zM12 0C8.741 0 8.333.014 7.053.072 2.695.272.273 2.69.073 7.052.014 8.333 0 8.741 0 12c0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98C8.333 23.986 8.741 24 12 24c3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98C15.668.014 15.259 0 12 0zm0 5.838a6.162 6.162 0 100 12.324 6.162 6.162 0 000-12.324zM12 16a4 4 0 110-8 4 4 0 010 8zm6.406-11.845a1.44 1.44 0 100 2.881 1.44 1.44 0 000-2.881z"/></svg>
+</a>
+<a class="st-btn st-btn-fb" href="https://facebook.com/Naturals.Salon.Nagavara/" target="_blank" rel="noopener" aria-label="Nagavara on Facebook"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="18" height="18" fill="#1877F2" aria-hidden="true" style="flex-shrink:0"><path d="M24 12.073C24 5.405 18.627 0 12 0S0 5.405 0 12.073C0 18.1 4.388 23.094 10.125 24v-8.437H7.078v-3.49h3.047V9.41c0-3.025 1.792-4.697 4.533-4.697 1.313 0 2.686.236 2.686.236v2.97h-1.513c-1.491 0-1.956.93-1.956 1.883v2.271h3.328l-.532 3.49h-2.796V24C19.612 23.094 24 18.1 24 12.073z"/></svg>
+</a>
+<a class="st-btn st-btn-maps" href="" target="_blank" rel="noopener" aria-label="Directions to Nagavara"><svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-map-pin" style="flex-shrink:0" aria-hidden="true"><path d="M20 10c0 6-8 12-8 12s-8-6-8-12a8 8 0 0 1 16 0Z"/><circle cx="12" cy="10" r="3"/></svg>
+</a>
+</div>
+<div class="st-info-row">
+<a class="st-view-btn" href="/stores/bangalore/nagavara/" aria-label="View Nagavara">Store details &#8594;</a>
+</div>
+</div>
+
 <details class="st-neighborhood">
 <summary>Areas served</summary>
 <div class="st-neighborhood-body">
@@ -1972,35 +2008,13 @@ Choose Store</button>
 </div>
 </div>
 </details>
-
-<div class="st-card-actions">
-<div class="st-icon-row">
-<a class="st-btn st-btn-book" href="https://naturals-salon-elementsmall.setmore.com/" target="_blank" rel="noopener" aria-label="Book at Nagavara"><svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-calendar" style="flex-shrink:0" aria-hidden="true"><rect width="18" height="18" x="3" y="4" rx="2" ry="2"/><path d="M16 2v4"/><path d="M8 2v4"/><path d="M3 10h18"/></svg>
-</a>
-<a class="st-btn st-btn-wa" href="https://wa.me/+919901000017" target="_blank" rel="noopener" aria-label="WhatsApp Nagavara"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="#25D366" width="18" height="18" style="flex-shrink:0" aria-hidden="true"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
-</a>
-<a class="st-btn st-btn-call" href="tel:+919901000017" aria-label="Call Nagavara"><svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-phone" style="flex-shrink:0" aria-hidden="true"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
-</a>
-</div>
-<div class="st-icon-row">
-<a class="st-btn st-btn-ig" href="https://instagram.com/Naturals.Salon.Nagavara/" target="_blank" rel="noopener" aria-label="Nagavara on Instagram"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="18" height="18" aria-hidden="true" style="flex-shrink:0"><defs><linearGradient id="ig-grad" x1="0%" y1="100%" x2="100%" y2="0%"><stop offset="0%" stop-color="#FFDC80"/><stop offset="25%" stop-color="#FCAF45"/><stop offset="50%" stop-color="#F77737"/><stop offset="75%" stop-color="#C13584"/><stop offset="100%" stop-color="#833AB4"/></linearGradient></defs><path fill="url(#ig-grad)" d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zM12 0C8.741 0 8.333.014 7.053.072 2.695.272.273 2.69.073 7.052.014 8.333 0 8.741 0 12c0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98C8.333 23.986 8.741 24 12 24c3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98C15.668.014 15.259 0 12 0zm0 5.838a6.162 6.162 0 100 12.324 6.162 6.162 0 000-12.324zM12 16a4 4 0 110-8 4 4 0 010 8zm6.406-11.845a1.44 1.44 0 100 2.881 1.44 1.44 0 000-2.881z"/></svg>
-</a>
-<a class="st-btn st-btn-fb" href="https://facebook.com/Naturals.Salon.Nagavara/" target="_blank" rel="noopener" aria-label="Nagavara on Facebook"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="18" height="18" fill="#1877F2" aria-hidden="true" style="flex-shrink:0"><path d="M24 12.073C24 5.405 18.627 0 12 0S0 5.405 0 12.073C0 18.1 4.388 23.094 10.125 24v-8.437H7.078v-3.49h3.047V9.41c0-3.025 1.792-4.697 4.533-4.697 1.313 0 2.686.236 2.686.236v2.97h-1.513c-1.491 0-1.956.93-1.956 1.883v2.271h3.328l-.532 3.49h-2.796V24C19.612 23.094 24 18.1 24 12.073z"/></svg>
-</a>
-<a class="st-btn st-btn-maps" href="" target="_blank" rel="noopener" aria-label="Directions to Nagavara"><svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-map-pin" style="flex-shrink:0" aria-hidden="true"><path d="M20 10c0 6-8 12-8 12s-8-6-8-12a8 8 0 0 1 16 0Z"/><circle cx="12" cy="10" r="3"/></svg>
-</a>
-</div>
-<div class="st-info-row">
-<a class="st-view-btn" href="/stores/bangalore/nagavara/" aria-label="View Nagavara">Info &#8594;</a>
-</div>
-</div>
 </div>
 </div>
 <div class="st-card reveal">
 <a href="/stores/bangalore/devasandra/" class="st-card-head" aria-label="View Devasandra">
-<div class="st-card-num">03</div>
+<div class="st-card-num">Location 03</div>
 <div class="st-card-name">Devasandra</div>
-<div class="st-card-area">Devasandra &middot; </div>
+<div class="st-card-area">Bangalore &middot; </div>
 <div class="st-open-now" data-store-id="" data-hours="10:00 AM – 9:00 PM" data-sat-hours="10:00 AM – 9:00 PM" data-sun-hours="10:00 AM – 9:00 PM">
 <span class="status-dot"></span>
 <span class="status-text">Checking...</span>
@@ -2010,6 +2024,29 @@ Choose Store</button>
 <div class="st-card-body">
 <div class="st-card-addr"><svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="var(--gold)" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-map-pin" style="flex-shrink:0" aria-hidden="true"><path d="M20 10c0 6-8 12-8 12s-8-6-8-12a8 8 0 0 1 16 0Z"/><circle cx="12" cy="10" r="3"/></svg>
 </div>
+
+<div class="st-card-actions">
+<div class="st-primary-row">
+<a class="st-book-primary" href="https://naturals-salon-devasandra.setmore.com/" target="_blank" rel="noopener" aria-label="Book at Devasandra"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-calendar" style="flex-shrink:0" aria-hidden="true"><rect width="18" height="18" x="3" y="4" rx="2" ry="2"/><path d="M16 2v4"/><path d="M8 2v4"/><path d="M3 10h18"/></svg>
+Book</a>
+<a class="st-btn st-btn-wa" href="https://wa.me/+917259490009" target="_blank" rel="noopener" aria-label="WhatsApp Devasandra"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="#25D366" width="18" height="18" style="flex-shrink:0" aria-hidden="true"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+</a>
+<a class="st-btn st-btn-call" href="tel:+917259490009" aria-label="Call Devasandra"><svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-phone" style="flex-shrink:0" aria-hidden="true"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
+</a>
+</div>
+<div class="st-icon-row st-secondary-row">
+<a class="st-btn st-btn-ig" href="https://instagram.com/Naturals.Salon.Devasandra/" target="_blank" rel="noopener" aria-label="Devasandra on Instagram"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="18" height="18" aria-hidden="true" style="flex-shrink:0"><defs><linearGradient id="ig-grad" x1="0%" y1="100%" x2="100%" y2="0%"><stop offset="0%" stop-color="#FFDC80"/><stop offset="25%" stop-color="#FCAF45"/><stop offset="50%" stop-color="#F77737"/><stop offset="75%" stop-color="#C13584"/><stop offset="100%" stop-color="#833AB4"/></linearGradient></defs><path fill="url(#ig-grad)" d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zM12 0C8.741 0 8.333.014 7.053.072 2.695.272.273 2.69.073 7.052.014 8.333 0 8.741 0 12c0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98C8.333 23.986 8.741 24 12 24c3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98C15.668.014 15.259 0 12 0zm0 5.838a6.162 6.162 0 100 12.324 6.162 6.162 0 000-12.324zM12 16a4 4 0 110-8 4 4 0 010 8zm6.406-11.845a1.44 1.44 0 100 2.881 1.44 1.44 0 000-2.881z"/></svg>
+</a>
+<a class="st-btn st-btn-fb" href="https://facebook.com/Naturals.Salon.Devasandra/" target="_blank" rel="noopener" aria-label="Devasandra on Facebook"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="18" height="18" fill="#1877F2" aria-hidden="true" style="flex-shrink:0"><path d="M24 12.073C24 5.405 18.627 0 12 0S0 5.405 0 12.073C0 18.1 4.388 23.094 10.125 24v-8.437H7.078v-3.49h3.047V9.41c0-3.025 1.792-4.697 4.533-4.697 1.313 0 2.686.236 2.686.236v2.97h-1.513c-1.491 0-1.956.93-1.956 1.883v2.271h3.328l-.532 3.49h-2.796V24C19.612 23.094 24 18.1 24 12.073z"/></svg>
+</a>
+<a class="st-btn st-btn-maps" href="" target="_blank" rel="noopener" aria-label="Directions to Devasandra"><svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-map-pin" style="flex-shrink:0" aria-hidden="true"><path d="M20 10c0 6-8 12-8 12s-8-6-8-12a8 8 0 0 1 16 0Z"/><circle cx="12" cy="10" r="3"/></svg>
+</a>
+</div>
+<div class="st-info-row">
+<a class="st-view-btn" href="/stores/bangalore/devasandra/" aria-label="View Devasandra">Store details &#8594;</a>
+</div>
+</div>
+
 <details class="st-neighborhood">
 <summary>Areas served</summary>
 <div class="st-neighborhood-body">
@@ -2028,35 +2065,13 @@ Choose Store</button>
 </div>
 </div>
 </details>
-
-<div class="st-card-actions">
-<div class="st-icon-row">
-<a class="st-btn st-btn-book" href="https://naturals-salon-devasandra.setmore.com/" target="_blank" rel="noopener" aria-label="Book at Devasandra"><svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-calendar" style="flex-shrink:0" aria-hidden="true"><rect width="18" height="18" x="3" y="4" rx="2" ry="2"/><path d="M16 2v4"/><path d="M8 2v4"/><path d="M3 10h18"/></svg>
-</a>
-<a class="st-btn st-btn-wa" href="https://wa.me/+917259490009" target="_blank" rel="noopener" aria-label="WhatsApp Devasandra"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="#25D366" width="18" height="18" style="flex-shrink:0" aria-hidden="true"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
-</a>
-<a class="st-btn st-btn-call" href="tel:+917259490009" aria-label="Call Devasandra"><svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-phone" style="flex-shrink:0" aria-hidden="true"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
-</a>
-</div>
-<div class="st-icon-row">
-<a class="st-btn st-btn-ig" href="https://instagram.com/Naturals.Salon.Devasandra/" target="_blank" rel="noopener" aria-label="Devasandra on Instagram"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="18" height="18" aria-hidden="true" style="flex-shrink:0"><defs><linearGradient id="ig-grad" x1="0%" y1="100%" x2="100%" y2="0%"><stop offset="0%" stop-color="#FFDC80"/><stop offset="25%" stop-color="#FCAF45"/><stop offset="50%" stop-color="#F77737"/><stop offset="75%" stop-color="#C13584"/><stop offset="100%" stop-color="#833AB4"/></linearGradient></defs><path fill="url(#ig-grad)" d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zM12 0C8.741 0 8.333.014 7.053.072 2.695.272.273 2.69.073 7.052.014 8.333 0 8.741 0 12c0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98C8.333 23.986 8.741 24 12 24c3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98C15.668.014 15.259 0 12 0zm0 5.838a6.162 6.162 0 100 12.324 6.162 6.162 0 000-12.324zM12 16a4 4 0 110-8 4 4 0 010 8zm6.406-11.845a1.44 1.44 0 100 2.881 1.44 1.44 0 000-2.881z"/></svg>
-</a>
-<a class="st-btn st-btn-fb" href="https://facebook.com/Naturals.Salon.Devasandra/" target="_blank" rel="noopener" aria-label="Devasandra on Facebook"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="18" height="18" fill="#1877F2" aria-hidden="true" style="flex-shrink:0"><path d="M24 12.073C24 5.405 18.627 0 12 0S0 5.405 0 12.073C0 18.1 4.388 23.094 10.125 24v-8.437H7.078v-3.49h3.047V9.41c0-3.025 1.792-4.697 4.533-4.697 1.313 0 2.686.236 2.686.236v2.97h-1.513c-1.491 0-1.956.93-1.956 1.883v2.271h3.328l-.532 3.49h-2.796V24C19.612 23.094 24 18.1 24 12.073z"/></svg>
-</a>
-<a class="st-btn st-btn-maps" href="" target="_blank" rel="noopener" aria-label="Directions to Devasandra"><svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-map-pin" style="flex-shrink:0" aria-hidden="true"><path d="M20 10c0 6-8 12-8 12s-8-6-8-12a8 8 0 0 1 16 0Z"/><circle cx="12" cy="10" r="3"/></svg>
-</a>
-</div>
-<div class="st-info-row">
-<a class="st-view-btn" href="/stores/bangalore/devasandra/" aria-label="View Devasandra">Info &#8594;</a>
-</div>
-</div>
 </div>
 </div>
 <div class="st-card reveal">
 <a href="/stores/bangalore/frazer-town/" class="st-card-head" aria-label="View Frazer Town">
-<div class="st-card-num">04</div>
+<div class="st-card-num">Location 04</div>
 <div class="st-card-name">Frazer Town</div>
-<div class="st-card-area">Frazer Town &middot; </div>
+<div class="st-card-area">Bangalore &middot; </div>
 <div class="st-open-now" data-store-id="" data-hours="10:00 AM – 9:00 PM" data-sat-hours="10:00 AM – 9:00 PM" data-sun-hours="10:00 AM – 9:00 PM">
 <span class="status-dot"></span>
 <span class="status-text">Checking...</span>
@@ -2066,6 +2081,29 @@ Choose Store</button>
 <div class="st-card-body">
 <div class="st-card-addr"><svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="var(--gold)" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-map-pin" style="flex-shrink:0" aria-hidden="true"><path d="M20 10c0 6-8 12-8 12s-8-6-8-12a8 8 0 0 1 16 0Z"/><circle cx="12" cy="10" r="3"/></svg>
 </div>
+
+<div class="st-card-actions">
+<div class="st-primary-row">
+<a class="st-book-primary" href="https://naturals-salon-frazertown.setmore.com/" target="_blank" rel="noopener" aria-label="Book at Frazer Town"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-calendar" style="flex-shrink:0" aria-hidden="true"><rect width="18" height="18" x="3" y="4" rx="2" ry="2"/><path d="M16 2v4"/><path d="M8 2v4"/><path d="M3 10h18"/></svg>
+Book</a>
+<a class="st-btn st-btn-wa" href="https://wa.me/+919606333017" target="_blank" rel="noopener" aria-label="WhatsApp Frazer Town"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="#25D366" width="18" height="18" style="flex-shrink:0" aria-hidden="true"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+</a>
+<a class="st-btn st-btn-call" href="tel:+919606333017" aria-label="Call Frazer Town"><svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-phone" style="flex-shrink:0" aria-hidden="true"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
+</a>
+</div>
+<div class="st-icon-row st-secondary-row">
+<a class="st-btn st-btn-ig" href="https://instagram.com/Naturals.Salon.FrazerTown/" target="_blank" rel="noopener" aria-label="Frazer Town on Instagram"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="18" height="18" aria-hidden="true" style="flex-shrink:0"><defs><linearGradient id="ig-grad" x1="0%" y1="100%" x2="100%" y2="0%"><stop offset="0%" stop-color="#FFDC80"/><stop offset="25%" stop-color="#FCAF45"/><stop offset="50%" stop-color="#F77737"/><stop offset="75%" stop-color="#C13584"/><stop offset="100%" stop-color="#833AB4"/></linearGradient></defs><path fill="url(#ig-grad)" d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zM12 0C8.741 0 8.333.014 7.053.072 2.695.272.273 2.69.073 7.052.014 8.333 0 8.741 0 12c0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98C8.333 23.986 8.741 24 12 24c3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98C15.668.014 15.259 0 12 0zm0 5.838a6.162 6.162 0 100 12.324 6.162 6.162 0 000-12.324zM12 16a4 4 0 110-8 4 4 0 010 8zm6.406-11.845a1.44 1.44 0 100 2.881 1.44 1.44 0 000-2.881z"/></svg>
+</a>
+<a class="st-btn st-btn-fb" href="https://www.facebook.com/Naturals.Salon.FrazerTown/" target="_blank" rel="noopener" aria-label="Frazer Town on Facebook"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="18" height="18" fill="#1877F2" aria-hidden="true" style="flex-shrink:0"><path d="M24 12.073C24 5.405 18.627 0 12 0S0 5.405 0 12.073C0 18.1 4.388 23.094 10.125 24v-8.437H7.078v-3.49h3.047V9.41c0-3.025 1.792-4.697 4.533-4.697 1.313 0 2.686.236 2.686.236v2.97h-1.513c-1.491 0-1.956.93-1.956 1.883v2.271h3.328l-.532 3.49h-2.796V24C19.612 23.094 24 18.1 24 12.073z"/></svg>
+</a>
+<a class="st-btn st-btn-maps" href="" target="_blank" rel="noopener" aria-label="Directions to Frazer Town"><svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-map-pin" style="flex-shrink:0" aria-hidden="true"><path d="M20 10c0 6-8 12-8 12s-8-6-8-12a8 8 0 0 1 16 0Z"/><circle cx="12" cy="10" r="3"/></svg>
+</a>
+</div>
+<div class="st-info-row">
+<a class="st-view-btn" href="/stores/bangalore/frazer-town/" aria-label="View Frazer Town">Store details &#8594;</a>
+</div>
+</div>
+
 <details class="st-neighborhood">
 <summary>Areas served</summary>
 <div class="st-neighborhood-body">
@@ -2084,35 +2122,13 @@ Choose Store</button>
 </div>
 </div>
 </details>
-
-<div class="st-card-actions">
-<div class="st-icon-row">
-<a class="st-btn st-btn-book" href="https://naturals-salon-frazertown.setmore.com/" target="_blank" rel="noopener" aria-label="Book at Frazer Town"><svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-calendar" style="flex-shrink:0" aria-hidden="true"><rect width="18" height="18" x="3" y="4" rx="2" ry="2"/><path d="M16 2v4"/><path d="M8 2v4"/><path d="M3 10h18"/></svg>
-</a>
-<a class="st-btn st-btn-wa" href="https://wa.me/+919606333017" target="_blank" rel="noopener" aria-label="WhatsApp Frazer Town"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="#25D366" width="18" height="18" style="flex-shrink:0" aria-hidden="true"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
-</a>
-<a class="st-btn st-btn-call" href="tel:+919606333017" aria-label="Call Frazer Town"><svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-phone" style="flex-shrink:0" aria-hidden="true"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
-</a>
-</div>
-<div class="st-icon-row">
-<a class="st-btn st-btn-ig" href="https://instagram.com/Naturals.Salon.FrazerTown/" target="_blank" rel="noopener" aria-label="Frazer Town on Instagram"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="18" height="18" aria-hidden="true" style="flex-shrink:0"><defs><linearGradient id="ig-grad" x1="0%" y1="100%" x2="100%" y2="0%"><stop offset="0%" stop-color="#FFDC80"/><stop offset="25%" stop-color="#FCAF45"/><stop offset="50%" stop-color="#F77737"/><stop offset="75%" stop-color="#C13584"/><stop offset="100%" stop-color="#833AB4"/></linearGradient></defs><path fill="url(#ig-grad)" d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zM12 0C8.741 0 8.333.014 7.053.072 2.695.272.273 2.69.073 7.052.014 8.333 0 8.741 0 12c0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98C8.333 23.986 8.741 24 12 24c3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98C15.668.014 15.259 0 12 0zm0 5.838a6.162 6.162 0 100 12.324 6.162 6.162 0 000-12.324zM12 16a4 4 0 110-8 4 4 0 010 8zm6.406-11.845a1.44 1.44 0 100 2.881 1.44 1.44 0 000-2.881z"/></svg>
-</a>
-<a class="st-btn st-btn-fb" href="https://www.facebook.com/Naturals.Salon.FrazerTown/" target="_blank" rel="noopener" aria-label="Frazer Town on Facebook"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="18" height="18" fill="#1877F2" aria-hidden="true" style="flex-shrink:0"><path d="M24 12.073C24 5.405 18.627 0 12 0S0 5.405 0 12.073C0 18.1 4.388 23.094 10.125 24v-8.437H7.078v-3.49h3.047V9.41c0-3.025 1.792-4.697 4.533-4.697 1.313 0 2.686.236 2.686.236v2.97h-1.513c-1.491 0-1.956.93-1.956 1.883v2.271h3.328l-.532 3.49h-2.796V24C19.612 23.094 24 18.1 24 12.073z"/></svg>
-</a>
-<a class="st-btn st-btn-maps" href="" target="_blank" rel="noopener" aria-label="Directions to Frazer Town"><svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-map-pin" style="flex-shrink:0" aria-hidden="true"><path d="M20 10c0 6-8 12-8 12s-8-6-8-12a8 8 0 0 1 16 0Z"/><circle cx="12" cy="10" r="3"/></svg>
-</a>
-</div>
-<div class="st-info-row">
-<a class="st-view-btn" href="/stores/bangalore/frazer-town/" aria-label="View Frazer Town">Info &#8594;</a>
-</div>
-</div>
 </div>
 </div>
 <div class="st-card reveal">
 <a href="/stores/bangalore/hennur/" class="st-card-head" aria-label="View Hennur">
-<div class="st-card-num">05</div>
+<div class="st-card-num">Location 05</div>
 <div class="st-card-name">Hennur</div>
-<div class="st-card-area">Hennur &middot; </div>
+<div class="st-card-area">Bangalore &middot; </div>
 <div class="st-open-now" data-store-id="" data-hours="10:00 AM – 8:00 PM" data-sat-hours="10:00 AM – 8:00 PM" data-sun-hours="10:00 AM – 8:00 PM">
 <span class="status-dot"></span>
 <span class="status-text">Checking...</span>
@@ -2122,6 +2138,29 @@ Choose Store</button>
 <div class="st-card-body">
 <div class="st-card-addr"><svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="var(--gold)" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-map-pin" style="flex-shrink:0" aria-hidden="true"><path d="M20 10c0 6-8 12-8 12s-8-6-8-12a8 8 0 0 1 16 0Z"/><circle cx="12" cy="10" r="3"/></svg>
 </div>
+
+<div class="st-card-actions">
+<div class="st-primary-row">
+<a class="st-book-primary" href="https://naturals-salon-hennur.setmore.com/" target="_blank" rel="noopener" aria-label="Book at Hennur"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-calendar" style="flex-shrink:0" aria-hidden="true"><rect width="18" height="18" x="3" y="4" rx="2" ry="2"/><path d="M16 2v4"/><path d="M8 2v4"/><path d="M3 10h18"/></svg>
+Book</a>
+<a class="st-btn st-btn-wa" href="https://wa.me/+919606900069" target="_blank" rel="noopener" aria-label="WhatsApp Hennur"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="#25D366" width="18" height="18" style="flex-shrink:0" aria-hidden="true"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+</a>
+<a class="st-btn st-btn-call" href="tel:+919606900069" aria-label="Call Hennur"><svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-phone" style="flex-shrink:0" aria-hidden="true"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
+</a>
+</div>
+<div class="st-icon-row st-secondary-row">
+<a class="st-btn st-btn-ig" href="https://instagram.com/Naturals.Salon.Hennur/" target="_blank" rel="noopener" aria-label="Hennur on Instagram"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="18" height="18" aria-hidden="true" style="flex-shrink:0"><defs><linearGradient id="ig-grad" x1="0%" y1="100%" x2="100%" y2="0%"><stop offset="0%" stop-color="#FFDC80"/><stop offset="25%" stop-color="#FCAF45"/><stop offset="50%" stop-color="#F77737"/><stop offset="75%" stop-color="#C13584"/><stop offset="100%" stop-color="#833AB4"/></linearGradient></defs><path fill="url(#ig-grad)" d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zM12 0C8.741 0 8.333.014 7.053.072 2.695.272.273 2.69.073 7.052.014 8.333 0 8.741 0 12c0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98C8.333 23.986 8.741 24 12 24c3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98C15.668.014 15.259 0 12 0zm0 5.838a6.162 6.162 0 100 12.324 6.162 6.162 0 000-12.324zM12 16a4 4 0 110-8 4 4 0 010 8zm6.406-11.845a1.44 1.44 0 100 2.881 1.44 1.44 0 000-2.881z"/></svg>
+</a>
+<a class="st-btn st-btn-fb" href="https://facebook.com/Naturals.Salon.Hennur/" target="_blank" rel="noopener" aria-label="Hennur on Facebook"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="18" height="18" fill="#1877F2" aria-hidden="true" style="flex-shrink:0"><path d="M24 12.073C24 5.405 18.627 0 12 0S0 5.405 0 12.073C0 18.1 4.388 23.094 10.125 24v-8.437H7.078v-3.49h3.047V9.41c0-3.025 1.792-4.697 4.533-4.697 1.313 0 2.686.236 2.686.236v2.97h-1.513c-1.491 0-1.956.93-1.956 1.883v2.271h3.328l-.532 3.49h-2.796V24C19.612 23.094 24 18.1 24 12.073z"/></svg>
+</a>
+<a class="st-btn st-btn-maps" href="" target="_blank" rel="noopener" aria-label="Directions to Hennur"><svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-map-pin" style="flex-shrink:0" aria-hidden="true"><path d="M20 10c0 6-8 12-8 12s-8-6-8-12a8 8 0 0 1 16 0Z"/><circle cx="12" cy="10" r="3"/></svg>
+</a>
+</div>
+<div class="st-info-row">
+<a class="st-view-btn" href="/stores/bangalore/hennur/" aria-label="View Hennur">Store details &#8594;</a>
+</div>
+</div>
+
 <details class="st-neighborhood">
 <summary>Areas served</summary>
 <div class="st-neighborhood-body">
@@ -2142,28 +2181,6 @@ Choose Store</button>
 </div>
 </div>
 </details>
-
-<div class="st-card-actions">
-<div class="st-icon-row">
-<a class="st-btn st-btn-book" href="https://naturals-salon-hennur.setmore.com/" target="_blank" rel="noopener" aria-label="Book at Hennur"><svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-calendar" style="flex-shrink:0" aria-hidden="true"><rect width="18" height="18" x="3" y="4" rx="2" ry="2"/><path d="M16 2v4"/><path d="M8 2v4"/><path d="M3 10h18"/></svg>
-</a>
-<a class="st-btn st-btn-wa" href="https://wa.me/+919606900069" target="_blank" rel="noopener" aria-label="WhatsApp Hennur"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="#25D366" width="18" height="18" style="flex-shrink:0" aria-hidden="true"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
-</a>
-<a class="st-btn st-btn-call" href="tel:+919606900069" aria-label="Call Hennur"><svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-phone" style="flex-shrink:0" aria-hidden="true"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
-</a>
-</div>
-<div class="st-icon-row">
-<a class="st-btn st-btn-ig" href="https://instagram.com/Naturals.Salon.Hennur/" target="_blank" rel="noopener" aria-label="Hennur on Instagram"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="18" height="18" aria-hidden="true" style="flex-shrink:0"><defs><linearGradient id="ig-grad" x1="0%" y1="100%" x2="100%" y2="0%"><stop offset="0%" stop-color="#FFDC80"/><stop offset="25%" stop-color="#FCAF45"/><stop offset="50%" stop-color="#F77737"/><stop offset="75%" stop-color="#C13584"/><stop offset="100%" stop-color="#833AB4"/></linearGradient></defs><path fill="url(#ig-grad)" d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zM12 0C8.741 0 8.333.014 7.053.072 2.695.272.273 2.69.073 7.052.014 8.333 0 8.741 0 12c0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98C8.333 23.986 8.741 24 12 24c3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98C15.668.014 15.259 0 12 0zm0 5.838a6.162 6.162 0 100 12.324 6.162 6.162 0 000-12.324zM12 16a4 4 0 110-8 4 4 0 010 8zm6.406-11.845a1.44 1.44 0 100 2.881 1.44 1.44 0 000-2.881z"/></svg>
-</a>
-<a class="st-btn st-btn-fb" href="https://facebook.com/Naturals.Salon.Hennur/" target="_blank" rel="noopener" aria-label="Hennur on Facebook"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="18" height="18" fill="#1877F2" aria-hidden="true" style="flex-shrink:0"><path d="M24 12.073C24 5.405 18.627 0 12 0S0 5.405 0 12.073C0 18.1 4.388 23.094 10.125 24v-8.437H7.078v-3.49h3.047V9.41c0-3.025 1.792-4.697 4.533-4.697 1.313 0 2.686.236 2.686.236v2.97h-1.513c-1.491 0-1.956.93-1.956 1.883v2.271h3.328l-.532 3.49h-2.796V24C19.612 23.094 24 18.1 24 12.073z"/></svg>
-</a>
-<a class="st-btn st-btn-maps" href="" target="_blank" rel="noopener" aria-label="Directions to Hennur"><svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-map-pin" style="flex-shrink:0" aria-hidden="true"><path d="M20 10c0 6-8 12-8 12s-8-6-8-12a8 8 0 0 1 16 0Z"/><circle cx="12" cy="10" r="3"/></svg>
-</a>
-</div>
-<div class="st-info-row">
-<a class="st-view-btn" href="/stores/bangalore/hennur/" aria-label="View Hennur">Info &#8594;</a>
-</div>
-</div>
 </div>
 </div>
 </div>
@@ -2278,6 +2295,45 @@ onerror="this.src='/images/service-icon/service_default.jpg'">
 </div>
 <div class="home-offers-grid home-carousel-track" id="home-offers-grid" aria-label="Offers carousel">
 <div class="hoc reveal"
+data-image-available="False"
+data-image-name="20260516_OFFER_HairSpaandHaircut"
+data-offer-title="Hair Spa and Haircut Combo at ₹2499">
+<div class="hoc-media">
+<img class="home-offer-img"
+src="https://naturals-blr.github.io/campaigns/offer/03_published/20260516_OFFER_HairSpaandHaircut.jpg"
+data-img-base="https://naturals-blr.github.io/campaigns/offer/03_published/20260516_OFFER_HairSpaandHaircut"
+alt="Hair Spa and Haircut Combo at ₹2499"
+width="400" height="300"
+loading="lazy">
+<div class="campaign-img-fallback">
+<div>
+<strong>Hair Spa and Haircut Combo at ₹2499</strong>
+<span>Special Offer</span>
+</div>
+</div>
+<div class="img-actions">
+<button class="img-action-btn" onclick="downloadImage(this)" title="Download Image">
+<svg viewBox="0 0 24 24"><path d="M19 9h-4V3H9v6H5l7 7 7-7zM5 18v2h14v-2H5z"/></svg>
+</button>
+<button class="img-action-btn" onclick="shareContent(this)" title="Share Offer">
+<svg viewBox="0 0 24 24"><path d="M18 16.08c-.76 0-1.44.3-1.96.77L8.91 12.7c.05-.23.09-.46.09-.7s-.04-.47-.09-.7l7.05-4.11c.54.5 1.25.81 2.04.81 1.66 0 3-1.34 3-3s-1.34-3-3 1.34 3 3c0 .24.04.47.09.7L8.04 9.81C7.5 9.31 6.79 9 6 9c-1.66 0-3 1.34 3 3s1.34 3 3 3c.79 0 1.5-.31 2.04-.81l7.12 4.16c-.05.21-.08.43-.08.65 0 1.61 1.31 2.92 2.92 1.61 0 2.92-1.31 2.92-2.92s-1.31-2.92-2.92z"/></svg>
+</button>
+</div>
+</div>
+
+<div class="hoc-body">
+<div class="hoc-badge">Special Offer</div>
+<div class="hoc-title">Hair Spa and Haircut Combo at ₹2499</div>
+<div class="hoc-details campaign-description">Enjoy a relaxing hair spa along with a stylish haircut at an unbeatable combo price of ₹2499.</div>
+<button class="campaign-desc-toggle" type="button" aria-expanded="false" onclick="toggleCampaignDescription(this)">+ More</button>
+<div class="hoc-meta">
+<div class="hoc-store">
+</div>
+<div class="hoc-valid">Valid till 30-May-2026</div>
+</div>
+</div>
+</div>
+<div class="hoc reveal"
 data-image-available="True"
 data-image-name="20260513_OFFER_MenGroomingComboa"
 data-offer-title="Men Grooming Combo at ₹459">
@@ -2355,44 +2411,6 @@ loading="lazy">
 </div>
 </div>
 </div>
-<div class="hoc reveal"
-data-image-available="True"
-data-image-name="20260510_OFFER_Flat₹1000OffonHa"
-data-offer-title="Flat ₹1000 Off on Hair Coloring">
-<div class="hoc-media">
-<img class="home-offer-img"
-src="https://naturals-blr.github.io/campaigns/offer/03_published/20260510_OFFER_Flat₹1000OffonHa.png"
-data-img-base="https://naturals-blr.github.io/campaigns/offer/03_published/20260510_OFFER_Flat₹1000OffonHa.png"
-alt="Flat ₹1000 Off on Hair Coloring"
-width="400" height="300"
-loading="lazy">
-<div class="campaign-img-fallback">
-<div>
-<strong>Flat ₹1000 Off on Hair Coloring</strong>
-<span>Special Offer</span>
-</div>
-</div>
-<div class="img-actions">
-<button class="img-action-btn" onclick="downloadImage(this)" title="Download Image">
-<svg viewBox="0 0 24 24"><path d="M19 9h-4V3H9v6H5l7 7 7-7zM5 18v2h14v-2H5z"/></svg>
-</button>
-<button class="img-action-btn" onclick="shareContent(this)" title="Share Offer">
-<svg viewBox="0 0 24 24"><path d="M18 16.08c-.76 0-1.44.3-1.96.77L8.91 12.7c.05-.23.09-.46.09-.7s-.04-.47-.09-.7l7.05-4.11c.54.5 1.25.81 2.04.81 1.66 0 3-1.34 3-3s-1.34-3-3 1.34 3 3c0 .24.04.47.09.7L8.04 9.81C7.5 9.31 6.79 9 6 9c-1.66 0-3 1.34 3 3s1.34 3 3 3c.79 0 1.5-.31 2.04-.81l7.12 4.16c-.05.21-.08.43-.08.65 0 1.61 1.31 2.92 2.92 1.61 0 2.92-1.31 2.92-2.92s-1.31-2.92-2.92z"/></svg>
-</button>
-</div>
-</div>
-
-<div class="hoc-body">
-<div class="hoc-badge">Special Offer</div>
-<div class="hoc-title">Flat ₹1000 Off on Hair Coloring</div>
-<div class="hoc-details campaign-description">Add a fresh new look with our expert hair coloring services and get flat ₹1000 off today.</div>
-<div class="hoc-meta">
-<div class="hoc-store">
-</div>
-<div class="hoc-valid">Valid till 30-May-2026</div>
-</div>
-</div>
-</div>
 </div>
 </div>
 <div class="offers-view-all">
@@ -2415,6 +2433,72 @@ loading="lazy">
 </div>
 </div>
 <div class="media-grid home-carousel-track" id="media-grid" aria-label="Campaigns carousel">
+<div class="media-card reveal" 
+data-image-available="False"
+data-image-name="20260516_ANNOU_LuxuryHasANewAdd"
+data-campaign-title="Luxury Has A New Address in Nagavara ✨">
+<div class="media-media">
+<img class="media-img"
+src="https://naturals-blr.github.io/campaigns/announcement/03_published/20260516_ANNOU_LuxuryHasANewAdd.jpg"
+data-img-base="https://naturals-blr.github.io/campaigns/announcement/03_published/20260516_ANNOU_LuxuryHasANewAdd"
+alt="Luxury Has A New Address in Nagavara ✨"
+width="400" height="300"
+loading="lazy">
+<div class="campaign-img-fallback">
+<div>
+<strong>Luxury Has A New Address in Nagavara ✨</strong>
+<span>announcement</span>
+</div>
+</div>
+</div>
+<div class="media-body">
+<div class="media-badge">ANNOUNCEMENT</div>
+<h3 class="media-title">Luxury Has A New Address in Nagavara ✨</h3>
+<div class="media-details campaign-description">Step into a world of 5-star pampering at the all-new Naturals Nagavara! 🥂 We are moving to serve you better with premium standards and a sophisticated new vibe. Make sure to follow our updated handle @Naturals.Salon.Nagavara for a sneak peek into our luxury interiors and grand opening offers.
+
+📍 Find us at: R.K. Tower, Chanukya Layout, Nagavara.
+#LuxurySalonBangalore #NaturalsNagavara #PamperYourself</div>
+<button class="campaign-desc-toggle" type="button" aria-expanded="false" onclick="toggleCampaignDescription(this)">+ More</button>
+<div class="media-meta">
+<div class="media-store">
+</div>
+<div class="media-valid">Valid till 30-May-2026</div>
+</div>
+</div>
+</div>
+<div class="media-card reveal" 
+data-image-available="True"
+data-image-name="20260515_ANNOU_NewLookNewLocati"
+data-campaign-title="New Look, New Location: Naturals Nagavara is Here!">
+<div class="media-media">
+<img class="media-img"
+src="https://naturals-blr.github.io/campaigns/announcement/03_published/20260515_ANNOU_NewLookNewLocati.png"
+data-img-base="https://naturals-blr.github.io/campaigns/announcement/03_published/20260515_ANNOU_NewLookNewLocati.png"
+alt="New Look, New Location: Naturals Nagavara is Here!"
+width="400" height="300"
+loading="lazy">
+<div class="campaign-img-fallback">
+<div>
+<strong>New Look, New Location: Naturals Nagavara is Here!</strong>
+<span>announcement</span>
+</div>
+</div>
+</div>
+<div class="media-body">
+<div class="media-badge">ANNOUNCEMENT</div>
+<h3 class="media-title">New Look, New Location: Naturals Nagavara is Here!</h3>
+<div class="media-details campaign-description">We’ve evolved! 🌿✨ Our beloved salon has moved to a brand-new space in Nagavara. With a new home comes a new handle—follow us @Naturals.Salon.Nagavara to stay connected. While our address is fresh, our 5-star 'Customer First' promise remains exactly the same. Come experience luxury in your neighborhood.
+
+📍 Visit us: 22-26/B11, R.K. Tower, 1st Cross, Chanukya Layout, Nagavara.
+#NaturalsNagavara #NewBeginnings #BangaloreBeauty</div>
+<button class="campaign-desc-toggle" type="button" aria-expanded="false" onclick="toggleCampaignDescription(this)">+ More</button>
+<div class="media-meta">
+<div class="media-store">
+</div>
+<div class="media-valid">Valid till 30-May-2026</div>
+</div>
+</div>
+</div>
 <div class="media-card reveal" 
 data-image-available="True"
 data-image-name="20260510_ANNOU_NewLocationNewLo"
@@ -2449,39 +2533,6 @@ While our name and address are changing, our commitment to a "Customer First" ex
 Stay tuned for our grand opening date and exclusive relocation offers!
 
 #NaturalsSalon #NaturalsNagavara #NewBeginnings #BangaloreBeauty #CustomerFirst #Nagavara</div>
-<button class="campaign-desc-toggle" type="button" aria-expanded="false" onclick="toggleCampaignDescription(this)">+ More</button>
-<div class="media-meta">
-<div class="media-store">
-</div>
-<div class="media-valid">Valid till 30-May-2026</div>
-</div>
-</div>
-</div>
-<div class="media-card reveal" 
-data-image-available="True"
-data-image-name="20260515_ANNOU_NewLookNewLocati"
-data-campaign-title="New Look, New Location: Naturals Nagavara is Here!">
-<div class="media-media">
-<img class="media-img"
-src="https://naturals-blr.github.io/campaigns/announcement/03_published/20260515_ANNOU_NewLookNewLocati.png"
-data-img-base="https://naturals-blr.github.io/campaigns/announcement/03_published/20260515_ANNOU_NewLookNewLocati.png"
-alt="New Look, New Location: Naturals Nagavara is Here!"
-width="400" height="300"
-loading="lazy">
-<div class="campaign-img-fallback">
-<div>
-<strong>New Look, New Location: Naturals Nagavara is Here!</strong>
-<span>announcement</span>
-</div>
-</div>
-</div>
-<div class="media-body">
-<div class="media-badge">ANNOUNCEMENT</div>
-<h3 class="media-title">New Look, New Location: Naturals Nagavara is Here!</h3>
-<div class="media-details campaign-description">We’ve evolved! 🌿✨ Our beloved salon has moved to a brand-new space in Nagavara. With a new home comes a new handle—follow us @Naturals.Salon.Nagavara to stay connected. While our address is fresh, our 5-star 'Customer First' promise remains exactly the same. Come experience luxury in your neighborhood.
-
-📍 Visit us: 22-26/B11, R.K. Tower, 1st Cross, Chanukya Layout, Nagavara.
-#NaturalsNagavara #NewBeginnings #BangaloreBeauty</div>
 <button class="campaign-desc-toggle" type="button" aria-expanded="false" onclick="toggleCampaignDescription(this)">+ More</button>
 <div class="media-meta">
 <div class="media-store">
@@ -2636,7 +2687,7 @@ carousel.scrollBy({ left: direction * (card.offsetWidth + gap), behavior: 'smoot
 }
 
 // Featured reviews data
-const featuredReviews = [{"Customer_Name": "Naveen Kumar", "Review_Comments": "Mr. Shahid\nGood massage. Felt totally relaxed", "Review_ID": "AbFvOqlJCOIfEgriczIPVlh-CT9WipuCSqyc4hb9PG1_NC3gZcHrJz2-C0dcdenb28rSJi3aAKvq", "Stars": 5, "Store_ID": "Store_N78", "Store_Name": "JP Nagar 5th Phase", "date_posted": "14-Dec-2019", "response": "Thank you so much Naveen Kumar! We\u0027re thrilled you had a 5-star experience. Your kind words mean the world to our team. Looking forward to serving you again soon!", "response_date": "15-May-2026", "show_it_in_website": "Yes"}, {"Customer_Name": "Neeharika Anand", "Review_Comments": "I really loved the waxing service here. Anusha did a great and thorough job. Definitely recommend!", "Review_ID": "AbFvOqnyqjF70bGkX1vG7GtxpsK5nD721i7mNaHcvvWvGvYbYg_iTmdzhYrmUUw8LRAMXC-cftkDdQ", "Stars": 5, "Store_ID": "Store_N78", "Store_Name": "JP Nagar 5th Phase", "date_posted": "2-Sep-2021", "response": "Thank you so much Neeharika Anand! We\u0027re thrilled you had a 5-star experience. Your kind words mean the world to our team. Looking forward to serving you again soon!", "response_date": "15-May-2026", "show_it_in_website": "Yes"}, {"Customer_Name": "Apoorva VD", "Review_Comments": "Akash is the best hairstylist here!! love getting my hair done here, best experience ever! :)))", "Review_ID": "AbFvOqnDQcpo-7UMbFB95PDBC4eDvOkjX5d_6qdw6dPBDhI3lht1u_7Kdb2Nv40NqW_DZPTxxV2_Zg", "Stars": 5, "Store_ID": "Store_N78", "Store_Name": "JP Nagar 5th Phase", "date_posted": "2-Oct-2021", "show_it_in_website": "Yes"}, {"Customer_Name": "Psychiatry Talks with Dr Sneha", "Review_Comments": "Mr Akash did a good service and was professional. Hair spa and massage was professional.", "Review_ID": "AbFvOqlk1BL36IySj0KOrUmZGwSB9aSKFh46Ap5UWewnbB9Zhz4fEF6weIVQuRw9JWtUwZW2Al_1NQ", "Stars": 5, "Store_ID": "Store_N78", "Store_Name": "JP Nagar 5th Phase", "date_posted": "10-Nov-2021", "show_it_in_website": "Yes"}, {"Customer_Name": "keerthana mu", "Review_Comments": "Great haircut service by Akash\nGood service overall", "Review_ID": "AbFvOqnP4x1oRlhMEEeC8zg7TitnBuwNTmwGiprkgyxeNekCb7tZT9q498P6G5ipT5B8O4oruKOE", "Stars": 5, "Store_ID": "Store_N78", "Store_Name": "JP Nagar 5th Phase", "date_posted": "2-Dec-2021", "show_it_in_website": "Yes"}, {"Customer_Name": "VIJAYAKUMAR S", "Review_Comments": "I\u0027m very much satisfied on the services offered by Mr.Yougul. Had wonderful Hair cut, Spa \u0026 Beard Trim.. Very professional way of doing all kind of services!!", "Review_ID": "AbFvOqk6efPY6LyFxixJCgoHK-Vr3-mRk7epkMdrveyllDBxjMWb88d3PFzHINACEJzctzmQj7alng", "Stars": 5, "Store_ID": "Store_N78", "Store_Name": "JP Nagar 5th Phase", "date_posted": "13-Mar-2022", "show_it_in_website": "Yes"}];
+const featuredReviews = [{"Customer_Name": "Naveen Kumar", "Review_Comments": "Mr. Shahid\nGood massage. Felt totally relaxed", "Review_ID": "AbFvOqlJCOIfEgriczIPVlh-CT9WipuCSqyc4hb9PG1_NC3gZcHrJz2-C0dcdenb28rSJi3aAKvq", "Stars": 5, "Store_ID": "Store_N78", "Store_Name": "JP Nagar 5th Phase", "date_posted": "14-Dec-2019", "response": "Thank you so much Naveen Kumar! We\u0027re thrilled you had a 5-star experience. Your kind words mean the world to our team. Looking forward to serving you again soon!", "response_date": "16-May-2026", "show_it_in_website": "Yes"}, {"Customer_Name": "Neeharika Anand", "Review_Comments": "I really loved the waxing service here. Anusha did a great and thorough job. Definitely recommend!", "Review_ID": "AbFvOqnyqjF70bGkX1vG7GtxpsK5nD721i7mNaHcvvWvGvYbYg_iTmdzhYrmUUw8LRAMXC-cftkDdQ", "Stars": 5, "Store_ID": "Store_N78", "Store_Name": "JP Nagar 5th Phase", "date_posted": "2-Sep-2021", "response": "Thank you so much Neeharika Anand! We\u0027re thrilled you had a 5-star experience. Your kind words mean the world to our team. Looking forward to serving you again soon!", "response_date": "16-May-2026", "show_it_in_website": "Yes"}, {"Customer_Name": "Apoorva VD", "Review_Comments": "Akash is the best hairstylist here!! love getting my hair done here, best experience ever! :)))", "Review_ID": "AbFvOqnDQcpo-7UMbFB95PDBC4eDvOkjX5d_6qdw6dPBDhI3lht1u_7Kdb2Nv40NqW_DZPTxxV2_Zg", "Stars": 5, "Store_ID": "Store_N78", "Store_Name": "JP Nagar 5th Phase", "date_posted": "2-Oct-2021", "show_it_in_website": "Yes"}, {"Customer_Name": "Psychiatry Talks with Dr Sneha", "Review_Comments": "Mr Akash did a good service and was professional. Hair spa and massage was professional.", "Review_ID": "AbFvOqlk1BL36IySj0KOrUmZGwSB9aSKFh46Ap5UWewnbB9Zhz4fEF6weIVQuRw9JWtUwZW2Al_1NQ", "Stars": 5, "Store_ID": "Store_N78", "Store_Name": "JP Nagar 5th Phase", "date_posted": "10-Nov-2021", "show_it_in_website": "Yes"}, {"Customer_Name": "keerthana mu", "Review_Comments": "Great haircut service by Akash\nGood service overall", "Review_ID": "AbFvOqnP4x1oRlhMEEeC8zg7TitnBuwNTmwGiprkgyxeNekCb7tZT9q498P6G5ipT5B8O4oruKOE", "Stars": 5, "Store_ID": "Store_N78", "Store_Name": "JP Nagar 5th Phase", "date_posted": "2-Dec-2021", "show_it_in_website": "Yes"}, {"Customer_Name": "VIJAYAKUMAR S", "Review_Comments": "I\u0027m very much satisfied on the services offered by Mr.Yougul. Had wonderful Hair cut, Spa \u0026 Beard Trim.. Very professional way of doing all kind of services!!", "Review_ID": "AbFvOqk6efPY6LyFxixJCgoHK-Vr3-mRk7epkMdrveyllDBxjMWb88d3PFzHINACEJzctzmQj7alng", "Stars": 5, "Store_ID": "Store_N78", "Store_Name": "JP Nagar 5th Phase", "date_posted": "13-Mar-2022", "show_it_in_website": "Yes"}];
 
 // State management
 let isModalOpen = false;
