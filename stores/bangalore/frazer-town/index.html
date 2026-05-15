@@ -371,13 +371,108 @@ color:var(--green-soft);
 color:#777;
 }
 
+.campaign-hub{
+padding:40px 60px;
+background:var(--cream);
+border-top:1px solid rgba(0,0,0,0.06);
+}
+
+.campaign-hub-head{
+display:flex;
+justify-content:space-between;
+gap:20px;
+align-items:flex-end;
+margin-bottom:18px;
+}
+
+.campaign-hub-title{
+font-family:'Cormorant Garamond',serif;
+font-size:32px;
+font-weight:300;
+color:var(--text);
+margin:0;
+}
+
+.campaign-hub-copy{
+font-size:13px;
+color:var(--text-mid);
+line-height:1.6;
+margin:6px 0 0;
+}
+
+.campaign-tabs{
+display:flex;
+gap:8px;
+overflow-x:auto;
+-webkit-overflow-scrolling:touch;
+padding:4px 0 18px;
+margin-bottom:6px;
+}
+
+.campaign-tab{
+flex:0 0 auto;
+border:1px solid rgba(0,0,0,0.10);
+background:#fff;
+color:var(--text-mid);
+border-radius:999px;
+padding:9px 14px;
+font:700 10px/1 'Jost',sans-serif;
+letter-spacing:1.4px;
+text-transform:uppercase;
+cursor:pointer;
+transition:background 0.2s,border-color 0.2s,color 0.2s,transform 0.2s;
+}
+
+.campaign-tab:hover{
+transform:translateY(-1px);
+border-color:var(--gold);
+color:var(--text);
+}
+
+.campaign-tab.is-active{
+background:var(--dark);
+border-color:var(--dark);
+color:var(--gold);
+}
+
+.campaign-count{
+opacity:0.62;
+margin-left:5px;
+}
+
+.campaign-panel-card.is-hidden{
+display:none !important;
+}
+
+.campaign-card-empty{
+grid-column:1 / -1;
+padding:36px;
+text-align:center;
+background:#fff;
+border:1px solid rgba(0,0,0,0.06);
+border-radius:14px;
+color:var(--text-mid);
+}
+
 @media(max-width:900px){
 .announcements-grid{
 grid-template-columns:1fr 1fr;
 }
+
+.campaign-hub{
+padding:30px 20px;
+}
+
+.campaign-hub-head{
+display:block;
+}
 }
 
 @media(max-width:600px){
+.campaign-hub{
+padding:24px 16px;
+}
+
 .announcements-grid{
 grid-template-columns:1fr;
 }
@@ -2225,7 +2320,10 @@ width="400" height="300" loading="lazy">
 </article>
 </div>
 <p style="font-size:11px;color:var(--text-light);margin-top:12px;font-style:italic;">* Offers subject to availability. Contact store to confirm.</p>
-<a href="/stores/bangalore/frazer-town/offers/" class="btn-secondary" style="margin-top:16px;display:inline-block;">View All Store Offers →</a>
+<div style="display:flex;flex-wrap:wrap;gap:10px;margin-top:16px;">
+<a href="/stores/bangalore/frazer-town/offers/" class="btn-secondary">View All Store Offers →</a>
+<a href="/stores/bangalore/frazer-town/offers/#all" class="btn-secondary">View All Store Campaigns →</a>
+</div>
 </div>
 
 
@@ -3386,6 +3484,47 @@ var expanded = desc.classList.toggle('is-expanded');
 btn.setAttribute('aria-expanded', expanded ? 'true' : 'false');
 btn.textContent = expanded ? '- Less' : '+ More';
 }
+
+function showCampaignTab(tab){
+var selected = tab || 'offer';
+document.querySelectorAll('[data-campaign-tab]').forEach(function(btn){
+btn.classList.toggle('is-active', btn.getAttribute('data-campaign-tab') === selected);
+});
+document.querySelectorAll('[data-campaign-types]').forEach(function(card){
+var types = (card.getAttribute('data-campaign-types') || '').split(/\s+/);
+var show = selected === 'all' ? types.indexOf('past') === -1 : types.indexOf(selected) !== -1;
+card.classList.toggle('is-hidden', !show);
+});
+var count = document.querySelectorAll('[data-campaign-types]:not(.is-hidden)').length;
+document.querySelectorAll('[data-campaign-results]').forEach(function(el){
+el.textContent = count + ' campaign' + (count === 1 ? '' : 's');
+});
+document.querySelectorAll('[data-campaign-empty]').forEach(function(el){
+el.classList.toggle('is-hidden', count !== 0);
+});
+}
+
+function initCampaignTabs(){
+var tabs = document.querySelectorAll('[data-campaign-tab]');
+if(!tabs.length) return;
+tabs.forEach(function(btn){
+btn.addEventListener('click', function(){
+var tab = btn.getAttribute('data-campaign-tab') || 'offer';
+if(history.replaceState){
+var cleanUrl = window.location.pathname + window.location.search;
+history.replaceState(null, '', tab === 'offer' ? cleanUrl : '#' + tab);
+}
+showCampaignTab(tab);
+});
+});
+var hash = (window.location.hash || '').replace('#', '').toLowerCase();
+if(hash === 'offers') hash = 'offer';
+var initial = hash || 'offer';
+if(!document.querySelector('[data-campaign-tab="' + initial + '"]')) initial = 'offer';
+showCampaignTab(initial);
+}
+
+document.addEventListener('DOMContentLoaded', initCampaignTabs);
 </script>
 
 <script>
