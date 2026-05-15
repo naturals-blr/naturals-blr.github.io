@@ -2678,6 +2678,43 @@ gap: 8px;
 .ft-copy { font-size: 11px; color: rgba(255,255,255,0.16); }
 .ft-url { font-size: 11px; color: rgba(255,255,255,0.18); letter-spacing: 1px; }
 
+.site-scroll-after-hero {
+position: fixed;
+right: 24px;
+bottom: 84px;
+z-index: 900;
+width: 44px;
+height: 44px;
+border-radius: 50%;
+border: 1px solid rgba(255,255,255,0.18);
+background: var(--dark, #101512);
+color: rgba(255,255,255,0.82);
+display: flex;
+align-items: center;
+justify-content: center;
+cursor: pointer;
+opacity: 0;
+pointer-events: none;
+transform: translateY(12px);
+transition: opacity 0.25s ease, transform 0.25s ease, background 0.2s ease, border-color 0.2s ease;
+box-shadow: 0 10px 28px rgba(0,0,0,0.22);
+}
+.site-scroll-after-hero.visible {
+opacity: 1;
+pointer-events: auto;
+transform: translateY(0);
+}
+.site-scroll-after-hero:hover {
+background: var(--green, #0f3d30);
+border-color: var(--green-soft, rgba(255,255,255,0.3));
+color: #fff;
+}
+.site-scroll-after-hero svg {
+width: 20px;
+height: 20px;
+display: block;
+}
+
 /* ── Responsive ─────────────────────────────────────────────────── */
 @media (max-width: 960px) {
 .ft-top {
@@ -2697,8 +2734,20 @@ grid-template-columns: 1fr;
 padding: 28px 16px 20px;
 }
 .ft-col ul a { max-width: 100%; }
+.site-scroll-after-hero {
+right: 18px;
+bottom: 86px;
+width: 42px;
+height: 42px;
+}
 }
 </style>
+
+<button class="site-scroll-after-hero" type="button" aria-label="Scroll to page content" title="Back to page content">
+<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+<path d="M18 15l-6-6-6 6"></path>
+</svg>
+</button>
 
 <div id="staffTrigger" style="position: fixed; bottom: 10px; right: 10px; width: 24px; height: 24px; opacity: 0.2; z-index: 9999; cursor: pointer;">
 ⚙️
@@ -2733,6 +2782,44 @@ window.location.href = "/intranet"; // change dynamically if needed
 triggers.forEach(trigger => {
 trigger.addEventListener('click', handleTriggerClick);
 });
+})();
+</script>
+
+<script>
+(function() {
+var btn = document.querySelector('.site-scroll-after-hero');
+if (!btn) return;
+
+function getHero() {
+return document.querySelector('.page-hero, .hero, .careers-hero');
+}
+
+function getTarget() {
+var hero = getHero();
+if (hero && hero.nextElementSibling) return hero.nextElementSibling;
+return document.querySelector('main, .services-main, .page-wrap, section');
+}
+
+function scrollBelowHero() {
+var target = getTarget();
+if (!target) {
+window.scrollTo({ top: 0, behavior: 'smooth' });
+return;
+}
+target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+}
+
+function updateVisibility() {
+var hero = getHero();
+var threshold = hero ? (hero.offsetTop + hero.offsetHeight - 80) : 280;
+var scrollY = window.pageYOffset || document.documentElement.scrollTop || 0;
+btn.classList.toggle('visible', scrollY > threshold);
+}
+
+btn.addEventListener('click', scrollBelowHero);
+window.addEventListener('scroll', updateVisibility, { passive: true });
+window.addEventListener('resize', updateVisibility);
+updateVisibility();
 })();
 </script><script>
 window.NATURALS_STORES = [{"Hero_Number": 1, "about_store_text": "Welcome to Naturals Unisex Salon JP Nagar 5th Phase \u2014 south Bangalore\u0027s premium beauty destination on 100 Ft Ring Road. Nestled in the heart of JP Nagar\u0027s 5th Phase, our salon has been the go-to choice for residents of JP Nagar, Banashankari, Jayanagar and Uttarahalli for expert hair care, radiant skin treatments and flawless bridal packages.\n \n Our team of certified stylists specialises in precision haircuts, balayage and global colour, keratin smoothening, hair spa therapies, and a full range of facials tailored to Bangalore\u0027s climate and skin types. Whether you\u0027re preparing for a wedding, a corporate event, or simply your weekly self-care ritual, every visit at our JP Nagar salon is crafted around you.\n \n Part of India\u0027s most trusted salon network with over 25 years of expertise across 1,000+ outlets, Naturals brings national-standard beauty services to your neighbourhood \u2014 with transparent pricing, premium products, and no surprises. Book your appointment online or walk in at Anand Onyx, 1st Floor, 15th Cross, 100 Ft Ring Road.\n\nDiscover a sanctuary of beauty in South Bangalore. Our JP Nagar 5th Phase stylists specialize in global hair trends and rejuvenating skin therapies.", "active_status": "Yes", "address_city": "Bangalore", "address_full": "1st Floor, Anand Onyx, No 305, 15th Cross Rd, near Outer Ring Road, 5th Phase, J P Nagar Phase 5, J. P. Nagar, Bangalore, Karnataka 560078, India", "address_line_1": "1st Floor, Anand Onyx, No 305, 15th Cross Rd, near Outer Ring Road, 5th Phase, J P Nagar Phase 5, J. P. Nagar", "address_pincode": "560078", "address_state": "Karnataka", "appointment_url": "https://naturals-salon-jpnagar5phase.setmore.com/", "booking_platform": "Setmore", "brand_store_name": "Naturals Unisex Salon - JP Nagar 5th Phase", "email": "jpnagar2.naturals@gmail.com", "escalation_contact": "Sophia", "escalation_email": "sophiaaxon@gmail.com", "escalation_whatsapp": "919741115349", "facebook_id": "Naturals.Salon.JPNagar5Phase", "facebook_page_id": "715840311849516", "facebook_url": "https://facebook.com/Naturals.Salon.JPNagar5Phase", "google_location_id": "locations/11456061934238062921", "google_maps_url": "https://g.page/Naturals_JPNagar5thPhase/", "google_place_id": "ChIJD_AjPBEVrjsRyrGhTRo9qvw", "google_review_link": "https://g.page/Naturals_JPNagar5thPhase/review?rc/", "h1_heading": "Naturals Unisex Salon - JP Nagar 5th Phase", "hero_tagline": "Elevate Your Style in South Bangalore", "instagram_business_account_id": "17841425192935961", "instagram_id": "Naturals.Salon.JPNagar5Phase", "instagram_url": "https://instagram.com/Naturals.Salon.JPNagar5Phase/", "local_neighborhood": "JP Nagar 5th Phase", "meta_description": "Experience luxury hair styling \u0026 skin care in JP Nagar. 5-star services from expert stylists. Book your premium makeover today!", "mon_fri_hours": "10:00 AM \u2013 9:00 PM", "nearby_landmarks": "Near Puttenahalli Lake, Ragigudda Sri Prasanna Anjaneyaswamy Temple, Ranga Shankara, Sarakki Lake, Indian Music Experience Museum, Lalbagh Botanical Garden, Bull Temple, Jayanagar 4th Block Market, ISKCON Vaikuntha Hill, Ranadheera Kanteerava Park", "phone_landline": "918041304444", "phone_mobile": "918792642299", "phone_whatsapp": "918792642299", "pincode": "560078", "price_range": "\u20b9\u20b9", "saturday_hours": "10:00 AM \u2013 9:00 PM", "schema_latitude": "12.9055", "schema_longitude": "77.5945", "seo_title": "Best Hair Salon in JP Nagar 5th Phase | Naturals Unisex Salon", "store_display_name": "JP Nagar 5th Phase", "store_id": "Store_N78", "store_id_short": "N78", "store_manager_name": "Nisha", "sunday_hours": "10:00 AM \u2013 9:00 PM"}, {"Hero_Number": 2, "about_store_text": "Welcome to Naturals Unisex Salon at Nagavara \u2014 north Bangalore\u0027s most convenient premium salon, located on the 1st Floor of , above to Paakashala Restaurant Nagavara, just minutes from Manyata Tech Park and Hebbal.\n \n Designed for the busy professional, our Elements Mall salon offers express and full-service beauty treatments that fit your schedule \u2014 from quick blowouts and express facials to full hair colour sessions and relaxing spa therapies. Whether you\u0027re a tech professional stepping away from the office, or a weekend shopper looking to unwind, our certified stylists deliver precision results with premium products every time.\n \n Our services include haircuts and styling for all hair types, global and fashion hair colour, keratin and smoothening treatments, deep conditioning hair spas, advanced facials, and de-tan and clean-up treatments perfect for Bangalore\u0027s sun and pollution. As part of India\u0027s most trusted salon network \u2014 with 25 years of expertise \u2014 Naturals brings world-class beauty services to your neighbourhood mall. Book online or visit us on the 3rd Floor at Elements Mall.\n\nLocated inside the premier Elements Mall, our salon offers high-end grooming and beauty solutions tailored for the sophisticated urban lifestyle.", "active_status": "Yes", "address_city": "Bangalore", "address_full": "22-26/B11, R.K. Tower, 1st Cross, Chanukya Layout, Near Skywalk Exit, Nagavara, Bangalore, Karnataka 560045, India", "address_line_1": "22-26/B11, R.K. Tower, 1st Cross, Chanukya Layout, Near Skywalk Exit, Nagavara,", "address_pincode": "560045", "address_state": "Karnataka", "appointment_url": "https://naturals-salon-elementsmall.setmore.com/", "booking_platform": "Setmore", "brand_store_name": "Naturals Unisex Salon - Nagavara", "email": "naturalsnagavara@gmail.com", "escalation_contact": "Sophia", "escalation_email": "sophiaaxon@gmail.com", "escalation_whatsapp": "919741115349", "facebook_id": "Naturals.Salon.Nagavara", "facebook_page_id": "318850925297093", "facebook_url": "https://facebook.com/Naturals.Salon.Nagavara/", "google_location_id": "locations/5858391068390788403", "google_maps_url": "https://maps.app.goo.gl/dPi8bNfB4USdgvvu8", "google_place_id": "ChIJo_js4GgXrjsR3LgZhMNOPz4", "google_review_link": "https://g.page/r/Cdy4GYTDTj8-EAI/review", "h1_heading": "Naturals Unisex Salon - Nagavara", "hero_tagline": "Luxury Beauty Meets Ultimate Convenience", "instagram_business_account_id": "17841437507959021", "instagram_id": "Naturals.Salon.Nagavara", "instagram_url": "https://instagram.com/Naturals.Salon.Nagavara/", "local_neighborhood": "Thanisandra / Nagavara", "meta_description": "Premium hair coloring \u0026 spa services at Nagavara. Visit North Bangalore\u0027s elite salon for a luxury transformation. Book now!", "mon_fri_hours": "10:00 AM \u2013 9:00 PM", "nearby_landmarks": "Above Paakashala Restaurant Nagavara, Near Skywalk Exit, Near Manyata Tech Park, Hebbal Flyover, Nagavara Lake, Rachenahalli Lake, Phoenix Mall of Asia, Snow City Bengaluru, Bengaluru Palace, Hennur Biodiversity Park, Aster CMI Hospital, Jakkur Lake", "phone_landline": "", "phone_mobile": "919901000017", "phone_whatsapp": "919901000017", "pincode": "560045", "price_range": "\u20b9\u20b9", "saturday_hours": "10:00 AM \u2013 9:00 PM", "schema_latitude": "13.04079", "schema_longitude": "77.61973", "seo_title": "Top Rated Salon in Nagavara | Naturals Unisex Salon", "store_display_name": "Nagavara", "store_id": "Store_N45", "store_id_short": "N45", "store_manager_name": "Sandesh Kumar", "sunday_hours": "10:00 AM \u2013 9:00 PM"}, {"Hero_Number": 3, "about_store_text": "Welcome to Naturals Unisex Salon Devasandra \u2014 east Bangalore\u0027s trusted beauty destination, conveniently located on Devasandra Main Road, KR Puram, opposite the landmark Lulu\u0027s Bakery in Basavanapura.\n \n Our Devasandra salon serves the rapidly growing communities of KR Puram, Mahadevapura, ITPL Road, Hoodi and Varthur with a full range of professional beauty services \u2014 from everyday haircuts and hair colour to bridal packages, deep conditioning treatments, skin care and body wellness therapies. Our team of experienced stylists knows that every client is unique, which is why each visit begins with a personalised consultation to understand your hair type, skin concerns and lifestyle.\n \n Families in KR Puram have trusted Naturals for premium-quality beauty services at honest, transparent prices. Whether you\u0027re looking for a weekend blow-dry, a pre-festival makeover, or a full bridal preparation, our Devasandra team is here to deliver results that last. Part of India\u0027s most respected salon network, Naturals brings 25 years of national expertise to your neighbourhood. Book your appointment online or walk in at Maruthi Tower, 1st Floor.\n\nWelcome to our brand new, state-of-the-art luxury location in Devasandra. We bring international styling standards and elite skin care to the KR Puram community.", "active_status": "Yes", "address_city": "Bangalore", "address_full": "2,3, 1st Floor, Maruthi Tower, No. 1, Devasandra Main Rd, opp. Lulu\u0027s Bakery, Basavanapura, KRPuram, Bangalore, Karnataka 560036, India", "address_line_1": "2,3, 1st Floor, Maruthi Tower, No. 1, Devasandra Main Rd, opp. Lulu\u0027s Bakery, Basavanapura, KRPuram", "address_pincode": "560036", "address_state": "Karnataka", "appointment_url": "https://naturals-salon-devasandra.setmore.com/", "booking_platform": "Setmore", "brand_store_name": "Naturals Unisex Salon - Devasandra", "email": "naturalsdevasandra@gmail.com", "escalation_contact": "Sophia", "escalation_email": "sophiaaxon@gmail.com", "escalation_whatsapp": "919741115349", "facebook_id": "Naturals.Salon.Devasandra", "facebook_page_id": "922849001248263", "facebook_url": "https://facebook.com/Naturals.Salon.Devasandra/", "google_location_id": "locations/2727661342173271867", "google_maps_url": "https://maps.google.com/?q=Naturals+Salon+Devasandra", "google_place_id": "ChIJoWUOlAARrjsREnWUrR3DWfk", "google_review_link": "https://g.page/Naturals-Devasandra/review?rc/", "h1_heading": "Naturals Unisex Salon - Devasandra", "hero_tagline": "A New Era of Luxury in Devasandra", "instagram_business_account_id": "17841437347582520", "instagram_id": "Naturals.Salon.Devasandra", "instagram_url": "https://instagram.com/Naturals.Salon.Devasandra/", "local_neighborhood": "Devasandra / KR Puram", "meta_description": "Visit our brand new luxury salon in Devasandra for expert haircuts \u0026 bridal makeup. Experience 5-star service near KR Puram. Book today!", "mon_fri_hours": "10:00 AM \u2013 9:00 PM", "nearby_landmarks": "Near Phoenix Marketcity, VR Bengaluru, Krishnarajapuram Railway Station, Bagmane World Technology Center, ITPL Whitefield, Marathahalli Bridge, Ulsoor Lake, RMZ Infinity, Commercial Street, Indira Nagar 100 Feet Road", "phone_landline": "", "phone_mobile": "917259490009", "phone_whatsapp": "917259490009", "pincode": "560036", "price_range": "\u20b9\u20b9", "saturday_hours": "10:00 AM \u2013 9:00 PM", "schema_latitude": "13.005", "schema_longitude": "77.698", "seo_title": "Best Salon in Devasandra KR Puram | Naturals Unisex Salon", "store_display_name": "Devasandra", "store_id": "Store_N36", "store_id_short": "N36", "store_manager_name": "Devasandra Store Manager", "sunday_hours": "10:00 AM \u2013 9:00 PM"}, {"Hero_Number": 4, "about_store_text": "Welcome to Naturals Unisex Salon Frazer Town \u2014 centrally located on Mosque Road, Pulikeshi Nagar, above Poorvika Mobile Store, in the heart of one of Bangalore\u0027s most vibrant and well-connected neighbourhoods.\n \n Our Frazer Town salon caters to Bangalore\u0027s most diverse clientele \u2014 from professionals working in the CBD and Shivajinagar, to residents of Frazer Town, Richards Town, Lingarajapuram and Ulsoor. We offer a comprehensive range of beauty services including precision haircuts, global and highlight hair colour, keratin and rebonding treatments, hair spa, advanced facials, bridal and party makeup, mehendi and full bridal packages for all communities.\n \n What sets our Frazer Town salon apart is our team\u0027s deep experience with diverse hair textures and skin tones \u2014 from fine straight hair to thick curly and wavy types, and from fair to deep skin tones. Every treatment is selected and adapted to give you the best possible result. Transparent pricing, premium products, and a warm, welcoming space \u2014 that\u0027s the Naturals promise. Visit us on Mosque Road or book your appointment online.\n\nNestled in the heart of heritage Bangalore, our Frazer Town salon combines classic elegance with modern hair and skin innovations for an elite experience.", "active_status": "Yes", "address_city": "Bangalore", "address_full": "1st floor, No.94, Mosque Rd, above Poorvika Mobile Store, Cleveland Town, Frazer Town, Bangalore, Karnataka 560005, India", "address_line_1": "1st floor, No.94, Mosque Rd, above Poorvika Mobile Store, Cleveland Town, Frazer Town", "address_pincode": "560005", "address_state": "Karnataka", "appointment_url": "https://naturals-salon-frazertown.setmore.com/", "booking_platform": "Setmore", "brand_store_name": "Naturals Unisex Salon - Frazer Town", "email": "frazertown.naturals@gmail.com", "escalation_contact": "Sophia", "escalation_email": "sophiaaxon@gmail.com", "escalation_whatsapp": "919741115349", "facebook_id": "Naturals.Salon.FrazerTown", "facebook_page_id": "526783314021240", "facebook_url": "https://www.facebook.com/Naturals.Salon.FrazerTown/", "google_location_id": "locations/4210460996377672562", "google_maps_url": "https://maps.google.com/?q=Naturals+Salon+Frazer+Town", "google_place_id": "ChIJcfViGvEWrjsRUuIzB28viSc", "google_review_link": "https://g.page/Naturals-FrazerTown/review?rc/", "h1_heading": "Naturals Unisex Salon - Frazer Town", "hero_tagline": "Timeless Elegance \u0026 Expert Styling", "instagram_business_account_id": "17841447241612437", "instagram_id": "Naturals.Salon.FrazerTown", "instagram_url": "https://instagram.com/Naturals.Salon.FrazerTown/", "local_neighborhood": "Frazer Town / Pulikeshi Nagar", "meta_description": "Professional hair styling \u0026 luxury beauty in Frazer Town. Expert services in a heritage neighborhood. Book your appointment today!", "mon_fri_hours": "10:00 AM \u2013 9:00 PM", "nearby_landmarks": "Near Mosque Road, Albert Bakery, St. Francis Xavier\u2019s Cathedral, Coles Park, Thom\u2019s Bakery \u0026 Supermarket, Bangalore East Railway Station, Bangalore Palace, Ulsoor Lake, Commercial Street, Vidhana Soudha", "phone_landline": "918040948040", "phone_mobile": "919606333017", "phone_whatsapp": "919606333017", "pincode": "560005", "price_range": "\u20b9\u20b9", "saturday_hours": "10:00 AM \u2013 9:00 PM", "schema_latitude": "12.99", "schema_longitude": "77.605", "seo_title": "Premium Salon in Frazer Town | Naturals Unisex Salon", "store_display_name": "Frazer Town", "store_id": "Store_N05", "store_id_short": "N05", "store_manager_name": "Rethika", "sunday_hours": "10:00 AM \u2013 9:00 PM"}, {"about_store_text": "Welcome to Naturals Unisex Salon Hennur \u2014 north Bangalore\u0027s trusted beauty salon, conveniently located above SBI Bank on Hennur Main Road at Hennur Cross, serving the fast-growing communities of Hennur, Kalyan Nagar, HBR Layout, Horamavu and Banaswadi.\n \n Hennur has transformed into one of Bangalore\u0027s most dynamic residential hubs, and our salon has grown with it \u2014 offering the neighbourhood access to premium salon services that were once only available in central Bangalore. From expert haircuts and the latest hair colour techniques, to relaxing hair spa therapies, brightening facials, de-tan treatments and full bridal packages, our certified team delivers outstanding results at honest, transparent prices.\n \n Our Hennur team is passionate about making every client feel pampered and confident \u2014 whether you\u0027re a working professional looking for a quick style refresh, a new bride preparing for your big day, or a family visiting together for the weekend. As part of India\u0027s most trusted salon chain with 25+ years of experience, Naturals brings the gold standard in beauty to your doorstep. Book online or walk in at Hennur Main Road.\n\nDedicated to excellence, our Hennur team provides personalized beauty consultations and advanced treatments designed for the modern resident of North Bangalore.", "active_status": "Yes", "address_city": "Bangalore", "address_full": "1st Floor, No 40/A, 40/C, Main Road, above SBI Bank, Hennur Gardens, Bangalore, Karnataka 560043, India", "address_line_1": "1st Floor, No 40/A, 40/C, Main Road, above SBI Bank, Hennur Gardens", "address_pincode": "560043", "address_state": "Karnataka", "appointment_url": "https://naturals-salon-hennur.setmore.com/", "booking_platform": "Setmore", "brand_store_name": "Naturals Unisex Salon - Hennur", "email": "naturalshennur@gmail.com", "escalation_contact": "Sophia", "escalation_email": "sophiaaxon@gmail.com", "escalation_whatsapp": "919741115349", "facebook_id": "Naturals.Salon.Hennur", "facebook_page_id": "111143220365821", "facebook_url": "https://facebook.com/Naturals.Salon.Hennur/", "google_location_id": "locations/10326220211235668452", "google_maps_url": "https://maps.google.com/?q=Naturals+Salon+Hennur", "google_place_id": "ChIJb03gT58XrjsRv0Rytrv60BM", "google_review_link": "https://g.page/Naturals-Hennur/review?rc/", "h1_heading": "Naturals Unisex Salon - Hennur", "hero_tagline": "Your Neighborhood Destination for Elite Beauty", "instagram_business_account_id": "17841426843499448", "instagram_id": "Naturals.Salon.Hennur", "instagram_url": "https://instagram.com/Naturals.Salon.Hennur/", "local_neighborhood": "Hennur / North Bangalore", "meta_description": "Expert hair styling \u0026 skin treatments in Hennur. Premium salon services for gated communities in North Bangalore. Book your visit!", "mon_fri_hours": "10:00 AM \u2013 8:00 PM", "nearby_landmarks": "Near Hennur Cross, Mantri Splendor, Manyata Tech Park, Hennur Lake Biodiversity Park, Elements Mall, Bagalur Main Road, Bangalore Palace, Hebbal Flyover, Lumbini Gardens, Horamavu Agara Lake, XLR8 Indoor Sports Arena, Byg Brewski Brewing Company", "phone_landline": "", "phone_mobile": "919606900069", "phone_whatsapp": "919606900069", "pincode": "560043", "price_range": "\u20b9\u20b9", "saturday_hours": "10:00 AM \u2013 8:00 PM", "schema_latitude": "13.042", "schema_longitude": "77.648", "seo_title": "Best Beauty Salon in Hennur | Naturals Unisex Salon", "store_display_name": "Hennur", "store_id": "Store_N43", "store_id_short": "N43", "store_manager_name": "Tresa Mary", "sunday_hours": "10:00 AM \u2013 8:00 PM"}];

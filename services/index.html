@@ -779,8 +779,7 @@ font-size: 12px;
 /* FILTERS - Luxury editorial-style filter panel */
 .filters-sec{
 background:var(--dark);
-position:sticky;
-top:70px;
+position:relative;
 z-index:100;
 border-bottom:1px solid rgba(255,255,255,0.06);
 box-shadow:0 2px 12px rgba(0,0,0,0.15);
@@ -1050,38 +1049,6 @@ background:rgba(0,0,0,0.2);
 }
 
 /* Scroll to Top Button */
-#scroll-top-btn {
-position: fixed;
-bottom: 20px;
-right: 20px;
-width: 50px;
-height: 50px;
-background: var(--gold);
-border: none;
-border-radius: 50%;
-color: white;
-cursor: pointer;
-display: flex;
-align-items: center;
-justify-content: center;
-box-shadow: 0 4px 12px rgba(212, 175, 55, 0.3);
-opacity: 0;
-pointer-events: none;
-transition: opacity 0.3s ease, transform 0.2s ease, box-shadow 0.2s ease;
-z-index: 1000;
-}
-
-#scroll-top-btn.visible {
-opacity: 1;
-pointer-events: auto;
-}
-
-#scroll-top-btn:hover {
-transform: translateY(-2px);
-box-shadow: 0 6px 16px rgba(212, 175, 55, 0.4);
-background: var(--gold-dark);
-}
-
 /* Services Main Container */
 .services-main{
 max-width:var(--content-max-width);
@@ -1536,23 +1503,6 @@ min-width:60px;justify-content:center;
 .empty-state{text-align:center;padding:80px 32px;color:var(--text-light);}
 .empty-state h3{font-family:'Cormorant Garamond',serif;font-size:32px;font-weight:300;margin-bottom:10px;}
 
-/* ── SCROLL TO TOP BUTTON ── */
-#scroll-top{
-position:fixed;bottom:32px;right:32px;z-index:500;
-width:44px;height:44px;
-background:var(--dark);
-border:1px solid rgba(255,255,255,0.15);
-color:rgba(255,255,255,0.7);
-font-size:18px;line-height:1;
-display:flex;align-items:center;justify-content:center;
-cursor:pointer;
-opacity:0;pointer-events:none;
-transform:translateY(12px);
-transition:opacity 0.3s ease,transform 0.3s ease,background 0.2s,border-color 0.2s;
-}
-#scroll-top.visible{opacity:1;pointer-events:auto;transform:translateY(0);}
-#scroll-top:hover{background:var(--green);border-color:var(--green-soft);color:#fff;}
-
 </style>
 <style>
 .btn-book{background:#1A73E8;color:#fff;padding:13px 22px;min-height:48px;font-size:11px;letter-spacing:1.5px;text-transform:uppercase;font-weight:600;display:inline-flex;align-items:center;gap:8px;transition:all 0.3s;border-radius:6px;white-space:nowrap;text-decoration:none;}
@@ -1603,6 +1553,158 @@ footer{background:#080f0b;}
 </style>
 
 <style>
+.results-bar{
+max-width:none;
+background:#0f1117;
+border-bottom:1px solid rgba(255,255,255,0.08);
+color:rgba(255,255,255,0.72);
+padding:14px max(20px,calc((100vw - 760px) / 2));
+}
+#results-count{color:rgba(255,255,255,0.72);}
+.services-main{
+max-width:none;
+background:#0f1117;
+padding:26px max(20px,calc((100vw - 760px) / 2)) 90px;
+}
+#svc-container{
+max-width:760px;
+margin:0 auto;
+}
+.category-header{
+position:static;
+text-align:left;
+background:transparent;
+margin:26px 0 14px;
+padding:0;
+}
+.category-title{
+font-family:'Jost',sans-serif;
+font-size:24px;
+font-weight:400;
+letter-spacing:0;
+line-height:1.2;
+color:#f5f5f7;
+margin:0;
+}
+.category-underline{display:none;}
+.svc-grid{
+display:grid;
+grid-template-columns:1fr;
+gap:12px;
+margin-bottom:34px;
+}
+.svc-card{
+min-height:132px;
+background:#111318;
+border:1px solid rgba(236,238,244,0.58);
+border-radius:24px;
+padding:16px 18px;
+display:grid;
+grid-template-columns:116px minmax(0,1fr) 34px;
+align-items:center;
+gap:18px;
+box-shadow:none;
+cursor:pointer;
+overflow:hidden;
+transition:border-color 0.2s,background 0.2s,transform 0.2s;
+}
+.svc-card:hover{
+background:#151820;
+border-color:rgba(236,238,244,0.86);
+box-shadow:none;
+transform:translateY(-1px);
+}
+.svc-thumb{
+width:116px;
+height:92px;
+border-radius:12px;
+background:#2f3438;
+overflow:hidden;
+display:flex;
+align-items:center;
+justify-content:center;
+}
+.svc-thumb img{
+width:100%;
+height:100%;
+object-fit:cover;
+}
+.svc-copy{
+min-width:0;
+}
+.svc-top-row{
+margin:0;
+}
+.svc-title{
+font-family:'Jost',sans-serif;
+font-size:24px;
+font-weight:600;
+color:#f7f7fb;
+line-height:1.12;
+letter-spacing:0;
+margin:0 0 8px;
+text-transform:none;
+overflow-wrap:anywhere;
+}
+.svc-meta-bar{
+display:flex;
+align-items:center;
+flex-wrap:wrap;
+gap:8px;
+margin:0;
+color:rgba(247,247,251,0.78);
+font-size:16px;
+line-height:1.35;
+}
+.svc-price{
+color:rgba(247,247,251,0.86);
+font-size:16px;
+font-weight:400;
+}
+.svc-regular{
+color:rgba(247,247,251,0.46);
+font-size:14px;
+text-decoration:line-through;
+}
+.svc-duration{
+color:rgba(247,247,251,0.68);
+font-size:14px;
+font-weight:500;
+padding:3px 8px;
+border:1px solid rgba(247,247,251,0.16);
+border-radius:999px;
+}
+.meta-separator{display:none;}
+.svc-toggle{
+margin:0;
+width:34px;
+height:34px;
+border-radius:0;
+background:transparent;
+color:#bfcaff;
+font-size:34px;
+font-weight:300;
+line-height:1;
+transform:none;
+}
+.svc-toggle:hover,
+.svc-toggle.expanded{
+background:transparent;
+color:#d7defd;
+transform:none;
+}
+.svc-toggle.expanded{
+transform:rotate(90deg);
+}
+.svc-description{
+grid-column:2 / 4;
+color:rgba(247,247,251,0.68);
+font-size:13px;
+line-height:1.6;
+}
+.svc-description.visible{
+border-top:1px solid rgba(247,247,251,0.12);
+}
 
 @media(max-width:900px){
 .page-hero-inner{padding:44px 20px 0;}
@@ -1613,8 +1715,7 @@ footer{background:#080f0b;}
 .filter-group.cat-group{min-width:140px;}
 .filter-group.sort-group{min-width:50px;}
 #store-select, #cat-select{min-width:120px;}
-.svc-grid{grid-template-columns:1fr 1fr;}
-#scroll-top{bottom:20px;right:20px;width:40px;height:40px;font-size:16px;}
+.svc-grid{grid-template-columns:1fr;}
 .store-pill{padding:6px 12px;font-size:12px;}
 }
 @media(max-width:600px){
@@ -1628,12 +1729,39 @@ footer{background:#080f0b;}
 .filter-lbl{display:none;}
 .cat-filter-scroll{flex-wrap:wrap;}
 .svc-grid{grid-template-columns:1fr;}
+.svc-card{
+min-height:132px;
+grid-template-columns:112px minmax(0,1fr) 30px;
+gap:16px;
+border-radius:24px;
+padding:14px 16px;
+}
+.svc-thumb{width:112px;height:88px;}
+.svc-title{font-size:22px;}
+.svc-meta-bar{font-size:15px;}
+.svc-price{font-size:15px;}
 .store-pill{padding:6px 10px;font-size:11px;}
 }
 @media(max-width:480px){
 .filters-wrap{padding:8px 12px;top:60px;gap:10px;}
 .filter-row{gap:4px;}
 .filter-group{gap:4px;}
+.services-main{
+padding-left:14px;
+padding-right:14px;
+}
+.results-bar{
+padding-left:14px;
+padding-right:14px;
+}
+.svc-card{
+grid-template-columns:100px minmax(0,1fr) 28px;
+gap:14px;
+padding:12px 14px;
+}
+.svc-thumb{width:100px;height:82px;}
+.svc-title{font-size:20px;}
+.svc-meta-bar{gap:6px;}
 .store-pill{padding:5px 8px;font-size:10px;}
 }
 </style>
@@ -2888,12 +3016,6 @@ serviceElement.textContent = filterValue;
 </div>
 </main>
 
-<button id="scroll-top-btn" onclick="scrollToResults()" title="Scroll to results">
-<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-<polyline points="18 15 12 9 6 15"></polyline>
-</svg>
-</button>
-
 <footer>
 <div class="ft-top">
 
@@ -3034,6 +3156,43 @@ gap: 8px;
 .ft-copy { font-size: 11px; color: rgba(255,255,255,0.16); }
 .ft-url { font-size: 11px; color: rgba(255,255,255,0.18); letter-spacing: 1px; }
 
+.site-scroll-after-hero {
+position: fixed;
+right: 24px;
+bottom: 84px;
+z-index: 900;
+width: 44px;
+height: 44px;
+border-radius: 50%;
+border: 1px solid rgba(255,255,255,0.18);
+background: var(--dark, #101512);
+color: rgba(255,255,255,0.82);
+display: flex;
+align-items: center;
+justify-content: center;
+cursor: pointer;
+opacity: 0;
+pointer-events: none;
+transform: translateY(12px);
+transition: opacity 0.25s ease, transform 0.25s ease, background 0.2s ease, border-color 0.2s ease;
+box-shadow: 0 10px 28px rgba(0,0,0,0.22);
+}
+.site-scroll-after-hero.visible {
+opacity: 1;
+pointer-events: auto;
+transform: translateY(0);
+}
+.site-scroll-after-hero:hover {
+background: var(--green, #0f3d30);
+border-color: var(--green-soft, rgba(255,255,255,0.3));
+color: #fff;
+}
+.site-scroll-after-hero svg {
+width: 20px;
+height: 20px;
+display: block;
+}
+
 /* ── Responsive ─────────────────────────────────────────────────── */
 @media (max-width: 960px) {
 .ft-top {
@@ -3053,8 +3212,20 @@ grid-template-columns: 1fr;
 padding: 28px 16px 20px;
 }
 .ft-col ul a { max-width: 100%; }
+.site-scroll-after-hero {
+right: 18px;
+bottom: 86px;
+width: 42px;
+height: 42px;
+}
 }
 </style>
+
+<button class="site-scroll-after-hero" type="button" aria-label="Scroll to page content" title="Back to page content">
+<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+<path d="M18 15l-6-6-6 6"></path>
+</svg>
+</button>
 
 <div id="staffTrigger" style="position: fixed; bottom: 10px; right: 10px; width: 24px; height: 24px; opacity: 0.2; z-index: 9999; cursor: pointer;">
 ⚙️
@@ -3089,6 +3260,44 @@ window.location.href = "/intranet"; // change dynamically if needed
 triggers.forEach(trigger => {
 trigger.addEventListener('click', handleTriggerClick);
 });
+})();
+</script>
+
+<script>
+(function() {
+var btn = document.querySelector('.site-scroll-after-hero');
+if (!btn) return;
+
+function getHero() {
+return document.querySelector('.page-hero, .hero, .careers-hero');
+}
+
+function getTarget() {
+var hero = getHero();
+if (hero && hero.nextElementSibling) return hero.nextElementSibling;
+return document.querySelector('main, .services-main, .page-wrap, section');
+}
+
+function scrollBelowHero() {
+var target = getTarget();
+if (!target) {
+window.scrollTo({ top: 0, behavior: 'smooth' });
+return;
+}
+target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+}
+
+function updateVisibility() {
+var hero = getHero();
+var threshold = hero ? (hero.offsetTop + hero.offsetHeight - 80) : 280;
+var scrollY = window.pageYOffset || document.documentElement.scrollTop || 0;
+btn.classList.toggle('visible', scrollY > threshold);
+}
+
+btn.addEventListener('click', scrollBelowHero);
+window.addEventListener('scroll', updateVisibility, { passive: true });
+window.addEventListener('resize', updateVisibility);
+updateVisibility();
 })();
 </script>
 <div id="sticky-bar" data-page-type="services">
@@ -3338,35 +3547,6 @@ document.addEventListener('DOMContentLoaded', initializePage);
 initializePage();
 }
 
-// Scroll to Top Button Logic
-window.scrollToResults = function() {
-const resultsElement = document.getElementById('results-count');
-if (resultsElement) {
-resultsElement.scrollIntoView({
-behavior: 'smooth',
-block: 'start'
-});
-}
-};
-
-// Handle scroll visibility for scroll-to-top button
-window.addEventListener('scroll', function() {
-const scrollBtn = document.getElementById('scroll-top-btn');
-const filtersSection = document.querySelector('.filters-sec');
-
-if (!scrollBtn || !filtersSection) return;
-
-const scrollPosition = window.pageYOffset || document.documentElement.scrollTop;
-const filtersTop = filtersSection.offsetTop + filtersSection.offsetHeight;
-const isVisible = scrollPosition > filtersTop; // Show when scrolled past filter area
-
-if (isVisible) {
-scrollBtn.classList.add('visible');
-} else {
-scrollBtn.classList.remove('visible');
-}
-});
-
 // Handle mobile back button to close category drawer
 let isCategoryDrawerOpen = false;
 
@@ -3510,28 +3690,30 @@ fragment.appendChild(categoryHeader);
 const grid = document.createElement('div');
 grid.className = 'svc-grid';
 
-services.forEach(service => {
+services.forEach((service, serviceIndex) => {
 const regularCost = service.Regular_Cost || '';
 const memberCost = service.Member_Cost || '';
 const duration = service.Duration || '';
 const description = service.Description || '';
 const serviceName = service.Service_Name || '';
-const serviceId = service.Service_Name ? service.Service_Name.replace(/\s+/g, '-').toLowerCase() : Math.random().toString(36).substr(2, 9);
+const serviceId = `${category}-${serviceName || 'service'}-${serviceIndex}`.toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/^-|-$/g, '');
 
 // Apply Title Case to service name and description
 const formattedServiceName = toTitleCase(serviceName);
 const formattedDescription = toTitleCase(description);
 
-// Price formatting for Apex Elite
+// Price and media formatting for compact service tiles.
+const iconName = service.service_icon_name || service.Service_Icon_Name || 'service_default.jpg';
+const iconSrc = `/images/service-icon/${iconName}`;
 let priceText = '';
 if (memberCost) {
 if (regularCost) {
-priceText = `<span class="svc-price">₹${memberCost}</span><span class="meta-separator">|</span><small style="text-decoration: line-through; opacity: 0.5;">₹${regularCost}</small>`;
+priceText = `<span class="svc-price">from ₹${memberCost}</span><span class="svc-regular">₹${regularCost}</span>`;
 } else {
-priceText = `<span class="svc-price">₹${memberCost}</span>`;
+priceText = `<span class="svc-price">from ₹${memberCost}</span>`;
 }
 } else if (regularCost) {
-priceText = `<span class="svc-price">₹${regularCost}</span>`;
+priceText = `<span class="svc-price">from ₹${regularCost}</span>`;
 }
 
 const serviceCard = document.createElement('article');
@@ -3541,14 +3723,19 @@ serviceCard.setAttribute('role', 'button');
 serviceCard.setAttribute('tabindex', '0');
 serviceCard.setAttribute('aria-expanded', 'false');
 serviceCard.innerHTML = `
+<div class="svc-thumb" aria-hidden="true">
+<img src="${iconSrc}" alt="" loading="lazy" onerror="this.onerror=null;this.src='/images/service-icon/service_default.jpg'">
+</div>
+<div class="svc-copy">
 <div class="svc-top-row">
 <h3 class="svc-title">${formattedServiceName}</h3>
 </div>
 <div class="svc-meta-bar">
 ${priceText}
-${duration ? `<span class="meta-separator">|</span><span class="svc-duration">${duration}</span>` : ''}
-${description ? `<span class="svc-toggle" onclick="event.stopPropagation(); toggleDescription('${serviceId}')" data-service-id="${serviceId}">+</span>` : ''}
+${duration ? `<span class="svc-duration">${duration}</span>` : ''}
 </div>
+</div>
+${description ? `<span class="svc-toggle" onclick="event.stopPropagation(); toggleDescription('${serviceId}')" data-service-id="${serviceId}">→</span>` : '<span class="svc-toggle">→</span>'}
 ${description ? `<div class="svc-description" id="desc-${serviceId}">${formattedDescription}</div>` : ''}
 `;
 
@@ -3608,7 +3795,7 @@ el.classList.remove('visible');
 });
 document.querySelectorAll('.svc-toggle.expanded').forEach(el => {
 el.classList.remove('expanded');
-el.textContent = '+';
+el.textContent = '→';
 });
 document.querySelectorAll('.svc-card[aria-expanded="true"]').forEach(el => {
 el.setAttribute('aria-expanded', 'false');
@@ -3618,7 +3805,7 @@ el.setAttribute('aria-expanded', 'false');
 if (!isExpanded) {
 descEl.classList.add('visible');
 toggleEl.classList.add('expanded');
-toggleEl.textContent = '−';
+toggleEl.textContent = '→';
 cardEl.setAttribute('aria-expanded', 'true');
 }
 }
@@ -3636,22 +3823,6 @@ populateCategoryDropdown();
 renderServices();
 });
 })();
-</script>
-
-<button id="scroll-up" onclick="window.scrollTo({top:0, behavior:'smooth'})" style="position:fixed; bottom:20px; right:20px; display:none; width:50px; height:50px; border-radius:50%; background:var(--gold); color:var(--dark); border:none; font-size:20px; font-weight:bold; cursor:pointer; box-shadow:0 4px 12px rgba(0,0,0,0.3); transition:all 0.3s; z-index:999;">↑</button>
-
-<script>
-// Show/hide scroll-to-top button based on scroll position
-window.addEventListener('scroll', function() {
-const scrollUpBtn = document.getElementById('scroll-up');
-if (scrollUpBtn) {
-if (window.scrollY > 300) {
-scrollUpBtn.style.display = 'block';
-} else {
-scrollUpBtn.style.display = 'none';
-}
-}
-});
 </script>
 
 </body>

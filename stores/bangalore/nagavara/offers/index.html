@@ -41,7 +41,7 @@ gtag('config', 'G-6H5YGVGG1Q');
 "description": "Exclusive Luxury Beauty Deals at Nagavara, Bangalore",
 "url": "https://naturals-blr.github.io/stores/bangalore/nagavara/offers/",
 "category": "Beauty and Grooming Promotions",
-"datePosted": "2026-05-15 06:20:37.597966T09:00:00+05:30",
+"datePosted": "2026-05-15 07:04:26.856472T09:00:00+05:30",
 "provider": {
 "@type": "HairSalon",
 "name": "Naturals Salon & Spa Nagavara",
@@ -1784,6 +1784,43 @@ gap: 8px;
 .ft-copy { font-size: 11px; color: rgba(255,255,255,0.16); }
 .ft-url { font-size: 11px; color: rgba(255,255,255,0.18); letter-spacing: 1px; }
 
+.site-scroll-after-hero {
+position: fixed;
+right: 24px;
+bottom: 84px;
+z-index: 900;
+width: 44px;
+height: 44px;
+border-radius: 50%;
+border: 1px solid rgba(255,255,255,0.18);
+background: var(--dark, #101512);
+color: rgba(255,255,255,0.82);
+display: flex;
+align-items: center;
+justify-content: center;
+cursor: pointer;
+opacity: 0;
+pointer-events: none;
+transform: translateY(12px);
+transition: opacity 0.25s ease, transform 0.25s ease, background 0.2s ease, border-color 0.2s ease;
+box-shadow: 0 10px 28px rgba(0,0,0,0.22);
+}
+.site-scroll-after-hero.visible {
+opacity: 1;
+pointer-events: auto;
+transform: translateY(0);
+}
+.site-scroll-after-hero:hover {
+background: var(--green, #0f3d30);
+border-color: var(--green-soft, rgba(255,255,255,0.3));
+color: #fff;
+}
+.site-scroll-after-hero svg {
+width: 20px;
+height: 20px;
+display: block;
+}
+
 /* ── Responsive ─────────────────────────────────────────────────── */
 @media (max-width: 960px) {
 .ft-top {
@@ -1803,8 +1840,20 @@ grid-template-columns: 1fr;
 padding: 28px 16px 20px;
 }
 .ft-col ul a { max-width: 100%; }
+.site-scroll-after-hero {
+right: 18px;
+bottom: 86px;
+width: 42px;
+height: 42px;
+}
 }
 </style>
+
+<button class="site-scroll-after-hero" type="button" aria-label="Scroll to page content" title="Back to page content">
+<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+<path d="M18 15l-6-6-6 6"></path>
+</svg>
+</button>
 
 <div id="staffTrigger" style="position: fixed; bottom: 10px; right: 10px; width: 24px; height: 24px; opacity: 0.2; z-index: 9999; cursor: pointer;">
 ⚙️
@@ -1839,6 +1888,44 @@ window.location.href = "/intranet"; // change dynamically if needed
 triggers.forEach(trigger => {
 trigger.addEventListener('click', handleTriggerClick);
 });
+})();
+</script>
+
+<script>
+(function() {
+var btn = document.querySelector('.site-scroll-after-hero');
+if (!btn) return;
+
+function getHero() {
+return document.querySelector('.page-hero, .hero, .careers-hero');
+}
+
+function getTarget() {
+var hero = getHero();
+if (hero && hero.nextElementSibling) return hero.nextElementSibling;
+return document.querySelector('main, .services-main, .page-wrap, section');
+}
+
+function scrollBelowHero() {
+var target = getTarget();
+if (!target) {
+window.scrollTo({ top: 0, behavior: 'smooth' });
+return;
+}
+target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+}
+
+function updateVisibility() {
+var hero = getHero();
+var threshold = hero ? (hero.offsetTop + hero.offsetHeight - 80) : 280;
+var scrollY = window.pageYOffset || document.documentElement.scrollTop || 0;
+btn.classList.toggle('visible', scrollY > threshold);
+}
+
+btn.addEventListener('click', scrollBelowHero);
+window.addEventListener('scroll', updateVisibility, { passive: true });
+window.addEventListener('resize', updateVisibility);
+updateVisibility();
 })();
 </script>
 <script>
