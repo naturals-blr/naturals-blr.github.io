@@ -284,19 +284,27 @@ transition:all 0.2s;border-radius:10px;background:#fff;text-decoration:none;
 }
 .st-view-btn:hover{border-color:var(--gold);color:var(--gold);}
 
-/* SERVICES (unchanged structure) */
+/* SERVICES */
 .services-sec{background:var(--cream);}
-.svc-cats-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;margin-bottom:48px;}
-.svc-cat-card{background:#fff;overflow:hidden;border-radius:14px;border:1px solid rgba(0,0,0,0.07);transition:all 0.3s;cursor:pointer;display:flex;flex-direction:column;}
-.svc-cat-card:hover{transform:translateY(-4px);box-shadow:0 12px 36px rgba(0,0,0,0.1);border-color:var(--gold);}
-.svc-cat-img{height:180px;overflow:hidden;flex-shrink:0;}
+.svc-cats-wrap{position:relative;max-width:1120px;margin:0 auto 34px;}
+.svc-cats-head{display:flex;justify-content:flex-end;margin:-18px 0 12px;}
+.svc-cats-actions{display:flex;align-items:center;gap:8px;}
+.svc-cat-nav{width:38px;height:38px;border-radius:50%;border:1px solid rgba(0,0,0,0.12);background:#fff;color:var(--text);display:inline-flex;align-items:center;justify-content:center;font-size:20px;line-height:1;cursor:pointer;transition:background 0.2s,border-color 0.2s,transform 0.2s,box-shadow 0.2s;}
+.svc-cat-nav:hover{background:var(--dark);border-color:var(--dark);color:#fff;transform:translateY(-1px);box-shadow:0 8px 18px rgba(0,0,0,0.12);}
+.svc-cats-grid{display:flex;gap:14px;overflow-x:auto;overflow-y:hidden;scroll-snap-type:x mandatory;scroll-padding:2px;overscroll-behavior-x:contain;padding:2px 2px 14px;margin:0 -2px;-webkit-overflow-scrolling:touch;scrollbar-width:thin;scrollbar-color:rgba(0,0,0,0.25) transparent;}
+.svc-cats-grid::-webkit-scrollbar{height:6px;}
+.svc-cats-grid::-webkit-scrollbar-track{background:transparent;}
+.svc-cats-grid::-webkit-scrollbar-thumb{background:rgba(0,0,0,0.22);border-radius:999px;}
+.svc-cat-card{background:#fff;overflow:hidden;border-radius:14px;border:1px solid rgba(0,0,0,0.07);transition:all 0.3s;cursor:pointer;display:flex;flex-direction:column;flex:0 0 clamp(166px, 22vw, 218px);scroll-snap-align:start;box-shadow:0 4px 16px rgba(0,0,0,0.04);}
+.svc-cat-card:hover{transform:translateY(-3px);box-shadow:0 12px 30px rgba(0,0,0,0.10);border-color:var(--gold);}
+.svc-cat-img{height:106px;overflow:hidden;flex-shrink:0;background:#f5f1e8;}
 .svc-cat-img img{width:100%;height:100%;object-fit:cover;transition:transform 0.6s ease;}
 .svc-cat-card:hover .svc-cat-img img{transform:scale(1.05);}
-.svc-cat-body{padding:20px 22px 24px;display:flex;flex-direction:column;flex:1;}
+.svc-cat-body{padding:14px 16px 16px;display:flex;flex-direction:column;flex:1;min-height:94px;}
 .svc-cat-icon{font-size:22px;margin-bottom:8px;display:block;}
-.svc-cat-name{font-family:'Cormorant Garamond',serif;font-size:20px;font-weight:400;color:var(--text);margin-bottom:6px;line-height:1.1;}
+.svc-cat-name{font-family:'Cormorant Garamond',serif;font-size:18px;font-weight:500;color:var(--text);margin-bottom:6px;line-height:1.12;}
 .svc-cat-desc{font-size:12px;color:var(--text-mid);line-height:1.7;font-weight:300;flex:1;}
-.svc-cat-price{margin-top:12px;font-size:13px;font-weight:700;color:var(--green-mid);}
+.svc-cat-price{margin-top:auto;font-size:12px;font-weight:800;color:var(--green-mid);}
 
 /* OFFERS (homepage) */
 .offers-sec{background:var(--dark);}
@@ -305,16 +313,25 @@ transition:all 0.2s;border-radius:10px;background:#fff;text-decoration:none;
 .offers-sec .sec-hdr p{color:rgba(255,255,255,0.4);}
 .offers-sec .btn-secondary{background:transparent;color:#fff;border-color:rgba(255,255,255,0.4);}
 .offers-sec .btn-secondary:hover{border-color:#fff;background:rgba(255,255,255,0.1);}
-.home-offers-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;margin-bottom:32px;}
-.hoc{background:rgba(255,255,255,0.04);border:1px solid rgba(255,255,255,0.08);border-radius:14px;overflow:hidden;transition:all 0.25s;display:flex;flex-direction:column;}
+.home-carousel-wrap{max-width:1120px;margin:0 auto 28px;}
+.home-carousel-head{display:flex;justify-content:flex-end;margin:-18px 0 12px;}
+.home-carousel-actions{display:flex;align-items:center;gap:8px;}
+.home-carousel-nav{width:38px;height:38px;border-radius:50%;border:1px solid rgba(255,255,255,0.18);background:rgba(255,255,255,0.06);color:#fff;display:inline-flex;align-items:center;justify-content:center;font-size:20px;line-height:1;cursor:pointer;transition:background 0.2s,border-color 0.2s,transform 0.2s,box-shadow 0.2s;}
+.home-carousel-nav:hover{background:rgba(255,255,255,0.14);border-color:var(--gold);color:var(--gold);transform:translateY(-1px);box-shadow:0 8px 18px rgba(0,0,0,0.18);}
+.home-carousel-track{display:flex;gap:14px;overflow-x:auto;overflow-y:hidden;scroll-snap-type:x mandatory;scroll-padding:2px;overscroll-behavior-x:contain;padding:2px 2px 14px;margin:0 -2px;-webkit-overflow-scrolling:touch;scrollbar-width:thin;scrollbar-color:rgba(255,255,255,0.25) transparent;}
+.home-carousel-track::-webkit-scrollbar{height:6px;}
+.home-carousel-track::-webkit-scrollbar-track{background:transparent;}
+.home-carousel-track::-webkit-scrollbar-thumb{background:rgba(255,255,255,0.24);border-radius:999px;}
+.home-offers-grid{margin-bottom:0;}
+.hoc{background:rgba(255,255,255,0.04);border:1px solid rgba(255,255,255,0.08);border-radius:14px;overflow:hidden;transition:all 0.25s;display:flex;flex-direction:column;min-height:332px;flex:0 0 clamp(230px, 30vw, 316px);scroll-snap-align:start;}
 .hoc:hover{background:rgba(255,255,255,0.07);border-color:var(--gold);transform:translateY(-2px);}
 .hoc:only-child{margin:0 auto;min-height:200px;max-width:400px;justify-self:center;align-items:center;}
-.hoc-media{height:180px;background:linear-gradient(135deg,var(--dark) 0%,var(--green) 100%);position:relative;overflow:hidden;}
+.hoc-media{height:160px;background:linear-gradient(135deg,var(--dark) 0%,var(--green) 100%);position:relative;overflow:hidden;}
 .hoc-media img{width:100%;height:100%;object-fit:cover;cursor:zoom-in;transition:transform 0.7s ease;}
 .hoc:hover .hoc-media img{transform:scale(1.04);}
-.hoc-body{padding:18px 18px 16px;display:flex;flex-direction:column;flex:1;}
+.hoc-body{padding:16px 16px 15px;display:flex;flex-direction:column;flex:1;}
 .hoc-badge{font-size:9px;letter-spacing:3px;text-transform:uppercase;color:var(--gold);font-weight:700;margin-bottom:10px;}
-.hoc-title{font-family:'Cormorant Garamond',serif;font-size:22px;color:#fff;font-weight:300;margin-bottom:8px;line-height:1.2;}
+.hoc-title{font-family:'Cormorant Garamond',serif;font-size:20px;color:#fff;font-weight:300;margin-bottom:8px;line-height:1.2;}
 .hoc-details{font-size:12px;color:rgba(255,255,255,0.42);line-height:1.7;font-weight:300;margin-bottom:12px;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden;}
 .hoc-meta{display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:8px;padding-top:12px;border-top:1px solid rgba(255,255,255,0.08);}
 .hoc-store{font-size:10px;color:rgba(255,255,255,0.35);letter-spacing:1px;text-transform:uppercase;}
@@ -330,15 +347,15 @@ transition:all 0.2s;border-radius:10px;background:#fff;text-decoration:none;
 .media-sec .sec-hdr p{color:rgba(255,255,255,0.4);}
 .media-sec .btn-secondary{background:transparent;color:#fff;border-color:rgba(255,255,255,0.4);}
 .media-sec .btn-secondary:hover{border-color:#fff;background:rgba(255,255,255,0.1);}
-.media-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;margin-bottom:32px;align-items:start;}
-.media-card{background:rgba(255,255,255,0.04);border:1px solid rgba(255,255,255,0.08);border-radius:14px;overflow:hidden;transition:all 0.25s;display:flex;flex-direction:column;min-height:360px;}
+.media-grid{margin-bottom:0;align-items:start;}
+.media-card{background:rgba(255,255,255,0.04);border:1px solid rgba(255,255,255,0.08);border-radius:14px;overflow:hidden;transition:all 0.25s;display:flex;flex-direction:column;min-height:332px;flex:0 0 clamp(230px, 30vw, 316px);scroll-snap-align:start;}
 .media-card:hover{background:rgba(255,255,255,0.07);border-color:var(--gold);transform:translateY(-2px);}
-.media-media{height:180px;background:linear-gradient(135deg,var(--dark) 0%,var(--green) 100%);position:relative;overflow:hidden;}
+.media-media{height:160px;background:linear-gradient(135deg,var(--dark) 0%,var(--green) 100%);position:relative;overflow:hidden;}
 .media-media img{width:100%;height:100%;object-fit:cover;cursor:zoom-in;transition:transform 0.7s ease;}
 .media-card:hover .media-media img{transform:scale(1.04);}
-.media-body{padding:18px 18px 16px;display:flex;flex-direction:column;flex:1;}
+.media-body{padding:16px 16px 15px;display:flex;flex-direction:column;flex:1;}
 .media-badge{font-size:9px;letter-spacing:3px;text-transform:uppercase;color:var(--gold);font-weight:700;margin-bottom:10px;}
-.media-title{font-family:'Cormorant Garamond',serif;font-size:22px;color:#fff;font-weight:300;margin-bottom:8px;line-height:1.2;}
+.media-title{font-family:'Cormorant Garamond',serif;font-size:20px;color:#fff;font-weight:300;margin-bottom:8px;line-height:1.2;}
 .media-details{font-size:12px;color:rgba(255,255,255,0.42);line-height:1.7;font-weight:300;margin-bottom:12px;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden;}
 .media-meta{display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:8px;padding-top:12px;border-top:1px solid rgba(255,255,255,0.08);}
 .media-store{font-size:10px;color:rgba(255,255,255,0.35);letter-spacing:1px;text-transform:uppercase;}
@@ -914,26 +931,28 @@ readMoreLink.textContent = textElement.classList.contains('expanded') ? 'Read Le
 
 <style>
 .media-grid{align-items:start;}
-.media-card{min-height:360px;}
-.media-media{height:180px !important;min-height:180px;}
+.media-media{height:160px !important;min-height:160px;}
 
 @media(max-width:992px){
 .st-grid{grid-template-columns:1fr 1fr;}
-.svc-cats-grid{grid-template-columns:1fr 1fr;}
-.home-offers-grid{grid-template-columns:1fr;}
+.svc-cat-card{flex-basis:clamp(164px, 32vw, 210px);}
+.hoc,.media-card{flex-basis:clamp(224px, 42vw, 300px);}
 .rev-grid{grid-template-columns:repeat(auto-fill, minmax(300px, 1fr));gap:15px;}
 .stores-sec,.services-sec,.offers-sec,.reviews-sec{padding:60px 20px;}
-.media-grid{grid-template-columns:1fr 1fr;}
 }
 @media(max-width:600px){
 .hero h1{font-size:clamp(32px,8vw,48px);}
 .hero-btns{flex-direction:column;align-items:center;}
 .st-grid{grid-template-columns:1fr;}
-.svc-cats-grid{grid-template-columns:1fr;}
+.svc-cats-head{margin:-20px 0 10px;}
+.svc-cat-nav{width:34px;height:34px;font-size:18px;}
+.svc-cat-card{flex-basis:min(72vw, 230px);}
+.svc-cat-img{height:104px;}
+.home-carousel-head{margin:-20px 0 10px;}
+.home-carousel-nav{width:34px;height:34px;font-size:18px;}
+.hoc,.media-card{flex-basis:min(78vw, 286px);}
+.hoc-media,.media-media{height:150px !important;min-height:150px;}
 .rev-grid{grid-template-columns:1fr;}
-.media-grid{grid-template-columns:1fr;}
-.media-card{min-height:340px;}
-.media-media{height:180px !important;min-height:180px;}
 }
 
 /* Open Now Badge */
@@ -2041,7 +2060,14 @@ Choose Your Store</button>
 <div class="lbl">What We Offer</div>
 <h2>Services crafted<br>for <em>every you.</em></h2>
 <p>From precision cuts to bridal transformations — world-class beauty at every visit.</p>
-</div><div class="svc-cats-grid">
+</div><div class="svc-cats-wrap">
+<div class="svc-cats-head reveal">
+<div class="svc-cats-actions" aria-label="Service category carousel controls">
+<button class="svc-cat-nav" type="button" aria-label="Previous service category" onclick="scrollServiceCategoryCarousel(this, -1)">&#8249;</button>
+<button class="svc-cat-nav" type="button" aria-label="Next service category" onclick="scrollServiceCategoryCarousel(this, 1)">&#8250;</button>
+</div>
+</div>
+<div class="svc-cats-grid" aria-label="Service category carousel">
 <a href="services/" class="svc-cat-card reveal" aria-label="HAIR STYLING - FEMALE services">
 <div class="svc-cat-img">
 <img src="/images/service-icon/hair_styling_female.jpg" 
@@ -2115,9 +2141,10 @@ onerror="this.src='/images/service-icon/service_default.jpg'">
 </div>
 </a>
 </div>
+</div>
 
 <div class="view-all reveal" style="text-align:center;">
-<a href="about/index.html" class="btn-secondary">About Us</a>
+<a href="/services/" class="btn-secondary">View All Services &#8594;</a>
 </div>
 </section>
 
@@ -2128,7 +2155,14 @@ onerror="this.src='/images/service-icon/service_default.jpg'">
 <p>Seasonal deals and promotions across all our Bangalore locations.</p>
 </div>
 
-<div class="home-offers-grid" id="home-offers-grid">
+<div class="home-carousel-wrap">
+<div class="home-carousel-head reveal">
+<div class="home-carousel-actions" aria-label="Offer carousel controls">
+<button class="home-carousel-nav" type="button" aria-label="Previous offer" onclick="scrollHomeCampaignCarousel(this, -1)">&#8249;</button>
+<button class="home-carousel-nav" type="button" aria-label="Next offer" onclick="scrollHomeCampaignCarousel(this, 1)">&#8250;</button>
+</div>
+</div>
+<div class="home-offers-grid home-carousel-track" id="home-offers-grid" aria-label="Offers carousel">
 <div class="hoc reveal"
 data-image-available="False"
 data-image-name="20260513_OFFER_MenGroomingComboa"
@@ -2214,6 +2248,7 @@ loading="lazy">
 </div>
 </div>
 </div>
+</div>
 <div class="offers-view-all">
 <a href="/offers/" class="btn-secondary">View All Offers &#8594;</a>
 </div>
@@ -2221,12 +2256,19 @@ loading="lazy">
 
 <section class="media-sec" id="media" aria-label="Other campaigns and announcements">
 <div class="sec-hdr reveal">
-<div class="lbl">Media</div>
-<h2>Latest <em>campaigns</em></h2>
-<p>View all current campaigns, announcements, and updates across our Bangalore locations.</p>
+<div class="lbl">Campaigns</div>
+<h2>Latest <em>updates</em></h2>
+<p>Announcements, media, and store updates across our Bangalore locations.</p>
 </div>
 
-<div class="media-grid" id="media-grid">
+<div class="home-carousel-wrap">
+<div class="home-carousel-head reveal">
+<div class="home-carousel-actions" aria-label="Campaign carousel controls">
+<button class="home-carousel-nav" type="button" aria-label="Previous campaign" onclick="scrollHomeCampaignCarousel(this, -1)">&#8249;</button>
+<button class="home-carousel-nav" type="button" aria-label="Next campaign" onclick="scrollHomeCampaignCarousel(this, 1)">&#8250;</button>
+</div>
+</div>
+<div class="media-grid home-carousel-track" id="media-grid" aria-label="Campaigns carousel">
 <div class="media-card reveal" 
 data-image-available="True"
 data-image-name="20260510_ANNOU_NewLocationNewLo"
@@ -2291,8 +2333,9 @@ loading="lazy">
 </div>
 </div>
 </div>
+</div>
 <div class="offers-view-all">
-<a href="/offers/#all" class="btn-secondary">View All Media &#8594;</a>
+<a href="/offers/#all" class="btn-secondary">View All Campaigns &#8594;</a>
 </div>
 </section>
 
@@ -2756,6 +2799,26 @@ View on Maps
 <div style="clear: both;"></div>
 
 <script>
+function scrollServiceCategoryCarousel(button, direction) {
+const section = button.closest('.services-sec');
+const carousel = section ? section.querySelector('.svc-cats-grid') : null;
+const card = carousel ? carousel.querySelector('.svc-cat-card') : null;
+if (!carousel || !card) return;
+const gapValue = parseFloat(getComputedStyle(carousel).columnGap || getComputedStyle(carousel).gap || '0');
+const gap = Number.isFinite(gapValue) ? gapValue : 0;
+carousel.scrollBy({ left: direction * (card.offsetWidth + gap), behavior: 'smooth' });
+}
+
+function scrollHomeCampaignCarousel(button, direction) {
+const section = button.closest('section');
+const carousel = section ? section.querySelector('.home-carousel-track') : null;
+const card = carousel ? carousel.querySelector('.hoc, .media-card') : null;
+if (!carousel || !card) return;
+const gapValue = parseFloat(getComputedStyle(carousel).columnGap || getComputedStyle(carousel).gap || '0');
+const gap = Number.isFinite(gapValue) ? gapValue : 0;
+carousel.scrollBy({ left: direction * (card.offsetWidth + gap), behavior: 'smooth' });
+}
+
 // Featured reviews data
 const featuredReviews = [{"Customer_Name": "Naveen Kumar", "Review_Comments": "Mr. Shahid\nGood massage. Felt totally relaxed", "Review_ID": "AbFvOqlJCOIfEgriczIPVlh-CT9WipuCSqyc4hb9PG1_NC3gZcHrJz2-C0dcdenb28rSJi3aAKvq", "Stars": 5, "Store_ID": "Store_N78", "Store_Name": "JP Nagar 5th Phase", "date_posted": "14-Dec-2019", "response": "Thank you so much Naveen Kumar! We\u0027re thrilled you had a 5-star experience. Your kind words mean the world to our team. Looking forward to serving you again soon!", "response_date": "15-May-2026", "show_it_in_website": "Yes"}, {"Customer_Name": "Neeharika Anand", "Review_Comments": "I really loved the waxing service here. Anusha did a great and thorough job. Definitely recommend!", "Review_ID": "AbFvOqnyqjF70bGkX1vG7GtxpsK5nD721i7mNaHcvvWvGvYbYg_iTmdzhYrmUUw8LRAMXC-cftkDdQ", "Stars": 5, "Store_ID": "Store_N78", "Store_Name": "JP Nagar 5th Phase", "date_posted": "2-Sep-2021", "response": "Thank you so much Neeharika Anand! We\u0027re thrilled you had a 5-star experience. Your kind words mean the world to our team. Looking forward to serving you again soon!", "response_date": "15-May-2026", "show_it_in_website": "Yes"}, {"Customer_Name": "Apoorva VD", "Review_Comments": "Akash is the best hairstylist here!! love getting my hair done here, best experience ever! :)))", "Review_ID": "AbFvOqnDQcpo-7UMbFB95PDBC4eDvOkjX5d_6qdw6dPBDhI3lht1u_7Kdb2Nv40NqW_DZPTxxV2_Zg", "Stars": 5, "Store_ID": "Store_N78", "Store_Name": "JP Nagar 5th Phase", "date_posted": "2-Oct-2021", "show_it_in_website": "Yes"}, {"Customer_Name": "Psychiatry Talks with Dr Sneha", "Review_Comments": "Mr Akash did a good service and was professional. Hair spa and massage was professional.", "Review_ID": "AbFvOqlk1BL36IySj0KOrUmZGwSB9aSKFh46Ap5UWewnbB9Zhz4fEF6weIVQuRw9JWtUwZW2Al_1NQ", "Stars": 5, "Store_ID": "Store_N78", "Store_Name": "JP Nagar 5th Phase", "date_posted": "10-Nov-2021", "show_it_in_website": "Yes"}, {"Customer_Name": "keerthana mu", "Review_Comments": "Great haircut service by Akash\nGood service overall", "Review_ID": "AbFvOqnP4x1oRlhMEEeC8zg7TitnBuwNTmwGiprkgyxeNekCb7tZT9q498P6G5ipT5B8O4oruKOE", "Stars": 5, "Store_ID": "Store_N78", "Store_Name": "JP Nagar 5th Phase", "date_posted": "2-Dec-2021", "show_it_in_website": "Yes"}, {"Customer_Name": "VIJAYAKUMAR S", "Review_Comments": "I\u0027m very much satisfied on the services offered by Mr.Yougul. Had wonderful Hair cut, Spa \u0026 Beard Trim.. Very professional way of doing all kind of services!!", "Review_ID": "AbFvOqk6efPY6LyFxixJCgoHK-Vr3-mRk7epkMdrveyllDBxjMWb88d3PFzHINACEJzctzmQj7alng", "Stars": 5, "Store_ID": "Store_N78", "Store_Name": "JP Nagar 5th Phase", "date_posted": "13-Mar-2022", "show_it_in_website": "Yes"}];
 
