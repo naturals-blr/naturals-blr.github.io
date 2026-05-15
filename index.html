@@ -220,6 +220,8 @@ a{text-decoration:none;color:inherit;}
 .hero-btns{display:flex;gap:14px;justify-content:center;flex-wrap:wrap;}
 .hero .btn-secondary{background:transparent;color:#fff;border-color:rgba(255,255,255,0.4);}
 .hero .btn-secondary:hover{border-color:#fff;background:rgba(255,255,255,0.1);}
+.hero-proof{display:flex;justify-content:center;gap:10px;flex-wrap:wrap;margin:18px auto 0;max-width:680px;}
+.hero-proof span{border:1px solid rgba(255,255,255,0.18);background:rgba(255,255,255,0.07);color:rgba(255,255,255,0.78);border-radius:999px;padding:8px 12px;font-size:11px;letter-spacing:1px;text-transform:uppercase;}
 
 .lbl{font-size:9px;letter-spacing:5px;text-transform:uppercase;color:var(--gold);font-weight:600;margin-bottom:16px;display:flex;align-items:center;gap:12px;}
 .lbl::before{content:'';width:18px;height:1px;background:var(--gold);}
@@ -251,6 +253,15 @@ display:block;text-decoration:none;transition:background 0.2s;
 .st-card-area{font-size:9px;letter-spacing:2px;text-transform:uppercase;color:var(--gold);margin-top:3px;}
 .st-card-body{padding:16px 22px 20px;flex:1;display:flex;flex-direction:column;}
 .st-card-addr{font-size:11px;color:var(--text-light);line-height:1.5;flex:1;margin-bottom:14px;}
+.st-neighborhood{border:1px solid rgba(0,0,0,0.08);border-radius:12px;margin:0 0 14px;background:#fbfaf7;overflow:hidden;}
+.st-neighborhood summary{list-style:none;cursor:pointer;padding:10px 12px;font-size:10px;letter-spacing:1.5px;text-transform:uppercase;font-weight:800;color:var(--green-mid);display:flex;justify-content:space-between;align-items:center;gap:12px;}
+.st-neighborhood summary::-webkit-details-marker{display:none;}
+.st-neighborhood summary::after{content:'+';font-size:16px;color:var(--gold);line-height:1;}
+.st-neighborhood[open] summary::after{content:'-';}
+.st-neighborhood-body{padding:0 12px 12px;font-size:12px;line-height:1.6;color:var(--text-mid);}
+.st-neighborhood-body strong{display:block;color:var(--text);font-weight:600;margin-bottom:8px;}
+.st-landmarks{display:flex;flex-wrap:wrap;gap:6px;margin-top:8px;}
+.st-landmarks span{border:1px solid rgba(0,0,0,0.08);border-radius:999px;padding:4px 8px;background:#fff;font-size:10px;color:var(--text-mid);}
 .st-card-actions{display:flex;flex-direction:column;gap:8px;}
 .st-icon-row{display:flex;gap:10px;justify-content:center;margin-bottom:10px;}
 .st-btn{
@@ -329,6 +340,9 @@ transition:all 0.2s;border-radius:10px;background:#fff;text-decoration:none;
 .hoc-media{height:160px;background:linear-gradient(135deg,var(--dark) 0%,var(--green) 100%);position:relative;overflow:hidden;}
 .hoc-media img{width:100%;height:100%;object-fit:cover;cursor:zoom-in;transition:transform 0.7s ease;}
 .hoc:hover .hoc-media img{transform:scale(1.04);}
+.campaign-img-fallback{display:none;height:100%;width:100%;align-items:center;justify-content:center;text-align:center;padding:18px;background:linear-gradient(135deg,rgba(35,55,45,0.98),rgba(11,24,18,0.98));color:#fff;}
+.campaign-img-fallback strong{display:block;font-family:'Cormorant Garamond',serif;font-size:22px;font-weight:400;line-height:1.1;color:#fff;}
+.campaign-img-fallback span{display:block;margin-top:8px;font-size:9px;letter-spacing:2px;text-transform:uppercase;color:var(--gold);font-weight:700;}
 .hoc-body{padding:16px 16px 15px;display:flex;flex-direction:column;flex:1;}
 .hoc-badge{font-size:9px;letter-spacing:3px;text-transform:uppercase;color:var(--gold);font-weight:700;margin-bottom:10px;}
 .hoc-title{font-family:'Cormorant Garamond',serif;font-size:20px;color:#fff;font-weight:300;margin-bottom:8px;line-height:1.2;}
@@ -1842,14 +1856,20 @@ fetchpriority="high">
 </div>
 <div class="hero-ov" aria-hidden="true"></div>
 <div class="hero-inner">
-<div class="hero-tag">5 Iconic Locations. 1 Elite Standard of Excellence.</div>
+<div class="hero-tag">Bangalore salons. Premium service. Easy booking.</div>
 <h1>Experience the Elite Standard of Beauty</h1>
-<p class="hero-sub">5 locations &middot; Expert stylists &middot; World-class services</p>
+<p class="hero-sub">Choose your nearest Naturals studio for expert hair, skin, bridal, and grooming services.</p>
 <div class="hero-btns">
 <button onclick="openStorePicker()" class="btn-primary"><svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-calendar" style="flex-shrink:0" aria-hidden="true"><rect width="18" height="18" x="3" y="4" rx="2" ry="2"/><path d="M16 2v4"/><path d="M8 2v4"/><path d="M3 10h18"/></svg>
-Book Now</button>
+Book Appointment</button>
+<a href="/offers/" class="btn-secondary">View Offers &#8594;</a>
 <button onclick="openStorePicker()" class="btn-secondary"><svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-map-pin" style="flex-shrink:0" aria-hidden="true"><path d="M20 10c0 6-8 12-8 12s-8-6-8-12a8 8 0 0 1 16 0Z"/><circle cx="12" cy="10" r="3"/></svg>
-Choose Your Store</button>
+Choose Store</button>
+</div>
+<div class="hero-proof" aria-label="Home page quick highlights">
+<span>5 Bangalore locations</span>
+<span>Expert stylists</span>
+<span>Google-reviewed stores</span>
 </div>
 </div>
 </section>
@@ -1876,6 +1896,24 @@ Choose Your Store</button>
 <div class="st-card-body">
 <div class="st-card-addr"><svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="var(--gold)" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-map-pin" style="flex-shrink:0" aria-hidden="true"><path d="M20 10c0 6-8 12-8 12s-8-6-8-12a8 8 0 0 1 16 0Z"/><circle cx="12" cy="10" r="3"/></svg>
 </div>
+<details class="st-neighborhood">
+<summary>Areas served</summary>
+<div class="st-neighborhood-body">
+<strong>JP Nagar 5th Phase</strong>
+<div class="st-landmarks" aria-label="Nearby landmarks for JP Nagar 5th Phase">
+<span>Near Puttenahalli Lake</span>
+<span>Ragigudda Sri Prasanna Anjaneyaswamy Temple</span>
+<span>Ranga Shankara</span>
+<span>Sarakki Lake</span>
+<span>Indian Music Experience Museum</span>
+<span>Lalbagh Botanical Garden</span>
+<span>Bull Temple</span>
+<span>Jayanagar 4th Block Market</span>
+<span>ISKCON Vaikuntha Hill</span>
+<span>Ranadheera Kanteerava Park</span>
+</div>
+</div>
+</details>
 
 <div class="st-card-actions">
 <div class="st-icon-row">
@@ -1914,6 +1952,26 @@ Choose Your Store</button>
 <div class="st-card-body">
 <div class="st-card-addr"><svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="var(--gold)" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-map-pin" style="flex-shrink:0" aria-hidden="true"><path d="M20 10c0 6-8 12-8 12s-8-6-8-12a8 8 0 0 1 16 0Z"/><circle cx="12" cy="10" r="3"/></svg>
 </div>
+<details class="st-neighborhood">
+<summary>Areas served</summary>
+<div class="st-neighborhood-body">
+<strong>Thanisandra / Nagavara</strong>
+<div class="st-landmarks" aria-label="Nearby landmarks for Nagavara">
+<span>Above Paakashala Restaurant Nagavara</span>
+<span>Near Skywalk Exit</span>
+<span>Near Manyata Tech Park</span>
+<span>Hebbal Flyover</span>
+<span>Nagavara Lake</span>
+<span>Rachenahalli Lake</span>
+<span>Phoenix Mall of Asia</span>
+<span>Snow City Bengaluru</span>
+<span>Bengaluru Palace</span>
+<span>Hennur Biodiversity Park</span>
+<span>Aster CMI Hospital</span>
+<span>Jakkur Lake</span>
+</div>
+</div>
+</details>
 
 <div class="st-card-actions">
 <div class="st-icon-row">
@@ -1952,6 +2010,24 @@ Choose Your Store</button>
 <div class="st-card-body">
 <div class="st-card-addr"><svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="var(--gold)" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-map-pin" style="flex-shrink:0" aria-hidden="true"><path d="M20 10c0 6-8 12-8 12s-8-6-8-12a8 8 0 0 1 16 0Z"/><circle cx="12" cy="10" r="3"/></svg>
 </div>
+<details class="st-neighborhood">
+<summary>Areas served</summary>
+<div class="st-neighborhood-body">
+<strong>Devasandra / KR Puram</strong>
+<div class="st-landmarks" aria-label="Nearby landmarks for Devasandra">
+<span>Near Phoenix Marketcity</span>
+<span>VR Bengaluru</span>
+<span>Krishnarajapuram Railway Station</span>
+<span>Bagmane World Technology Center</span>
+<span>ITPL Whitefield</span>
+<span>Marathahalli Bridge</span>
+<span>Ulsoor Lake</span>
+<span>RMZ Infinity</span>
+<span>Commercial Street</span>
+<span>Indira Nagar 100 Feet Road</span>
+</div>
+</div>
+</details>
 
 <div class="st-card-actions">
 <div class="st-icon-row">
@@ -1990,6 +2066,24 @@ Choose Your Store</button>
 <div class="st-card-body">
 <div class="st-card-addr"><svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="var(--gold)" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-map-pin" style="flex-shrink:0" aria-hidden="true"><path d="M20 10c0 6-8 12-8 12s-8-6-8-12a8 8 0 0 1 16 0Z"/><circle cx="12" cy="10" r="3"/></svg>
 </div>
+<details class="st-neighborhood">
+<summary>Areas served</summary>
+<div class="st-neighborhood-body">
+<strong>Frazer Town / Pulikeshi Nagar</strong>
+<div class="st-landmarks" aria-label="Nearby landmarks for Frazer Town">
+<span>Near Mosque Road</span>
+<span>Albert Bakery</span>
+<span>St. Francis Xavier’s Cathedral</span>
+<span>Coles Park</span>
+<span>Thom’s Bakery & Supermarket</span>
+<span>Bangalore East Railway Station</span>
+<span>Bangalore Palace</span>
+<span>Ulsoor Lake</span>
+<span>Commercial Street</span>
+<span>Vidhana Soudha</span>
+</div>
+</div>
+</details>
 
 <div class="st-card-actions">
 <div class="st-icon-row">
@@ -2028,6 +2122,26 @@ Choose Your Store</button>
 <div class="st-card-body">
 <div class="st-card-addr"><svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="var(--gold)" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-map-pin" style="flex-shrink:0" aria-hidden="true"><path d="M20 10c0 6-8 12-8 12s-8-6-8-12a8 8 0 0 1 16 0Z"/><circle cx="12" cy="10" r="3"/></svg>
 </div>
+<details class="st-neighborhood">
+<summary>Areas served</summary>
+<div class="st-neighborhood-body">
+<strong>Hennur / North Bangalore</strong>
+<div class="st-landmarks" aria-label="Nearby landmarks for Hennur">
+<span>Near Hennur Cross</span>
+<span>Mantri Splendor</span>
+<span>Manyata Tech Park</span>
+<span>Hennur Lake Biodiversity Park</span>
+<span>Elements Mall</span>
+<span>Bagalur Main Road</span>
+<span>Bangalore Palace</span>
+<span>Hebbal Flyover</span>
+<span>Lumbini Gardens</span>
+<span>Horamavu Agara Lake</span>
+<span>XLR8 Indoor Sports Arena</span>
+<span>Byg Brewski Brewing Company</span>
+</div>
+</div>
+</details>
 
 <div class="st-card-actions">
 <div class="st-icon-row">
@@ -2151,8 +2265,8 @@ onerror="this.src='/images/service-icon/service_default.jpg'">
 <section class="offers-sec" id="offers" aria-label="Current offers">
 <div class="sec-hdr reveal">
 <div class="lbl">Exclusive Deals</div>
-<h2>Current <em>offers</em></h2>
-<p>Seasonal deals and promotions across all our Bangalore locations.</p>
+<h2>Today's <em>offers</em></h2>
+<p>Active promotions from our Bangalore stores, curated for quick booking.</p>
 </div>
 
 <div class="home-carousel-wrap">
@@ -2164,10 +2278,30 @@ onerror="this.src='/images/service-icon/service_default.jpg'">
 </div>
 <div class="home-offers-grid home-carousel-track" id="home-offers-grid" aria-label="Offers carousel">
 <div class="hoc reveal"
-data-image-available="False"
+data-image-available="True"
 data-image-name="20260513_OFFER_MenGroomingComboa"
 data-offer-title="Men Grooming Combo at ₹459">
 <div class="hoc-media">
+<img class="home-offer-img"
+src="https://naturals-blr.github.io/campaigns/offer/03_published/20260513_OFFER_MenGroomingComboa.png"
+data-img-base="https://naturals-blr.github.io/campaigns/offer/03_published/20260513_OFFER_MenGroomingComboa.png"
+alt="Men Grooming Combo at ₹459"
+width="400" height="300"
+loading="lazy">
+<div class="campaign-img-fallback">
+<div>
+<strong>Men Grooming Combo at ₹459</strong>
+<span>Special Offer</span>
+</div>
+</div>
+<div class="img-actions">
+<button class="img-action-btn" onclick="downloadImage(this)" title="Download Image">
+<svg viewBox="0 0 24 24"><path d="M19 9h-4V3H9v6H5l7 7 7-7zM5 18v2h14v-2H5z"/></svg>
+</button>
+<button class="img-action-btn" onclick="shareContent(this)" title="Share Offer">
+<svg viewBox="0 0 24 24"><path d="M18 16.08c-.76 0-1.44.3-1.96.77L8.91 12.7c.05-.23.09-.46.09-.7s-.04-.47-.09-.7l7.05-4.11c.54.5 1.25.81 2.04.81 1.66 0 3-1.34 3-3s-1.34-3-3 1.34 3 3c0 .24.04.47.09.7L8.04 9.81C7.5 9.31 6.79 9 6 9c-1.66 0-3 1.34 3 3s1.34 3 3 3c.79 0 1.5-.31 2.04-.81l7.12 4.16c-.05.21-.08.43-.08.65 0 1.61 1.31 2.92 2.92 1.61 0 2.92-1.31 2.92-2.92s-1.31-2.92-2.92z"/></svg>
+</button>
+</div>
 </div>
 
 <div class="hoc-body">
@@ -2193,6 +2327,12 @@ data-img-base="https://naturals-blr.github.io/campaigns/offer/03_published/20260
 alt="Bridal Beauty Packages Starting ₹4999"
 width="400" height="300"
 loading="lazy">
+<div class="campaign-img-fallback">
+<div>
+<strong>Bridal Beauty Packages Starting ₹4999</strong>
+<span>Special Offer</span>
+</div>
+</div>
 <div class="img-actions">
 <button class="img-action-btn" onclick="downloadImage(this)" title="Download Image">
 <svg viewBox="0 0 24 24"><path d="M19 9h-4V3H9v6H5l7 7 7-7zM5 18v2h14v-2H5z"/></svg>
@@ -2226,6 +2366,12 @@ data-img-base="https://naturals-blr.github.io/campaigns/offer/03_published/20260
 alt="Flat ₹1000 Off on Hair Coloring"
 width="400" height="300"
 loading="lazy">
+<div class="campaign-img-fallback">
+<div>
+<strong>Flat ₹1000 Off on Hair Coloring</strong>
+<span>Special Offer</span>
+</div>
+</div>
 <div class="img-actions">
 <button class="img-action-btn" onclick="downloadImage(this)" title="Download Image">
 <svg viewBox="0 0 24 24"><path d="M19 9h-4V3H9v6H5l7 7 7-7zM5 18v2h14v-2H5z"/></svg>
@@ -2280,6 +2426,12 @@ data-img-base="https://naturals-blr.github.io/campaigns/announcement/03_publishe
 alt="New Location, New Look, New Handle! 🌿✨"
 width="400" height="300"
 loading="lazy">
+<div class="campaign-img-fallback">
+<div>
+<strong>New Location, New Look, New Handle! 🌿✨</strong>
+<span>announcement</span>
+</div>
+</div>
 </div>
 <div class="media-body">
 <div class="media-badge">ANNOUNCEMENT</div>
@@ -2306,16 +2458,22 @@ Stay tuned for our grand opening date and exclusive relocation offers!
 </div>
 </div>
 <div class="media-card reveal" 
-data-image-available="False"
+data-image-available="True"
 data-image-name="20260515_ANNOU_NewLookNewLocati"
 data-campaign-title="New Look, New Location: Naturals Nagavara is Here!">
 <div class="media-media">
 <img class="media-img"
-src="https://naturals-blr.github.io/campaigns/announcement/03_published/20260515_ANNOU_NewLookNewLocati.jpg"
-data-img-base="https://naturals-blr.github.io/campaigns/announcement/03_published/20260515_ANNOU_NewLookNewLocati"
+src="https://naturals-blr.github.io/campaigns/announcement/03_published/20260515_ANNOU_NewLookNewLocati.png"
+data-img-base="https://naturals-blr.github.io/campaigns/announcement/03_published/20260515_ANNOU_NewLookNewLocati.png"
 alt="New Look, New Location: Naturals Nagavara is Here!"
 width="400" height="300"
 loading="lazy">
+<div class="campaign-img-fallback">
+<div>
+<strong>New Look, New Location: Naturals Nagavara is Here!</strong>
+<span>announcement</span>
+</div>
+</div>
 </div>
 <div class="media-body">
 <div class="media-badge">ANNOUNCEMENT</div>
@@ -2452,348 +2610,6 @@ Psychiatry Talks with Dr Sneha
 </svg>
 View All 5-Star Reviews
 </button>
-</section>
-
-<section class="neighborhood-cluster" style="background:var(--dark);padding:60px 40px;text-align:center;">
-<div class="sec-hdr" style="margin-bottom:40px;">
-<div class="lbl" style="font-size:11px;letter-spacing:2px;text-transform:uppercase;color:var(--gold);font-weight:600;margin-bottom:12px;">Elite Locations</div>
-<h2 style="font-family:'Cormorant Garamond',serif;font-size:38px;font-weight:300;color:#fff;line-height:1.2;">Serving Bangalore's <em style="color:var(--gold);font-style:italic;">Premium Neighborhoods</em></h2>
-<p style="font-size:15px;color:rgba(255,255,255,0.6);max-width:600px;margin:16px auto 0;">Find Naturals Elite in these iconic Bangalore locations, each offering premium beauty experiences</p>
-</div>
-
-<div class="stores-grid" style="display:grid;grid-template-columns:repeat(auto-fit,minmax(320px,1fr));gap:24px;max-width:1200px;margin:0 auto;">
-<div class="store-card" style="background:rgba(255,255,255,0.03);border:1px solid rgba(255,255,255,0.08);border-radius:16px;padding:28px;text-align:left;transition:all 0.3s ease;position:relative;overflow:hidden;" onmouseover="this.style.background='rgba(255,255,255,0.06)';this.style.borderColor='rgba(201,168,76,0.3)';this.style.transform='translateY(-4px)';" onmouseout="this.style.background='rgba(255,255,255,0.03)';this.style.borderColor='rgba(255,255,255,0.08)';this.style.transform='translateY(0)';">
-
-<div style="position:absolute;left:0;top:0;bottom:0;width:4px;background:var(--gold);"></div>
-
-
-<h3 style="font-family:'Cormorant Garamond',serif;font-size:26px;font-weight:400;color:#fff;margin-bottom:6px;text-transform:capitalize;letter-spacing:0.5px;">JP Nagar 5th Phase</h3>
-
-
-<p style="font-size:12px;color:rgba(255,255,255,0.5);font-style:italic;margin-bottom:20px;">Serving JP Nagar 5th Phase</p>
-
-
-<div style="margin-bottom:16px;">
-<div style="font-size:10px;letter-spacing:2.5px;text-transform:uppercase;color:var(--gold);font-weight:600;margin-bottom:12px;">Near Key Landmarks</div>
-<div class="landmark-badges" style="display:grid;grid-template-columns:1fr 1fr;gap:6px 12px;">
-<span style="display:flex;align-items:center;gap:6px;font-size:12px;color:rgba(255,255,255,0.7);white-space:nowrap;overflow:hidden;text-overflow:ellipsis;" title="Near Puttenahalli Lake">
-<svg width="6" height="6" viewBox="0 0 24 24" fill="var(--gold)" style="flex-shrink:0;margin-top:1px;"><circle cx="12" cy="12" r="6"/></svg>
-Near Puttenahalli Lake
-</span>
-<span style="display:flex;align-items:center;gap:6px;font-size:12px;color:rgba(255,255,255,0.7);white-space:nowrap;overflow:hidden;text-overflow:ellipsis;" title="Ragigudda Sri Prasanna Anjaneyaswamy Temple">
-<svg width="6" height="6" viewBox="0 0 24 24" fill="var(--gold)" style="flex-shrink:0;margin-top:1px;"><circle cx="12" cy="12" r="6"/></svg>
-Ragigudda Sri Prasanna Anjaneyaswamy Temple
-</span>
-<span style="display:flex;align-items:center;gap:6px;font-size:12px;color:rgba(255,255,255,0.7);white-space:nowrap;overflow:hidden;text-overflow:ellipsis;" title="Ranga Shankara">
-<svg width="6" height="6" viewBox="0 0 24 24" fill="var(--gold)" style="flex-shrink:0;margin-top:1px;"><circle cx="12" cy="12" r="6"/></svg>
-Ranga Shankara
-</span>
-<span style="display:flex;align-items:center;gap:6px;font-size:12px;color:rgba(255,255,255,0.7);white-space:nowrap;overflow:hidden;text-overflow:ellipsis;" title="Sarakki Lake">
-<svg width="6" height="6" viewBox="0 0 24 24" fill="var(--gold)" style="flex-shrink:0;margin-top:1px;"><circle cx="12" cy="12" r="6"/></svg>
-Sarakki Lake
-</span>
-<span style="display:flex;align-items:center;gap:6px;font-size:12px;color:rgba(255,255,255,0.7);white-space:nowrap;overflow:hidden;text-overflow:ellipsis;" title="Indian Music Experience Museum">
-<svg width="6" height="6" viewBox="0 0 24 24" fill="var(--gold)" style="flex-shrink:0;margin-top:1px;"><circle cx="12" cy="12" r="6"/></svg>
-Indian Music Experience Museum
-</span>
-<span style="display:flex;align-items:center;gap:6px;font-size:12px;color:rgba(255,255,255,0.7);white-space:nowrap;overflow:hidden;text-overflow:ellipsis;" title="Lalbagh Botanical Garden">
-<svg width="6" height="6" viewBox="0 0 24 24" fill="var(--gold)" style="flex-shrink:0;margin-top:1px;"><circle cx="12" cy="12" r="6"/></svg>
-Lalbagh Botanical Garden
-</span>
-<span style="display:flex;align-items:center;gap:6px;font-size:12px;color:rgba(255,255,255,0.7);white-space:nowrap;overflow:hidden;text-overflow:ellipsis;" title="Bull Temple">
-<svg width="6" height="6" viewBox="0 0 24 24" fill="var(--gold)" style="flex-shrink:0;margin-top:1px;"><circle cx="12" cy="12" r="6"/></svg>
-Bull Temple
-</span>
-<span style="display:flex;align-items:center;gap:6px;font-size:12px;color:rgba(255,255,255,0.7);white-space:nowrap;overflow:hidden;text-overflow:ellipsis;" title="Jayanagar 4th Block Market">
-<svg width="6" height="6" viewBox="0 0 24 24" fill="var(--gold)" style="flex-shrink:0;margin-top:1px;"><circle cx="12" cy="12" r="6"/></svg>
-Jayanagar 4th Block Market
-</span>
-<span style="display:flex;align-items:center;gap:6px;font-size:12px;color:rgba(255,255,255,0.7);white-space:nowrap;overflow:hidden;text-overflow:ellipsis;" title="ISKCON Vaikuntha Hill">
-<svg width="6" height="6" viewBox="0 0 24 24" fill="var(--gold)" style="flex-shrink:0;margin-top:1px;"><circle cx="12" cy="12" r="6"/></svg>
-ISKCON Vaikuntha Hill
-</span>
-<span style="display:flex;align-items:center;gap:6px;font-size:12px;color:rgba(255,255,255,0.7);white-space:nowrap;overflow:hidden;text-overflow:ellipsis;" title="Ranadheera Kanteerava Park">
-<svg width="6" height="6" viewBox="0 0 24 24" fill="var(--gold)" style="flex-shrink:0;margin-top:1px;"><circle cx="12" cy="12" r="6"/></svg>
-Ranadheera Kanteerava Park
-</span>
-</div>
-</div>
-
-
-<a href="#" target="_blank" rel="noopener" style="display:inline-flex;align-items:center;gap:8px;padding:10px 18px;background:transparent;border:1px solid var(--gold);border-radius:8px;color:var(--gold);font-size:12px;font-weight:500;text-decoration:none;transition:all 0.2s ease;" onmouseover="this.style.background='var(--gold)';this.style.color='var(--dark)';" onmouseout="this.style.background='transparent';this.style.color='var(--gold)';">
-<svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5c-1.38 0-2.5-1.12-2.5-2.5s1.12-2.5 2.5-2.5 2.5 1.12 2.5 2.5-1.12 2.5-2.5 2.5z"/></svg>
-View on Maps
-</a>
-</div>
-<div class="store-card" style="background:rgba(255,255,255,0.03);border:1px solid rgba(255,255,255,0.08);border-radius:16px;padding:28px;text-align:left;transition:all 0.3s ease;position:relative;overflow:hidden;" onmouseover="this.style.background='rgba(255,255,255,0.06)';this.style.borderColor='rgba(201,168,76,0.3)';this.style.transform='translateY(-4px)';" onmouseout="this.style.background='rgba(255,255,255,0.03)';this.style.borderColor='rgba(255,255,255,0.08)';this.style.transform='translateY(0)';">
-
-<div style="position:absolute;left:0;top:0;bottom:0;width:4px;background:var(--gold);"></div>
-
-
-<h3 style="font-family:'Cormorant Garamond',serif;font-size:26px;font-weight:400;color:#fff;margin-bottom:6px;text-transform:capitalize;letter-spacing:0.5px;">Nagavara</h3>
-
-
-<p style="font-size:12px;color:rgba(255,255,255,0.5);font-style:italic;margin-bottom:20px;">Serving Thanisandra / Nagavara</p>
-
-
-<div style="margin-bottom:16px;">
-<div style="font-size:10px;letter-spacing:2.5px;text-transform:uppercase;color:var(--gold);font-weight:600;margin-bottom:12px;">Near Key Landmarks</div>
-<div class="landmark-badges" style="display:grid;grid-template-columns:1fr 1fr;gap:6px 12px;">
-<span style="display:flex;align-items:center;gap:6px;font-size:12px;color:rgba(255,255,255,0.7);white-space:nowrap;overflow:hidden;text-overflow:ellipsis;" title="Above Paakashala Restaurant Nagavara">
-<svg width="6" height="6" viewBox="0 0 24 24" fill="var(--gold)" style="flex-shrink:0;margin-top:1px;"><circle cx="12" cy="12" r="6"/></svg>
-Above Paakashala Restaurant Nagavara
-</span>
-<span style="display:flex;align-items:center;gap:6px;font-size:12px;color:rgba(255,255,255,0.7);white-space:nowrap;overflow:hidden;text-overflow:ellipsis;" title="Near Skywalk Exit">
-<svg width="6" height="6" viewBox="0 0 24 24" fill="var(--gold)" style="flex-shrink:0;margin-top:1px;"><circle cx="12" cy="12" r="6"/></svg>
-Near Skywalk Exit
-</span>
-<span style="display:flex;align-items:center;gap:6px;font-size:12px;color:rgba(255,255,255,0.7);white-space:nowrap;overflow:hidden;text-overflow:ellipsis;" title="Near Manyata Tech Park">
-<svg width="6" height="6" viewBox="0 0 24 24" fill="var(--gold)" style="flex-shrink:0;margin-top:1px;"><circle cx="12" cy="12" r="6"/></svg>
-Near Manyata Tech Park
-</span>
-<span style="display:flex;align-items:center;gap:6px;font-size:12px;color:rgba(255,255,255,0.7);white-space:nowrap;overflow:hidden;text-overflow:ellipsis;" title="Hebbal Flyover">
-<svg width="6" height="6" viewBox="0 0 24 24" fill="var(--gold)" style="flex-shrink:0;margin-top:1px;"><circle cx="12" cy="12" r="6"/></svg>
-Hebbal Flyover
-</span>
-<span style="display:flex;align-items:center;gap:6px;font-size:12px;color:rgba(255,255,255,0.7);white-space:nowrap;overflow:hidden;text-overflow:ellipsis;" title="Nagavara Lake">
-<svg width="6" height="6" viewBox="0 0 24 24" fill="var(--gold)" style="flex-shrink:0;margin-top:1px;"><circle cx="12" cy="12" r="6"/></svg>
-Nagavara Lake
-</span>
-<span style="display:flex;align-items:center;gap:6px;font-size:12px;color:rgba(255,255,255,0.7);white-space:nowrap;overflow:hidden;text-overflow:ellipsis;" title="Rachenahalli Lake">
-<svg width="6" height="6" viewBox="0 0 24 24" fill="var(--gold)" style="flex-shrink:0;margin-top:1px;"><circle cx="12" cy="12" r="6"/></svg>
-Rachenahalli Lake
-</span>
-<span style="display:flex;align-items:center;gap:6px;font-size:12px;color:rgba(255,255,255,0.7);white-space:nowrap;overflow:hidden;text-overflow:ellipsis;" title="Phoenix Mall of Asia">
-<svg width="6" height="6" viewBox="0 0 24 24" fill="var(--gold)" style="flex-shrink:0;margin-top:1px;"><circle cx="12" cy="12" r="6"/></svg>
-Phoenix Mall of Asia
-</span>
-<span style="display:flex;align-items:center;gap:6px;font-size:12px;color:rgba(255,255,255,0.7);white-space:nowrap;overflow:hidden;text-overflow:ellipsis;" title="Snow City Bengaluru">
-<svg width="6" height="6" viewBox="0 0 24 24" fill="var(--gold)" style="flex-shrink:0;margin-top:1px;"><circle cx="12" cy="12" r="6"/></svg>
-Snow City Bengaluru
-</span>
-<span style="display:flex;align-items:center;gap:6px;font-size:12px;color:rgba(255,255,255,0.7);white-space:nowrap;overflow:hidden;text-overflow:ellipsis;" title="Bengaluru Palace">
-<svg width="6" height="6" viewBox="0 0 24 24" fill="var(--gold)" style="flex-shrink:0;margin-top:1px;"><circle cx="12" cy="12" r="6"/></svg>
-Bengaluru Palace
-</span>
-<span style="display:flex;align-items:center;gap:6px;font-size:12px;color:rgba(255,255,255,0.7);white-space:nowrap;overflow:hidden;text-overflow:ellipsis;" title="Hennur Biodiversity Park">
-<svg width="6" height="6" viewBox="0 0 24 24" fill="var(--gold)" style="flex-shrink:0;margin-top:1px;"><circle cx="12" cy="12" r="6"/></svg>
-Hennur Biodiversity Park
-</span>
-<span style="display:flex;align-items:center;gap:6px;font-size:12px;color:rgba(255,255,255,0.7);white-space:nowrap;overflow:hidden;text-overflow:ellipsis;" title="Aster CMI Hospital">
-<svg width="6" height="6" viewBox="0 0 24 24" fill="var(--gold)" style="flex-shrink:0;margin-top:1px;"><circle cx="12" cy="12" r="6"/></svg>
-Aster CMI Hospital
-</span>
-<span style="display:flex;align-items:center;gap:6px;font-size:12px;color:rgba(255,255,255,0.7);white-space:nowrap;overflow:hidden;text-overflow:ellipsis;" title="Jakkur Lake">
-<svg width="6" height="6" viewBox="0 0 24 24" fill="var(--gold)" style="flex-shrink:0;margin-top:1px;"><circle cx="12" cy="12" r="6"/></svg>
-Jakkur Lake
-</span>
-</div>
-</div>
-
-
-<a href="#" target="_blank" rel="noopener" style="display:inline-flex;align-items:center;gap:8px;padding:10px 18px;background:transparent;border:1px solid var(--gold);border-radius:8px;color:var(--gold);font-size:12px;font-weight:500;text-decoration:none;transition:all 0.2s ease;" onmouseover="this.style.background='var(--gold)';this.style.color='var(--dark)';" onmouseout="this.style.background='transparent';this.style.color='var(--gold)';">
-<svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5c-1.38 0-2.5-1.12-2.5-2.5s1.12-2.5 2.5-2.5 2.5 1.12 2.5 2.5-1.12 2.5-2.5 2.5z"/></svg>
-View on Maps
-</a>
-</div>
-<div class="store-card" style="background:rgba(255,255,255,0.03);border:1px solid rgba(255,255,255,0.08);border-radius:16px;padding:28px;text-align:left;transition:all 0.3s ease;position:relative;overflow:hidden;" onmouseover="this.style.background='rgba(255,255,255,0.06)';this.style.borderColor='rgba(201,168,76,0.3)';this.style.transform='translateY(-4px)';" onmouseout="this.style.background='rgba(255,255,255,0.03)';this.style.borderColor='rgba(255,255,255,0.08)';this.style.transform='translateY(0)';">
-
-<div style="position:absolute;left:0;top:0;bottom:0;width:4px;background:var(--gold);"></div>
-
-
-<h3 style="font-family:'Cormorant Garamond',serif;font-size:26px;font-weight:400;color:#fff;margin-bottom:6px;text-transform:capitalize;letter-spacing:0.5px;">Devasandra</h3>
-
-
-<p style="font-size:12px;color:rgba(255,255,255,0.5);font-style:italic;margin-bottom:20px;">Serving Devasandra / KR Puram</p>
-
-
-<div style="margin-bottom:16px;">
-<div style="font-size:10px;letter-spacing:2.5px;text-transform:uppercase;color:var(--gold);font-weight:600;margin-bottom:12px;">Near Key Landmarks</div>
-<div class="landmark-badges" style="display:grid;grid-template-columns:1fr 1fr;gap:6px 12px;">
-<span style="display:flex;align-items:center;gap:6px;font-size:12px;color:rgba(255,255,255,0.7);white-space:nowrap;overflow:hidden;text-overflow:ellipsis;" title="Near Phoenix Marketcity">
-<svg width="6" height="6" viewBox="0 0 24 24" fill="var(--gold)" style="flex-shrink:0;margin-top:1px;"><circle cx="12" cy="12" r="6"/></svg>
-Near Phoenix Marketcity
-</span>
-<span style="display:flex;align-items:center;gap:6px;font-size:12px;color:rgba(255,255,255,0.7);white-space:nowrap;overflow:hidden;text-overflow:ellipsis;" title="VR Bengaluru">
-<svg width="6" height="6" viewBox="0 0 24 24" fill="var(--gold)" style="flex-shrink:0;margin-top:1px;"><circle cx="12" cy="12" r="6"/></svg>
-VR Bengaluru
-</span>
-<span style="display:flex;align-items:center;gap:6px;font-size:12px;color:rgba(255,255,255,0.7);white-space:nowrap;overflow:hidden;text-overflow:ellipsis;" title="Krishnarajapuram Railway Station">
-<svg width="6" height="6" viewBox="0 0 24 24" fill="var(--gold)" style="flex-shrink:0;margin-top:1px;"><circle cx="12" cy="12" r="6"/></svg>
-Krishnarajapuram Railway Station
-</span>
-<span style="display:flex;align-items:center;gap:6px;font-size:12px;color:rgba(255,255,255,0.7);white-space:nowrap;overflow:hidden;text-overflow:ellipsis;" title="Bagmane World Technology Center">
-<svg width="6" height="6" viewBox="0 0 24 24" fill="var(--gold)" style="flex-shrink:0;margin-top:1px;"><circle cx="12" cy="12" r="6"/></svg>
-Bagmane World Technology Center
-</span>
-<span style="display:flex;align-items:center;gap:6px;font-size:12px;color:rgba(255,255,255,0.7);white-space:nowrap;overflow:hidden;text-overflow:ellipsis;" title="ITPL Whitefield">
-<svg width="6" height="6" viewBox="0 0 24 24" fill="var(--gold)" style="flex-shrink:0;margin-top:1px;"><circle cx="12" cy="12" r="6"/></svg>
-ITPL Whitefield
-</span>
-<span style="display:flex;align-items:center;gap:6px;font-size:12px;color:rgba(255,255,255,0.7);white-space:nowrap;overflow:hidden;text-overflow:ellipsis;" title="Marathahalli Bridge">
-<svg width="6" height="6" viewBox="0 0 24 24" fill="var(--gold)" style="flex-shrink:0;margin-top:1px;"><circle cx="12" cy="12" r="6"/></svg>
-Marathahalli Bridge
-</span>
-<span style="display:flex;align-items:center;gap:6px;font-size:12px;color:rgba(255,255,255,0.7);white-space:nowrap;overflow:hidden;text-overflow:ellipsis;" title="Ulsoor Lake">
-<svg width="6" height="6" viewBox="0 0 24 24" fill="var(--gold)" style="flex-shrink:0;margin-top:1px;"><circle cx="12" cy="12" r="6"/></svg>
-Ulsoor Lake
-</span>
-<span style="display:flex;align-items:center;gap:6px;font-size:12px;color:rgba(255,255,255,0.7);white-space:nowrap;overflow:hidden;text-overflow:ellipsis;" title="RMZ Infinity">
-<svg width="6" height="6" viewBox="0 0 24 24" fill="var(--gold)" style="flex-shrink:0;margin-top:1px;"><circle cx="12" cy="12" r="6"/></svg>
-RMZ Infinity
-</span>
-<span style="display:flex;align-items:center;gap:6px;font-size:12px;color:rgba(255,255,255,0.7);white-space:nowrap;overflow:hidden;text-overflow:ellipsis;" title="Commercial Street">
-<svg width="6" height="6" viewBox="0 0 24 24" fill="var(--gold)" style="flex-shrink:0;margin-top:1px;"><circle cx="12" cy="12" r="6"/></svg>
-Commercial Street
-</span>
-<span style="display:flex;align-items:center;gap:6px;font-size:12px;color:rgba(255,255,255,0.7);white-space:nowrap;overflow:hidden;text-overflow:ellipsis;" title="Indira Nagar 100 Feet Road">
-<svg width="6" height="6" viewBox="0 0 24 24" fill="var(--gold)" style="flex-shrink:0;margin-top:1px;"><circle cx="12" cy="12" r="6"/></svg>
-Indira Nagar 100 Feet Road
-</span>
-</div>
-</div>
-
-
-<a href="#" target="_blank" rel="noopener" style="display:inline-flex;align-items:center;gap:8px;padding:10px 18px;background:transparent;border:1px solid var(--gold);border-radius:8px;color:var(--gold);font-size:12px;font-weight:500;text-decoration:none;transition:all 0.2s ease;" onmouseover="this.style.background='var(--gold)';this.style.color='var(--dark)';" onmouseout="this.style.background='transparent';this.style.color='var(--gold)';">
-<svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5c-1.38 0-2.5-1.12-2.5-2.5s1.12-2.5 2.5-2.5 2.5 1.12 2.5 2.5-1.12 2.5-2.5 2.5z"/></svg>
-View on Maps
-</a>
-</div>
-<div class="store-card" style="background:rgba(255,255,255,0.03);border:1px solid rgba(255,255,255,0.08);border-radius:16px;padding:28px;text-align:left;transition:all 0.3s ease;position:relative;overflow:hidden;" onmouseover="this.style.background='rgba(255,255,255,0.06)';this.style.borderColor='rgba(201,168,76,0.3)';this.style.transform='translateY(-4px)';" onmouseout="this.style.background='rgba(255,255,255,0.03)';this.style.borderColor='rgba(255,255,255,0.08)';this.style.transform='translateY(0)';">
-
-<div style="position:absolute;left:0;top:0;bottom:0;width:4px;background:var(--gold);"></div>
-
-
-<h3 style="font-family:'Cormorant Garamond',serif;font-size:26px;font-weight:400;color:#fff;margin-bottom:6px;text-transform:capitalize;letter-spacing:0.5px;">Frazer Town</h3>
-
-
-<p style="font-size:12px;color:rgba(255,255,255,0.5);font-style:italic;margin-bottom:20px;">Serving Frazer Town / Pulikeshi Nagar</p>
-
-
-<div style="margin-bottom:16px;">
-<div style="font-size:10px;letter-spacing:2.5px;text-transform:uppercase;color:var(--gold);font-weight:600;margin-bottom:12px;">Near Key Landmarks</div>
-<div class="landmark-badges" style="display:grid;grid-template-columns:1fr 1fr;gap:6px 12px;">
-<span style="display:flex;align-items:center;gap:6px;font-size:12px;color:rgba(255,255,255,0.7);white-space:nowrap;overflow:hidden;text-overflow:ellipsis;" title="Near Mosque Road">
-<svg width="6" height="6" viewBox="0 0 24 24" fill="var(--gold)" style="flex-shrink:0;margin-top:1px;"><circle cx="12" cy="12" r="6"/></svg>
-Near Mosque Road
-</span>
-<span style="display:flex;align-items:center;gap:6px;font-size:12px;color:rgba(255,255,255,0.7);white-space:nowrap;overflow:hidden;text-overflow:ellipsis;" title="Albert Bakery">
-<svg width="6" height="6" viewBox="0 0 24 24" fill="var(--gold)" style="flex-shrink:0;margin-top:1px;"><circle cx="12" cy="12" r="6"/></svg>
-Albert Bakery
-</span>
-<span style="display:flex;align-items:center;gap:6px;font-size:12px;color:rgba(255,255,255,0.7);white-space:nowrap;overflow:hidden;text-overflow:ellipsis;" title="St. Francis Xavier’s Cathedral">
-<svg width="6" height="6" viewBox="0 0 24 24" fill="var(--gold)" style="flex-shrink:0;margin-top:1px;"><circle cx="12" cy="12" r="6"/></svg>
-St. Francis Xavier’s Cathedral
-</span>
-<span style="display:flex;align-items:center;gap:6px;font-size:12px;color:rgba(255,255,255,0.7);white-space:nowrap;overflow:hidden;text-overflow:ellipsis;" title="Coles Park">
-<svg width="6" height="6" viewBox="0 0 24 24" fill="var(--gold)" style="flex-shrink:0;margin-top:1px;"><circle cx="12" cy="12" r="6"/></svg>
-Coles Park
-</span>
-<span style="display:flex;align-items:center;gap:6px;font-size:12px;color:rgba(255,255,255,0.7);white-space:nowrap;overflow:hidden;text-overflow:ellipsis;" title="Thom’s Bakery & Supermarket">
-<svg width="6" height="6" viewBox="0 0 24 24" fill="var(--gold)" style="flex-shrink:0;margin-top:1px;"><circle cx="12" cy="12" r="6"/></svg>
-Thom’s Bakery & Supermarket
-</span>
-<span style="display:flex;align-items:center;gap:6px;font-size:12px;color:rgba(255,255,255,0.7);white-space:nowrap;overflow:hidden;text-overflow:ellipsis;" title="Bangalore East Railway Station">
-<svg width="6" height="6" viewBox="0 0 24 24" fill="var(--gold)" style="flex-shrink:0;margin-top:1px;"><circle cx="12" cy="12" r="6"/></svg>
-Bangalore East Railway Station
-</span>
-<span style="display:flex;align-items:center;gap:6px;font-size:12px;color:rgba(255,255,255,0.7);white-space:nowrap;overflow:hidden;text-overflow:ellipsis;" title="Bangalore Palace">
-<svg width="6" height="6" viewBox="0 0 24 24" fill="var(--gold)" style="flex-shrink:0;margin-top:1px;"><circle cx="12" cy="12" r="6"/></svg>
-Bangalore Palace
-</span>
-<span style="display:flex;align-items:center;gap:6px;font-size:12px;color:rgba(255,255,255,0.7);white-space:nowrap;overflow:hidden;text-overflow:ellipsis;" title="Ulsoor Lake">
-<svg width="6" height="6" viewBox="0 0 24 24" fill="var(--gold)" style="flex-shrink:0;margin-top:1px;"><circle cx="12" cy="12" r="6"/></svg>
-Ulsoor Lake
-</span>
-<span style="display:flex;align-items:center;gap:6px;font-size:12px;color:rgba(255,255,255,0.7);white-space:nowrap;overflow:hidden;text-overflow:ellipsis;" title="Commercial Street">
-<svg width="6" height="6" viewBox="0 0 24 24" fill="var(--gold)" style="flex-shrink:0;margin-top:1px;"><circle cx="12" cy="12" r="6"/></svg>
-Commercial Street
-</span>
-<span style="display:flex;align-items:center;gap:6px;font-size:12px;color:rgba(255,255,255,0.7);white-space:nowrap;overflow:hidden;text-overflow:ellipsis;" title="Vidhana Soudha">
-<svg width="6" height="6" viewBox="0 0 24 24" fill="var(--gold)" style="flex-shrink:0;margin-top:1px;"><circle cx="12" cy="12" r="6"/></svg>
-Vidhana Soudha
-</span>
-</div>
-</div>
-
-
-<a href="#" target="_blank" rel="noopener" style="display:inline-flex;align-items:center;gap:8px;padding:10px 18px;background:transparent;border:1px solid var(--gold);border-radius:8px;color:var(--gold);font-size:12px;font-weight:500;text-decoration:none;transition:all 0.2s ease;" onmouseover="this.style.background='var(--gold)';this.style.color='var(--dark)';" onmouseout="this.style.background='transparent';this.style.color='var(--gold)';">
-<svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5c-1.38 0-2.5-1.12-2.5-2.5s1.12-2.5 2.5-2.5 2.5 1.12 2.5 2.5-1.12 2.5-2.5 2.5z"/></svg>
-View on Maps
-</a>
-</div>
-<div class="store-card" style="background:rgba(255,255,255,0.03);border:1px solid rgba(255,255,255,0.08);border-radius:16px;padding:28px;text-align:left;transition:all 0.3s ease;position:relative;overflow:hidden;" onmouseover="this.style.background='rgba(255,255,255,0.06)';this.style.borderColor='rgba(201,168,76,0.3)';this.style.transform='translateY(-4px)';" onmouseout="this.style.background='rgba(255,255,255,0.03)';this.style.borderColor='rgba(255,255,255,0.08)';this.style.transform='translateY(0)';">
-
-<div style="position:absolute;left:0;top:0;bottom:0;width:4px;background:var(--gold);"></div>
-
-
-<h3 style="font-family:'Cormorant Garamond',serif;font-size:26px;font-weight:400;color:#fff;margin-bottom:6px;text-transform:capitalize;letter-spacing:0.5px;">Hennur</h3>
-
-
-<p style="font-size:12px;color:rgba(255,255,255,0.5);font-style:italic;margin-bottom:20px;">Serving Hennur / North Bangalore</p>
-
-
-<div style="margin-bottom:16px;">
-<div style="font-size:10px;letter-spacing:2.5px;text-transform:uppercase;color:var(--gold);font-weight:600;margin-bottom:12px;">Near Key Landmarks</div>
-<div class="landmark-badges" style="display:grid;grid-template-columns:1fr 1fr;gap:6px 12px;">
-<span style="display:flex;align-items:center;gap:6px;font-size:12px;color:rgba(255,255,255,0.7);white-space:nowrap;overflow:hidden;text-overflow:ellipsis;" title="Near Hennur Cross">
-<svg width="6" height="6" viewBox="0 0 24 24" fill="var(--gold)" style="flex-shrink:0;margin-top:1px;"><circle cx="12" cy="12" r="6"/></svg>
-Near Hennur Cross
-</span>
-<span style="display:flex;align-items:center;gap:6px;font-size:12px;color:rgba(255,255,255,0.7);white-space:nowrap;overflow:hidden;text-overflow:ellipsis;" title="Mantri Splendor">
-<svg width="6" height="6" viewBox="0 0 24 24" fill="var(--gold)" style="flex-shrink:0;margin-top:1px;"><circle cx="12" cy="12" r="6"/></svg>
-Mantri Splendor
-</span>
-<span style="display:flex;align-items:center;gap:6px;font-size:12px;color:rgba(255,255,255,0.7);white-space:nowrap;overflow:hidden;text-overflow:ellipsis;" title="Manyata Tech Park">
-<svg width="6" height="6" viewBox="0 0 24 24" fill="var(--gold)" style="flex-shrink:0;margin-top:1px;"><circle cx="12" cy="12" r="6"/></svg>
-Manyata Tech Park
-</span>
-<span style="display:flex;align-items:center;gap:6px;font-size:12px;color:rgba(255,255,255,0.7);white-space:nowrap;overflow:hidden;text-overflow:ellipsis;" title="Hennur Lake Biodiversity Park">
-<svg width="6" height="6" viewBox="0 0 24 24" fill="var(--gold)" style="flex-shrink:0;margin-top:1px;"><circle cx="12" cy="12" r="6"/></svg>
-Hennur Lake Biodiversity Park
-</span>
-<span style="display:flex;align-items:center;gap:6px;font-size:12px;color:rgba(255,255,255,0.7);white-space:nowrap;overflow:hidden;text-overflow:ellipsis;" title="Elements Mall">
-<svg width="6" height="6" viewBox="0 0 24 24" fill="var(--gold)" style="flex-shrink:0;margin-top:1px;"><circle cx="12" cy="12" r="6"/></svg>
-Elements Mall
-</span>
-<span style="display:flex;align-items:center;gap:6px;font-size:12px;color:rgba(255,255,255,0.7);white-space:nowrap;overflow:hidden;text-overflow:ellipsis;" title="Bagalur Main Road">
-<svg width="6" height="6" viewBox="0 0 24 24" fill="var(--gold)" style="flex-shrink:0;margin-top:1px;"><circle cx="12" cy="12" r="6"/></svg>
-Bagalur Main Road
-</span>
-<span style="display:flex;align-items:center;gap:6px;font-size:12px;color:rgba(255,255,255,0.7);white-space:nowrap;overflow:hidden;text-overflow:ellipsis;" title="Bangalore Palace">
-<svg width="6" height="6" viewBox="0 0 24 24" fill="var(--gold)" style="flex-shrink:0;margin-top:1px;"><circle cx="12" cy="12" r="6"/></svg>
-Bangalore Palace
-</span>
-<span style="display:flex;align-items:center;gap:6px;font-size:12px;color:rgba(255,255,255,0.7);white-space:nowrap;overflow:hidden;text-overflow:ellipsis;" title="Hebbal Flyover">
-<svg width="6" height="6" viewBox="0 0 24 24" fill="var(--gold)" style="flex-shrink:0;margin-top:1px;"><circle cx="12" cy="12" r="6"/></svg>
-Hebbal Flyover
-</span>
-<span style="display:flex;align-items:center;gap:6px;font-size:12px;color:rgba(255,255,255,0.7);white-space:nowrap;overflow:hidden;text-overflow:ellipsis;" title="Lumbini Gardens">
-<svg width="6" height="6" viewBox="0 0 24 24" fill="var(--gold)" style="flex-shrink:0;margin-top:1px;"><circle cx="12" cy="12" r="6"/></svg>
-Lumbini Gardens
-</span>
-<span style="display:flex;align-items:center;gap:6px;font-size:12px;color:rgba(255,255,255,0.7);white-space:nowrap;overflow:hidden;text-overflow:ellipsis;" title="Horamavu Agara Lake">
-<svg width="6" height="6" viewBox="0 0 24 24" fill="var(--gold)" style="flex-shrink:0;margin-top:1px;"><circle cx="12" cy="12" r="6"/></svg>
-Horamavu Agara Lake
-</span>
-<span style="display:flex;align-items:center;gap:6px;font-size:12px;color:rgba(255,255,255,0.7);white-space:nowrap;overflow:hidden;text-overflow:ellipsis;" title="XLR8 Indoor Sports Arena">
-<svg width="6" height="6" viewBox="0 0 24 24" fill="var(--gold)" style="flex-shrink:0;margin-top:1px;"><circle cx="12" cy="12" r="6"/></svg>
-XLR8 Indoor Sports Arena
-</span>
-<span style="display:flex;align-items:center;gap:6px;font-size:12px;color:rgba(255,255,255,0.7);white-space:nowrap;overflow:hidden;text-overflow:ellipsis;" title="Byg Brewski Brewing Company">
-<svg width="6" height="6" viewBox="0 0 24 24" fill="var(--gold)" style="flex-shrink:0;margin-top:1px;"><circle cx="12" cy="12" r="6"/></svg>
-Byg Brewski Brewing Company
-</span>
-</div>
-</div>
-
-
-<a href="#" target="_blank" rel="noopener" style="display:inline-flex;align-items:center;gap:8px;padding:10px 18px;background:transparent;border:1px solid var(--gold);border-radius:8px;color:var(--gold);font-size:12px;font-weight:500;text-decoration:none;transition:all 0.2s ease;" onmouseover="this.style.background='var(--gold)';this.style.color='var(--dark)';" onmouseout="this.style.background='transparent';this.style.color='var(--gold)';">
-<svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5c-1.38 0-2.5-1.12-2.5-2.5s1.12-2.5 2.5-2.5 2.5 1.12 2.5 2.5-1.12 2.5-2.5 2.5z"/></svg>
-View on Maps
-</a>
-</div>
-</div>
 </section>
 
 <div style="clear: both;"></div>
@@ -3865,7 +3681,11 @@ var i=0; img.src=base + EXT[i];
 img.onerror=function(){
 i++;
 if(i<EXT.length) img.src=base + EXT[i];
-else img.style.display='none';
+else {
+img.style.display='none';
+var fallback = img.parentNode ? img.parentNode.querySelector('.campaign-img-fallback') : null;
+if(fallback) fallback.style.display='flex';
+}
 };
 });
 }
