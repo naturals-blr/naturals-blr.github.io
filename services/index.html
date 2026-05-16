@@ -3703,8 +3703,12 @@ const formattedServiceName = toTitleCase(serviceName);
 const formattedDescription = toTitleCase(description);
 
 // Price and media formatting for compact service tiles.
-const iconName = service.service_icon_name || service.Service_Icon_Name || 'service_default.jpg';
-const iconSrc = `/images/service-icon/${iconName}`;
+const fallbackServiceImageSrc = '/images/service-image/service_default.jpg';
+const rawServiceImageName = service.service_image_name || service.Service_Image_Name || '';
+const serviceImageName = String(rawServiceImageName).split(/[\\/]/).pop().trim();
+const serviceImageSrc = serviceImageName
+? `/images/service-image/${encodeURIComponent(serviceImageName)}`
+: fallbackServiceImageSrc;
 let priceText = '';
 if (memberCost) {
 if (regularCost) {
@@ -3724,7 +3728,7 @@ serviceCard.setAttribute('tabindex', '0');
 serviceCard.setAttribute('aria-expanded', 'false');
 serviceCard.innerHTML = `
 <div class="svc-thumb" aria-hidden="true">
-<img src="${iconSrc}" alt="" loading="lazy" onerror="this.onerror=null;this.src='/images/service-icon/service_default.jpg'">
+<img src="${serviceImageSrc}" alt="" width="116" height="92" loading="lazy" decoding="async" onerror="this.onerror=null;this.src='${fallbackServiceImageSrc}'">
 </div>
 <div class="svc-copy">
 <div class="svc-top-row">
