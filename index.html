@@ -249,8 +249,14 @@ display:block;text-decoration:none;transition:background 0.2s;position:relative;
 .st-card-num{display:inline-flex;align-items:center;border:1px solid rgba(255,255,255,0.14);border-radius:999px;padding:5px 9px;font-size:9px;color:rgba(255,255,255,0.64);letter-spacing:2px;text-transform:uppercase;margin-bottom:14px;}
 .st-card-name{font-family:'Cormorant Garamond',serif;font-size:25px;color:#fff;font-weight:400;line-height:1.05;max-width:76%;}
 .st-card-area{font-size:9px;letter-spacing:2px;text-transform:uppercase;color:var(--gold);margin-top:8px;font-weight:700;}
+.st-distance{display:none;margin-top:6px;font-size:10px;color:rgba(255,255,255,0.62);letter-spacing:0.8px;}
+.st-distance.is-visible{display:block;}
 .st-card-body{padding:18px 18px 20px;flex:1;display:flex;flex-direction:column;}
 .st-card-addr{font-size:12px;color:var(--text-mid);line-height:1.55;margin-bottom:14px;background:#fbfaf7;border:1px solid rgba(0,0,0,0.06);border-radius:12px;padding:12px 12px;min-height:74px;}
+.st-map{height:128px;border-radius:12px;overflow:hidden;border:1px solid rgba(0,0,0,0.08);margin:-2px 0 14px;background:#edf1ee;position:relative;}
+.st-map iframe{width:100%;height:100%;border:0;display:block;filter:saturate(0.95) contrast(0.96);}
+.st-map-link{position:absolute;right:8px;bottom:8px;border-radius:999px;background:rgba(17,23,20,0.86);color:#fff;padding:6px 9px;font-size:9px;letter-spacing:1px;text-transform:uppercase;font-weight:800;text-decoration:none;}
+.st-map-link:hover{background:var(--gold);color:var(--dark);}
 .st-hours{font-size:11px;color:var(--text-mid);line-height:1.55;margin:-4px 0 14px;background:#fff;border:1px solid rgba(201,168,76,0.20);border-radius:12px;padding:10px 12px;}
 .st-hours strong{color:var(--text);font-weight:800;}
 .st-neighborhood{border:1px solid rgba(0,0,0,0.08);border-radius:12px;margin:14px 0 0;background:#fbfaf7;overflow:hidden;}
@@ -262,6 +268,7 @@ display:block;text-decoration:none;transition:background 0.2s;position:relative;
 .st-neighborhood-body strong{display:block;color:var(--text);font-weight:600;margin-bottom:8px;}
 .st-landmarks{display:flex;flex-wrap:wrap;gap:6px;margin-top:8px;}
 .st-landmarks span{border:1px solid rgba(0,0,0,0.08);border-radius:999px;padding:4px 8px;background:#fff;font-size:10px;color:var(--text-mid);}
+.st-landmarks-more{border:1px solid rgba(201,168,76,0.22);border-radius:999px;padding:4px 8px;background:rgba(201,168,76,0.10);font-size:10px;color:var(--green-mid);font-weight:800;}
 .st-card-actions{display:flex;flex-direction:column;gap:10px;margin-top:auto;}
 .st-primary-row{display:grid;grid-template-columns:1fr 40px 40px;gap:8px;align-items:center;}
 .st-icon-row{display:flex;gap:10px;justify-content:center;}
@@ -1929,6 +1936,7 @@ Choose Store</button>
 <a href="/stores/bangalore/jp-nagar-5th-phase/" class="st-card-head" aria-label="View JP Nagar 5th Phase">
 <div class="st-card-num">Location 01</div>
 <div class="st-card-name">JP Nagar 5th Phase</div>
+<div class="st-distance" data-lat="12.9082" data-lng="77.5941"></div>
 <div class="st-card-area">Bangalore &middot; </div>
 <div class="st-open-now status-unknown" data-store-id="" data-hours="10:00 AM – 9:00 PM" data-sat-hours="10:00 AM – 9:00 PM" data-sun-hours="10:00 AM – 9:00 PM" data-store-url="/stores/bangalore/jp-nagar-5th-phase/">
 <span class="status-dot"></span>
@@ -1938,6 +1946,15 @@ Choose Store</button>
 
 <div class="st-card-body">
 <div class="st-card-addr"><svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="var(--gold)" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-map-pin" style="flex-shrink:0" aria-hidden="true"><path d="M20 10c0 6-8 12-8 12s-8-6-8-12a8 8 0 0 1 16 0Z"/><circle cx="12" cy="10" r="3"/></svg>
+</div>
+<div class="st-map">
+<iframe
+loading="lazy"
+referrerpolicy="no-referrer-when-downgrade"
+title="Map for JP Nagar 5th Phase"
+src="https://www.google.com/maps?q=12.9082,77.5941&z=15&output=embed">
+</iframe>
+<a class="st-map-link" href="https://maps.google.com/?q=Naturals+Salon+JP+Nagar+5th+Phase+Bangalore" target="_blank" rel="noopener" aria-label="Open JP Nagar 5th Phase in Google Maps">Open map</a>
 </div>
 <div class="st-hours">
 <strong>Hours:</strong>
@@ -1957,7 +1974,7 @@ Book</a>
 </a>
 <a class="st-btn st-btn-fb" href="https://facebook.com/Naturals.Salon.JPNagar5Phase" target="_blank" rel="noopener" aria-label="JP Nagar 5th Phase on Facebook"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="18" height="18" fill="#1877F2" aria-hidden="true" style="flex-shrink:0"><path d="M24 12.073C24 5.405 18.627 0 12 0S0 5.405 0 12.073C0 18.1 4.388 23.094 10.125 24v-8.437H7.078v-3.49h3.047V9.41c0-3.025 1.792-4.697 4.533-4.697 1.313 0 2.686.236 2.686.236v2.97h-1.513c-1.491 0-1.956.93-1.956 1.883v2.271h3.328l-.532 3.49h-2.796V24C19.612 23.094 24 18.1 24 12.073z"/></svg>
 </a>
-<a class="st-btn st-btn-maps" href="https://g.page/Naturals_JPNagar5thPhase/" target="_blank" rel="noopener" aria-label="Directions to JP Nagar 5th Phase"><svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-map-pin" style="flex-shrink:0" aria-hidden="true"><path d="M20 10c0 6-8 12-8 12s-8-6-8-12a8 8 0 0 1 16 0Z"/><circle cx="12" cy="10" r="3"/></svg>
+<a class="st-btn st-btn-maps" href="https://maps.google.com/?q=Naturals+Salon+JP+Nagar+5th+Phase+Bangalore" target="_blank" rel="noopener" aria-label="Directions to JP Nagar 5th Phase"><svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-map-pin" style="flex-shrink:0" aria-hidden="true"><path d="M20 10c0 6-8 12-8 12s-8-6-8-12a8 8 0 0 1 16 0Z"/><circle cx="12" cy="10" r="3"/></svg>
 </a>
 </div>
 <div class="st-info-row">
@@ -1978,8 +1995,7 @@ Book</a>
 <span>Lalbagh Botanical Garden</span>
 <span>Bull Temple</span>
 <span>Jayanagar 4th Block Market</span>
-<span>ISKCON Vaikuntha Hill</span>
-<span>Ranadheera Kanteerava Park</span>
+<span class="st-landmarks-more">+ 2 more</span>
 </div>
 </div>
 </details>
@@ -1989,6 +2005,7 @@ Book</a>
 <a href="/stores/bangalore/nagavara/" class="st-card-head" aria-label="View Nagavara">
 <div class="st-card-num">Location 02</div>
 <div class="st-card-name">Nagavara</div>
+<div class="st-distance" data-lat="13.0524" data-lng="77.6140"></div>
 <div class="st-card-area">Bangalore &middot; </div>
 <div class="st-open-now status-unknown" data-store-id="" data-hours="10:00 AM – 9:00 PM" data-sat-hours="10:00 AM – 9:00 PM" data-sun-hours="10:00 AM – 9:00 PM" data-store-url="/stores/bangalore/nagavara/">
 <span class="status-dot"></span>
@@ -1998,6 +2015,15 @@ Book</a>
 
 <div class="st-card-body">
 <div class="st-card-addr"><svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="var(--gold)" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-map-pin" style="flex-shrink:0" aria-hidden="true"><path d="M20 10c0 6-8 12-8 12s-8-6-8-12a8 8 0 0 1 16 0Z"/><circle cx="12" cy="10" r="3"/></svg>
+</div>
+<div class="st-map">
+<iframe
+loading="lazy"
+referrerpolicy="no-referrer-when-downgrade"
+title="Map for Nagavara"
+src="https://www.google.com/maps?q=13.0524,77.6140&z=15&output=embed">
+</iframe>
+<a class="st-map-link" href="https://maps.google.com/?q=Naturals+Salon+Nagavara+Bangalore" target="_blank" rel="noopener" aria-label="Open Nagavara in Google Maps">Open map</a>
 </div>
 <div class="st-hours">
 <strong>Hours:</strong>
@@ -2017,7 +2043,7 @@ Book</a>
 </a>
 <a class="st-btn st-btn-fb" href="https://facebook.com/Naturals.Salon.Nagavara/" target="_blank" rel="noopener" aria-label="Nagavara on Facebook"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="18" height="18" fill="#1877F2" aria-hidden="true" style="flex-shrink:0"><path d="M24 12.073C24 5.405 18.627 0 12 0S0 5.405 0 12.073C0 18.1 4.388 23.094 10.125 24v-8.437H7.078v-3.49h3.047V9.41c0-3.025 1.792-4.697 4.533-4.697 1.313 0 2.686.236 2.686.236v2.97h-1.513c-1.491 0-1.956.93-1.956 1.883v2.271h3.328l-.532 3.49h-2.796V24C19.612 23.094 24 18.1 24 12.073z"/></svg>
 </a>
-<a class="st-btn st-btn-maps" href="https://maps.app.goo.gl/dPi8bNfB4USdgvvu8" target="_blank" rel="noopener" aria-label="Directions to Nagavara"><svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-map-pin" style="flex-shrink:0" aria-hidden="true"><path d="M20 10c0 6-8 12-8 12s-8-6-8-12a8 8 0 0 1 16 0Z"/><circle cx="12" cy="10" r="3"/></svg>
+<a class="st-btn st-btn-maps" href="https://maps.google.com/?q=Naturals+Salon+Nagavara+Bangalore" target="_blank" rel="noopener" aria-label="Directions to Nagavara"><svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-map-pin" style="flex-shrink:0" aria-hidden="true"><path d="M20 10c0 6-8 12-8 12s-8-6-8-12a8 8 0 0 1 16 0Z"/><circle cx="12" cy="10" r="3"/></svg>
 </a>
 </div>
 <div class="st-info-row">
@@ -2038,10 +2064,7 @@ Book</a>
 <span>Rachenahalli Lake</span>
 <span>Phoenix Mall of Asia</span>
 <span>Snow City Bengaluru</span>
-<span>Bengaluru Palace</span>
-<span>Hennur Biodiversity Park</span>
-<span>Aster CMI Hospital</span>
-<span>Jakkur Lake</span>
+<span class="st-landmarks-more">+ 4 more</span>
 </div>
 </div>
 </details>
@@ -2051,6 +2074,7 @@ Book</a>
 <a href="/stores/bangalore/devasandra/" class="st-card-head" aria-label="View Devasandra">
 <div class="st-card-num">Location 03</div>
 <div class="st-card-name">Devasandra</div>
+<div class="st-distance" data-lat="13.0012" data-lng="77.6784"></div>
 <div class="st-card-area">Bangalore &middot; </div>
 <div class="st-open-now status-unknown" data-store-id="" data-hours="10:00 AM – 9:00 PM" data-sat-hours="10:00 AM – 9:00 PM" data-sun-hours="10:00 AM – 9:00 PM" data-store-url="/stores/bangalore/devasandra/">
 <span class="status-dot"></span>
@@ -2060,6 +2084,15 @@ Book</a>
 
 <div class="st-card-body">
 <div class="st-card-addr"><svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="var(--gold)" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-map-pin" style="flex-shrink:0" aria-hidden="true"><path d="M20 10c0 6-8 12-8 12s-8-6-8-12a8 8 0 0 1 16 0Z"/><circle cx="12" cy="10" r="3"/></svg>
+</div>
+<div class="st-map">
+<iframe
+loading="lazy"
+referrerpolicy="no-referrer-when-downgrade"
+title="Map for Devasandra"
+src="https://www.google.com/maps?q=13.0012,77.6784&z=15&output=embed">
+</iframe>
+<a class="st-map-link" href="https://maps.google.com/?q=Naturals+Salon+Devasandra+Bangalore" target="_blank" rel="noopener" aria-label="Open Devasandra in Google Maps">Open map</a>
 </div>
 <div class="st-hours">
 <strong>Hours:</strong>
@@ -2079,7 +2112,7 @@ Book</a>
 </a>
 <a class="st-btn st-btn-fb" href="https://facebook.com/Naturals.Salon.Devasandra/" target="_blank" rel="noopener" aria-label="Devasandra on Facebook"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="18" height="18" fill="#1877F2" aria-hidden="true" style="flex-shrink:0"><path d="M24 12.073C24 5.405 18.627 0 12 0S0 5.405 0 12.073C0 18.1 4.388 23.094 10.125 24v-8.437H7.078v-3.49h3.047V9.41c0-3.025 1.792-4.697 4.533-4.697 1.313 0 2.686.236 2.686.236v2.97h-1.513c-1.491 0-1.956.93-1.956 1.883v2.271h3.328l-.532 3.49h-2.796V24C19.612 23.094 24 18.1 24 12.073z"/></svg>
 </a>
-<a class="st-btn st-btn-maps" href="https://maps.google.com/?q=Naturals+Salon+Devasandra" target="_blank" rel="noopener" aria-label="Directions to Devasandra"><svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-map-pin" style="flex-shrink:0" aria-hidden="true"><path d="M20 10c0 6-8 12-8 12s-8-6-8-12a8 8 0 0 1 16 0Z"/><circle cx="12" cy="10" r="3"/></svg>
+<a class="st-btn st-btn-maps" href="https://maps.google.com/?q=Naturals+Salon+Devasandra+Bangalore" target="_blank" rel="noopener" aria-label="Directions to Devasandra"><svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-map-pin" style="flex-shrink:0" aria-hidden="true"><path d="M20 10c0 6-8 12-8 12s-8-6-8-12a8 8 0 0 1 16 0Z"/><circle cx="12" cy="10" r="3"/></svg>
 </a>
 </div>
 <div class="st-info-row">
@@ -2100,8 +2133,7 @@ Book</a>
 <span>Marathahalli Bridge</span>
 <span>Ulsoor Lake</span>
 <span>RMZ Infinity</span>
-<span>Commercial Street</span>
-<span>Indira Nagar 100 Feet Road</span>
+<span class="st-landmarks-more">+ 2 more</span>
 </div>
 </div>
 </details>
@@ -2111,6 +2143,7 @@ Book</a>
 <a href="/stores/bangalore/frazer-town/" class="st-card-head" aria-label="View Frazer Town">
 <div class="st-card-num">Location 04</div>
 <div class="st-card-name">Frazer Town</div>
+<div class="st-distance" data-lat="12.9767" data-lng="77.6120"></div>
 <div class="st-card-area">Bangalore &middot; </div>
 <div class="st-open-now status-unknown" data-store-id="" data-hours="10:00 AM – 9:00 PM" data-sat-hours="10:00 AM – 9:00 PM" data-sun-hours="10:00 AM – 9:00 PM" data-store-url="/stores/bangalore/frazer-town/">
 <span class="status-dot"></span>
@@ -2120,6 +2153,15 @@ Book</a>
 
 <div class="st-card-body">
 <div class="st-card-addr"><svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="var(--gold)" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-map-pin" style="flex-shrink:0" aria-hidden="true"><path d="M20 10c0 6-8 12-8 12s-8-6-8-12a8 8 0 0 1 16 0Z"/><circle cx="12" cy="10" r="3"/></svg>
+</div>
+<div class="st-map">
+<iframe
+loading="lazy"
+referrerpolicy="no-referrer-when-downgrade"
+title="Map for Frazer Town"
+src="https://www.google.com/maps?q=12.9767,77.6120&z=15&output=embed">
+</iframe>
+<a class="st-map-link" href="https://maps.google.com/?q=Naturals+Salon+Frazer+Town+Bangalore" target="_blank" rel="noopener" aria-label="Open Frazer Town in Google Maps">Open map</a>
 </div>
 <div class="st-hours">
 <strong>Hours:</strong>
@@ -2139,7 +2181,7 @@ Book</a>
 </a>
 <a class="st-btn st-btn-fb" href="https://www.facebook.com/Naturals.Salon.FrazerTown/" target="_blank" rel="noopener" aria-label="Frazer Town on Facebook"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="18" height="18" fill="#1877F2" aria-hidden="true" style="flex-shrink:0"><path d="M24 12.073C24 5.405 18.627 0 12 0S0 5.405 0 12.073C0 18.1 4.388 23.094 10.125 24v-8.437H7.078v-3.49h3.047V9.41c0-3.025 1.792-4.697 4.533-4.697 1.313 0 2.686.236 2.686.236v2.97h-1.513c-1.491 0-1.956.93-1.956 1.883v2.271h3.328l-.532 3.49h-2.796V24C19.612 23.094 24 18.1 24 12.073z"/></svg>
 </a>
-<a class="st-btn st-btn-maps" href="https://maps.google.com/?q=Naturals+Salon+Frazer+Town" target="_blank" rel="noopener" aria-label="Directions to Frazer Town"><svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-map-pin" style="flex-shrink:0" aria-hidden="true"><path d="M20 10c0 6-8 12-8 12s-8-6-8-12a8 8 0 0 1 16 0Z"/><circle cx="12" cy="10" r="3"/></svg>
+<a class="st-btn st-btn-maps" href="https://maps.google.com/?q=Naturals+Salon+Frazer+Town+Bangalore" target="_blank" rel="noopener" aria-label="Directions to Frazer Town"><svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-map-pin" style="flex-shrink:0" aria-hidden="true"><path d="M20 10c0 6-8 12-8 12s-8-6-8-12a8 8 0 0 1 16 0Z"/><circle cx="12" cy="10" r="3"/></svg>
 </a>
 </div>
 <div class="st-info-row">
@@ -2160,8 +2202,7 @@ Book</a>
 <span>Bangalore East Railway Station</span>
 <span>Bangalore Palace</span>
 <span>Ulsoor Lake</span>
-<span>Commercial Street</span>
-<span>Vidhana Soudha</span>
+<span class="st-landmarks-more">+ 2 more</span>
 </div>
 </div>
 </details>
@@ -2171,6 +2212,7 @@ Book</a>
 <a href="/stores/bangalore/hennur/" class="st-card-head" aria-label="View Hennur">
 <div class="st-card-num">Location 05</div>
 <div class="st-card-name">Hennur</div>
+<div class="st-distance" data-lat="13.0468" data-lng="77.6390"></div>
 <div class="st-card-area">Bangalore &middot; </div>
 <div class="st-open-now status-unknown" data-store-id="" data-hours="10:00 AM – 8:00 PM" data-sat-hours="10:00 AM – 8:00 PM" data-sun-hours="10:00 AM – 8:00 PM" data-store-url="/stores/bangalore/hennur/">
 <span class="status-dot"></span>
@@ -2180,6 +2222,15 @@ Book</a>
 
 <div class="st-card-body">
 <div class="st-card-addr"><svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="var(--gold)" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-map-pin" style="flex-shrink:0" aria-hidden="true"><path d="M20 10c0 6-8 12-8 12s-8-6-8-12a8 8 0 0 1 16 0Z"/><circle cx="12" cy="10" r="3"/></svg>
+</div>
+<div class="st-map">
+<iframe
+loading="lazy"
+referrerpolicy="no-referrer-when-downgrade"
+title="Map for Hennur"
+src="https://www.google.com/maps?q=13.0468,77.6390&z=15&output=embed">
+</iframe>
+<a class="st-map-link" href="https://maps.google.com/?q=Naturals+Salon+Hennur+Bangalore" target="_blank" rel="noopener" aria-label="Open Hennur in Google Maps">Open map</a>
 </div>
 <div class="st-hours">
 <strong>Hours:</strong>
@@ -2199,7 +2250,7 @@ Book</a>
 </a>
 <a class="st-btn st-btn-fb" href="https://facebook.com/Naturals.Salon.Hennur/" target="_blank" rel="noopener" aria-label="Hennur on Facebook"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="18" height="18" fill="#1877F2" aria-hidden="true" style="flex-shrink:0"><path d="M24 12.073C24 5.405 18.627 0 12 0S0 5.405 0 12.073C0 18.1 4.388 23.094 10.125 24v-8.437H7.078v-3.49h3.047V9.41c0-3.025 1.792-4.697 4.533-4.697 1.313 0 2.686.236 2.686.236v2.97h-1.513c-1.491 0-1.956.93-1.956 1.883v2.271h3.328l-.532 3.49h-2.796V24C19.612 23.094 24 18.1 24 12.073z"/></svg>
 </a>
-<a class="st-btn st-btn-maps" href="https://maps.google.com/?q=Naturals+Salon+Hennur" target="_blank" rel="noopener" aria-label="Directions to Hennur"><svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-map-pin" style="flex-shrink:0" aria-hidden="true"><path d="M20 10c0 6-8 12-8 12s-8-6-8-12a8 8 0 0 1 16 0Z"/><circle cx="12" cy="10" r="3"/></svg>
+<a class="st-btn st-btn-maps" href="https://maps.google.com/?q=Naturals+Salon+Hennur+Bangalore" target="_blank" rel="noopener" aria-label="Directions to Hennur"><svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-map-pin" style="flex-shrink:0" aria-hidden="true"><path d="M20 10c0 6-8 12-8 12s-8-6-8-12a8 8 0 0 1 16 0Z"/><circle cx="12" cy="10" r="3"/></svg>
 </a>
 </div>
 <div class="st-info-row">
@@ -2220,10 +2271,7 @@ Book</a>
 <span>Bagalur Main Road</span>
 <span>Bangalore Palace</span>
 <span>Hebbal Flyover</span>
-<span>Lumbini Gardens</span>
-<span>Horamavu Agara Lake</span>
-<span>XLR8 Indoor Sports Arena</span>
-<span>Byg Brewski Brewing Company</span>
+<span class="st-landmarks-more">+ 4 more</span>
 </div>
 </div>
 </details>
@@ -3517,10 +3565,10 @@ window.store_open_status = {}; // Global object to store status for all stores
 
 function checkOpenNowStatus() {
 var now = new Date();
-var day = now.getDay(); // 0 = Sunday, 1 = Monday, ..., 6 = Saturday
 
 // Force comparison using Asia/Kolkata time only (no local time conversion)
 var istTime = new Date(now.toLocaleString("en-US", {timeZone: "Asia/Kolkata"}));
+var day = istTime.getDay(); // 0 = Sunday, 1 = Monday, ..., 6 = Saturday
 var istHours = istTime.getHours();
 var istMinutes = istTime.getMinutes();
 var currentTime = istHours * 60 + istMinutes;
@@ -3533,15 +3581,21 @@ var sunHours = el.getAttribute('data-sun-hours');
 var dot = el.querySelector('.status-dot');
 var text = el.querySelector('.status-text');
 
-if (!hours || !dot || !text) return;
+if (!hours || !dot || !text) {
+setUnknownStatus(el);
+return;
+}
 
 var todayHours = hours;
 if (day === 6 && satHours) todayHours = satHours; // Saturday
 if (day === 0 && sunHours) todayHours = sunHours; // Sunday
 
 // Parse hours like "10:00 AM – 9:00 PM"
-var timeMatch = todayHours.match(/(\d+):(\d+)\s*(AM|PM)\s*–\s*(\d+):(\d+)\s*(AM|PM)/);
-if (!timeMatch) return;
+var timeMatch = todayHours.match(/(\d+):(\d+)\s*(AM|PM)\s*(?:–|-|to)\s*(\d+):(\d+)\s*(AM|PM)/i);
+if (!timeMatch) {
+setUnknownStatus(el);
+return;
+}
 
 var openTime = parseTime(timeMatch[1], timeMatch[2], timeMatch[3]);
 var closeTime = parseTime(timeMatch[4], timeMatch[5], timeMatch[6]);
@@ -3554,7 +3608,7 @@ window.store_open_status[storeId] = isOpen;
 
 if (isOpen) {
 dot.style.background = '#28a745'; // Green
-text.textContent = 'Open Now';
+text.textContent = 'Open';
 text.style.color = '#28a745';
 el.className = 'st-open-now status-open'; // Add class
 } else {
@@ -3566,12 +3620,49 @@ el.className = 'st-open-now status-closed'; // Add class
 });
 }
 
+function setUnknownStatus(el) {
+var text = el && el.querySelector ? el.querySelector('.status-text') : null;
+if (!text) return;
+el.className = 'st-open-now status-unknown';
+text.textContent = 'See hours →';
+}
+
 function parseTime(hours, minutes, period) {
 var h = parseInt(hours);
 var m = parseInt(minutes);
+period = String(period || '').toUpperCase();
 if (period === 'PM' && h !== 12) h += 12;
 if (period === 'AM' && h === 12) h = 0;
 return h * 60 + m;
+}
+
+function initDistanceHints() {
+if (!navigator.geolocation) return;
+navigator.geolocation.getCurrentPosition(function(pos) {
+var userLat = pos.coords.latitude;
+var userLng = pos.coords.longitude;
+document.querySelectorAll('.st-distance').forEach(function(el) {
+var lat = parseFloat(el.getAttribute('data-lat'));
+var lng = parseFloat(el.getAttribute('data-lng'));
+if (!Number.isFinite(lat) || !Number.isFinite(lng)) return;
+var km = distanceKm(userLat, userLng, lat, lng);
+el.textContent = km < 10 ? km.toFixed(1) + ' km away' : Math.round(km) + ' km away';
+el.classList.add('is-visible');
+});
+}, function() {
+// Permission denied or unavailable; distance hints are optional.
+}, { enableHighAccuracy: false, timeout: 3500, maximumAge: 600000 });
+}
+
+function distanceKm(lat1, lng1, lat2, lng2) {
+var rad = Math.PI / 180;
+var earthKm = 6371;
+var dLat = (lat2 - lat1) * rad;
+var dLng = (lng2 - lng1) * rad;
+var a = Math.sin(dLat / 2) * Math.sin(dLat / 2) +
+Math.cos(lat1 * rad) * Math.cos(lat2 * rad) *
+Math.sin(dLng / 2) * Math.sin(dLng / 2);
+return earthKm * 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1 - a));
 }
 
 // Check status on page load and every minute
@@ -3581,12 +3672,12 @@ document.querySelectorAll('.st-open-now').forEach(function(el) {
 var text = el.querySelector('.status-text');
 if (!text) return;
 if (text.textContent === 'See hours' || text.textContent === 'Checking...') {
-el.className = 'st-open-now status-unknown';
-text.textContent = 'See hours';
+setUnknownStatus(el);
 }
 });
 }, 3000);
 checkOpenNowStatus();
+initDistanceHints();
 setInterval(checkOpenNowStatus, 60000); // Update every minute
 });
 
