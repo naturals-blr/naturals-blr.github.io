@@ -41,7 +41,7 @@ gtag('config', 'G-6H5YGVGG1Q');
 "description": "Exclusive Luxury Beauty Deals at Nagavara, Bangalore",
 "url": "https://naturals-blr.github.io/stores/bangalore/nagavara/offers/",
 "category": "Beauty and Grooming Promotions",
-"datePosted": "2026-05-18 15:59:02.451152T09:00:00+05:30",
+"datePosted": "2026-05-18 20:43:19.748206T09:00:00+05:30",
 "provider": {
 "@type": "HairSalon",
 "name": "Naturals Salon & Spa Nagavara",
@@ -380,6 +380,148 @@ cursor:zoom-in;
 
 .announcement-card:hover .announcement-media img{
 transform:scale(1.04);
+}
+
+.campaign-img-fallback.campaign-poster-fallback{
+position:absolute;
+inset:0;
+width:100%;
+height:100%;
+display:none;
+align-items:center;
+justify-content:center;
+padding:18px;
+text-align:center;
+color:#fff;
+cursor:zoom-in;
+background:
+radial-gradient(circle at 18% 18%, rgba(201,168,76,0.32), transparent 30%),
+radial-gradient(circle at 86% 18%, rgba(79,141,98,0.30), transparent 34%),
+linear-gradient(135deg, #173126 0%, #0c1612 52%, #352a12 100%);
+}
+
+.campaign-img-fallback.campaign-poster-fallback.is-visible{
+display:flex;
+}
+
+.campaign-poster-fallback:focus-visible{
+outline:2px solid var(--gold);
+outline-offset:-6px;
+}
+
+.campaign-poster-announcement{
+background:
+radial-gradient(circle at 20% 15%, rgba(201,168,76,0.30), transparent 32%),
+radial-gradient(circle at 86% 82%, rgba(130,93,176,0.28), transparent 36%),
+linear-gradient(135deg, #16312c 0%, #111a2a 58%, #2d1c43 100%);
+}
+
+.campaign-poster-greeting{
+background:
+radial-gradient(circle at 18% 20%, rgba(244,203,108,0.34), transparent 32%),
+radial-gradient(circle at 84% 80%, rgba(196,91,119,0.30), transparent 35%),
+linear-gradient(135deg, #2d1a2e 0%, #102a24 100%);
+}
+
+.campaign-poster-frame{
+width:100%;
+max-width:92%;
+display:flex;
+flex-direction:column;
+align-items:center;
+justify-content:center;
+gap:9px;
+}
+
+.campaign-poster-kicker,
+.campaign-modal-kicker{
+font:800 10px/1.2 'Jost',sans-serif;
+letter-spacing:2.8px;
+text-transform:uppercase;
+color:var(--gold);
+}
+
+.campaign-poster-title{
+font-family:'Cormorant Garamond',serif;
+font-size:clamp(22px, 7vw, 34px);
+font-weight:400;
+line-height:1.02;
+color:#fff;
+overflow-wrap:anywhere;
+}
+
+.campaign-poster-copy{
+display:-webkit-box;
+-webkit-line-clamp:2;
+-webkit-box-orient:vertical;
+overflow:hidden;
+max-width:34rem;
+font:400 12px/1.5 'Jost',sans-serif;
+color:rgba(255,255,255,0.72);
+}
+
+.campaign-poster-date{
+margin-top:3px;
+border:1px solid rgba(255,255,255,0.22);
+border-radius:999px;
+padding:7px 10px;
+font:800 10px/1 'Jost',sans-serif;
+letter-spacing:1.5px;
+text-transform:uppercase;
+color:#fff;
+background:rgba(0,0,0,0.22);
+}
+
+.campaign-modal-poster{
+display:none;
+width:min(760px, 92vw);
+aspect-ratio:4 / 3;
+max-height:86vh;
+align-items:center;
+justify-content:center;
+padding:clamp(24px, 5vw, 56px);
+text-align:center;
+color:#fff;
+background:
+radial-gradient(circle at 15% 12%, rgba(201,168,76,0.36), transparent 32%),
+radial-gradient(circle at 88% 82%, rgba(79,141,98,0.34), transparent 36%),
+linear-gradient(135deg, #173126 0%, #0c1612 52%, #352a12 100%);
+}
+
+.campaign-modal-poster-frame{
+width:100%;
+display:flex;
+flex-direction:column;
+align-items:center;
+justify-content:center;
+gap:14px;
+}
+
+.campaign-modal-title{
+max-width:12em;
+font-family:'Cormorant Garamond',serif;
+font-size:clamp(34px, 7vw, 72px);
+font-weight:400;
+line-height:0.98;
+overflow-wrap:anywhere;
+}
+
+.campaign-modal-copy{
+max-width:48rem;
+color:rgba(255,255,255,0.76);
+font:400 clamp(13px, 2vw, 17px)/1.55 'Jost',sans-serif;
+}
+
+.campaign-modal-date{
+margin-top:4px;
+border:1px solid rgba(255,255,255,0.24);
+border-radius:999px;
+padding:10px 14px;
+font:800 11px/1 'Jost',sans-serif;
+letter-spacing:1.8px;
+text-transform:uppercase;
+color:#fff;
+background:rgba(0,0,0,0.22);
 }
 
 .hoc-body,
@@ -1552,6 +1694,22 @@ Past <span class="campaign-count">2</span>
 <img src="https://naturals-blr.github.io/campaigns/offer/03_published/20260510_OFFER_Flat₹1000OffonHa.png"
 data-img-base="https://naturals-blr.github.io/campaigns/offer/03_published/20260510_OFFER_Flat₹1000OffonHa.png"
 alt="Flat ₹1000 Off on Hair Coloring" loading="lazy" onclick="openModal(this)">
+<div class="campaign-img-fallback campaign-poster-fallback campaign-poster-offer"
+role="button"
+tabindex="0"
+aria-label="Open campaign details for Flat ₹1000 Off on Hair Coloring"
+data-poster-title="Flat ₹1000 Off on Hair Coloring"
+data-poster-label="Offer"
+data-poster-body="Add a fresh new look with our expert hair coloring services and get flat ₹1000 off today."
+data-poster-date="30-May-2026"
+data-poster-date-prefix="Valid until">
+<div class="campaign-poster-frame">
+<div class="campaign-poster-kicker">Offer</div>
+<div class="campaign-poster-title">Flat ₹1000 Off on Hair Coloring</div>
+<div class="campaign-poster-copy">Add a fresh new look with our expert hair coloring services and get flat ₹1000 off today.</div>
+<div class="campaign-poster-date">Valid until 30-May-2026</div>
+</div>
+</div>
 </div>
 <div class="offer-body">
 <div class="offer-badge">Offer</div>
@@ -1565,8 +1723,30 @@ alt="Flat ₹1000 Off on Hair Coloring" loading="lazy" onclick="openModal(this)"
 <article class="offer-card campaign-panel-card" data-store-id="" data-store-name="nagavara" data-campaign-types="all announcement">
 <div class="offer-media">
 <span class="ribbon urgent">Announcement</span>
-<div style="width:100%;height:100%;display:flex;align-items:center;justify-content:center;background:linear-gradient(135deg,var(--dark),var(--green));">
-<span style="color:#fff;font-size:28px;opacity:0.55;">Announcement</span>
+<img src="https://naturals-blr.github.io/campaigns/announcement/03_published/20260518_ANNOU_SameHeartBrandNe.png"
+data-img-base="https://naturals-blr.github.io/campaigns/announcement/03_published/20260518_ANNOU_SameHeartBrandNe.png"
+alt="Same Heart, Brand New Space ❤️" loading="lazy" onclick="openModal(this)">
+<div class="campaign-img-fallback campaign-poster-fallback campaign-poster-announcement"
+role="button"
+tabindex="0"
+aria-label="Open campaign details for Same Heart, Brand New Space ❤️"
+data-poster-title="Same Heart, Brand New Space ❤️"
+data-poster-label="Announcement"
+data-poster-body="Our commitment to you hasn’t changed, but our location has! 🌿 We are bringing our signature 'Redo or Repay' guarantee and transparent service to a beautiful new home in Nagavara. Follow @Naturals.Salon.Nagavara for official updates and exclusive relocation deals.
+
+📍 Visit us at: 22-26/B11, R.K. Tower, 1st Cross, Chanukya Layout.
+#CustomerFirst #NaturalsNagavara #BangaloreSalons"
+data-poster-date="30-May-2026"
+data-poster-date-prefix="Valid until">
+<div class="campaign-poster-frame">
+<div class="campaign-poster-kicker">Announcement</div>
+<div class="campaign-poster-title">Same Heart, Brand New Space ❤️</div>
+<div class="campaign-poster-copy">Our commitment to you hasn’t changed, but our location has! 🌿 We are bringing our signature 'Redo or Repay' guarantee and transparent service to a beautiful new home in Nagavara. Follow @Naturals.Salon.Nagavara for official updates and exclusive relocation deals.
+
+📍 Visit us at: 22-26/B11, R.K. Tower, 1st Cross, Chanukya Layout.
+#CustomerFirst #NaturalsNagavara #BangaloreSalons</div>
+<div class="campaign-poster-date">Valid until 30-May-2026</div>
+</div>
 </div>
 </div>
 <div class="offer-body">
@@ -1585,8 +1765,30 @@ alt="Flat ₹1000 Off on Hair Coloring" loading="lazy" onclick="openModal(this)"
 <article class="offer-card campaign-panel-card" data-store-id="" data-store-name="nagavara" data-campaign-types="all announcement">
 <div class="offer-media">
 <span class="ribbon urgent">Announcement</span>
-<div style="width:100%;height:100%;display:flex;align-items:center;justify-content:center;background:linear-gradient(135deg,var(--dark),var(--green));">
-<span style="color:#fff;font-size:28px;opacity:0.55;">Announcement</span>
+<img src="https://naturals-blr.github.io/campaigns/announcement/03_published/20260517_ANNOU_We’veMoved!SayHel.png"
+data-img-base="https://naturals-blr.github.io/campaigns/announcement/03_published/20260517_ANNOU_We’veMoved!SayHel.png"
+alt="We’ve Moved! Say Hello to Naturals Nagavara 👋" loading="lazy" onclick="openModal(this)">
+<div class="campaign-img-fallback campaign-poster-fallback campaign-poster-announcement"
+role="button"
+tabindex="0"
+aria-label="Open campaign details for We’ve Moved! Say Hello to Naturals Nagavara 👋"
+data-poster-title="We’ve Moved! Say Hello to Naturals Nagavara 👋"
+data-poster-label="Announcement"
+data-poster-body="Exciting News! 📢 Our relocation is complete, and we’re now closer to you at Nagavara. New space, new look, and a new handle: @Naturals.Salon.Nagavara. We can't wait to welcome you to our 5-star facility for the ultimate 'Customer First' experience.
+
+📍 New Location: Near Skywalk Exit, Nagavara, Bangalore 560045.
+#NaturalsSalon #Nagavara #NewLocation"
+data-poster-date="30-May-2026"
+data-poster-date-prefix="Valid until">
+<div class="campaign-poster-frame">
+<div class="campaign-poster-kicker">Announcement</div>
+<div class="campaign-poster-title">We’ve Moved! Say Hello to Naturals Nagavara 👋</div>
+<div class="campaign-poster-copy">Exciting News! 📢 Our relocation is complete, and we’re now closer to you at Nagavara. New space, new look, and a new handle: @Naturals.Salon.Nagavara. We can't wait to welcome you to our 5-star facility for the ultimate 'Customer First' experience.
+
+📍 New Location: Near Skywalk Exit, Nagavara, Bangalore 560045.
+#NaturalsSalon #Nagavara #NewLocation</div>
+<div class="campaign-poster-date">Valid until 30-May-2026</div>
+</div>
 </div>
 </div>
 <div class="offer-body">
@@ -1608,6 +1810,28 @@ alt="Flat ₹1000 Off on Hair Coloring" loading="lazy" onclick="openModal(this)"
 <img src="https://naturals-blr.github.io/campaigns/announcement/03_published/20260516_ANNOU_LuxuryHasANewAdd.png"
 data-img-base="https://naturals-blr.github.io/campaigns/announcement/03_published/20260516_ANNOU_LuxuryHasANewAdd.png"
 alt="Luxury Has A New Address in Nagavara ✨" loading="lazy" onclick="openModal(this)">
+<div class="campaign-img-fallback campaign-poster-fallback campaign-poster-announcement"
+role="button"
+tabindex="0"
+aria-label="Open campaign details for Luxury Has A New Address in Nagavara ✨"
+data-poster-title="Luxury Has A New Address in Nagavara ✨"
+data-poster-label="Announcement"
+data-poster-body="Step into a world of 5-star pampering at the all-new Naturals Nagavara! 🥂 We are moving to serve you better with premium standards and a sophisticated new vibe. Make sure to follow our updated handle @Naturals.Salon.Nagavara for a sneak peek into our luxury interiors and grand opening offers.
+
+📍 Find us at: R.K. Tower, Chanukya Layout, Nagavara.
+#LuxurySalonBangalore #NaturalsNagavara #PamperYourself"
+data-poster-date="30-May-2026"
+data-poster-date-prefix="Valid until">
+<div class="campaign-poster-frame">
+<div class="campaign-poster-kicker">Announcement</div>
+<div class="campaign-poster-title">Luxury Has A New Address in Nagavara ✨</div>
+<div class="campaign-poster-copy">Step into a world of 5-star pampering at the all-new Naturals Nagavara! 🥂 We are moving to serve you better with premium standards and a sophisticated new vibe. Make sure to follow our updated handle @Naturals.Salon.Nagavara for a sneak peek into our luxury interiors and grand opening offers.
+
+📍 Find us at: R.K. Tower, Chanukya Layout, Nagavara.
+#LuxurySalonBangalore #NaturalsNagavara #PamperYourself</div>
+<div class="campaign-poster-date">Valid until 30-May-2026</div>
+</div>
+</div>
 </div>
 <div class="offer-body">
 <div class="offer-badge">Announcement</div>
@@ -1628,6 +1852,28 @@ alt="Luxury Has A New Address in Nagavara ✨" loading="lazy" onclick="openModal
 <img src="https://naturals-blr.github.io/campaigns/announcement/03_published/20260515_ANNOU_NewLookNewLocati.png"
 data-img-base="https://naturals-blr.github.io/campaigns/announcement/03_published/20260515_ANNOU_NewLookNewLocati.png"
 alt="New Look, New Location: Naturals Nagavara is Here!" loading="lazy" onclick="openModal(this)">
+<div class="campaign-img-fallback campaign-poster-fallback campaign-poster-announcement"
+role="button"
+tabindex="0"
+aria-label="Open campaign details for New Look, New Location: Naturals Nagavara is Here!"
+data-poster-title="New Look, New Location: Naturals Nagavara is Here!"
+data-poster-label="Announcement"
+data-poster-body="We’ve evolved! 🌿✨ Our beloved salon has moved to a brand-new space in Nagavara. With a new home comes a new handle—follow us @Naturals.Salon.Nagavara to stay connected. While our address is fresh, our 5-star 'Customer First' promise remains exactly the same. Come experience luxury in your neighborhood.
+
+📍 Visit us: 22-26/B11, R.K. Tower, 1st Cross, Chanukya Layout, Nagavara.
+#NaturalsNagavara #NewBeginnings #BangaloreBeauty"
+data-poster-date="30-May-2026"
+data-poster-date-prefix="Valid until">
+<div class="campaign-poster-frame">
+<div class="campaign-poster-kicker">Announcement</div>
+<div class="campaign-poster-title">New Look, New Location: Naturals Nagavara is Here!</div>
+<div class="campaign-poster-copy">We’ve evolved! 🌿✨ Our beloved salon has moved to a brand-new space in Nagavara. With a new home comes a new handle—follow us @Naturals.Salon.Nagavara to stay connected. While our address is fresh, our 5-star 'Customer First' promise remains exactly the same. Come experience luxury in your neighborhood.
+
+📍 Visit us: 22-26/B11, R.K. Tower, 1st Cross, Chanukya Layout, Nagavara.
+#NaturalsNagavara #NewBeginnings #BangaloreBeauty</div>
+<div class="campaign-poster-date">Valid until 30-May-2026</div>
+</div>
+</div>
 </div>
 <div class="offer-body">
 <div class="offer-badge">Announcement</div>
@@ -1648,6 +1894,46 @@ alt="New Look, New Location: Naturals Nagavara is Here!" loading="lazy" onclick=
 <img src="https://naturals-blr.github.io/campaigns/announcement/03_published/20260510_ANNOU_NewLocationNewLo.png"
 data-img-base="https://naturals-blr.github.io/campaigns/announcement/03_published/20260510_ANNOU_NewLocationNewLo.png"
 alt="New Location, New Look, New Handle! 🌿✨" loading="lazy" onclick="openModal(this)">
+<div class="campaign-img-fallback campaign-poster-fallback campaign-poster-announcement"
+role="button"
+tabindex="0"
+aria-label="Open campaign details for New Location, New Look, New Handle! 🌿✨"
+data-poster-title="New Location, New Look, New Handle! 🌿✨"
+data-poster-label="Announcement"
+data-poster-body="We are excited to announce that as we move to our brand-new home in Nagavara to serve you better, we have updated our social media handles to align with our new location!
+
+Find and follow us at our updated handle:
+👉 @Naturals.Salon.Nagavara
+
+While our name and address are changing, our commitment to a "Customer First" experience remains the same. We are bringing our premium 5-star service standards to a beautiful new space closer to you.
+
+📍 Visit us at our new home:
+22-26/B11, R.K. Tower, 1st Cross, Chanukya Layout, Near Skywalk Exit, Nagavara, Bangalore 560045.
+
+Stay tuned for our grand opening date and exclusive relocation offers!
+
+#NaturalsSalon #NaturalsNagavara #NewBeginnings #BangaloreBeauty #CustomerFirst #Nagavara"
+data-poster-date="30-May-2026"
+data-poster-date-prefix="Valid until">
+<div class="campaign-poster-frame">
+<div class="campaign-poster-kicker">Announcement</div>
+<div class="campaign-poster-title">New Location, New Look, New Handle! 🌿✨</div>
+<div class="campaign-poster-copy">We are excited to announce that as we move to our brand-new home in Nagavara to serve you better, we have updated our social media handles to align with our new location!
+
+Find and follow us at our updated handle:
+👉 @Naturals.Salon.Nagavara
+
+While our name and address are changing, our commitment to a "Customer First" experience remains the same. We are bringing our premium 5-star service standards to a beautiful new space closer to you.
+
+📍 Visit us at our new home:
+22-26/B11, R.K. Tower, 1st Cross, Chanukya Layout, Near Skywalk Exit, Nagavara, Bangalore 560045.
+
+Stay tuned for our grand opening date and exclusive relocation offers!
+
+#NaturalsSalon #NaturalsNagavara #NewBeginnings #BangaloreBeauty #CustomerFirst #Nagavara</div>
+<div class="campaign-poster-date">Valid until 30-May-2026</div>
+</div>
+</div>
 </div>
 <div class="offer-body">
 <div class="offer-badge">Announcement</div>
@@ -1678,6 +1964,22 @@ Stay tuned for our grand opening date and exclusive relocation offers!
 <img src="/campaigns/offer/04_archived/20260428_OFFER_Flat20OffonHair.jpg"
 data-img-base="/campaigns/offer/04_archived/20260428_OFFER_Flat20OffonHair.jpg"
 alt="Flat 20% Off on Hair Spa" loading="lazy" onclick="openModal(this)">
+<div class="campaign-img-fallback campaign-poster-fallback campaign-poster-offer"
+role="button"
+tabindex="0"
+aria-label="Open campaign details for Flat 20% Off on Hair Spa"
+data-poster-title="Flat 20% Off on Hair Spa"
+data-poster-label="Past Campaign"
+data-poster-body="Pamper your hair with our nourishing Hair Spa treatment and enjoy 20% off. Limited time offer."
+data-poster-date="15-May-2026"
+data-poster-date-prefix="Ended">
+<div class="campaign-poster-frame">
+<div class="campaign-poster-kicker">Past Campaign</div>
+<div class="campaign-poster-title">Flat 20% Off on Hair Spa</div>
+<div class="campaign-poster-copy">Pamper your hair with our nourishing Hair Spa treatment and enjoy 20% off. Limited time offer.</div>
+<div class="campaign-poster-date">Ended 15-May-2026</div>
+</div>
+</div>
 </div>
 <div class="expired-body">
 <div class="expired-title">Flat 20% Off on Hair Spa</div>
@@ -1692,6 +1994,22 @@ alt="Flat 20% Off on Hair Spa" loading="lazy" onclick="openModal(this)">
 <img src="/campaigns/offer/04_archived/20260429_OFFER_GetGlowingSkin–2.jpg"
 data-img-base="/campaigns/offer/04_archived/20260429_OFFER_GetGlowingSkin–2.jpg"
 alt="Get Glowing Skin – 25% Off on Facials" loading="lazy" onclick="openModal(this)">
+<div class="campaign-img-fallback campaign-poster-fallback campaign-poster-offer"
+role="button"
+tabindex="0"
+aria-label="Open campaign details for Get Glowing Skin – 25% Off on Facials"
+data-poster-title="Get Glowing Skin – 25% Off on Facials"
+data-poster-label="Past Campaign"
+data-poster-body="Rejuvenate your skin with our premium facial services and get 25% off. Book today."
+data-poster-date="15-May-2026"
+data-poster-date-prefix="Ended">
+<div class="campaign-poster-frame">
+<div class="campaign-poster-kicker">Past Campaign</div>
+<div class="campaign-poster-title">Get Glowing Skin – 25% Off on Facials</div>
+<div class="campaign-poster-copy">Rejuvenate your skin with our premium facial services and get 25% off. Book today.</div>
+<div class="campaign-poster-date">Ended 15-May-2026</div>
+</div>
+</div>
 </div>
 <div class="expired-body">
 <div class="expired-title">Get Glowing Skin – 25% Off on Facials</div>
@@ -2025,6 +2343,91 @@ if(fallback) fallback.style.display='flex';
 </script>
 
 <script>
+function isCampaignPosterFallback(el) {
+return !!(el && el.classList && el.classList.contains('campaign-poster-fallback'));
+}
+
+function isVisibleCampaignPosterFallback(el) {
+return isCampaignPosterFallback(el) && window.getComputedStyle(el).display !== 'none';
+}
+
+function ensureCampaignModalPoster(innerSelector) {
+var inner = document.querySelector(innerSelector);
+if (!inner) return null;
+var poster = inner.querySelector('.campaign-modal-poster');
+if (poster) return poster;
+poster = document.createElement('div');
+poster.className = 'campaign-modal-poster';
+poster.setAttribute('aria-live', 'polite');
+poster.innerHTML =
+'<div class="campaign-modal-poster-frame">' +
+'<div class="campaign-modal-kicker"></div>' +
+'<div class="campaign-modal-title"></div>' +
+'<div class="campaign-modal-copy"></div>' +
+'<div class="campaign-modal-date"></div>' +
+'</div>';
+inner.appendChild(poster);
+return poster;
+}
+
+function showCampaignModalPoster(innerSelector, imgSelector, sourceEl) {
+var poster = ensureCampaignModalPoster(innerSelector);
+var img = document.querySelector(imgSelector);
+if (!poster || !sourceEl) return;
+var title = sourceEl.getAttribute('data-poster-title') || 'Campaign';
+var label = sourceEl.getAttribute('data-poster-label') || 'Campaign';
+var body = sourceEl.getAttribute('data-poster-body') || '';
+var date = sourceEl.getAttribute('data-poster-date') || '';
+var datePrefix = sourceEl.getAttribute('data-poster-date-prefix') || 'Valid until';
+poster.querySelector('.campaign-modal-kicker').textContent = label;
+poster.querySelector('.campaign-modal-title').textContent = title;
+poster.querySelector('.campaign-modal-copy').textContent = body;
+poster.querySelector('.campaign-modal-copy').style.display = body ? 'block' : 'none';
+poster.querySelector('.campaign-modal-date').textContent = date ? datePrefix + ' ' + date : '';
+poster.querySelector('.campaign-modal-date').style.display = date ? 'inline-flex' : 'none';
+poster.style.display = 'flex';
+if (img) {
+img.removeAttribute('src');
+img.style.display = 'none';
+}
+}
+
+function showCampaignModalImage(innerSelector, imgSelector, src) {
+var poster = ensureCampaignModalPoster(innerSelector);
+var img = document.querySelector(imgSelector);
+if (poster) poster.style.display = 'none';
+if (img) {
+img.style.display = 'block';
+img.src = src || '';
+}
+}
+
+function clearCampaignModalMedia(innerSelector, imgSelector) {
+var poster = ensureCampaignModalPoster(innerSelector);
+var img = document.querySelector(imgSelector);
+if (poster) poster.style.display = 'none';
+if (img) {
+img.removeAttribute('src');
+img.style.display = 'block';
+}
+}
+
+function bindCampaignPosterFallbacks(selector, openFn) {
+document.querySelectorAll(selector).forEach(function(el) {
+if (el.getAttribute('data-poster-bound') === 'true') return;
+el.setAttribute('data-poster-bound', 'true');
+el.addEventListener('click', function() { openFn(el); });
+el.addEventListener('keydown', function(e) {
+if (e.key === 'Enter' || e.key === ' ') {
+e.preventDefault();
+openFn(el);
+}
+});
+});
+}
+</script>
+
+<script>
 function toggleCampaignDescription(btn){
 var card = btn.closest('.hoc, .media-card, .offer-card, .announcement-card, .expired-card');
 if(!card) return;
@@ -2082,21 +2485,31 @@ document.addEventListener('DOMContentLoaded', initCampaignTabs);
 let currentImageIndex = 0;
 let allImages = [];
 
-function getCampaignImages() {
-return Array.from(document.querySelectorAll('.announcement-media img, .offer-media img, .expired-media img'));
+function getCampaignMediaItems() {
+return Array.from(document.querySelectorAll('.announcement-media img, .offer-media img, .expired-media img, .announcement-media .campaign-poster-fallback, .offer-media .campaign-poster-fallback, .expired-media .campaign-poster-fallback'))
+.filter(function(item) {
+return isCampaignPosterFallback(item) ? isVisibleCampaignPosterFallback(item) : !!item.src;
+});
 }
 
-function openModal(img) {
+function setModalMedia(item) {
+if (isCampaignPosterFallback(item)) {
+showCampaignModalPoster('#img-modal-inner', '#modal-img', item);
+} else {
+showCampaignModalImage('#img-modal-inner', '#modal-img', item.src);
+}
+}
+
+function openModal(item) {
 const overlay = document.getElementById('img-modal-overlay');
 const modal = document.getElementById('img-modal');
-const modalImg = document.getElementById('modal-img');
 
-allImages = getCampaignImages().filter(function(image) { return !!image.src; });
-if (!img || !img.src || !allImages.length) return;
-currentImageIndex = allImages.indexOf(img);
+allImages = getCampaignMediaItems();
+if (!item || !allImages.length) return;
+currentImageIndex = allImages.indexOf(item);
 if (currentImageIndex < 0) currentImageIndex = 0;
 
-modalImg.src = img.src;
+setModalMedia(allImages[currentImageIndex]);
 overlay.style.display = 'block';
 modal.style.display = 'flex';
 document.body.style.overflow = 'hidden';
@@ -2109,20 +2522,20 @@ window._modalHistoryPushed = true;
 }
 
 document.addEventListener('DOMContentLoaded', function() {
-getCampaignImages().forEach(function(img) {
+Array.from(document.querySelectorAll('.announcement-media img, .offer-media img, .expired-media img')).forEach(function(img) {
 if (!img.getAttribute('onclick')) {
 img.addEventListener('click', function() { openModal(img); });
 }
 });
+bindCampaignPosterFallbacks('.announcement-media .campaign-poster-fallback, .offer-media .campaign-poster-fallback, .expired-media .campaign-poster-fallback', openModal);
 });
 
 function closeModal() {
 const overlay = document.getElementById('img-modal-overlay');
 const modal = document.getElementById('img-modal');
-const modalImg = document.getElementById('modal-img');
 overlay.style.display = 'none';
 modal.style.display = 'none';
-modalImg.src = '';
+clearCampaignModalMedia('#img-modal-inner', '#modal-img');
 document.body.style.overflow = '';
 
 // Reset history state flag
@@ -2132,13 +2545,13 @@ window._modalHistoryPushed = false;
 function prevImage() {
 if (!allImages.length) return;
 currentImageIndex = (currentImageIndex - 1 + allImages.length) % allImages.length;
-document.getElementById('modal-img').src = allImages[currentImageIndex].src;
+setModalMedia(allImages[currentImageIndex]);
 }
 
 function nextImage() {
 if (!allImages.length) return;
 currentImageIndex = (currentImageIndex + 1) % allImages.length;
-document.getElementById('modal-img').src = allImages[currentImageIndex].src;
+setModalMedia(allImages[currentImageIndex]);
 }
 
 // Keyboard navigation

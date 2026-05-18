@@ -521,6 +521,148 @@ cursor:zoom-in;
 transform:scale(1.04);
 }
 
+.campaign-img-fallback.campaign-poster-fallback{
+position:absolute;
+inset:0;
+width:100%;
+height:100%;
+display:none;
+align-items:center;
+justify-content:center;
+padding:18px;
+text-align:center;
+color:#fff;
+cursor:zoom-in;
+background:
+radial-gradient(circle at 18% 18%, rgba(201,168,76,0.32), transparent 30%),
+radial-gradient(circle at 86% 18%, rgba(79,141,98,0.30), transparent 34%),
+linear-gradient(135deg, #173126 0%, #0c1612 52%, #352a12 100%);
+}
+
+.campaign-img-fallback.campaign-poster-fallback.is-visible{
+display:flex;
+}
+
+.campaign-poster-fallback:focus-visible{
+outline:2px solid var(--gold);
+outline-offset:-6px;
+}
+
+.campaign-poster-announcement{
+background:
+radial-gradient(circle at 20% 15%, rgba(201,168,76,0.30), transparent 32%),
+radial-gradient(circle at 86% 82%, rgba(130,93,176,0.28), transparent 36%),
+linear-gradient(135deg, #16312c 0%, #111a2a 58%, #2d1c43 100%);
+}
+
+.campaign-poster-greeting{
+background:
+radial-gradient(circle at 18% 20%, rgba(244,203,108,0.34), transparent 32%),
+radial-gradient(circle at 84% 80%, rgba(196,91,119,0.30), transparent 35%),
+linear-gradient(135deg, #2d1a2e 0%, #102a24 100%);
+}
+
+.campaign-poster-frame{
+width:100%;
+max-width:92%;
+display:flex;
+flex-direction:column;
+align-items:center;
+justify-content:center;
+gap:9px;
+}
+
+.campaign-poster-kicker,
+.campaign-modal-kicker{
+font:800 10px/1.2 'Jost',sans-serif;
+letter-spacing:2.8px;
+text-transform:uppercase;
+color:var(--gold);
+}
+
+.campaign-poster-title{
+font-family:'Cormorant Garamond',serif;
+font-size:clamp(22px, 7vw, 34px);
+font-weight:400;
+line-height:1.02;
+color:#fff;
+overflow-wrap:anywhere;
+}
+
+.campaign-poster-copy{
+display:-webkit-box;
+-webkit-line-clamp:2;
+-webkit-box-orient:vertical;
+overflow:hidden;
+max-width:34rem;
+font:400 12px/1.5 'Jost',sans-serif;
+color:rgba(255,255,255,0.72);
+}
+
+.campaign-poster-date{
+margin-top:3px;
+border:1px solid rgba(255,255,255,0.22);
+border-radius:999px;
+padding:7px 10px;
+font:800 10px/1 'Jost',sans-serif;
+letter-spacing:1.5px;
+text-transform:uppercase;
+color:#fff;
+background:rgba(0,0,0,0.22);
+}
+
+.campaign-modal-poster{
+display:none;
+width:min(760px, 92vw);
+aspect-ratio:4 / 3;
+max-height:86vh;
+align-items:center;
+justify-content:center;
+padding:clamp(24px, 5vw, 56px);
+text-align:center;
+color:#fff;
+background:
+radial-gradient(circle at 15% 12%, rgba(201,168,76,0.36), transparent 32%),
+radial-gradient(circle at 88% 82%, rgba(79,141,98,0.34), transparent 36%),
+linear-gradient(135deg, #173126 0%, #0c1612 52%, #352a12 100%);
+}
+
+.campaign-modal-poster-frame{
+width:100%;
+display:flex;
+flex-direction:column;
+align-items:center;
+justify-content:center;
+gap:14px;
+}
+
+.campaign-modal-title{
+max-width:12em;
+font-family:'Cormorant Garamond',serif;
+font-size:clamp(34px, 7vw, 72px);
+font-weight:400;
+line-height:0.98;
+overflow-wrap:anywhere;
+}
+
+.campaign-modal-copy{
+max-width:48rem;
+color:rgba(255,255,255,0.76);
+font:400 clamp(13px, 2vw, 17px)/1.55 'Jost',sans-serif;
+}
+
+.campaign-modal-date{
+margin-top:4px;
+border:1px solid rgba(255,255,255,0.24);
+border-radius:999px;
+padding:10px 14px;
+font:800 11px/1 'Jost',sans-serif;
+letter-spacing:1.8px;
+text-transform:uppercase;
+color:#fff;
+background:rgba(0,0,0,0.22);
+}
+
 .hoc-body,
 .media-body,
 .offer-body,
@@ -2373,20 +2515,30 @@ onerror="this.src='/images/service-icon/service_default.jpg'">
 </div>
 <div class="home-offers-grid home-carousel-track" id="home-offers-grid" aria-label="Offers carousel">
 <div class="hoc reveal"
-data-image-available="False"
+data-image-available="True"
 data-image-name="20260516_OFFER_HairSpaandHaircut"
 data-offer-title="Hair Spa and Haircut Combo at ₹2499">
 <div class="hoc-media">
 <img class="home-offer-img"
-src="https://naturals-blr.github.io/campaigns/offer/03_published/20260516_OFFER_HairSpaandHaircut.jpg"
-data-img-base="https://naturals-blr.github.io/campaigns/offer/03_published/20260516_OFFER_HairSpaandHaircut"
+src="https://naturals-blr.github.io/campaigns/offer/03_published/20260512_OFFER_HairSpaandHaircut.png"
+data-img-base="https://naturals-blr.github.io/campaigns/offer/03_published/20260512_OFFER_HairSpaandHaircut.png"
 alt="Hair Spa and Haircut Combo at ₹2499"
 width="400" height="300"
 loading="lazy">
-<div class="campaign-img-fallback">
-<div>
-<strong>Hair Spa and Haircut Combo at ₹2499</strong>
-<span>Special Offer</span>
+<div class="campaign-img-fallback campaign-poster-fallback campaign-poster-offer"
+role="button"
+tabindex="0"
+aria-label="Open campaign details for Hair Spa and Haircut Combo at ₹2499"
+data-poster-title="Hair Spa and Haircut Combo at ₹2499"
+data-poster-label="Special Offer"
+data-poster-body="Enjoy a relaxing hair spa along with a stylish haircut at an unbeatable combo price of ₹2499."
+data-poster-date="30-May-2026"
+data-poster-date-prefix="Valid till">
+<div class="campaign-poster-frame">
+<div class="campaign-poster-kicker">Special Offer</div>
+<div class="campaign-poster-title">Hair Spa and Haircut Combo at ₹2499</div>
+<div class="campaign-poster-copy">Enjoy a relaxing hair spa along with a stylish haircut at an unbeatable combo price of ₹2499.</div>
+<div class="campaign-poster-date">Valid till 30-May-2026</div>
 </div>
 </div>
 <div class="img-actions">
@@ -2422,10 +2574,20 @@ data-img-base="https://naturals-blr.github.io/campaigns/offer/03_published/20260
 alt="Men Grooming Combo at ₹459"
 width="400" height="300"
 loading="lazy">
-<div class="campaign-img-fallback">
-<div>
-<strong>Men Grooming Combo at ₹459</strong>
-<span>Special Offer</span>
+<div class="campaign-img-fallback campaign-poster-fallback campaign-poster-offer"
+role="button"
+tabindex="0"
+aria-label="Open campaign details for Men Grooming Combo at ₹459"
+data-poster-title="Men Grooming Combo at ₹459"
+data-poster-label="Special Offer"
+data-poster-body="Upgrade your style with our grooming combo including haircut and beard styling at just ₹459."
+data-poster-date="30-May-2026"
+data-poster-date-prefix="Valid till">
+<div class="campaign-poster-frame">
+<div class="campaign-poster-kicker">Special Offer</div>
+<div class="campaign-poster-title">Men Grooming Combo at ₹459</div>
+<div class="campaign-poster-copy">Upgrade your style with our grooming combo including haircut and beard styling at just ₹459.</div>
+<div class="campaign-poster-date">Valid till 30-May-2026</div>
 </div>
 </div>
 <div class="img-actions">
@@ -2461,10 +2623,20 @@ data-img-base="https://naturals-blr.github.io/campaigns/offer/03_published/20260
 alt="Bridal Beauty Packages Starting ₹4999"
 width="400" height="300"
 loading="lazy">
-<div class="campaign-img-fallback">
-<div>
-<strong>Bridal Beauty Packages Starting ₹4999</strong>
-<span>Special Offer</span>
+<div class="campaign-img-fallback campaign-poster-fallback campaign-poster-offer"
+role="button"
+tabindex="0"
+aria-label="Open campaign details for Bridal Beauty Packages Starting ₹4999"
+data-poster-title="Bridal Beauty Packages Starting ₹4999"
+data-poster-label="Special Offer"
+data-poster-body="Get your dream bridal look with our premium bridal packages starting at just ₹4999. Book your special day now."
+data-poster-date="30-May-2026"
+data-poster-date-prefix="Valid till">
+<div class="campaign-poster-frame">
+<div class="campaign-poster-kicker">Special Offer</div>
+<div class="campaign-poster-title">Bridal Beauty Packages Starting ₹4999</div>
+<div class="campaign-poster-copy">Get your dream bridal look with our premium bridal packages starting at just ₹4999. Book your special day now.</div>
+<div class="campaign-poster-date">Valid till 30-May-2026</div>
 </div>
 </div>
 <div class="img-actions">
@@ -2481,6 +2653,103 @@ loading="lazy">
 <div class="hoc-badge">Special Offer</div>
 <div class="hoc-title">Bridal Beauty Packages Starting ₹4999</div>
 <div class="hoc-details campaign-description">Get your dream bridal look with our premium bridal packages starting at just ₹4999. Book your special day now.</div>
+<button class="campaign-desc-toggle" type="button" aria-expanded="false" onclick="toggleCampaignDescription(this)">+ More</button>
+<div class="hoc-meta">
+<div class="hoc-store">
+</div>
+<div class="hoc-valid">Valid till 30-May-2026</div>
+</div>
+</div>
+</div>
+<div class="hoc reveal"
+data-image-available="True"
+data-image-name="20260510_OFFER_Flat₹1000OffonHa"
+data-offer-title="Flat ₹1000 Off on Hair Coloring">
+<div class="hoc-media">
+<img class="home-offer-img"
+src="https://naturals-blr.github.io/campaigns/offer/03_published/20260510_OFFER_Flat₹1000OffonHa.png"
+data-img-base="https://naturals-blr.github.io/campaigns/offer/03_published/20260510_OFFER_Flat₹1000OffonHa.png"
+alt="Flat ₹1000 Off on Hair Coloring"
+width="400" height="300"
+loading="lazy">
+<div class="campaign-img-fallback campaign-poster-fallback campaign-poster-offer"
+role="button"
+tabindex="0"
+aria-label="Open campaign details for Flat ₹1000 Off on Hair Coloring"
+data-poster-title="Flat ₹1000 Off on Hair Coloring"
+data-poster-label="Special Offer"
+data-poster-body="Add a fresh new look with our expert hair coloring services and get flat ₹1000 off today."
+data-poster-date="30-May-2026"
+data-poster-date-prefix="Valid till">
+<div class="campaign-poster-frame">
+<div class="campaign-poster-kicker">Special Offer</div>
+<div class="campaign-poster-title">Flat ₹1000 Off on Hair Coloring</div>
+<div class="campaign-poster-copy">Add a fresh new look with our expert hair coloring services and get flat ₹1000 off today.</div>
+<div class="campaign-poster-date">Valid till 30-May-2026</div>
+</div>
+</div>
+<div class="img-actions">
+<button class="img-action-btn" onclick="downloadImage(this)" title="Download Image">
+<svg viewBox="0 0 24 24"><path d="M19 9h-4V3H9v6H5l7 7 7-7zM5 18v2h14v-2H5z"/></svg>
+</button>
+<button class="img-action-btn" onclick="shareContent(this)" title="Share Offer">
+<svg viewBox="0 0 24 24"><path d="M18 16.08c-.76 0-1.44.3-1.96.77L8.91 12.7c.05-.23.09-.46.09-.7s-.04-.47-.09-.7l7.05-4.11c.54.5 1.25.81 2.04.81 1.66 0 3-1.34 3-3s-1.34-3-3 1.34 3 3c0 .24.04.47.09.7L8.04 9.81C7.5 9.31 6.79 9 6 9c-1.66 0-3 1.34 3 3s1.34 3 3 3c.79 0 1.5-.31 2.04-.81l7.12 4.16c-.05.21-.08.43-.08.65 0 1.61 1.31 2.92 2.92 1.61 0 2.92-1.31 2.92-2.92s-1.31-2.92-2.92z"/></svg>
+</button>
+</div>
+</div>
+
+<div class="hoc-body">
+<div class="hoc-badge">Special Offer</div>
+<div class="hoc-title">Flat ₹1000 Off on Hair Coloring</div>
+<div class="hoc-details campaign-description">Add a fresh new look with our expert hair coloring services and get flat ₹1000 off today.</div>
+<div class="hoc-meta">
+<div class="hoc-store">
+</div>
+<div class="hoc-valid">Valid till 30-May-2026</div>
+</div>
+</div>
+</div>
+<div class="hoc reveal"
+data-image-available="True"
+data-image-name="20260505_OFFER_Flat30OffonHair"
+data-offer-title="Flat 30% Off on Hair Smoothening">
+<div class="hoc-media">
+<img class="home-offer-img"
+src="https://naturals-blr.github.io/campaigns/offer/03_published/20260505_OFFER_Flat30OffonHair.png"
+data-img-base="https://naturals-blr.github.io/campaigns/offer/03_published/20260505_OFFER_Flat30OffonHair.png"
+alt="Flat 30% Off on Hair Smoothening"
+width="400" height="300"
+loading="lazy">
+<div class="campaign-img-fallback campaign-poster-fallback campaign-poster-offer"
+role="button"
+tabindex="0"
+aria-label="Open campaign details for Flat 30% Off on Hair Smoothening"
+data-poster-title="Flat 30% Off on Hair Smoothening"
+data-poster-label="Special Offer"
+data-poster-body="Get silky smooth hair with our professional smoothening service and enjoy flat 30% off. Limited period only."
+data-poster-date="30-May-2026"
+data-poster-date-prefix="Valid till">
+<div class="campaign-poster-frame">
+<div class="campaign-poster-kicker">Special Offer</div>
+<div class="campaign-poster-title">Flat 30% Off on Hair Smoothening</div>
+<div class="campaign-poster-copy">Get silky smooth hair with our professional smoothening service and enjoy flat 30% off. Limited period only.</div>
+<div class="campaign-poster-date">Valid till 30-May-2026</div>
+</div>
+</div>
+<div class="img-actions">
+<button class="img-action-btn" onclick="downloadImage(this)" title="Download Image">
+<svg viewBox="0 0 24 24"><path d="M19 9h-4V3H9v6H5l7 7 7-7zM5 18v2h14v-2H5z"/></svg>
+</button>
+<button class="img-action-btn" onclick="shareContent(this)" title="Share Offer">
+<svg viewBox="0 0 24 24"><path d="M18 16.08c-.76 0-1.44.3-1.96.77L8.91 12.7c.05-.23.09-.46.09-.7s-.04-.47-.09-.7l7.05-4.11c.54.5 1.25.81 2.04.81 1.66 0 3-1.34 3-3s-1.34-3-3 1.34 3 3c0 .24.04.47.09.7L8.04 9.81C7.5 9.31 6.79 9 6 9c-1.66 0-3 1.34 3 3s1.34 3 3 3c.79 0 1.5-.31 2.04-.81l7.12 4.16c-.05.21-.08.43-.08.65 0 1.61 1.31 2.92 2.92 1.61 0 2.92-1.31 2.92-2.92s-1.31-2.92-2.92z"/></svg>
+</button>
+</div>
+</div>
+
+<div class="hoc-body">
+<div class="hoc-badge">Special Offer</div>
+<div class="hoc-title">Flat 30% Off on Hair Smoothening</div>
+<div class="hoc-details campaign-description">Get silky smooth hair with our professional smoothening service and enjoy flat 30% off. Limited period only.</div>
 <button class="campaign-desc-toggle" type="button" aria-expanded="false" onclick="toggleCampaignDescription(this)">+ More</button>
 <div class="hoc-meta">
 <div class="hoc-store">
@@ -2512,20 +2781,30 @@ loading="lazy">
 </div>
 <div class="media-grid home-carousel-track" id="media-grid" aria-label="News and updates carousel">
 <div class="media-card reveal" 
-data-image-available="False"
+data-image-available="True"
 data-image-name="20260518_ANNOU_SameHeartBrandNe"
 data-campaign-title="Same Heart, Brand New Space ❤️">
 <div class="media-media">
 <img class="media-img"
-src="https://naturals-blr.github.io/campaigns/announcement/03_published/20260518_ANNOU_SameHeartBrandNe.jpg"
-data-img-base="https://naturals-blr.github.io/campaigns/announcement/03_published/20260518_ANNOU_SameHeartBrandNe"
+src="https://naturals-blr.github.io/campaigns/announcement/03_published/20260518_ANNOU_SameHeartBrandNe.png"
+data-img-base="https://naturals-blr.github.io/campaigns/announcement/03_published/20260518_ANNOU_SameHeartBrandNe.png"
 alt="Same Heart, Brand New Space ❤️"
 width="400" height="300"
 loading="lazy">
-<div class="campaign-img-fallback">
-<div>
-<strong>Same Heart, Brand New Space ❤️</strong>
-<span>announcement</span>
+<div class="campaign-img-fallback campaign-poster-fallback campaign-poster-announcement"
+role="button"
+tabindex="0"
+aria-label="Open campaign details for Same Heart, Brand New Space ❤️"
+data-poster-title="Same Heart, Brand New Space ❤️"
+data-poster-label="Announcement"
+data-poster-body="Our commitment to you hasn’t changed, but our location has! 🌿 We are bringing our signature 'Redo or Repay' guarantee and transparent service to a beautiful new home in Nagavara. Follow @Naturals.Salon.Nagavara for official updates and exclusive relocation deals. 📍 Visit us at: 22-26/B11, R.K. Tower, 1st Cross, Chanukya Layout."
+data-poster-date="30-May-2026"
+data-poster-date-prefix="Valid till">
+<div class="campaign-poster-frame">
+<div class="campaign-poster-kicker">Announcement</div>
+<div class="campaign-poster-title">Same Heart, Brand New Space ❤️</div>
+<div class="campaign-poster-copy">Our commitment to you hasn’t changed, but our location has! 🌿 We are bringing our signature 'Redo or Repay' guarantee and transparent service to a beautiful new home in Nagavara. Follow @Naturals.Salon.Nagavara for official updates and exclusive relocation deals. 📍 Visit us at: 22-26/B11, R.K. Tower, 1st Cross, Chanukya Layout.</div>
+<div class="campaign-poster-date">Valid till 30-May-2026</div>
 </div>
 </div>
 </div>
@@ -2552,10 +2831,20 @@ data-img-base="https://naturals-blr.github.io/campaigns/announcement/03_publishe
 alt="Luxury Has A New Address in Nagavara ✨"
 width="400" height="300"
 loading="lazy">
-<div class="campaign-img-fallback">
-<div>
-<strong>Luxury Has A New Address in Nagavara ✨</strong>
-<span>announcement</span>
+<div class="campaign-img-fallback campaign-poster-fallback campaign-poster-announcement"
+role="button"
+tabindex="0"
+aria-label="Open campaign details for Luxury Has A New Address in Nagavara ✨"
+data-poster-title="Luxury Has A New Address in Nagavara ✨"
+data-poster-label="Announcement"
+data-poster-body="Step into a world of 5-star pampering at the all-new Naturals Nagavara! 🥂 We are moving to serve you better with premium standards and a sophisticated new vibe. Make sure to follow our updated handle @Naturals.Salon.Nagavara for a sneak peek into our luxury interiors and grand opening offers. 📍 Find us at: R.K. Tower, Chanukya Layout, Nagavara."
+data-poster-date="30-May-2026"
+data-poster-date-prefix="Valid till">
+<div class="campaign-poster-frame">
+<div class="campaign-poster-kicker">Announcement</div>
+<div class="campaign-poster-title">Luxury Has A New Address in Nagavara ✨</div>
+<div class="campaign-poster-copy">Step into a world of 5-star pampering at the all-new Naturals Nagavara! 🥂 We are moving to serve you better with premium standards and a sophisticated new vibe. Make sure to follow our updated handle @Naturals.Salon.Nagavara for a sneak peek into our luxury interiors and grand opening offers. 📍 Find us at: R.K. Tower, Chanukya Layout, Nagavara.</div>
+<div class="campaign-poster-date">Valid till 30-May-2026</div>
 </div>
 </div>
 </div>
@@ -3417,6 +3706,91 @@ if(fallback) fallback.style.display='flex';
 </script>
 
 <script>
+function isCampaignPosterFallback(el) {
+return !!(el && el.classList && el.classList.contains('campaign-poster-fallback'));
+}
+
+function isVisibleCampaignPosterFallback(el) {
+return isCampaignPosterFallback(el) && window.getComputedStyle(el).display !== 'none';
+}
+
+function ensureCampaignModalPoster(innerSelector) {
+var inner = document.querySelector(innerSelector);
+if (!inner) return null;
+var poster = inner.querySelector('.campaign-modal-poster');
+if (poster) return poster;
+poster = document.createElement('div');
+poster.className = 'campaign-modal-poster';
+poster.setAttribute('aria-live', 'polite');
+poster.innerHTML =
+'<div class="campaign-modal-poster-frame">' +
+'<div class="campaign-modal-kicker"></div>' +
+'<div class="campaign-modal-title"></div>' +
+'<div class="campaign-modal-copy"></div>' +
+'<div class="campaign-modal-date"></div>' +
+'</div>';
+inner.appendChild(poster);
+return poster;
+}
+
+function showCampaignModalPoster(innerSelector, imgSelector, sourceEl) {
+var poster = ensureCampaignModalPoster(innerSelector);
+var img = document.querySelector(imgSelector);
+if (!poster || !sourceEl) return;
+var title = sourceEl.getAttribute('data-poster-title') || 'Campaign';
+var label = sourceEl.getAttribute('data-poster-label') || 'Campaign';
+var body = sourceEl.getAttribute('data-poster-body') || '';
+var date = sourceEl.getAttribute('data-poster-date') || '';
+var datePrefix = sourceEl.getAttribute('data-poster-date-prefix') || 'Valid until';
+poster.querySelector('.campaign-modal-kicker').textContent = label;
+poster.querySelector('.campaign-modal-title').textContent = title;
+poster.querySelector('.campaign-modal-copy').textContent = body;
+poster.querySelector('.campaign-modal-copy').style.display = body ? 'block' : 'none';
+poster.querySelector('.campaign-modal-date').textContent = date ? datePrefix + ' ' + date : '';
+poster.querySelector('.campaign-modal-date').style.display = date ? 'inline-flex' : 'none';
+poster.style.display = 'flex';
+if (img) {
+img.removeAttribute('src');
+img.style.display = 'none';
+}
+}
+
+function showCampaignModalImage(innerSelector, imgSelector, src) {
+var poster = ensureCampaignModalPoster(innerSelector);
+var img = document.querySelector(imgSelector);
+if (poster) poster.style.display = 'none';
+if (img) {
+img.style.display = 'block';
+img.src = src || '';
+}
+}
+
+function clearCampaignModalMedia(innerSelector, imgSelector) {
+var poster = ensureCampaignModalPoster(innerSelector);
+var img = document.querySelector(imgSelector);
+if (poster) poster.style.display = 'none';
+if (img) {
+img.removeAttribute('src');
+img.style.display = 'block';
+}
+}
+
+function bindCampaignPosterFallbacks(selector, openFn) {
+document.querySelectorAll(selector).forEach(function(el) {
+if (el.getAttribute('data-poster-bound') === 'true') return;
+el.setAttribute('data-poster-bound', 'true');
+el.addEventListener('click', function() { openFn(el); });
+el.addEventListener('keydown', function(e) {
+if (e.key === 'Enter' || e.key === ' ') {
+e.preventDefault();
+openFn(el);
+}
+});
+});
+}
+</script>
+
+<script>
 function toggleCampaignDescription(btn){
 var card = btn.closest('.hoc, .media-card, .offer-card, .announcement-card, .expired-card');
 if(!card) return;
@@ -3471,24 +3845,36 @@ document.addEventListener('DOMContentLoaded', initCampaignTabs);
 
 <script>
 /* Image-only gallery for homepage offers and non-offer campaigns */
-var homeOfferSrcs = [];
+var homeOfferItems = [];
 var homeOfferIndex = 0;
 
-function getHomeCampaignImages(){
-return Array.from(document.querySelectorAll('img.home-offer-img, img.media-img'));
-}
-
-function collectHomeOfferImages(){
-homeOfferSrcs = [];
-getHomeCampaignImages().forEach(function(img){
-if(img.src) homeOfferSrcs.push(img.src);
+function getHomeCampaignMediaItems(){
+return Array.from(document.querySelectorAll('img.home-offer-img, img.media-img, .hoc-media .campaign-poster-fallback, .media-media .campaign-poster-fallback'))
+.filter(function(item) {
+return isCampaignPosterFallback(item) ? isVisibleCampaignPosterFallback(item) : !!item.src;
 });
 }
-function openHomeOfferModalAt(idx){
-collectHomeOfferImages();
-if(!homeOfferSrcs.length) return;
-homeOfferIndex = Math.max(0, Math.min(idx, homeOfferSrcs.length-1));
-document.getElementById('ho-img-src').src = homeOfferSrcs[homeOfferIndex];
+
+function collectHomeOfferItems(){
+homeOfferItems = getHomeCampaignMediaItems();
+}
+
+function setHomeOfferModalMedia(item){
+if(isCampaignPosterFallback(item)){
+showCampaignModalPoster('#ho-img-inner', '#ho-img-src', item);
+} else {
+showCampaignModalImage('#ho-img-inner', '#ho-img-src', item.src);
+}
+}
+function openHomeOfferModalAt(itemOrIndex){
+collectHomeOfferItems();
+if(!homeOfferItems.length) return;
+if(typeof itemOrIndex === 'number'){
+homeOfferIndex = Math.max(0, Math.min(itemOrIndex, homeOfferItems.length-1));
+} else {
+homeOfferIndex = Math.max(0, homeOfferItems.indexOf(itemOrIndex));
+}
+setHomeOfferModalMedia(homeOfferItems[homeOfferIndex]);
 document.getElementById('ho-img-overlay').style.display='block';
 document.getElementById('ho-img-modal').style.display='flex';
 document.body.style.overflow='hidden';
@@ -3500,27 +3886,28 @@ window._hoImgModalHistoryPushed = true;
 function closeHomeOfferModal(){
 document.getElementById('ho-img-overlay').style.display='none';
 document.getElementById('ho-img-modal').style.display='none';
-document.getElementById('ho-img-src').src='';
+clearCampaignModalMedia('#ho-img-inner', '#ho-img-src');
 document.body.style.overflow='';
 window._hoImgModalHistoryPushed = false;
 }
 function nextHomeOffer(){
-if(!homeOfferSrcs.length) return;
-homeOfferIndex = (homeOfferIndex + 1) % homeOfferSrcs.length;
-document.getElementById('ho-img-src').src = homeOfferSrcs[homeOfferIndex];
+if(!homeOfferItems.length) return;
+homeOfferIndex = (homeOfferIndex + 1) % homeOfferItems.length;
+setHomeOfferModalMedia(homeOfferItems[homeOfferIndex]);
 }
 function prevHomeOffer(){
-if(!homeOfferSrcs.length) return;
-homeOfferIndex = (homeOfferIndex - 1 + homeOfferSrcs.length) % homeOfferSrcs.length;
-document.getElementById('ho-img-src').src = homeOfferSrcs[homeOfferIndex];
+if(!homeOfferItems.length) return;
+homeOfferIndex = (homeOfferIndex - 1 + homeOfferItems.length) % homeOfferItems.length;
+setHomeOfferModalMedia(homeOfferItems[homeOfferIndex]);
 }
 
 /* click handlers */
 document.addEventListener('DOMContentLoaded', function(){
-var imgs = getHomeCampaignImages();
-imgs.forEach(function(img, idx){
-img.addEventListener('click', function(){ openHomeOfferModalAt(idx); });
+var imgs = Array.from(document.querySelectorAll('img.home-offer-img, img.media-img'));
+imgs.forEach(function(img){
+img.addEventListener('click', function(){ openHomeOfferModalAt(img); });
 });
+bindCampaignPosterFallbacks('.hoc-media .campaign-poster-fallback, .media-media .campaign-poster-fallback', openHomeOfferModalAt);
 
 // swipe support (mobile)
 var startX = null;
