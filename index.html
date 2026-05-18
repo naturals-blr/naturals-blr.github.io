@@ -251,6 +251,8 @@ display:block;text-decoration:none;transition:background 0.2s;position:relative;
 .st-card-area{font-size:9px;letter-spacing:2px;text-transform:uppercase;color:var(--gold);margin-top:8px;font-weight:700;}
 .st-card-body{padding:18px 18px 20px;flex:1;display:flex;flex-direction:column;}
 .st-card-addr{font-size:12px;color:var(--text-mid);line-height:1.55;margin-bottom:14px;background:#fbfaf7;border:1px solid rgba(0,0,0,0.06);border-radius:12px;padding:12px 12px;min-height:74px;}
+.st-hours{font-size:11px;color:var(--text-mid);line-height:1.55;margin:-4px 0 14px;background:#fff;border:1px solid rgba(201,168,76,0.20);border-radius:12px;padding:10px 12px;}
+.st-hours strong{color:var(--text);font-weight:800;}
 .st-neighborhood{border:1px solid rgba(0,0,0,0.08);border-radius:12px;margin:14px 0 0;background:#fbfaf7;overflow:hidden;}
 .st-neighborhood summary{list-style:none;cursor:pointer;padding:10px 12px;font-size:10px;letter-spacing:1.5px;text-transform:uppercase;font-weight:800;color:var(--green-mid);display:flex;justify-content:space-between;align-items:center;gap:12px;}
 .st-neighborhood summary::-webkit-details-marker{display:none;}
@@ -760,8 +762,10 @@ footer{background:#080f0b;}
 .rev-header{display:flex;align-items:center;justify-content:space-between;margin-bottom:12px;}
 .rev-header-left{display:flex;align-items:center;gap:10px;}
 .rev-user-img{width:32px;height:32px;border-radius:50%;background:linear-gradient(135deg,var(--gold),#b8941f);color:#fff;display:flex;align-items:center;justify-content:center;font-size:14px;font-weight:600;font-family:'Inter',sans-serif;flex-shrink:0;}
-.rev-name{font-family:'Inter',sans-serif;font-size:14px;font-weight:600;color:#2c2c2c;line-height:1.2;margin:0;display:flex;align-items:center;gap:6px;}
+.rev-person{min-width:0;}
+.rev-name{font-family:'Inter',sans-serif;font-size:14px;font-weight:600;color:#2c2c2c;line-height:1.2;margin:0;display:flex;align-items:center;gap:6px;flex-wrap:wrap;}
 .rev-name .rev-stars{color:#D4AF37;font-size:12px;display:inline-flex;gap:1px;letter-spacing:0.5px;margin-left:6px;}
+.rev-store{font-size:10px;font-weight:500;color:#888;letter-spacing:0.4px;margin-top:3px;white-space:nowrap;}
 .rev-header-right{display:flex;align-items:center;gap:6px;}
 .rev-google-icon{width:16px;height:16px;background:#4285f4;border-radius:2px;display:flex;align-items:center;justify-content:center;color:#fff;font-size:10px;font-weight:600;font-family:'Inter',sans-serif;}
 .rev-verified-text{font-family:'Inter',sans-serif;font-size:10px;color:#888;font-weight:400;}
@@ -783,7 +787,7 @@ footer{background:#080f0b;}
 .reviews-snippet{margin-bottom:24px;}
 .reviews-snippet .rev-grid{grid-template-columns:1fr;gap:16px;}
 
-/* Wall of Love Modal */
+/* Customer reviews modal */
 .modal-overlay{position:fixed;inset:0;background:rgba(0,0,0,0.6);display:flex;align-items:center;justify-content:center;z-index:99999;opacity:0;visibility:hidden;transition:all 0.3s ease;padding:20px;}
 .modal-overlay.active{opacity:1;visibility:visible;}
 .modal-content{background:#fff;border-radius:20px;max-width:1000px;width:100%;max-height:90vh;height:100%;display:flex;flex-direction:column;transform:scale(0.9);transition:all 0.3s ease;overflow-y:auto;}
@@ -987,6 +991,9 @@ readMoreLink.textContent = textElement.classList.contains('expanded') ? 'Read Le
 .st-open-now.status-closed{background:rgba(220,53,69,0.14);border-color:rgba(220,53,69,0.30);}
 .st-open-now.status-closed .status-dot{background:#ff6b7a;}
 .st-open-now.status-closed .status-text{color:#ffe3e6;}
+.st-open-now.status-unknown{background:rgba(201,168,76,0.16);border-color:rgba(201,168,76,0.32);}
+.st-open-now.status-unknown .status-dot{background:var(--gold);}
+.st-open-now.status-unknown .status-text{color:#fff2c4;}
 </style>
 </head>
 <body>
@@ -1003,6 +1010,11 @@ fetchpriority="high"
 onerror="this.style.display='none'">
 </a>
 
+<div class="hdr-actions">
+<button class="hdr-book" type="button" onclick="window._naturalsPendingAction='book'; openStorePicker();" aria-label="Book appointment">
+<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-calendar" style="flex-shrink:0" aria-hidden="true"><rect width="18" height="18" x="3" y="4" rx="2" ry="2"/><path d="M16 2v4"/><path d="M8 2v4"/><path d="M3 10h18"/></svg>
+<span>Book Appointment</span>
+</button>
 <button id="hamburger" aria-label="Menu" aria-expanded="false" aria-controls="drawer">
 <span class="hb-line"></span>
 <span class="hb-line"></span>
@@ -1017,27 +1029,16 @@ onerror="this.style.display='none'">
 <button class="drawer-x" aria-label="Close menu">×</button>
 </div>
 
-<div class="drawer-theme-section">
-<div class="drawer-theme-label">CHOOSE THEME</div>
-<div class="drawer-theme-swatches">
-<button class="theme-swatch theme-luxury" onclick="setTheme('luxury')" aria-label="Switch to Luxury theme" data-theme="luxury">
-<span class="swatch-circle"></span>
-</button>
-<button class="theme-swatch theme-naturals" onclick="setTheme('naturals')" aria-label="Switch to Naturals theme" data-theme="naturals">
-<span class="swatch-circle"></span>
-</button>
-</div>
-</div>
-
 <div class="drawer-section">
 <a class="drawer-link is-active" href="https://naturals-blr.github.io/" aria-label="Naturals Salon & Spa — Home">HOME</a>
 <a class="drawer-link " href="https://naturals-blr.github.io/services/" aria-label="View all salon services">SERVICES</a>
 <a class="drawer-link " href="https://naturals-blr.github.io/offers/" aria-label="View current salon offers and promotions">OFFERS</a>
 
-<div class="drawer-stores-section">
-<div class="drawer-stores-header">
+<details class="drawer-stores-section">
+<summary class="drawer-stores-header">
 <span class="drawer-stores-title">OUR STORES</span>
-</div>
+<span class="drawer-stores-arrow">⌄</span>
+</summary>
 
 <div class="drawer-stores-list">
 <a class="drawer-store-link" href="https://naturals-blr.github.io/stores/bangalore/jp-nagar-5th-phase/" aria-label="Visit Naturals Salon JP Nagar 5th Phase">
@@ -1056,7 +1057,7 @@ onerror="this.style.display='none'">
 <span class="drawer-store-name">Hennur</span>
 </a>
 </div>
-</div>
+</details>
 
 <a class="drawer-link " href="https://naturals-blr.github.io/careers/bangalore/" aria-label="Join our team and view career opportunities">Join our Team</a>
 <a class="drawer-link " href="https://naturals-blr.github.io/about/" aria-label="Learn about Naturals Salon & Spa">ABOUT</a>
@@ -1066,6 +1067,17 @@ onerror="this.style.display='none'">
 <button class="drawer-cta-btn" onclick="window._naturalsPendingAction='book'; openStorePicker();" aria-label="Select store and book appointment">
 BOOK APPOINTMENT
 </button>
+<div class="drawer-theme-section" aria-label="Theme options">
+<span class="drawer-theme-label">Theme</span>
+<div class="drawer-theme-swatches">
+<button class="theme-swatch theme-luxury" onclick="setTheme('luxury')" aria-label="Switch to Luxury theme" data-theme="luxury">
+<span class="swatch-circle"></span>
+</button>
+<button class="theme-swatch theme-naturals" onclick="setTheme('naturals')" aria-label="Switch to Naturals theme" data-theme="naturals">
+<span class="swatch-circle"></span>
+</button>
+</div>
+</div>
 </div>
 </nav>
 
@@ -1179,27 +1191,9 @@ box-shadow:0 0 0 1px rgba(212,175,55,0.18) inset;
 .drawer-open #hamburger .hb-line:nth-child(3){transform:rotate(-45deg) translate(6px,-6px);}
 
 /* ── THEME TOGGLE SECTION ── */
-.drawer-theme-section{
-padding:16px 16px 12px;
-border-bottom:1px solid rgba(255,255,255,0.08);
-text-align:center;
-}
-
-.drawer-theme-label{
-font-size:9px;
-color:rgba(255,255,255,0.4);
-letter-spacing:1px;
-text-transform:uppercase;
-margin-bottom:10px;
-font-weight:400;
-}
-
-.drawer-theme-swatches{
-display:flex;
-justify-content:center;
-gap:12px;
-align-items:center;
-}
+.drawer-theme-section{display:flex;align-items:center;justify-content:center;gap:12px;margin-top:12px;}
+.drawer-theme-label{font-size:9px;color:rgba(255,255,255,0.44);letter-spacing:1px;text-transform:uppercase;font-weight:700;}
+.drawer-theme-swatches{display:flex;justify-content:center;gap:10px;align-items:center;}
 
 .theme-swatch{
 background:transparent;
@@ -1250,8 +1244,20 @@ overflow:hidden;
 .drawer-stores-header{
 display:flex;
 align-items:center;
+justify-content:space-between;
 padding:14px 16px 8px;
 border-bottom:1px solid rgba(255,255,255,0.08);
+cursor:pointer;
+list-style:none;
+}
+.drawer-stores-header::-webkit-details-marker{display:none;}
+.drawer-stores-arrow{
+color:rgba(255,255,255,0.5);
+font-size:14px;
+transition:transform 0.2s;
+}
+.drawer-stores-section[open] .drawer-stores-arrow{
+transform:rotate(180deg);
 }
 
 .drawer-stores-title{
@@ -1307,7 +1313,7 @@ transition:color 0.2s ease;
 position:sticky;
 bottom:0;
 margin-top:16px;
-padding:16px;
+padding:16px 16px 14px;
 background:var(--dark);
 border-top:1px solid rgba(255,255,255,0.08);
 backdrop-filter:blur(8px);
@@ -1407,6 +1413,8 @@ closeDrawer();
 });
 })();
 </script>
+
+</div>
 
 </div>
 </header>
@@ -1812,14 +1820,43 @@ max-height:68px;
 max-width:min(200px, calc(100vw - 112px));
 filter:brightness(0) invert(1);
 }
+.hdr-actions{display:flex;align-items:center;gap:12px;flex-shrink:0;}
+.hdr-book{
+height:42px;
+border-radius:12px;
+border:1px solid rgba(201,168,76,0.55);
+background:var(--gold);
+color:var(--dark);
+display:inline-flex;
+align-items:center;
+justify-content:center;
+gap:8px;
+padding:0 16px;
+font-family:'Jost',sans-serif;
+font-size:11px;
+line-height:1;
+letter-spacing:1px;
+text-transform:uppercase;
+font-weight:800;
+cursor:pointer;
+white-space:nowrap;
+transition:transform 0.2s,box-shadow 0.2s,opacity 0.2s;
+}
+.hdr-book svg{width:16px;height:16px;fill:currentColor;flex-shrink:0;}
+.hdr-book:hover{transform:translateY(-1px);box-shadow:0 10px 26px rgba(201,168,76,0.22);}
 @media(max-width:768px){
 #site-header, .hdr-inner{height:58px;}
 .hdr-inner{padding:0 16px;}
 .hdr-logo img{height:48px !important; max-height:48px; max-width:calc(100vw - 88px);}
+.hdr-actions{gap:8px;}
+.hdr-book{height:36px;padding:0 11px;font-size:10px;border-radius:10px;}
+.hdr-book span{display:none;}
 }
 @media(max-width:480px){
 .hdr-inner{padding:0 12px;}
 .hdr-logo img{max-width:calc(100vw - 76px);}
+.hdr-actions{gap:6px;}
+.hdr-book{width:36px;padding:0;}
 }
 
 /* Hamburger (new look) */
@@ -1872,6 +1909,7 @@ fetchpriority="high">
 <div class="hero-btns">
 <button onclick="openStorePicker()" class="btn-primary"><svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-calendar" style="flex-shrink:0" aria-hidden="true"><rect width="18" height="18" x="3" y="4" rx="2" ry="2"/><path d="M16 2v4"/><path d="M8 2v4"/><path d="M3 10h18"/></svg>
 Book Appointment</button>
+<a href="https://www.instagram.com/naturalssalon/" class="btn-secondary" target="_blank" rel="noopener">View Our Work &#8594;</a>
 <a href="/offers/" class="btn-secondary">View Offers &#8594;</a>
 <button onclick="openStorePicker()" class="btn-secondary"><svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-map-pin" style="flex-shrink:0" aria-hidden="true"><path d="M20 10c0 6-8 12-8 12s-8-6-8-12a8 8 0 0 1 16 0Z"/><circle cx="12" cy="10" r="3"/></svg>
 Choose Store</button>
@@ -1892,15 +1930,18 @@ Choose Store</button>
 <div class="st-card-num">Location 01</div>
 <div class="st-card-name">JP Nagar 5th Phase</div>
 <div class="st-card-area">Bangalore &middot; </div>
-<div class="st-open-now" data-store-id="" data-hours="10:00 AM – 9:00 PM" data-sat-hours="10:00 AM – 9:00 PM" data-sun-hours="10:00 AM – 9:00 PM">
+<div class="st-open-now status-unknown" data-store-id="" data-hours="10:00 AM – 9:00 PM" data-sat-hours="10:00 AM – 9:00 PM" data-sun-hours="10:00 AM – 9:00 PM" data-store-url="/stores/bangalore/jp-nagar-5th-phase/">
 <span class="status-dot"></span>
-<span class="status-text">Checking...</span>
+<span class="status-text">See hours</span>
 </div>
 </a>
 
 <div class="st-card-body">
 <div class="st-card-addr"><svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="var(--gold)" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-map-pin" style="flex-shrink:0" aria-hidden="true"><path d="M20 10c0 6-8 12-8 12s-8-6-8-12a8 8 0 0 1 16 0Z"/><circle cx="12" cy="10" r="3"/></svg>
 </div>
+<div class="st-hours">
+<strong>Hours:</strong>
+Mon-Fri 10:00 AM – 9:00 PM &middot; Sat 10:00 AM – 9:00 PM &middot; Sun 10:00 AM – 9:00 PM </div>
 
 <div class="st-card-actions">
 <div class="st-primary-row">
@@ -1916,7 +1957,7 @@ Book</a>
 </a>
 <a class="st-btn st-btn-fb" href="https://facebook.com/Naturals.Salon.JPNagar5Phase" target="_blank" rel="noopener" aria-label="JP Nagar 5th Phase on Facebook"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="18" height="18" fill="#1877F2" aria-hidden="true" style="flex-shrink:0"><path d="M24 12.073C24 5.405 18.627 0 12 0S0 5.405 0 12.073C0 18.1 4.388 23.094 10.125 24v-8.437H7.078v-3.49h3.047V9.41c0-3.025 1.792-4.697 4.533-4.697 1.313 0 2.686.236 2.686.236v2.97h-1.513c-1.491 0-1.956.93-1.956 1.883v2.271h3.328l-.532 3.49h-2.796V24C19.612 23.094 24 18.1 24 12.073z"/></svg>
 </a>
-<a class="st-btn st-btn-maps" href="" target="_blank" rel="noopener" aria-label="Directions to JP Nagar 5th Phase"><svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-map-pin" style="flex-shrink:0" aria-hidden="true"><path d="M20 10c0 6-8 12-8 12s-8-6-8-12a8 8 0 0 1 16 0Z"/><circle cx="12" cy="10" r="3"/></svg>
+<a class="st-btn st-btn-maps" href="https://g.page/Naturals_JPNagar5thPhase/" target="_blank" rel="noopener" aria-label="Directions to JP Nagar 5th Phase"><svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-map-pin" style="flex-shrink:0" aria-hidden="true"><path d="M20 10c0 6-8 12-8 12s-8-6-8-12a8 8 0 0 1 16 0Z"/><circle cx="12" cy="10" r="3"/></svg>
 </a>
 </div>
 <div class="st-info-row">
@@ -1949,15 +1990,18 @@ Book</a>
 <div class="st-card-num">Location 02</div>
 <div class="st-card-name">Nagavara</div>
 <div class="st-card-area">Bangalore &middot; </div>
-<div class="st-open-now" data-store-id="" data-hours="10:00 AM – 9:00 PM" data-sat-hours="10:00 AM – 9:00 PM" data-sun-hours="10:00 AM – 9:00 PM">
+<div class="st-open-now status-unknown" data-store-id="" data-hours="10:00 AM – 9:00 PM" data-sat-hours="10:00 AM – 9:00 PM" data-sun-hours="10:00 AM – 9:00 PM" data-store-url="/stores/bangalore/nagavara/">
 <span class="status-dot"></span>
-<span class="status-text">Checking...</span>
+<span class="status-text">See hours</span>
 </div>
 </a>
 
 <div class="st-card-body">
 <div class="st-card-addr"><svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="var(--gold)" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-map-pin" style="flex-shrink:0" aria-hidden="true"><path d="M20 10c0 6-8 12-8 12s-8-6-8-12a8 8 0 0 1 16 0Z"/><circle cx="12" cy="10" r="3"/></svg>
 </div>
+<div class="st-hours">
+<strong>Hours:</strong>
+Mon-Fri 10:00 AM – 9:00 PM &middot; Sat 10:00 AM – 9:00 PM &middot; Sun 10:00 AM – 9:00 PM </div>
 
 <div class="st-card-actions">
 <div class="st-primary-row">
@@ -1973,7 +2017,7 @@ Book</a>
 </a>
 <a class="st-btn st-btn-fb" href="https://facebook.com/Naturals.Salon.Nagavara/" target="_blank" rel="noopener" aria-label="Nagavara on Facebook"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="18" height="18" fill="#1877F2" aria-hidden="true" style="flex-shrink:0"><path d="M24 12.073C24 5.405 18.627 0 12 0S0 5.405 0 12.073C0 18.1 4.388 23.094 10.125 24v-8.437H7.078v-3.49h3.047V9.41c0-3.025 1.792-4.697 4.533-4.697 1.313 0 2.686.236 2.686.236v2.97h-1.513c-1.491 0-1.956.93-1.956 1.883v2.271h3.328l-.532 3.49h-2.796V24C19.612 23.094 24 18.1 24 12.073z"/></svg>
 </a>
-<a class="st-btn st-btn-maps" href="" target="_blank" rel="noopener" aria-label="Directions to Nagavara"><svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-map-pin" style="flex-shrink:0" aria-hidden="true"><path d="M20 10c0 6-8 12-8 12s-8-6-8-12a8 8 0 0 1 16 0Z"/><circle cx="12" cy="10" r="3"/></svg>
+<a class="st-btn st-btn-maps" href="https://maps.app.goo.gl/dPi8bNfB4USdgvvu8" target="_blank" rel="noopener" aria-label="Directions to Nagavara"><svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-map-pin" style="flex-shrink:0" aria-hidden="true"><path d="M20 10c0 6-8 12-8 12s-8-6-8-12a8 8 0 0 1 16 0Z"/><circle cx="12" cy="10" r="3"/></svg>
 </a>
 </div>
 <div class="st-info-row">
@@ -2008,15 +2052,18 @@ Book</a>
 <div class="st-card-num">Location 03</div>
 <div class="st-card-name">Devasandra</div>
 <div class="st-card-area">Bangalore &middot; </div>
-<div class="st-open-now" data-store-id="" data-hours="10:00 AM – 9:00 PM" data-sat-hours="10:00 AM – 9:00 PM" data-sun-hours="10:00 AM – 9:00 PM">
+<div class="st-open-now status-unknown" data-store-id="" data-hours="10:00 AM – 9:00 PM" data-sat-hours="10:00 AM – 9:00 PM" data-sun-hours="10:00 AM – 9:00 PM" data-store-url="/stores/bangalore/devasandra/">
 <span class="status-dot"></span>
-<span class="status-text">Checking...</span>
+<span class="status-text">See hours</span>
 </div>
 </a>
 
 <div class="st-card-body">
 <div class="st-card-addr"><svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="var(--gold)" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-map-pin" style="flex-shrink:0" aria-hidden="true"><path d="M20 10c0 6-8 12-8 12s-8-6-8-12a8 8 0 0 1 16 0Z"/><circle cx="12" cy="10" r="3"/></svg>
 </div>
+<div class="st-hours">
+<strong>Hours:</strong>
+Mon-Fri 10:00 AM – 9:00 PM &middot; Sat 10:00 AM – 9:00 PM &middot; Sun 10:00 AM – 9:00 PM </div>
 
 <div class="st-card-actions">
 <div class="st-primary-row">
@@ -2032,7 +2079,7 @@ Book</a>
 </a>
 <a class="st-btn st-btn-fb" href="https://facebook.com/Naturals.Salon.Devasandra/" target="_blank" rel="noopener" aria-label="Devasandra on Facebook"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="18" height="18" fill="#1877F2" aria-hidden="true" style="flex-shrink:0"><path d="M24 12.073C24 5.405 18.627 0 12 0S0 5.405 0 12.073C0 18.1 4.388 23.094 10.125 24v-8.437H7.078v-3.49h3.047V9.41c0-3.025 1.792-4.697 4.533-4.697 1.313 0 2.686.236 2.686.236v2.97h-1.513c-1.491 0-1.956.93-1.956 1.883v2.271h3.328l-.532 3.49h-2.796V24C19.612 23.094 24 18.1 24 12.073z"/></svg>
 </a>
-<a class="st-btn st-btn-maps" href="" target="_blank" rel="noopener" aria-label="Directions to Devasandra"><svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-map-pin" style="flex-shrink:0" aria-hidden="true"><path d="M20 10c0 6-8 12-8 12s-8-6-8-12a8 8 0 0 1 16 0Z"/><circle cx="12" cy="10" r="3"/></svg>
+<a class="st-btn st-btn-maps" href="https://maps.google.com/?q=Naturals+Salon+Devasandra" target="_blank" rel="noopener" aria-label="Directions to Devasandra"><svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-map-pin" style="flex-shrink:0" aria-hidden="true"><path d="M20 10c0 6-8 12-8 12s-8-6-8-12a8 8 0 0 1 16 0Z"/><circle cx="12" cy="10" r="3"/></svg>
 </a>
 </div>
 <div class="st-info-row">
@@ -2065,15 +2112,18 @@ Book</a>
 <div class="st-card-num">Location 04</div>
 <div class="st-card-name">Frazer Town</div>
 <div class="st-card-area">Bangalore &middot; </div>
-<div class="st-open-now" data-store-id="" data-hours="10:00 AM – 9:00 PM" data-sat-hours="10:00 AM – 9:00 PM" data-sun-hours="10:00 AM – 9:00 PM">
+<div class="st-open-now status-unknown" data-store-id="" data-hours="10:00 AM – 9:00 PM" data-sat-hours="10:00 AM – 9:00 PM" data-sun-hours="10:00 AM – 9:00 PM" data-store-url="/stores/bangalore/frazer-town/">
 <span class="status-dot"></span>
-<span class="status-text">Checking...</span>
+<span class="status-text">See hours</span>
 </div>
 </a>
 
 <div class="st-card-body">
 <div class="st-card-addr"><svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="var(--gold)" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-map-pin" style="flex-shrink:0" aria-hidden="true"><path d="M20 10c0 6-8 12-8 12s-8-6-8-12a8 8 0 0 1 16 0Z"/><circle cx="12" cy="10" r="3"/></svg>
 </div>
+<div class="st-hours">
+<strong>Hours:</strong>
+Mon-Fri 10:00 AM – 9:00 PM &middot; Sat 10:00 AM – 9:00 PM &middot; Sun 10:00 AM – 9:00 PM </div>
 
 <div class="st-card-actions">
 <div class="st-primary-row">
@@ -2089,7 +2139,7 @@ Book</a>
 </a>
 <a class="st-btn st-btn-fb" href="https://www.facebook.com/Naturals.Salon.FrazerTown/" target="_blank" rel="noopener" aria-label="Frazer Town on Facebook"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="18" height="18" fill="#1877F2" aria-hidden="true" style="flex-shrink:0"><path d="M24 12.073C24 5.405 18.627 0 12 0S0 5.405 0 12.073C0 18.1 4.388 23.094 10.125 24v-8.437H7.078v-3.49h3.047V9.41c0-3.025 1.792-4.697 4.533-4.697 1.313 0 2.686.236 2.686.236v2.97h-1.513c-1.491 0-1.956.93-1.956 1.883v2.271h3.328l-.532 3.49h-2.796V24C19.612 23.094 24 18.1 24 12.073z"/></svg>
 </a>
-<a class="st-btn st-btn-maps" href="" target="_blank" rel="noopener" aria-label="Directions to Frazer Town"><svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-map-pin" style="flex-shrink:0" aria-hidden="true"><path d="M20 10c0 6-8 12-8 12s-8-6-8-12a8 8 0 0 1 16 0Z"/><circle cx="12" cy="10" r="3"/></svg>
+<a class="st-btn st-btn-maps" href="https://maps.google.com/?q=Naturals+Salon+Frazer+Town" target="_blank" rel="noopener" aria-label="Directions to Frazer Town"><svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-map-pin" style="flex-shrink:0" aria-hidden="true"><path d="M20 10c0 6-8 12-8 12s-8-6-8-12a8 8 0 0 1 16 0Z"/><circle cx="12" cy="10" r="3"/></svg>
 </a>
 </div>
 <div class="st-info-row">
@@ -2122,15 +2172,18 @@ Book</a>
 <div class="st-card-num">Location 05</div>
 <div class="st-card-name">Hennur</div>
 <div class="st-card-area">Bangalore &middot; </div>
-<div class="st-open-now" data-store-id="" data-hours="10:00 AM – 8:00 PM" data-sat-hours="10:00 AM – 8:00 PM" data-sun-hours="10:00 AM – 8:00 PM">
+<div class="st-open-now status-unknown" data-store-id="" data-hours="10:00 AM – 8:00 PM" data-sat-hours="10:00 AM – 8:00 PM" data-sun-hours="10:00 AM – 8:00 PM" data-store-url="/stores/bangalore/hennur/">
 <span class="status-dot"></span>
-<span class="status-text">Checking...</span>
+<span class="status-text">See hours</span>
 </div>
 </a>
 
 <div class="st-card-body">
 <div class="st-card-addr"><svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="var(--gold)" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-map-pin" style="flex-shrink:0" aria-hidden="true"><path d="M20 10c0 6-8 12-8 12s-8-6-8-12a8 8 0 0 1 16 0Z"/><circle cx="12" cy="10" r="3"/></svg>
 </div>
+<div class="st-hours">
+<strong>Hours:</strong>
+Mon-Fri 10:00 AM – 8:00 PM &middot; Sat 10:00 AM – 8:00 PM &middot; Sun 10:00 AM – 8:00 PM </div>
 
 <div class="st-card-actions">
 <div class="st-primary-row">
@@ -2146,7 +2199,7 @@ Book</a>
 </a>
 <a class="st-btn st-btn-fb" href="https://facebook.com/Naturals.Salon.Hennur/" target="_blank" rel="noopener" aria-label="Hennur on Facebook"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="18" height="18" fill="#1877F2" aria-hidden="true" style="flex-shrink:0"><path d="M24 12.073C24 5.405 18.627 0 12 0S0 5.405 0 12.073C0 18.1 4.388 23.094 10.125 24v-8.437H7.078v-3.49h3.047V9.41c0-3.025 1.792-4.697 4.533-4.697 1.313 0 2.686.236 2.686.236v2.97h-1.513c-1.491 0-1.956.93-1.956 1.883v2.271h3.328l-.532 3.49h-2.796V24C19.612 23.094 24 18.1 24 12.073z"/></svg>
 </a>
-<a class="st-btn st-btn-maps" href="" target="_blank" rel="noopener" aria-label="Directions to Hennur"><svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-map-pin" style="flex-shrink:0" aria-hidden="true"><path d="M20 10c0 6-8 12-8 12s-8-6-8-12a8 8 0 0 1 16 0Z"/><circle cx="12" cy="10" r="3"/></svg>
+<a class="st-btn st-btn-maps" href="https://maps.google.com/?q=Naturals+Salon+Hennur" target="_blank" rel="noopener" aria-label="Directions to Hennur"><svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-map-pin" style="flex-shrink:0" aria-hidden="true"><path d="M20 10c0 6-8 12-8 12s-8-6-8-12a8 8 0 0 1 16 0Z"/><circle cx="12" cy="10" r="3"/></svg>
 </a>
 </div>
 <div class="st-info-row">
@@ -2192,76 +2245,82 @@ Book</a>
 </div>
 </div>
 <div class="svc-cats-grid" aria-label="Service category carousel">
-<a href="services/" class="svc-cat-card reveal" aria-label="HAIR STYLING - FEMALE services">
+<a href="/services/?cat=Hair%20Styling%20-%20Female" class="svc-cat-card reveal" aria-label="Hair Styling - Female services">
 <div class="svc-cat-img">
 <img src="/images/service-icon/hair_styling_female.jpg" 
-alt="HAIR STYLING - FEMALE" 
+alt="Hair Styling - Female" 
 width="400" height="300" 
 loading="lazy" 
 onerror="this.src='/images/service-icon/service_default.jpg'">
 </div>
 <div class="svc-cat-body">
-<div class="svc-cat-name">HAIR STYLING - FEMALE</div>
+<div class="svc-cat-name">Hair Styling - Female</div>
+<div class="svc-cat-price">from &#8377;315</div>
 </div>
 </a>
-<a href="services/" class="svc-cat-card reveal" aria-label="HAIR WASH AND BLOW DRY services">
+<a href="/services/?cat=Hair%20Wash%20and%20Blow%20Dry" class="svc-cat-card reveal" aria-label="Hair Wash and Blow Dry services">
 <div class="svc-cat-img">
 <img src="/images/service-icon/hair_wash_and_blow_dry.jpg" 
-alt="HAIR WASH AND BLOW DRY" 
+alt="Hair Wash and Blow Dry" 
 width="400" height="300" 
 loading="lazy" 
 onerror="this.src='/images/service-icon/service_default.jpg'">
 </div>
 <div class="svc-cat-body">
-<div class="svc-cat-name">HAIR WASH AND BLOW DRY</div>
+<div class="svc-cat-name">Hair Wash and Blow Dry</div>
+<div class="svc-cat-price">from &#8377;450</div>
 </div>
 </a>
-<a href="services/" class="svc-cat-card reveal" aria-label="COLOURING AND HIGHLIGHTS services">
+<a href="/services/?cat=Colouring%20and%20Highlights" class="svc-cat-card reveal" aria-label="Colouring and Highlights services">
 <div class="svc-cat-img">
 <img src="/images/service-icon/colouring_and_highlights.jpg" 
-alt="COLOURING AND HIGHLIGHTS" 
+alt="Colouring and Highlights" 
 width="400" height="300" 
 loading="lazy" 
 onerror="this.src='/images/service-icon/service_default.jpg'">
 </div>
 <div class="svc-cat-body">
-<div class="svc-cat-name">COLOURING AND HIGHLIGHTS</div>
+<div class="svc-cat-name">Colouring and Highlights</div>
+<div class="svc-cat-price">from &#8377;315</div>
 </div>
 </a>
-<a href="services/" class="svc-cat-card reveal" aria-label="TEXTURE services">
+<a href="/services/?cat=Texture" class="svc-cat-card reveal" aria-label="Texture services">
 <div class="svc-cat-img">
 <img src="/images/service-icon/texture.jpg" 
-alt="TEXTURE" 
+alt="Texture" 
 width="400" height="300" 
 loading="lazy" 
 onerror="this.src='/images/service-icon/service_default.jpg'">
 </div>
 <div class="svc-cat-body">
-<div class="svc-cat-name">TEXTURE</div>
+<div class="svc-cat-name">Texture</div>
+<div class="svc-cat-price">from &#8377;5400</div>
 </div>
 </a>
-<a href="services/" class="svc-cat-card reveal" aria-label="HAIR STYLING services">
+<a href="/services/?cat=Hair%20Styling" class="svc-cat-card reveal" aria-label="Hair Styling services">
 <div class="svc-cat-img">
 <img src="/images/service-icon/hair_styling.jpg" 
-alt="HAIR STYLING" 
+alt="Hair Styling" 
 width="400" height="300" 
 loading="lazy" 
 onerror="this.src='/images/service-icon/service_default.jpg'">
 </div>
 <div class="svc-cat-body">
-<div class="svc-cat-name">HAIR STYLING</div>
+<div class="svc-cat-name">Hair Styling</div>
+<div class="svc-cat-price">from &#8377;900</div>
 </div>
 </a>
-<a href="services/" class="svc-cat-card reveal" aria-label="HEAD MASSAGE services">
+<a href="/services/?cat=Head%20Massage" class="svc-cat-card reveal" aria-label="Head Massage services">
 <div class="svc-cat-img">
 <img src="/images/service-icon/head_massage.jpg" 
-alt="HEAD MASSAGE" 
+alt="Head Massage" 
 width="400" height="300" 
 loading="lazy" 
 onerror="this.src='/images/service-icon/service_default.jpg'">
 </div>
 <div class="svc-cat-body">
-<div class="svc-cat-name">HEAD MASSAGE</div>
+<div class="svc-cat-name">Head Massage</div>
+<div class="svc-cat-price">from &#8377;900</div>
 </div>
 </a>
 </div>
@@ -2413,19 +2472,19 @@ loading="lazy">
 
 <section class="media-sec" id="media" aria-label="Other campaigns and announcements">
 <div class="sec-hdr reveal">
-<div class="lbl">Campaigns</div>
+<div class="lbl">Latest from us</div>
 <h2>Latest <em>updates</em></h2>
 <p>Announcements, media, and store updates across our Bangalore locations.</p>
 </div>
 
 <div class="home-carousel-wrap">
 <div class="home-carousel-head reveal">
-<div class="home-carousel-actions" aria-label="Campaign carousel controls">
-<button class="home-carousel-nav" type="button" aria-label="Previous campaign" onclick="scrollHomeCampaignCarousel(this, -1)">&#8249;</button>
-<button class="home-carousel-nav" type="button" aria-label="Next campaign" onclick="scrollHomeCampaignCarousel(this, 1)">&#8250;</button>
+<div class="home-carousel-actions" aria-label="News carousel controls">
+<button class="home-carousel-nav" type="button" aria-label="Previous update" onclick="scrollHomeCampaignCarousel(this, -1)">&#8249;</button>
+<button class="home-carousel-nav" type="button" aria-label="Next update" onclick="scrollHomeCampaignCarousel(this, 1)">&#8250;</button>
 </div>
 </div>
-<div class="media-grid home-carousel-track" id="media-grid" aria-label="Campaigns carousel">
+<div class="media-grid home-carousel-track" id="media-grid" aria-label="News and updates carousel">
 <div class="media-card reveal" 
 data-image-available="False"
 data-image-name="20260518_ANNOU_SameHeartBrandNe"
@@ -2447,43 +2506,7 @@ loading="lazy">
 <div class="media-body">
 <div class="media-badge">ANNOUNCEMENT</div>
 <h3 class="media-title">Same Heart, Brand New Space ❤️</h3>
-<div class="media-details campaign-description">Our commitment to you hasn’t changed, but our location has! 🌿 We are bringing our signature 'Redo or Repay' guarantee and transparent service to a beautiful new home in Nagavara. Follow @Naturals.Salon.Nagavara for official updates and exclusive relocation deals.
-
-📍 Visit us at: 22-26/B11, R.K. Tower, 1st Cross, Chanukya Layout.
-#CustomerFirst #NaturalsNagavara #BangaloreSalons</div>
-<button class="campaign-desc-toggle" type="button" aria-expanded="false" onclick="toggleCampaignDescription(this)">+ More</button>
-<div class="media-meta">
-<div class="media-store">
-</div>
-<div class="media-valid">Valid till 30-May-2026</div>
-</div>
-</div>
-</div>
-<div class="media-card reveal" 
-data-image-available="False"
-data-image-name="20260517_ANNOU_We’veMoved!SayHel"
-data-campaign-title="We’ve Moved! Say Hello to Naturals Nagavara 👋">
-<div class="media-media">
-<img class="media-img"
-src="https://naturals-blr.github.io/campaigns/announcement/03_published/20260517_ANNOU_We’veMoved!SayHel.jpg"
-data-img-base="https://naturals-blr.github.io/campaigns/announcement/03_published/20260517_ANNOU_We’veMoved!SayHel"
-alt="We’ve Moved! Say Hello to Naturals Nagavara 👋"
-width="400" height="300"
-loading="lazy">
-<div class="campaign-img-fallback">
-<div>
-<strong>We’ve Moved! Say Hello to Naturals Nagavara 👋</strong>
-<span>announcement</span>
-</div>
-</div>
-</div>
-<div class="media-body">
-<div class="media-badge">ANNOUNCEMENT</div>
-<h3 class="media-title">We’ve Moved! Say Hello to Naturals Nagavara 👋</h3>
-<div class="media-details campaign-description">Exciting News! 📢 Our relocation is complete, and we’re now closer to you at Nagavara. New space, new look, and a new handle: @Naturals.Salon.Nagavara. We can't wait to welcome you to our 5-star facility for the ultimate 'Customer First' experience.
-
-📍 New Location: Near Skywalk Exit, Nagavara, Bangalore 560045.
-#NaturalsSalon #Nagavara #NewLocation</div>
+<div class="media-details campaign-description">Our commitment to you hasn’t changed, but our location has! 🌿 We are bringing our signature 'Redo or Repay' guarantee and transparent service to a beautiful new home in Nagavara. Follow @Naturals.Salon.Nagavara for official updates and exclusive relocation deals. 📍 Visit us at: 22-26/B11, R.K. Tower, 1st Cross, Chanukya Layout.</div>
 <button class="campaign-desc-toggle" type="button" aria-expanded="false" onclick="toggleCampaignDescription(this)">+ More</button>
 <div class="media-meta">
 <div class="media-store">
@@ -2513,85 +2536,7 @@ loading="lazy">
 <div class="media-body">
 <div class="media-badge">ANNOUNCEMENT</div>
 <h3 class="media-title">Luxury Has A New Address in Nagavara ✨</h3>
-<div class="media-details campaign-description">Step into a world of 5-star pampering at the all-new Naturals Nagavara! 🥂 We are moving to serve you better with premium standards and a sophisticated new vibe. Make sure to follow our updated handle @Naturals.Salon.Nagavara for a sneak peek into our luxury interiors and grand opening offers.
-
-📍 Find us at: R.K. Tower, Chanukya Layout, Nagavara.
-#LuxurySalonBangalore #NaturalsNagavara #PamperYourself</div>
-<button class="campaign-desc-toggle" type="button" aria-expanded="false" onclick="toggleCampaignDescription(this)">+ More</button>
-<div class="media-meta">
-<div class="media-store">
-</div>
-<div class="media-valid">Valid till 30-May-2026</div>
-</div>
-</div>
-</div>
-<div class="media-card reveal" 
-data-image-available="True"
-data-image-name="20260515_ANNOU_NewLookNewLocati"
-data-campaign-title="New Look, New Location: Naturals Nagavara is Here!">
-<div class="media-media">
-<img class="media-img"
-src="https://naturals-blr.github.io/campaigns/announcement/03_published/20260515_ANNOU_NewLookNewLocati.png"
-data-img-base="https://naturals-blr.github.io/campaigns/announcement/03_published/20260515_ANNOU_NewLookNewLocati.png"
-alt="New Look, New Location: Naturals Nagavara is Here!"
-width="400" height="300"
-loading="lazy">
-<div class="campaign-img-fallback">
-<div>
-<strong>New Look, New Location: Naturals Nagavara is Here!</strong>
-<span>announcement</span>
-</div>
-</div>
-</div>
-<div class="media-body">
-<div class="media-badge">ANNOUNCEMENT</div>
-<h3 class="media-title">New Look, New Location: Naturals Nagavara is Here!</h3>
-<div class="media-details campaign-description">We’ve evolved! 🌿✨ Our beloved salon has moved to a brand-new space in Nagavara. With a new home comes a new handle—follow us @Naturals.Salon.Nagavara to stay connected. While our address is fresh, our 5-star 'Customer First' promise remains exactly the same. Come experience luxury in your neighborhood.
-
-📍 Visit us: 22-26/B11, R.K. Tower, 1st Cross, Chanukya Layout, Nagavara.
-#NaturalsNagavara #NewBeginnings #BangaloreBeauty</div>
-<button class="campaign-desc-toggle" type="button" aria-expanded="false" onclick="toggleCampaignDescription(this)">+ More</button>
-<div class="media-meta">
-<div class="media-store">
-</div>
-<div class="media-valid">Valid till 30-May-2026</div>
-</div>
-</div>
-</div>
-<div class="media-card reveal" 
-data-image-available="True"
-data-image-name="20260510_ANNOU_NewLocationNewLo"
-data-campaign-title="New Location, New Look, New Handle! 🌿✨">
-<div class="media-media">
-<img class="media-img"
-src="https://naturals-blr.github.io/campaigns/announcement/03_published/20260510_ANNOU_NewLocationNewLo.png"
-data-img-base="https://naturals-blr.github.io/campaigns/announcement/03_published/20260510_ANNOU_NewLocationNewLo.png"
-alt="New Location, New Look, New Handle! 🌿✨"
-width="400" height="300"
-loading="lazy">
-<div class="campaign-img-fallback">
-<div>
-<strong>New Location, New Look, New Handle! 🌿✨</strong>
-<span>announcement</span>
-</div>
-</div>
-</div>
-<div class="media-body">
-<div class="media-badge">ANNOUNCEMENT</div>
-<h3 class="media-title">New Location, New Look, New Handle! 🌿✨</h3>
-<div class="media-details campaign-description">We are excited to announce that as we move to our brand-new home in Nagavara to serve you better, we have updated our social media handles to align with our new location!
-
-Find and follow us at our updated handle:
-👉 @Naturals.Salon.Nagavara
-
-While our name and address are changing, our commitment to a "Customer First" experience remains the same. We are bringing our premium 5-star service standards to a beautiful new space closer to you.
-
-📍 Visit us at our new home:
-22-26/B11, R.K. Tower, 1st Cross, Chanukya Layout, Near Skywalk Exit, Nagavara, Bangalore 560045.
-
-Stay tuned for our grand opening date and exclusive relocation offers!
-
-#NaturalsSalon #NaturalsNagavara #NewBeginnings #BangaloreBeauty #CustomerFirst #Nagavara</div>
+<div class="media-details campaign-description">Step into a world of 5-star pampering at the all-new Naturals Nagavara! 🥂 We are moving to serve you better with premium standards and a sophisticated new vibe. Make sure to follow our updated handle @Naturals.Salon.Nagavara for a sneak peek into our luxury interiors and grand opening offers. 📍 Find us at: R.K. Tower, Chanukya Layout, Nagavara.</div>
 <button class="campaign-desc-toggle" type="button" aria-expanded="false" onclick="toggleCampaignDescription(this)">+ More</button>
 <div class="media-meta">
 <div class="media-store">
@@ -2603,14 +2548,14 @@ Stay tuned for our grand opening date and exclusive relocation offers!
 </div>
 </div>
 <div class="offers-view-all">
-<a href="/offers/#all" class="btn-secondary">View All Campaigns &#8594;</a>
+<a href="/offers/#all" class="btn-secondary">View All Updates &#8594;</a>
 </div>
 </section>
 
 <section class="reviews-sec" id="testimonials" aria-label="Customer reviews" style="padding:100px 60px;">
 <div class="sec-hdr reveal">
-<div class="lbl">Social Proof</div>
-<h2>Grateful <em>stories.</em></h2>
+<div class="lbl">Customer Reviews</div>
+<h2>What our <em>customers say.</em></h2>
 <p>Real experiences from our customers across Bangalore stores.</p>
 </div>
 
@@ -2622,10 +2567,12 @@ Stay tuned for our grand opening date and exclusive relocation offers!
 <div class="rev-header">
 <div class="rev-header-left">
 <div class="rev-user-img">N</div>
+<div class="rev-person">
 <div class="rev-name">
 Naveen Kumar
 <div class="rev-stars">
 ★★★★★ </div>
+</div>
 </div>
 </div>
 <div class="rev-header-right">
@@ -2646,10 +2593,12 @@ Good massage. Felt totally relaxed"</div>
 <div class="rev-header">
 <div class="rev-header-left">
 <div class="rev-user-img">N</div>
+<div class="rev-person">
 <div class="rev-name">
 Neeharika Anand
 <div class="rev-stars">
 ★★★★★ </div>
+</div>
 </div>
 </div>
 <div class="rev-header-right">
@@ -2669,10 +2618,12 @@ Neeharika Anand
 <div class="rev-header">
 <div class="rev-header-left">
 <div class="rev-user-img">A</div>
+<div class="rev-person">
 <div class="rev-name">
 Apoorva VD
 <div class="rev-stars">
 ★★★★★ </div>
+</div>
 </div>
 </div>
 <div class="rev-header-right">
@@ -2692,10 +2643,12 @@ Apoorva VD
 <div class="rev-header">
 <div class="rev-header-left">
 <div class="rev-user-img">P</div>
+<div class="rev-person">
 <div class="rev-name">
 Psychiatry Talks with Dr Sneha
 <div class="rev-stars">
 ★★★★★ </div>
+</div>
 </div>
 </div>
 <div class="rev-header-right">
@@ -3275,152 +3228,6 @@ window.NATURALS_STORES = [{"about_store_text": "Welcome to Naturals Unisex Salon
 window.NATURALS_BASE = '';
 </script>
 
-<div id="store-modal-overlay" onclick="closeStorePicker()" style="display:none;"></div>
-
-<div id="store-modal"
-role="dialog"
-aria-modal="true"
-aria-label="Select your store"
-data-store-count="5"
-style="display:none;">
-<div id="store-modal-inner">
-<div class="spm-header">
-<div class="spm-title">Select Your <em>Store</em></div>
-<div class="spm-sub">Choose your preferred Naturals Salon &amp; Spa Bangalore location</div>
-<button class="spm-close" onclick="closeStorePicker()" aria-label="Close">&#10005;</button>
-</div>
-
-<div class="spm-cards" id="spm-cards">
-<div class="spm-card"
-onclick="selectStore('N78','JP Nagar 5th Phase','https://naturals-salon-jpnagar5phase.setmore.com/','+918792642299','+918792642299','https://g.page/Naturals_JPNagar5thPhase/','/stores/bangalore/jp-nagar-5th-phase/')"
-role="button" tabindex="0">
-<div class="spm-card-num">1</div>
-<div class="spm-card-info">
-<div class="spm-card-name">JP Nagar 5th Phase</div>
-<div class="spm-card-area">JP Nagar 5th Phase &middot; 560078</div>
-<div class="spm-card-addr">1st Floor, Anand Onyx, No 305, 15th Cross Rd, near Outer Ring Road, 5th Phase, J P Nagar Phase 5, J. P. Nagar, Bangalore, Karnataka 560078, India</div>
-</div>
-<div class="spm-card-cta">Select &#8594;</div>
-</div>
-<div class="spm-card"
-onclick="selectStore('N45','Nagavara','https://naturals-salon-elementsmall.setmore.com/','+919901000017','+919901000017','https://maps.app.goo.gl/dPi8bNfB4USdgvvu8','/stores/bangalore/nagavara/')"
-role="button" tabindex="0">
-<div class="spm-card-num">2</div>
-<div class="spm-card-info">
-<div class="spm-card-name">Nagavara</div>
-<div class="spm-card-area">Nagavara &middot; 560045</div>
-<div class="spm-card-addr">22-26/B11, R.K. Tower, 1st Cross, Chanukya Layout, Near Skywalk Exit, Nagavara, Bangalore, Karnataka 560045, India</div>
-</div>
-<div class="spm-card-cta">Select &#8594;</div>
-</div>
-<div class="spm-card"
-onclick="selectStore('N36','Devasandra','https://naturals-salon-devasandra.setmore.com/','+917259490009','+917259490009','https://maps.google.com/?q=Naturals+Salon+Devasandra','/stores/bangalore/devasandra/')"
-role="button" tabindex="0">
-<div class="spm-card-num">3</div>
-<div class="spm-card-info">
-<div class="spm-card-name">Devasandra</div>
-<div class="spm-card-area">Devasandra &middot; 560036</div>
-<div class="spm-card-addr">2,3, 1st Floor, Maruthi Tower, No. 1, Devasandra Main Rd, opp. Lulu's Bakery, Basavanapura, KRPuram, Bangalore, Karnataka 560036, India</div>
-</div>
-<div class="spm-card-cta">Select &#8594;</div>
-</div>
-<div class="spm-card"
-onclick="selectStore('N05','Frazer Town','https://naturals-salon-frazertown.setmore.com/','+919606333017','+919606333017','https://maps.google.com/?q=Naturals+Salon+Frazer+Town','/stores/bangalore/frazer-town/')"
-role="button" tabindex="0">
-<div class="spm-card-num">4</div>
-<div class="spm-card-info">
-<div class="spm-card-name">Frazer Town</div>
-<div class="spm-card-area">Frazer Town &middot; 560005</div>
-<div class="spm-card-addr">1st floor, No.94, Mosque Rd, above Poorvika Mobile Store, Cleveland Town, Frazer Town, Bangalore, Karnataka 560005, India</div>
-</div>
-<div class="spm-card-cta">Select &#8594;</div>
-</div>
-<div class="spm-card"
-onclick="selectStore('N43','Hennur','https://naturals-salon-hennur.setmore.com/','+919606900069','+919606900069','https://maps.google.com/?q=Naturals+Salon+Hennur','/stores/bangalore/hennur/')"
-role="button" tabindex="0">
-<div class="spm-card-num">5</div>
-<div class="spm-card-info">
-<div class="spm-card-name">Hennur</div>
-<div class="spm-card-area">Hennur &middot; 560043</div>
-<div class="spm-card-addr">1st Floor, No 40/A, 40/C, Main Road, above SBI Bank, Hennur Gardens, Bangalore, Karnataka 560043, India</div>
-</div>
-<div class="spm-card-cta">Select &#8594;</div>
-</div>
-</div>
-</div>
-</div>
-
-<style>
-#store-modal-overlay{position:fixed;inset:0;background:rgba(0,0,0,0.65);z-index:12000;backdrop-filter:blur(4px);}
-
-#store-modal{
-position:fixed;top:50%;left:50%;
-transform:translate(-50%,-50%);
-z-index:12001;
-width:min(640px, 92vw);
-max-height:86vh;
-background:var(--cream);
-box-shadow:0 24px 80px rgba(0,0,0,0.45);
-border-radius:16px;
-overflow:hidden;
-}
-[data-theme="naturals"] #store-modal{background:#FAF7FF;}
-
-.spm-header{background:var(--dark);padding:22px 22px;position:relative;}
-[data-theme="naturals"] .spm-header{background:#1A0533;}
-.spm-title{font-family:'Cormorant Garamond',serif;font-size:26px;font-weight:300;color:#fff;margin-bottom:4px;}
-.spm-title em{font-style:italic;color:var(--gold);}
-.spm-sub{font-size:11px;color:rgba(255,255,255,0.4);letter-spacing:1px;line-height:1.4;}
-.spm-close{position:absolute;top:14px;right:14px;background:rgba(255,255,255,0.10);border:1px solid rgba(255,255,255,0.18);color:#fff;border-radius:12px;width:40px;height:40px;font-size:18px;cursor:pointer;line-height:1;}
-.spm-close:hover{background:rgba(255,255,255,0.18);}
-
-.spm-cards{padding:4px;overflow:hidden;}
-/* Toggle scroll ON only when store-count > 6 */
-.spm-cards.spm-scroll{overflow-y:auto;max-height:calc(86vh - 110px);}
-
-.spm-card{
-display:flex;align-items:center;gap:14px;
-padding:14px 18px;background:#fff;border-bottom:1px solid rgba(0,0,0,0.05);
-cursor:pointer;transition:all 0.2s;border-left:3px solid transparent;
-}
-.spm-card:hover{background:#f8f6f0;border-left-color:var(--gold);}
-[data-theme="naturals"] .spm-card:hover{background:#f3eeff;border-left-color:var(--green-mid);}
-.spm-card:focus{outline:2px solid var(--gold);outline-offset:-2px;}
-
-.spm-card-num{font-family:'Cormorant Garamond',serif;font-size:26px;color:rgba(0,0,0,0.12);font-weight:300;width:28px;flex-shrink:0;}
-.spm-card-info{flex:1;min-width:0;}
-.spm-card-name{font-family:'Cormorant Garamond',serif;font-size:18px;font-weight:400;color:var(--text);margin-bottom:2px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;}
-.spm-card-area{font-size:10px;color:var(--gold);letter-spacing:2px;text-transform:uppercase;margin-bottom:2px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;}
-.spm-card-addr{font-size:11px;color:var(--text-light);font-weight:300;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;}
-.spm-card-cta{font-size:11px;color:var(--text-light);letter-spacing:1px;text-transform:uppercase;white-space:nowrap;transition:color 0.2s;}
-.spm-card:hover .spm-card-cta{color:var(--green-mid);}
-
-@media(max-width:640px){
-#store-modal{width:min(520px, 92vw);max-height:82vh;}
-.spm-header{padding:18px 18px;}
-.spm-title{font-size:22px;}
-.spm-card{padding:12px 14px;}
-.spm-card-addr{display:none;} /* ✅ hide address only on mobile */
-}
-</style>
-
-<script>
-(function(){
-function applyStoreModalScrollRule(){
-var modal = document.getElementById('store-modal');
-var cards = document.getElementById('spm-cards');
-if(!modal || !cards) return;
-var n = parseInt(modal.getAttribute('data-store-count') || '0', 10);
-cards.classList.toggle('spm-scroll', n > 6); /* ✅ scroll only if >6 */
-}
-if(document.readyState === 'loading'){
-document.addEventListener('DOMContentLoaded', applyStoreModalScrollRule);
-} else {
-applyStoreModalScrollRule();
-}
-})();
-</script>
-
 <div id="sticky-bar" data-page-type="homepage">
 <button class="sb-btn" id="sb-book" aria-label="Book appointment" title="Book"><svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-calendar" style="flex-shrink:0" aria-hidden="true"><rect width="18" height="18" x="3" y="4" rx="2" ry="2"/><path d="M16 2v4"/><path d="M8 2v4"/><path d="M3 10h18"/></svg>
 </button>
@@ -3532,226 +3339,6 @@ bar.classList.add('is-visible'); /* Show on load for other pages */
 bar.classList.add('is-visible'); /* Legacy fallback */
 }
 })();
-</script>
-
-<script>
-(function(){
-if(window.naturalsModalHistoryReady) return;
-window.naturalsModalHistoryReady = true;
-window.naturalsModalStack = [];
-
-window.naturalsPushModalState = function(id, closeFn){
-if(!id || typeof closeFn !== 'function') return;
-window.naturalsModalStack = window.naturalsModalStack.filter(function(item){ return item.id !== id; });
-window.naturalsModalStack.push({ id: id, closeFn: closeFn });
-if(!(history.state && history.state.naturalsModal === id)){
-history.pushState({ naturalsModal: id }, '', window.location.href);
-}
-};
-
-window.naturalsClearModalState = function(id){
-window.naturalsModalStack = window.naturalsModalStack.filter(function(item){ return item.id !== id; });
-};
-
-function closeTopModalFromHistory(){
-var item = window.naturalsModalStack.pop();
-if(!item) return false;
-item.closeFn(true);
-return true;
-}
-
-window.addEventListener('popstate', function(){
-closeTopModalFromHistory();
-});
-
-document.addEventListener('keydown', function(e){
-if(e.key !== 'Escape') return;
-if(!window.naturalsModalStack.length) return;
-e.preventDefault();
-closeTopModalFromHistory();
-});
-})();
-
-function openStorePicker(){
-document.getElementById('store-modal-overlay').style.display='block';
-document.getElementById('store-modal').style.display='block';
-document.body.style.overflow='hidden';
-if(window.naturalsPushModalState){
-window.naturalsPushModalState('store-picker', function(){ closeStorePicker(true); });
-}
-}
-function closeStorePicker(fromHistory){
-document.getElementById('store-modal-overlay').style.display='none';
-document.getElementById('store-modal').style.display='none';
-document.body.style.overflow='';
-if(!fromHistory && window.naturalsClearModalState) window.naturalsClearModalState('store-picker');
-}
-
-/* Ensure sticky buttons use selected store on non-store pages */
-window._applyStickyStore = function(sd){
-try{
-if(!sd) return;
-var bar=document.getElementById('sticky-bar');
-if(bar && bar.getAttribute('data-page-type') !== 'store'){
-/* On non-store pages, we always want to prompt.
-So we don't bind the sticky bar buttons to the selected store. */
-return;
-}
-var bookBtn=document.getElementById('sb-book');
-var waBtn=document.getElementById('sb-wa');
-var callBtn=document.getElementById('sb-call');
-var mapsBtn=document.getElementById('sb-maps');
-
-function clearAndBind(btn, fn){
-if(!btn) return;
-var clone = btn.cloneNode(true);
-btn.parentNode.replaceChild(clone, btn);
-clone.addEventListener('click', fn);
-}
-
-clearAndBind(bookBtn, function(){ if(sd.book) window.open(sd.book,'_blank'); });
-clearAndBind(waBtn, function(){ if(sd.wa) window.open('https://wa.me/' + sd.wa,'_blank'); });
-clearAndBind(callBtn, function(){ if(sd.call) window.location.href='tel:' + sd.call; });
-clearAndBind(mapsBtn, function(){ if(sd.maps) window.open(sd.maps,'_blank'); });
-}catch(e){}
-};
-
-function selectStore(id,name,book,wa,call,maps,pageUrl){
-var sd={id:id,name:name,book:book,wa:wa,call:call,maps:maps,pageUrl:pageUrl};
-localStorage.setItem('naturals-store',JSON.stringify(sd));
-closeStorePicker();
-if(typeof window._applyStickyStore==='function') window._applyStickyStore(sd);
-
-// Handle pending booking action
-var actionPerformed = false;
-if(typeof window._naturalsPendingAction==='string' && window._naturalsPendingAction==='book' && book){
-window.open(book,'_blank');
-window._naturalsPendingAction=null;
-actionPerformed = true;
-} else if(typeof window._naturalsPendingAction==='string' && window._naturalsPendingAction==='wa' && wa){
-window.open('https://wa.me/'+wa,'_blank');
-window._naturalsPendingAction=null;
-actionPerformed = true;
-} else if(typeof window._naturalsPendingAction==='string' && window._naturalsPendingAction==='call' && call){
-window.location.href='tel:'+call;
-window._naturalsPendingAction=null;
-actionPerformed = true;
-} else if(typeof window._naturalsPendingAction==='string' && window._naturalsPendingAction==='maps' && maps){
-window.open(maps,'_blank');
-window._naturalsPendingAction=null;
-actionPerformed = true;
-} else if(typeof window._naturalsPerformPendingAction==='function' && window._naturalsPendingAction){
-window._naturalsPerformPendingAction(sd);
-actionPerformed = true;
-}
-
-// Only navigate if no action was performed and we have a pageUrl
-if(!actionPerformed && pageUrl) {
-window.location.href = pageUrl;
-}
-}
-
-/* Used by homepage store tiles (Book/Chat/Call/Directions) to keep your flow */
-function storePickerThen(id,name,book,wa,call,maps,pageUrl,action){
-var sd={id:id,name:name,book:book,wa:wa,call:call,maps:maps,pageUrl:pageUrl};
-localStorage.setItem('naturals-store',JSON.stringify(sd));
-closeStorePicker();
-if(action==='book' && book) window.open(book,'_blank');
-if(action==='wa' && wa) window.open('https://wa.me/'+wa,'_blank');
-if(action==='call' && call) window.location.href='tel:'+call;
-if(action==='maps' && maps) window.open(maps,'_blank');
-}
-
-/* Set active state for store pages */
-function setActiveStoreState(){
-try{
-var currentPath = window.location.pathname;
-var storeLinks = document.querySelectorAll('.drawer-store-link');
-
-storeLinks.forEach(function(link){
-var href = link.getAttribute('href');
-if(href && currentPath.includes(href.replace(/^\//, ''))){
-link.classList.add('active');
-} else {
-link.classList.remove('active');
-}
-});
-}catch(e){}
-}
-
-/* Run on page load and when drawer opens */
-document.addEventListener('DOMContentLoaded', setActiveStoreState);
-
-/* Also run when hamburger is clicked (drawer opens) */
-var hamburger = document.getElementById('hamburger');
-if(hamburger){
-hamburger.addEventListener('click', function(){
-setTimeout(setActiveStoreState, 100); // Small delay for drawer animation
-setTimeout(updateThemeSwatches, 50); // Update theme swatches when drawer opens
-});
-}
-
-/* Theme toggle functionality - Global State Management */
-function setTheme(themeName){
-// Apply to document for immediate effect
-document.documentElement.setAttribute('data-theme', themeName);
-document.body.setAttribute('data-theme', themeName);
-
-// Persist in localStorage for global state
-localStorage.setItem('naturals-theme', themeName);
-
-// Update visual state
-updateThemeSwatches();
-}
-
-function updateThemeSwatches(){
-try{
-var currentTheme = document.body.getAttribute('data-theme') || 'luxury';
-var swatches = document.querySelectorAll('.theme-swatch');
-
-swatches.forEach(function(swatch){
-swatch.classList.remove('active');
-if(swatch.getAttribute('data-theme') === currentTheme){
-swatch.classList.add('active');
-}
-});
-}catch(e){}
-}
-
-/* Set default theme to Luxury for new visitors - Global State */
-(function(){
-var savedTheme = localStorage.getItem('naturals-theme');
-if(!savedTheme){
-savedTheme = 'luxury'; // Default to Luxury theme for premium identity
-localStorage.setItem('naturals-theme', savedTheme);
-}
-
-// Apply to both documentElement and body for global consistency
-if(savedTheme){
-document.documentElement.setAttribute('data-theme', savedTheme);
-document.body.setAttribute('data-theme', savedTheme);
-}
-
-// Update visual state when DOM is ready
-if(document.readyState === 'loading'){
-document.addEventListener('DOMContentLoaded', updateThemeSwatches);
-} else {
-updateThemeSwatches();
-}
-})();
-
-document.addEventListener('keydown',function(e){ if(e.key==='Escape') closeStorePicker(); });
-document.addEventListener('DOMContentLoaded',function(){
-try{
-var saved=JSON.parse(localStorage.getItem('naturals-store'));
-if(saved && saved.name){
-var ind=document.getElementById('store-indicator');
-var nm=document.getElementById('si-name');
-if(ind && nm){ nm.textContent=saved.name; ind.style.display='flex'; }
-if(typeof window._applyStickyStore==='function') window._applyStickyStore(saved);
-}
-}catch(e){}
-});
 </script>
 
 <div id="ho-img-overlay" onclick="closeHomeOfferModal()"></div>
@@ -3989,6 +3576,16 @@ return h * 60 + m;
 
 // Check status on page load and every minute
 document.addEventListener('DOMContentLoaded', function(){
+setTimeout(function(){
+document.querySelectorAll('.st-open-now').forEach(function(el) {
+var text = el.querySelector('.status-text');
+if (!text) return;
+if (text.textContent === 'See hours' || text.textContent === 'Checking...') {
+el.className = 'st-open-now status-unknown';
+text.textContent = 'See hours';
+}
+});
+}, 3000);
 checkOpenNowStatus();
 setInterval(checkOpenNowStatus, 60000); // Update every minute
 });
@@ -4068,7 +3665,7 @@ window.open('https://wa.me/?text=' + encodeURIComponent(window.location.href), '
 <div id="reviewsModal" class="modal-overlay">
 <div class="modal-content">
 <div class="modal-header">
-<h3 class="modal-title">Wall of <em>Love</em></h3>
+<h3 class="modal-title">Customer <em>Reviews</em></h3>
 <button class="modal-close" onclick="closeReviewsModal()" aria-label="Close reviews">
 <svg fill="currentColor" viewBox="0 0 24 24">
 <path d="M19 6.41L17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 10.59 17.59 19 17.59 13.41 12z"/>

@@ -257,6 +257,11 @@ fetchpriority="high"
 onerror="this.style.display='none'">
 </a>
 
+<div class="hdr-actions">
+<button class="hdr-book" type="button" onclick="window._naturalsPendingAction='book'; openStorePicker();" aria-label="Book appointment">
+<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-calendar" style="flex-shrink:0" aria-hidden="true"><rect width="18" height="18" x="3" y="4" rx="2" ry="2"/><path d="M16 2v4"/><path d="M8 2v4"/><path d="M3 10h18"/></svg>
+<span>Book Appointment</span>
+</button>
 <button id="hamburger" aria-label="Menu" aria-expanded="false" aria-controls="drawer">
 <span class="hb-line"></span>
 <span class="hb-line"></span>
@@ -271,27 +276,16 @@ onerror="this.style.display='none'">
 <button class="drawer-x" aria-label="Close menu">×</button>
 </div>
 
-<div class="drawer-theme-section">
-<div class="drawer-theme-label">CHOOSE THEME</div>
-<div class="drawer-theme-swatches">
-<button class="theme-swatch theme-luxury" onclick="setTheme('luxury')" aria-label="Switch to Luxury theme" data-theme="luxury">
-<span class="swatch-circle"></span>
-</button>
-<button class="theme-swatch theme-naturals" onclick="setTheme('naturals')" aria-label="Switch to Naturals theme" data-theme="naturals">
-<span class="swatch-circle"></span>
-</button>
-</div>
-</div>
-
 <div class="drawer-section">
 <a class="drawer-link " href="https://naturals-blr.github.io/" aria-label="Naturals Salon & Spa — Home">HOME</a>
 <a class="drawer-link " href="https://naturals-blr.github.io/services/" aria-label="View all salon services">SERVICES</a>
 <a class="drawer-link " href="https://naturals-blr.github.io/offers/" aria-label="View current salon offers and promotions">OFFERS</a>
 
-<div class="drawer-stores-section">
-<div class="drawer-stores-header">
+<details class="drawer-stores-section">
+<summary class="drawer-stores-header">
 <span class="drawer-stores-title">OUR STORES</span>
-</div>
+<span class="drawer-stores-arrow">⌄</span>
+</summary>
 
 <div class="drawer-stores-list">
 <a class="drawer-store-link" href="https://naturals-blr.github.io/stores/bangalore/jp-nagar-5th-phase/" aria-label="Visit Naturals Salon JP Nagar 5th Phase">
@@ -310,7 +304,7 @@ onerror="this.style.display='none'">
 <span class="drawer-store-name">Hennur</span>
 </a>
 </div>
-</div>
+</details>
 
 <a class="drawer-link " href="https://naturals-blr.github.io/careers/bangalore/" aria-label="Join our team and view career opportunities">Join our Team</a>
 <a class="drawer-link is-active" href="https://naturals-blr.github.io/about/" aria-label="Learn about Naturals Salon & Spa">ABOUT</a>
@@ -320,6 +314,17 @@ onerror="this.style.display='none'">
 <button class="drawer-cta-btn" onclick="window._naturalsPendingAction='book'; openStorePicker();" aria-label="Select store and book appointment">
 BOOK APPOINTMENT
 </button>
+<div class="drawer-theme-section" aria-label="Theme options">
+<span class="drawer-theme-label">Theme</span>
+<div class="drawer-theme-swatches">
+<button class="theme-swatch theme-luxury" onclick="setTheme('luxury')" aria-label="Switch to Luxury theme" data-theme="luxury">
+<span class="swatch-circle"></span>
+</button>
+<button class="theme-swatch theme-naturals" onclick="setTheme('naturals')" aria-label="Switch to Naturals theme" data-theme="naturals">
+<span class="swatch-circle"></span>
+</button>
+</div>
+</div>
 </div>
 </nav>
 
@@ -433,27 +438,9 @@ box-shadow:0 0 0 1px rgba(212,175,55,0.18) inset;
 .drawer-open #hamburger .hb-line:nth-child(3){transform:rotate(-45deg) translate(6px,-6px);}
 
 /* ── THEME TOGGLE SECTION ── */
-.drawer-theme-section{
-padding:16px 16px 12px;
-border-bottom:1px solid rgba(255,255,255,0.08);
-text-align:center;
-}
-
-.drawer-theme-label{
-font-size:9px;
-color:rgba(255,255,255,0.4);
-letter-spacing:1px;
-text-transform:uppercase;
-margin-bottom:10px;
-font-weight:400;
-}
-
-.drawer-theme-swatches{
-display:flex;
-justify-content:center;
-gap:12px;
-align-items:center;
-}
+.drawer-theme-section{display:flex;align-items:center;justify-content:center;gap:12px;margin-top:12px;}
+.drawer-theme-label{font-size:9px;color:rgba(255,255,255,0.44);letter-spacing:1px;text-transform:uppercase;font-weight:700;}
+.drawer-theme-swatches{display:flex;justify-content:center;gap:10px;align-items:center;}
 
 .theme-swatch{
 background:transparent;
@@ -504,8 +491,20 @@ overflow:hidden;
 .drawer-stores-header{
 display:flex;
 align-items:center;
+justify-content:space-between;
 padding:14px 16px 8px;
 border-bottom:1px solid rgba(255,255,255,0.08);
+cursor:pointer;
+list-style:none;
+}
+.drawer-stores-header::-webkit-details-marker{display:none;}
+.drawer-stores-arrow{
+color:rgba(255,255,255,0.5);
+font-size:14px;
+transition:transform 0.2s;
+}
+.drawer-stores-section[open] .drawer-stores-arrow{
+transform:rotate(180deg);
 }
 
 .drawer-stores-title{
@@ -561,7 +560,7 @@ transition:color 0.2s ease;
 position:sticky;
 bottom:0;
 margin-top:16px;
-padding:16px;
+padding:16px 16px 14px;
 background:var(--dark);
 border-top:1px solid rgba(255,255,255,0.08);
 backdrop-filter:blur(8px);
@@ -661,6 +660,8 @@ closeDrawer();
 });
 })();
 </script>
+
+</div>
 
 </div>
 </header>
@@ -1066,14 +1067,43 @@ max-height:68px;
 max-width:min(200px, calc(100vw - 112px));
 filter:brightness(0) invert(1);
 }
+.hdr-actions{display:flex;align-items:center;gap:12px;flex-shrink:0;}
+.hdr-book{
+height:42px;
+border-radius:12px;
+border:1px solid rgba(201,168,76,0.55);
+background:var(--gold);
+color:var(--dark);
+display:inline-flex;
+align-items:center;
+justify-content:center;
+gap:8px;
+padding:0 16px;
+font-family:'Jost',sans-serif;
+font-size:11px;
+line-height:1;
+letter-spacing:1px;
+text-transform:uppercase;
+font-weight:800;
+cursor:pointer;
+white-space:nowrap;
+transition:transform 0.2s,box-shadow 0.2s,opacity 0.2s;
+}
+.hdr-book svg{width:16px;height:16px;fill:currentColor;flex-shrink:0;}
+.hdr-book:hover{transform:translateY(-1px);box-shadow:0 10px 26px rgba(201,168,76,0.22);}
 @media(max-width:768px){
 #site-header, .hdr-inner{height:58px;}
 .hdr-inner{padding:0 16px;}
 .hdr-logo img{height:48px !important; max-height:48px; max-width:calc(100vw - 88px);}
+.hdr-actions{gap:8px;}
+.hdr-book{height:36px;padding:0 11px;font-size:10px;border-radius:10px;}
+.hdr-book span{display:none;}
 }
 @media(max-width:480px){
 .hdr-inner{padding:0 12px;}
 .hdr-logo img{max-width:calc(100vw - 76px);}
+.hdr-actions{gap:6px;}
+.hdr-book{width:36px;padding:0;}
 }
 
 /* Hamburger (new look) */
