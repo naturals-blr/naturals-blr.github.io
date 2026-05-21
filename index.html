@@ -4413,36 +4413,22 @@ var FALLBACK='https://images.unsplash.com/photo-1522337360788-8b13dee7a37e?w=180
 
 function resolveImg(slug, fallbackSlug, el, isSource){
 var extIdx=0, useFallback=false, fallbackIdx=0;
-
-function setSrc(url){
-if(isSource){ el.srcset=url; } else { el.src=url; }
-}
-
+function setSrc(url){ if(isSource){ el.srcset=url; } else { el.src=url; } }
 function tryNext(){
+var url;
 if(!useFallback){
-if(extIdx<EXT.length){
-setSrc(HERO_BASE+slug+EXT[extIdx]);
-extIdx++;
-} else if(fallbackSlug){
-useFallback=true;
-extIdx=0;
-tryNext();
+if(extIdx<EXT.length){ url=HERO_BASE+slug+EXT[extIdx]; extIdx++; }
+else if(fallbackSlug){ useFallback=true; extIdx=0; tryNext(); return; }
+else { setSrc(FALLBACK); return; }
 } else {
-setSrc(FALLBACK);
+if(fallbackIdx<EXT.length){ url=HERO_BASE+fallbackSlug+EXT[fallbackIdx]; fallbackIdx++; }
+else { setSrc(FALLBACK); return; }
 }
-} else {
-if(fallbackIdx<EXT.length){
-setSrc(HERO_BASE+fallbackSlug+EXT[fallbackIdx]);
-fallbackIdx++;
-} else {
-setSrc(FALLBACK);
-}
-}
-}
-
 var probe=new Image();
-probe.onload=function(){ setSrc(probe.src); };
+probe.onload=function(){ setSrc(url); };
 probe.onerror=function(){ tryNext(); };
+probe.src=url;
+}
 tryNext();
 }
 
