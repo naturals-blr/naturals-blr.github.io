@@ -209,7 +209,9 @@ a{text-decoration:none;color:inherit;}
 /* HERO */
 .hero{height:100vh;min-height:700px;position:relative;display:flex;align-items:center;justify-content:center;overflow:hidden;}
 .hero-bg{position:absolute;inset:0;}
-.hero-bg picture,.hero-bg img{width:100%;height:100%;object-fit:cover;}
+.hero-slide{position:absolute;inset:0;opacity:0;transition:opacity 2s ease-in-out;}
+.hero-slide.active{opacity:1;}
+.hero-slide picture,.hero-slide img{width:100%;height:100%;object-fit:cover;}
 .hero-ov{position:absolute;inset:0;background:linear-gradient(135deg,var(--hero-tint) 0%,var(--hero-tint2) 60%,rgba(0,0,0,0.1) 100%);}
 .hero-inner{position:relative;z-index:2;text-align:center;padding:0 24px;max-width:800px;}
 .hero-tag{display:inline-flex;align-items:center;gap:12px;font-size:9px;letter-spacing:5px;text-transform:uppercase;color:var(--gold);font-weight:600;margin-bottom:24px;}
@@ -2057,14 +2059,18 @@ body{padding-top:58px;}
 </style>
 <section class="hero" aria-label="Hero">
 <div class="hero-bg">
+<div class="hero-slide active">
 <picture>
 <source media="(max-width: 768px)" data-hero-img="m-home-01">
-<img data-hero-img="home-01"
-alt="Naturals Salon & Spa Bangalore — premium beauty services"
-width="1800" height="1200"
-loading="eager"
-fetchpriority="high">
+<img data-hero-img="home-01" alt="Naturals Salon & Spa Bangalore — premium beauty services" loading="eager" fetchpriority="high">
 </picture>
+</div>
+<div class="hero-slide">
+<picture>
+<source media="(max-width: 768px)" data-hero-img="m-home-02">
+<img data-hero-img="home-02" alt="Naturals Salon & Spa Bangalore — expert styling" loading="lazy">
+</picture>
+</div>
 </div>
 <div class="hero-ov" aria-hidden="true"></div>
 <div class="hero-inner">
@@ -2080,6 +2086,19 @@ Choose Store</button>
 </div>
 </div>
 </section>
+
+<script>
+(function(){
+var slides = document.querySelectorAll('.hero-slide');
+if(slides.length <= 1) return;
+var current = 0;
+setInterval(function(){
+slides[current].classList.remove('active');
+current = (current + 1) % slides.length;
+slides[current].classList.add('active');
+}, 6000);
+})();
+</script>
 
 <section class="stores-sec section" id="our-stores" aria-label="Our store locations">
 <div class="sec-hdr reveal">
@@ -4427,18 +4446,12 @@ probe.onerror=function(){ tryNext(); };
 tryNext();
 }
 
-var desktopImg=document.querySelector('.hero-bg img[data-hero-img]');
-var mobileSrc=document.querySelector('.hero-bg source[data-hero-img]');
-
-if(desktopImg){
-var dSlug=desktopImg.getAttribute('data-hero-img');
-resolveImg(dSlug, null, desktopImg, false);
-}
-if(mobileSrc && desktopImg){
-var mSlug=mobileSrc.getAttribute('data-hero-img');
-var dSlug=desktopImg.getAttribute('data-hero-img');
-resolveImg(mSlug, dSlug, mobileSrc, true);
-}
+document.querySelectorAll('.hero-slide picture').forEach(function(pic){
+var desktopImg=pic.querySelector('img[data-hero-img]');
+var mobileSrc=pic.querySelector('source[data-hero-img]');
+if(desktopImg) resolveImg(desktopImg.getAttribute('data-hero-img'), null, desktopImg, false);
+if(mobileSrc && desktopImg) resolveImg(mobileSrc.getAttribute('data-hero-img'), desktopImg.getAttribute('data-hero-img'), mobileSrc, true);
+});
 })();
 </script>
 </body>
