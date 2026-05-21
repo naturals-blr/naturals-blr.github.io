@@ -209,7 +209,7 @@ a{text-decoration:none;color:inherit;}
 /* HERO */
 .hero{height:100vh;min-height:700px;position:relative;display:flex;align-items:center;justify-content:center;overflow:hidden;}
 .hero-bg{position:absolute;inset:0;}
-.hero-bg img{height:100%;object-fit:cover;}
+.hero-bg picture,.hero-bg img{width:100%;height:100%;object-fit:cover;}
 .hero-ov{position:absolute;inset:0;background:linear-gradient(135deg,var(--hero-tint) 0%,var(--hero-tint2) 60%,rgba(0,0,0,0.1) 100%);}
 .hero-inner{position:relative;z-index:2;text-align:center;padding:0 24px;max-width:800px;}
 .hero-tag{display:inline-flex;align-items:center;gap:12px;font-size:9px;letter-spacing:5px;text-transform:uppercase;color:var(--gold);font-weight:600;margin-bottom:24px;}
@@ -2057,11 +2057,15 @@ body{padding-top:58px;}
 </style>
 <section class="hero" aria-label="Hero">
 <div class="hero-bg">
+<picture>
+<source media="(max-width: 768px)" srcset="/images/heroes/m-home-01.png"
+onerror="this.srcset='/images/heroes/m-home-01.jpg'">
 <img src="/images/heroes/home-01.png" alt="Naturals Salon & Spa Bangalore — premium beauty services"
 width="1800" height="1200"
 onerror="this.src='https://images.unsplash.com/photo-1522337360788-8b13dee7a37e?w=1800&q=85'"
 loading="eager"
 fetchpriority="high">
+</picture>
 </div>
 <div class="hero-ov" aria-hidden="true"></div>
 <div class="hero-inner">
@@ -2120,13 +2124,15 @@ Book</a>
 </div>
 </div>
 <div class="st-map">
+<a href="https://g.page/Naturals_JPNagar5thPhase/" target="_blank" rel="noopener" aria-label="Open JP Nagar 5th Phase in Google Maps" style="position: relative; display: block;">
 <iframe
 loading="lazy"
 referrerpolicy="no-referrer-when-downgrade"
 title="Map for JP Nagar 5th Phase"
-src="https://www.google.com/maps?q=place_id:ChIJD_AjPBEVrjsRyrGhTRo9qvw&output=embed">
+src="https://www.google.com/maps?q=place_id:ChIJD_AjPBEVrjsRyrGhTRo9qvw&output=embed"
+style="width: 100%; height: 200px; border: none;">
 </iframe>
-<a class="st-map-link" href="https://g.page/Naturals_JPNagar5thPhase/" target="_blank" rel="noopener" aria-label="Open JP Nagar 5th Phase in Google Maps">Open map</a>
+</a>
 </div>
 <div class="st-hours">
 <span class="st-hours-title">Hours</span>
@@ -2188,13 +2194,15 @@ Book</a>
 </div>
 </div>
 <div class="st-map">
+<a href="https://maps.app.goo.gl/dPi8bNfB4USdgvvu8" target="_blank" rel="noopener" aria-label="Open Nagavara in Google Maps" style="position: relative; display: block;">
 <iframe
 loading="lazy"
 referrerpolicy="no-referrer-when-downgrade"
 title="Map for Nagavara"
-src="https://www.google.com/maps?q=place_id:ChIJo_js4GgXrjsR3LgZhMNOPz4&output=embed">
+src="https://www.google.com/maps?q=place_id:ChIJo_js4GgXrjsR3LgZhMNOPz4&output=embed"
+style="width: 100%; height: 200px; border: none;">
 </iframe>
-<a class="st-map-link" href="https://maps.app.goo.gl/dPi8bNfB4USdgvvu8" target="_blank" rel="noopener" aria-label="Open Nagavara in Google Maps">Open map</a>
+</a>
 </div>
 <div class="st-hours">
 <span class="st-hours-title">Hours</span>
@@ -2256,13 +2264,15 @@ Book</a>
 </div>
 </div>
 <div class="st-map">
+<a href="https://maps.google.com/?q=Naturals+Salon+Devasandra" target="_blank" rel="noopener" aria-label="Open Devasandra in Google Maps" style="position: relative; display: block;">
 <iframe
 loading="lazy"
 referrerpolicy="no-referrer-when-downgrade"
 title="Map for Devasandra"
-src="https://www.google.com/maps?q=place_id:ChIJoWUOlAARrjsREnWUrR3DWfk&output=embed">
+src="https://www.google.com/maps?q=place_id:ChIJoWUOlAARrjsREnWUrR3DWfk&output=embed"
+style="width: 100%; height: 200px; border: none;">
 </iframe>
-<a class="st-map-link" href="https://maps.google.com/?q=Naturals+Salon+Devasandra" target="_blank" rel="noopener" aria-label="Open Devasandra in Google Maps">Open map</a>
+</a>
 </div>
 <div class="st-hours">
 <span class="st-hours-title">Hours</span>
@@ -2324,13 +2334,15 @@ Book</a>
 </div>
 </div>
 <div class="st-map">
+<a href="https://maps.google.com/?q=Naturals+Salon+Frazer+Town" target="_blank" rel="noopener" aria-label="Open Frazer Town in Google Maps" style="position: relative; display: block;">
 <iframe
 loading="lazy"
 referrerpolicy="no-referrer-when-downgrade"
 title="Map for Frazer Town"
-src="https://www.google.com/maps?q=place_id:ChIJcfViGvEWrjsRUuIzB28viSc&output=embed">
+src="https://www.google.com/maps?q=place_id:ChIJcfViGvEWrjsRUuIzB28viSc&output=embed"
+style="width: 100%; height: 200px; border: none;">
 </iframe>
-<a class="st-map-link" href="https://maps.google.com/?q=Naturals+Salon+Frazer+Town" target="_blank" rel="noopener" aria-label="Open Frazer Town in Google Maps">Open map</a>
+</a>
 </div>
 <div class="st-hours">
 <span class="st-hours-title">Hours</span>
@@ -2392,13 +2404,15 @@ Book</a>
 </div>
 </div>
 <div class="st-map">
+<a href="https://maps.google.com/?q=Naturals+Salon+Hennur" target="_blank" rel="noopener" aria-label="Open Hennur in Google Maps" style="position: relative; display: block;">
 <iframe
 loading="lazy"
 referrerpolicy="no-referrer-when-downgrade"
 title="Map for Hennur"
-src="https://www.google.com/maps?q=place_id:ChIJb03gT58XrjsRv0Rytrv60BM&output=embed">
+src="https://www.google.com/maps?q=place_id:ChIJb03gT58XrjsRv0Rytrv60BM&output=embed"
+style="width: 100%; height: 200px; border: none;">
 </iframe>
-<a class="st-map-link" href="https://maps.google.com/?q=Naturals+Salon+Hennur" target="_blank" rel="noopener" aria-label="Open Hennur in Google Maps">Open map</a>
+</a>
 </div>
 <div class="st-hours">
 <span class="st-hours-title">Hours</span>
