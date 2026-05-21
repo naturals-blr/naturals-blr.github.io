@@ -1141,7 +1141,7 @@ style="display:none;">
 
 <div class="spm-cards" id="spm-cards">
 <div class="spm-card"
-onclick="selectStore('N78','JP Nagar 5th Phase','https://naturals-salon-jpnagar5phase.setmore.com/','+918792642299','+918792642299','https://www.google.com/maps?q=12.9055,77.5945&z=17&query_place_id=ChIJD_AjPBEVrjsRyrGhTRo9qvw','https://naturals-blr.github.io/stores/bangalore/jp-nagar-5th-phase/')"
+onclick="selectStore('N78','JP Nagar 5th Phase','https://naturals-salon-jpnagar5phase.setmore.com/','+918792642299','+918792642299','https://g.page/Naturals_JPNagar5thPhase/','https://naturals-blr.github.io/stores/bangalore/jp-nagar-5th-phase/')"
 role="button" tabindex="0">
 <div class="spm-card-num">1</div>
 <div class="spm-card-info">
@@ -1152,7 +1152,7 @@ role="button" tabindex="0">
 <div class="spm-card-cta">Select &#8594;</div>
 </div>
 <div class="spm-card"
-onclick="selectStore('N45','Nagavara','https://naturals-salon-elementsmall.setmore.com/','+919901000017','+919901000017','https://www.google.com/maps?q=13.04079,77.61973&z=17&query_place_id=ChIJo_js4GgXrjsR3LgZhMNOPz4','https://naturals-blr.github.io/stores/bangalore/nagavara/')"
+onclick="selectStore('N45','Nagavara','https://naturals-salon-elementsmall.setmore.com/','+919901000017','+919901000017','https://maps.app.goo.gl/dPi8bNfB4USdgvvu8','https://naturals-blr.github.io/stores/bangalore/nagavara/')"
 role="button" tabindex="0">
 <div class="spm-card-num">2</div>
 <div class="spm-card-info">
@@ -1163,7 +1163,7 @@ role="button" tabindex="0">
 <div class="spm-card-cta">Select &#8594;</div>
 </div>
 <div class="spm-card"
-onclick="selectStore('N36','Devasandra','https://naturals-salon-devasandra.setmore.com/','+917259490009','+917259490009','https://www.google.com/maps?q=13.005,77.698&z=17&query_place_id=ChIJoWUOlAARrjsREnWUrR3DWfk','https://naturals-blr.github.io/stores/bangalore/devasandra/')"
+onclick="selectStore('N36','Devasandra','https://naturals-salon-devasandra.setmore.com/','+917259490009','+917259490009','https://maps.google.com/?q=Naturals+Salon+Devasandra','https://naturals-blr.github.io/stores/bangalore/devasandra/')"
 role="button" tabindex="0">
 <div class="spm-card-num">3</div>
 <div class="spm-card-info">
@@ -1174,7 +1174,7 @@ role="button" tabindex="0">
 <div class="spm-card-cta">Select &#8594;</div>
 </div>
 <div class="spm-card"
-onclick="selectStore('N05','Frazer Town','https://naturals-salon-frazertown.setmore.com/','+919606333017','+919606333017','https://www.google.com/maps?q=12.99,77.605&z=17&query_place_id=ChIJcfViGvEWrjsRUuIzB28viSc','https://naturals-blr.github.io/stores/bangalore/frazer-town/')"
+onclick="selectStore('N05','Frazer Town','https://naturals-salon-frazertown.setmore.com/','+919606333017','+919606333017','https://maps.google.com/?q=Naturals+Salon+Frazer+Town','https://naturals-blr.github.io/stores/bangalore/frazer-town/')"
 role="button" tabindex="0">
 <div class="spm-card-num">4</div>
 <div class="spm-card-info">
@@ -1185,7 +1185,7 @@ role="button" tabindex="0">
 <div class="spm-card-cta">Select &#8594;</div>
 </div>
 <div class="spm-card"
-onclick="selectStore('N43','Hennur','https://naturals-salon-hennur.setmore.com/','+919606900069','+919606900069','https://www.google.com/maps?q=13.042,77.648&z=17&query_place_id=ChIJb03gT58XrjsRv0Rytrv60BM','https://naturals-blr.github.io/stores/bangalore/hennur/')"
+onclick="selectStore('N43','Hennur','https://naturals-salon-hennur.setmore.com/','+919606900069','+919606900069','https://maps.google.com/?q=Naturals+Salon+Hennur','https://naturals-blr.github.io/stores/bangalore/hennur/')"
 role="button" tabindex="0">
 <div class="spm-card-num">5</div>
 <div class="spm-card-info">
@@ -1598,21 +1598,47 @@ overflow-x:hidden;
 body{padding-top:58px;}
 }
 </style>
-<div class="page-hero">
-<div class="page-hero-bg">
-<img class="hero-resolver-img" 
-data-slug="offers" 
-data-fallback="/images/heroes/offers.jpg"
-alt="Exclusive Elite Salon Offers"
-loading="eager">
+
+<style>
+.offers-hero{position:relative;overflow:hidden;height:70vh;min-height:500px;display:flex;align-items:flex-end;}
+.offers-hero-bg{position:absolute;inset:0;}
+.offers-hero-slide{position:absolute;inset:0;opacity:0;transition:opacity 1.5s ease-in-out;}
+.offers-hero-slide.active{opacity:1;}
+.offers-hero-slide img{width:100%;height:100%;object-fit:cover;filter:saturate(1.05);}
+.offers-hero-ov{position:absolute;inset:0;background:linear-gradient(135deg,rgba(26,5,51,0.7) 0%,rgba(13,3,26,0.5) 60%,rgba(0,0,0,0.12) 100%);}
+.offers-hero-inner{position:relative;z-index:2;padding:0 60px 60px;max-width:800px;}
+.offers-hero-label{font-size:11px;letter-spacing:2px;text-transform:uppercase;color:var(--gold);margin-bottom:12px;}
+.offers-hero-inner h1{font-family:'Cormorant Garamond',serif;font-size:clamp(36px,5vw,56px);font-weight:300;color:#fff;line-height:1.15;margin-bottom:12px;}
+.offers-hero-inner p{font-size:14px;color:rgba(255,255,255,0.75);line-height:1.6;}
+@media(max-width:768px){.offers-hero{min-height:400px;}.offers-hero-inner{padding:0 24px 40px;}}
+</style>
+
+<section class="offers-hero" aria-label="Offers hero">
+<div class="offers-hero-bg">
+<div class="offers-hero-slide active"><img src="/images/heroes/offers-01.jpg" alt="Naturals Salon offers" loading="eager" fetchpriority="high"></div>
+<div class="offers-hero-slide"><img src="/images/heroes/offers-02.jpg" alt="Naturals Salon deals" loading="lazy"></div>
+<div class="offers-hero-slide"><img src="/images/heroes/offers-03.jpg" alt="Naturals Salon promotions" loading="lazy"></div>
 </div>
-<div class="page-hero-ov"></div>
-<div class="page-hero-inner">
-<div class="lbl">Uncompromising Luxury. Exceptional Value.</div>
+<div class="offers-hero-ov" aria-hidden="true"></div>
+<div class="offers-hero-inner">
+<div class="offers-hero-label">Uncompromising Luxury. Exceptional Value.</div>
 <h1>Exclusive Elite Salon Offers</h1>
 <p>Unlock exclusive beauty deals at Bangalore's premier salons. From JP Nagar to Hennur, explore offers on hair, facials, & bridal packages at our 5 elite locations.</p>
 </div>
-</div>
+</section>
+
+<script>
+(function(){
+var slides = document.querySelectorAll('.offers-hero-slide');
+if(slides.length <= 1) return;
+var current = 0;
+setInterval(function(){
+slides[current].classList.remove('active');
+current = (current + 1) % slides.length;
+slides[current].classList.add('active');
+}, 5000);
+})();
+</script>
 
 <style>
 .store-offers-section{padding:40px 60px;background:var(--cream);}
@@ -2479,7 +2505,7 @@ style="display:none;">
 
 <div class="spm-cards" id="spm-cards">
 <div class="spm-card"
-onclick="selectStore('N78','JP Nagar 5th Phase','https://naturals-salon-jpnagar5phase.setmore.com/','+918792642299','+918792642299','https://www.google.com/maps?q=12.9055,77.5945&z=17&query_place_id=ChIJD_AjPBEVrjsRyrGhTRo9qvw','/stores/bangalore/jp-nagar-5th-phase/')"
+onclick="selectStore('N78','JP Nagar 5th Phase','https://naturals-salon-jpnagar5phase.setmore.com/','+918792642299','+918792642299','https://g.page/Naturals_JPNagar5thPhase/','/stores/bangalore/jp-nagar-5th-phase/')"
 role="button" tabindex="0">
 <div class="spm-card-num">1</div>
 <div class="spm-card-info">
@@ -2490,7 +2516,7 @@ role="button" tabindex="0">
 <div class="spm-card-cta">Select &#8594;</div>
 </div>
 <div class="spm-card"
-onclick="selectStore('N45','Nagavara','https://naturals-salon-elementsmall.setmore.com/','+919901000017','+919901000017','https://www.google.com/maps?q=13.04079,77.61973&z=17&query_place_id=ChIJo_js4GgXrjsR3LgZhMNOPz4','/stores/bangalore/nagavara/')"
+onclick="selectStore('N45','Nagavara','https://naturals-salon-elementsmall.setmore.com/','+919901000017','+919901000017','https://maps.app.goo.gl/dPi8bNfB4USdgvvu8','/stores/bangalore/nagavara/')"
 role="button" tabindex="0">
 <div class="spm-card-num">2</div>
 <div class="spm-card-info">
@@ -2501,7 +2527,7 @@ role="button" tabindex="0">
 <div class="spm-card-cta">Select &#8594;</div>
 </div>
 <div class="spm-card"
-onclick="selectStore('N36','Devasandra','https://naturals-salon-devasandra.setmore.com/','+917259490009','+917259490009','https://www.google.com/maps?q=13.005,77.698&z=17&query_place_id=ChIJoWUOlAARrjsREnWUrR3DWfk','/stores/bangalore/devasandra/')"
+onclick="selectStore('N36','Devasandra','https://naturals-salon-devasandra.setmore.com/','+917259490009','+917259490009','https://maps.google.com/?q=Naturals+Salon+Devasandra','/stores/bangalore/devasandra/')"
 role="button" tabindex="0">
 <div class="spm-card-num">3</div>
 <div class="spm-card-info">
@@ -2512,7 +2538,7 @@ role="button" tabindex="0">
 <div class="spm-card-cta">Select &#8594;</div>
 </div>
 <div class="spm-card"
-onclick="selectStore('N05','Frazer Town','https://naturals-salon-frazertown.setmore.com/','+919606333017','+919606333017','https://www.google.com/maps?q=12.99,77.605&z=17&query_place_id=ChIJcfViGvEWrjsRUuIzB28viSc','/stores/bangalore/frazer-town/')"
+onclick="selectStore('N05','Frazer Town','https://naturals-salon-frazertown.setmore.com/','+919606333017','+919606333017','https://maps.google.com/?q=Naturals+Salon+Frazer+Town','/stores/bangalore/frazer-town/')"
 role="button" tabindex="0">
 <div class="spm-card-num">4</div>
 <div class="spm-card-info">
@@ -2523,7 +2549,7 @@ role="button" tabindex="0">
 <div class="spm-card-cta">Select &#8594;</div>
 </div>
 <div class="spm-card"
-onclick="selectStore('N43','Hennur','https://naturals-salon-hennur.setmore.com/','+919606900069','+919606900069','https://www.google.com/maps?q=13.042,77.648&z=17&query_place_id=ChIJb03gT58XrjsRv0Rytrv60BM','/stores/bangalore/hennur/')"
+onclick="selectStore('N43','Hennur','https://naturals-salon-hennur.setmore.com/','+919606900069','+919606900069','https://maps.google.com/?q=Naturals+Salon+Hennur','/stores/bangalore/hennur/')"
 role="button" tabindex="0">
 <div class="spm-card-num">5</div>
 <div class="spm-card-info">
