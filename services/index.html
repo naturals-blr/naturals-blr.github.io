@@ -1024,6 +1024,7 @@ color: #fff;
 
 /* Hero-to-Filter Gap Removal */
 .page-hero{margin-bottom:0 !important;padding-bottom:0 !important;}
+.page-hero-bg picture,.page-hero-bg img{width:100%;height:100%;object-fit:cover;}
 .filters-sec{margin-top:0 !important;padding-top:0 !important;margin-bottom:0 !important;}
 .services-main{padding-top:0 !important;margin-top:0;}
 
@@ -2653,11 +2654,10 @@ body{padding-top:58px;}
 </style>
 <div class="page-hero">
 <div class="page-hero-bg">
-<img class="hero-resolver-img" 
-data-slug="services" 
-data-fallback="/images/heroes/services-01.jpg"
-alt="Our Curated Elite Service Menu"
-loading="eager">
+<picture>
+<source media="(max-width: 768px)" data-hero-img="m-services">
+<img data-hero-img="services" alt="Services & Pricing" loading="eager" fetchpriority="high">
+</picture>
 </div>
 <div class="page-hero-ov"></div>
 <div class="page-hero-inner">
@@ -3878,6 +3878,38 @@ allGenderBtn.classList.add('active');
 populateCategoryDropdown();
 renderServices();
 });
+})();
+</script>
+
+<script>
+(function(){
+var EXT=['.png','.jpg','.jpeg','.webp'];
+var HERO_BASE='/images/heroes/';
+var FALLBACK='https://images.unsplash.com/photo-1560066984-138dadb4c035?w=1800&q=85';
+
+function resolveImg(slug, fallbackSlug, el, isSource){
+var extIdx=0, useFallback=false, fallbackIdx=0;
+function setSrc(url){ if(isSource){ el.srcset=url; } else { el.src=url; } }
+function tryNext(){
+if(!useFallback){
+if(extIdx<EXT.length){ setSrc(HERO_BASE+slug+EXT[extIdx]); extIdx++; }
+else if(fallbackSlug){ useFallback=true; extIdx=0; tryNext(); }
+else { setSrc(FALLBACK); }
+} else {
+if(fallbackIdx<EXT.length){ setSrc(HERO_BASE+fallbackSlug+EXT[fallbackIdx]); fallbackIdx++; }
+else { setSrc(FALLBACK); }
+}
+}
+var probe=new Image();
+probe.onload=function(){ setSrc(probe.src); };
+probe.onerror=function(){ tryNext(); };
+tryNext();
+}
+
+var desktopImg=document.querySelector('.page-hero-bg img[data-hero-img]');
+var mobileSrc=document.querySelector('.page-hero-bg source[data-hero-img]');
+if(desktopImg) resolveImg(desktopImg.getAttribute('data-hero-img'), null, desktopImg, false);
+if(mobileSrc && desktopImg) resolveImg(mobileSrc.getAttribute('data-hero-img'), desktopImg.getAttribute('data-hero-img'), mobileSrc, true);
 })();
 </script>
 

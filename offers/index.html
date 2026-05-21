@@ -1604,7 +1604,7 @@ body{padding-top:58px;}
 .offers-hero-bg{position:absolute;inset:0;}
 .offers-hero-slide{position:absolute;inset:0;opacity:0;transition:opacity 1.5s ease-in-out;}
 .offers-hero-slide.active{opacity:1;}
-.offers-hero-slide img{width:100%;height:100%;object-fit:cover;filter:saturate(1.05);}
+.offers-hero-slide picture,.offers-hero-slide img{width:100%;height:100%;object-fit:cover;}
 .offers-hero-ov{position:absolute;inset:0;background:linear-gradient(135deg,rgba(26,5,51,0.7) 0%,rgba(13,3,26,0.5) 60%,rgba(0,0,0,0.12) 100%);}
 .offers-hero-inner{position:relative;z-index:2;padding:0 60px 60px;max-width:800px;}
 .offers-hero-label{font-size:11px;letter-spacing:2px;text-transform:uppercase;color:var(--gold);margin-bottom:12px;}
@@ -1615,9 +1615,24 @@ body{padding-top:58px;}
 
 <section class="offers-hero" aria-label="Offers hero">
 <div class="offers-hero-bg">
-<div class="offers-hero-slide active"><img src="/images/heroes/offers-01.jpg" alt="Naturals Salon offers" loading="eager" fetchpriority="high"></div>
-<div class="offers-hero-slide"><img src="/images/heroes/offers-02.jpg" alt="Naturals Salon deals" loading="lazy"></div>
-<div class="offers-hero-slide"><img src="/images/heroes/offers-03.jpg" alt="Naturals Salon promotions" loading="lazy"></div>
+<div class="offers-hero-slide active">
+<picture>
+<source media="(max-width: 768px)" data-hero-img="m-offers-01">
+<img data-hero-img="offers-01" alt="Naturals Salon offers" loading="eager" fetchpriority="high">
+</picture>
+</div>
+<div class="offers-hero-slide">
+<picture>
+<source media="(max-width: 768px)" data-hero-img="m-offers-02">
+<img data-hero-img="offers-02" alt="Naturals Salon deals" loading="lazy">
+</picture>
+</div>
+<div class="offers-hero-slide">
+<picture>
+<source media="(max-width: 768px)" data-hero-img="m-offers-03">
+<img data-hero-img="offers-03" alt="Naturals Salon promotions" loading="lazy">
+</picture>
+</div>
 </div>
 <div class="offers-hero-ov" aria-hidden="true"></div>
 <div class="offers-hero-inner">
@@ -1637,6 +1652,40 @@ slides[current].classList.remove('active');
 current = (current + 1) % slides.length;
 slides[current].classList.add('active');
 }, 5000);
+})();
+</script>
+
+<script>
+(function(){
+var EXT=['.png','.jpg','.jpeg','.webp'];
+var HERO_BASE='/images/heroes/';
+var FALLBACK='https://images.unsplash.com/photo-1522337360788-8b13dee7a37e?w=1800&q=85';
+
+function resolveImg(slug, fallbackSlug, el, isSource){
+var extIdx=0, useFallback=false, fallbackIdx=0;
+function setSrc(url){ if(isSource){ el.srcset=url; } else { el.src=url; } }
+function tryNext(){
+if(!useFallback){
+if(extIdx<EXT.length){ setSrc(HERO_BASE+slug+EXT[extIdx]); extIdx++; }
+else if(fallbackSlug){ useFallback=true; extIdx=0; tryNext(); }
+else { setSrc(FALLBACK); }
+} else {
+if(fallbackIdx<EXT.length){ setSrc(HERO_BASE+fallbackSlug+EXT[fallbackIdx]); fallbackIdx++; }
+else { setSrc(FALLBACK); }
+}
+}
+var probe=new Image();
+probe.onload=function(){ setSrc(probe.src); };
+probe.onerror=function(){ tryNext(); };
+tryNext();
+}
+
+document.querySelectorAll('.offers-hero-bg picture').forEach(function(pic){
+var desktopImg=pic.querySelector('img[data-hero-img]');
+var mobileSrc=pic.querySelector('source[data-hero-img]');
+if(desktopImg) resolveImg(desktopImg.getAttribute('data-hero-img'), null, desktopImg, false);
+if(mobileSrc && desktopImg) resolveImg(mobileSrc.getAttribute('data-hero-img'), desktopImg.getAttribute('data-hero-img'), mobileSrc, true);
+});
 })();
 </script>
 
@@ -1666,7 +1715,7 @@ slides[current].classList.add('active');
 <div class="store-tile-name">JP Nagar 5th Phase</div>
 <div class="store-tile-landmarks">Bangalore · 1st Floor, Anand Onyx, No 305, 15th Cross Rd, near Outer Ring Road, 5th Phase...</div>
 <div class="offer-details">
-6 offers available
+7 offers available
 </div>
 <a href="https://naturals-blr.github.io/stores/bangalore/jp-nagar-5th-phase/offers/" class="store-tile-btn">View JP Nagar 5th Phase Offers</a>
 </article>
@@ -1690,7 +1739,7 @@ slides[current].classList.add('active');
 <div class="store-tile-name">Frazer Town</div>
 <div class="store-tile-landmarks">Bangalore · 1st floor, No.94, Mosque Rd, above Poorvika Mobile Store, Cleveland Town, Fra...</div>
 <div class="offer-details">
-6 offers available
+7 offers available
 </div>
 <a href="https://naturals-blr.github.io/stores/bangalore/frazer-town/offers/" class="store-tile-btn">View Frazer Town Offers</a>
 </article>
@@ -1698,7 +1747,7 @@ slides[current].classList.add('active');
 <div class="store-tile-name">Hennur</div>
 <div class="store-tile-landmarks">Bangalore · 1st Floor, No 40/A, 40/C, Main Road, above SBI Bank, Hennur Gardens, Bangalor...</div>
 <div class="offer-details">
-6 offers available
+7 offers available
 </div>
 <a href="https://naturals-blr.github.io/stores/bangalore/hennur/offers/" class="store-tile-btn">View Hennur Offers</a>
 </article>
@@ -1714,19 +1763,19 @@ slides[current].classList.add('active');
 <p class="campaign-hub-copy">Browse current offers, announcements, updates, and past campaigns across our Bangalore stores.</p>
 </div>
 <div class="results-bar" style="padding:0;background:transparent;border:0;">
-<div data-campaign-results>14 campaigns</div>
+<div data-campaign-results>16 campaigns</div>
 </div>
 </div>
 
 <div class="campaign-tabs" role="tablist" aria-label="Campaign types">
 <button class="campaign-tab is-active" type="button" data-campaign-tab="offer">
-Offers <span class="campaign-count">6</span>
+Offers <span class="campaign-count">7</span>
 </button>
 <button class="campaign-tab" type="button" data-campaign-tab="all">
-All <span class="campaign-count">14</span>
+All <span class="campaign-count">16</span>
 </button>
 <button class="campaign-tab" type="button" data-campaign-tab="announcement">
-Announcement <span class="campaign-count">8</span>
+Announcement <span class="campaign-count">9</span>
 </button>
 <button class="campaign-tab" type="button" data-campaign-tab="past">
 Past <span class="campaign-count">5</span>
@@ -1928,6 +1977,74 @@ data-poster-date-prefix="Valid until">
 <button class="campaign-desc-toggle" type="button" aria-expanded="false" onclick="toggleCampaignDescription(this)">+ More</button>
 <div class="offer-footer">
 <span class="offer-valid">Valid until 31-May-2026</span>
+</div>
+</div>
+</article>
+<article class="offer-card campaign-panel-card" data-campaign-types="all offer">
+<div class="offer-media">
+<span class="ribbon urgent">Offer</span>
+<div class="campaign-img-fallback campaign-poster-fallback campaign-poster-offer is-visible"
+role="button"
+tabindex="0"
+aria-label="Open campaign details for Flat 25 Percent Off on Keratin Treatment"
+data-poster-title="Flat 25 Percent Off on Keratin Treatment"
+data-poster-label="Offer"
+data-poster-body="Get smooth, frizz free hair with our keratin treatment and enjoy flat 25 percent off."
+data-poster-date="30-Jun-2026"
+data-poster-date-prefix="Valid until">
+<div class="campaign-poster-frame">
+<div class="campaign-poster-kicker">Offer</div>
+<div class="campaign-poster-title">Flat 25 Percent Off on Keratin Treatment</div>
+<div class="campaign-poster-copy">Get smooth, frizz free hair with our keratin treatment and enjoy flat 25 percent off.</div>
+<div class="campaign-poster-date">Valid until 30-Jun-2026</div>
+</div>
+</div>
+</div>
+<div class="offer-body">
+<div class="offer-badge">Offer</div>
+<h3 class="offer-title">Flat 25 Percent Off on Keratin Treatment</h3>
+<p class="offer-details campaign-description">Get smooth, frizz free hair with our keratin treatment and enjoy flat 25 percent off.</p>
+<div class="offer-footer">
+<span class="offer-valid">Valid until 30-Jun-2026</span>
+</div>
+</div>
+</article>
+<article class="offer-card campaign-panel-card" data-campaign-types="all announcement">
+<div class="offer-media">
+<span class="ribbon urgent">Announcement</span>
+<div class="campaign-img-fallback campaign-poster-fallback campaign-poster-announcement is-visible"
+role="button"
+tabindex="0"
+aria-label="Open campaign details for Something Beautiful is Opening in Nagavara Today 🌿"
+data-poster-title="Something Beautiful is Opening in Nagavara Today 🌿"
+data-poster-label="Announcement"
+data-poster-body="A new chapter begins! ✨ We are open today in Nagavara to offer you a better, more luxurious experience. Follow our new journey at @Naturals.Salon.Nagavara and get ready for a 5-star transformation!
+
+📍 New Home: R.K. Tower, 1st Cross, Chanukya Layout.
+#ComingSoon #NaturalsNagavara #LuxuryAwaits"
+data-poster-date="30-May-2026"
+data-poster-date-prefix="Valid until">
+<div class="campaign-poster-frame">
+<div class="campaign-poster-kicker">Announcement</div>
+<div class="campaign-poster-title">Something Beautiful is Opening in Nagavara Today 🌿</div>
+<div class="campaign-poster-copy">A new chapter begins! ✨ We are open today in Nagavara to offer you a better, more luxurious experience. Follow our new journey at @Naturals.Salon.Nagavara and get ready for a 5-star transformation!
+
+📍 New Home: R.K. Tower, 1st Cross, Chanukya Layout.
+#ComingSoon #NaturalsNagavara #LuxuryAwaits</div>
+<div class="campaign-poster-date">Valid until 30-May-2026</div>
+</div>
+</div>
+</div>
+<div class="offer-body">
+<div class="offer-badge">Announcement</div>
+<h3 class="offer-title">Something Beautiful is Opening in Nagavara Today 🌿</h3>
+<p class="offer-details campaign-description">A new chapter begins! ✨ We are open today in Nagavara to offer you a better, more luxurious experience. Follow our new journey at @Naturals.Salon.Nagavara and get ready for a 5-star transformation!
+
+📍 New Home: R.K. Tower, 1st Cross, Chanukya Layout.
+#ComingSoon #NaturalsNagavara #LuxuryAwaits</p>
+<button class="campaign-desc-toggle" type="button" aria-expanded="false" onclick="toggleCampaignDescription(this)">+ More</button>
+<div class="offer-footer">
+<span class="offer-valid">Valid until 30-May-2026</span>
 </div>
 </div>
 </article>
