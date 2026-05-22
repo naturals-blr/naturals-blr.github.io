@@ -41,7 +41,7 @@ gtag('config', 'G-6H5YGVGG1Q');
 "description": "Exclusive Luxury Beauty Deals at Devasandra, Bangalore",
 "url": "https://naturals-blr.github.io/stores/bangalore/devasandra/offers/",
 "category": "Beauty and Grooming Promotions",
-"datePosted": "2026-05-22 06:13:39.754565T09:00:00+05:30",
+"datePosted": "2026-05-22 06:27:28.361301T09:00:00+05:30",
 "provider": {
 "@type": "HairSalon",
 "name": "Naturals Salon & Spa Devasandra",
@@ -318,6 +318,10 @@ footer{background:#080f0b;}
 .img-action-btn{width:36px;height:36px;border-radius:10px;background:rgba(255,255,255,0.95);border:1px solid rgba(0,0,0,0.10);cursor:pointer;display:flex;align-items:center;justify-content:center;transition:transform 0.2s,box-shadow 0.2s;}
 .img-action-btn:hover{transform:translateY(-2px);box-shadow:0 4px 12px rgba(0,0,0,0.15);}
 .img-action-btn svg{width:18px;height:18px;fill:var(--text);}
+
+@media(max-width:768px){
+.img-actions{opacity:1 !important;}
+}
 </style>
 
 <style>
@@ -1672,7 +1676,7 @@ Past <span class="campaign-count">2</span>
 
 <div id="offers-grid-all" class="offers-grid">
 <article class="offer-card campaign-panel-card" data-store-id="" data-store-name="devasandra" data-campaign-types="all offer">
-<div class="offer-media">
+<div class="offer-media img-container">
 <span class="ribbon urgent">Offer</span>
 <img src="https://naturals-blr.github.io/campaigns/offer/03_published/20260510_OFFER_Flat₹1000OffonHa.png"
 data-img-base="https://naturals-blr.github.io/campaigns/offer/03_published/20260510_OFFER_Flat₹1000OffonHa.png"
@@ -1693,6 +1697,14 @@ data-poster-date-prefix="Valid until">
 <div class="campaign-poster-date">Valid until 30-May-2026</div>
 </div>
 </div>
+<div class="img-actions">
+<button class="img-action-btn" onclick="downloadImage(this)" title="Download Image">
+<svg viewBox="0 0 24 24"><path d="M19 9h-4V3H9v6H5l7 7 7-7zM5 18v2h14v-2H5z"/></svg>
+</button>
+<button class="img-action-btn" onclick="shareContent(this)" title="Share Campaign">
+<svg viewBox="0 0 24 24"><path d="M18 16.08c-.76 0-1.44.3-1.96.77L8.91 12.7c.05-.23.09-.46.09-.7s-.04-.47-.09-.7l7.05-4.11c.54.5 1.25.81 2.04.81 1.66 0 3-1.34 3-3s-1.34-3-3 1.34 3 3c0 .24.04.47.09.7L8.04 9.81C7.5 9.31 6.79 9 6 9c-1.66 0-3 1.34 3 3s1.34 3 3 3c.79 0 1.5-.31 2.04-.81l7.12 4.16c-.05.21-.08.43-.08.65 0 1.61 1.31 2.92 2.92 1.61 0 2.92-1.31 2.92-2.92s-1.31-2.92-2.92-2.92z"/></svg>
+</button>
+</div>
 </div>
 <div class="offer-body">
 <div class="offer-badge">Offer</div>
@@ -1705,7 +1717,7 @@ data-poster-date-prefix="Valid until">
 </article>
 
 <article class="expired-card campaign-panel-card" data-campaign-types="past offer">
-<div class="expired-media">
+<div class="expired-media img-container">
 <span class="expired-ribbon">Past</span>
 <img src="/campaigns/offer/04_archived/20260428_OFFER_Flat20OffonHair.jpg"
 data-img-base="/campaigns/offer/04_archived/20260428_OFFER_Flat20OffonHair.jpg"
@@ -1726,6 +1738,14 @@ data-poster-date-prefix="Ended">
 <div class="campaign-poster-date">Ended 15-May-2026</div>
 </div>
 </div>
+<div class="img-actions">
+<button class="img-action-btn" onclick="downloadImage(this)" title="Download Image">
+<svg viewBox="0 0 24 24"><path d="M19 9h-4V3H9v6H5l7 7 7-7zM5 18v2h14v-2H5z"/></svg>
+</button>
+<button class="img-action-btn" onclick="shareContent(this)" title="Share Campaign">
+<svg viewBox="0 0 24 24"><path d="M18 16.08c-.76 0-1.44.3-1.96.77L8.91 12.7c.05-.23.09-.46.09-.7s-.04-.47-.09-.7l7.05-4.11c.54.5 1.25.81 2.04.81 1.66 0 3-1.34 3-3s-1.34-3-3 1.34 3 3c0 .24.04.47.09.7L8.04 9.81C7.5 9.31 6.79 9 6 9c-1.66 0-3 1.34 3 3s1.34 3 3 3c.79 0 1.5-.31 2.04-.81l7.12 4.16c-.05.21-.08.43-.08.65 0 1.61 1.31 2.92 2.92 1.61 0 2.92-1.31 2.92-2.92s-1.31-2.92-2.92-2.92z"/></svg>
+</button>
+</div>
 </div>
 <div class="expired-body">
 <div class="expired-title">Flat 20% Off on Hair Spa</div>
@@ -1735,7 +1755,7 @@ data-poster-date-prefix="Ended">
 </div>
 </article>
 <article class="expired-card campaign-panel-card" data-campaign-types="past offer">
-<div class="expired-media">
+<div class="expired-media img-container">
 <span class="expired-ribbon">Past</span>
 <img src="/campaigns/offer/04_archived/20260429_OFFER_GetGlowingSkin–2.jpg"
 data-img-base="/campaigns/offer/04_archived/20260429_OFFER_GetGlowingSkin–2.jpg"
@@ -1755,6 +1775,14 @@ data-poster-date-prefix="Ended">
 <div class="campaign-poster-copy">Rejuvenate your skin with our premium facial services and get 25% off. Book today.</div>
 <div class="campaign-poster-date">Ended 15-May-2026</div>
 </div>
+</div>
+<div class="img-actions">
+<button class="img-action-btn" onclick="downloadImage(this)" title="Download Image">
+<svg viewBox="0 0 24 24"><path d="M19 9h-4V3H9v6H5l7 7 7-7zM5 18v2h14v-2H5z"/></svg>
+</button>
+<button class="img-action-btn" onclick="shareContent(this)" title="Share Campaign">
+<svg viewBox="0 0 24 24"><path d="M18 16.08c-.76 0-1.44.3-1.96.77L8.91 12.7c.05-.23.09-.46.09-.7s-.04-.47-.09-.7l7.05-4.11c.54.5 1.25.81 2.04.81 1.66 0 3-1.34 3-3s-1.34-3-3 1.34 3 3c0 .24.04.47.09.7L8.04 9.81C7.5 9.31 6.79 9 6 9c-1.66 0-3 1.34 3 3s1.34 3 3 3c.79 0 1.5-.31 2.04-.81l7.12 4.16c-.05.21-.08.43-.08.65 0 1.61 1.31 2.92 2.92 1.61 0 2.92-1.31 2.92-2.92s-1.31-2.92-2.92-2.92z"/></svg>
+</button>
 </div>
 </div>
 <div class="expired-body">

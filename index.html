@@ -464,6 +464,10 @@ display:flex;align-items:center;justify-content:center;
 .img-action-btn{width:36px;height:36px;border-radius:10px;background:rgba(255,255,255,0.95);border:1px solid rgba(0,0,0,0.10);cursor:pointer;display:flex;align-items:center;justify-content:center;transition:transform 0.2s,box-shadow 0.2s;}
 .img-action-btn:hover{transform:translateY(-2px);box-shadow:0 4px 12px rgba(0,0,0,0.15);}
 .img-action-btn svg{width:18px;height:18px;fill:var(--text);}
+
+@media(max-width:768px){
+.img-actions{opacity:1 !important;}
+}
 </style>
 
 <style>
@@ -2579,7 +2583,7 @@ onerror="this.src='/images/service-icon/service_default.jpg'">
 data-image-available="True"
 data-image-name="20260516_OFFER_HairSpaandHaircut"
 data-offer-title="Hair Spa and Haircut Combo at ₹2499">
-<div class="hoc-media">
+<div class="hoc-media img-container">
 <img class="home-offer-img"
 src="https://naturals-blr.github.io/campaigns/offer/03_published/20260512_OFFER_HairSpaandHaircut.png"
 data-img-base="https://naturals-blr.github.io/campaigns/offer/03_published/20260512_OFFER_HairSpaandHaircut.png"
@@ -2628,7 +2632,7 @@ data-poster-date-prefix="Valid till">
 data-image-available="True"
 data-image-name="20260513_OFFER_MenGroomingComboa"
 data-offer-title="Men Grooming Combo at ₹459">
-<div class="hoc-media">
+<div class="hoc-media img-container">
 <img class="home-offer-img"
 src="https://naturals-blr.github.io/campaigns/offer/03_published/20260513_OFFER_MenGroomingComboa.png"
 data-img-base="https://naturals-blr.github.io/campaigns/offer/03_published/20260513_OFFER_MenGroomingComboa.png"
@@ -2677,7 +2681,7 @@ data-poster-date-prefix="Valid till">
 data-image-available="True"
 data-image-name="20260510_OFFER_BridalBeautyPackag"
 data-offer-title="Bridal Beauty Packages Starting ₹4999">
-<div class="hoc-media">
+<div class="hoc-media img-container">
 <img class="home-offer-img"
 src="https://naturals-blr.github.io/campaigns/offer/03_published/20260510_OFFER_BridalBeautyPackag.png"
 data-img-base="https://naturals-blr.github.io/campaigns/offer/03_published/20260510_OFFER_BridalBeautyPackag.png"
@@ -2726,7 +2730,7 @@ data-poster-date-prefix="Valid till">
 data-image-available="True"
 data-image-name="20260510_OFFER_Flat₹1000OffonHa"
 data-offer-title="Flat ₹1000 Off on Hair Coloring">
-<div class="hoc-media">
+<div class="hoc-media img-container">
 <img class="home-offer-img"
 src="https://naturals-blr.github.io/campaigns/offer/03_published/20260510_OFFER_Flat₹1000OffonHa.png"
 data-img-base="https://naturals-blr.github.io/campaigns/offer/03_published/20260510_OFFER_Flat₹1000OffonHa.png"
@@ -2774,7 +2778,7 @@ data-poster-date-prefix="Valid till">
 data-image-available="True"
 data-image-name="20260505_OFFER_Flat30OffonHair"
 data-offer-title="Flat 30% Off on Hair Smoothening">
-<div class="hoc-media">
+<div class="hoc-media img-container">
 <img class="home-offer-img"
 src="https://naturals-blr.github.io/campaigns/offer/03_published/20260505_OFFER_Flat30OffonHair.png"
 data-img-base="https://naturals-blr.github.io/campaigns/offer/03_published/20260505_OFFER_Flat30OffonHair.png"
@@ -2823,7 +2827,7 @@ data-poster-date-prefix="Valid till">
 data-image-available="True"
 data-image-name="20260519_OFFER_FestiveBeautySale"
 data-offer-title="Festive Beauty Sale Up to 40 Percent Off">
-<div class="hoc-media">
+<div class="hoc-media img-container">
 <img class="home-offer-img"
 src="https://naturals-blr.github.io/campaigns/offer/03_published/20260519_OFFER_FestiveBeautySale.png"
 data-img-base="https://naturals-blr.github.io/campaigns/offer/03_published/20260519_OFFER_FestiveBeautySale.png"
@@ -2894,7 +2898,7 @@ data-poster-date-prefix="Valid till">
 data-image-available="False"
 data-image-name="20260522_ANNOU_SomethingBeautiful"
 data-campaign-title="Something Beautiful is Opening in Nagavara Today 🌿">
-<div class="media-media">
+<div class="media-media img-container">
 <img class="media-img"
 src="https://naturals-blr.github.io/campaigns/announcement/03_published/20260522_ANNOU_SomethingBeautiful.jpg"
 data-img-base="https://naturals-blr.github.io/campaigns/announcement/03_published/20260522_ANNOU_SomethingBeautiful"
@@ -2917,6 +2921,14 @@ data-poster-date-prefix="Valid till">
 <div class="campaign-poster-date">Valid till 30-May-2026</div>
 </div>
 </div>
+<div class="img-actions">
+<button class="img-action-btn" onclick="downloadImage(this)" title="Download Image">
+<svg viewBox="0 0 24 24"><path d="M19 9h-4V3H9v6H5l7 7 7-7zM5 18v2h14v-2H5z"/></svg>
+</button>
+<button class="img-action-btn" onclick="shareContent(this)" title="Share Update">
+<svg viewBox="0 0 24 24"><path d="M18 16.08c-.76 0-1.44.3-1.96.77L8.91 12.7c.05-.23.09-.46.09-.7s-.04-.47-.09-.7l7.05-4.11c.54.5 1.25.81 2.04.81 1.66 0 3-1.34 3-3s-1.34-3-3 1.34 3 3c0 .24.04.47.09.7L8.04 9.81C7.5 9.31 6.79 9 6 9c-1.66 0-3 1.34 3 3s1.34 3 3 3c.79 0 1.5-.31 2.04-.81l7.12 4.16c-.05.21-.08.43-.08.65 0 1.61 1.31 2.92 2.92 1.61 0 2.92-1.31 2.92-2.92s-1.31-2.92-2.92-2.92z"/></svg>
+</button>
+</div>
 </div>
 <div class="media-body">
 <div class="media-badge">ANNOUNCEMENT</div>
@@ -2934,7 +2946,7 @@ data-poster-date-prefix="Valid till">
 data-image-available="True"
 data-image-name="20260521_ANNOU_LuxuryHasANewAdd"
 data-campaign-title="Luxury Has A New Address in Nagavara ✨">
-<div class="media-media">
+<div class="media-media img-container">
 <img class="media-img"
 src="https://naturals-blr.github.io/campaigns/announcement/03_published/20260516_ANNOU_LuxuryHasANewAdd.png"
 data-img-base="https://naturals-blr.github.io/campaigns/announcement/03_published/20260516_ANNOU_LuxuryHasANewAdd.png"
@@ -2957,6 +2969,14 @@ data-poster-date-prefix="Valid till">
 <div class="campaign-poster-date">Valid till 30-May-2026</div>
 </div>
 </div>
+<div class="img-actions">
+<button class="img-action-btn" onclick="downloadImage(this)" title="Download Image">
+<svg viewBox="0 0 24 24"><path d="M19 9h-4V3H9v6H5l7 7 7-7zM5 18v2h14v-2H5z"/></svg>
+</button>
+<button class="img-action-btn" onclick="shareContent(this)" title="Share Update">
+<svg viewBox="0 0 24 24"><path d="M18 16.08c-.76 0-1.44.3-1.96.77L8.91 12.7c.05-.23.09-.46.09-.7s-.04-.47-.09-.7l7.05-4.11c.54.5 1.25.81 2.04.81 1.66 0 3-1.34 3-3s-1.34-3-3 1.34 3 3c0 .24.04.47.09.7L8.04 9.81C7.5 9.31 6.79 9 6 9c-1.66 0-3 1.34 3 3s1.34 3 3 3c.79 0 1.5-.31 2.04-.81l7.12 4.16c-.05.21-.08.43-.08.65 0 1.61 1.31 2.92 2.92 1.61 0 2.92-1.31 2.92-2.92s-1.31-2.92-2.92-2.92z"/></svg>
+</button>
+</div>
 </div>
 <div class="media-body">
 <div class="media-badge">ANNOUNCEMENT</div>
@@ -2974,7 +2994,7 @@ data-poster-date-prefix="Valid till">
 data-image-available="True"
 data-image-name="20260520_ANNOU_NagavaraWe’reMovi"
 data-campaign-title="Nagavara, We’re Moving In! 🏠✨">
-<div class="media-media">
+<div class="media-media img-container">
 <img class="media-img"
 src="https://naturals-blr.github.io/campaigns/announcement/03_published/20260520_ANNOU_NagavaraWe’reMovi.png"
 data-img-base="https://naturals-blr.github.io/campaigns/announcement/03_published/20260520_ANNOU_NagavaraWe’reMovi.png"
@@ -2997,6 +3017,14 @@ data-poster-date-prefix="Valid till">
 <div class="campaign-poster-date">Valid till 30-May-2026</div>
 </div>
 </div>
+<div class="img-actions">
+<button class="img-action-btn" onclick="downloadImage(this)" title="Download Image">
+<svg viewBox="0 0 24 24"><path d="M19 9h-4V3H9v6H5l7 7 7-7zM5 18v2h14v-2H5z"/></svg>
+</button>
+<button class="img-action-btn" onclick="shareContent(this)" title="Share Update">
+<svg viewBox="0 0 24 24"><path d="M18 16.08c-.76 0-1.44.3-1.96.77L8.91 12.7c.05-.23.09-.46.09-.7s-.04-.47-.09-.7l7.05-4.11c.54.5 1.25.81 2.04.81 1.66 0 3-1.34 3-3s-1.34-3-3 1.34 3 3c0 .24.04.47.09.7L8.04 9.81C7.5 9.31 6.79 9 6 9c-1.66 0-3 1.34 3 3s1.34 3 3 3c.79 0 1.5-.31 2.04-.81l7.12 4.16c-.05.21-.08.43-.08.65 0 1.61 1.31 2.92 2.92 1.61 0 2.92-1.31 2.92-2.92s-1.31-2.92-2.92-2.92z"/></svg>
+</button>
+</div>
 </div>
 <div class="media-body">
 <div class="media-badge">ANNOUNCEMENT</div>
@@ -3014,7 +3042,7 @@ data-poster-date-prefix="Valid till">
 data-image-available="True"
 data-image-name="20260519_ANNOU_BIGNEWS-Naturals"
 data-campaign-title="BIG NEWS - Naturals Nagavara is Now Live! 🚀">
-<div class="media-media">
+<div class="media-media img-container">
 <img class="media-img"
 src="https://naturals-blr.github.io/campaigns/announcement/03_published/20260519_ANNOU_BIGNEWS-Naturals.png"
 data-img-base="https://naturals-blr.github.io/campaigns/announcement/03_published/20260519_ANNOU_BIGNEWS-Naturals.png"
@@ -3037,6 +3065,14 @@ data-poster-date-prefix="Valid till">
 <div class="campaign-poster-date">Valid till 30-May-2026</div>
 </div>
 </div>
+<div class="img-actions">
+<button class="img-action-btn" onclick="downloadImage(this)" title="Download Image">
+<svg viewBox="0 0 24 24"><path d="M19 9h-4V3H9v6H5l7 7 7-7zM5 18v2h14v-2H5z"/></svg>
+</button>
+<button class="img-action-btn" onclick="shareContent(this)" title="Share Update">
+<svg viewBox="0 0 24 24"><path d="M18 16.08c-.76 0-1.44.3-1.96.77L8.91 12.7c.05-.23.09-.46.09-.7s-.04-.47-.09-.7l7.05-4.11c.54.5 1.25.81 2.04.81 1.66 0 3-1.34 3-3s-1.34-3-3 1.34 3 3c0 .24.04.47.09.7L8.04 9.81C7.5 9.31 6.79 9 6 9c-1.66 0-3 1.34 3 3s1.34 3 3 3c.79 0 1.5-.31 2.04-.81l7.12 4.16c-.05.21-.08.43-.08.65 0 1.61 1.31 2.92 2.92 1.61 0 2.92-1.31 2.92-2.92s-1.31-2.92-2.92-2.92z"/></svg>
+</button>
+</div>
 </div>
 <div class="media-body">
 <div class="media-badge">ANNOUNCEMENT</div>
@@ -3054,7 +3090,7 @@ data-poster-date-prefix="Valid till">
 data-image-available="True"
 data-image-name="20260516_ANNOU_LuxuryHasANewAdd"
 data-campaign-title="Luxury Has A New Address in Nagavara ✨">
-<div class="media-media">
+<div class="media-media img-container">
 <img class="media-img"
 src="https://naturals-blr.github.io/campaigns/announcement/03_published/20260516_ANNOU_LuxuryHasANewAdd.png"
 data-img-base="https://naturals-blr.github.io/campaigns/announcement/03_published/20260516_ANNOU_LuxuryHasANewAdd.png"
@@ -3077,6 +3113,14 @@ data-poster-date-prefix="Valid till">
 <div class="campaign-poster-date">Valid till 30-May-2026</div>
 </div>
 </div>
+<div class="img-actions">
+<button class="img-action-btn" onclick="downloadImage(this)" title="Download Image">
+<svg viewBox="0 0 24 24"><path d="M19 9h-4V3H9v6H5l7 7 7-7zM5 18v2h14v-2H5z"/></svg>
+</button>
+<button class="img-action-btn" onclick="shareContent(this)" title="Share Update">
+<svg viewBox="0 0 24 24"><path d="M18 16.08c-.76 0-1.44.3-1.96.77L8.91 12.7c.05-.23.09-.46.09-.7s-.04-.47-.09-.7l7.05-4.11c.54.5 1.25.81 2.04.81 1.66 0 3-1.34 3-3s-1.34-3-3 1.34 3 3c0 .24.04.47.09.7L8.04 9.81C7.5 9.31 6.79 9 6 9c-1.66 0-3 1.34 3 3s1.34 3 3 3c.79 0 1.5-.31 2.04-.81l7.12 4.16c-.05.21-.08.43-.08.65 0 1.61 1.31 2.92 2.92 1.61 0 2.92-1.31 2.92-2.92s-1.31-2.92-2.92-2.92z"/></svg>
+</button>
+</div>
 </div>
 <div class="media-body">
 <div class="media-badge">ANNOUNCEMENT</div>
@@ -3094,7 +3138,7 @@ data-poster-date-prefix="Valid till">
 data-image-available="True"
 data-image-name="20260518_ANNOU_SameHeartBrandNe"
 data-campaign-title="Same Heart, Brand New Space ❤️">
-<div class="media-media">
+<div class="media-media img-container">
 <img class="media-img"
 src="https://naturals-blr.github.io/campaigns/announcement/03_published/20260518_ANNOU_SameHeartBrandNe.png"
 data-img-base="https://naturals-blr.github.io/campaigns/announcement/03_published/20260518_ANNOU_SameHeartBrandNe.png"
@@ -3116,6 +3160,14 @@ data-poster-date-prefix="Valid till">
 <div class="campaign-poster-copy">Our commitment to you hasn’t changed, but our location has! 🌿 We are bringing our signature 'Redo or Repay' guarantee and transparent service to a beautiful new home in Nagavara. Follow @Naturals.Salon.Nagavara for official updates and exclusive relocation deals. 📍 Visit us at: 22-26/B11, R.K. Tower, 1st Cross, Chanukya Layout.</div>
 <div class="campaign-poster-date">Valid till 30-May-2026</div>
 </div>
+</div>
+<div class="img-actions">
+<button class="img-action-btn" onclick="downloadImage(this)" title="Download Image">
+<svg viewBox="0 0 24 24"><path d="M19 9h-4V3H9v6H5l7 7 7-7zM5 18v2h14v-2H5z"/></svg>
+</button>
+<button class="img-action-btn" onclick="shareContent(this)" title="Share Update">
+<svg viewBox="0 0 24 24"><path d="M18 16.08c-.76 0-1.44.3-1.96.77L8.91 12.7c.05-.23.09-.46.09-.7s-.04-.47-.09-.7l7.05-4.11c.54.5 1.25.81 2.04.81 1.66 0 3-1.34 3-3s-1.34-3-3 1.34 3 3c0 .24.04.47.09.7L8.04 9.81C7.5 9.31 6.79 9 6 9c-1.66 0-3 1.34 3 3s1.34 3 3 3c.79 0 1.5-.31 2.04-.81l7.12 4.16c-.05.21-.08.43-.08.65 0 1.61 1.31 2.92 2.92 1.61 0 2.92-1.31 2.92-2.92s-1.31-2.92-2.92-2.92z"/></svg>
+</button>
 </div>
 </div>
 <div class="media-body">
