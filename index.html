@@ -33,8 +33,18 @@
 <script type="application/ld+json">
 {
 "@context": "https://schema.org",
+"@type": "WebSite",
+"name": "Naturals Salon & Spa Bangalore",
+"alternateName": "Naturals Elite Bangalore",
+"url": "https://naturals-blr.github.io"
+}
+</script>
+<script type="application/ld+json">
+{
+"@context": "https://schema.org",
 "@type": "",
-"name": "Naturals Unisex Salon, The top rated stores in Bangalore",
+"name": "Naturals Salon & Spa Bangalore",
+"alternateName": "Naturals Elite Bangalore",
 "url": "https://naturals-blr.github.io",
 "logo": "https://naturals-blr.github.io/images/og/og-home.jpg",
 "description": "Elite Salon & Spa Services",
@@ -266,10 +276,9 @@ display:block;text-decoration:none;transition:background 0.2s;position:relative;
 .st-hours-row span:last-child{font-size:11px;color:var(--text-mid);line-height:1.35;}
 .st-hours-row.is-daily{grid-template-columns:56px 1fr;}
 .st-neighborhood{border:1px solid rgba(0,0,0,0.08);border-radius:12px;margin:14px 0 0;background:#fbfaf7;overflow:hidden;}
-.st-neighborhood summary{list-style:none;cursor:pointer;padding:10px 12px;font-size:10px;letter-spacing:1.5px;text-transform:uppercase;font-weight:800;color:var(--green-mid);display:flex;justify-content:space-between;align-items:center;gap:12px;}
-.st-neighborhood summary::-webkit-details-marker{display:none;}
-.st-neighborhood summary::after{content:'+';font-size:16px;color:var(--gold);line-height:1;}
-.st-neighborhood[open] summary::after{content:'-';}
+
+.st-neighborhood-label{padding:10px 12px 0;font-size:10px;letter-spacing:1.5px;text-transform:uppercase;font-weight:800;color:var(--green-mid);}
+
 .st-neighborhood-body{padding:0 12px 12px;font-size:12px;line-height:1.6;color:var(--text-mid);}
 .st-neighborhood-body strong{display:block;color:var(--text);font-weight:600;margin-bottom:8px;}
 .st-landmarks{display:flex;flex-wrap:wrap;gap:6px;margin-top:8px;}
@@ -2163,8 +2172,8 @@ style="width: 100%; height: 200px; border: none;">
 </div>
 </div>
 
-<details class="st-neighborhood">
-<summary>Areas served</summary>
+<div class="st-neighborhood">
+<div class="st-neighborhood-label">Areas served</div>
 <div class="st-neighborhood-body">
 <strong>JP Nagar 5th Phase</strong>
 <div class="st-landmarks" aria-label="Nearby landmarks for JP Nagar 5th Phase">
@@ -2179,7 +2188,7 @@ style="width: 100%; height: 200px; border: none;">
 <span class="st-landmarks-more">+ 2 more</span>
 </div>
 </div>
-</details>
+</div>
 </div>
 </div>
 <div class="st-card reveal">
@@ -2232,8 +2241,8 @@ style="width: 100%; height: 200px; border: none;">
 </div>
 </div>
 
-<details class="st-neighborhood">
-<summary>Areas served</summary>
+<div class="st-neighborhood">
+<div class="st-neighborhood-label">Areas served</div>
 <div class="st-neighborhood-body">
 <strong>Thanisandra / Nagavara</strong>
 <div class="st-landmarks" aria-label="Nearby landmarks for Nagavara">
@@ -2248,7 +2257,7 @@ style="width: 100%; height: 200px; border: none;">
 <span class="st-landmarks-more">+ 4 more</span>
 </div>
 </div>
-</details>
+</div>
 </div>
 </div>
 <div class="st-card reveal">
@@ -2301,8 +2310,8 @@ style="width: 100%; height: 200px; border: none;">
 </div>
 </div>
 
-<details class="st-neighborhood">
-<summary>Areas served</summary>
+<div class="st-neighborhood">
+<div class="st-neighborhood-label">Areas served</div>
 <div class="st-neighborhood-body">
 <strong>Devasandra / KR Puram</strong>
 <div class="st-landmarks" aria-label="Nearby landmarks for Devasandra">
@@ -2317,7 +2326,7 @@ style="width: 100%; height: 200px; border: none;">
 <span class="st-landmarks-more">+ 2 more</span>
 </div>
 </div>
-</details>
+</div>
 </div>
 </div>
 <div class="st-card reveal">
@@ -2370,8 +2379,8 @@ style="width: 100%; height: 200px; border: none;">
 </div>
 </div>
 
-<details class="st-neighborhood">
-<summary>Areas served</summary>
+<div class="st-neighborhood">
+<div class="st-neighborhood-label">Areas served</div>
 <div class="st-neighborhood-body">
 <strong>Frazer Town / Pulikeshi Nagar</strong>
 <div class="st-landmarks" aria-label="Nearby landmarks for Frazer Town">
@@ -2386,7 +2395,7 @@ style="width: 100%; height: 200px; border: none;">
 <span class="st-landmarks-more">+ 2 more</span>
 </div>
 </div>
-</details>
+</div>
 </div>
 </div>
 <div class="st-card reveal">
@@ -2439,8 +2448,8 @@ style="width: 100%; height: 200px; border: none;">
 </div>
 </div>
 
-<details class="st-neighborhood">
-<summary>Areas served</summary>
+<div class="st-neighborhood">
+<div class="st-neighborhood-label">Areas served</div>
 <div class="st-neighborhood-body">
 <strong>Hennur / North Bangalore</strong>
 <div class="st-landmarks" aria-label="Nearby landmarks for Hennur">
@@ -2455,7 +2464,7 @@ style="width: 100%; height: 200px; border: none;">
 <span class="st-landmarks-more">+ 4 more</span>
 </div>
 </div>
-</details>
+</div>
 </div>
 </div>
 </div>
