@@ -1225,12 +1225,7 @@ onerror="this.style.display='none'">
 <a class="drawer-link " href="https://naturals-blr.github.io/services/" aria-label="View all salon services">SERVICES</a>
 <a class="drawer-link " href="https://naturals-blr.github.io/offers/" aria-label="View current salon offers and promotions">OFFERS</a>
 
-<details class="drawer-stores-section">
-<summary class="drawer-stores-header">
-<span class="drawer-stores-title">OUR STORES</span>
-<span class="drawer-stores-arrow">⌄</span>
-</summary>
-
+<div class="drawer-section-label">OUR STORES</div>
 <div class="drawer-stores-list">
 <a class="drawer-store-link" href="https://naturals-blr.github.io/stores/bangalore/jp-nagar-5th-phase/" aria-label="Visit Naturals Salon JP Nagar 5th Phase">
 <span class="drawer-store-name">JP Nagar 5th Phase</span>
@@ -1248,7 +1243,6 @@ onerror="this.style.display='none'">
 <span class="drawer-store-name">Hennur</span>
 </a>
 </div>
-</details>
 
 <a class="drawer-link " href="https://naturals-blr.github.io/careers/bangalore/" aria-label="Join our team and view career opportunities">Join our Team</a>
 <a class="drawer-link " href="https://naturals-blr.github.io/about/" aria-label="Learn about Naturals Salon & Spa">ABOUT</a>
@@ -1411,34 +1405,7 @@ transform:scale(1.1);
 }
 
 /* ── STORES SECTION STYLES ── */
-.drawer-stores-section{
-margin-top:12px;
-border-radius:12px;
-background:rgba(255,255,255,0.03);
-border:1px solid rgba(255,255,255,0.06);
-overflow:hidden;
-}
-
-.drawer-stores-header{
-display:flex;
-align-items:center;
-justify-content:space-between;
-padding:14px 16px 8px;
-border-bottom:1px solid rgba(255,255,255,0.08);
-cursor:pointer;
-list-style:none;
-}
-.drawer-stores-header::-webkit-details-marker{display:none;}
-.drawer-stores-arrow{
-color:rgba(255,255,255,0.5);
-font-size:14px;
-transition:transform 0.2s;
-}
-.drawer-stores-section[open] .drawer-stores-arrow{
-transform:rotate(180deg);
-}
-
-.drawer-stores-title{
+.drawer-section-label{
 color:rgba(255,255,255,0.95);
 font-size:12px;
 font-weight:600;
@@ -3163,12 +3130,13 @@ Good massage. Felt totally relaxed"</div>
 </div>
 
 
-<button class="read-all-btn" onclick="openModal()">
+<button class="read-all-btn" onclick="openReviewModal(event)">
 <svg fill="currentColor" viewBox="0 0 24 24">
 <path d="M12 2l3.09 6.26L22 9.27l-6.91 1.01L12 22l-3.09-5.72L2 9.27l6.91-1.01L12 2z"/>
 </svg>
 View All 5-Star Reviews
 </button>
+
 </section>
 
 <div style="clear: both;"></div>
@@ -3192,247 +3160,118 @@ const amount = Math.max(260, Math.round(carousel.clientWidth * 0.82));
 carousel.scrollBy({ left: direction * amount, behavior: 'smooth' });
 if (button && typeof button.blur === 'function') button.blur();
 }
+</script>
 
-// Featured reviews data
-const featuredReviews = [{"Stars": 5, "customer_name": "Naveen Kumar", "date_posted": "14-Dec-2019", "response": "Thank you so much Naveen Kumar! We\u0027re thrilled you had a 5-star experience. Your kind words mean the world to our team. Looking forward to serving you again soon!", "response_date": "26-May-2026", "review_comments": "Mr. Shahid\nGood massage. Felt totally relaxed", "review_id": "AbFvOqlJCOIfEgriczIPVlh-CT9WipuCSqyc4hb9PG1_NC3gZcHrJz2-C0dcdenb28rSJi3aAKvq", "show_it_in_website": "Yes", "stars": "5", "store_id": "Store_N78", "store_name": "JP Nagar 5th Phase"}, {"Stars": 5, "customer_name": "Neeharika Anand", "date_posted": "2-Sep-2021", "response": "Thank you so much Neeharika Anand! We\u0027re thrilled you had a 5-star experience. Your kind words mean the world to our team. Looking forward to serving you again soon!", "response_date": "26-May-2026", "review_comments": "I really loved the waxing service here. Anusha did a great and thorough job. Definitely recommend!", "review_id": "AbFvOqnyqjF70bGkX1vG7GtxpsK5nD721i7mNaHcvvWvGvYbYg_iTmdzhYrmUUw8LRAMXC-cftkDdQ", "show_it_in_website": "Yes", "stars": "5", "store_id": "Store_N78", "store_name": "JP Nagar 5th Phase"}, {"Stars": 5, "customer_name": "Apoorva VD", "date_posted": "2-Oct-2021", "review_comments": "Akash is the best hairstylist here!! love getting my hair done here, best experience ever! :)))", "review_id": "AbFvOqnDQcpo-7UMbFB95PDBC4eDvOkjX5d_6qdw6dPBDhI3lht1u_7Kdb2Nv40NqW_DZPTxxV2_Zg", "show_it_in_website": "Yes", "stars": "5", "store_id": "Store_N78", "store_name": "JP Nagar 5th Phase"}, {"Stars": 5, "customer_name": "Psychiatry Talks with Dr Sneha", "date_posted": "10-Nov-2021", "review_comments": "Mr Akash did a good service and was professional. Hair spa and massage was professional.", "review_id": "AbFvOqlk1BL36IySj0KOrUmZGwSB9aSKFh46Ap5UWewnbB9Zhz4fEF6weIVQuRw9JWtUwZW2Al_1NQ", "show_it_in_website": "Yes", "stars": "5", "store_id": "Store_N78", "store_name": "JP Nagar 5th Phase"}, {"Stars": 5, "customer_name": "keerthana mu", "date_posted": "2-Dec-2021", "review_comments": "Great haircut service by Akash\nGood service overall", "review_id": "AbFvOqnP4x1oRlhMEEeC8zg7TitnBuwNTmwGiprkgyxeNekCb7tZT9q498P6G5ipT5B8O4oruKOE", "show_it_in_website": "Yes", "stars": "5", "store_id": "Store_N78", "store_name": "JP Nagar 5th Phase"}, {"Stars": 5, "customer_name": "VIJAYAKUMAR S", "date_posted": "13-Mar-2022", "review_comments": "I\u0027m very much satisfied on the services offered by Mr.Yougul. Had wonderful Hair cut, Spa \u0026 Beard Trim.. Very professional way of doing all kind of services!!", "review_id": "AbFvOqk6efPY6LyFxixJCgoHK-Vr3-mRk7epkMdrveyllDBxjMWb88d3PFzHINACEJzctzmQj7alng", "show_it_in_website": "Yes", "stars": "5", "store_id": "Store_N78", "store_name": "JP Nagar 5th Phase"}];
+<script>
+var NATURALS_REVIEWS = [{"Stars": 5, "customer_name": "Naveen Kumar", "date_posted": "14-Dec-2019", "response": "Thank you so much Naveen Kumar! We\u0027re thrilled you had a 5-star experience. Your kind words mean the world to our team. Looking forward to serving you again soon!", "response_date": "26-May-2026", "review_comments": "Mr. Shahid\nGood massage. Felt totally relaxed", "review_id": "AbFvOqlJCOIfEgriczIPVlh-CT9WipuCSqyc4hb9PG1_NC3gZcHrJz2-C0dcdenb28rSJi3aAKvq", "show_it_in_website": "Yes", "stars": "5", "store_id": "Store_N78", "store_name": "JP Nagar 5th Phase"}, {"Stars": 5, "customer_name": "Neeharika Anand", "date_posted": "2-Sep-2021", "response": "Thank you so much Neeharika Anand! We\u0027re thrilled you had a 5-star experience. Your kind words mean the world to our team. Looking forward to serving you again soon!", "response_date": "26-May-2026", "review_comments": "I really loved the waxing service here. Anusha did a great and thorough job. Definitely recommend!", "review_id": "AbFvOqnyqjF70bGkX1vG7GtxpsK5nD721i7mNaHcvvWvGvYbYg_iTmdzhYrmUUw8LRAMXC-cftkDdQ", "show_it_in_website": "Yes", "stars": "5", "store_id": "Store_N78", "store_name": "JP Nagar 5th Phase"}, {"Stars": 5, "customer_name": "Apoorva VD", "date_posted": "2-Oct-2021", "review_comments": "Akash is the best hairstylist here!! love getting my hair done here, best experience ever! :)))", "review_id": "AbFvOqnDQcpo-7UMbFB95PDBC4eDvOkjX5d_6qdw6dPBDhI3lht1u_7Kdb2Nv40NqW_DZPTxxV2_Zg", "show_it_in_website": "Yes", "stars": "5", "store_id": "Store_N78", "store_name": "JP Nagar 5th Phase"}, {"Stars": 5, "customer_name": "Psychiatry Talks with Dr Sneha", "date_posted": "10-Nov-2021", "review_comments": "Mr Akash did a good service and was professional. Hair spa and massage was professional.", "review_id": "AbFvOqlk1BL36IySj0KOrUmZGwSB9aSKFh46Ap5UWewnbB9Zhz4fEF6weIVQuRw9JWtUwZW2Al_1NQ", "show_it_in_website": "Yes", "stars": "5", "store_id": "Store_N78", "store_name": "JP Nagar 5th Phase"}, {"Stars": 5, "customer_name": "keerthana mu", "date_posted": "2-Dec-2021", "review_comments": "Great haircut service by Akash\nGood service overall", "review_id": "AbFvOqnP4x1oRlhMEEeC8zg7TitnBuwNTmwGiprkgyxeNekCb7tZT9q498P6G5ipT5B8O4oruKOE", "show_it_in_website": "Yes", "stars": "5", "store_id": "Store_N78", "store_name": "JP Nagar 5th Phase"}, {"Stars": 5, "customer_name": "VIJAYAKUMAR S", "date_posted": "13-Mar-2022", "review_comments": "I\u0027m very much satisfied on the services offered by Mr.Yougul. Had wonderful Hair cut, Spa \u0026 Beard Trim.. Very professional way of doing all kind of services!!", "review_id": "AbFvOqk6efPY6LyFxixJCgoHK-Vr3-mRk7epkMdrveyllDBxjMWb88d3PFzHINACEJzctzmQj7alng", "show_it_in_website": "Yes", "stars": "5", "store_id": "Store_N78", "store_name": "JP Nagar 5th Phase"}];
+var isReviewModalOpen = false;
+var isLoading = false;
 
-// State management
-let isModalOpen = false;
-let currentReviews = [];
-let isLoading = false;
+function openReviewModal(event) {
+if (event) { event.stopPropagation(); event.preventDefault(); }
+if (window.isReviewModalOpening) return;
+window.isReviewModalOpening = true;
 
-// Open reviews modal
-function openModal() {
-console.log('Checking Data:', typeof featuredReviews, featuredReviews?.length);
+var modal = document.getElementById('reviewsModal');
+var content = document.getElementById('modalReviewsContent');
+if (!modal) { window.isReviewModalOpening = false; return; }
+if (content) content.innerHTML = '';
 
-// Fix 3: The One-Time Guard - Prevent multiple executions
-if (window.isModalOpening) return;
-window.isModalOpening = true;
-
-// Clear previous content
-let modalContent = document.getElementById('modalReviewsContent');
-if (!modalContent) {
-// Fallback: Try alternative target
-modalContent = document.getElementById('modal-content') || document.getElementById('reviewsModal').querySelector('.modal-body');
-console.log("Using fallback modal content element for clearing");
+if (!modal._rmClickSetup) {
+modal._rmClickSetup = true;
+modal.addEventListener('click', function(e){
+if (e.target.id === 'reviewsModal') closeReviewsModal();
+});
 }
 
-if (modalContent) {
-modalContent.innerHTML = '';
-}
-
-isModalOpen = true;
+isReviewModalOpen = true;
 isLoading = true;
-
-const modal = document.getElementById('reviewsModal');
-
-// Fallback: Find content element for loading state
-let content = document.getElementById('modalReviewsContent');
-if (!content) {
-content = document.getElementById('modal-content') || document.getElementById('reviewsModal').querySelector('.modal-body');
-}
-
-// Show modal
 modal.classList.add('active');
 document.body.style.overflow = 'hidden';
-if(window.naturalsPushModalState){
+
+if (window.naturalsPushModalState) {
 window.naturalsPushModalState('home-reviews', function(){ closeReviewsModal(true); });
 } else {
-history.pushState({modalOpen: true}, "", window.location.href);
+history.pushState({modalOpen: true}, '', window.location.href);
 }
 
-// Bulletproof Change 1: Add loading state with delay
-setTimeout(() => {
+setTimeout(function(){
 if (content && isLoading) {
-content.innerHTML = '<div class="loading-spinner"></div>';
+content.innerHTML = '<div class="modal-loading"><div class="modal-loading-spinner"></div><p>Loading reviews...</p></div>';
 }
-loadReviewsInBatches();
-window.isModalOpening = false; // Reset guard after loading starts
-}, 100); // Bulletproof Change 1: 100ms delay
-}
-let content = document.getElementById('modalReviewsContent');
-if (!content) {
-content = document.getElementById('modal-content') || document.getElementById('reviewsModal').querySelector('.modal-body');
+renderAllReviews(content);
+window.isReviewModalOpening = false;
+}, 100);
 }
 
-// Show modal
-modal.classList.add('active');
-document.body.style.overflow = 'hidden';
-
-// Bulletproof Change 1: Add loading state with delay
-setTimeout(() => {
-if (content && isLoading) {
-content.innerHTML = '<div class="loading-spinner"></div>';
-}
-loadReviewsInBatches();
-window.isModalOpening = false; // Reset guard after loading starts
-}, 300);
-}, 100); // Bulletproof Change 1: 100ms delay
-}
-
-// Close reviews modal
 function closeReviewsModal(fromHistory) {
-isModalOpen = false;
+isReviewModalOpen = false;
 isLoading = false;
-window.isModalOpening = false; // Reset guard when modal is closed
-
-const modal = document.getElementById('reviewsModal');
-modal.classList.remove('active');
+window.isReviewModalOpening = false;
+var modal = document.getElementById('reviewsModal');
+if (modal) modal.classList.remove('active');
 document.body.style.overflow = '';
-if(!fromHistory && window.naturalsClearModalState) window.naturalsClearModalState('home-reviews');
+if (!fromHistory && window.naturalsClearModalState) window.naturalsClearModalState('home-reviews');
 }
 
-// Load reviews in batches for performance
-function loadReviewsInBatches() {
-// Fix 2: Manual HTML Injection - Force injection directly into modal body
-const modalBody = document.querySelector('.modal-body') || document.getElementById('modalReviewsContent');
-if (modalBody && featuredReviews && featuredReviews.length > 0) {
-console.log("Manual HTML Injection: Rendering all reviews at once");
-modalBody.innerHTML = featuredReviews.map((r, index) => createReviewCard(r, index)).join('');
-console.log("Manual injection completed - reviews should be visible now");
-window.isModalOpening = false; // Reset guard
-return; // Skip batch loading
+function renderAllReviews(contentEl) {
+var content = contentEl || document.getElementById('modalReviewsContent');
+if (!content) { isLoading = false; return; }
+if (NATURALS_REVIEWS && NATURALS_REVIEWS.length > 0) {
+var html = '';
+for (var i = 0; i < NATURALS_REVIEWS.length; i++) {
+html += createReviewCard(NATURALS_REVIEWS[i], i);
 }
-
-// Fallback: Try alternative target if main target not found
-let content = document.getElementById('modalReviewsContent');
-if (!content) {
-content = document.getElementById('modal-content') || document.getElementById('reviewsModal').querySelector('.modal-body');
-console.log("Using fallback modal content element");
-}
-
-if (!content) {
-console.error("Could not find modal content element!");
-window.isModalOpening = false; // Reset guard
-return;
-}
-
-const batchSize = 20; // Load 20 reviews at a time
-let currentIndex = 0;
-
-// Debug: Check if featuredReviews data exists
-console.log("Featured reviews data:", featuredReviews);
-console.log("Featured reviews count:", featuredReviews.length);
-console.log("Target content element found:", !!content);
-
-// Sort reviews by date_posted descending
-const sortedReviews = [...featuredReviews].sort((a, b) => {
-// Handle empty or invalid dates
-const dateA = a.date_posted ? new Date(a.date_posted) : new Date(0);
-const dateB = b.date_posted ? new Date(b.date_posted) : new Date(0);
-return dateB - dateA;
-});
-
-console.log("Sorted reviews count:", sortedReviews.length);
-currentReviews = sortedReviews;
-
-function loadBatch() {
-if (currentIndex >= sortedReviews.length) {
-isLoading = false;
-return;
-}
-
-const batch = sortedReviews.slice(currentIndex, currentIndex + batchSize);
-
-// Hard Reset 3: Manual Trigger
-console.log("Rendering " + batch.length + " cards now...");
-
-const batchHtml = batch.map((review, index) => {
-const globalIndex = currentIndex + index;
-console.log("Rendering card " + (globalIndex + 1) + ": " + review.customer_name);
-return createReviewCard(review, globalIndex);
-}).join('');
-
-content.innerHTML += batchHtml;
-currentIndex += batchSize;
-
-// Continue loading if more reviews
-if (currentIndex < sortedReviews.length) {
-setTimeout(loadBatch, 100);
+content.innerHTML = html;
 } else {
+content.innerHTML = '<div style="padding:40px;text-align:center;"><h3>No reviews available</h3><p style="color:#888;margin-top:8px;font-size:14px;">There are currently no reviews to display.</p></div>';
+}
 isLoading = false;
-console.log("All reviews loaded successfully!");
-}
 }
 
-// Load first batch immediately
-loadBatch();
-
-// Add scroll listener for lazy loading
-content?.addEventListener('scroll', () => {
-if (content.scrollHeight - content.scrollTop <= content.clientHeight + 200) {
-loadBatch();
-}
-});
-
-// Load first batch immediately
-loadBatch();
-}
-
-// Close modal on escape key
-document.addEventListener('keydown', (e) => {
-if (e.key === 'Escape' && isModalOpen) {
-closeReviewsModal();
-}
-});
-
-// ── Handle browser back button for reviews modal ──
-window.addEventListener('popstate', function(event) {
-// If reviews modal is open and back button is pressed, close modal
-const modal = document.getElementById('reviewsModal');
-if (modal && modal.classList.contains('active')) {
-closeReviewsModal();
-}
-});
-
-// Create review card HTML
 function createReviewCard(review, index) {
-// Safety check: Skip if review is missing basic info
-if (!review || !review.customer_name) {
-console.warn("Skipping invalid review:", review);
-return '';
+var name = review.Customer_Name || review.customer_name || 'Valued Customer';
+var starsCount = parseInt(review.Stars || review.stars || 5);
+var stars = '';
+for (var s = 0; s < starsCount; s++) stars += '\u2605';
+var initial = name.charAt(0).toUpperCase();
+var comments = review.Review_Comments || review.review_comments || review.comments || 'Great experience!';
+
+return '<div class="rev-card">' +
+'<div class="rev-header-row" style="display:block;width:100%;clear:both;">' +
+'<div class="rev-header" style="display:flex;align-items:center;justify-content:space-between;">' +
+'<div class="rev-header-left" style="display:flex;align-items:center;gap:10px;">' +
+'<div class="rev-avatar">' + escapeHtml(initial) + '</div>' +
+'<div class="rev-name-stars">' +
+'<span class="rev-name">' + escapeHtml(name) + '</span>' +
+'<div class="rev-stars">' + stars + '</div>' +
+'</div>' +
+'</div>' +
+'<div class="google-icon"><img src="/images/icons/google.png" alt="Google review" width="16"></div>' +
+'</div>' +
+'</div>' +
+'<div class="rev-content-row" style="display:block;width:100%;margin-top:0px;">' +
+'<div class="rev-content">"' + escapeHtml(comments) + '"</div>' +
+'</div>' +
+'</div>';
 }
 
-// Handle stars field - it might be string or number
-const starsCount = parseInt(review.stars || review.Stars || 5);
-const stars = '★'.repeat(starsCount);
-const initial = review.customer_name ? review.customer_name.charAt(0).toUpperCase() : 'A';
-const comments = review.review_comments || review.comments || 'Great experience!';
-
-return `
-<div class="rev-card">
-<div class="rev-header-row" style="display: block; width: 100%; clear: both;">
-<div class="rev-header" style="display: flex; align-items: center; justify-content: space-between;">
-<div class="rev-header-left" style="display: flex; align-items: center; gap: 10px;">
-<div class="rev-avatar">${initial}</div>
-<div class="rev-name-stars">
-<span class="rev-name">${review.customer_name}</span>
-<div class="rev-stars">${stars}</div>
-</div>
-</div>
-<div class="google-icon"><img src="/images/icons/google.png" width="16"></div>
-</div>
-</div><div class="rev-content-row" style="display: block; width: 100%; margin-top: 0px;">
-<div class="rev-content">
-"${comments}"
-</div>
-</div>
-</div>`;
+function escapeHtml(str) {
+var d = document.createElement('div');
+d.appendChild(document.createTextNode(str));
+return d.innerHTML;
 }
 
-// Close modal on escape key
-document.addEventListener('keydown', (e) => {
-if (e.key === 'Escape' && isModalOpen) {
-closeReviewsModal();
-}
+document.addEventListener('keydown', function(e){
+if (e.key === 'Escape' && isReviewModalOpen) closeReviewsModal();
 });
 
-// Close modal on background click
-document.getElementById('reviewsModal').addEventListener('click', (e) => {
-if (e.target.id === 'reviewsModal') {
-closeReviewsModal();
-}
+window.addEventListener('popstate', function(e){
+var m = document.getElementById('reviewsModal');
+if (m && m.classList.contains('active')) closeReviewsModal();
 });
+
+window.openReviewsModal = openReviewModal;
 </script>
 
 <footer>
@@ -4243,8 +4082,6 @@ closeHomeOfferModal();
 }
 });
 
-// Bulletproof Alias: Ensure both function names work simultaneously
-window.openReviewsModal = openModal;
 </script>
 
 <script>
@@ -4309,9 +4146,7 @@ window.open('https://wa.me/?text=' + encodeURIComponent(window.location.href), '
 </button>
 </div>
 <div class="modal-body">
-<div id="modalReviewsContent" class="modal-reviews">
-
-</div>
+<div id="modalReviewsContent" class="modal-reviews"></div>
 </div>
 </div>
 </div>

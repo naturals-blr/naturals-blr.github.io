@@ -27,6 +27,13 @@ gtag('config', 'G-6H5YGVGG1Q');
 <meta property="og:image" content="https://naturals-blr.github.io/images/og/og-offers.jpg">
 <meta property="og:url" content="https://naturals-blr.github.io/offers/">
 <meta property="og:site_name" content="Naturals Salon &amp; Spa Bangalore">
+<meta property="og:locale" content="en_IN">
+<meta property="og:image:alt" content="Naturals Salon offers and deals in Bangalore">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Best Salon Offers in Bangalore">
+<meta name="twitter:description" content="Unlock exclusive beauty deals at Bangalore's premier salons. From JP Nagar to Hennur, explore offers on hair, facials, & bridal packages at our 5 elite locations.">
+<meta name="twitter:image" content="https://naturals-blr.github.io/images/og/og-offers.jpg">
+<meta name="twitter:image:alt" content="Naturals Salon offers and deals in Bangalore">
 <meta name="whatsapp-msg" content="">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 
@@ -756,12 +763,7 @@ onerror="this.style.display='none'">
 <a class="drawer-link " href="https://naturals-blr.github.io/services/" aria-label="View all salon services">SERVICES</a>
 <a class="drawer-link is-active" href="https://naturals-blr.github.io/offers/" aria-label="View current salon offers and promotions">OFFERS</a>
 
-<details class="drawer-stores-section">
-<summary class="drawer-stores-header">
-<span class="drawer-stores-title">OUR STORES</span>
-<span class="drawer-stores-arrow">⌄</span>
-</summary>
-
+<div class="drawer-section-label">OUR STORES</div>
 <div class="drawer-stores-list">
 <a class="drawer-store-link" href="https://naturals-blr.github.io/stores/bangalore/jp-nagar-5th-phase/" aria-label="Visit Naturals Salon JP Nagar 5th Phase">
 <span class="drawer-store-name">JP Nagar 5th Phase</span>
@@ -779,7 +781,6 @@ onerror="this.style.display='none'">
 <span class="drawer-store-name">Hennur</span>
 </a>
 </div>
-</details>
 
 <a class="drawer-link " href="https://naturals-blr.github.io/careers/bangalore/" aria-label="Join our team and view career opportunities">Join our Team</a>
 <a class="drawer-link " href="https://naturals-blr.github.io/about/" aria-label="Learn about Naturals Salon & Spa">ABOUT</a>
@@ -942,34 +943,7 @@ transform:scale(1.1);
 }
 
 /* ── STORES SECTION STYLES ── */
-.drawer-stores-section{
-margin-top:12px;
-border-radius:12px;
-background:rgba(255,255,255,0.03);
-border:1px solid rgba(255,255,255,0.06);
-overflow:hidden;
-}
-
-.drawer-stores-header{
-display:flex;
-align-items:center;
-justify-content:space-between;
-padding:14px 16px 8px;
-border-bottom:1px solid rgba(255,255,255,0.08);
-cursor:pointer;
-list-style:none;
-}
-.drawer-stores-header::-webkit-details-marker{display:none;}
-.drawer-stores-arrow{
-color:rgba(255,255,255,0.5);
-font-size:14px;
-transition:transform 0.2s;
-}
-.drawer-stores-section[open] .drawer-stores-arrow{
-transform:rotate(180deg);
-}
-
-.drawer-stores-title{
+.drawer-section-label{
 color:rgba(255,255,255,0.95);
 font-size:12px;
 font-weight:600;
@@ -1610,11 +1584,7 @@ body{padding-top:58px;}
 .offers-hero-slide.active{opacity:1;}
 .offers-hero-slide picture,.offers-hero-slide img{width:100%;height:100%;object-fit:cover;}
 .offers-hero-ov{position:absolute;inset:0;background:linear-gradient(135deg,rgba(26,5,51,0.7) 0%,rgba(13,3,26,0.5) 60%,rgba(0,0,0,0.12) 100%);}
-.offers-hero-inner{position:relative;z-index:2;padding:0 60px 60px;max-width:800px;}
-.offers-hero-label{font-size:11px;letter-spacing:2px;text-transform:uppercase;color:var(--gold);margin-bottom:12px;}
-.offers-hero-inner h1{font-family:'Cormorant Garamond',serif;font-size:clamp(36px,5vw,56px);font-weight:300;color:#fff;line-height:1.15;margin-bottom:12px;}
-.offers-hero-inner p{font-size:14px;color:rgba(255,255,255,0.75);line-height:1.6;}
-@media(max-width:768px){.offers-hero{min-height:400px;}.offers-hero-inner{padding:0 24px 40px;}}
+@media(max-width:768px){.offers-hero{min-height:400px;}}
 </style>
 
 <section class="offers-hero" aria-label="Offers hero">
@@ -1638,12 +1608,7 @@ body{padding-top:58px;}
 </picture>
 </div>
 </div>
-<div class="offers-hero-ov" aria-hidden="true"></div>
-<div class="offers-hero-inner">
-<div class="offers-hero-label">Uncompromising Luxury. Exceptional Value.</div>
-<h1>Exclusive Elite Salon Offers</h1>
-<p>Unlock exclusive beauty deals at Bangalore's premier salons. From JP Nagar to Hennur, explore offers on hair, facials, & bridal packages at our 5 elite locations.</p>
-</div>
+<div class="offers-hero-ov" aria-hidden="true" style="opacity:0.25;"></div>
 </section>
 
 <script>

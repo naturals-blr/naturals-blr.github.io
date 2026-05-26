@@ -209,12 +209,7 @@ onerror="this.style.display='none'">
 <a class="drawer-link " href="https://naturals-blr.github.io/services/" aria-label="View all salon services">SERVICES</a>
 <a class="drawer-link " href="https://naturals-blr.github.io/offers/" aria-label="View current salon offers and promotions">OFFERS</a>
 
-<details class="drawer-stores-section">
-<summary class="drawer-stores-header">
-<span class="drawer-stores-title">OUR STORES</span>
-<span class="drawer-stores-arrow">⌄</span>
-</summary>
-
+<div class="drawer-section-label">OUR STORES</div>
 <div class="drawer-stores-list">
 <a class="drawer-store-link" href="https://naturals-blr.github.io/stores/bangalore/jp-nagar-5th-phase/" aria-label="Visit Naturals Salon JP Nagar 5th Phase">
 <span class="drawer-store-name">JP Nagar 5th Phase</span>
@@ -232,7 +227,6 @@ onerror="this.style.display='none'">
 <span class="drawer-store-name">Hennur</span>
 </a>
 </div>
-</details>
 
 <a class="drawer-link " href="https://naturals-blr.github.io/careers/bangalore/" aria-label="Join our team and view career opportunities">Join our Team</a>
 <a class="drawer-link " href="https://naturals-blr.github.io/about/" aria-label="Learn about Naturals Salon & Spa">ABOUT</a>
@@ -395,34 +389,7 @@ transform:scale(1.1);
 }
 
 /* ── STORES SECTION STYLES ── */
-.drawer-stores-section{
-margin-top:12px;
-border-radius:12px;
-background:rgba(255,255,255,0.03);
-border:1px solid rgba(255,255,255,0.06);
-overflow:hidden;
-}
-
-.drawer-stores-header{
-display:flex;
-align-items:center;
-justify-content:space-between;
-padding:14px 16px 8px;
-border-bottom:1px solid rgba(255,255,255,0.08);
-cursor:pointer;
-list-style:none;
-}
-.drawer-stores-header::-webkit-details-marker{display:none;}
-.drawer-stores-arrow{
-color:rgba(255,255,255,0.5);
-font-size:14px;
-transition:transform 0.2s;
-}
-.drawer-stores-section[open] .drawer-stores-arrow{
-transform:rotate(180deg);
-}
-
-.drawer-stores-title{
+.drawer-section-label{
 color:rgba(255,255,255,0.95);
 font-size:12px;
 font-weight:600;
