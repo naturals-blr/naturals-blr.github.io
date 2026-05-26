@@ -283,7 +283,10 @@ display:block;text-decoration:none;transition:background 0.2s;position:relative;
 .st-neighborhood-body strong{display:block;color:var(--text);font-weight:600;margin-bottom:8px;}
 .st-landmarks{display:flex;flex-wrap:wrap;gap:6px;margin-top:8px;}
 .st-landmarks span{border:1px solid rgba(0,0,0,0.08);border-radius:999px;padding:4px 8px;background:#fff;font-size:10px;color:var(--text-mid);}
-.st-landmarks-more{border:1px solid rgba(201,168,76,0.22);border-radius:999px;padding:4px 8px;background:rgba(201,168,76,0.10);font-size:10px;color:var(--green-mid);font-weight:800;}
+.st-landmarks-more{border:1px solid rgba(201,168,76,0.22);border-radius:999px;padding:4px 8px;background:rgba(201,168,76,0.10);font-size:10px;color:var(--green-mid);font-weight:800;cursor:pointer;transition:background 0.2s;}
+.st-landmarks-more:hover{background:rgba(201,168,76,0.20);}
+.st-landmarks .nbh-hidden{display:none;}
+.st-landmarks.expanded .nbh-hidden{display:inline-flex;}
 .st-card-actions{display:flex;flex-direction:column;gap:10px;margin-top:auto;}
 .st-primary-row{display:block;}
 .st-icon-row{display:flex;gap:10px;justify-content:center;align-items:center;flex-wrap:wrap;}
@@ -331,14 +334,7 @@ transition:all 0.2s;border-radius:10px;background:#fff;text-decoration:none;
 .services-sec{background:var(--cream);}
 .svc-cats-wrap{position:relative;max-width:1120px;margin:0 auto 34px;}
 .svc-cats-head{display:flex;justify-content:flex-end;margin:-18px 0 12px;}
-.svc-cats-actions{display:flex;align-items:center;gap:8px;}
-.svc-cat-nav{width:38px;height:38px;border-radius:50%;border:1px solid rgba(0,0,0,0.12);background:#fff;color:var(--text);display:inline-flex;align-items:center;justify-content:center;font-size:20px;line-height:1;cursor:pointer;transition:background 0.2s,border-color 0.2s,transform 0.2s,box-shadow 0.2s;}
-.svc-cat-nav:hover{background:var(--dark);border-color:var(--dark);color:#fff;transform:translateY(-1px);box-shadow:0 8px 18px rgba(0,0,0,0.12);}
-.svc-cats-grid{display:flex;gap:14px;overflow-x:auto;overflow-y:hidden;scroll-snap-type:x mandatory;scroll-padding:2px;overscroll-behavior-x:contain;padding:2px 2px 14px;margin:0 -2px;-webkit-overflow-scrolling:touch;scrollbar-width:thin;scrollbar-color:rgba(0,0,0,0.25) transparent;}
-.svc-cats-grid::-webkit-scrollbar{height:6px;}
-.svc-cats-grid::-webkit-scrollbar-track{background:transparent;}
-.svc-cats-grid::-webkit-scrollbar-thumb{background:rgba(0,0,0,0.22);border-radius:999px;}
-.svc-cat-card{background:#fff;overflow:hidden;border-radius:14px;border:1px solid rgba(0,0,0,0.07);transition:all 0.3s;cursor:pointer;display:flex;flex-direction:column;flex:0 0 clamp(166px, 22vw, 218px);scroll-snap-align:start;box-shadow:0 4px 16px rgba(0,0,0,0.04);}
+.svc-cat-card{background:#fff;overflow:hidden;border-radius:14px;border:1px solid rgba(0,0,0,0.07);transition:all 0.3s;cursor:pointer;display:flex;flex-direction:column;flex:0 0 clamp(166px, 22vw, 218px);box-shadow:0 4px 16px rgba(0,0,0,0.04);}
 .svc-cat-card:hover{transform:translateY(-3px);box-shadow:0 12px 30px rgba(0,0,0,0.10);border-color:var(--gold);}
 .svc-cat-img{height:106px;overflow:hidden;flex-shrink:0;background:#f5f1e8;}
 .svc-cat-img img{width:100%;height:100%;object-fit:cover;transition:transform 0.6s ease;}
@@ -358,15 +354,7 @@ transition:all 0.2s;border-radius:10px;background:#fff;text-decoration:none;
 .offers-sec .btn-secondary:hover{border-color:#fff;background:rgba(255,255,255,0.1);}
 .home-carousel-wrap{max-width:1120px;margin:0 auto 28px;}
 .home-carousel-head{display:flex;justify-content:flex-end;margin:-18px 0 12px;}
-.home-carousel-actions{display:flex;align-items:center;gap:8px;}
-.home-carousel-nav{width:38px;height:38px;border-radius:50%;border:1px solid rgba(255,255,255,0.18);background:rgba(255,255,255,0.06);color:#fff;display:inline-flex;align-items:center;justify-content:center;font-size:20px;line-height:1;cursor:pointer;transition:background 0.2s,border-color 0.2s,transform 0.2s,box-shadow 0.2s;}
-.home-carousel-nav:hover{background:rgba(255,255,255,0.14);border-color:var(--gold);color:var(--gold);transform:translateY(-1px);box-shadow:0 8px 18px rgba(0,0,0,0.18);}
-.home-carousel-track{display:flex;gap:14px;overflow-x:auto;overflow-y:hidden;scroll-snap-type:x mandatory;scroll-padding:2px;overscroll-behavior-x:contain;padding:2px 2px 14px;margin:0 -2px;-webkit-overflow-scrolling:touch;scrollbar-width:thin;scrollbar-color:rgba(255,255,255,0.25) transparent;}
-.home-carousel-track::-webkit-scrollbar{height:6px;}
-.home-carousel-track::-webkit-scrollbar-track{background:transparent;}
-.home-carousel-track::-webkit-scrollbar-thumb{background:rgba(255,255,255,0.24);border-radius:999px;}
-.home-offers-grid{margin-bottom:0;}
-.hoc{background:rgba(255,255,255,0.04);border:1px solid rgba(255,255,255,0.08);border-radius:14px;overflow:hidden;transition:all 0.25s;display:flex;flex-direction:column;min-height:332px;flex:0 0 clamp(230px, 30vw, 316px);scroll-snap-align:start;}
+.hoc{background:rgba(255,255,255,0.04);border:1px solid rgba(255,255,255,0.08);border-radius:14px;overflow:hidden;transition:all 0.25s;display:flex;flex-direction:column;min-height:332px;flex:0 0 clamp(230px, 30vw, 316px);}
 .hoc:hover{background:rgba(255,255,255,0.07);border-color:var(--gold);transform:translateY(-2px);}
 .hoc:only-child{margin:0 auto;min-height:200px;max-width:400px;justify-self:center;align-items:center;}
 .hoc-media{height:160px;background:linear-gradient(135deg,var(--dark) 0%,var(--green) 100%);position:relative;overflow:hidden;}
@@ -1138,12 +1126,9 @@ readMoreLink.textContent = textElement.classList.contains('expanded') ? 'Read Le
 .hero h1{font-size:clamp(32px,8vw,48px);}
 .hero-btns{flex-direction:column;align-items:center;}
 .st-grid{grid-template-columns:1fr;}
-.svc-cats-head{margin:-20px 0 10px;}
-.svc-cat-nav{width:34px;height:34px;font-size:18px;}
 .svc-cat-card{flex-basis:min(72vw, 230px);}
 .svc-cat-img{height:104px;}
 .home-carousel-head{margin:-20px 0 10px;}
-.home-carousel-nav{width:34px;height:34px;font-size:18px;}
 .hoc,.media-card{flex-basis:min(78vw, 286px);}
 .hoc-media,.media-media{height:150px !important;min-height:150px;}
 .rev-grid{grid-template-columns:1fr;}
@@ -2143,7 +2128,7 @@ style="width: 100%; height: 200px; border: none;">
 <div class="st-neighborhood-label">Areas served</div>
 <div class="st-neighborhood-body">
 <strong>JP Nagar 5th Phase</strong>
-<div class="st-landmarks" aria-label="Nearby landmarks for JP Nagar 5th Phase">
+<div class="st-landmarks" id="nbh-N78" aria-label="Nearby landmarks for JP Nagar 5th Phase">
 <span>Near Puttenahalli Lake</span>
 <span>Ragigudda Sri Prasanna Anjaneyaswamy Temple</span>
 <span>Ranga Shankara</span>
@@ -2152,7 +2137,9 @@ style="width: 100%; height: 200px; border: none;">
 <span>Lalbagh Botanical Garden</span>
 <span>Bull Temple</span>
 <span>Jayanagar 4th Block Market</span>
-<span class="st-landmarks-more">+ 2 more</span>
+<span class="nbh-hidden">ISKCON Vaikuntha Hill</span>
+<span class="nbh-hidden">Ranadheera Kanteerava Park</span>
+<button class="st-landmarks-more" onclick="toggleNbhHome(this)" data-count="2">+ 2 more</button>
 </div>
 </div>
 </div>
@@ -2212,7 +2199,7 @@ style="width: 100%; height: 200px; border: none;">
 <div class="st-neighborhood-label">Areas served</div>
 <div class="st-neighborhood-body">
 <strong>Thanisandra / Nagavara</strong>
-<div class="st-landmarks" aria-label="Nearby landmarks for Nagavara">
+<div class="st-landmarks" id="nbh-N45" aria-label="Nearby landmarks for Nagavara">
 <span>Above Paakashala Restaurant Nagavara</span>
 <span>Near Skywalk Exit</span>
 <span>Near Manyata Tech Park</span>
@@ -2221,7 +2208,11 @@ style="width: 100%; height: 200px; border: none;">
 <span>Rachenahalli Lake</span>
 <span>Phoenix Mall of Asia</span>
 <span>Snow City Bengaluru</span>
-<span class="st-landmarks-more">+ 4 more</span>
+<span class="nbh-hidden">Bengaluru Palace</span>
+<span class="nbh-hidden">Hennur Biodiversity Park</span>
+<span class="nbh-hidden">Aster CMI Hospital</span>
+<span class="nbh-hidden">Jakkur Lake</span>
+<button class="st-landmarks-more" onclick="toggleNbhHome(this)" data-count="4">+ 4 more</button>
 </div>
 </div>
 </div>
@@ -2281,7 +2272,7 @@ style="width: 100%; height: 200px; border: none;">
 <div class="st-neighborhood-label">Areas served</div>
 <div class="st-neighborhood-body">
 <strong>Devasandra / KR Puram</strong>
-<div class="st-landmarks" aria-label="Nearby landmarks for Devasandra">
+<div class="st-landmarks" id="nbh-N36" aria-label="Nearby landmarks for Devasandra">
 <span>Near Phoenix Marketcity</span>
 <span>VR Bengaluru</span>
 <span>Krishnarajapuram Railway Station</span>
@@ -2290,7 +2281,9 @@ style="width: 100%; height: 200px; border: none;">
 <span>Marathahalli Bridge</span>
 <span>Ulsoor Lake</span>
 <span>RMZ Infinity</span>
-<span class="st-landmarks-more">+ 2 more</span>
+<span class="nbh-hidden">Commercial Street</span>
+<span class="nbh-hidden">Indira Nagar 100 Feet Road</span>
+<button class="st-landmarks-more" onclick="toggleNbhHome(this)" data-count="2">+ 2 more</button>
 </div>
 </div>
 </div>
@@ -2350,7 +2343,7 @@ style="width: 100%; height: 200px; border: none;">
 <div class="st-neighborhood-label">Areas served</div>
 <div class="st-neighborhood-body">
 <strong>Frazer Town / Pulikeshi Nagar</strong>
-<div class="st-landmarks" aria-label="Nearby landmarks for Frazer Town">
+<div class="st-landmarks" id="nbh-N05" aria-label="Nearby landmarks for Frazer Town">
 <span>Near Mosque Road</span>
 <span>Albert Bakery</span>
 <span>St. Francis Xavier’s Cathedral</span>
@@ -2359,7 +2352,9 @@ style="width: 100%; height: 200px; border: none;">
 <span>Bangalore East Railway Station</span>
 <span>Bangalore Palace</span>
 <span>Ulsoor Lake</span>
-<span class="st-landmarks-more">+ 2 more</span>
+<span class="nbh-hidden">Commercial Street</span>
+<span class="nbh-hidden">Vidhana Soudha</span>
+<button class="st-landmarks-more" onclick="toggleNbhHome(this)" data-count="2">+ 2 more</button>
 </div>
 </div>
 </div>
@@ -2419,7 +2414,7 @@ style="width: 100%; height: 200px; border: none;">
 <div class="st-neighborhood-label">Areas served</div>
 <div class="st-neighborhood-body">
 <strong>Hennur / North Bangalore</strong>
-<div class="st-landmarks" aria-label="Nearby landmarks for Hennur">
+<div class="st-landmarks" id="nbh-N43" aria-label="Nearby landmarks for Hennur">
 <span>Near Hennur Cross</span>
 <span>Mantri Splendor</span>
 <span>Manyata Tech Park</span>
@@ -2428,7 +2423,11 @@ style="width: 100%; height: 200px; border: none;">
 <span>Bagalur Main Road</span>
 <span>Bangalore Palace</span>
 <span>Hebbal Flyover</span>
-<span class="st-landmarks-more">+ 4 more</span>
+<span class="nbh-hidden">Lumbini Gardens</span>
+<span class="nbh-hidden">Horamavu Agara Lake</span>
+<span class="nbh-hidden">XLR8 Indoor Sports Arena</span>
+<span class="nbh-hidden">Byg Brewski Brewing Company</span>
+<button class="st-landmarks-more" onclick="toggleNbhHome(this)" data-count="4">+ 4 more</button>
 </div>
 </div>
 </div>
@@ -2444,13 +2443,13 @@ style="width: 100%; height: 200px; border: none;">
 <p>From precision cuts to bridal transformations — world-class beauty at every visit.</p>
 </div><div class="svc-cats-wrap">
 <div class="svc-cats-head reveal">
-<div class="svc-cats-actions" aria-label="Service category carousel controls">
-<button class="svc-cat-nav" type="button" aria-label="Previous service category" onclick="scrollServiceCategoryCarousel(this, -1)">&#8249;</button>
-<button class="svc-cat-nav" type="button" aria-label="Next service category" onclick="scrollServiceCategoryCarousel(this, 1)">&#8250;</button>
+<div class="hscroll-actions" aria-label="svc-cats carousel controls">
+<button class="hscroll-btn" type="button" aria-label="Previous" onclick="hscroll('svc-cats', -1, this)">&#8249;</button>
+<button class="hscroll-btn" type="button" aria-label="Next" onclick="hscroll('svc-cats', 1, this)">&#8250;</button>
 </div>
+
 </div>
-<div class="svc-cats-grid" aria-label="Service category carousel">
-<a href="/services/?cat=Hair%20Styling%20-%20Female" class="svc-cat-card reveal" aria-label="Hair Styling - Female services">
+<div class="hscroll-track" data-hscroll-track="svc-cats"> <a href="/services/?cat=Hair%20Styling%20-%20Female" class="svc-cat-card reveal" data-hscroll-card aria-label="Hair Styling - Female services">
 <div class="svc-cat-img">
 <img src="/images/service-icon/hair_styling_female.jpg" 
 alt="Hair Styling - Female" 
@@ -2463,7 +2462,7 @@ onerror="this.src='/images/service-icon/service_default.jpg'">
 <div class="svc-cat-price">from &#8377;315</div>
 </div>
 </a>
-<a href="/services/?cat=Hair%20Wash%20and%20Blow%20Dry" class="svc-cat-card reveal" aria-label="Hair Wash and Blow Dry services">
+<a href="/services/?cat=Hair%20Wash%20and%20Blow%20Dry" class="svc-cat-card reveal" data-hscroll-card aria-label="Hair Wash and Blow Dry services">
 <div class="svc-cat-img">
 <img src="/images/service-icon/hair_wash_and_blow_dry.jpg" 
 alt="Hair Wash and Blow Dry" 
@@ -2476,7 +2475,7 @@ onerror="this.src='/images/service-icon/service_default.jpg'">
 <div class="svc-cat-price">from &#8377;450</div>
 </div>
 </a>
-<a href="/services/?cat=Colouring%20and%20Highlights" class="svc-cat-card reveal" aria-label="Colouring and Highlights services">
+<a href="/services/?cat=Colouring%20and%20Highlights" class="svc-cat-card reveal" data-hscroll-card aria-label="Colouring and Highlights services">
 <div class="svc-cat-img">
 <img src="/images/service-icon/colouring_and_highlights.jpg" 
 alt="Colouring and Highlights" 
@@ -2489,7 +2488,7 @@ onerror="this.src='/images/service-icon/service_default.jpg'">
 <div class="svc-cat-price">from &#8377;315</div>
 </div>
 </a>
-<a href="/services/?cat=Texture" class="svc-cat-card reveal" aria-label="Texture services">
+<a href="/services/?cat=Texture" class="svc-cat-card reveal" data-hscroll-card aria-label="Texture services">
 <div class="svc-cat-img">
 <img src="/images/service-icon/texture.jpg" 
 alt="Texture" 
@@ -2502,7 +2501,7 @@ onerror="this.src='/images/service-icon/service_default.jpg'">
 <div class="svc-cat-price">from &#8377;5400</div>
 </div>
 </a>
-<a href="/services/?cat=Hair%20Styling" class="svc-cat-card reveal" aria-label="Hair Styling services">
+<a href="/services/?cat=Hair%20Styling" class="svc-cat-card reveal" data-hscroll-card aria-label="Hair Styling services">
 <div class="svc-cat-img">
 <img src="/images/service-icon/hair_styling.jpg" 
 alt="Hair Styling" 
@@ -2515,7 +2514,7 @@ onerror="this.src='/images/service-icon/service_default.jpg'">
 <div class="svc-cat-price">from &#8377;900</div>
 </div>
 </a>
-<a href="/services/?cat=Head%20Massage" class="svc-cat-card reveal" aria-label="Head Massage services">
+<a href="/services/?cat=Head%20Massage" class="svc-cat-card reveal" data-hscroll-card aria-label="Head Massage services">
 <div class="svc-cat-img">
 <img src="/images/service-icon/head_massage.jpg" 
 alt="Head Massage" 
@@ -2545,13 +2544,13 @@ onerror="this.src='/images/service-icon/service_default.jpg'">
 
 <div class="home-carousel-wrap">
 <div class="home-carousel-head reveal">
-<div class="home-carousel-actions" aria-label="Offer carousel controls">
-<button class="home-carousel-nav" type="button" aria-label="Previous offer" onclick="scrollHomeCampaignCarousel(this, -1)">&#8249;</button>
-<button class="home-carousel-nav" type="button" aria-label="Next offer" onclick="scrollHomeCampaignCarousel(this, 1)">&#8250;</button>
+<div class="hscroll-actions" aria-label="offers carousel controls">
+<button class="hscroll-btn" type="button" aria-label="Previous" onclick="hscroll('offers', -1, this)">&#8249;</button>
+<button class="hscroll-btn" type="button" aria-label="Next" onclick="hscroll('offers', 1, this)">&#8250;</button>
 </div>
+
 </div>
-<div class="home-offers-grid home-carousel-track" id="home-offers-grid" aria-label="Offers carousel">
-<div class="hoc reveal"
+<div class="hscroll-track" data-hscroll-track="offers"> <div class="hoc reveal" data-hscroll-card
 data-image-available="True"
 data-image-name="20260516_OFFER_HairSpaandHaircut"
 data-offer-title="Hair Spa and Haircut Combo at ₹2499">
@@ -2600,7 +2599,7 @@ data-poster-date-prefix="Valid till">
 </div>
 </div>
 </div>
-<div class="hoc reveal"
+<div class="hoc reveal" data-hscroll-card
 data-image-available="True"
 data-image-name="20260513_OFFER_MenGroomingComboa"
 data-offer-title="Men Grooming Combo at ₹459">
@@ -2649,7 +2648,7 @@ data-poster-date-prefix="Valid till">
 </div>
 </div>
 </div>
-<div class="hoc reveal"
+<div class="hoc reveal" data-hscroll-card
 data-image-available="True"
 data-image-name="20260510_OFFER_BridalBeautyPackag"
 data-offer-title="Bridal Beauty Packages Starting ₹4999">
@@ -2699,7 +2698,6 @@ data-poster-date-prefix="Valid till">
 </div>
 </div>
 </div>
-</div>
 <div class="offers-view-all">
 <a href="/offers/" class="btn-secondary">View All Offers &#8594;</a>
 </div>
@@ -2714,13 +2712,13 @@ data-poster-date-prefix="Valid till">
 
 <div class="home-carousel-wrap">
 <div class="home-carousel-head reveal">
-<div class="home-carousel-actions" aria-label="News carousel controls">
-<button class="home-carousel-nav" type="button" aria-label="Previous update" onclick="scrollHomeCampaignCarousel(this, -1)">&#8249;</button>
-<button class="home-carousel-nav" type="button" aria-label="Next update" onclick="scrollHomeCampaignCarousel(this, 1)">&#8250;</button>
+<div class="hscroll-actions" aria-label="updates carousel controls">
+<button class="hscroll-btn" type="button" aria-label="Previous" onclick="hscroll('updates', -1, this)">&#8249;</button>
+<button class="hscroll-btn" type="button" aria-label="Next" onclick="hscroll('updates', 1, this)">&#8250;</button>
 </div>
+
 </div>
-<div class="media-grid home-carousel-track" id="media-grid" aria-label="News and updates carousel">
-<div class="media-card reveal" 
+<div class="hscroll-track" data-hscroll-track="updates"> <div class="media-card reveal" data-hscroll-card
 data-image-available="True"
 data-image-name="20260522_ANNOU_SomethingBeautiful"
 data-campaign-title="Something Beautiful is Opening in Nagavara Today 🌿">
@@ -2768,7 +2766,7 @@ data-poster-date-prefix="Valid till">
 </div>
 </div>
 </div>
-<div class="media-card reveal" 
+<div class="media-card reveal" data-hscroll-card
 data-image-available="True"
 data-image-name="20260521_ANNOU_LuxuryHasANewAdd"
 data-campaign-title="Luxury Has A New Address in Nagavara ✨">
@@ -2816,7 +2814,7 @@ data-poster-date-prefix="Valid till">
 </div>
 </div>
 </div>
-<div class="media-card reveal" 
+<div class="media-card reveal" data-hscroll-card
 data-image-available="True"
 data-image-name="20260520_ANNOU_NagavaraWe’reMovi"
 data-campaign-title="Nagavara, We’re Moving In! 🏠✨">
@@ -2864,7 +2862,7 @@ data-poster-date-prefix="Valid till">
 </div>
 </div>
 </div>
-<div class="media-card reveal" 
+<div class="media-card reveal" data-hscroll-card
 data-image-available="True"
 data-image-name="20260519_ANNOU_BIGNEWS-Naturals"
 data-campaign-title="BIG NEWS - Naturals Nagavara is Now Live! 🚀">
@@ -2912,7 +2910,7 @@ data-poster-date-prefix="Valid till">
 </div>
 </div>
 </div>
-<div class="media-card reveal" 
+<div class="media-card reveal" data-hscroll-card
 data-image-available="True"
 data-image-name="20260516_ANNOU_LuxuryHasANewAdd"
 data-campaign-title="Luxury Has A New Address in Nagavara ✨">
@@ -2960,7 +2958,7 @@ data-poster-date-prefix="Valid till">
 </div>
 </div>
 </div>
-<div class="media-card reveal" 
+<div class="media-card reveal" data-hscroll-card
 data-image-available="True"
 data-image-name="20260518_ANNOU_SameHeartBrandNe"
 data-campaign-title="Same Heart, Brand New Space ❤️">
@@ -3005,7 +3003,6 @@ data-poster-date-prefix="Valid till">
 <div class="media-store">
 </div>
 <div class="media-valid">Valid till 30-May-2026</div>
-</div>
 </div>
 </div>
 </div>
@@ -3141,24 +3138,32 @@ View All 5-Star Reviews
 
 <div style="clear: both;"></div>
 
+<style>
+.hscroll-actions{display:flex;align-items:center;gap:8px;flex-shrink:0;}
+.hscroll-btn{width:38px;height:38px;border-radius:50%;border:1px solid rgba(128,128,128,0.22);background:rgba(128,128,128,0.08);color:inherit;display:inline-flex;align-items:center;justify-content:center;font-size:20px;line-height:1;cursor:pointer;transition:background 0.2s,border-color 0.2s,transform 0.2s,box-shadow 0.2s;}
+.hscroll-btn:hover{background:var(--dark,#101512);border-color:var(--dark,#101512);color:#fff;transform:translateY(-1px);box-shadow:0 8px 18px rgba(0,0,0,0.18);}
+.hscroll-track{display:flex;gap:14px;overflow-x:auto;overflow-y:hidden;scroll-snap-type:x mandatory;scroll-padding:2px;overscroll-behavior-x:contain;padding:2px 2px 14px;margin:0 -2px;-webkit-overflow-scrolling:touch;scrollbar-width:thin;scrollbar-color:rgba(128,128,128,0.25) transparent;}
+.hscroll-track::-webkit-scrollbar{height:6px;}
+.hscroll-track::-webkit-scrollbar-track{background:transparent;}
+.hscroll-track::-webkit-scrollbar-thumb{background:rgba(128,128,128,0.22);border-radius:999px;}
+[data-hscroll-card]{scroll-snap-align:start;}
+@media(max-width:600px){.hscroll-btn{width:34px;height:34px;font-size:18px;}}
+</style>
 <script>
-function scrollServiceCategoryCarousel(button, direction) {
-const wrap = button.closest('.svc-cats-wrap') || button.closest('.services-sec');
-const carousel = wrap ? wrap.querySelector('.svc-cats-grid') : null;
-scrollHorizontalCarousel(carousel, direction, button);
+function hscroll(id, direction, btn) {
+var track = document.querySelector('[data-hscroll-track="' + id + '"]');
+if (!track) return;
+var card = track.querySelector('[data-hscroll-card]');
+var gap = 14;
+if (card) {
+var cs = getComputedStyle(track);
+var cg = parseFloat(cs.columnGap);
+var gg = parseFloat(cs.gap);
+gap = Number.isFinite(cg) ? cg : (Number.isFinite(gg) ? gg : 14);
 }
-
-function scrollHomeCampaignCarousel(button, direction) {
-const wrap = button.closest('.home-carousel-wrap') || button.closest('section');
-const carousel = wrap ? wrap.querySelector('.home-carousel-track') : null;
-scrollHorizontalCarousel(carousel, direction, button);
-}
-
-function scrollHorizontalCarousel(carousel, direction, button) {
-if (!carousel) return;
-const amount = Math.max(260, Math.round(carousel.clientWidth * 0.82));
-carousel.scrollBy({ left: direction * amount, behavior: 'smooth' });
-if (button && typeof button.blur === 'function') button.blur();
+var amount = card ? (card.offsetWidth + gap) : Math.max(260, Math.round(track.clientWidth * 0.82));
+track.scrollBy({ left: direction * amount, behavior: 'smooth' });
+if (btn && typeof btn.blur === 'function') btn.blur();
 }
 </script>
 
@@ -3414,43 +3419,6 @@ gap: 8px;
 .ft-copy { font-size: 11px; color: rgba(255,255,255,0.16); }
 .ft-url { font-size: 11px; color: rgba(255,255,255,0.18); letter-spacing: 1px; }
 
-.site-scroll-after-hero {
-position: fixed;
-right: 24px;
-bottom: 84px;
-z-index: 900;
-width: 44px;
-height: 44px;
-border-radius: 50%;
-border: 1px solid rgba(255,255,255,0.18);
-background: var(--dark, #101512);
-color: rgba(255,255,255,0.82);
-display: flex;
-align-items: center;
-justify-content: center;
-cursor: pointer;
-opacity: 0;
-pointer-events: none;
-transform: translateY(12px);
-transition: opacity 0.25s ease, transform 0.25s ease, background 0.2s ease, border-color 0.2s ease;
-box-shadow: 0 10px 28px rgba(0,0,0,0.22);
-}
-.site-scroll-after-hero.visible {
-opacity: 1;
-pointer-events: auto;
-transform: translateY(0);
-}
-.site-scroll-after-hero:hover {
-background: var(--green, #0f3d30);
-border-color: var(--green-soft, rgba(255,255,255,0.3));
-color: #fff;
-}
-.site-scroll-after-hero svg {
-width: 20px;
-height: 20px;
-display: block;
-}
-
 /* ── Responsive ─────────────────────────────────────────────────── */
 @media (max-width: 960px) {
 .ft-top {
@@ -3470,20 +3438,8 @@ grid-template-columns: 1fr;
 padding: 28px 16px 20px;
 }
 .ft-col ul a { max-width: 100%; }
-.site-scroll-after-hero {
-right: 18px;
-bottom: 86px;
-width: 42px;
-height: 42px;
-}
 }
 </style>
-
-<button class="site-scroll-after-hero" type="button" aria-label="Scroll to page content" title="Back to page content">
-<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
-<path d="M18 15l-6-6-6 6"></path>
-</svg>
-</button>
 
 <div id="staffTrigger" style="position: fixed; bottom: 10px; right: 10px; width: 24px; height: 24px; opacity: 0.2; z-index: 9999; cursor: pointer;">
 ⚙️
@@ -3521,43 +3477,47 @@ trigger.addEventListener('click', handleTriggerClick);
 })();
 </script>
 
+<button class="stt-btn" type="button" aria-label="Scroll to top" title="Back to top">
+<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+<path d="M18 15l-6-6-6 6"></path>
+</svg>
+</button>
+
+<style>
+.stt-btn{
+position:fixed;right:24px;bottom:84px;z-index:900;
+width:44px;height:44px;border-radius:50%;
+border:1px solid rgba(255,255,255,0.18);
+background:var(--dark,#101512);
+color:rgba(255,255,255,0.82);
+display:flex;align-items:center;justify-content:center;
+cursor:pointer;
+opacity:0;pointer-events:none;
+transform:translateY(12px);
+transition:opacity 0.25s ease,transform 0.25s ease,background 0.2s ease,border-color 0.2s ease;
+box-shadow:0 10px 28px rgba(0,0,0,0.22);
+}
+.stt-btn.visible{opacity:1;pointer-events:auto;transform:translateY(0);}
+.stt-btn:hover{background:var(--green,#0f3d30);border-color:var(--green-soft,rgba(255,255,255,0.3));color:#fff;}
+.stt-btn svg{width:20px;height:20px;display:block;}
+@media(max-width:600px){.stt-btn{right:18px;bottom:86px;width:42px;height:42px;}}
+</style>
+
 <script>
-(function() {
-var btn = document.querySelector('.site-scroll-after-hero');
-if (!btn) return;
-
-function getHero() {
-return document.querySelector('.page-hero, .hero, .careers-hero');
+(function(){
+var btn=document.querySelector('.stt-btn');
+if(!btn) return;
+function update(){
+var scrollY=window.pageYOffset||document.documentElement.scrollTop||0;
+btn.classList.toggle('visible',scrollY>400);
 }
-
-function getTarget() {
-var hero = getHero();
-if (hero && hero.nextElementSibling) return hero.nextElementSibling;
-return document.querySelector('main, .services-main, .page-wrap, section');
-}
-
-function scrollBelowHero() {
-var target = getTarget();
-if (!target) {
-window.scrollTo({ top: 0, behavior: 'smooth' });
-return;
-}
-target.scrollIntoView({ behavior: 'smooth', block: 'start' });
-}
-
-function updateVisibility() {
-var hero = getHero();
-var threshold = hero ? (hero.offsetTop + hero.offsetHeight - 80) : 280;
-var scrollY = window.pageYOffset || document.documentElement.scrollTop || 0;
-btn.classList.toggle('visible', scrollY > threshold);
-}
-
-btn.addEventListener('click', scrollBelowHero);
-window.addEventListener('scroll', updateVisibility, { passive: true });
-window.addEventListener('resize', updateVisibility);
-updateVisibility();
+btn.addEventListener('click',function(){ window.scrollTo({top:0,behavior:'smooth'}); });
+window.addEventListener('scroll',update,{passive:true});
+window.addEventListener('resize',update);
+update();
 })();
-</script><script>
+</script>
+<script>
 window.NATURALS_STORES = [{"Active_Status": "Yes", "Address_City": "Bangalore", "Address_Full": "1st Floor, Anand Onyx, No 305, 15th Cross Rd, near Outer Ring Road, 5th Phase, J P Nagar Phase 5, J. P. Nagar", "Address_Line_2": "", "Address_State": "Karnataka", "Appointment_URL": "https://naturals-salon-jpnagar5phase.setmore.com/", "Booking_Platform": "Setmore", "Email": "jpnagar2.naturals@gmail.com", "Facebook_ID": "Naturals.Salon.JPNagar5Phase", "Facebook_URL": "https://facebook.com/Naturals.Salon.JPNagar5Phase", "Google_Location_ID": "locations/11456061934238062921", "Google_Maps_URL": "https://g.page/Naturals_JPNagar5thPhase/", "Google_Place_ID": "ChIJD_AjPBEVrjsRyrGhTRo9qvw", "Instagram_ID": "@Naturals.Salon.JPNagar5Phase", "Instagram_URL": "https://instagram.com/Naturals.Salon.JPNagar5Phase/", "Manager_Name": "Nisha", "Manager_WhatsApp": "+918792642299", "Phone_Raw": "+918792642299", "Pincode": "560078", "Store_ID": "Store_N78", "Store_Page_URL": "stores/n78.html", "about_store_text": "Welcome to Naturals Unisex Salon JP Nagar 5th Phase \u2014 south Bangalore\u0027s premium beauty destination on 100 Ft Ring Road. Nestled in the heart of JP Nagar\u0027s 5th Phase, our salon has been the go-to choice for residents of JP Nagar, Banashankari, Jayanagar and Uttarahalli for expert hair care, radiant skin treatments and flawless bridal packages.\n \n Our team of certified stylists specialises in precision haircuts, balayage and global colour, keratin smoothening, hair spa therapies, and a full range of facials tailored to Bangalore\u0027s climate and skin types. Whether you\u0027re preparing for a wedding, a corporate event, or simply your weekly self-care ritual, every visit at our JP Nagar salon is crafted around you.\n \n Part of India\u0027s most trusted salon network with over 25 years of expertise across 1,000+ outlets, Naturals brings national-standard beauty services to your neighbourhood \u2014 with transparent pricing, premium products, and no surprises. Book your appointment online or walk in at Anand Onyx, 1st Floor, 15th Cross, 100 Ft Ring Road.\n\nDiscover a sanctuary of beauty in South Bangalore. Our JP Nagar 5th Phase stylists specialize in global hair trends and rejuvenating skin therapies.", "active_status": "Yes", "address_city": "Bangalore", "address_full": "1st Floor, Anand Onyx, No 305, 15th Cross Rd, near Outer Ring Road, 5th Phase, J P Nagar Phase 5, J. P. Nagar, Bangalore, Karnataka 560078, India", "address_line_1": "1st Floor, Anand Onyx, No 305, 15th Cross Rd, near Outer Ring Road, 5th Phase, J P Nagar Phase 5, J. P. Nagar", "address_pincode": "560078", "address_state": "Karnataka", "appointment_url": "https://naturals-salon-jpnagar5phase.setmore.com/", "booking_platform": "Setmore", "brand_store_name": "Naturals Unisex Salon - JP Nagar 5th Phase", "email": "jpnagar2.naturals@gmail.com", "escalation_contact": "Sophia", "escalation_email": "sophiaaxon@gmail.com", "escalation_whatsapp": "919741115349", "facebook_id": "Naturals.Salon.JPNagar5Phase", "facebook_page_id": "715840311849516", "facebook_url": "https://facebook.com/Naturals.Salon.JPNagar5Phase", "google_location_id": "locations/11456061934238062921", "google_maps_url": "https://g.page/Naturals_JPNagar5thPhase/", "google_place_id": "ChIJD_AjPBEVrjsRyrGhTRo9qvw", "google_review_link": "https://g.page/Naturals_JPNagar5thPhase/review?rc/", "h1_heading": "Naturals Unisex Salon - JP Nagar 5th Phase", "hero_tagline": "Elevate Your Style in South Bangalore", "instagram_business_account_id": "17841425192935961", "instagram_id": "Naturals.Salon.JPNagar5Phase", "instagram_url": "https://instagram.com/Naturals.Salon.JPNagar5Phase/", "local_neighborhood": "JP Nagar 5th Phase", "meta_description": "Experience luxury hair styling \u0026 skin care in JP Nagar. 5-star services from expert stylists. Book your premium makeover today!", "mon_fri_hours": "10:00 AM \u2013 9:00 PM", "nearby_landmarks": "Near Puttenahalli Lake, Ragigudda Sri Prasanna Anjaneyaswamy Temple, Ranga Shankara, Sarakki Lake, Indian Music Experience Museum, Lalbagh Botanical Garden, Bull Temple, Jayanagar 4th Block Market, ISKCON Vaikuntha Hill, Ranadheera Kanteerava Park", "phone_landline": "+918041304444", "phone_mobile": "+918792642299", "phone_whatsapp": "+918792642299", "pincode": "560078", "price_range": "\u20b9\u20b9", "saturday_hours": "10:00 AM \u2013 9:00 PM", "schema_latitude": "12.9055", "schema_longitude": "77.5945", "seo_title": "Best Hair Salon in JP Nagar 5th Phase | Naturals Unisex Salon", "store_area": "", "store_display_name": "JP Nagar 5th Phase", "store_id": "Store_N78", "store_id_short": "N78", "store_manager_name": "Nisha", "sunday_hours": "10:00 AM \u2013 9:00 PM"}, {"Active_Status": "Yes", "Address_City": "Bangalore", "Address_Full": "22-26/B11, R.K. Tower, 1st Cross, Chanukya Layout, Near Skywalk Exit, Nagavara,", "Address_Line_2": "", "Address_State": "Karnataka", "Appointment_URL": "https://naturals-salon-elementsmall.setmore.com/", "Booking_Platform": "Setmore", "Email": "naturalsnagavara@gmail.com", "Facebook_ID": "Naturals.Salon.Nagavara", "Facebook_URL": "https://facebook.com/Naturals.Salon.Nagavara/", "Google_Location_ID": "locations/5858391068390788403", "Google_Maps_URL": "https://maps.app.goo.gl/dPi8bNfB4USdgvvu8", "Google_Place_ID": "ChIJo_js4GgXrjsR3LgZhMNOPz4", "Instagram_ID": "@Naturals.Salon.Nagavara", "Instagram_URL": "https://instagram.com/Naturals.Salon.Nagavara/", "Manager_Name": "Sandesh Kumar", "Manager_WhatsApp": "+919901000017", "Phone_Raw": "+919901000017", "Pincode": "560045", "Store_ID": "Store_N45", "Store_Page_URL": "stores/n45.html", "about_store_text": "Welcome to Naturals Unisex Salon at Nagavara \u2014 north Bangalore\u0027s most convenient premium salon, located on the 1st Floor of , above to Paakashala Restaurant Nagavara, just minutes from Manyata Tech Park and Hebbal.\n \n Designed for the busy professional, our Elements Mall salon offers express and full-service beauty treatments that fit your schedule \u2014 from quick blowouts and express facials to full hair colour sessions and relaxing spa therapies. Whether you\u0027re a tech professional stepping away from the office, or a weekend shopper looking to unwind, our certified stylists deliver precision results with premium products every time.\n \n Our services include haircuts and styling for all hair types, global and fashion hair colour, keratin and smoothening treatments, deep conditioning hair spas, advanced facials, and de-tan and clean-up treatments perfect for Bangalore\u0027s sun and pollution. As part of India\u0027s most trusted salon network \u2014 with 25 years of expertise \u2014 Naturals brings world-class beauty services to your neighbourhood mall. Book online or visit us on the 3rd Floor at Elements Mall.\n\nLocated inside the premier Elements Mall, our salon offers high-end grooming and beauty solutions tailored for the sophisticated urban lifestyle.", "active_status": "Yes", "address_city": "Bangalore", "address_full": "22-26/B11, R.K. Tower, 1st Cross, Chanukya Layout, Near Skywalk Exit, Nagavara, Bangalore, Karnataka 560045, India", "address_line_1": "22-26/B11, R.K. Tower, 1st Cross, Chanukya Layout, Near Skywalk Exit, Nagavara,", "address_pincode": "560045", "address_state": "Karnataka", "appointment_url": "https://naturals-salon-elementsmall.setmore.com/", "booking_platform": "Setmore", "brand_store_name": "Naturals Unisex Salon - Nagavara", "email": "naturalsnagavara@gmail.com", "escalation_contact": "Sophia", "escalation_email": "sophiaaxon@gmail.com", "escalation_whatsapp": "919741115349", "facebook_id": "Naturals.Salon.Nagavara", "facebook_page_id": "318850925297093", "facebook_url": "https://facebook.com/Naturals.Salon.Nagavara/", "google_location_id": "locations/5858391068390788403", "google_maps_url": "https://maps.app.goo.gl/dPi8bNfB4USdgvvu8", "google_place_id": "ChIJo_js4GgXrjsR3LgZhMNOPz4", "google_review_link": "https://g.page/r/Cdy4GYTDTj8-EAI/review", "h1_heading": "Naturals Unisex Salon - Nagavara", "hero_tagline": "Luxury Beauty Meets Ultimate Convenience", "instagram_business_account_id": "17841437507959021", "instagram_id": "Naturals.Salon.Nagavara", "instagram_url": "https://instagram.com/Naturals.Salon.Nagavara/", "local_neighborhood": "Thanisandra / Nagavara", "meta_description": "Premium hair coloring \u0026 spa services at Nagavara. Visit North Bangalore\u0027s elite salon for a luxury transformation. Book now!", "mon_fri_hours": "10:00 AM \u2013 9:00 PM", "nearby_landmarks": "Above Paakashala Restaurant Nagavara, Near Skywalk Exit, Near Manyata Tech Park, Hebbal Flyover, Nagavara Lake, Rachenahalli Lake, Phoenix Mall of Asia, Snow City Bengaluru, Bengaluru Palace, Hennur Biodiversity Park, Aster CMI Hospital, Jakkur Lake", "phone_landline": "+918049900078", "phone_mobile": "+919901000017", "phone_whatsapp": "+919901000017", "pincode": "560045", "price_range": "\u20b9\u20b9", "saturday_hours": "10:00 AM \u2013 9:00 PM", "schema_latitude": "13.04079", "schema_longitude": "77.61973", "seo_title": "Top Rated Salon in Nagavara | Naturals Unisex Salon", "store_area": "", "store_display_name": "Nagavara", "store_id": "Store_N45", "store_id_short": "N45", "store_manager_name": "Sandesh Kumar", "sunday_hours": "10:00 AM \u2013 9:00 PM"}, {"Active_Status": "Yes", "Address_City": "Bangalore", "Address_Full": "2,3, 1st Floor, Maruthi Tower, No. 1, Devasandra Main Rd, opp. Lulu\u0027s Bakery, Basavanapura, KRPuram", "Address_Line_2": "", "Address_State": "Karnataka", "Appointment_URL": "https://naturals-salon-devasandra.setmore.com/", "Booking_Platform": "Setmore", "Email": "naturalsdevasandra@gmail.com", "Facebook_ID": "Naturals.Salon.Devasandra", "Facebook_URL": "https://facebook.com/Naturals.Salon.Devasandra/", "Google_Location_ID": "locations/2727661342173271867", "Google_Maps_URL": "https://maps.google.com/?q=Naturals+Salon+Devasandra", "Google_Place_ID": "ChIJoWUOlAARrjsREnWUrR3DWfk", "Instagram_ID": "@Naturals.Salon.Devasandra", "Instagram_URL": "https://instagram.com/Naturals.Salon.Devasandra/", "Manager_Name": "Devasandra Store Manager", "Manager_WhatsApp": "+917259490009", "Phone_Raw": "+917259490009", "Pincode": "560036", "Store_ID": "Store_N36", "Store_Page_URL": "stores/n36.html", "about_store_text": "Welcome to Naturals Unisex Salon Devasandra \u2014 east Bangalore\u0027s trusted beauty destination, conveniently located on Devasandra Main Road, KR Puram, opposite the landmark Lulu\u0027s Bakery in Basavanapura.\n \n Our Devasandra salon serves the rapidly growing communities of KR Puram, Mahadevapura, ITPL Road, Hoodi and Varthur with a full range of professional beauty services \u2014 from everyday haircuts and hair colour to bridal packages, deep conditioning treatments, skin care and body wellness therapies. Our team of experienced stylists knows that every client is unique, which is why each visit begins with a personalised consultation to understand your hair type, skin concerns and lifestyle.\n \n Families in KR Puram have trusted Naturals for premium-quality beauty services at honest, transparent prices. Whether you\u0027re looking for a weekend blow-dry, a pre-festival makeover, or a full bridal preparation, our Devasandra team is here to deliver results that last. Part of India\u0027s most respected salon network, Naturals brings 25 years of national expertise to your neighbourhood. Book your appointment online or walk in at Maruthi Tower, 1st Floor.\n\nWelcome to our brand new, state-of-the-art luxury location in Devasandra. We bring international styling standards and elite skin care to the KR Puram community.", "active_status": "Yes", "address_city": "Bangalore", "address_full": "2,3, 1st Floor, Maruthi Tower, No. 1, Devasandra Main Rd, opp. Lulu\u0027s Bakery, Basavanapura, KRPuram, Bangalore, Karnataka 560036, India", "address_line_1": "2,3, 1st Floor, Maruthi Tower, No. 1, Devasandra Main Rd, opp. Lulu\u0027s Bakery, Basavanapura, KRPuram", "address_pincode": "560036", "address_state": "Karnataka", "appointment_url": "https://naturals-salon-devasandra.setmore.com/", "booking_platform": "Setmore", "brand_store_name": "Naturals Unisex Salon - Devasandra", "email": "naturalsdevasandra@gmail.com", "escalation_contact": "Sophia", "escalation_email": "sophiaaxon@gmail.com", "escalation_whatsapp": "919741115349", "facebook_id": "Naturals.Salon.Devasandra", "facebook_page_id": "922849001248263", "facebook_url": "https://facebook.com/Naturals.Salon.Devasandra/", "google_location_id": "locations/2727661342173271867", "google_maps_url": "https://maps.google.com/?q=Naturals+Salon+Devasandra", "google_place_id": "ChIJoWUOlAARrjsREnWUrR3DWfk", "google_review_link": "https://g.page/Naturals-Devasandra/review?rc/", "h1_heading": "Naturals Unisex Salon - Devasandra", "hero_tagline": "A New Era of Luxury in Devasandra", "instagram_business_account_id": "17841437347582520", "instagram_id": "Naturals.Salon.Devasandra", "instagram_url": "https://instagram.com/Naturals.Salon.Devasandra/", "local_neighborhood": "Devasandra / KR Puram", "meta_description": "Visit our brand new luxury salon in Devasandra for expert haircuts \u0026 bridal makeup. Experience 5-star service near KR Puram. Book today!", "mon_fri_hours": "10:00 AM \u2013 9:00 PM", "nearby_landmarks": "Near Phoenix Marketcity, VR Bengaluru, Krishnarajapuram Railway Station, Bagmane World Technology Center, ITPL Whitefield, Marathahalli Bridge, Ulsoor Lake, RMZ Infinity, Commercial Street, Indira Nagar 100 Feet Road", "phone_landline": "", "phone_mobile": "+917259490009", "phone_whatsapp": "+917259490009", "pincode": "560036", "price_range": "\u20b9\u20b9", "saturday_hours": "10:00 AM \u2013 9:00 PM", "schema_latitude": "13.005", "schema_longitude": "77.698", "seo_title": "Best Salon in Devasandra KR Puram | Naturals Unisex Salon", "store_area": "", "store_display_name": "Devasandra", "store_id": "Store_N36", "store_id_short": "N36", "store_manager_name": "Devasandra Store Manager", "sunday_hours": "10:00 AM \u2013 9:00 PM"}, {"Active_Status": "Yes", "Address_City": "Bangalore", "Address_Full": "1st floor, No.94, Mosque Rd, above Poorvika Mobile Store, Cleveland Town, Frazer Town", "Address_Line_2": "", "Address_State": "Karnataka", "Appointment_URL": "https://naturals-salon-frazertown.setmore.com/", "Booking_Platform": "Setmore", "Email": "frazertown.naturals@gmail.com", "Facebook_ID": "Naturals.Salon.FrazerTown", "Facebook_URL": "https://www.facebook.com/Naturals.Salon.FrazerTown/", "Google_Location_ID": "locations/4210460996377672562", "Google_Maps_URL": "https://maps.google.com/?q=Naturals+Salon+Frazer+Town", "Google_Place_ID": "ChIJcfViGvEWrjsRUuIzB28viSc", "Instagram_ID": "@Naturals.Salon.FrazerTown", "Instagram_URL": "https://instagram.com/Naturals.Salon.FrazerTown/", "Manager_Name": "Rethika", "Manager_WhatsApp": "+919606333017", "Phone_Raw": "+919606333017", "Pincode": "560005", "Store_ID": "Store_N05", "Store_Page_URL": "stores/n05.html", "about_store_text": "Welcome to Naturals Unisex Salon Frazer Town \u2014 centrally located on Mosque Road, Pulikeshi Nagar, above Poorvika Mobile Store, in the heart of one of Bangalore\u0027s most vibrant and well-connected neighbourhoods.\n \n Our Frazer Town salon caters to Bangalore\u0027s most diverse clientele \u2014 from professionals working in the CBD and Shivajinagar, to residents of Frazer Town, Richards Town, Lingarajapuram and Ulsoor. We offer a comprehensive range of beauty services including precision haircuts, global and highlight hair colour, keratin and rebonding treatments, hair spa, advanced facials, bridal and party makeup, mehendi and full bridal packages for all communities.\n \n What sets our Frazer Town salon apart is our team\u0027s deep experience with diverse hair textures and skin tones \u2014 from fine straight hair to thick curly and wavy types, and from fair to deep skin tones. Every treatment is selected and adapted to give you the best possible result. Transparent pricing, premium products, and a warm, welcoming space \u2014 that\u0027s the Naturals promise. Visit us on Mosque Road or book your appointment online.\n\nNestled in the heart of heritage Bangalore, our Frazer Town salon combines classic elegance with modern hair and skin innovations for an elite experience.", "active_status": "Yes", "address_city": "Bangalore", "address_full": "1st floor, No.94, Mosque Rd, above Poorvika Mobile Store, Cleveland Town, Frazer Town, Bangalore, Karnataka 560005, India", "address_line_1": "1st floor, No.94, Mosque Rd, above Poorvika Mobile Store, Cleveland Town, Frazer Town", "address_pincode": "560005", "address_state": "Karnataka", "appointment_url": "https://naturals-salon-frazertown.setmore.com/", "booking_platform": "Setmore", "brand_store_name": "Naturals Unisex Salon - Frazer Town", "email": "frazertown.naturals@gmail.com", "escalation_contact": "Sophia", "escalation_email": "sophiaaxon@gmail.com", "escalation_whatsapp": "919741115349", "facebook_id": "Naturals.Salon.FrazerTown", "facebook_page_id": "526783314021240", "facebook_url": "https://www.facebook.com/Naturals.Salon.FrazerTown/", "google_location_id": "locations/4210460996377672562", "google_maps_url": "https://maps.google.com/?q=Naturals+Salon+Frazer+Town", "google_place_id": "ChIJcfViGvEWrjsRUuIzB28viSc", "google_review_link": "https://g.page/Naturals-FrazerTown/review?rc/", "h1_heading": "Naturals Unisex Salon - Frazer Town", "hero_tagline": "Timeless Elegance \u0026 Expert Styling", "instagram_business_account_id": "17841447241612437", "instagram_id": "Naturals.Salon.FrazerTown", "instagram_url": "https://instagram.com/Naturals.Salon.FrazerTown/", "local_neighborhood": "Frazer Town / Pulikeshi Nagar", "meta_description": "Professional hair styling \u0026 luxury beauty in Frazer Town. Expert services in a heritage neighborhood. Book your appointment today!", "mon_fri_hours": "10:00 AM \u2013 9:00 PM", "nearby_landmarks": "Near Mosque Road, Albert Bakery, St. Francis Xavier\u2019s Cathedral, Coles Park, Thom\u2019s Bakery \u0026 Supermarket, Bangalore East Railway Station, Bangalore Palace, Ulsoor Lake, Commercial Street, Vidhana Soudha", "phone_landline": "+918040948040", "phone_mobile": "+919606333017", "phone_whatsapp": "+919606333017", "pincode": "560005", "price_range": "\u20b9\u20b9", "saturday_hours": "10:00 AM \u2013 9:00 PM", "schema_latitude": "12.99", "schema_longitude": "77.605", "seo_title": "Premium Salon in Frazer Town | Naturals Unisex Salon", "store_area": "", "store_display_name": "Frazer Town", "store_id": "Store_N05", "store_id_short": "N05", "store_manager_name": "Rethika", "sunday_hours": "10:00 AM \u2013 9:00 PM"}, {"Active_Status": "Yes", "Address_City": "Bangalore", "Address_Full": "1st Floor, No 40/A, 40/C, Main Road, above SBI Bank, Hennur Gardens", "Address_Line_2": "", "Address_State": "Karnataka", "Appointment_URL": "https://naturals-salon-hennur.setmore.com/", "Booking_Platform": "Setmore", "Email": "naturalshennur@gmail.com", "Facebook_ID": "Naturals.Salon.Hennur", "Facebook_URL": "https://facebook.com/Naturals.Salon.Hennur/", "Google_Location_ID": "locations/10326220211235668452", "Google_Maps_URL": "https://maps.google.com/?q=Naturals+Salon+Hennur", "Google_Place_ID": "ChIJb03gT58XrjsRv0Rytrv60BM", "Instagram_ID": "@Naturals.Salon.Hennur", "Instagram_URL": "https://instagram.com/Naturals.Salon.Hennur/", "Manager_Name": "Tresa Mary", "Manager_WhatsApp": "+919606900069", "Phone_Raw": "+919606900069", "Pincode": "560043", "Store_ID": "Store_N43", "Store_Page_URL": "stores/n43.html", "about_store_text": "Welcome to Naturals Unisex Salon Hennur \u2014 north Bangalore\u0027s trusted beauty salon, conveniently located above SBI Bank on Hennur Main Road at Hennur Cross, serving the fast-growing communities of Hennur, Kalyan Nagar, HBR Layout, Horamavu and Banaswadi.\n \n Hennur has transformed into one of Bangalore\u0027s most dynamic residential hubs, and our salon has grown with it \u2014 offering the neighbourhood access to premium salon services that were once only available in central Bangalore. From expert haircuts and the latest hair colour techniques, to relaxing hair spa therapies, brightening facials, de-tan treatments and full bridal packages, our certified team delivers outstanding results at honest, transparent prices.\n \n Our Hennur team is passionate about making every client feel pampered and confident \u2014 whether you\u0027re a working professional looking for a quick style refresh, a new bride preparing for your big day, or a family visiting together for the weekend. As part of India\u0027s most trusted salon chain with 25+ years of experience, Naturals brings the gold standard in beauty to your doorstep. Book online or walk in at Hennur Main Road.\n\nDedicated to excellence, our Hennur team provides personalized beauty consultations and advanced treatments designed for the modern resident of North Bangalore.", "active_status": "Yes", "address_city": "Bangalore", "address_full": "1st Floor, No 40/A, 40/C, Main Road, above SBI Bank, Hennur Gardens, Bangalore, Karnataka 560043, India", "address_line_1": "1st Floor, No 40/A, 40/C, Main Road, above SBI Bank, Hennur Gardens", "address_pincode": "560043", "address_state": "Karnataka", "appointment_url": "https://naturals-salon-hennur.setmore.com/", "booking_platform": "Setmore", "brand_store_name": "Naturals Unisex Salon - Hennur", "email": "naturalshennur@gmail.com", "escalation_contact": "Sophia", "escalation_email": "sophiaaxon@gmail.com", "escalation_whatsapp": "919741115349", "facebook_id": "Naturals.Salon.Hennur", "facebook_page_id": "111143220365821", "facebook_url": "https://facebook.com/Naturals.Salon.Hennur/", "google_location_id": "locations/10326220211235668452", "google_maps_url": "https://maps.google.com/?q=Naturals+Salon+Hennur", "google_place_id": "ChIJb03gT58XrjsRv0Rytrv60BM", "google_review_link": "https://g.page/Naturals-Hennur/review?rc/", "h1_heading": "Naturals Unisex Salon - Hennur", "hero_tagline": "Your Neighborhood Destination for Elite Beauty", "instagram_business_account_id": "17841426843499448", "instagram_id": "Naturals.Salon.Hennur", "instagram_url": "https://instagram.com/Naturals.Salon.Hennur/", "local_neighborhood": "Hennur / North Bangalore", "meta_description": "Expert hair styling \u0026 skin treatments in Hennur. Premium salon services for gated communities in North Bangalore. Book your visit!", "mon_fri_hours": "10:00 AM \u2013 8:00 PM", "nearby_landmarks": "Near Hennur Cross, Mantri Splendor, Manyata Tech Park, Hennur Lake Biodiversity Park, Elements Mall, Bagalur Main Road, Bangalore Palace, Hebbal Flyover, Lumbini Gardens, Horamavu Agara Lake, XLR8 Indoor Sports Arena, Byg Brewski Brewing Company", "phone_landline": "", "phone_mobile": "+919606900069", "phone_whatsapp": "+919606900069", "pincode": "560043", "price_range": "\u20b9\u20b9", "saturday_hours": "10:00 AM \u2013 8:00 PM", "schema_latitude": "13.042", "schema_longitude": "77.648", "seo_title": "Best Beauty Salon in Hennur | Naturals Unisex Salon", "store_area": "", "store_display_name": "Hennur", "store_id": "Store_N43", "store_id_short": "N43", "store_manager_name": "Tresa Mary", "sunday_hours": "10:00 AM \u2013 8:00 PM"}];
 window.NATURALS_BASE = '';
 </script>
