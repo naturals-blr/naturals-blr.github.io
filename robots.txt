@@ -1,3 +1,3 @@
 User-agent: *
 Allow: /
-Sitemap: https://naturals-blr.github.io/sitemap.xml
+Sitemap: https://naturalsprime.in/sitemap.xml
