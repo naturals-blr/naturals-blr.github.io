@@ -1,0 +1,14 @@
+{
+  "name": "Naturals Salon & Spa Bangalore",
+  "short_name": "Naturals",
+  "description": "Naturals Unisex Salon — The top rated stores in Bangalore for hair, skin, and beauty services.",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#f7f5f0",
+  "theme_color": "#c9a84c",
+  "icons": [
+    { "src": "/images/favicon/favicon-16x16.png", "sizes": "16x16", "type": "image/png" },
+    { "src": "/images/favicon/favicon-32x32.png", "sizes": "32x32", "type": "image/png" },
+    { "src": "/images/favicon/apple-touch-icon.png", "sizes": "180x180", "type": "image/png" }
+  ]
+}
