@@ -5,7 +5,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <meta name="robots" content="noindex, nofollow">
 <meta name="googlebot" content="noindex, nofollow">
-<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' https://accounts.google.com 'unsafe-inline'; connect-src 'self' https://accounts.google.com https://oauth2.googleapis.com https://www.googleapis.com https://ik.imagekit.io https://upload.imagekit.io; style-src 'self' 'unsafe-inline' https://accounts.google.com https://fonts.googleapis.com; font-src 'self' data: https://fonts.gstatic.com; frame-src 'self' https://accounts.google.com; img-src 'self' data: blob: https://ik.imagekit.io https://lh3.googleusercontent.com;">
+<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' https://accounts.google.com 'unsafe-inline'; connect-src 'self' https://accounts.google.com https://oauth2.googleapis.com https://www.googleapis.com; style-src 'self' 'unsafe-inline' https://accounts.google.com https://fonts.googleapis.com; font-src 'self' data: https://fonts.gstatic.com; frame-src 'self' https://accounts.google.com; img-src 'self' data: blob: https://ik.imagekit.io https://lh3.googleusercontent.com;">
 <meta name="referrer" content="strict-origin-when-cross-origin">
 <script src="config.js"></script>
 <title>Campaign Admin — Naturals Salon &amp; Spa</title>
@@ -237,7 +237,7 @@ header .user-info button:hover{background:#f3f4f6}
               </div>
               <input type="file" id="file-input" accept="image/png,image/jpeg,image/webp" style="display:none">
               <div id="file-status"></div>
-              <div class="upload-progress" id="upload-progress"><span class="spinner show" id="upload-spinner"></span><span class="upload-check" id="upload-check">&#x2713;</span> <span id="upload-status-text">Uploading to ImageKit...</span></div>
+              <div class="upload-progress" id="upload-progress"><span class="spinner show" id="upload-spinner"></span><span class="upload-check" id="upload-check">&#x2713;</span> <span id="upload-status-text">Reading image...</span></div>
             </div>
             <div class="image-preview" id="image-preview">
               <img id="preview-img" alt="">
@@ -420,33 +420,20 @@ function updatePublishButton() {
   if (pub) pub.disabled = uploadInProgress;
 }
 
-// ── ImageKit upload (unsigned via native fetch + FormData) ────────────
+// ── Image upload via base64 (server-side upload handled by GitHub Actions) ─
 
 function uploadToImageKit(file) {
   return new Promise((resolve, reject) => {
-    const formData = new FormData();
-    formData.append('file', file);
-    formData.append('fileName', `campaign_${Date.now()}.png`);
-    formData.append('publicKey', ADMIN_CONFIG.IMAGEKIT_PUBLIC_KEY);
-    formData.append('useUniqueFileName', 'true');
-    formData.append('folder', '/');
-
-    fetch('https://upload.imagekit.io/api/v1/files/upload', {
-      method: 'POST',
-      body: formData,
-    })
-      .then(function (response) {
-        if (!response.ok) {
-          return response.json().then(function (err) { throw new Error(err.message); });
-        }
-        return response.json();
-      })
-      .then(function (data) {
-        resolve(data.url);
-      })
-      .catch(function (err) {
-        reject(err);
+    const reader = new FileReader();
+    reader.onload = function () {
+      const parts = reader.result.split(',');
+      resolve({
+        base64: parts[1],
+        filename: `campaign_${Date.now()}.${file.name.split('.').pop()}`,
       });
+    };
+    reader.onerror = function () { reject(reader.error); };
+    reader.readAsDataURL(file);
   });
 }
 
@@ -545,6 +532,18 @@ async function doPublish() {
   const idToken = currentUser ? currentUser.idToken : '';
 
   // Construct markdown body for the issue
+  const pending = window.__pendingUpload;
+  const imageBlock = pending
+    ? [
+        `**Image URL:** base64://pending (embedded below)`,
+        '',
+        '<!-- IMAGE DATA -->',
+        `FILENAME: ${pending.filename}`,
+        `BASE64: ${pending.base64}`,
+        '<!-- /IMAGE DATA -->',
+      ].join('\n')
+    : `**Image URL:** ${imageUrl || '(none)'}`;
+
   const mdBody = [
     '## Campaign Details',
     '',
@@ -555,13 +554,15 @@ async function doPublish() {
     `**Campaign Type:** ${campaignType}`,
     `**Platforms:** ${platformList || '(none selected)'}`,
     `**Stores:** ${storeIds.join(', ')}`,
-    `**Image URL:** ${imageUrl || '(none)'}`,
+    imageBlock,
     '',
     '---',
     '',
     `**Triggered By:** ${triggeredBy}`,
     `**Google ID Token:** \`${idToken}\``,
   ].join('\n');
+
+  window.__pendingUpload = null;
 
   const issueUrl = 'https://github.com/naturals-blr/naturals-ops/issues/new'
     + '?title=[Campaign_AdHoc] ' + encodeURIComponent(title)
@@ -775,20 +776,20 @@ async function handleFile(file) {
   statusText.textContent = 'Uploading image...';
 
   try {
-    const url = await uploadToImageKit(file);
-    $('post-image-url').value = url;
-    updateImagePreview(url);
+    const result = await uploadToImageKit(file);
+    window.__pendingUpload = result;
+    $('post-image-url').value = 'base64://pending';
     progressEl.className = 'upload-progress done show';
     spinner.classList.remove('show');
     check.classList.add('show');
-    statusText.textContent = 'Uploaded';
-    logMsg('Image uploaded to ImageKit','success');
+    statusText.textContent = 'Ready (base64)';
+    logMsg('Image encoded as base64, ready to publish','success');
   } catch (err) {
     progressEl.className = 'upload-progress error show';
     spinner.classList.remove('show');
     check.classList.remove('show');
-    statusText.textContent = 'Upload failed: ' + err.message;
-    logMsg('Image upload failed: ' + err.message,'error');
+    statusText.textContent = 'Encoding failed: ' + err.message;
+    logMsg('Image encoding failed: ' + err.message,'error');
     $('post-image-url').value = '';
   }
 

@@ -12,7 +12,7 @@ const ADMIN_CONFIG = {
   GOOGLE_CLIENT_ID: '816755094343-1ibdm0ecuhg90b50090rjoohkrlr9pd5.apps.googleusercontent.com',
 
   // ImageKit — public key only (no secret)
-  IMAGEKIT_PUBLIC_KEY: 'public_FS+yTbkgglmRSrKu9hBg4Lm04/8=',
+  IMAGEKIT_PUBLIC_KEY: '',
   IMAGEKIT_URL_ENDPOINT: 'https://ik.imagekit.io/aristycoon/',
 
   // Production base URL for building offer links (injected at deploy time)
