@@ -294,7 +294,6 @@ header .user-info button:hover{background:#f3f4f6}
 </div>
 
 <script src="config.js"></script>
-<script src="https://sdk.imagekit.io/js/imagekit.sdk.js"></script>
 <script>
 (function(){
 const C = ADMIN_CONFIG;
@@ -409,15 +408,30 @@ function updatePublishButton() {
   if (pub) pub.disabled = uploadInProgress;
 }
 
-// ── ImageKit upload (unsigned SDK) ───────────────────────────────────
-const imagekit = new ImageKit({
-  publicKey: C.IMAGEKIT_PUBLIC_KEY,
-  urlEndpoint: C.IMAGEKIT_URL_ENDPOINT,
-});
+// ── ImageKit upload (unsigned SDK, loaded on demand) ─────────────────
+let imagekitInstance = null;
 
-function uploadToImageKit(file) {
+function getImageKit() {
+  if (imagekitInstance) return Promise.resolve(imagekitInstance);
   return new Promise((resolve, reject) => {
-    imagekit.upload({
+    const s = document.createElement('script');
+    s.src = 'https://sdk.imagekit.io/js/imagekit.sdk.js';
+    s.onload = () => {
+      imagekitInstance = new ImageKit({
+        publicKey: C.IMAGEKIT_PUBLIC_KEY,
+        urlEndpoint: C.IMAGEKIT_URL_ENDPOINT,
+      });
+      resolve(imagekitInstance);
+    };
+    s.onerror = () => reject(new Error('Failed to load ImageKit SDK'));
+    document.head.appendChild(s);
+  });
+}
+
+async function uploadToImageKit(file) {
+  const ik = await getImageKit();
+  return new Promise((resolve, reject) => {
+    ik.upload({
       file: file,
       fileName: `campaign_${Date.now()}.${file.name.split('.').pop()}`,
       folder: '/salon_campaign_creatives',
