@@ -156,8 +156,20 @@ header .user-info button:hover{background:#f3f4f6}
   <div class="card">
     <h1>&#x1F33F; Naturals Admin</h1>
     <p class="sub">Campaign Publishing Panel</p>
-    <p class="role-info" id="auth-role-info">Sign in with your Google Workspace account</p>
-    <button id="btn-google-signin">&#x1F5F3; Sign in with Google</button>
+    <p class="role-info" id="auth-role-info">Sign in with your Google account</p>
+    <div id="g_id_onload"
+         data-client_id="816755094343-1ibdm0ecuhg90b50090rjoohkrlr9pd5.apps.googleusercontent.com"
+         data-context="signin"
+         data-callback="handleCredentialResponse"
+         data-auto_select="false">
+    </div>
+    <div class="g_id_signin"
+         data-type="standard"
+         data-shape="rectangular"
+         data-theme="outline"
+         data-text="signin_with"
+         data-size="large">
+    </div>
     <div id="auth-error" class="error"></div>
   </div>
 </div>
@@ -617,21 +629,7 @@ function applyStoreAccessFilter() {
   updatePreview();
 }
 
-function initAuth() {
-  const script = document.createElement('script');
-  script.src = 'https://accounts.google.com/gsi/client';
-  script.onload = () => {
-    google.accounts.id.initialize({
-      client_id: C.GOOGLE_CLIENT_ID,
-      callback: handleCredentialResponse,
-    });
-    $('btn-google-signin').onclick = () => {
-      $('auth-error').textContent = '';
-      google.accounts.id.prompt(); // one-tap or button-based
-    };
-  };
-  document.head.appendChild(script);
-}
+window.handleCredentialResponse = handleCredentialResponse;
 
 $('btn-signout').onclick = () => {
   currentUser = null;
@@ -797,10 +795,10 @@ async function handleFile(file) {
 (function init() {
   loadInjectedData();
   populateStores();
-  initAuth();
   updatePreview();
 })();
 })();
 </script>
+<script src="https://accounts.google.com/gsi/client"></script>
 </body>
 </html>
