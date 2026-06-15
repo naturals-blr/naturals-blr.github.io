@@ -632,12 +632,12 @@ function handleCredentialResponse(credentialResponse) {
 
   const email = payload.email || '';
   const hd = payload.hd || '';
-  if (!email.endsWith('@' + C.ALLOWED_DOMAIN) && hd !== C.ALLOWED_DOMAIN) {
-    // Also check AUTHORIZED_EMAILS for testing
-    if (!C.AUTHORIZED_EMAILS.includes(email)) {
-      $('auth-error').textContent = 'Access restricted to @' + C.ALLOWED_DOMAIN + ' accounts';
-      return;
-    }
+
+  // Allow any authenticated email — real access control is server-side
+  // in verify_and_dispatch.yml (checks stores.json for manager/owner emails)
+  if (!email) {
+    $('auth-error').textContent = 'Email not found in token';
+    return;
   }
 
   currentUser = {
@@ -653,13 +653,8 @@ function handleCredentialResponse(credentialResponse) {
 
   // Role determination (client-side hint; actual enforcement is in workflow)
   const roleBadge = $('user-role-badge');
-  if (currentUser.email === C.AUTHORIZED_EMAILS[0] || !currentUser.email.endsWith('@' + C.ALLOWED_DOMAIN)) {
-    roleBadge.textContent = 'owner';
-    roleBadge.className = 'role-badge role-owner';
-  } else {
-    roleBadge.textContent = 'manager';
-    roleBadge.className = 'role-badge role-store';
-  }
+  roleBadge.textContent = 'manager';
+  roleBadge.className = 'role-badge role-store';
 
   document.body.classList.remove('auth-locked');
   logMsg('Signed in as ' + currentUser.email,'success');

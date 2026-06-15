@@ -24,9 +24,10 @@ const ADMIN_CONFIG = {
   DISPATCH_TOKEN: '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',
 
   // Allowed email domain for Google OAuth sign-in
-  ALLOWED_DOMAIN: 'naturalsprime.in',
+  // Set to empty string to allow any email (real auth is server-side in verify_and_dispatch.yml)
+  ALLOWED_DOMAIN: '',
 
-  // Authorised emails for testing (optional, min privilege)
+  // Authorised emails (any email can trigger auth; real access control is server-side)
   AUTHORIZED_EMAILS: [],
 
   // Platform character limits — injected at deploy time from aris_global_settings
