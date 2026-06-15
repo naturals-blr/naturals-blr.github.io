@@ -1,0 +1,923 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="robots" content="noindex, nofollow">
+<meta name="googlebot" content="noindex, nofollow">
+<meta http-equiv="Content-Security-Policy" content="default-src 'self' https://accounts.google.com https://*.githubusercontent.com https://raw.githubusercontent.com https://naturalsprime.in https://ik.imagekit.io https://upload.imagekit.io; script-src 'self' 'unsafe-inline' https://accounts.google.com https://apis.google.com; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src 'self' https://fonts.gstatic.com; img-src 'self' data: https://naturalsprime.in https://*.githubusercontent.com https://ik.imagekit.io blob:; connect-src 'self' https://api.github.com https://accounts.google.com https://upload.imagekit.io https://ik.imagekit.io;">
+<meta name="referrer" content="strict-origin-when-cross-origin">
+<title>Campaign Admin — Naturals Salon &amp; Spa</title>
+<link href="https://fonts.googleapis.com/css2?family=Inter:opsz@14..32&display=swap" rel="stylesheet">
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+body{font-family:'Inter',-apple-system,BlinkMacSystemFont,sans-serif;background:#f3f4f6;color:#1f2937;line-height:1.5}
+body.auth-locked #app-main{display:none}
+body:not(.auth-locked) #auth-screen{display:none}
+#auth-screen{display:flex;align-items:center;justify-content:center;min-height:100vh;padding:2rem}
+#auth-screen .card{background:#fff;border-radius:1rem;padding:3rem 2.5rem;text-align:center;box-shadow:0 4px 24px rgba(0,0,0,.08);max-width:400px;width:100%}
+#auth-screen h1{font-size:1.5rem;font-weight:700;color:#166534;margin-bottom:.25rem}
+#auth-screen .sub{font-size:.875rem;color:#6b7280;margin-bottom:.25rem}
+#auth-screen .role-info{font-size:.75rem;color:#9ca3af;margin-bottom:1.5rem;min-height:1.25rem}
+#auth-screen button{display:inline-flex;align-items:center;gap:.5rem;padding:.75rem 1.5rem;background:#fff;border:1px solid #d1d5db;border-radius:.5rem;font-size:.875rem;font-weight:500;color:#374151;cursor:pointer;transition:all .15s}
+#auth-screen button:hover{background:#f9fafb;border-color:#9ca3af}
+#auth-screen .error{color:#dc2626;font-size:.75rem;margin-top:.75rem}
+header{background:#fff;border-bottom:1px solid #e5e7eb;padding:.75rem 1.25rem;display:flex;align-items:center;justify-content:space-between;position:sticky;top:0;z-index:50;flex-wrap:wrap;gap:.5rem}
+header h1{font-size:1.125rem;font-weight:700;color:#166534}
+header .user-info{display:flex;align-items:center;gap:.75rem;font-size:.8125rem;color:#6b7280}
+header .user-info img{width:28px;height:28px;border-radius:50%}
+header .user-info .role-badge{font-size:.625rem;font-weight:600;padding:.125rem .375rem;border-radius:.25rem;text-transform:uppercase}
+header .user-info .role-owner{background:#fef3c7;color:#92400e}
+header .user-info .role-clevel{background:#dbeafe;color:#1e40af}
+header .user-info .role-store{background:#dcfce7;color:#166534}
+header .user-info button{background:none;border:1px solid #d1d5db;border-radius:.375rem;padding:.25rem .75rem;font-size:.75rem;cursor:pointer;color:#6b7280}
+header .user-info button:hover{background:#f3f4f6}
+.scroll-area{flex:1;overflow-y:auto;padding:1.5rem}
+.scroll-area-inner{max-width:720px;margin:0 auto;display:flex;flex-direction:column;gap:1.25rem}
+.page-wrap{display:flex;flex-direction:column;height:100vh}
+.form-group label{display:block;font-size:.8125rem;font-weight:600;color:#374151;margin-bottom:.375rem}
+.form-group input[type="text"],.form-group input[type="url"],.form-group input[type="date"],.form-group textarea,.form-group select{width:100%;border:1px solid #d1d5db;border-radius:.5rem;padding:.5rem .75rem;font-size:.875rem;transition:border-color .15s;font-family:inherit}
+.form-group input:focus,.form-group textarea:focus,.form-group select:focus{outline:none;border-color:#166534;box-shadow:0 0 0 3px rgba(22,163,74,.12)}
+.form-group textarea{resize:vertical;min-height:5rem}
+.char-count{font-size:.75rem;color:#9ca3af;text-align:right;margin-top:.25rem}
+.char-count.over{color:#dc2626;font-weight:600}
+.platform-limits{display:flex;gap:.75rem;font-size:.75rem;color:#9ca3af;margin-top:.25rem;flex-wrap:wrap}
+.platform-limits span.over{color:#dc2626;font-weight:600}
+.date-row{display:grid;grid-template-columns:1fr 1fr;gap:1rem}
+.drop-zone{border:2px dashed #d1d5db;border-radius:.5rem;padding:1.25rem;text-align:center;cursor:pointer;font-size:.8125rem;color:#9ca3af;transition:all .15s}
+.drop-zone:hover,.drop-zone.drag-over{border-color:#166534;background:#f0fdf4}
+.drop-zone.has-file{border-color:#166534;background:#f0fdf4;padding:.75rem}
+.drop-zone .file-name{color:#166534;font-weight:500;font-size:.8125rem}
+.image-preview{display:none;width:6rem;height:6rem;border-radius:.5rem;overflow:hidden;border:1px solid #e5e7eb;flex-shrink:0}
+.image-preview.show{display:block}
+.image-preview img,.image-preview video{width:100%;height:100%;object-fit:cover}
+.image-row{display:flex;gap:.75rem;align-items:flex-start}
+.image-input-wrap{flex:1;display:flex;flex-direction:column;gap:.5rem}
+.image-input-wrap input[type="url"]{width:100%;border:1px solid #d1d5db;border-radius:.5rem;padding:.5rem .75rem;font-size:.875rem}
+.image-input-wrap input[type="url"]:focus{outline:none;border-color:#166534;box-shadow:0 0 0 3px rgba(22,163,74,.12)}
+.upload-progress{font-size:.75rem;display:none;align-items:center;gap:.375rem}
+.upload-progress.show{display:flex}
+.upload-progress.uploading{color:#6b7280}
+.upload-progress.done{color:#16a34a}
+.upload-progress.error{color:#dc2626}
+.spinner{width:14px;height:14px;border:2px solid #e5e7eb;border-top-color:#16a34a;border-radius:50%;animation:spin .6s linear infinite;display:none}
+.spinner.show{display:inline-block}
+.upload-check{display:none;font-size:1rem}
+.upload-check.show{display:inline}
+@keyframes spin{to{transform:rotate(360deg)}}
+.platforms-row{display:flex;gap:1.25rem}
+.platforms-row label{display:flex;align-items:center;gap:.375rem;font-size:.875rem;cursor:pointer}
+.platforms-row input[type="checkbox"]{width:1rem;height:1rem;border-radius:.25rem;border:1px solid #d1d5db;accent-color:#166534}
+.stores-grid{display:flex;flex-wrap:wrap;gap:.75rem}
+.stores-grid label{display:flex;align-items:center;gap:.375rem;font-size:.8125rem;cursor:pointer;padding:.375rem .625rem;border:1px solid #e5e7eb;border-radius:.375rem;transition:all .15s}
+.stores-grid label:hover{border-color:#166534;background:#f0fdf4}
+.stores-grid input[type="checkbox"]{width:.875rem;height:.875rem;accent-color:#166534}
+.stores-actions{display:flex;gap:.5rem;margin-bottom:.5rem}
+.stores-actions button{font-size:.75rem;padding:.25rem .625rem;border:1px solid #d1d5db;border-radius:.375rem;background:#fff;cursor:pointer;color:#6b7280}
+.stores-actions button:hover{background:#f3f4f6}
+.preview-section{display:none}
+.preview-section.show{display:block}
+.preview-section hr{border:none;border-top:1px solid #e5e7eb;margin-bottom:.75rem}
+.preview-section .label{font-size:.6875rem;font-weight:600;color:#6b7280;text-transform:uppercase;letter-spacing:.05em;margin-bottom:.5rem}
+.preview-cards{display:grid;grid-template-columns:repeat(auto-fill,minmax(280px,1fr));gap:.75rem}
+.preview-card{border:1px solid #e5e7eb;border-radius:.5rem;padding:.75rem;background:#fff}
+.preview-card .store-tag{font-size:.6875rem;font-weight:700;color:#166534}
+.preview-card .store-name{font-size:.6875rem;color:#9ca3af}
+.preview-card .card-title{font-size:.8125rem;font-weight:600;color:#1f2937;margin-top:.25rem}
+.preview-card .card-body{font-size:.75rem;color:#6b7280;margin-top:.125rem;display:-webkit-box;-webkit-line-clamp:3;-webkit-box-orient:vertical;overflow:hidden}
+.preview-card .card-url{font-size:.6875rem;color:#16a34a;margin-top:.25rem;display:inline-block}
+.preview-card .card-img{margin-top:.5rem;max-height:3rem;border-radius:.25rem;border:1px solid #f3f4f6}
+.action-row{display:flex;align-items:center;gap:.75rem;padding-top:.5rem;flex-wrap:wrap}
+.btn{display:inline-flex;align-items:center;gap:.375rem;padding:.625rem 1.25rem;font-size:.8125rem;font-weight:600;border-radius:.5rem;border:none;cursor:pointer;transition:all .15s}
+.btn:disabled{opacity:.4;cursor:not-allowed}
+.btn-primary{background:#166534;color:#fff}
+.btn-primary:hover:not(:disabled){background:#14532d}
+.btn-secondary{background:#fff;border:1px solid #d1d5db;color:#374151}
+.btn-secondary:hover:not(:disabled){background:#f9fafb}
+.publish-status{font-size:.875rem;color:#6b7280}
+.result-section{display:none}
+.result-section.show{display:block}
+.result-section hr{border:none;border-top:1px solid #e5e7eb;margin-bottom:.75rem}
+.result-table{overflow-x:auto}
+.result-table table{width:100%;border-collapse:collapse;font-size:.75rem}
+.result-table th{background:#f3f4f6;padding:.375rem .5rem;text-align:left;font-weight:600;color:#6b7280}
+.result-table th.center{text-align:center}
+.result-table td{padding:.375rem .5rem;border-top:1px solid #f3f4f6}
+.result-table td.center{text-align:center}
+.badge{padding:.125rem .375rem;border-radius:.25rem;font-size:.6875rem;font-weight:500}
+.badge-ok{background:#dcfce7;color:#166534}
+.badge-fail{background:#fef2f2;color:#dc2626}
+.badge-pending{background:#f3f4f6;color:#9ca3af}
+.activity-bar{background:#fff;border-top:1px solid #e5e7eb;padding:.5rem 1.25rem;display:flex;align-items:center;justify-content:space-between}
+.activity-bar .label{font-size:.6875rem;font-weight:600;color:#6b7280;text-transform:uppercase}
+.activity-bar button{font-size:.6875rem;color:#9ca3af;background:none;border:none;cursor:pointer}
+.activity-bar button:hover{color:#6b7280}
+.activity-log{font-family:monospace;font-size:.6875rem;max-height:5rem;overflow-y:auto;display:flex;flex-direction:column;gap:.125rem;flex:1;margin-left:1rem}
+.activity-log .entry{color:#6b7280}
+.activity-log .entry.error{color:#dc2626}
+.activity-log .entry.success{color:#16a34a}
+.activity-log .entry.info{color:#2563eb}
+
+/* Confirm step */
+#form-fields.confirm-hidden{display:none}
+.confirm-section{display:none}
+.confirm-section.show{display:block}
+.confirm-section hr{border:none;border-top:1px solid #e5e7eb;margin-bottom:.75rem}
+.confirm-section .label{font-size:.6875rem;font-weight:600;color:#6b7280;text-transform:uppercase;letter-spacing:.05em;margin-bottom:.5rem}
+.confirm-card{background:#fff;border:1px solid #e5e7eb;border-radius:.75rem;overflow:hidden}
+.confirm-card .card-img{width:100%;max-height:200px;object-fit:cover;display:block;border-bottom:1px solid #f3f4f6}
+.confirm-card .card-img-placeholder{width:100%;height:100px;background:#f3f4f6;display:flex;align-items:center;justify-content:center;color:#9ca3af;font-size:.75rem;border-bottom:1px solid #f3f4f6}
+.confirm-card .card-body{padding:.75rem 1rem}
+.confirm-card .card-title{font-size:1rem;font-weight:700;color:#1f2937;margin-bottom:.25rem}
+.confirm-card .card-caption{font-size:.8125rem;color:#6b7280;line-height:1.4;margin-bottom:.5rem}
+.confirm-card .meta-row{display:flex;flex-wrap:wrap;gap:.5rem;align-items:center;font-size:.75rem;color:#6b7280;margin-bottom:.5rem}
+.confirm-card .type-badge{font-size:.6875rem;font-weight:600;padding:.125rem .5rem;border-radius:999px;text-transform:uppercase}
+.confirm-card .type-Offer{background:#fef3c7;color:#92400e}
+.confirm-card .type-Event{background:#dbeafe;color:#1e40af}
+.confirm-card .type-Announcement{background:#dcfce7;color:#166534}
+.confirm-card .type-Seasonal{background:#f3e8ff;color:#6b21a8}
+.confirm-card .type-Bridal{background:#fce7f3;color:#9d174d}
+.confirm-card .type-Repost{background:#e5e7eb;color:#374151}
+.confirm-card .store-list{display:flex;flex-wrap:wrap;gap:.375rem;font-size:.6875rem;color:#6b7280;margin-bottom:.5rem}
+.confirm-card .store-list .store-tag{padding:.125rem .375rem;border:1px solid #e5e7eb;border-radius:.25rem}
+.confirm-card .platform-icons{display:flex;gap:.375rem;margin-bottom:.75rem}
+.confirm-card .platform-icons .pi{font-size:.6875rem;font-weight:600;padding:.125rem .5rem;border-radius:.25rem}
+.confirm-card .pi-active{background:#166534;color:#fff}
+.confirm-card .pi-inactive{background:#f3f4f6;color:#d1d5db}
+.confirm-card .confirm-actions{display:flex;gap:.5rem;padding:.75rem 1rem;border-top:1px solid #f3f4f6}
+.confirm-card .confirm-actions .btn{flex:1;justify-content:center}
+
+@media(max-width:640px){.date-row{grid-template-columns:1fr}.preview-cards{grid-template-columns:1fr}.platforms-row{flex-wrap:wrap;gap:.75rem}}
+</style>
+</head>
+<body class="auth-locked">
+<div id="auth-screen">
+  <div class="card">
+    <h1>&#x1F33F; Naturals Admin</h1>
+    <p class="sub">Campaign Publishing Panel</p>
+    <p class="role-info" id="auth-role-info">Sign in with your Google Workspace account</p>
+    <button id="btn-google-signin">&#x1F5F3; Sign in with Google</button>
+    <div id="auth-error" class="error"></div>
+  </div>
+</div>
+
+<div id="app-main" class="page-wrap">
+  <header>
+    <h1>&#x1F4E3; Campaign Publisher</h1>
+    <div class="user-info" id="user-info">
+      <img id="user-avatar" src="" alt="">
+      <span id="user-name"></span>
+      <span id="user-role-badge" class="role-badge"></span>
+      <button id="btn-signout">Sign out</button>
+    </div>
+  </header>
+
+  <div class="scroll-area">
+    <div class="scroll-area-inner">
+
+      <div id="form-fields">
+
+        <!-- Campaign Type (populated dynamically from campaigns.json) -->
+        <div class="form-group">
+          <label for="campaign-type">Campaign Type</label>
+          <select id="campaign-type">
+            <option value="">Loading…</option>
+          </select>
+        </div>
+
+        <!-- Title -->
+        <div class="form-group">
+          <label for="post-title">Campaign Title *</label>
+          <input type="text" id="post-title" maxlength="100" placeholder="e.g. Weekend Special: 20% Off">
+        </div>
+
+        <!-- Body -->
+        <div>
+          <div class="form-group">
+            <label for="post-body">Description / Caption *</label>
+            <textarea id="post-body" rows="4" placeholder="Describe the offer or announcement..."></textarea>
+          </div>
+          <div class="char-count" id="char-count">0 chars</div>
+          <div class="platform-limits" id="platform-limits"></div>
+        </div>
+
+        <!-- Dates -->
+        <div class="date-row">
+          <div class="form-group">
+            <label for="post-start">Start Date</label>
+            <input type="date" id="post-start">
+          </div>
+          <div class="form-group">
+            <label for="post-end">End Date</label>
+            <input type="date" id="post-end">
+          </div>
+        </div>
+
+        <!-- Image -->
+        <div>
+          <label style="font-size:.8125rem;font-weight:600;color:#374151;margin-bottom:.375rem;display:block">Campaign Image</label>
+          <div class="image-row">
+            <div class="image-input-wrap">
+              <input type="url" id="post-image-url" placeholder="https://naturalsprime.in/campaigns/... (or upload below)">
+              <div class="drop-zone" id="drop-zone">
+                <p>&#x1F4C2; Drop image here or click to upload &mdash; PNG, JPG, WebP (max 10MB)</p>
+              </div>
+              <input type="file" id="file-input" accept="image/png,image/jpeg,image/webp" style="display:none">
+              <div id="file-status"></div>
+              <div class="upload-progress" id="upload-progress"><span class="spinner show" id="upload-spinner"></span><span class="upload-check" id="upload-check">&#x2713;</span> <span id="upload-status-text">Uploading to ImageKit...</span></div>
+            </div>
+            <div class="image-preview" id="image-preview">
+              <img id="preview-img" alt="">
+            </div>
+          </div>
+        </div>
+
+        <!-- Platforms -->
+        <div class="form-group">
+          <label>Target Platforms</label>
+          <div class="platforms-row">
+            <label><input type="checkbox" id="platform-fb" checked> Facebook</label>
+            <label><input type="checkbox" id="platform-ig" checked> Instagram</label>
+            <label><input type="checkbox" id="platform-gp" checked> Google Business Profile</label>
+          </div>
+        </div>
+
+        <!-- Stores -->
+        <div class="form-group">
+          <label>Stores</label>
+          <div class="stores-actions">
+            <button id="btn-select-all">Select All</button>
+            <button id="btn-deselect-all">None</button>
+          </div>
+          <div class="stores-grid" id="stores-grid"></div>
+        </div>
+
+        <!-- Live Preview -->
+        <div class="preview-section" id="preview-section">
+          <hr>
+          <div class="label">&#x1F50D; Live Preview</div>
+          <div class="preview-cards" id="preview-cards"></div>
+        </div>
+
+        <!-- Action -->
+        <div class="action-row">
+          <button class="btn btn-primary" id="btn-review">&#x270F; Review Campaign</button>
+          <span class="publish-status" id="publish-status"></span>
+        </div>
+
+      </div><!-- /form-fields -->
+
+      <!-- Confirm step -->
+      <div class="confirm-section" id="confirm-section">
+        <hr>
+        <div class="label">&#x1F441; Confirm Campaign</div>
+        <div class="confirm-card" id="confirm-card"></div>
+      </div>
+
+      <!-- Results -->
+      <div class="result-section" id="result-section">
+        <hr>
+        <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:.5rem">
+          <div class="label">&#x1F4CB; Results</div>
+          <span id="result-summary" style="font-size:.75rem;font-weight:500"></span>
+        </div>
+        <div class="result-table" id="result-table"></div>
+      </div>
+    </div>
+  </div>
+
+  <div class="activity-bar">
+    <span class="label">Activity</span>
+    <div class="activity-log" id="activity-log"></div>
+    <button id="btn-clear-log">Clear</button>
+  </div>
+</div>
+
+<script src="config.js"></script>
+<script>
+(function(){
+const C = ADMIN_CONFIG;
+let storeList = [];
+let STORE_NAMES = {};
+
+const $ = id => document.getElementById(id);
+const logMsg = (msg, level='info') => {
+  const el = $('activity-log');
+  const ts = new Date().toLocaleTimeString('en-IN',{hour12:false});
+  const cls = level === 'error' ? 'entry error' : level === 'success' ? 'entry success' : 'entry info';
+  el.insertAdjacentHTML('afterbegin',`<div class="${cls}">${ts} ${msg}</div>`);
+};
+
+async function fetchHistory() {
+  const token = C.DISPATCH_TOKEN;
+  if (!token || token === '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') return;
+
+  try {
+    const url = `https://api.github.com/repos/${C.GITHUB_OWNER}/${C.GITHUB_REPO}/contents/build/data/adhoc_history.json`;
+    const res = await fetch(url, {
+      headers: {
+        'Authorization': `Bearer ${token}`,
+        'Accept': 'application/vnd.github+json',
+      }
+    });
+    if (!res.ok) return;
+
+    const data = await res.json();
+    const decoded = atob(data.content.replace(/\n/g, ''));
+    const history = JSON.parse(decoded);
+
+    const el = $('activity-log');
+    const storeName = id => { const s = storeList.find(s => s.id === id); return s ? s.name : id; };
+
+    history.slice(0, 10).forEach(entry => {
+      const ts = entry.timestamp ? entry.timestamp.slice(0, 16).replace('T', ' ') : '';
+      const stores = (entry.storeIds || []).map(s => storeName(s)).join(', ');
+      const status = entry.total > 0 ? `✓ ${entry.successes}/${entry.total}` : '–';
+      const by = entry.triggered_by || 'system';
+      const title = (entry.title || '').substring(0, 50);
+      el.insertAdjacentHTML('beforeend',
+        `<div class="entry info" style="border-bottom:1px solid #f3f4f6;padding:2px 0">${ts} <strong>${escHtml(title)}</strong> — ${escHtml(stores)} — ${escHtml(by)} — ${status}</div>`
+      );
+    });
+
+    if (history.length) {
+      el.insertAdjacentHTML('beforeend', '<div class="entry info" style="font-size:.625rem;color:#9ca3af;padding:2px 0">— end of history —</div>');
+    }
+  } catch (e) {
+    // silent — history is non-critical
+  }
+}
+
+let currentUser = null;
+let uploadInProgress = false;
+
+function escHtml(s) {
+  const d = document.createElement('div');
+  d.textContent = s;
+  return d.innerHTML;
+}
+
+function getStoreSlug(name) {
+  for (const s of storeList) {
+    if (s.name === name) return s.slug;
+  }
+  return name.toLowerCase().replace(/[^a-z0-9]/g,'');
+}
+
+function getSelectedStores() {
+  return [...document.querySelectorAll('.store-cb:checked')].map(cb => cb.dataset.store);
+}
+
+function getPlatforms() {
+  return { facebook:$('platform-fb').checked, instagram:$('platform-ig').checked, google:$('platform-gp').checked };
+}
+
+function updateCharCount() {
+  const len = $('post-body').value.length;
+  const el = $('char-count');
+  el.textContent = len + ' chars';
+  el.classList.toggle('over', len > 2200);
+
+  const platforms = [];
+  if ($('platform-fb').checked) platforms.push('facebook');
+  if ($('platform-ig').checked) platforms.push('instagram');
+  if ($('platform-gp').checked) platforms.push('google');
+
+  const limitsEl = $('platform-limits');
+  if (platforms.length === 0) { limitsEl.innerHTML = ''; return; }
+  limitsEl.innerHTML = platforms.map(p => {
+    const limit = C.PLATFORM_LIMITS[p];
+    const over = len > limit;
+    return `<span class="${over ? 'over' : ''}">${p}: ${len}/${limit}</span>`;
+  }).join(' &middot; ');
+}
+
+function updatePreview() {
+  const title = $('post-title').value.trim();
+  const body = $('post-body').value.trim();
+  const imgUrl = $('post-image-url').value.trim();
+  const stores = getSelectedStores();
+  const section = $('preview-section');
+  const container = $('preview-cards');
+
+  if (!title && !body) { section.classList.remove('show'); return; }
+  section.classList.add('show');
+
+  container.innerHTML = stores.map(sid => {
+    const name = STORE_NAMES[sid] || sid;
+    const slug = getStoreSlug(name);
+    const branded = `Naturals Unisex Salon ${name} - ${title || '(no title)'}`;
+    const url = `${C.PRODUCTION_BASE_URL}/${slug}/offers/`;
+    const brandedBody = (body || '(no body)') + '\n\n\u{1F4CD} Visit: ' + url;
+    const imgHtml = imgUrl ? `<img src="${escHtml(imgUrl)}" class="card-img" onerror="this.style.display='none'">` : '';
+    return `<div class="preview-card">
+      <div><span class="store-tag">${sid}</span> <span class="store-name">${escHtml(name)}</span></div>
+      <div class="card-title">${escHtml(branded)}</div>
+      <div class="card-body">${escHtml(brandedBody)}</div>
+      <a href="${url}" target="_blank" class="card-url">${url}</a>
+      ${imgHtml}
+    </div>`;
+  }).join('');
+  updateCharCount();
+}
+
+function updateImagePreview(url) {
+  const preview = $('image-preview');
+  const img = $('preview-img');
+  if (url) {
+    preview.classList.add('show');
+    img.src = url;
+  } else {
+    preview.classList.remove('show');
+    img.src = '';
+  }
+}
+
+function setLoading(loading) {
+  const pub = $('btn-publish-confirm');
+  if (pub) {
+    pub.disabled = loading || uploadInProgress;
+    pub.textContent = loading ? '\u23F3 Publishing...' : '\u{1F4E4} Publish Now';
+  }
+}
+
+function updatePublishButton() {
+  const pub = $('btn-publish-confirm');
+  if (pub) pub.disabled = uploadInProgress;
+}
+
+// ── ImageKit upload ──────────────────────────────────────────────────
+async function uploadToImageKit(file) {
+  const checked = document.querySelectorAll('.store-cb:checked');
+  const allSelected = checked.length === storeList.length;
+  const slug = allSelected || checked.length === 0
+    ? 'all'
+    : (() => { const s = storeList.find(st => st.id === checked[0].dataset.store); return s ? s.slug : 'all'; })();
+
+  const formData = new FormData();
+  formData.append('file', file);
+  formData.append('fileName', `${Date.now()}.${file.name.split('.').pop()}`);
+  formData.append('folder', `/campaigns/${slug}/${new Date().toISOString().slice(0,7)}/`);
+  formData.append('useUniqueFileName', 'true');
+
+  const res = await fetch('https://upload.imagekit.io/api/v1/files/upload', {
+    method: 'POST',
+    headers: { 'Authorization': 'Basic ' + btoa(C.IMAGEKIT_PUBLIC_KEY + ':') },
+    body: formData
+  });
+  if (!res.ok) {
+    const err = await res.text();
+    throw new Error(`ImageKit upload failed (${res.status}): ${err}`);
+  }
+  const data = await res.json();
+  return data.url;
+}
+
+// ── Review / Confirm step ────────────────────────────────────────────
+function formatDate(iso) {
+  if (!iso) return '—';
+  const d = new Date(iso + 'T00:00:00');
+  return d.toLocaleDateString('en-GB', { day: '2-digit', month: 'short', year: 'numeric' });
+}
+
+function showReview() {
+  const title = $('post-title').value.trim();
+  const body = $('post-body').value.trim();
+  if (!title || !body) { logMsg('Title and body are required','error'); return; }
+
+  const platforms = getPlatforms();
+  const storeIds = getSelectedStores();
+  if (storeIds.length === 0) { logMsg('Select at least one store','error'); return; }
+
+  const imageUrl = $('post-image-url').value.trim();
+  const campaignType = $('campaign-type').value;
+  const startDate = $('post-start').value;
+  const endDate = $('post-end').value;
+
+  const caption = body.length > 125 ? body.substring(0, 125) + '…' : body;
+  const storeNames = storeIds.map(id => STORE_NAMES[id] || id).join(', ');
+
+  const imgHtml = imageUrl
+    ? `<img src="${escHtml(imageUrl)}" class="card-img" onerror="this.style.display='none'">`
+    : '<div class="card-img-placeholder">No image</div>';
+
+  const typeBadge = `<span class="type-badge type-${campaignType}">${campaignType}</span>`;
+
+  const platformIcons = ['facebook','instagram','google'].map(p => {
+    const active = platforms[p];
+    const label = { facebook: 'FB', instagram: 'IG', google: 'GBP' }[p];
+    return `<span class="pi ${active ? 'pi-active' : 'pi-inactive'}">${label}</span>`;
+  }).join(' ');
+
+  const storeTags = storeIds.map(id => `<span class="store-tag">${id} — ${escHtml(STORE_NAMES[id] || id)}</span>`).join('');
+
+  $('confirm-card').innerHTML = `
+    ${imgHtml}
+    <div class="card-body">
+      <div class="card-title">${escHtml(title)}</div>
+      <div class="card-caption">${escHtml(caption)}</div>
+      <div class="meta-row">
+        ${typeBadge}
+        <span>Start: ${formatDate(startDate)} → End: ${formatDate(endDate)}</span>
+      </div>
+      <div class="store-list">${storeTags}</div>
+      <div class="platform-icons">${platformIcons}</div>
+    </div>
+    <div class="confirm-actions">
+      <button class="btn btn-secondary" id="btn-edit">&#x270F; Edit</button>
+      <button class="btn btn-primary" id="btn-publish-confirm">&#x1F4E4; Publish Now</button>
+    </div>
+  `;
+
+  $('form-fields').classList.add('confirm-hidden');
+  $('confirm-section').classList.add('show');
+  $('btn-edit').onclick = showEdit;
+  $('btn-publish-confirm').onclick = doPublish;
+  updatePublishButton();
+}
+
+function showEdit() {
+  $('form-fields').classList.remove('confirm-hidden');
+  $('confirm-section').classList.remove('show');
+  const scrollArea = $('form-fields').closest('.scroll-area-inner');
+  if (scrollArea) scrollArea.scrollIntoView({ behavior: 'smooth' });
+}
+
+// ── Publish ──────────────────────────────────────────────────────────
+async function doPublish() {
+  const title = $('post-title').value.trim();
+  const body = $('post-body').value.trim();
+  if (!title || !body) { logMsg('Title and body are required','error'); return; }
+
+  const platforms = getPlatforms();
+  const storeIds = getSelectedStores();
+  const startDate = $('post-start').value;
+  const endDate = $('post-end').value;
+  const campaignType = $('campaign-type').value;
+
+  if (!platforms.facebook && !platforms.instagram && !platforms.google) { logMsg('Select at least one platform','error'); return; }
+  if (storeIds.length === 0) { logMsg('Select at least one store','error'); return; }
+
+  const imageUrl = $('post-image-url').value.trim();
+
+  setLoading(true);
+  $('publish-status').textContent = '';
+
+  const inputs = {
+    store_id: storeIds.join(','),
+    campaign_title: title,
+    caption: body,
+    start_date: startDate,
+    end_date: endDate,
+    campaign_type: campaignType,
+    image_url: imageUrl || '',
+    platforms: Object.entries(platforms).filter(([,v]) => v).map(([k]) => k).join(','),
+    triggered_by: currentUser ? currentUser.email : 'unknown',
+    id_token: currentUser ? currentUser.idToken : '',
+  };
+
+  logMsg(`Triggering publish: "${title}" (${storeIds.join(', ')})`);
+
+  try {
+    // Call verify_and_dispatch.yml which validates the Google ID token server-side
+    // DISPATCH_TOKEN is injected at deploy time from GitHub Secrets (never in source)
+    const dispatchToken = C.DISPATCH_TOKEN;
+    if (!dispatchToken || dispatchToken === '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') {
+      throw new Error('DISPATCH_TOKEN not configured — deploy via deploy_admin.yml');
+    }
+    const dispatchUrl = `https://api.github.com/repos/${C.GITHUB_OWNER}/${C.GITHUB_REPO}/actions/workflows/${C.VERIFY_WORKFLOW}/dispatches`;
+    const dispatchRes = await fetch(dispatchUrl, {
+      method: 'POST',
+      headers: {
+        'Authorization': `Bearer ${dispatchToken}`,
+        'Content-Type': 'application/json',
+        'Accept': 'application/vnd.github+json'
+      },
+      body: JSON.stringify({ ref: 'main', inputs })
+    });
+
+    if (!dispatchRes.ok) {
+      const errText = await dispatchRes.text();
+      throw new Error(`GitHub API error (${dispatchRes.status}): ${errText}`);
+    }
+
+    logMsg('Verification workflow dispatched — validating credentials...','success');
+    $('publish-status').textContent = '\u2705 Credentials submitted for verification...';
+
+    // Show result section
+    const resultSection = $('result-section');
+    resultSection.classList.add('show');
+    $('result-table').innerHTML = '<p style="font-size:.75rem;color:#6b7280">Workflow triggered. Check the <a href="https://github.com/' + C.GITHUB_OWNER + '/' + C.GITHUB_REPO + '/actions" target="_blank">Actions tab</a> for status.</p>';
+    $('result-summary').textContent = '';
+
+  } catch (err) {
+    logMsg(`Publish failed: ${err.message}`,'error');
+    $('publish-status').textContent = '\u274C Failed';
+  }
+
+  setLoading(false);
+}
+
+// ── Auth ─────────────────────────────────────────────────────────────
+function handleCredentialResponse(credentialResponse) {
+  const idToken = credentialResponse.credential;
+  const parts = idToken.split('.');
+  let payload;
+  try {
+    payload = JSON.parse(atob(parts[1].replace(/-/g,'+').replace(/_/g,'/')));
+  } catch(e) {
+    $('auth-error').textContent = 'Failed to parse token';
+    return;
+  }
+
+  const email = payload.email || '';
+  const hd = payload.hd || '';
+  if (!email.endsWith('@' + C.ALLOWED_DOMAIN) && hd !== C.ALLOWED_DOMAIN) {
+    // Also check AUTHORIZED_EMAILS for testing
+    if (!C.AUTHORIZED_EMAILS.includes(email)) {
+      $('auth-error').textContent = 'Access restricted to @' + C.ALLOWED_DOMAIN + ' accounts';
+      return;
+    }
+  }
+
+  currentUser = {
+    email: email,
+    name: payload.name || email,
+    picture: payload.picture || '',
+    hd: hd,
+    idToken: idToken,
+  };
+
+  $('user-name').textContent = currentUser.name;
+  $('user-avatar').src = currentUser.picture;
+
+  // Role determination (client-side hint; actual enforcement is in workflow)
+  const roleBadge = $('user-role-badge');
+  if (currentUser.email === C.AUTHORIZED_EMAILS[0] || !currentUser.email.endsWith('@' + C.ALLOWED_DOMAIN)) {
+    roleBadge.textContent = 'owner';
+    roleBadge.className = 'role-badge role-owner';
+  } else {
+    roleBadge.textContent = 'manager';
+    roleBadge.className = 'role-badge role-store';
+  }
+
+  document.body.classList.remove('auth-locked');
+  logMsg('Signed in as ' + currentUser.email,'success');
+
+  // Fetch store email mapping if not loaded yet, then filter stores
+  applyStoreAccessFilter();
+}
+
+async function applyStoreAccessFilter() {
+  if (!storeEmailData) await fetchStoreEmails();
+  const allowed = getAllowedStoreIds(currentUser ? currentUser.email : '');
+  if (allowed === 'all') {
+    populateStores(null);
+    logMsg('Elevated access — all stores visible','info');
+  } else if (allowed) {
+    populateStores(allowed);
+    logMsg('Store access — restricted to assigned store only','info');
+  }
+  updatePreview();
+}
+
+function initAuth() {
+  const script = document.createElement('script');
+  script.src = 'https://accounts.google.com/gsi/client';
+  script.onload = () => {
+    google.accounts.id.initialize({
+      client_id: C.GOOGLE_CLIENT_ID,
+      callback: handleCredentialResponse,
+    });
+    $('btn-google-signin').onclick = () => {
+      $('auth-error').textContent = '';
+      google.accounts.id.prompt(); // one-tap or button-based
+    };
+  };
+  document.head.appendChild(script);
+}
+
+$('btn-signout').onclick = () => {
+  currentUser = null;
+  document.body.classList.add('auth-locked');
+  populateStores(null);
+  updatePreview();
+  logMsg('Signed out','info');
+};
+
+// ── Store email lookup ───────────────────────────────────────────────
+let storeEmailData = null;
+
+async function fetchStoreEmails() {
+  const token = C.DISPATCH_TOKEN;
+  if (!token || token === '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') return;
+
+  try {
+    const mgrMap = {};
+    const ownerSet = new Set();
+    const storeMap = {};
+    const names = {};
+    const allStores = [];
+
+    // 1. Fetch stores.json for store definitions, manager emails, and owner emails
+    const sUrl = `https://api.github.com/repos/${C.GITHUB_OWNER}/${C.GITHUB_REPO}/contents/build/data/stores.json`;
+    const sRes = await fetch(sUrl, {
+      headers: { 'Authorization': `Bearer ${token}`, 'Accept': 'application/vnd.github+json' }
+    });
+    if (sRes.ok) {
+      const sData = await sRes.json();
+      const stores = JSON.parse(atob(sData.content.replace(/\n/g, '')));
+      for (const s of stores) {
+        const sid = s.store_id_short || '';
+        const displayName = s.store_display_name || '';
+        const slug = displayName.toLowerCase().replace(/[^a-z0-9]/g, '') || '';
+        if (sid && displayName) {
+          allStores.push({ id: sid, name: displayName, slug });
+          names[sid] = displayName;
+        }
+        const mgrEmail = (s.email || '').toLowerCase();
+        const ownerEmail = (s.escalation_email || '').toLowerCase();
+        if (sid && mgrEmail) mgrMap[mgrEmail] = sid;
+        if (ownerEmail) ownerSet.add(ownerEmail);
+      }
+    }
+
+    // 2. Fetch aris_global_settings.json for c_level/area_manager emails + platform limits
+    const aUrl = `https://api.github.com/repos/${C.GITHUB_OWNER}/${C.GITHUB_REPO}/contents/build/data/aris_global_settings.json`;
+    const aRes = await fetch(aUrl, {
+      headers: { 'Authorization': `Bearer ${token}`, 'Accept': 'application/vnd.github+json' }
+    });
+    if (aRes.ok) {
+      const aData = await aRes.json();
+      const settings = JSON.parse(atob(aData.content.replace(/\n/g, '')));
+
+      // Campaign access emails
+      const access = settings['admin_campaign_access'] || {};
+      for (const [key, val] of Object.entries(access)) {
+        const email = (val || '').toString().toLowerCase().trim();
+        if (!email) continue;
+        if (/^campaign_access_clevel_email_\d+$/.test(key)) {
+          ownerSet.add(email);
+        } else if (/^campaign_access_area_manager_email_\d+$/.test(key)) {
+          ownerSet.add(email);
+        }
+      }
+
+      // Platform character limits — override from aris_global_settings
+      if (settings['platform_limits']) {
+        Object.assign(C.PLATFORM_LIMITS, settings['platform_limits']);
+      }
+    }
+
+    // 3. Fetch campaigns.json for campaign type options
+    const cUrl = `https://api.github.com/repos/${C.GITHUB_OWNER}/${C.GITHUB_REPO}/contents/build/data/campaigns.json`;
+    const cRes = await fetch(cUrl, {
+      headers: { 'Authorization': `Bearer ${token}`, 'Accept': 'application/vnd.github+json' }
+    });
+    if (cRes.ok) {
+      const cData = await cRes.json();
+      const campaigns = JSON.parse(atob(cData.content.replace(/\n/g, '')));
+      const types = [...new Set(campaigns.map(c => (c.content_type || '').trim().toLowerCase()).filter(Boolean))];
+      if (types.length > 0) {
+        const sel = $('campaign-type');
+        sel.innerHTML = types.sort().map(t =>
+          `<option value="${t}">${t.charAt(0).toUpperCase() + t.slice(1)}</option>`
+        ).join('');
+      }
+    }
+
+    storeList = allStores;
+    STORE_NAMES = names;
+    storeEmailData = { managerMap: mgrMap, ownerSet };
+  } catch (e) {
+    // non-critical
+  }
+}
+
+function getAllowedStoreIds(email) {
+  if (!storeEmailData || !email) return null;
+  const lower = email.toLowerCase();
+  const { managerMap, ownerSet } = storeEmailData;
+  if (ownerSet.has(lower)) return 'all';
+  const sid = managerMap[lower];
+  return sid ? [sid] : null;
+}
+
+// ── Populate stores ──────────────────────────────────────────────────
+function populateStores(allowedIds) {
+  const grid = $('stores-grid');
+  if (storeList.length === 0) {
+    grid.innerHTML = '<p style="font-size:.75rem;color:#9ca3af">Loading store data…</p>';
+    return;
+  }
+  grid.innerHTML = storeList
+    .filter(s => !allowedIds || allowedIds.includes(s.id))
+    .map(s =>
+      `<label><input type="checkbox" class="store-cb" data-store="${s.id}" checked> ${s.id} &mdash; ${escHtml(s.name)}</label>`
+    ).join('');
+}
+
+// ── Events ───────────────────────────────────────────────────────────
+['campaign-type','post-title','post-body','post-image-url'].forEach(id => {
+  $(id).addEventListener('input', updatePreview);
+});
+$('post-image-url').addEventListener('input', () => {
+  updateImagePreview($('post-image-url').value.trim());
+});
+$('post-start').addEventListener('input', updatePreview);
+$('post-end').addEventListener('input', updatePreview);
+// Use delegation for store checkboxes (re-rendered on login)
+$('stores-grid').addEventListener('change', updatePreview);
+['platform-fb','platform-ig','platform-gp'].forEach(id => {
+  $(id).addEventListener('change', updatePreview);
+});
+
+$('btn-select-all').onclick = () => {
+  document.querySelectorAll('.store-cb').forEach(cb => cb.checked = true);
+  updatePreview();
+};
+$('btn-deselect-all').onclick = () => {
+  document.querySelectorAll('.store-cb').forEach(cb => cb.checked = false);
+  updatePreview();
+};
+
+$('btn-review').addEventListener('click', showReview);
+$('btn-clear-log').onclick = () => { $('activity-log').innerHTML = ''; };
+
+// ── Default dates ──────────────────────────────────────────────────
+const today = new Date();
+$('post-start').value = today.toISOString().slice(0,10);
+const wk = new Date(today); wk.setDate(wk.getDate()+7);
+$('post-end').value = wk.toISOString().slice(0,10);
+
+// ── File upload ────────────────────────────────────────────────────
+const dropZone = $('drop-zone');
+const fileInput = $('file-input');
+const fileStatus = $('file-status');
+
+dropZone.onclick = () => fileInput.click();
+
+dropZone.addEventListener('dragover', e => { e.preventDefault(); dropZone.classList.add('drag-over'); });
+dropZone.addEventListener('dragleave', () => dropZone.classList.remove('drag-over'));
+dropZone.addEventListener('drop', e => {
+  e.preventDefault();
+  dropZone.classList.remove('drag-over');
+  if (e.dataTransfer.files.length) handleFile(e.dataTransfer.files[0]);
+});
+fileInput.addEventListener('change', () => { if (fileInput.files.length) handleFile(fileInput.files[0]); });
+
+async function handleFile(file) {
+  if (uploadInProgress) { logMsg('Upload already in progress','error'); return; }
+  if (!file.type.startsWith('image/')) { logMsg('Only image files accepted','error'); return; }
+  if (file.size > 10 * 1024 * 1024) { logMsg('File too large (max 10MB)','error'); return; }
+
+  dropZone.classList.add('has-file');
+  fileStatus.innerHTML = `<span class="file-name">${escHtml(file.name)} (${(file.size/1024).toFixed(0)} KB)</span>`;
+  updateImagePreview(URL.createObjectURL(file));
+
+  // Show upload progress and disable publish
+  uploadInProgress = true;
+  updatePublishButton();
+  const progressEl = $('upload-progress');
+  const spinner = $('upload-spinner');
+  const check = $('upload-check');
+  const statusText = $('upload-status-text');
+  progressEl.className = 'upload-progress uploading show';
+  spinner.classList.add('show');
+  check.classList.remove('show');
+  statusText.textContent = 'Uploading image...';
+
+  try {
+    const url = await uploadToImageKit(file);
+    $('post-image-url').value = url;
+    updateImagePreview(url);
+    progressEl.className = 'upload-progress done show';
+    spinner.classList.remove('show');
+    check.classList.add('show');
+    statusText.textContent = 'Uploaded';
+    logMsg('Image uploaded to ImageKit','success');
+  } catch (err) {
+    progressEl.className = 'upload-progress error show';
+    spinner.classList.remove('show');
+    check.classList.remove('show');
+    statusText.textContent = 'Upload failed: ' + err.message;
+    logMsg('Image upload failed: ' + err.message,'error');
+    $('post-image-url').value = '';
+  }
+
+  uploadInProgress = false;
+  updatePublishButton();
+}
+
+// ── Init ─────────────────────────────────────────────────────────────
+(async function init() {
+  await fetchStoreEmails();
+  populateStores();
+  initAuth();
+  updatePreview();
+  fetchHistory();
+})();
+})();
+</script>
+</body>
+</html>
