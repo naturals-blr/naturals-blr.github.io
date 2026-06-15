@@ -421,16 +421,57 @@ function updatePublishButton() {
 }
 
 // ── Image upload via base64 (server-side upload handled by GitHub Actions) ─
+//     Falls back to Canvas compression if base64 exceeds URL-safe threshold.
+
+var MAX_BASE64_CHARS = 8000;
+
+function compressBase64(base64, mimeType, ext, maxLen) {
+  return new Promise(function (resolve) {
+    var img = new Image();
+    img.onload = function () {
+      var w = img.naturalWidth, h = img.naturalHeight;
+      var MAX_W = 800;
+      if (w > MAX_W) { h = Math.round(h * MAX_W / w); w = MAX_W; }
+      var canvas = document.createElement('canvas');
+      canvas.width = w;
+      canvas.height = h;
+      var ctx = canvas.getContext('2d');
+      ctx.drawImage(img, 0, 0, w, h);
+      var q = 0.8;
+      var data, b64;
+      do {
+        data = canvas.toDataURL('image/jpeg', q);
+        b64 = data.split(',')[1];
+        q = Math.max(0.1, q - 0.15);
+      } while (b64.length > maxLen && q > 0.1);
+      resolve({ base64: b64, ext: 'jpg' });
+    };
+    img.onerror = function () { resolve({ base64: base64, ext: ext }); };
+    img.src = 'data:' + mimeType + ';base64,' + base64;
+  });
+}
 
 function uploadToImageKit(file) {
-  return new Promise((resolve, reject) => {
-    const reader = new FileReader();
+  var ext = file.name.split('.').pop();
+  var mime = file.type;
+  return new Promise(function (resolve, reject) {
+    var reader = new FileReader();
     reader.onload = function () {
-      const parts = reader.result.split(',');
-      resolve({
-        base64: parts[1],
-        filename: `campaign_${Date.now()}.${file.name.split('.').pop()}`,
-      });
+      var parts = reader.result.split(',');
+      var b64 = parts[1];
+      if (b64.length <= MAX_BASE64_CHARS) {
+        resolve({
+          base64: b64,
+          filename: 'campaign_' + Date.now() + '.' + ext,
+        });
+      } else {
+        compressBase64(b64, mime, ext, MAX_BASE64_CHARS).then(function (comp) {
+          resolve({
+            base64: comp.base64,
+            filename: 'campaign_' + Date.now() + '.' + comp.ext,
+          });
+        });
+      }
     };
     reader.onerror = function () { reject(reader.error); };
     reader.readAsDataURL(file);
