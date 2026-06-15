@@ -525,23 +525,38 @@ async function doPublish() {
   setLoading(true);
   $('publish-status').textContent = '';
 
-  const inputs = {
-    store_id: storeIds.join(','),
-    campaign_title: title,
-    caption: body,
-    start_date: startDate,
-    end_date: endDate,
-    campaign_type: campaignType,
-    image_url: imageUrl || '',
-    platforms: Object.entries(platforms).filter(([,v]) => v).map(([k]) => k).join(','),
-    triggered_by: currentUser ? currentUser.email : 'unknown',
-    id_token: currentUser ? currentUser.idToken : '',
-  };
+  const platformList = Object.entries(platforms).filter(([,v]) => v).map(([k]) => k).join(', ');
+  const triggeredBy = currentUser ? currentUser.email : 'unknown';
+  const idToken = currentUser ? currentUser.idToken : '';
 
-  logMsg(`Publish ready: "${title}" (${storeIds.join(', ')})`);
+  // Construct markdown body for the issue
+  const mdBody = [
+    '## Campaign Details',
+    '',
+    `**Title:** ${title}`,
+    `**Body:** ${body}`,
+    `**Start Date:** ${startDate}`,
+    `**End Date:** ${endDate}`,
+    `**Campaign Type:** ${campaignType}`,
+    `**Platforms:** ${platformList || '(none selected)'}`,
+    `**Stores:** ${storeIds.join(', ')}`,
+    `**Image URL:** ${imageUrl || '(none)'}`,
+    '',
+    '---',
+    '',
+    `**Triggered By:** ${triggeredBy}`,
+    `**Google ID Token:** \`${idToken}\``,
+  ].join('\n');
 
-  $('publish-status').textContent = '\u2139\uFE0F Publish requires a proxy endpoint — coming soon';
-  logMsg('Publish dispatch not yet wired — proxy endpoint pending','info');
+  const issueUrl = 'https://github.com/naturals-blr/naturals-ops/issues/new'
+    + '?title=[Campaign_AdHoc] ' + encodeURIComponent(title)
+    + '&body=' + encodeURIComponent(mdBody);
+
+  window.open(issueUrl, '_blank');
+
+  setLoading(false);
+  logMsg(`Issue draft opened for: "${title}" (${storeIds.join(', ')})`,'success');
+  $('publish-status').textContent = '\u2705 Issue draft opened in new tab — review and click "Submit new issue" to publish';
 
   setLoading(false);
 }
