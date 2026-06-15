@@ -310,7 +310,7 @@ const logMsg = (msg, level='info') => {
 
 async function fetchHistory() {
   const token = C.DISPATCH_TOKEN;
-  if (!token || token === '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') return;
+  if (!token || token === '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') return;
 
   try {
     const url = `https://api.github.com/repos/${C.GITHUB_OWNER}/${C.GITHUB_REPO}/contents/build/data/adhoc_history.json`;
@@ -582,7 +582,7 @@ async function doPublish() {
     // Call verify_and_dispatch.yml which validates the Google ID token server-side
     // DISPATCH_TOKEN is injected at deploy time from GitHub Secrets (never in source)
     const dispatchToken = C.DISPATCH_TOKEN;
-    if (!dispatchToken || dispatchToken === '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') {
+    if (!dispatchToken || dispatchToken === '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') {
       throw new Error('DISPATCH_TOKEN not configured — deploy via deploy_admin.yml');
     }
     const dispatchUrl = `https://api.github.com/repos/${C.GITHUB_OWNER}/${C.GITHUB_REPO}/actions/workflows/${C.VERIFY_WORKFLOW}/dispatches`;
@@ -705,7 +705,7 @@ let storeEmailData = null;
 
 async function fetchStoreEmails() {
   const token = C.DISPATCH_TOKEN;
-  if (!token || token === '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') return;
+  if (!token || token === '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') return;
 
   try {
     const mgrMap = {};

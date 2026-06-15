@@ -21,7 +21,7 @@ const ADMIN_CONFIG = {
   // The admin JS uses the DISPATCH_TOKEN placeholder which gets replaced
   // at deploy time by deploy_admin.yml (never committed to source)
   VERIFY_WORKFLOW: 'verify_and_dispatch.yml',
-  DISPATCH_TOKEN: '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',
+  DISPATCH_TOKEN: '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',
 
   // Allowed email domain for Google OAuth sign-in
   // Set to empty string to allow any email (real auth is server-side in verify_and_dispatch.yml)
