@@ -420,31 +420,33 @@ function updatePublishButton() {
   if (pub) pub.disabled = uploadInProgress;
 }
 
-// ── ImageKit upload (unsigned via fetch — no SDK dependency) ──────────
+// ── ImageKit upload (unsigned via native fetch + FormData) ────────────
 
 function uploadToImageKit(file) {
   return new Promise((resolve, reject) => {
-    const fd = new FormData();
-    fd.append('file', file);
-    fd.append('fileName', `campaign_${Date.now()}.${file.name.split('.').pop()}`);
-    fd.append('publicKey', ADMIN_CONFIG.IMAGEKIT_PUBLIC_KEY);
-    fd.append('folder', '/');
-    fd.append('useUniqueFileName', 'true');
-    fd.append('tags', 'manager-dispatch');
+    const formData = new FormData();
+    formData.append('file', file);
+    formData.append('fileName', `campaign_${Date.now()}.png`);
+    formData.append('publicKey', ADMIN_CONFIG.IMAGEKIT_PUBLIC_KEY);
+    formData.append('useUniqueFileName', 'true');
+    formData.append('folder', '/');
 
     fetch('https://upload.imagekit.io/api/v1/files/upload', {
       method: 'POST',
-      body: fd,
+      body: formData,
     })
-      .then(function (r) { return r.json(); })
-      .then(function (data) {
-        if (data.url) {
-          resolve(data.url);
-        } else {
-          reject(new Error(data.message || 'ImageKit upload failed'));
+      .then(function (response) {
+        if (!response.ok) {
+          return response.json().then(function (err) { throw new Error(err.message); });
         }
+        return response.json();
       })
-      .catch(function (err) { reject(err); });
+      .then(function (data) {
+        resolve(data.url);
+      })
+      .catch(function (err) {
+        reject(err);
+      });
   });
 }
 
