@@ -814,13 +814,11 @@ async function handleFile(file) {
 
   try {
     const result = await uploadToImageKit(file);
-    window.__pendingUpload = result;
-    $('post-image-url').value = 'base64://pending';
     progressEl.className = 'upload-progress done show';
     spinner.classList.remove('show');
     check.classList.add('show');
-    statusText.textContent = 'Ready (base64)';
-    logMsg('Image encoded as base64, ready to publish','success');
+    statusText.textContent = 'Preview ready — paste a hosted URL above or leave blank';
+    logMsg('Image preview ready — paste a hosted URL in the field above for publishing','info');
   } catch (err) {
     progressEl.className = 'upload-progress error show';
     spinner.classList.remove('show');
