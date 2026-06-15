@@ -18,9 +18,6 @@ const ADMIN_CONFIG = {
   // Production base URL for building offer links (injected at deploy time)
   PRODUCTION_BASE_URL: 'https://naturalsprime.in',
 
-  // GitHub Issues API — fine-grained PAT (issues:write, injected at build time)
-  GH_PAT: '',
-
   // Platform character limits — defaults (overridden by injected ARIS_PLATFORM_LIMITS)
   PLATFORM_LIMITS: { facebook: 63206, instagram: 2200, google: 1500 },
 };
