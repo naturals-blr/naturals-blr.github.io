@@ -13,7 +13,7 @@ const ADMIN_CONFIG = {
 
   // ImageKit — public key only (no secret)
   IMAGEKIT_PUBLIC_KEY: 'public_FS+yTbkgglmRSrKu9hBg4Lm04/8=',
-  IMAGEKIT_URL_ENDPOINT: 'https://ik.imagekit.io/naturals',
+  IMAGEKIT_URL_ENDPOINT: 'https://ik.imagekit.io/aristycoon/',
 
   // Production base URL for building offer links (injected at deploy time)
   PRODUCTION_BASE_URL: 'https://naturalsprime.in',
