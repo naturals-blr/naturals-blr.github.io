@@ -431,7 +431,7 @@ function updatePublishButton() {
 
 function uploadToImageKit(file) {
   return new Promise((resolve, reject) => {
-    ikClient.upload({
+    window.ikClient.upload({
       file: file,
       fileName: `campaign_${Date.now()}.${file.name.split('.').pop()}`,
       folder: '/salon_campaign_creatives',
