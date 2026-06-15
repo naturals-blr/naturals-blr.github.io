@@ -26,7 +26,7 @@ const ADMIN_CONFIG = {
 // These are injected at build time by build/build.py to eliminate
 // authenticated GitHub API calls from the browser.
 window.SALON_STORES_CACHE = [{"id": "N78", "name": "JP Nagar 5th Phase", "slug": "jpnagar5thphase"}, {"id": "N45", "name": "Nagavara", "slug": "nagavara"}, {"id": "N36", "name": "Ayyappa Nagar", "slug": "ayyappanagar"}, {"id": "N05", "name": "Frazer Town", "slug": "frazertown"}, {"id": "N43", "name": "Hennur", "slug": "hennur"}];
-window.STORE_EMAIL_MAP = {};
-window.STORE_OWNER_SET = [];
+window.STORE_EMAIL_MAP = {"jpnagar2.naturals@gmail.com": "N78", "naturalsnagavara@gmail.com": "N45", "naturalsdevasandra@gmail.com": "N36", "frazertown.naturals@gmail.com": "N05", "naturalshennur@gmail.com": "N43"};
+window.STORE_OWNER_SET = ["iris.digihelp+sandesh@gmail.com", "iris.digihelp@gmail.com", "sandesh.aristycoon@gmail.com", "sophiaaxon@gmail.com"];
 window.CAMPAIGN_TYPES_CACHE = ["announcement", "offer"];
-window.ARIS_PLATFORM_LIMITS = {};
+window.ARIS_PLATFORM_LIMITS = {"facebook": 63206, "instagram": 2200, "google": 1500};
