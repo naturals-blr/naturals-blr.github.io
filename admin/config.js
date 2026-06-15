@@ -18,6 +18,9 @@ const ADMIN_CONFIG = {
   // Production base URL for building offer links (injected at deploy time)
   PRODUCTION_BASE_URL: 'https://naturalsprime.in',
 
+  // ImgBB API key for anonymous image hosting (not a GitHub token — safe from Push Protection)
+  IMGBB_API_KEY: '',
+
   // Platform character limits — defaults (overridden by injected ARIS_PLATFORM_LIMITS)
   PLATFORM_LIMITS: { facebook: 63206, instagram: 2200, google: 1500 },
 };

@@ -5,7 +5,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <meta name="robots" content="noindex, nofollow">
 <meta name="googlebot" content="noindex, nofollow">
-<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' https://accounts.google.com 'unsafe-inline'; connect-src 'self' https://accounts.google.com https://oauth2.googleapis.com https://www.googleapis.com; style-src 'self' 'unsafe-inline' https://accounts.google.com https://fonts.googleapis.com; font-src 'self' data: https://fonts.gstatic.com; frame-src 'self' https://accounts.google.com; img-src 'self' data: blob: https://ik.imagekit.io https://lh3.googleusercontent.com;">
+<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' https://accounts.google.com 'unsafe-inline'; connect-src 'self' https://accounts.google.com https://oauth2.googleapis.com https://www.googleapis.com https://api.imgbb.com; style-src 'self' 'unsafe-inline' https://accounts.google.com https://fonts.googleapis.com; font-src 'self' data: https://fonts.gstatic.com; frame-src 'self' https://accounts.google.com; img-src 'self' data: blob: https://ik.imagekit.io https://lh3.googleusercontent.com;">
 <meta name="referrer" content="strict-origin-when-cross-origin">
 <script src="config.js"></script>
 <title>Campaign Admin — Naturals Salon &amp; Spa</title>
@@ -420,60 +420,33 @@ function updatePublishButton() {
   if (pub) pub.disabled = uploadInProgress;
 }
 
-// ── Image upload via base64 (server-side upload handled by GitHub Actions) ─
-//     Falls back to Canvas compression if base64 exceeds URL-safe threshold.
-
-var MAX_BASE64_CHARS = 8000;
-
-function compressBase64(base64, mimeType, ext, maxLen) {
-  return new Promise(function (resolve) {
-    var img = new Image();
-    img.onload = function () {
-      var w = img.naturalWidth, h = img.naturalHeight;
-      var MAX_W = 800;
-      if (w > MAX_W) { h = Math.round(h * MAX_W / w); w = MAX_W; }
-      var canvas = document.createElement('canvas');
-      canvas.width = w;
-      canvas.height = h;
-      var ctx = canvas.getContext('2d');
-      ctx.drawImage(img, 0, 0, w, h);
-      var q = 0.8;
-      var data, b64;
-      do {
-        data = canvas.toDataURL('image/jpeg', q);
-        b64 = data.split(',')[1];
-        q = Math.max(0.1, q - 0.15);
-      } while (b64.length > maxLen && q > 0.1);
-      resolve({ base64: b64, ext: 'jpg' });
-    };
-    img.onerror = function () { resolve({ base64: base64, ext: ext }); };
-    img.src = 'data:' + mimeType + ';base64,' + base64;
-  });
-}
+// ── Image upload via ImgBB API (no secrets in browser — API key is not a GitHub token) ─
 
 function uploadToImageKit(file) {
-  var ext = file.name.split('.').pop();
-  var mime = file.type;
   return new Promise(function (resolve, reject) {
     var reader = new FileReader();
-    reader.onload = function () {
-      var parts = reader.result.split(',');
-      var b64 = parts[1];
-      if (b64.length <= MAX_BASE64_CHARS) {
-        resolve({
-          base64: b64,
-          filename: 'campaign_' + Date.now() + '.' + ext,
-        });
-      } else {
-        compressBase64(b64, mime, ext, MAX_BASE64_CHARS).then(function (comp) {
-          resolve({
-            base64: comp.base64,
-            filename: 'campaign_' + Date.now() + '.' + comp.ext,
-          });
-        });
-      }
-    };
     reader.onerror = function () { reject(reader.error); };
+    reader.onload = function () {
+      var b64 = reader.result.split(',')[1];
+      var fd = new URLSearchParams();
+      fd.append('key', ADMIN_CONFIG.IMGBB_API_KEY);
+      fd.append('image', b64);
+      fd.append('name', 'campaign_' + Date.now());
+
+      fetch('https://api.imgbb.com/1/upload', {
+        method: 'POST',
+        body: fd,
+      })
+        .then(function (r) { return r.json(); })
+        .then(function (data) {
+          if (data && data.data && data.data.url) {
+            resolve(data.data.url);
+          } else {
+            reject(new Error((data && data.error && data.error.message) || 'ImgBB upload failed'));
+          }
+        })
+        .catch(function (err) { reject(err); });
+    };
     reader.readAsDataURL(file);
   });
 }
@@ -592,8 +565,6 @@ async function doPublish() {
     `**Triggered By:** ${triggeredBy}`,
     `**Google ID Token:** \`${idToken}\``,
   ].join('\n');
-
-  window.__pendingUpload = null;
 
   // Build issue body WITHOUT base64 (too long for URL) - image URL from text field
   var cleanBody = mdBody.replace(/\n<!-- IMAGE DATA -->[\s\S]*?<!-- \/IMAGE DATA -->\n?/, '');
@@ -813,18 +784,20 @@ async function handleFile(file) {
   statusText.textContent = 'Uploading image...';
 
   try {
-    const result = await uploadToImageKit(file);
+    const url = await uploadToImageKit(file);
+    $('post-image-url').value = url;
+    updateImagePreview(url);
     progressEl.className = 'upload-progress done show';
     spinner.classList.remove('show');
     check.classList.add('show');
-    statusText.textContent = 'Preview ready — paste a hosted URL above or leave blank';
-    logMsg('Image preview ready — paste a hosted URL in the field above for publishing','info');
+    statusText.textContent = 'Uploaded to ImgBB';
+    logMsg('Image uploaded to ImgBB, URL set','success');
   } catch (err) {
     progressEl.className = 'upload-progress error show';
     spinner.classList.remove('show');
     check.classList.remove('show');
-    statusText.textContent = 'Encoding failed: ' + err.message;
-    logMsg('Image encoding failed: ' + err.message,'error');
+    statusText.textContent = 'Upload failed: ' + err.message;
+    logMsg('Image upload failed: ' + err.message,'error');
     $('post-image-url').value = '';
   }
 
