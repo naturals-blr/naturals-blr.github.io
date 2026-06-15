@@ -5,25 +5,9 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <meta name="robots" content="noindex, nofollow">
 <meta name="googlebot" content="noindex, nofollow">
-<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' https://accounts.google.com https://cdnjs.cloudflare.com 'unsafe-inline'; connect-src 'self' https://accounts.google.com https://oauth2.googleapis.com https://www.googleapis.com https://ik.imagekit.io; style-src 'self' 'unsafe-inline' https://accounts.google.com https://fonts.googleapis.com; font-src 'self' data: https://fonts.gstatic.com; frame-src 'self' https://accounts.google.com; img-src 'self' data: blob: https://ik.imagekit.io https://lh3.googleusercontent.com;">
+<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' https://accounts.google.com 'unsafe-inline'; connect-src 'self' https://accounts.google.com https://oauth2.googleapis.com https://www.googleapis.com https://ik.imagekit.io https://upload.imagekit.io; style-src 'self' 'unsafe-inline' https://accounts.google.com https://fonts.googleapis.com; font-src 'self' data: https://fonts.gstatic.com; frame-src 'self' https://accounts.google.com; img-src 'self' data: blob: https://ik.imagekit.io https://lh3.googleusercontent.com;">
 <meta name="referrer" content="strict-origin-when-cross-origin">
-<script src="https://cdnjs.cloudflare.com/ajax/libs/imagekit-javascript/1.5.0/imagekit.min.js"></script>
 <script src="config.js"></script>
-<script>
-try {
-  if (typeof ADMIN_CONFIG !== 'undefined') {
-    window.ikClient = new ImageKit({
-      publicKey: ADMIN_CONFIG.IMAGEKIT_PUBLIC_KEY,
-      urlEndpoint: ADMIN_CONFIG.IMAGEKIT_URL_ENDPOINT,
-    });
-    console.log("[SUCCESS] window.ikClient initialized cleanly in head.");
-  } else {
-    console.error("[CRITICAL] ADMIN_CONFIG is missing or wrapped in an inaccessible scope.");
-  }
-} catch (e) {
-  console.error("[CRITICAL] Instantiation failed:", e.message);
-}
-</script>
 <title>Campaign Admin — Naturals Salon &amp; Spa</title>
 <link href="https://fonts.googleapis.com/css2?family=Inter:opsz@14..32&display=swap" rel="stylesheet">
 <style>
@@ -436,23 +420,31 @@ function updatePublishButton() {
   if (pub) pub.disabled = uploadInProgress;
 }
 
-// ── ImageKit upload (unsigned SDK) ───────────────────────────────────
+// ── ImageKit upload (unsigned via fetch — no SDK dependency) ──────────
 
 function uploadToImageKit(file) {
   return new Promise((resolve, reject) => {
-    window.ikClient.upload({
-      file: file,
-      fileName: `campaign_${Date.now()}.${file.name.split('.').pop()}`,
-      folder: '/salon_campaign_creatives',
-      tags: ['manager-dispatch'],
-      useUniqueFileName: true,
-    }, function(err, result) {
-      if (err) {
-        reject(new Error(err.message || 'ImageKit upload failed'));
-      } else {
-        resolve(result.url);
-      }
-    });
+    const fd = new FormData();
+    fd.append('file', file);
+    fd.append('fileName', `campaign_${Date.now()}.${file.name.split('.').pop()}`);
+    fd.append('publicKey', ADMIN_CONFIG.IMAGEKIT_PUBLIC_KEY);
+    fd.append('folder', '/salon_campaign_creatives');
+    fd.append('useUniqueFileName', 'true');
+    fd.append('tags', 'manager-dispatch');
+
+    fetch('https://upload.imagekit.io/api/v1/files/upload', {
+      method: 'POST',
+      body: fd,
+    })
+      .then(function (r) { return r.json(); })
+      .then(function (data) {
+        if (data.url) {
+          resolve(data.url);
+        } else {
+          reject(new Error(data.message || 'ImageKit upload failed'));
+        }
+      })
+      .catch(function (err) { reject(err); });
   });
 }
 
