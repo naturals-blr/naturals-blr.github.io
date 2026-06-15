@@ -7,9 +7,25 @@
 <meta name="googlebot" content="noindex, nofollow">
 <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' https://accounts.google.com https://cdnjs.cloudflare.com 'unsafe-inline'; connect-src 'self' https://accounts.google.com https://ik.imagekit.io; style-src 'self' 'unsafe-inline' https://accounts.google.com https://fonts.googleapis.com; font-src 'self' data: https://fonts.gstatic.com; img-src 'self' data: https://ik.imagekit.io; frame-src 'self' https://accounts.google.com;">
 <meta name="referrer" content="strict-origin-when-cross-origin">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/imagekit-javascript/1.5.0/imagekit.min.js"></script>
+<script src="config.js"></script>
+<script>
+window.handleCredentialResponse = function(response) {
+  try {
+    const payload = JSON.parse(atob(response.credential.split('.')[1]));
+    console.log("Auth handshake received for:", payload.email);
+    document.getElementById('manager-email').value = payload.email;
+  } catch (e) {
+    console.error("Auth decoding error:", e);
+  }
+};
+window.imagekit = new ImageKit({
+  publicKey: ADMIN_CONFIG.IMAGEKIT_PUBLIC_KEY,
+  urlEndpoint: ADMIN_CONFIG.IMAGEKIT_URL_ENDPOINT,
+});
+</script>
 <title>Campaign Admin — Naturals Salon &amp; Spa</title>
 <link href="https://fonts.googleapis.com/css2?family=Inter:opsz@14..32&display=swap" rel="stylesheet">
-<script src="https://cdnjs.cloudflare.com/ajax/libs/imagekit-javascript/1.5.0/imagekit.min.js"></script>
 <style>
 *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
 body{font-family:'Inter',-apple-system,BlinkMacSystemFont,sans-serif;background:#f3f4f6;color:#1f2937;line-height:1.5}
@@ -306,7 +322,6 @@ header .user-info button:hover{background:#f3f4f6}
   </div>
 </div>
 
-<script src="config.js"></script>
 <script>
 (function(){
 const C = ADMIN_CONFIG;
@@ -422,10 +437,6 @@ function updatePublishButton() {
 }
 
 // ── ImageKit upload (unsigned SDK) ───────────────────────────────────
-const imagekit = new ImageKit({
-  publicKey: C.IMAGEKIT_PUBLIC_KEY,
-  urlEndpoint: C.IMAGEKIT_URL_ENDPOINT,
-});
 
 function uploadToImageKit(file) {
   return new Promise((resolve, reject) => {
