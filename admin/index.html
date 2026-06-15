@@ -10,15 +10,6 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/imagekit-javascript/1.5.0/imagekit.min.js"></script>
 <script src="config.js"></script>
 <script>
-window.handleCredentialResponse = function(response) {
-  try {
-    const payload = JSON.parse(atob(response.credential.split('.')[1]));
-    console.log("Auth handshake received for:", payload.email);
-    document.getElementById('manager-email').value = payload.email;
-  } catch (e) {
-    console.error("Auth decoding error:", e);
-  }
-};
 window.ikClient = new ImageKit({
   publicKey: ADMIN_CONFIG.IMAGEKIT_PUBLIC_KEY,
   urlEndpoint: ADMIN_CONFIG.IMAGEKIT_URL_ENDPOINT,
