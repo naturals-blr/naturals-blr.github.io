@@ -19,7 +19,7 @@ window.handleCredentialResponse = function(response) {
     console.error("Auth decoding error:", e);
   }
 };
-window.imagekit = new ImageKit({
+window.ikClient = new ImageKit({
   publicKey: ADMIN_CONFIG.IMAGEKIT_PUBLIC_KEY,
   urlEndpoint: ADMIN_CONFIG.IMAGEKIT_URL_ENDPOINT,
 });
@@ -440,7 +440,7 @@ function updatePublishButton() {
 
 function uploadToImageKit(file) {
   return new Promise((resolve, reject) => {
-    imagekit.upload({
+    ikClient.upload({
       file: file,
       fileName: `campaign_${Date.now()}.${file.name.split('.').pop()}`,
       folder: '/salon_campaign_creatives',
