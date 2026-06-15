@@ -428,7 +428,7 @@ function uploadToImageKit(file) {
     fd.append('file', file);
     fd.append('fileName', `campaign_${Date.now()}.${file.name.split('.').pop()}`);
     fd.append('publicKey', ADMIN_CONFIG.IMAGEKIT_PUBLIC_KEY);
-    fd.append('folder', '/salon_campaign_creatives');
+    fd.append('folder', '/');
     fd.append('useUniqueFileName', 'true');
     fd.append('tags', 'manager-dispatch');
 
