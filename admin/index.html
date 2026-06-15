@@ -5,7 +5,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <meta name="robots" content="noindex, nofollow">
 <meta name="googlebot" content="noindex, nofollow">
-<meta http-equiv="Content-Security-Policy" content="default-src 'self' https://accounts.google.com https://*.githubusercontent.com https://raw.githubusercontent.com https://naturalsprime.in https://ik.imagekit.io https://upload.imagekit.io; script-src 'self' 'unsafe-inline' https://accounts.google.com https://apis.google.com; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src 'self' https://fonts.gstatic.com; img-src 'self' data: https://naturalsprime.in https://*.githubusercontent.com https://ik.imagekit.io blob:; connect-src 'self' https://api.github.com https://accounts.google.com https://upload.imagekit.io https://ik.imagekit.io;">
+<meta http-equiv="Content-Security-Policy" content="default-src 'self' https://accounts.google.com https://*.githubusercontent.com https://raw.githubusercontent.com https://naturalsprime.in https://ik.imagekit.io https://upload.imagekit.io; script-src 'self' 'unsafe-inline' https://accounts.google.com https://apis.google.com; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src 'self' https://fonts.gstatic.com; img-src 'self' data: https://naturalsprime.in https://*.githubusercontent.com https://ik.imagekit.io blob:; connect-src 'self' https://accounts.google.com https://upload.imagekit.io https://ik.imagekit.io;">
 <meta name="referrer" content="strict-origin-when-cross-origin">
 <title>Campaign Admin — Naturals Salon &amp; Spa</title>
 <link href="https://fonts.googleapis.com/css2?family=Inter:opsz@14..32&display=swap" rel="stylesheet">
@@ -308,45 +308,7 @@ const logMsg = (msg, level='info') => {
   el.insertAdjacentHTML('afterbegin',`<div class="${cls}">${ts} ${msg}</div>`);
 };
 
-async function fetchHistory() {
-  const token = C.DISPATCH_TOKEN;
-  if (!token || token === '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') return;
 
-  try {
-    const url = `https://api.github.com/repos/${C.GITHUB_OWNER}/${C.GITHUB_REPO}/contents/build/data/adhoc_history.json`;
-    const res = await fetch(url, {
-      headers: {
-        'Authorization': `Bearer ${token}`,
-        'Accept': 'application/vnd.github+json',
-      }
-    });
-    if (!res.ok) return;
-
-    const data = await res.json();
-    const decoded = atob(data.content.replace(/\n/g, ''));
-    const history = JSON.parse(decoded);
-
-    const el = $('activity-log');
-    const storeName = id => { const s = storeList.find(s => s.id === id); return s ? s.name : id; };
-
-    history.slice(0, 10).forEach(entry => {
-      const ts = entry.timestamp ? entry.timestamp.slice(0, 16).replace('T', ' ') : '';
-      const stores = (entry.storeIds || []).map(s => storeName(s)).join(', ');
-      const status = entry.total > 0 ? `✓ ${entry.successes}/${entry.total}` : '–';
-      const by = entry.triggered_by || 'system';
-      const title = (entry.title || '').substring(0, 50);
-      el.insertAdjacentHTML('beforeend',
-        `<div class="entry info" style="border-bottom:1px solid #f3f4f6;padding:2px 0">${ts} <strong>${escHtml(title)}</strong> — ${escHtml(stores)} — ${escHtml(by)} — ${status}</div>`
-      );
-    });
-
-    if (history.length) {
-      el.insertAdjacentHTML('beforeend', '<div class="entry info" style="font-size:.625rem;color:#9ca3af;padding:2px 0">— end of history —</div>');
-    }
-  } catch (e) {
-    // silent — history is non-critical
-  }
-}
 
 let currentUser = null;
 let uploadInProgress = false;
@@ -576,44 +538,10 @@ async function doPublish() {
     id_token: currentUser ? currentUser.idToken : '',
   };
 
-  logMsg(`Triggering publish: "${title}" (${storeIds.join(', ')})`);
+  logMsg(`Publish ready: "${title}" (${storeIds.join(', ')})`);
 
-  try {
-    // Call verify_and_dispatch.yml which validates the Google ID token server-side
-    // DISPATCH_TOKEN is injected at deploy time from GitHub Secrets (never in source)
-    const dispatchToken = C.DISPATCH_TOKEN;
-    if (!dispatchToken || dispatchToken === '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') {
-      throw new Error('DISPATCH_TOKEN not configured — deploy via deploy_admin.yml');
-    }
-    const dispatchUrl = `https://api.github.com/repos/${C.GITHUB_OWNER}/${C.GITHUB_REPO}/actions/workflows/${C.VERIFY_WORKFLOW}/dispatches`;
-    const dispatchRes = await fetch(dispatchUrl, {
-      method: 'POST',
-      headers: {
-        'Authorization': `Bearer ${dispatchToken}`,
-        'Content-Type': 'application/json',
-        'Accept': 'application/vnd.github+json'
-      },
-      body: JSON.stringify({ ref: 'main', inputs })
-    });
-
-    if (!dispatchRes.ok) {
-      const errText = await dispatchRes.text();
-      throw new Error(`GitHub API error (${dispatchRes.status}): ${errText}`);
-    }
-
-    logMsg('Verification workflow dispatched — validating credentials...','success');
-    $('publish-status').textContent = '\u2705 Credentials submitted for verification...';
-
-    // Show result section
-    const resultSection = $('result-section');
-    resultSection.classList.add('show');
-    $('result-table').innerHTML = '<p style="font-size:.75rem;color:#6b7280">Workflow triggered. Check the <a href="https://github.com/' + C.GITHUB_OWNER + '/' + C.GITHUB_REPO + '/actions" target="_blank">Actions tab</a> for status.</p>';
-    $('result-summary').textContent = '';
-
-  } catch (err) {
-    logMsg(`Publish failed: ${err.message}`,'error');
-    $('publish-status').textContent = '\u274C Failed';
-  }
+  $('publish-status').textContent = '\u2139\uFE0F Publish requires a proxy endpoint — coming soon';
+  logMsg('Publish dispatch not yet wired — proxy endpoint pending','info');
 
   setLoading(false);
 }
@@ -663,8 +591,8 @@ function handleCredentialResponse(credentialResponse) {
   applyStoreAccessFilter();
 }
 
-async function applyStoreAccessFilter() {
-  if (!storeEmailData) await fetchStoreEmails();
+function applyStoreAccessFilter() {
+  if (!storeEmailData) loadInjectedData();
   const allowed = getAllowedStoreIds(currentUser ? currentUser.email : '');
   if (allowed === 'all') {
     populateStores(null);
@@ -700,92 +628,40 @@ $('btn-signout').onclick = () => {
   logMsg('Signed out','info');
 };
 
-// ── Store email lookup ───────────────────────────────────────────────
+// ── Store data (injected at build time) ──────────────────────────────
 let storeEmailData = null;
 
-async function fetchStoreEmails() {
-  const token = C.DISPATCH_TOKEN;
-  if (!token || token === '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') return;
+function loadInjectedData() {
+  const stores = window.SALON_STORES_CACHE || [];
+  const emailMap = window.STORE_EMAIL_MAP || {};
+  const ownerSet = new Set(window.STORE_OWNER_SET || []);
+  const names = {};
+  const allStores = [];
 
-  try {
-    const mgrMap = {};
-    const ownerSet = new Set();
-    const storeMap = {};
-    const names = {};
-    const allStores = [];
-
-    // 1. Fetch stores.json for store definitions, manager emails, and owner emails
-    const sUrl = `https://api.github.com/repos/${C.GITHUB_OWNER}/${C.GITHUB_REPO}/contents/build/data/stores.json`;
-    const sRes = await fetch(sUrl, {
-      headers: { 'Authorization': `Bearer ${token}`, 'Accept': 'application/vnd.github+json' }
-    });
-    if (sRes.ok) {
-      const sData = await sRes.json();
-      const stores = JSON.parse(atob(sData.content.replace(/\n/g, '')));
-      for (const s of stores) {
-        const sid = s.store_id_short || '';
-        const displayName = s.store_display_name || '';
-        const slug = displayName.toLowerCase().replace(/[^a-z0-9]/g, '') || '';
-        if (sid && displayName) {
-          allStores.push({ id: sid, name: displayName, slug });
-          names[sid] = displayName;
-        }
-        const mgrEmail = (s.email || '').toLowerCase();
-        const ownerEmail = (s.escalation_email || '').toLowerCase();
-        if (sid && mgrEmail) mgrMap[mgrEmail] = sid;
-        if (ownerEmail) ownerSet.add(ownerEmail);
-      }
+  for (const s of stores) {
+    if (s.id && s.name) {
+      allStores.push({ id: s.id, name: s.name, slug: s.slug });
+      names[s.id] = s.name;
     }
+  }
 
-    // 2. Fetch aris_global_settings.json for c_level/area_manager emails + platform limits
-    const aUrl = `https://api.github.com/repos/${C.GITHUB_OWNER}/${C.GITHUB_REPO}/contents/build/data/aris_global_settings.json`;
-    const aRes = await fetch(aUrl, {
-      headers: { 'Authorization': `Bearer ${token}`, 'Accept': 'application/vnd.github+json' }
-    });
-    if (aRes.ok) {
-      const aData = await aRes.json();
-      const settings = JSON.parse(atob(aData.content.replace(/\n/g, '')));
+  storeList = allStores;
+  STORE_NAMES = names;
+  storeEmailData = { managerMap: emailMap, ownerSet };
 
-      // Campaign access emails
-      const access = settings['admin_campaign_access'] || {};
-      for (const [key, val] of Object.entries(access)) {
-        const email = (val || '').toString().toLowerCase().trim();
-        if (!email) continue;
-        if (/^campaign_access_clevel_email_\d+$/.test(key)) {
-          ownerSet.add(email);
-        } else if (/^campaign_access_area_manager_email_\d+$/.test(key)) {
-          ownerSet.add(email);
-        }
-      }
+  // Populate campaign types from injected cache
+  const types = window.CAMPAIGN_TYPES_CACHE || [];
+  if (types.length > 0) {
+    const sel = $('campaign-type');
+    sel.innerHTML = types.map(t =>
+      `<option value="${t}">${t.charAt(0).toUpperCase() + t.slice(1)}</option>`
+    ).join('');
+  }
 
-      // Platform character limits — override from aris_global_settings
-      if (settings['platform_limits']) {
-        Object.assign(C.PLATFORM_LIMITS, settings['platform_limits']);
-      }
-    }
-
-    // 3. Fetch campaigns.json for campaign type options
-    const cUrl = `https://api.github.com/repos/${C.GITHUB_OWNER}/${C.GITHUB_REPO}/contents/build/data/campaigns.json`;
-    const cRes = await fetch(cUrl, {
-      headers: { 'Authorization': `Bearer ${token}`, 'Accept': 'application/vnd.github+json' }
-    });
-    if (cRes.ok) {
-      const cData = await cRes.json();
-      const campaigns = JSON.parse(atob(cData.content.replace(/\n/g, '')));
-      const types = [...new Set(campaigns.map(c => (c.content_type || '').trim().toLowerCase()).filter(Boolean))];
-      if (types.length > 0) {
-        const sel = $('campaign-type');
-        sel.innerHTML = types.sort().map(t =>
-          `<option value="${t}">${t.charAt(0).toUpperCase() + t.slice(1)}</option>`
-        ).join('');
-      }
-    }
-
-    storeList = allStores;
-    STORE_NAMES = names;
-    storeEmailData = { managerMap: mgrMap, ownerSet };
-  } catch (e) {
-    // non-critical
+  // Apply platform limits from injected settings cache
+  const limits = window.ARIS_PLATFORM_LIMITS;
+  if (limits) {
+    Object.assign(C.PLATFORM_LIMITS, limits);
   }
 }
 
@@ -905,12 +781,11 @@ async function handleFile(file) {
 }
 
 // ── Init ─────────────────────────────────────────────────────────────
-(async function init() {
-  await fetchStoreEmails();
+(function init() {
+  loadInjectedData();
   populateStores();
   initAuth();
   updatePreview();
-  fetchHistory();
 })();
 })();
 </script>

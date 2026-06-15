@@ -1,39 +1,32 @@
 /**
  * Naturals Admin Panel — Configuration
  *
- * ⚠️  NEVER store secrets/tokens here. This file is in the source repo.
- *      The DISPATCH_TOKEN placeholder is replaced at deploy time by
- *      .github/workflows/deploy_admin.yml using GitHub Secrets.
+ * ⚠️  NO tokens or secrets here. Data (stores, campaigns, settings) is
+ *      injected at build time by build/build.py into admin/config.js
+ *      in the output directory. See the window.*_CACHE globals below.
  *
  * See docs/OPS_PLAYBOOK_FB_TOKENS.md and Naturals_Admin_Panel_Spec_v1.docx
  */
 const ADMIN_CONFIG = {
-  // Values below are injected at deploy time from GitHub Secrets
+  // Google OAuth — public client ID
   GOOGLE_CLIENT_ID: '816755094343-1ibdm0ecuhg90b50090rjoohkrlr9pd5.apps.googleusercontent.com',
+
+  // ImageKit — public key only (no secret)
   IMAGEKIT_PUBLIC_KEY: 'public_FS+yTbkgglmRSrKu9hBg4Lm04/8=',
   IMAGEKIT_URL_ENDPOINT: 'https://ik.imagekit.io/naturals',
 
-  // GitHub — repo where the verification workflow lives
-  GITHUB_OWNER: 'naturals-blr',
-  GITHUB_REPO: 'naturals-ops',
-
-  // Verification workflow — called from browser with Google ID token
-  // The admin JS uses the DISPATCH_TOKEN placeholder which gets replaced
-  // at deploy time by deploy_admin.yml (never committed to source)
-  VERIFY_WORKFLOW: 'verify_and_dispatch.yml',
-  DISPATCH_TOKEN: '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',
-
-  // Allowed email domain for Google OAuth sign-in
-  // Set to empty string to allow any email (real auth is server-side in verify_and_dispatch.yml)
-  ALLOWED_DOMAIN: '',
-
-  // Authorised emails (any email can trigger auth; real access control is server-side)
-  AUTHORIZED_EMAILS: [],
-
-  // Platform character limits — injected at deploy time from aris_global_settings
-  // Defaults used as fallback if settings not yet loaded
-  PLATFORM_LIMITS: { facebook: 63206, instagram: 2200, google: 1500 },
-
   // Production base URL for building offer links (injected at deploy time)
   PRODUCTION_BASE_URL: 'https://naturalsprime.in',
+
+  // Platform character limits — defaults (overridden by injected ARIS_PLATFORM_LIMITS)
+  PLATFORM_LIMITS: { facebook: 63206, instagram: 2200, google: 1500 },
 };
+
+// ── Build-time data injection ──────────────────────────────────────────
+// These are injected at build time by build/build.py to eliminate
+// authenticated GitHub API calls from the browser.
+window.SALON_STORES_CACHE = [{"id": "N78", "name": "JP Nagar 5th Phase", "slug": "jpnagar5thphase"}, {"id": "N45", "name": "Nagavara", "slug": "nagavara"}, {"id": "N36", "name": "Ayyappa Nagar", "slug": "ayyappanagar"}, {"id": "N05", "name": "Frazer Town", "slug": "frazertown"}, {"id": "N43", "name": "Hennur", "slug": "hennur"}];
+window.STORE_EMAIL_MAP = {};
+window.STORE_OWNER_SET = [];
+window.CAMPAIGN_TYPES_CACHE = ["announcement", "offer"];
+window.ARIS_PLATFORM_LIMITS = {};
