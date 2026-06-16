@@ -5,7 +5,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <meta name="robots" content="noindex, nofollow">
 <meta name="googlebot" content="noindex, nofollow">
-<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' https://accounts.google.com 'unsafe-inline'; connect-src 'self' https://accounts.google.com https://oauth2.googleapis.com https://www.googleapis.com https://api.imgbb.com; style-src 'self' 'unsafe-inline' https://accounts.google.com https://fonts.googleapis.com; font-src 'self' data: https://fonts.gstatic.com; frame-src 'self' https://accounts.google.com; img-src 'self' data: blob: https://ik.imagekit.io https://lh3.googleusercontent.com;">
+<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' https://accounts.google.com 'unsafe-inline'; connect-src 'self' https://accounts.google.com https://oauth2.googleapis.com https://www.googleapis.com; style-src 'self' 'unsafe-inline' https://accounts.google.com https://fonts.googleapis.com; font-src 'self' data: https://fonts.gstatic.com; frame-src 'self' https://accounts.google.com; img-src 'self' data: blob: https://lh3.googleusercontent.com;">
 <meta name="referrer" content="strict-origin-when-cross-origin">
 <script src="config.js"></script>
 <title>Campaign Admin — Naturals Salon &amp; Spa</title>
@@ -200,15 +200,15 @@ header .user-info button:hover{background:#f3f4f6}
 
         <!-- Title -->
         <div class="form-group">
-          <label for="post-title">Campaign Title *</label>
-          <input type="text" id="post-title" maxlength="100" placeholder="e.g. Weekend Special: 20% Off">
+          <label for="campaign-title">Campaign Title *</label>
+          <input type="text" id="campaign-title" maxlength="100" placeholder="e.g. Weekend Special: 20% Off">
         </div>
 
         <!-- Body -->
         <div>
           <div class="form-group">
-            <label for="post-body">Description / Caption *</label>
-            <textarea id="post-body" rows="4" placeholder="Describe the offer or announcement..."></textarea>
+            <label for="campaign-body">Description / Caption *</label>
+            <textarea id="campaign-body" rows="4" placeholder="Describe the offer or announcement..."></textarea>
           </div>
           <div class="char-count" id="char-count">0 chars</div>
           <div class="platform-limits" id="platform-limits"></div>
@@ -217,12 +217,12 @@ header .user-info button:hover{background:#f3f4f6}
         <!-- Dates -->
         <div class="date-row">
           <div class="form-group">
-            <label for="post-start">Start Date</label>
-            <input type="date" id="post-start">
+            <label for="start-date">Start Date</label>
+            <input type="date" id="start-date">
           </div>
           <div class="form-group">
-            <label for="post-end">End Date</label>
-            <input type="date" id="post-end">
+            <label for="end-date">End Date</label>
+            <input type="date" id="end-date">
           </div>
         </div>
 
@@ -249,9 +249,9 @@ header .user-info button:hover{background:#f3f4f6}
         <div class="form-group">
           <label>Target Platforms</label>
           <div class="platforms-row">
-            <label><input type="checkbox" id="platform-fb" checked> Facebook</label>
-            <label><input type="checkbox" id="platform-ig" checked> Instagram</label>
-            <label><input type="checkbox" id="platform-gp" checked> Google Business Profile</label>
+            <label><input type="checkbox" name="platforms" value="facebook" id="platform-fb" checked> Facebook</label>
+            <label><input type="checkbox" name="platforms" value="instagram" id="platform-ig" checked> Instagram</label>
+            <label><input type="checkbox" name="platforms" value="google" id="platform-gp" checked> Google Business Profile</label>
           </div>
         </div>
 
@@ -347,7 +347,7 @@ function getPlatforms() {
 }
 
 function updateCharCount() {
-  const len = $('post-body').value.length;
+  const len = $('campaign-body').value.length;
   const el = $('char-count');
   el.textContent = len + ' chars';
   el.classList.toggle('over', len > 2200);
@@ -367,8 +367,8 @@ function updateCharCount() {
 }
 
 function updatePreview() {
-  const title = $('post-title').value.trim();
-  const body = $('post-body').value.trim();
+  const title = $('campaign-title').value.trim();
+  const body = $('campaign-body').value.trim();
   const imgUrl = $('post-image-url').value.trim();
   const stores = getSelectedStores();
   const section = $('preview-section');
@@ -407,49 +407,12 @@ function updateImagePreview(url) {
   }
 }
 
-function setLoading(loading) {
-  const pub = $('btn-publish-confirm');
-  if (pub) {
-    pub.disabled = loading || uploadInProgress;
-    pub.textContent = loading ? '\u23F3 Publishing...' : '\u{1F4E4} Publish Now';
-  }
-}
-
 function updatePublishButton() {
   const pub = $('btn-publish-confirm');
   if (pub) pub.disabled = uploadInProgress;
 }
 
-// ── Image upload via ImgBB API (no secrets in browser — API key is not a GitHub token) ─
-
-function uploadToImageKit(file) {
-  return new Promise(function (resolve, reject) {
-    var reader = new FileReader();
-    reader.onerror = function () { reject(reader.error); };
-    reader.onload = function () {
-      var b64 = reader.result.split(',')[1];
-      var fd = new URLSearchParams();
-      fd.append('key', ADMIN_CONFIG.IMGBB_API_KEY);
-      fd.append('image', b64);
-      fd.append('name', 'campaign_' + Date.now());
-
-      fetch('https://api.imgbb.com/1/upload', {
-        method: 'POST',
-        body: fd,
-      })
-        .then(function (r) { return r.json(); })
-        .then(function (data) {
-          if (data && data.data && data.data.url) {
-            resolve(data.data.url);
-          } else {
-            reject(new Error((data && data.error && data.error.message) || 'ImgBB upload failed'));
-          }
-        })
-        .catch(function (err) { reject(err); });
-    };
-    reader.readAsDataURL(file);
-  });
-}
+// ── No client-side image upload — staff drags image into GitHub Issue Form directly ─
 
 // ── Review / Confirm step ────────────────────────────────────────────
 function formatDate(iso) {
@@ -459,8 +422,8 @@ function formatDate(iso) {
 }
 
 function showReview() {
-  const title = $('post-title').value.trim();
-  const body = $('post-body').value.trim();
+  const title = $('campaign-title').value.trim();
+  const body = $('campaign-body').value.trim();
   if (!title || !body) { logMsg('Title and body are required','error'); return; }
 
   const platforms = getPlatforms();
@@ -469,8 +432,8 @@ function showReview() {
 
   const imageUrl = $('post-image-url').value.trim();
   const campaignType = $('campaign-type').value;
-  const startDate = $('post-start').value;
-  const endDate = $('post-end').value;
+  const startDate = $('start-date').value;
+  const endDate = $('end-date').value;
 
   const caption = body.length > 125 ? body.substring(0, 125) + '…' : body;
   const storeNames = storeIds.map(id => STORE_NAMES[id] || id).join(', ');
@@ -510,7 +473,7 @@ function showReview() {
   $('form-fields').classList.add('confirm-hidden');
   $('confirm-section').classList.add('show');
   $('btn-edit').onclick = showEdit;
-  $('btn-publish-confirm').onclick = doPublish;
+  $('btn-publish-confirm').onclick = handleCampaignPublish;
   updatePublishButton();
 }
 
@@ -522,67 +485,46 @@ function showEdit() {
 }
 
 // ── Publish ──────────────────────────────────────────────────────────
-async function doPublish() {
-  const title = $('post-title').value.trim();
-  const body = $('post-body').value.trim();
-  if (!title || !body) { logMsg('Title and body are required','error'); return; }
+function handleCampaignPublish() {
+    const campaignData = {
+        title: document.getElementById('campaign-title').value,
+        body: document.getElementById('campaign-body').value,
+        startDate: document.getElementById('start-date').value,
+        endDate: document.getElementById('end-date').value,
+        type: document.getElementById('campaign-type').value,
+        platforms: Array.from(document.querySelectorAll('input[name="platforms"]:checked')).map(el => el.value).join(', '),
+        stores: Array.from(document.querySelectorAll('input[name="stores"]:checked')).map(el => el.value).join(', '),
+        triggeredBy: window.__userEmail || 'local-testing-session@naturals.in'
+    };
 
-  const platforms = getPlatforms();
-  const storeIds = getSelectedStores();
-  const startDate = $('post-start').value;
-  const endDate = $('post-end').value;
-  const campaignType = $('campaign-type').value;
+    const formattedPacket = [
+        `## Campaign Details`,
+        `**Title:** ${campaignData.title}`,
+        `**Body:** ${campaignData.body}`,
+        `**Start Date:** ${campaignData.startDate}`,
+        `**End Date:** ${campaignData.endDate}`,
+        `**Campaign Type:** ${campaignData.type}`,
+        `**Platforms:** ${campaignData.platforms}`,
+        `**Stores:** ${campaignData.stores}`,
+        `---`,
+        `**Triggered By:** ${campaignData.triggeredBy}`
+    ].join('\n');
 
-  if (!platforms.facebook && !platforms.instagram && !platforms.google) { logMsg('Select at least one platform','error'); return; }
-  if (storeIds.length === 0) { logMsg('Select at least one store','error'); return; }
+    console.log('=== Campaign Packet ===\n' + formattedPacket);
 
-  const imageUrl = $('post-image-url').value.trim();
+    navigator.clipboard.writeText(formattedPacket).then(() => {
+        alert("📋 Campaign data packaging complete and copied to clipboard!\n\nClick OK to open the publisher, then paste the block into the form and drag-and-drop your image.");
 
-  setLoading(true);
-  $('publish-status').textContent = '';
-
-  const platformList = Object.entries(platforms).filter(([,v]) => v).map(([k]) => k).join(', ');
-  const triggeredBy = currentUser ? currentUser.email : 'unknown';
-  const idToken = currentUser ? currentUser.idToken : '';
-
-  // Construct markdown body for the issue
-  var imageBlock = '**Image URL:** ' + (imageUrl || '(none)');
-
-  const mdBody = [
-    '## Campaign Details',
-    '',
-    `**Title:** ${title}`,
-    `**Body:** ${body}`,
-    `**Start Date:** ${startDate}`,
-    `**End Date:** ${endDate}`,
-    `**Campaign Type:** ${campaignType}`,
-    `**Platforms:** ${platformList || '(none selected)'}`,
-    `**Stores:** ${storeIds.join(', ')}`,
-    imageBlock,
-    '',
-    '---',
-    '',
-    `**Triggered By:** ${triggeredBy}`,
-    `**Google ID Token:** \`${idToken}\``,
-  ].join('\n');
-
-  // Build issue body WITHOUT base64 (too long for URL) - image URL from text field
-  var cleanBody = mdBody.replace(/\n<!-- IMAGE DATA -->[\s\S]*?<!-- \/IMAGE DATA -->\n?/, '');
-  if (imageUrl) {
-    cleanBody = cleanBody.replace('base64://pending (embedded below)', imageUrl);
-  }
-
-  var issueUrl = 'https://github.com/naturals-blr/naturals-ops/issues/new'
-    + '?title=[Campaign_AdHoc] ' + encodeURIComponent(title)
-    + '&body=' + encodeURIComponent(cleanBody);
-
-  window.open(issueUrl, '_blank');
-
-  setLoading(false);
-  logMsg('Issue draft opened for: "' + title + '" (' + storeIds.join(', ') + ')','success');
-  $('publish-status').textContent = '\u2705 Issue draft opened in new tab — review and click "Submit new issue" to publish';
-
-  setLoading(false);
+        const targetUrl = `https://github.com/naturals-blr/naturals-ops/issues/new?template=campaign_dispatch.yml&title=${encodeURIComponent('[Campaign] ' + campaignData.title)}`;
+        window.open(targetUrl, '_blank');
+    }).catch(err => {
+        console.error('Clipboard write failed:', err);
+        var fallback = prompt('Clipboard blocked. Copy the block below manually, then click OK to open the form:\n\n' + formattedPacket, formattedPacket);
+        if (fallback !== null) {
+            const targetUrl = `https://github.com/naturals-blr/naturals-ops/issues/new?template=campaign_dispatch.yml&title=${encodeURIComponent('[Campaign] ' + campaignData.title)}`;
+            window.open(targetUrl, '_blank');
+        }
+    });
 }
 
 // ── Auth ─────────────────────────────────────────────────────────────
@@ -615,6 +557,7 @@ function handleCredentialResponse(credentialResponse) {
     idToken: idToken,
   };
 
+  window.__userEmail = currentUser.email;
   $('user-name').textContent = currentUser.name;
   $('user-avatar').src = currentUser.picture;
 
@@ -709,19 +652,19 @@ function populateStores(allowedIds) {
   grid.innerHTML = storeList
     .filter(s => !allowedIds || allowedIds.includes(s.id))
     .map(s =>
-      `<label><input type="checkbox" class="store-cb" data-store="${s.id}" checked> ${s.id} &mdash; ${escHtml(s.name)}</label>`
+      `<label><input type="checkbox" class="store-cb" name="stores" value="${s.id}" data-store="${s.id}" checked> ${s.id} &mdash; ${escHtml(s.name)}</label>`
     ).join('');
 }
 
 // ── Events ───────────────────────────────────────────────────────────
-['campaign-type','post-title','post-body','post-image-url'].forEach(id => {
+['campaign-type','campaign-title','campaign-body','post-image-url'].forEach(id => {
   $(id).addEventListener('input', updatePreview);
 });
 $('post-image-url').addEventListener('input', () => {
   updateImagePreview($('post-image-url').value.trim());
 });
-$('post-start').addEventListener('input', updatePreview);
-$('post-end').addEventListener('input', updatePreview);
+$('start-date').addEventListener('input', updatePreview);
+$('end-date').addEventListener('input', updatePreview);
 // Use delegation for store checkboxes (re-rendered on login)
 $('stores-grid').addEventListener('change', updatePreview);
 ['platform-fb','platform-ig','platform-gp'].forEach(id => {
@@ -742,9 +685,9 @@ $('btn-clear-log').onclick = () => { $('activity-log').innerHTML = ''; };
 
 // ── Default dates ──────────────────────────────────────────────────
 const today = new Date();
-$('post-start').value = today.toISOString().slice(0,10);
+$('start-date').value = today.toISOString().slice(0,10);
 const wk = new Date(today); wk.setDate(wk.getDate()+7);
-$('post-end').value = wk.toISOString().slice(0,10);
+$('end-date').value = wk.toISOString().slice(0,10);
 
 // ── File upload ────────────────────────────────────────────────────
 const dropZone = $('drop-zone');
@@ -762,7 +705,7 @@ dropZone.addEventListener('drop', e => {
 });
 fileInput.addEventListener('change', () => { if (fileInput.files.length) handleFile(fileInput.files[0]); });
 
-async function handleFile(file) {
+function handleFile(file) {
   if (uploadInProgress) { logMsg('Upload already in progress','error'); return; }
   if (!file.type.startsWith('image/')) { logMsg('Only image files accepted','error'); return; }
   if (file.size > 10 * 1024 * 1024) { logMsg('File too large (max 10MB)','error'); return; }
@@ -781,25 +724,13 @@ async function handleFile(file) {
   progressEl.className = 'upload-progress uploading show';
   spinner.classList.add('show');
   check.classList.remove('show');
-  statusText.textContent = 'Uploading image...';
-
-  try {
-    const url = await uploadToImageKit(file);
-    $('post-image-url').value = url;
-    updateImagePreview(url);
-    progressEl.className = 'upload-progress done show';
-    spinner.classList.remove('show');
-    check.classList.add('show');
-    statusText.textContent = 'Uploaded to ImgBB';
-    logMsg('Image uploaded to ImgBB, URL set','success');
-  } catch (err) {
-    progressEl.className = 'upload-progress error show';
-    spinner.classList.remove('show');
-    check.classList.remove('show');
-    statusText.textContent = 'Upload failed: ' + err.message;
-    logMsg('Image upload failed: ' + err.message,'error');
-    $('post-image-url').value = '';
-  }
+  var previewUrl = URL.createObjectURL(file);
+  updateImagePreview(previewUrl);
+  progressEl.className = 'upload-progress done show';
+  spinner.classList.remove('show');
+  check.classList.add('show');
+  statusText.textContent = 'Selected \u2014 attach in GitHub form';
+  logMsg('Image selected for local preview (attach in GitHub Issue form)','success');
 
   uploadInProgress = false;
   updatePublishButton();
