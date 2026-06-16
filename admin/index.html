@@ -513,15 +513,15 @@ function handleCampaignPublish() {
     console.log('=== Campaign Packet ===\n' + formattedPacket);
 
     navigator.clipboard.writeText(formattedPacket).then(() => {
-        alert("📋 Campaign data packaging complete and copied to clipboard!\n\nClick OK to open the publisher, then paste the block into the form and drag-and-drop your image.");
+        alert("📋 Campaign packet copied!\n\nClick OK to open a new issue, then paste the packet into the body and drag-and-drop your poster image.");
 
-        const targetUrl = `https://github.com/naturals-blr/naturals-ops/issues/new?template=campaign_dispatch.yml&title=${encodeURIComponent('[Campaign] ' + campaignData.title)}`;
+        const targetUrl = `https://github.com/naturals-blr/naturals-ops/issues/new?title=${encodeURIComponent('[Campaign] ' + campaignData.title)}`;
         window.open(targetUrl, '_blank');
     }).catch(err => {
         console.error('Clipboard write failed:', err);
-        var fallback = prompt('Clipboard blocked. Copy the block below manually, then click OK to open the form:\n\n' + formattedPacket, formattedPacket);
+        var fallback = prompt('Clipboard blocked. Copy the block below manually, then click OK to open the issue:\n\n' + formattedPacket, formattedPacket);
         if (fallback !== null) {
-            const targetUrl = `https://github.com/naturals-blr/naturals-ops/issues/new?template=campaign_dispatch.yml&title=${encodeURIComponent('[Campaign] ' + campaignData.title)}`;
+            const targetUrl = `https://github.com/naturals-blr/naturals-ops/issues/new?title=${encodeURIComponent('[Campaign] ' + campaignData.title)}`;
             window.open(targetUrl, '_blank');
         }
     });
