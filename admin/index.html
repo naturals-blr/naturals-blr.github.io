@@ -5,7 +5,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <meta name="robots" content="noindex, nofollow">
 <meta name="googlebot" content="noindex, nofollow">
-<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' https://accounts.google.com 'unsafe-inline'; connect-src 'self' https://accounts.google.com https://oauth2.googleapis.com https://www.googleapis.com; style-src 'self' 'unsafe-inline' https://accounts.google.com https://fonts.googleapis.com; font-src 'self' data: https://fonts.gstatic.com; frame-src 'self' https://accounts.google.com; img-src 'self' data: blob: https://lh3.googleusercontent.com;">
+<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' https://accounts.google.com 'unsafe-inline'; connect-src 'self' https://accounts.google.com https://oauth2.googleapis.com https://www.googleapis.com https://script.google.com; style-src 'self' 'unsafe-inline' https://accounts.google.com https://fonts.googleapis.com; font-src 'self' data: https://fonts.gstatic.com; frame-src 'self' https://accounts.google.com; img-src 'self' data: blob: https://lh3.googleusercontent.com;">
 <meta name="referrer" content="strict-origin-when-cross-origin">
 <script src="config.js"></script>
 <title>Campaign Admin — Naturals Salon &amp; Spa</title>
@@ -323,6 +323,7 @@ const logMsg = (msg, level='info') => {
 
 
 let currentUser = null;
+let uploadedFile = null;
 let uploadInProgress = false;
 
 function escHtml(s) {
@@ -408,8 +409,10 @@ function updateImagePreview(url) {
 }
 
 function updatePublishButton() {
-  const pub = $('btn-publish-confirm');
-  if (pub) pub.disabled = uploadInProgress;
+  ['btn-publish-google','btn-publish-github'].forEach(id => {
+    const btn = $(id);
+    if (btn) btn.disabled = uploadInProgress;
+  });
 }
 
 // ── No client-side image upload — staff drags image into GitHub Issue Form directly ─
@@ -466,20 +469,23 @@ function showReview() {
     </div>
     <div class="confirm-actions">
       <button class="btn btn-secondary" id="btn-edit">&#x270F; Edit</button>
-      <button class="btn btn-primary" id="btn-publish-confirm">&#x1F4E4; Publish Now</button>
+      <button class="btn btn-primary" id="btn-publish-google">&#x1F310; Publish via Google</button>
+      <button class="btn btn-secondary" id="btn-publish-github">&#x1F4E4; Publish via GitHub</button>
     </div>
   `;
 
   $('form-fields').classList.add('confirm-hidden');
   $('confirm-section').classList.add('show');
   $('btn-edit').onclick = showEdit;
-  $('btn-publish-confirm').onclick = handleCampaignPublish;
+  $('btn-publish-google').onclick = handleGooglePublish;
+  $('btn-publish-github').onclick = handleCampaignPublish;
   updatePublishButton();
 }
 
 function showEdit() {
   $('form-fields').classList.remove('confirm-hidden');
   $('confirm-section').classList.remove('show');
+  $('publish-status').textContent = '';
   const scrollArea = $('form-fields').closest('.scroll-area-inner');
   if (scrollArea) scrollArea.scrollIntoView({ behavior: 'smooth' });
 }
@@ -525,6 +531,51 @@ function handleCampaignPublish() {
             window.open(targetUrl, '_blank');
         }
     });
+}
+
+// ── Google Apps Script Publish (Option A - Primary) ────────────────
+async function handleGooglePublish() {
+    const title = document.getElementById('campaign-title').value.trim();
+    const body = document.getElementById('campaign-body').value.trim();
+    if (!title || !body) { logMsg('Title and body are required','error'); return; }
+
+    const webhookUrl = C.GAS_WEBHOOK_URL;
+    if (!webhookUrl) {
+        logMsg('Google webhook URL not configured (GAS_WEBHOOK_URL is empty)','error');
+        return;
+    }
+
+    const formData = new FormData();
+    formData.append('title', title);
+    formData.append('body', body);
+    formData.append('startDate', document.getElementById('start-date').value);
+    formData.append('endDate', document.getElementById('end-date').value);
+    formData.append('campaign_type', document.getElementById('campaign-type').value);
+    formData.append('platforms', JSON.stringify(getPlatforms()));
+    formData.append('storeIds', JSON.stringify(getSelectedStores()));
+    formData.append('triggeredBy', window.__userEmail || 'local-testing-session@naturals.in');
+
+    if (uploadedFile) {
+        formData.append('image', uploadedFile, uploadedFile.name);
+    }
+
+    logMsg('Submitting to Google relay...','info');
+
+    try {
+        const response = await fetch(webhookUrl, {
+            method: 'POST',
+            body: formData
+        });
+        const result = await response.json();
+        if (result.ok) {
+            logMsg('✅ Campaign dispatched successfully to GitHub via Google relay','success');
+            $('publish-status').textContent = '✅ Dispatched via Google';
+        } else {
+            logMsg('❌ Google relay failed: ' + (result.error || 'Unknown error'),'error');
+        }
+    } catch (err) {
+        logMsg('❌ Google relay error: ' + err.message,'error');
+    }
 }
 
 // ── Auth ─────────────────────────────────────────────────────────────
@@ -710,6 +761,7 @@ function handleFile(file) {
   if (!file.type.startsWith('image/')) { logMsg('Only image files accepted','error'); return; }
   if (file.size > 10 * 1024 * 1024) { logMsg('File too large (max 10MB)','error'); return; }
 
+  uploadedFile = file;
   dropZone.classList.add('has-file');
   fileStatus.innerHTML = `<span class="file-name">${escHtml(file.name)} (${(file.size/1024).toFixed(0)} KB)</span>`;
   updateImagePreview(URL.createObjectURL(file));
