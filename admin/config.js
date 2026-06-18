@@ -15,7 +15,7 @@ const ADMIN_CONFIG = {
   PRODUCTION_BASE_URL: 'https://naturalsprime.in',
 
   // Google Apps Script Web App URL for the relay (Option A - Primary)
-  GAS_WEBHOOK_URL: '',
+  GAS_WEBHOOK_URL: 'https://script.google.com/macros/s/AKfycbwqtspGIuXR5uTs1roJlYRjysm1i4421f41ygDch7WGWatVCp1lXl0a7FrAOMCxl_cfDA/exec',
 
   // Platform character limits — defaults (overridden by injected ARIS_PLATFORM_LIMITS)
   PLATFORM_LIMITS: { facebook: 63206, instagram: 2200, google: 1500 },
