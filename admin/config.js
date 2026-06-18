@@ -29,3 +29,4 @@ window.STORE_EMAIL_MAP = {};
 window.STORE_OWNER_SET = [];
 window.CAMPAIGN_TYPES_CACHE = ["announcement", "offer"];
 window.ARIS_PLATFORM_LIMITS = {};
+window.REVIEW_SUMMARY = {"total": 2146, "replied": 10, "avgStars": 5, "perStore": [{"store": "Ayyappa Nagar", "id": "N36", "total": 383, "replied": 2, "avgStars": 5.0}, {"store": "Frazer Town", "id": "N05", "total": 417, "replied": 2, "avgStars": 5.0}, {"store": "Hennur", "id": "N43", "total": 465, "replied": 2, "avgStars": 5.0}, {"store": "JP Nagar 5th Phase", "id": "N78", "total": 411, "replied": 2, "avgStars": 5.0}, {"store": "Nagavara", "id": "N45", "total": 465, "replied": 2, "avgStars": 5.0}, {"store": "Store 11456061934238062921", "id": "", "total": 2, "replied": 0, "avgStars": 5.0}, {"store": "Store 5858391068390788403", "id": "", "total": 3, "replied": 0, "avgStars": 5.0}]};
