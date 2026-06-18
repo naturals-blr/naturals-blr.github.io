@@ -57,12 +57,6 @@ header .user-info button:hover{background:#f3f4f6}
 .badge-green{background:#dcfce7;color:#166534}
 .badge-amber{background:#fef3c7;color:#92400e}
 
-/* Summary row */
-.summary-row{display:grid;grid-template-columns:repeat(auto-fit,minmax(160px,1fr));gap:.75rem;margin-bottom:2rem}
-.summary-card{background:#fff;border:1px solid #e5e7eb;border-radius:.5rem;padding:1rem;text-align:center}
-.summary-card .num{font-size:1.75rem;font-weight:700;color:#166534}
-.summary-card .lbl{font-size:.6875rem;color:#9ca3af;text-transform:uppercase;letter-spacing:.04em;margin-top:.125rem}
-
 /* Activity bar */
 .activity-bar{background:#fff;border-top:1px solid #e5e7eb;padding:.5rem 1.25rem;display:flex;align-items:center;justify-content:space-between}
 .activity-bar .label{font-size:.6875rem;font-weight:600;color:#6b7280;text-transform:uppercase}
@@ -116,25 +110,6 @@ header .user-info button:hover{background:#f3f4f6}
       <div class="welcome">
         <h2 id="greeting">Welcome</h2>
         <p>Select a tool to get started.</p>
-      </div>
-
-      <div class="summary-row" id="summary-row">
-        <div class="summary-card">
-          <div class="num" id="stat-stores">—</div>
-          <div class="lbl">Stores</div>
-        </div>
-        <div class="summary-card">
-          <div class="num" id="stat-reviews">—</div>
-          <div class="lbl">Total Reviews</div>
-        </div>
-        <div class="summary-card">
-          <div class="num" id="stat-replied">—</div>
-          <div class="lbl">Replied</div>
-        </div>
-        <div class="summary-card">
-          <div class="num" id="stat-avg">—</div>
-          <div class="lbl">Avg Rating</div>
-        </div>
       </div>
 
       <div class="feature-grid">
@@ -255,18 +230,11 @@ $('btn-signout').onclick = () => {
 
 // ── Load stats from injected data ────────────────────────────────────
 function loadStats() {
-  const stores = window.SALON_STORES_CACHE || [];
-  $('stat-stores').textContent = stores.length;
-
   const rpt = window.REVIEW_SUMMARY;
   if (rpt) {
-    $('stat-reviews').textContent = rpt.total || '—';
-    $('stat-replied').textContent = rpt.replied || '—';
-    $('stat-avg').textContent = rpt.avgStars || '—';
     const unreplied = (rpt.total || 0) - (rpt.replied || 0);
     $('review-count-label').textContent = unreplied + ' unreplied';
   } else {
-    $('stat-reviews').textContent = '?';
     $('review-count-label').textContent = 'Sign in to view';
   }
 }
