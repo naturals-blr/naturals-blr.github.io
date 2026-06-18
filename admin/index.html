@@ -545,26 +545,38 @@ async function handleGooglePublish() {
         return;
     }
 
-    const formData = new FormData();
-    formData.append('title', title);
-    formData.append('body', body);
-    formData.append('startDate', document.getElementById('start-date').value);
-    formData.append('endDate', document.getElementById('end-date').value);
-    formData.append('campaign_type', document.getElementById('campaign-type').value);
-    formData.append('platforms', JSON.stringify(getPlatforms()));
-    formData.append('storeIds', JSON.stringify(getSelectedStores()));
-    formData.append('triggeredBy', window.__userEmail || 'local-testing-session@naturals.in');
+    const payload = {
+        title: title,
+        body: body,
+        startDate: document.getElementById('start-date').value,
+        endDate: document.getElementById('end-date').value,
+        campaign_type: document.getElementById('campaign-type').value,
+        platforms: JSON.stringify(getPlatforms()),
+        storeIds: JSON.stringify(getSelectedStores()),
+        triggeredBy: window.__userEmail || 'local-testing-session@naturals.in',
+        imageData: null,
+        imageName: null
+    };
 
     if (uploadedFile) {
-        formData.append('image', uploadedFile, uploadedFile.name);
+        try {
+            payload.imageData = await fileToBase64(uploadedFile);
+            payload.imageName = uploadedFile.name;
+        } catch (e) {
+            logMsg('Failed to encode image: ' + e.message, 'error');
+            return;
+        }
     }
 
     logMsg('Submitting to Google relay...','info');
 
     try {
-        const response = await fetch(webhookUrl, {
+        // Use same-origin proxy (/api/publish-via-gas) to avoid CORS.
+        // The server forwards to GAS_WEBHOOK_URL server-side.
+        const response = await fetch('/api/publish-via-gas', {
             method: 'POST',
-            body: formData
+            headers: { 'Content-Type': 'text/plain;charset=utf-8' },
+            body: JSON.stringify(payload)
         });
         const result = await response.json();
         if (result.ok) {
@@ -576,6 +588,15 @@ async function handleGooglePublish() {
     } catch (err) {
         logMsg('❌ Google relay error: ' + err.message,'error');
     }
+}
+
+function fileToBase64(file) {
+    return new Promise((resolve, reject) => {
+        const reader = new FileReader();
+        reader.onload = () => resolve(reader.result);
+        reader.onerror = () => reject(new Error('File read failed'));
+        reader.readAsDataURL(file);
+    });
 }
 
 // ── Auth ─────────────────────────────────────────────────────────────
