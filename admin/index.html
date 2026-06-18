@@ -66,6 +66,9 @@ header .user-info button:hover{background:#f3f4f6}
 .activity-log .entry{color:#6b7280}
 .activity-log .entry.success{color:#16a34a}
 .activity-log .entry.info{color:#2563eb}
+.btn-secondary{background:#fff;border:1px solid #d1d5db;border-radius:.5rem;padding:.5rem 1rem;font-size:.8125rem;font-weight:600;color:#374151;cursor:pointer;transition:all .15s}
+.btn-secondary:hover:not(:disabled){background:#f9fafb}
+.btn-secondary:disabled{opacity:.4;cursor:not-allowed}
 </style>
 </head>
 <body class="auth-locked">
@@ -132,6 +135,11 @@ header .user-info button:hover{background:#f3f4f6}
             <span id="review-count-label">Loading&hellip;</span>
           </div>
         </a>
+      </div>
+
+      <div style="margin-top:1.5rem;padding-top:1.5rem;border-top:1px solid #e5e7eb;display:flex;align-items:center;gap:.75rem;flex-wrap:wrap">
+        <button class="btn btn-secondary" id="btn-sync-reviews" style="font-size:.75rem">&#x1F504; Sync Reviews from Google</button>
+        <span id="sync-status" style="font-size:.75rem;color:#9ca3af"></span>
       </div>
     </div>
   </div>
@@ -226,6 +234,30 @@ $('btn-signout').onclick = () => {
   clearSession();
   document.body.classList.add('auth-locked');
   logMsg('Signed out', 'info');
+};
+
+// ── Sync reviews from GBP ──────────────────────────────────────────
+$('btn-sync-reviews').onclick = async () => {
+  const btn = $('btn-sync-reviews');
+  const status = $('sync-status');
+  btn.disabled = true;
+  status.textContent = 'Syncing reviews from Google Business Profile...';
+  logMsg('Starting review sync...', 'info');
+  try {
+    const res = await fetch('/api/sync-reviews', { method: 'POST' });
+    const data = await res.json();
+    if (data.ok) {
+      status.textContent = '✅ Reviews synced. Refresh Review Report to see updated data.';
+      logMsg('✅ Reviews synced successfully', 'success');
+    } else {
+      status.textContent = '❌ Sync failed: ' + (data.error || 'Unknown error');
+      logMsg('❌ Sync failed: ' + (data.error || 'Unknown error'), 'error');
+    }
+  } catch (err) {
+    status.textContent = '❌ Sync error: ' + err.message;
+    logMsg('❌ Sync error: ' + err.message, 'error');
+  }
+  btn.disabled = false;
 };
 
 // ── Load stats from injected data ────────────────────────────────────
