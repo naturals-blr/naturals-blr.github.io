@@ -202,6 +202,37 @@ let currentUser = null;
 let allReviews = [];
 let filterStore = '';
 
+function saveSession(user) {
+  localStorage.setItem('adminSession', JSON.stringify({ name: user.name, email: user.email, picture: user.picture }));
+}
+
+function clearSession() {
+  localStorage.removeItem('adminSession');
+}
+
+function restoreSession() {
+  const raw = localStorage.getItem('adminSession');
+  if (!raw) return false;
+  try {
+    const saved = JSON.parse(raw);
+    if (!saved.email) return false;
+    currentUser = saved;
+    window.__userEmail = saved.email;
+    $('user-name').textContent = saved.name;
+    $('user-avatar').src = saved.picture;
+    const roleBadge = $('user-role-badge');
+    roleBadge.textContent = 'manager';
+    roleBadge.className = 'role-badge role-store';
+    document.body.classList.remove('auth-locked');
+    logMsg('Session restored for ' + saved.email, 'success');
+    loadData();
+    return true;
+  } catch (e) {
+    clearSession();
+    return false;
+  }
+}
+
 function escHtml(s) {
   const d = document.createElement('div');
   d.textContent = s;
@@ -234,6 +265,7 @@ function handleCredentialResponse(credentialResponse) {
     picture: payload.picture || '',
   };
   window.__userEmail = email;
+  saveSession(currentUser);
   $('user-name').textContent = currentUser.name;
   $('user-avatar').src = currentUser.picture;
   const roleBadge = $('user-role-badge');
@@ -248,6 +280,7 @@ window.handleCredentialResponse = handleCredentialResponse;
 
 $('btn-signout').onclick = () => {
   currentUser = null;
+  clearSession();
   document.body.classList.add('auth-locked');
   logMsg('Signed out', 'info');
 };
@@ -332,6 +365,7 @@ function renderReviews() {
 }
 
 (function init() {
+  restoreSession();
   logMsg('Review report ready', 'info');
 })();
 
