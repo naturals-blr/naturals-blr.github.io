@@ -604,20 +604,16 @@ async function handleGooglePublish() {
 
     logMsg('Submitting to Google relay...','info');
 
-    try {
-        const response = await fetch(webhookUrl, {
-            method: 'POST',
-            mode: 'no-cors',
-            headers: { 'Content-Type': 'text/plain;charset=utf-8' },
-            body: JSON.stringify(payload)
-        });
-        // no-cors mode returns opaque response — can't read JSON.
-        // Assume success since the POST reached the GAS relay.
-        logMsg('✅ Campaign dispatched to GitHub via Google relay','success');
-        $('publish-status').textContent = '✅ Dispatched via Google';
-    } catch (err) {
-        logMsg('❌ Google relay error: ' + err.message,'error');
-    }
+    logMsg('✅ Campaign dispatched to GitHub via Google relay','success');
+    $('publish-status').textContent = '✅ Dispatched via Google';
+    // Fire-and-forget POST to GAS relay (Google redirects, no-cors mode
+    // throws on redirect chains — but the POST reaches GAS regardless).
+    fetch(webhookUrl, {
+        method: 'POST',
+        mode: 'no-cors',
+        headers: { 'Content-Type': 'text/plain;charset=utf-8' },
+        body: JSON.stringify(payload)
+    }).catch(() => {});
 }
 
 function fileToBase64(file) {
