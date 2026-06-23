@@ -788,10 +788,10 @@ box-shadow:0 2px 12px rgba(0,0,0,0.15);
 .filters-wrap{
 max-width:var(--content-max-width);
 margin:0 auto;
-padding:20px var(--content-padding) 16px var(--content-padding);
+padding:14px var(--content-padding) 12px var(--content-padding);
 display:flex;
 flex-direction:column;
-gap:16px;
+gap:12px;
 }
 
 .filter-row{
@@ -1023,8 +1023,9 @@ color: #fff;
 }
 
 /* Hero-to-Filter Gap Removal */
-.page-hero{margin-bottom:0 !important;padding-bottom:0 !important;}
+.page-hero{margin-bottom:0 !important;padding-bottom:0 !important;height:40vh;min-height:280px;}
 .page-hero-bg picture,.page-hero-bg img{width:100%;height:100%;object-fit:cover;}
+.page-hero-inner{padding-bottom:32px !important;}
 .filters-sec{margin-top:0 !important;padding-top:0 !important;margin-bottom:0 !important;}
 .services-main{padding-top:0 !important;margin-top:0;}
 
@@ -1243,11 +1244,11 @@ line-height: 1.3;
 }
 .svc-book-btn:hover { background: #b8943a; }
 
-.svc-badges{display:flex;gap:4px;flex-wrap:wrap;margin-top:6px;}
-.svc-badge{font-size:8px;font-weight:700;letter-spacing:0.8px;text-transform:uppercase;padding:2px 7px;border-radius:4px;line-height:1.3;}
-.svc-badge-featured{background:#C9A84C;color:#1a1a1a;}
-.svc-badge-popular{background:#2D6A4F;color:#fff;}
-.svc-badge-trending{background:#8B5CF6;color:#fff;}
+.svc-badges{display:none;}
+.svc-badge{display:none;}
+.svc-badge-featured{display:none;}
+.svc-badge-popular{display:none;}
+.svc-badge-trending{display:none;}
 
 .svc-title {
 font-family: 'Cormorant Garamond', serif;
@@ -1626,9 +1627,9 @@ footer{background:#080f0b;}
 .results-bar{
 max-width:none;
 background:#0f1117;
-border-bottom:1px solid rgba(255,255,255,0.08);
+border-bottom:1px solid rgba(255,255,255,0.06);
 color:rgba(255,255,255,0.72);
-padding:14px max(20px,calc((100vw - 760px) / 2));
+padding:10px max(20px,calc((100vw - 760px) / 2));
 }
 #results-count{color:rgba(255,255,255,0.72);}
 .sort-btn{background:rgba(255,255,255,0.06);border-color:rgba(255,255,255,0.15);color:rgba(255,255,255,0.6);}
@@ -1643,7 +1644,7 @@ padding:14px max(20px,calc((100vw - 760px) / 2));
 .services-main{
 max-width:none;
 background:#0f1117;
-padding:26px max(20px,calc((100vw - 760px) / 2)) 90px;
+padding:16px max(20px,calc((100vw - 760px) / 2)) 60px;
 }
 #svc-container{
 max-width:760px;
@@ -1653,7 +1654,7 @@ margin:0 auto;
 position:static;
 text-align:left;
 background:transparent;
-margin:26px 0 14px;
+margin:16px 0 10px;
 padding:0;
 }
 .category-title{
@@ -1669,126 +1670,178 @@ margin:0;
 .svc-grid{
 display:grid;
 grid-template-columns:1fr;
-gap:12px;
-margin-bottom:34px;
+gap:10px;
+margin-bottom:28px;
 }
 .svc-card{
-min-height:132px;
+min-height:120px;
 background:#111318;
 border:1px solid rgba(236,238,244,0.58);
-border-radius:24px;
-padding:16px 18px;
+border-radius:20px;
+padding:14px 16px;
 display:grid;
-grid-template-columns:116px minmax(0,1fr) 34px;
+grid-template-columns:128px minmax(0,1fr) 32px;
 align-items:center;
-gap:18px;
-box-shadow:none;
+gap:16px;
 cursor:pointer;
 overflow:hidden;
 transition:border-color 0.2s,background 0.2s,transform 0.2s;
 }
 .svc-card:hover{
 background:#151820;
-border-color:rgba(236,238,244,0.86);
-box-shadow:none;
+border-color:var(--gold);
 transform:translateY(-1px);
 }
 .svc-thumb{
-width:116px;
-height:92px;
-border-radius:12px;
-background:#2f3438;
+width:128px;
+height:100px;
+border-radius:14px;
+background:linear-gradient(135deg,#2a2f36 0%,#1e2228 100%);
 overflow:hidden;
 display:flex;
 align-items:center;
 justify-content:center;
+position:relative;
 }
 .svc-thumb img{
 width:100%;
 height:100%;
 object-fit:cover;
 }
+.svc-thumb-placeholder{
+width:100%;
+height:100%;
+display:flex;
+align-items:center;
+justify-content:center;
+font-size:32px;
+opacity:0.2;
+color:#f5f5f7;
+}
 .svc-copy{
 min-width:0;
 }
-.svc-top-row{
-margin:0;
-}
 .svc-title{
 font-family:'Jost',sans-serif;
-font-size:24px;
+font-size:20px;
 font-weight:600;
 color:#f7f7fb;
-line-height:1.12;
-letter-spacing:0;
-margin:0 0 8px;
-text-transform:none;
+line-height:1.15;
+margin:0 0 6px;
 overflow-wrap:anywhere;
+display:inline;
 }
 .svc-meta-bar{
 display:flex;
 align-items:center;
 flex-wrap:wrap;
-gap:8px;
+gap:6px;
 margin:0;
-color:rgba(247,247,251,0.78);
-font-size:16px;
+color:rgba(247,247,251,0.72);
+font-size:15px;
 line-height:1.35;
 }
 .svc-price{
-color:rgba(247,247,251,0.86);
-font-size:16px;
-font-weight:400;
+color:var(--gold);
+font-size:19px;
+font-weight:600;
 }
 .svc-regular{
-color:rgba(247,247,251,0.46);
-font-size:14px;
+color:rgba(247,247,251,0.4);
+font-size:13px;
 text-decoration:line-through;
+margin-left:-2px;
 }
 .svc-duration{
-color:rgba(247,247,251,0.68);
-font-size:14px;
-font-weight:500;
-padding:3px 8px;
-border:1px solid rgba(247,247,251,0.16);
+color:rgba(247,247,251,0.55);
+font-size:12px;
+font-weight:400;
+padding:2px 8px;
+border:1px solid rgba(247,247,251,0.12);
 border-radius:999px;
 }
-.svc-save-badge{background:#2D6A4F;color:#fff;}
-.svc-book-btn{background:#C9A84C;color:#0f1117;font-weight:700;}
-.svc-book-btn:hover{background:#b8943a;}
-.svc-badge-featured{background:#C9A84C;color:#0f1117;}
-.svc-badge-popular{background:#2D6A4F;color:#fff;}
-.svc-badge-trending{background:#8B5CF6;color:#fff;}
+.svc-save-badge{
+background:#1a3a2e;
+color:#b0e6c8;
+font-size:10px;
+font-weight:600;
+padding:2px 7px;
+border-radius:6px;
+letter-spacing:0.3px;
+}
+.svc-book-btn{
+background:var(--gold);
+color:#0f1117;
+font-weight:600;
+font-size:11px;
+padding:5px 14px;
+border-radius:8px;
+letter-spacing:0.3px;
+margin-left:auto;
+}
+.svc-book-btn:hover{background:#d4af37;}
+/* ── Badge styles (positioned distinctly per type) ── */
+.svc-badge-featured-tag{
+position:absolute;top:8px;left:8px;
+background:#C9A84C;color:#0f1117;
+font-size:8px;font-weight:800;letter-spacing:0.6px;
+text-transform:uppercase;padding:3px 8px;
+border-radius:6px;line-height:1.2;
+z-index:2;box-shadow:0 2px 6px rgba(0,0,0,0.3);
+}
+.svc-badge-popular-tag{
+display:inline-block;
+background:#2D6A4F;color:#fff;
+font-size:9px;font-weight:600;letter-spacing:0.4px;
+text-transform:uppercase;padding:1px 7px;
+border-radius:4px;line-height:1.4;
+vertical-align:middle;margin-left:6px;
+}
+.svc-badge-trending-tag{
+display:inline-block;
+background:#8B5CF6;color:#fff;
+font-size:9px;font-weight:600;letter-spacing:0.4px;
+padding:1px 7px;border-radius:4px;line-height:1.4;
+margin-right:4px;
+}
+.svc-badges{display:none;}
+.svc-badge{display:none;}
+.svc-icon{display:none;}
 .meta-separator{display:none;}
 .svc-toggle{
 margin:0;
-width:34px;
-height:34px;
-border-radius:0;
-background:transparent;
-color:#bfcaff;
-font-size:34px;
+width:32px;
+height:32px;
+border-radius:50%;
+background:rgba(255,255,255,0.04);
+color:rgba(247,247,251,0.3);
+font-size:18px;
 font-weight:300;
 line-height:1;
-transform:none;
+display:flex;
+align-items:center;
+justify-content:center;
+transition:all 0.2s;
 }
-.svc-toggle:hover,
-.svc-toggle.expanded{
-background:transparent;
-color:#d7defd;
-transform:none;
+.svc-toggle:hover{
+background:rgba(255,255,255,0.08);
+color:rgba(247,247,251,0.6);
 }
 .svc-toggle.expanded{
+background:rgba(201,168,76,0.12);
+color:var(--gold);
 transform:rotate(90deg);
 }
 .svc-description{
 grid-column:2 / 4;
-color:rgba(247,247,251,0.68);
+color:rgba(247,247,251,0.72);
 font-size:13px;
-line-height:1.6;
+line-height:1.55;
 }
 .svc-description.visible{
-border-top:1px solid rgba(247,247,251,0.12);
+border-top:1px solid rgba(247,247,251,0.08);
+margin-top:8px;
+padding-top:10px;
 }
 
 @media(max-width:900px){
@@ -1815,16 +1868,16 @@ border-top:1px solid rgba(247,247,251,0.12);
 .cat-filter-scroll{flex-wrap:wrap;}
 .svc-grid{grid-template-columns:1fr;}
 .svc-card{
-min-height:132px;
-grid-template-columns:112px minmax(0,1fr) 30px;
-gap:16px;
-border-radius:24px;
-padding:14px 16px;
+min-height:110px;
+grid-template-columns:104px minmax(0,1fr) 28px;
+gap:14px;
+border-radius:16px;
+padding:12px 14px;
 }
-.svc-thumb{width:112px;height:88px;}
-.svc-title{font-size:22px;}
-.svc-meta-bar{font-size:15px;}
-.svc-price{font-size:15px;}
+.svc-thumb{width:104px;height:84px;border-radius:10px;}
+.svc-title{font-size:18px;}
+.svc-meta-bar{font-size:14px;gap:5px;}
+.svc-price{font-size:17px;}
 .store-pill{padding:6px 10px;font-size:11px;}
 }
 @media(max-width:480px){
@@ -1840,13 +1893,15 @@ padding-left:14px;
 padding-right:14px;
 }
 .svc-card{
-grid-template-columns:100px minmax(0,1fr) 28px;
-gap:14px;
-padding:12px 14px;
+grid-template-columns:88px minmax(0,1fr) 26px;
+gap:12px;
+padding:10px 12px;
+border-radius:14px;
 }
-.svc-thumb{width:100px;height:82px;}
-.svc-title{font-size:20px;}
-.svc-meta-bar{gap:6px;}
+.svc-thumb{width:88px;height:72px;border-radius:10px;}
+.svc-title{font-size:16px;}
+.svc-meta-bar{gap:4px;font-size:13px;}
+.svc-price{font-size:16px;}
 .store-pill{padding:5px 8px;font-size:10px;}
 }
 </style>
@@ -1855,7 +1910,7 @@ padding:12px 14px;
 </head>
 <body>
 
-<a class="skip-link" href="#main-content">Skip to content</a>
+<a class="skip-link" href="#services-start">Skip to content</a>
 
 <header id="site-header">
 <div class="hdr-inner">
@@ -2720,7 +2775,7 @@ body{padding-top:58px;}
 </div>
 </div>
 
-<section class="filters-sec section">
+<section class="filters-sec section" id="services-start">
 <div class="filters-wrap" style="padding-top: 8px; padding-bottom: 8px; height: auto;">
 
 <div style="display: flex; align-items: center; justify-content: space-between; width: 100%;">
@@ -3044,8 +3099,9 @@ serviceElement.textContent = filterValue;
 <div class="store-pills-wrap" id="store-pills"></div>
 
 
-<div id="category-trigger" style="cursor: pointer; padding: 8px; display: flex; align-items: center;" onclick="openCategoryDrawer()">
-<svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="color: #f3ae1a;">
+<div id="category-trigger" role="button" tabindex="0" style="cursor: pointer; padding: 8px 12px; display: flex; align-items: center; gap: 6px; border:1px solid rgba(201,162,39,0.25); border-radius:8px;" onclick="openCategoryDrawer()" onkeydown="if(event.key==='Enter'||event.key===' ')event.preventDefault();openCategoryDrawer()">
+<span style="font-size:10px;font-weight:600;letter-spacing:1px;text-transform:uppercase;color:rgba(201,162,39,0.85);white-space:nowrap;">Category</span>
+<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="color: #f3ae1a;">
 <polygon points="22 3 2 3 10 12.46 10 19 14 21 14 12.46 22 3"></polygon>
 </svg>
 </div>
@@ -3081,7 +3137,8 @@ serviceElement.textContent = filterValue;
 <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
 <input type="text" id="svc-search" placeholder="Search services..." oninput="setSearch(this.value)">
 </div>
-<div id="results-count">Loading...</div>
+<button id="clear-filters-btn" onclick="clearFilters()" style="display:none;font-size:10px;font-weight:600;letter-spacing:0.5px;text-transform:uppercase;background:rgba(201,162,39,0.15);color:var(--gold);border:1px solid rgba(201,162,39,0.3);border-radius:8px;padding:4px 10px;cursor:pointer;font-family:'Jost',sans-serif;white-space:nowrap;transition:all 0.2s;" onmouseover="this.style.background='rgba(201,162,39,0.25)'" onmouseout="this.style.background='rgba(201,162,39,0.15)'">Clear</button>
+<div id="results-count" aria-live="polite">Loading...</div>
 <div class="sort-group">
 <button class="sort-btn active" data-sort="asc" onclick="setSort('asc')" title="Price low to high">₹ ↑</button>
 <button class="sort-btn" data-sort="desc" onclick="setSort('desc')" title="Price high to low">₹ ↓</button>
@@ -3496,15 +3553,21 @@ return word;
 // 2. STATE
 let currentFilters = { gender: 'all', category: 'all', sort: 'asc', store: 'all', search: '' };
 
+let searchTimer;
 window.setSort = function(direction) {
 currentFilters.sort = direction;
 document.querySelectorAll('.sort-btn').forEach(b => b.classList.toggle('active', b.dataset.sort === direction));
+syncUrl();
 renderServices();
 };
 
 window.setSearch = function(value) {
+clearTimeout(searchTimer);
+searchTimer = setTimeout(function() {
 currentFilters.search = value.toLowerCase().trim();
+syncUrl();
 renderServices();
+}, 200);
 };
 
 // Build store filter pills from ACTIVE_STORES
@@ -3524,15 +3587,55 @@ container.innerHTML = html;
 window.setStore = function(storeId) {
 currentFilters.store = storeId;
 document.querySelectorAll('.store-pill').forEach(b => b.classList.toggle('active', b.dataset.store === storeId));
+syncUrl();
 renderServices();
 };
 
+window.clearFilters = function() {
+currentFilters = { gender: 'all', category: 'all', sort: 'asc', store: 'all', search: '' };
+// Reset gender pills
+document.querySelectorAll('[data-filter-type="gender"]').forEach(el => {
+el.classList.toggle('active', el.dataset.filterValue === 'all');
+});
+// Reset store pills
+document.querySelectorAll('.store-pill').forEach(el => {
+el.classList.toggle('active', el.dataset.store === 'all');
+});
+// Reset sort buttons
+document.querySelectorAll('.sort-btn').forEach(el => {
+el.classList.toggle('active', el.dataset.sort === 'asc');
+});
+// Clear search field
+document.getElementById('svc-search').value = '';
+// Repopulate categories
+populateCategoryDrawer();
+syncUrl();
+renderServices();
+};
+
+// Sync current filter state to URL query params
+function syncUrl() {
+try {
+const params = new URLSearchParams();
+if (currentFilters.gender !== 'all') params.set('gender', currentFilters.gender);
+if (currentFilters.category !== 'all') params.set('cat', currentFilters.category);
+if (currentFilters.store !== 'all') params.set('store', currentFilters.store);
+if (currentFilters.sort !== 'asc') params.set('sort', currentFilters.sort);
+if (currentFilters.search) params.set('q', currentFilters.search);
+const qs = params.toString();
+const url = qs ? window.location.pathname + '?' + qs : window.location.pathname;
+window.history.replaceState(null, '', url);
+} catch (err) { /* ignore */ }
+}
+
+// Read initial filter state from URL params
 try {
 const params = new URLSearchParams(window.location.search);
-const categoryFromUrl = params.get('cat');
-if (categoryFromUrl) {
-currentFilters.category = categoryFromUrl;
-}
+if (params.get('gender')) currentFilters.gender = params.get('gender');
+if (params.get('cat')) currentFilters.category = params.get('cat');
+if (params.get('store')) currentFilters.store = params.get('store');
+if (params.get('sort')) currentFilters.sort = params.get('sort');
+if (params.get('q')) currentFilters.search = (params.get('q') || '').toLowerCase().trim();
 } catch (err) {
 // Keep default filters if URL parsing is unavailable.
 }
@@ -3557,6 +3660,7 @@ el.classList.remove('active');
 });
 element.classList.add('active');
 
+syncUrl();
 renderServices();
 
 // Scroll to filter section after filter change
@@ -3587,6 +3691,7 @@ drawer.style.transform = 'translateY(100%)';
 window.selectCategory = function(category) {
 currentFilters.category = category;
 closeCategoryDrawer();
+syncUrl();
 renderServices();
 
 // Scroll to filter section after filter change
@@ -3628,29 +3733,15 @@ drawerContent.innerHTML = '';
 
 // Add category options with click handlers
 const categoryArray = Array.from(categories);
+const currentCategory = currentFilters.category;
 categoryArray.forEach(category => {
 const button = document.createElement('button');
-button.className = 'category-btn';
+button.className = 'category-btn' + (category === currentCategory ? ' active' : '');
 button.textContent = category;
 button.onclick = () => selectCategory(category);
 drawerContent.appendChild(button);
 });
 }
-
-// Initialize the page
-function initializePage() {
-populateCategoryDrawer();
-renderServices();
-}
-
-// Run initialization when DOM is ready
-if (document.readyState === 'loading') {
-document.addEventListener('DOMContentLoaded', initializePage);
-} else {
-initializePage();
-}
-
-// Handle mobile back button to close category drawer
 let isCategoryDrawerOpen = false;
 
 window.closeCategoryDrawer = function(fromHistory) {
@@ -3726,10 +3817,17 @@ function renderServices() {
 const container = document.getElementById('svc-container');
 const emptyState = document.getElementById('empty-state');
 const countEl = document.getElementById('results-count');
+const clearBtn = document.getElementById('clear-filters-btn');
 
 // Clear loading text immediately
 if (countEl.textContent === 'Loading...') {
 countEl.textContent = '';
+}
+
+// Show clear button when any non-default filter is active
+if (clearBtn) {
+const hasActiveFilter = currentFilters.gender !== 'all' || currentFilters.category !== 'all' || currentFilters.store !== 'all' || currentFilters.sort !== 'asc' || currentFilters.search;
+clearBtn.style.display = hasActiveFilter ? '' : 'none';
 }
 
 // Filter services based on current filters
@@ -3830,13 +3928,20 @@ const serviceId = `${category}-${serviceName || 'service'}-${serviceIndex}`.toLo
 const formattedServiceName = toTitleCase(serviceName);
 const formattedDescription = toTitleCase(description);
 
-// Price and media formatting for compact service tiles.
-const fallbackServiceImageSrc = '/images/service-image/service_default.jpg';
+// Service image — use service_default.jpg when no specific image exists
+const defaultServiceImg = '/images/service-image/service_default.jpg';
+const placeholderSvg = 'data:image/svg+xml,' + encodeURIComponent(
+'<svg xmlns="http://www.w3.org/2000/svg" width="256" height="200" viewBox="0 0 256 200">' +
+'<defs><linearGradient id="g" x1="0%" y1="0%" x2="100%" y2="100%"><stop offset="0%" stop-color="#2a2f36"/><stop offset="100%" stop-color="#1a1e24"/></linearGradient></defs>' +
+'<rect width="256" height="200" fill="url(#g)"/>' +
+'<text x="128" y="110" text-anchor="middle" fill="rgba(255,255,255,0.08)" font-size="64" font-family="serif">✦</text>' +
+'</svg>'
+);
 const rawServiceImageName = service.service_image_name || service.Service_Image_Name || '';
 const serviceImageName = String(rawServiceImageName).split(/[\\/]/).pop().trim();
 const serviceImageSrc = serviceImageName
 ? `/images/service-image/${encodeURIComponent(serviceImageName)}`
-: fallbackServiceImageSrc;
+: defaultServiceImg;
 const hasMember = memberCost && memberCost !== 'NA';
 const hasRegular = regularCost && regularCost !== 'NA';
 let priceText = '';
@@ -3852,57 +3957,41 @@ priceText = `<span class="svc-price">₹${memberCost}</span>`;
 priceText = `<span class="svc-price">₹${regularCost}</span>`;
 }
 
-const iconName = service.service_icon_name || service.Service_Icon_Name || '';
-const iconHtml = iconName ? `<img src="/images/service-icon/${encodeURIComponent(iconName)}" alt="" class="svc-icon" width="24" height="24" loading="lazy" onerror="this.style.display='none'">` : '';
-
-// Status badges
+// Status badges — each placed distinctly within the card
 const isFeatured = (service.is_featured || '').toLowerCase() === 'yes';
 const isPopular = (service.is_popular || '').toLowerCase() === 'yes';
 const isTrending = (service.is_trending || '').toLowerCase() === 'yes';
-let badgesHtml = '';
-if (isFeatured) badgesHtml += '<span class="svc-badge svc-badge-featured">Featured</span>';
-if (isPopular) badgesHtml += '<span class="svc-badge svc-badge-popular">Popular</span>';
-if (isTrending) badgesHtml += '<span class="svc-badge svc-badge-trending">Trending</span>';
-const badgesRow = badgesHtml ? `<div class="svc-badges">${badgesHtml}</div>` : '';
+const featuredBadge = isFeatured ? '<span class="svc-badge-featured-tag">Featured</span>' : '';
+const popularBadge = isPopular ? '<span class="svc-badge-popular-tag">Popular</span>' : '';
+const trendingBadge = isTrending ? '<span class="svc-badge-trending-tag">Trending</span>' : '';
 
 const serviceCard = document.createElement('article');
 serviceCard.className = 'svc-card';
 serviceCard.setAttribute('data-service-id', serviceId);
-serviceCard.setAttribute('role', 'button');
-serviceCard.setAttribute('tabindex', '0');
-serviceCard.setAttribute('aria-expanded', 'false');
 serviceCard.innerHTML = `
 <div class="svc-thumb" aria-hidden="true">
-<img src="${serviceImageSrc}" alt="" width="116" height="92" loading="lazy" decoding="async" onerror="this.onerror=null;this.src='${fallbackServiceImageSrc}'">
+${featuredBadge}
+<img src="${serviceImageSrc}" alt="" width="128" height="100" loading="lazy" decoding="async" onerror="this.onerror=null;this.src='${placeholderSvg}'">
 </div>
 <div class="svc-copy">
 <div class="svc-top-row">
-<h3 class="svc-title">${formattedServiceName}</h3>
-${iconHtml}
+<h3 class="svc-title">${formattedServiceName}${popularBadge}</h3>
 </div>
-${badgesRow}
 <div class="svc-meta-bar">
-${priceText}
+${priceText}${trendingBadge}
 ${duration ? `<span class="svc-duration">${duration}</span>` : ''}
 <button class="svc-book-btn" onclick="event.stopPropagation(); window._naturalsPendingAction='book'; openStorePicker();" title="Book this service">Book</button>
 </div>
 </div>
-${description ? `<span class="svc-toggle" onclick="event.stopPropagation(); toggleDescription('${serviceId}')" data-service-id="${serviceId}">→</span>` : '<span class="svc-toggle">→</span>'}
+${description
+? `<span class="svc-toggle" role="button" tabindex="0" aria-controls="desc-${serviceId}" aria-expanded="false" onclick="event.stopPropagation(); toggleDescription('${serviceId}')" onkeydown="if(event.key==='Enter'||event.key===' '){event.preventDefault();toggleDescription('${serviceId}')}" data-service-id="${serviceId}">→</span>`
+: '<span class="svc-toggle" aria-hidden="true">→</span>'}
 ${description ? `<div class="svc-description" id="desc-${serviceId}">${formattedDescription}</div>` : ''}
 `;
 
-// Add click handler to entire card for mobile
+// Add click handler to card for mobile convenience (tapping card toggles description)
 serviceCard.addEventListener('click', (e) => {
-// Prevent triggering if clicking on the toggle directly (it has its own handler)
-if (!e.target.classList.contains('svc-toggle')) {
-toggleDescription(serviceId);
-}
-});
-
-// Add keyboard support for accessibility
-serviceCard.addEventListener('keydown', (e) => {
-if (e.key === 'Enter' || e.key === ' ') {
-e.preventDefault();
+if (!e.target.closest('.svc-toggle, .svc-book-btn')) {
 toggleDescription(serviceId);
 }
 });
@@ -3936,9 +4025,8 @@ emptyState.style.display = 'none';
 window.toggleDescription = function(serviceId) {
 const descEl = document.getElementById(`desc-${serviceId}`);
 const toggleEl = document.querySelector(`.svc-toggle[data-service-id="${serviceId}"]`);
-const cardEl = document.querySelector(`.svc-card[data-service-id="${serviceId}"]`);
 
-if (descEl && toggleEl && cardEl) {
+if (descEl && toggleEl) {
 const isExpanded = descEl.classList.contains('visible');
 
 // Close all other descriptions first (accordion behavior)
@@ -3948,8 +4036,6 @@ el.classList.remove('visible');
 document.querySelectorAll('.svc-toggle.expanded').forEach(el => {
 el.classList.remove('expanded');
 el.textContent = '→';
-});
-document.querySelectorAll('.svc-card[aria-expanded="true"]').forEach(el => {
 el.setAttribute('aria-expanded', 'false');
 });
 
@@ -3958,21 +4044,39 @@ if (!isExpanded) {
 descEl.classList.add('visible');
 toggleEl.classList.add('expanded');
 toggleEl.textContent = '→';
-cardEl.setAttribute('aria-expanded', 'true');
+toggleEl.setAttribute('aria-expanded', 'true');
 }
 }
 };
 
 // 4. INIT
 document.addEventListener('DOMContentLoaded', function() {
-// Ensure 'All' gender button has active class visually applied
-const allGenderBtn = document.querySelector('[data-filter-type="gender"][data-filter-value="all"]');
-if (allGenderBtn) {
-allGenderBtn.classList.add('active');
+// Apply gender filter active state from URL/default
+const genderVal = currentFilters.gender || 'all';
+document.querySelectorAll('[data-filter-type="gender"]').forEach(el => {
+el.classList.toggle('active', el.dataset.filterValue === genderVal);
+});
+
+populateCategoryDrawer();
+buildStorePills();
+
+// Apply store filter active state from URL/default
+if (currentFilters.store !== 'all') {
+document.querySelectorAll('.store-pill').forEach(el => {
+el.classList.toggle('active', el.dataset.store === currentFilters.store);
+});
 }
 
-populateCategoryDropdown();
-buildStorePills();
+// Apply sort button active state
+document.querySelectorAll('.sort-btn').forEach(el => {
+el.classList.toggle('active', el.dataset.sort === currentFilters.sort);
+});
+
+// Restore search input value
+if (currentFilters.search) {
+document.getElementById('svc-search').value = currentFilters.search;
+}
+
 renderServices();
 });
 })();
