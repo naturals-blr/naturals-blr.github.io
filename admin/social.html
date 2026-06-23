@@ -343,8 +343,15 @@ function restoreSession() {
   try {
     const saved = JSON.parse(raw);
     if (!saved.email) return false;
+    const allowed = window.ADMIN_ALLOWED_EMAILS || [];
+    if (allowed.length > 0 && !allowed.includes(saved.email)) {
+      clearSession();
+      return false;
+    }
     currentUser = saved;
     window.__userEmail = saved.email;
+    window.__userAccessType = saved.accessType || 'full';
+    window.__userStoreId = saved.storeId || '';
     $('user-name').textContent = saved.name;
     $('user-avatar').src = saved.picture;
     const roleBadge = $('user-role-badge');
@@ -637,25 +644,34 @@ function handleCredentialResponse(credentialResponse) {
     return;
   }
 
-  const email = payload.email || '';
+  const email = (payload.email || '').toLowerCase().trim();
   const hd = payload.hd || '';
 
-  // Allow any authenticated email — real access control is server-side
-  // in verify_and_dispatch.yml (checks stores.json for manager/owner emails)
   if (!email) {
     $('auth-error').textContent = 'Email not found in token';
     return;
   }
+  const allowed = window.ADMIN_ALLOWED_EMAILS || [];
+  if (allowed.length > 0 && !allowed.includes(email)) {
+    $('auth-error').textContent = 'Access denied: ' + email + ' is not authorized. Contact the system administrator.';
+    return;
+  }
 
+  const storeId = (window.STORE_EMAIL_MAP || {})[email] || '';
+  const isFullAccess = (window.ADMIN_CAMPAIGN_ACCESS || []).includes(email) || (window.STORE_OWNER_SET || []).includes(email);
   currentUser = {
     email: email,
     name: payload.name || email,
     picture: payload.picture || '',
     hd: hd,
     idToken: idToken,
+    accessType: storeId && !isFullAccess ? 'store' : 'full',
+    storeId: storeId || '',
   };
 
   window.__userEmail = currentUser.email;
+  window.__userAccessType = currentUser.accessType;
+  window.__userStoreId = currentUser.storeId;
   saveSession(currentUser);
   $('user-name').textContent = currentUser.name;
   $('user-avatar').src = currentUser.picture;

@@ -216,13 +216,25 @@ function restoreSession() {
   try {
     const saved = JSON.parse(raw);
     if (!saved.email) return false;
+    const allowed = window.ADMIN_ALLOWED_EMAILS || [];
+    if (allowed.length > 0 && !allowed.includes(saved.email)) {
+      clearSession();
+      return false;
+    }
     currentUser = saved;
     window.__userEmail = saved.email;
+    window.__userAccessType = saved.accessType || 'full';
+    window.__userStoreId = saved.storeId || '';
     $('user-name').textContent = saved.name;
     $('user-avatar').src = saved.picture;
     const roleBadge = $('user-role-badge');
-    roleBadge.textContent = 'manager';
-    roleBadge.className = 'role-badge role-store';
+    if (saved.accessType === 'store') {
+      roleBadge.textContent = 'store - ' + (saved.storeId || '');
+      roleBadge.className = 'role-badge role-store';
+    } else {
+      roleBadge.textContent = 'full access';
+      roleBadge.className = 'role-badge role-owner';
+    }
     document.body.classList.remove('auth-locked');
     logMsg('Session restored for ' + saved.email, 'success');
     loadData();
@@ -254,25 +266,41 @@ function handleCredentialResponse(credentialResponse) {
     $('auth-error').textContent = 'Failed to parse token';
     return;
   }
-  const email = payload.email || '';
+  const email = (payload.email || '').toLowerCase().trim();
   if (!email) {
     $('auth-error').textContent = 'Email not found in token';
     return;
   }
+  const allowed = window.ADMIN_ALLOWED_EMAILS || [];
+  if (allowed.length > 0 && !allowed.includes(email)) {
+    $('auth-error').textContent = 'Access denied: ' + email + ' is not authorized. Contact the system administrator.';
+    return;
+  }
+  const storeId = (window.STORE_EMAIL_MAP || {})[email] || '';
+  const isFullAccess = (window.ADMIN_CAMPAIGN_ACCESS || []).includes(email) || (window.STORE_OWNER_SET || []).includes(email);
   currentUser = {
     email: email,
     name: payload.name || email,
     picture: payload.picture || '',
+    accessType: storeId && !isFullAccess ? 'store' : 'full',
+    storeId: storeId || '',
   };
   window.__userEmail = email;
+  window.__userAccessType = currentUser.accessType;
+  window.__userStoreId = currentUser.storeId;
   saveSession(currentUser);
   $('user-name').textContent = currentUser.name;
   $('user-avatar').src = currentUser.picture;
   const roleBadge = $('user-role-badge');
-  roleBadge.textContent = 'manager';
-  roleBadge.className = 'role-badge role-store';
+  if (currentUser.accessType === 'store') {
+    roleBadge.textContent = 'store - ' + currentUser.storeId;
+    roleBadge.className = 'role-badge role-store';
+  } else {
+    roleBadge.textContent = 'full access';
+    roleBadge.className = 'role-badge role-owner';
+  }
   document.body.classList.remove('auth-locked');
-  logMsg('Signed in as ' + currentUser.email, 'success');
+  logMsg('Signed in as ' + currentUser.email + ' (' + currentUser.accessType + ')', 'success');
   loadData();
 }
 
@@ -288,14 +316,34 @@ $('btn-signout').onclick = () => {
 // ── Load data ────────────────────────────────────────────────────────
 function loadData() {
   const rpt = window.REVIEW_SUMMARY;
+  const isStoreUser = window.__userAccessType === 'store';
+  const userStoreId = window.__userStoreId || '';
+  const storeCache = window.SALON_STORES_CACHE || [];
+  const storeIdToName = {};
+  storeCache.forEach(s => { storeIdToName[s.id] = s.name; });
+  const userStoreName = storeIdToName[userStoreId] || '';
+
+  let filteredPerStore = rpt ? (rpt.perStore || []).filter(s => s.id) : [];
+  if (isStoreUser && userStoreName) {
+    filteredPerStore = filteredPerStore.filter(s => s.store === userStoreName);
+  }
+
   if (rpt && rpt.total) {
-    $('stat-total').textContent = rpt.total;
-    $('stat-replied').textContent = rpt.replied;
-    $('stat-avg').textContent = rpt.avgStars;
-    $('stat-unreplied').textContent = rpt.total - rpt.replied;
+    if (isStoreUser) {
+      const myStore = filteredPerStore[0] || {};
+      $('stat-total').textContent = myStore.total || 0;
+      $('stat-replied').textContent = myStore.replied || 0;
+      $('stat-avg').textContent = myStore.avgStars || '\u2014';
+      $('stat-unreplied').textContent = (myStore.total || 0) - (myStore.replied || 0);
+    } else {
+      $('stat-total').textContent = rpt.total;
+      $('stat-replied').textContent = rpt.replied;
+      $('stat-avg').textContent = rpt.avgStars;
+      $('stat-unreplied').textContent = rpt.total - rpt.replied;
+    }
 
     const tbody = $('store-tbody');
-    tbody.innerHTML = rpt.perStore.filter(s => s.id).map(s => {
+    tbody.innerHTML = filteredPerStore.map(s => {
       const unreplied = s.total - s.replied;
       return `<tr>
         <td class="highlight">${escHtml(s.store)}</td>
@@ -309,9 +357,13 @@ function loadData() {
 
     // Build store filter buttons
     const filterEl = $('store-filter');
-    rpt.perStore.filter(s => s.id).forEach(s => {
-      filterEl.insertAdjacentHTML('beforeend', `<button data-store="${escHtml(s.store)}">${escHtml(s.store)}</button>`);
+    filteredPerStore.forEach(s => {
+      const active = isStoreUser && s.store === userStoreName ? ' active' : '';
+      filterEl.insertAdjacentHTML('beforeend', `<button data-store="${escHtml(s.store)}"${active}>${escHtml(s.store)}</button>`);
     });
+    if (isStoreUser && userStoreName) {
+      filterStore = userStoreName;
+    }
     filterEl.addEventListener('click', e => {
       if (e.target.tagName !== 'BUTTON') return;
       filterEl.querySelectorAll('button').forEach(b => b.classList.remove('active'));
@@ -322,7 +374,7 @@ function loadData() {
   }
 
   // Fetch recent reviews
-  const apiUrl = '/api/reviews-data?limit=50';
+  const apiUrl = '/api/reviews-data?limit=' + (isStoreUser ? '200' : '50');
   fetch(apiUrl)
     .then(r => r.json())
     .then(res => {

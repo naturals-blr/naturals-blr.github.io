@@ -37,25 +37,15 @@ header .user-info button:hover{background:#f3f4f6}
 .scroll-area{flex:1;overflow-y:auto;padding:2rem}
 .scroll-area-inner{max-width:900px;margin:0 auto}
 
-/* Welcome */
-.welcome{margin-bottom:2rem}
-.welcome h2{font-size:1.5rem;font-weight:700;color:#1f2937}
-.welcome p{font-size:.875rem;color:#6b7280;margin-top:.25rem}
-
 /* Feature cards */
 .feature-grid{display:grid;grid-template-columns:1fr 1fr;gap:1.25rem}
 @media(max-width:640px){.feature-grid{grid-template-columns:1fr}}
 .feature-card{background:#fff;border-radius:.75rem;border:1px solid #e5e7eb;padding:1.5rem;transition:all .15s;cursor:pointer;text-decoration:none;display:block}
 .feature-card:hover{box-shadow:0 4px 12px rgba(0,0,0,.06);border-color:#166534}
 .feature-card .icon{width:48px;height:48px;border-radius:.75rem;display:flex;align-items:center;justify-content:center;font-size:1.5rem;margin-bottom:1rem}
-.feature-card .icon-social{background:#f0fdf4;color:#166534}
-.feature-card .icon-reviews{background:#fef3c7;color:#92400e}
 .feature-card h3{font-size:1.125rem;font-weight:700;color:#1f2937;margin-bottom:.25rem}
 .feature-card p{font-size:.8125rem;color:#6b7280;line-height:1.5}
 .feature-card .meta{font-size:.75rem;color:#9ca3af;margin-top:.75rem;display:flex;align-items:center;gap:.5rem}
-.feature-card .badge{display:inline-flex;align-items:center;gap:.25rem;padding:.125rem .5rem;border-radius:999px;font-size:.6875rem;font-weight:600}
-.badge-green{background:#dcfce7;color:#166534}
-.badge-amber{background:#fef3c7;color:#92400e}
 
 /* Activity bar */
 .activity-bar{background:#fff;border-top:1px solid #e5e7eb;padding:.5rem 1.25rem;display:flex;align-items:center;justify-content:space-between}
@@ -110,37 +100,59 @@ header .user-info button:hover{background:#f3f4f6}
 
   <div class="scroll-area">
     <div class="scroll-area-inner">
-      <div class="welcome">
-        <h2 id="greeting">Welcome</h2>
-        <p>Select a tool to get started.</p>
+      <!-- ═══ Section: Reviews & Engagement ═══ -->
+      <div style="display:flex;align-items:center;gap:.5rem;margin-bottom:.75rem;margin-top:.5rem">
+        <span style="width:3px;height:18px;border-radius:2px;background:#166534;display:inline-block;flex-shrink:0"></span>
+        <h2 style="font-size:.6875rem;font-weight:600;color:#9ca3af;text-transform:uppercase;letter-spacing:.04em">Reviews &amp; Engagement</h2>
       </div>
-
-      <div class="feature-grid">
-        <a href="/admin/social.html" class="feature-card" id="card-social">
-          <div class="icon icon-social">&#x1F4E3;</div>
-          <h3>Social Publisher</h3>
-          <p>Create and publish campaigns to Facebook, Instagram, and Google Business Profile. Select stores, upload images, and dispatch via Google relay or GitHub.</p>
-          <div class="meta">
-            <span class="badge badge-green">&#x25CF; Active</span>
-            <span>v2 &mdash; Dual path</span>
-          </div>
+      <div class="feature-grid" style="margin-bottom:2rem">
+        <a href="/reviews.html" class="feature-card" id="card-review-hub">
+          <div class="icon" style="background:#f0fdf4;color:#166534;font-size:1.5rem">&#x1F4AC;</div>
+          <h3>Review Hub</h3>
+          <p>Browse, generate AI replies, and post to Google Business Profile.</p>
+          <div class="meta"><span style="font-size:.75rem;font-weight:600;color:#166534">Open &rarr;</span></div>
         </a>
-
-        <a href="/admin/reviews.html" class="feature-card" id="card-reviews">
-          <div class="icon icon-reviews">&#x2B50;</div>
+        <a href="/review-report.html" class="feature-card" id="card-review-report">
+          <div class="icon" style="background:#fef3c7;color:#92400e;font-size:1.5rem">&#x2B50;</div>
           <h3>Review Report</h3>
-          <p>View customer review analytics across all stores. See reply status, star ratings, and recent feedback at a glance.</p>
-          <div class="meta">
-            <span class="badge badge-amber">&#x25CF; Report</span>
-            <span id="review-count-label">Loading&hellip;</span>
-          </div>
+          <p>See reply status, star ratings, totals, and per-store breakdown at a glance.</p>
+          <div class="meta"><span id="review-count-label" style="font-size:.75rem;color:#9ca3af">Loading&hellip;</span><span style="font-size:.75rem;font-weight:600;color:#166534;margin-left:auto">Open &rarr;</span></div>
         </a>
       </div>
 
-      <div style="margin-top:1.5rem;padding-top:1.5rem;border-top:1px solid #e5e7eb;display:flex;align-items:center;gap:.75rem;flex-wrap:wrap">
-        <button class="btn btn-secondary" id="btn-sync-reviews" style="font-size:.75rem">&#x1F504; Sync Reviews from Google</button>
-        <span id="sync-status" style="font-size:.75rem;color:#9ca3af"></span>
+      <!-- ═══ Section: Social Publishing ═══ -->
+      <div style="display:flex;align-items:center;gap:.5rem;margin-bottom:.75rem">
+        <span style="width:3px;height:18px;border-radius:2px;background:#166534;display:inline-block;flex-shrink:0"></span>
+        <h2 style="font-size:.6875rem;font-weight:600;color:#9ca3af;text-transform:uppercase;letter-spacing:.04em">Social Publishing</h2>
       </div>
+      <div class="feature-grid" style="margin-bottom:2rem">
+        <a href="/adhoc.html" class="feature-card">
+          <div class="icon" style="background:#ffe4e6;color:#be123c;font-size:1.5rem">&#x1F680;</div>
+          <h3>Quick Post</h3>
+          <p>Send a one-off campaign to selected stores and platforms on the fly.</p>
+          <div class="meta"><span style="font-size:.75rem;font-weight:600;color:#be123c">Open &rarr;</span></div>
+        </a>
+        <a href="/auto-campaign.html" class="feature-card">
+          <div class="icon" style="background:#ffedd5;color:#c2410c;font-size:1.5rem">&#x26A1;</div>
+          <h3>Auto Campaign</h3>
+          <p>Paste raw offer text &mdash; AI extracts, generates images, and publishes to all platforms.</p>
+          <div class="meta"><span style="font-size:.75rem;font-weight:600;color:#c2410c">Open &rarr;</span></div>
+        </a>
+        <a href="/social.html" class="feature-card">
+          <div class="icon" style="background:#f3f0ff;color:#6d28d9;font-size:1.5rem">&#x1F4E3;</div>
+          <h3>Campaign Relay</h3>
+          <p>Select existing campaigns and publish across Facebook, Instagram, and Google.</p>
+          <div class="meta"><span style="font-size:.75rem;font-weight:600;color:#6d28d9">Open &rarr;</span></div>
+        </a>
+        <a href="/ace.html" class="feature-card">
+          <div class="icon" style="background:#cffafe;color:#0891b2;font-size:1.5rem">&#x26A1;</div>
+          <h3>ACE &mdash; Autopilot</h3>
+          <p>LLM copy &rarr; AI image &rarr; Git host &rarr; social publish. Zero input.</p>
+          <div class="meta"><span style="font-size:.75rem;font-weight:600;color:#0891b2">Open &rarr;</span></div>
+        </a>
+      </div>
+
+
     </div>
   </div>
 
@@ -177,15 +189,26 @@ function restoreSession() {
   try {
     const saved = JSON.parse(raw);
     if (!saved.email) return false;
+    const allowed = window.ADMIN_ALLOWED_EMAILS || [];
+    if (allowed.length > 0 && !allowed.includes(saved.email)) {
+      clearSession();
+      return false;
+    }
     currentUser = saved;
     window.__userEmail = saved.email;
+    window.__userAccessType = saved.accessType || 'full';
+    window.__userStoreId = saved.storeId || '';
     $('user-name').textContent = saved.name;
     $('user-avatar').src = saved.picture;
     const roleBadge = $('user-role-badge');
-    roleBadge.textContent = 'manager';
-    roleBadge.className = 'role-badge role-store';
+    if (saved.accessType === 'store') {
+      roleBadge.textContent = 'store - ' + (saved.storeId || '');
+      roleBadge.className = 'role-badge role-store';
+    } else {
+      roleBadge.textContent = 'full access';
+      roleBadge.className = 'role-badge role-owner';
+    }
     document.body.classList.remove('auth-locked');
-    $('greeting').textContent = 'Welcome, ' + saved.name.split(' ')[0];
     logMsg('Session restored for ' + saved.email, 'success');
     return true;
   } catch (e) {
@@ -205,26 +228,41 @@ function handleCredentialResponse(credentialResponse) {
     $('auth-error').textContent = 'Failed to parse token';
     return;
   }
-  const email = payload.email || '';
+  const email = (payload.email || '').toLowerCase().trim();
   if (!email) {
     $('auth-error').textContent = 'Email not found in token';
     return;
   }
+  const allowed = window.ADMIN_ALLOWED_EMAILS || [];
+  if (allowed.length > 0 && !allowed.includes(email)) {
+    $('auth-error').textContent = 'Access denied: ' + email + ' is not authorized. Contact the system administrator.';
+    return;
+  }
+  const storeId = (window.STORE_EMAIL_MAP || {})[email] || '';
+  const isFullAccess = (window.ADMIN_CAMPAIGN_ACCESS || []).includes(email) || (window.STORE_OWNER_SET || []).includes(email);
   currentUser = {
     email: email,
     name: payload.name || email,
     picture: payload.picture || '',
+    accessType: storeId && !isFullAccess ? 'store' : 'full',
+    storeId: storeId || '',
   };
   window.__userEmail = email;
+  window.__userAccessType = currentUser.accessType;
+  window.__userStoreId = currentUser.storeId;
   saveSession(currentUser);
   $('user-name').textContent = currentUser.name;
   $('user-avatar').src = currentUser.picture;
   const roleBadge = $('user-role-badge');
-  roleBadge.textContent = 'manager';
-  roleBadge.className = 'role-badge role-store';
+  if (currentUser.accessType === 'store') {
+    roleBadge.textContent = 'store - ' + currentUser.storeId;
+    roleBadge.className = 'role-badge role-store';
+  } else {
+    roleBadge.textContent = 'full access';
+    roleBadge.className = 'role-badge role-owner';
+  }
   document.body.classList.remove('auth-locked');
-  logMsg('Signed in as ' + currentUser.email, 'success');
-  $('greeting').textContent = 'Welcome, ' + currentUser.name.split(' ')[0];
+  logMsg('Signed in as ' + currentUser.email + ' (' + currentUser.accessType + ')', 'success');
 }
 
 window.handleCredentialResponse = handleCredentialResponse;
@@ -234,30 +272,6 @@ $('btn-signout').onclick = () => {
   clearSession();
   document.body.classList.add('auth-locked');
   logMsg('Signed out', 'info');
-};
-
-// ── Sync reviews from GBP ──────────────────────────────────────────
-$('btn-sync-reviews').onclick = async () => {
-  const btn = $('btn-sync-reviews');
-  const status = $('sync-status');
-  btn.disabled = true;
-  status.textContent = 'Syncing reviews from Google Business Profile...';
-  logMsg('Starting review sync...', 'info');
-  try {
-    const res = await fetch('/api/sync-reviews', { method: 'POST' });
-    const data = await res.json();
-    if (data.ok) {
-      status.textContent = '✅ Reviews synced. Refresh Review Report to see updated data.';
-      logMsg('✅ Reviews synced successfully', 'success');
-    } else {
-      status.textContent = '❌ Sync failed: ' + (data.error || 'Unknown error');
-      logMsg('❌ Sync failed: ' + (data.error || 'Unknown error'), 'error');
-    }
-  } catch (err) {
-    status.textContent = '❌ Sync error: ' + err.message;
-    logMsg('❌ Sync error: ' + err.message, 'error');
-  }
-  btn.disabled = false;
 };
 
 // ── Load stats from injected data ────────────────────────────────────
