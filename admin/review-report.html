@@ -193,49 +193,19 @@
       $('summary-stats').classList.add('opacity-50');
       $('reviews-container').innerHTML = '<div class="text-center text-gray-400 py-8 text-sm">Loading reviews...</div>';
       try {
-        const params = new URLSearchParams();
-        if (dateFrom) params.set('from', dateFrom);
-        if (dateTo) params.set('to', dateTo);
-
-        const chartFrom = new Date(); chartFrom.setDate(chartFrom.getDate() - 365);
-        const chartParams = new URLSearchParams();
-        chartParams.set('from', chartFrom.toISOString().split('T')[0]);
-
-        const fetches = [
-          fetch('/api/stores-sheet'),
-          fetch('/api/reviews-data?' + params.toString()),
-          fetch('/api/reviews-data?' + chartParams.toString()),
-        ];
-
-        let analyticsPromise = null;
-        if (dateFrom) {
-          const aTo = dateTo || new Date().toISOString().split('T')[0];
-          analyticsPromise = fetch('/api/reviews-analytics?from=' + encodeURIComponent(dateFrom) + '&to=' + encodeURIComponent(aTo));
-          fetches.push(analyticsPromise);
-        }
-
-        const responses = await Promise.all(fetches);
-        const storesRes = responses[0];
-        const reviewsRes = responses[1];
-        const chartRes = responses[2];
-        const analyticsRes = analyticsPromise ? responses[3] : null;
+        const [storesRes, reviewsRes] = await Promise.all([
+          fetch('/api/stores-sheet.json'),
+          fetch('/api/reviews-data.json'),
+        ]);
 
         const storesJson = await storesRes.json();
+        if (!Array.isArray(storesJson)) throw new Error('Failed to load stores');
+        storeOrder = storesJson;
+
         const reviewsJson = await reviewsRes.json();
-        const chartJson = await chartRes.json();
-
-        if (!storesJson.ok) throw new Error(storesJson.error || 'Failed to load stores');
-        if (!reviewsJson.ok) throw new Error(reviewsJson.error || 'Failed to load reviews');
-
-        storeOrder = storesJson.data || [];
-        allReviews = reviewsJson.data || [];
-        if (chartJson.ok) chartReviews = chartJson.data || [];
-
-        analyticsData = null;
-        if (analyticsRes && analyticsRes.ok) {
-          const aJson = await analyticsRes.json();
-          if (aJson.ok) analyticsData = aJson.data;
-        }
+        if (!Array.isArray(reviewsJson)) throw new Error('Failed to load reviews');
+        allReviews = reviewsJson;
+        chartReviews = reviewsJson;
 
         populateStoreFilter();
         refreshDisplay();
@@ -250,16 +220,29 @@
       return reviews.filter(r => (r.store_name || 'Unknown') === selectedStore);
     }
 
+    function filterByDate(reviews, from, to) {
+      if (!from && !to) return reviews;
+      const fromMs = from ? new Date(from).getTime() : 0;
+      const toMs = to ? new Date(to).getTime() + 86400000 : Infinity;
+      return reviews.filter(r => {
+        const d = r.review_create_time || r.date_posted || '';
+        const t = new Date(d).getTime();
+        return !isNaN(t) && t >= fromMs && t < toMs;
+      });
+    }
+
     function refreshDisplay() {
-      const filtered = getFilteredReviews(allReviews);
+      const storeFiltered = getFilteredReviews(allReviews);
+      const displayReviews = filterByDate(storeFiltered, dateFrom, dateTo);
       const chartFiltered = getFilteredReviews(chartReviews);
       applyPeriodLabel();
+      analyticsData = currentPeriod !== 'all' && dateFrom ? computeAnalytics(allReviews, dateFrom, dateTo || new Date().toISOString().split('T')[0]) : null;
       renderTrendBadges();
-      renderReputationAlert(filtered);
-      computeSummary(filtered);
+      renderReputationAlert(displayReviews);
+      computeSummary(displayReviews);
       computePriorPeriod();
-      renderStoreTable(filtered, analyticsData);
-      renderReviews(filtered);
+      renderStoreTable(displayReviews, analyticsData);
+      renderReviews(displayReviews);
       renderCharts(chartFiltered);
     }
 
@@ -623,24 +606,118 @@
     }
     window.copyReview = copyReview;
 
+    function computeAnalytics(reviews, from, to) {
+      if (!from || !to) return null;
+      const fromMs = new Date(from).getTime();
+      const toMs = new Date(to).getTime() + 86400000;
+      const windowDuration = toMs - fromMs;
+      if (isNaN(fromMs) || isNaN(toMs) || windowDuration <= 0) return null;
+
+      const priorStartMs = fromMs - windowDuration;
+      const priorEndMs = fromMs - 1;
+      const yoyStartMs = fromMs - 31536000000;
+      const yoyEndMs = toMs - 31536000000;
+
+      function filterWindow(start, end) {
+        return reviews.filter(r => {
+          const d = r.review_create_time || r.date_posted || '';
+          const t = new Date(d).getTime();
+          return !isNaN(t) && t >= start && t < end;
+        });
+      }
+
+      function computeStats(rs) {
+        const map = {};
+        for (const r of rs) {
+          const name = r.store_name || 'Unknown';
+          if (!map[name]) map[name] = { count: 0, starSum: 0, starCount: 0 };
+          map[name].count++;
+          const sv = r.stars || r.Stars;
+          const val = sv == null ? 5 : isNaN(sv) ? (String(sv).trim().toUpperCase() === 'FIVE' ? 5 : parseInt(sv) || 5) : +sv;
+          if (val > 0 && val <= 5) { map[name].starSum += val; map[name].starCount++; }
+        }
+        for (const k of Object.keys(map)) map[k].avgRating = map[k].starCount ? +(map[k].starSum / map[k].starCount).toFixed(2) : null;
+        return map;
+      }
+
+      function totalStats(map) {
+        let count = 0, starSum = 0, starCount = 0;
+        for (const k of Object.keys(map)) { count += map[k].count; starSum += map[k].starSum; starCount += map[k].starCount; }
+        return { count, avgRating: starCount ? +(starSum / starCount).toFixed(2) : null };
+      }
+
+      function deltaPct(curr, prior) {
+        if (!prior || prior === 0) return curr > 0 ? 100 : 0;
+        return +(((curr - prior) / prior) * 100).toFixed(1);
+      }
+      function deltaVal(curr, prior) {
+        if (curr == null || prior == null) return null;
+        return +(curr - prior).toFixed(2);
+      }
+
+      const currR = filterWindow(fromMs, toMs);
+      const priorR = filterWindow(priorStartMs, priorEndMs);
+      const yoyR = filterWindow(yoyStartMs, yoyEndMs);
+      const currStats = computeStats(currR);
+      const priorStats = computeStats(priorR);
+      const yoyStats = computeStats(yoyR);
+      const tCurr = totalStats(currStats);
+      const tPrior = totalStats(priorStats);
+      const tYoy = totalStats(yoyStats);
+
+      const summary = {
+        current_count: tCurr.count, current_avg_rating: tCurr.avgRating,
+        prior_count: tPrior.count, prior_avg_rating: tPrior.avgRating,
+        yoy_count: tYoy.count, yoy_avg_rating: tYoy.avgRating,
+        mom_count_delta_pct: deltaPct(tCurr.count, tPrior.count),
+        mom_rating_delta_val: deltaVal(tCurr.avgRating, tPrior.avgRating),
+        yoy_count_delta_pct: deltaPct(tCurr.count, tYoy.count),
+        yoy_rating_delta_val: deltaVal(tCurr.avgRating, tYoy.avgRating),
+      };
+
+      const allNames = new Set([...Object.keys(currStats), ...Object.keys(priorStats), ...Object.keys(yoyStats)]);
+      const stores = Array.from(allNames).map(name => {
+        const c = currStats[name] || { count: 0, avgRating: null };
+        const p = priorStats[name] || { count: 0, avgRating: null };
+        const y = yoyStats[name] || { count: 0, avgRating: null };
+        return {
+          branch_name: name,
+          current_count: c.count, current_avg_rating: c.avgRating,
+          prior_count: p.count, prior_avg_rating: p.avgRating,
+          yoy_count: y.count, yoy_avg_rating: y.avgRating,
+          mom_count_delta_pct: deltaPct(c.count, p.count),
+          mom_rating_delta_val: deltaVal(c.avgRating, p.avgRating),
+          yoy_count_delta_pct: deltaPct(c.count, y.count),
+          yoy_rating_delta_val: deltaVal(c.avgRating, y.avgRating),
+          brand_contribution_pct: tCurr.count > 0 ? +((c.count / tCurr.count) * 100).toFixed(1) : 0,
+        };
+      });
+
+      return { summary, stores };
+    }
+
+    function applyPeriod() {
+      const fromInput = $('date-from');
+      const toInput = $('date-to');
+      const now = new Date();
+      if (currentPeriod === 'all') { dateFrom = null; dateTo = null; fromInput.disabled = true; toInput.disabled = true; }
+      else if (currentPeriod === 'custom') { fromInput.disabled = false; toInput.disabled = false; dateFrom = fromInput.value || null; dateTo = toInput.value || null; }
+      else { fromInput.disabled = true; toInput.disabled = true; const from = new Date(now); from.setDate(from.getDate() - parseInt(currentPeriod)); dateFrom = from.toISOString().split('T')[0]; dateTo = null; }
+      refreshDisplay();
+    }
+
     // ── Period filter ──
     document.querySelectorAll('.period-btn').forEach(btn => {
       btn.onclick = function() {
         document.querySelectorAll('.period-btn').forEach(b => b.classList.remove('active'));
         this.classList.add('active');
         currentPeriod = this.dataset.period;
-        const fromInput = $('date-from');
-        const toInput = $('date-to');
-        const now = new Date();
-        if (currentPeriod === 'all') { dateFrom = null; dateTo = null; fromInput.disabled = true; toInput.disabled = true; }
-        else if (currentPeriod === 'custom') { fromInput.disabled = false; toInput.disabled = false; dateFrom = fromInput.value || null; dateTo = toInput.value || null; }
-        else { fromInput.disabled = true; toInput.disabled = true; const from = new Date(now); from.setDate(from.getDate() - parseInt(currentPeriod)); dateFrom = from.toISOString().split('T')[0]; dateTo = null; }
-        loadData();
+        applyPeriod();
       };
     });
 
-    $('date-from').onchange = function() { if (currentPeriod === 'custom') { dateFrom = this.value || null; dateTo = $('date-to').value || null; loadData(); } };
-    $('date-to').onchange = function() { if (currentPeriod === 'custom') { dateTo = this.value || null; dateFrom = $('date-from').value || null; loadData(); } };
+    $('date-from').onchange = function() { if (currentPeriod === 'custom') { dateFrom = this.value || null; dateTo = $('date-to').value || null; refreshDisplay(); } };
+    $('date-to').onchange = function() { if (currentPeriod === 'custom') { dateTo = this.value || null; dateFrom = $('date-from').value || null; refreshDisplay(); } };
 
     // ── Store filter — filters every section ──
     $('store-filter').onchange = function() {
@@ -655,7 +732,7 @@
       const field = th.dataset.sort;
       if (sortBy === field) sortDir = sortDir === 'asc' ? 'desc' : 'asc';
       else { sortBy = field; sortDir = 'asc'; }
-      renderStoreTable(getFilteredReviews(allReviews), analyticsData);
+      renderStoreTable(filterByDate(getFilteredReviews(allReviews), dateFrom, dateTo), analyticsData);
     });
 
     $('btn-refresh').onclick = loadData;

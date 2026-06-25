@@ -24,52 +24,15 @@
   </script>
   <style>
     body { background: #F9F9FB; color: #1F2937; }
-    #activity-log > div:first-child { animation: fadeIn 0.2s ease-out; }
-    @keyframes fadeIn { from { opacity: 0; transform: translateY(-4px); } to { opacity: 1; transform: translateY(0); } }
-
-    /* ── Mode toggle pills ── */
-    .mode-toggle { background: #F0F0F4; border-radius: 10px; padding: 3px; display: inline-flex; gap: 2px; }
-    .mode-btn { padding: 6px 16px; font-size: 0.8125rem; font-weight: 500; border-radius: 8px; border: none; background: transparent; color: #6B7280; cursor: pointer; transition: all 0.15s; }
-    .mode-btn:hover { color: #4B5563; }
-    .mode-btn.active { background: #fff; color: #7C3AED; box-shadow: 0 1px 4px rgba(0,0,0,0.08); border: 1px solid #DDD6FE; font-weight: 600; }
-
-    /* ── AI Provider custom pill radios ── */
-    .provider-pills { display: flex; gap: 6px; flex-wrap: wrap; }
-    .provider-pills label { position: relative; cursor: pointer; }
-    .provider-pills input[type="radio"] { position: absolute; opacity: 0; pointer-events: none; }
-    .provider-pills .pill { display: inline-flex; align-items: center; gap: 4px; padding: 4px 14px; font-size: 0.75rem; font-weight: 500; border-radius: 999px; background: #F0F0F4; color: #6B7280; border: 1px solid transparent; transition: all 0.15s; user-select: none; }
-    .provider-pills input[type="radio"]:checked + .pill { background: #7C3AED; color: #fff; border-color: #7C3AED; box-shadow: 0 1px 4px rgba(124,58,237,0.25); }
-    .provider-pills .pill:hover { background: #EDE9FE; color: #6D28D9; }
-    .provider-pills input[type="radio"]:checked + .pill:hover { background: #6D28D9; }
-
-    /* ── DRY RUN / LIVE badges ── */
-    .badge-live { background: #D1FAE5; color: #065F46; border: 1px solid #A7F3D0; }
-    .badge-dryrun { background: #FEF3C7; color: #92400E; border: 1px solid #FDE68A; }
-
-    /* ── Sidebar store items ── */
     .store-item { border-left: 3px solid transparent; transition: all 0.12s; cursor: pointer; border-radius: 0 8px 8px 0; }
     .store-item.active { background: #F5F3FF; border-left-color: #7C3AED; color: #6D28D9; font-weight: 600; }
     .store-item:not(.active):hover { background: #F3F4F6; }
-
-    /* ── Store numeric badge ── */
     .store-badge { display: inline-flex; align-items: center; justify-content: center; min-width: 24px; height: 24px; padding: 0 6px; border-radius: 999px; font-size: 0.6875rem; font-weight: 600; background: #F0F0F4; color: #6B7280; }
     .store-badge.has-pending { background: #D1FAE5; color: #065F46; }
-    .store-badge.error { background: #FEE2E2; color: #991B1B; }
-
-    /* ── Review cards ── */
-    .review-card { border-radius: 12px; box-shadow: 0 1px 3px rgba(0,0,0,0.04); border: 1px solid #E5E7EB; overflow: hidden; transition: opacity 0.3s, box-shadow 0.15s; }
+    .review-card { border-radius: 12px; box-shadow: 0 1px 3px rgba(0,0,0,0.04); border: 1px solid #E5E7EB; overflow: hidden; transition: box-shadow 0.15s; }
     .review-card:hover { box-shadow: 0 2px 8px rgba(0,0,0,0.06); }
     .review-avatar { width: 36px; height: 36px; border-radius: 50%; background: linear-gradient(135deg, #EDE9FE, #DDD6FE); display: flex; align-items: center; justify-content: center; font-weight: 700; font-size: 0.875rem; color: #6D28D9; flex-shrink: 0; }
-
-    /* ── Activity log ── */
-    #activity-log { font-family: 'JetBrains Mono', 'SF Mono', monospace; font-size: 0.75rem; line-height: 1.5; }
-    .activity-entry { display: flex; align-items: flex-start; gap: 8px; padding: 3px 0; }
-    .activity-icon { flex-shrink: 0; width: 14px; text-align: center; }
-    .activity-msg { flex: 1; min-width: 0; word-break: break-word; }
-    .activity-time { flex-shrink: 0; color: #9CA3AF; margin-left: auto; padding-left: 8px; }
-
-    /* ── Empty state ── */
-    .empty-state-icon { width: 56px; height: 56px; color: #D1D5DB; margin-bottom: 16px; }
+    .local-notice { background: #FFFBEB; border: 1px solid #FDE68A; border-radius: 8px; padding: 8px 14px; font-size: 0.75rem; color: #92400E; display: flex; align-items: center; gap: 8px; }
   </style>
 </head>
 <body class="font-sans antialiased">
@@ -81,94 +44,236 @@
       <div class="flex items-center justify-between">
         <div class="flex items-center gap-3">
           <a href="./" class="text-lg text-royal-600 hover:text-royal-800 transition-colors leading-none">←</a>
-          <h1 class="text-lg font-bold text-royal-800 tracking-tight">Reply to Reviews</h1>
+          <h1 class="text-lg font-bold text-royal-800 tracking-tight">Review Replies</h1>
           <span id="total-pending-count" class="ml-1 px-3 py-0.5 text-xs font-semibold rounded-full bg-royal-100 text-royal-700 hidden"></span>
-          <div id="status-badges" class="flex items-center gap-2"></div>
-          <button id="btn-toggle-dryrun" class="text-xs px-3 py-1 rounded-full border font-medium transition-colors hidden"></button>
         </div>
-        <button onclick="location.href='/'" class="text-xs px-3 py-1.5 border border-gray-200 rounded-lg hover:bg-gray-50 text-gray-500 hover:text-gray-700 transition-colors">Home</button>
+        <div class="flex items-center gap-3">
+          <div class="local-notice">
+            <span>⚡</span>
+            <span>Write actions require <code class="bg-amber-100 px-1.5 rounded font-mono">npm start</code> locally</span>
+          </div>
+          <button onclick="location.href='/'" class="text-xs px-3 py-1.5 border border-gray-200 rounded-lg hover:bg-gray-50 text-gray-500 hover:text-gray-700 transition-colors">Home</button>
+        </div>
       </div>
     </header>
-
-    <!-- Reply Mode Toggle -->
-    <div class="bg-white border-b border-gray-200/80 px-5 py-3 shrink-0">
-      <div class="flex items-center justify-between">
-        <div class="flex items-center gap-3">
-          <div class="w-9 h-9 rounded-xl bg-royal-50 flex items-center justify-center text-base">🤖</div>
-          <div>
-            <h3 class="font-semibold text-xs text-gray-700">Reply Generation Mode</h3>
-            <p class="text-xs text-gray-400 mt-0.5">Choose how review replies are generated</p>
-          </div>
-        </div>
-        <div class="flex items-center gap-3">
-          <span id="mode-indicator" class="text-xs text-gray-400 font-medium"></span>
-          <div class="mode-toggle" id="mode-toggle">
-            <button data-mode="template" class="mode-btn">Templates</button>
-            <button data-mode="llm" class="mode-btn">LLM</button>
-          </div>
-        </div>
-      </div>
-      <div id="mode-detail" class="mt-3 text-xs text-gray-400 bg-royal-50/50 border border-royal-100/50 rounded-lg px-3 py-2"></div>
-      <div id="ai-provider-section" class="mt-3 hidden">
-        <div class="flex items-center gap-3">
-          <span class="text-xs font-semibold text-gray-500">AI Provider</span>
-          <div class="provider-pills">
-            <label><input type="radio" name="aiProvider" value="auto" checked><span class="pill">Auto</span></label>
-            <label><input type="radio" name="aiProvider" value="ollama"><span class="pill">Ollama</span></label>
-            <label><input type="radio" name="aiProvider" value="groq"><span class="pill">Groq</span></label>
-            <label><input type="radio" name="aiProvider" value="gemini"><span class="pill">Gemini</span></label>
-          </div>
-        </div>
-      </div>
-    </div>
 
     <div class="flex flex-1 overflow-hidden">
       <!-- Sidebar -->
       <aside class="w-56 bg-white border-r border-gray-200/80 flex flex-col shrink-0">
         <div class="px-4 py-3 border-b border-gray-100 flex items-center justify-between">
           <h2 class="text-xs font-bold text-gray-500 uppercase tracking-wider">Stores</h2>
-          <button id="btn-refresh-all" class="text-xs text-gray-400 hover:text-royal-600 transition-colors" title="Refresh all">↻</button>
+          <span class="text-xs text-gray-400" id="store-count"></span>
         </div>
-        <div id="store-list" class="flex-1 overflow-y-auto py-1 space-y-0.5">
-          <div class="text-xs text-gray-400 text-center py-8 px-4">Click a store to load reviews</div>
-        </div>
+        <div id="store-list" class="flex-1 overflow-y-auto py-1 space-y-0.5"></div>
       </aside>
 
       <!-- Main -->
       <main class="flex-1 flex flex-col overflow-hidden bg-[#F9F9FB]">
-        <!-- Reviews panel -->
-        <div id="reviews-panel" class="flex-1 overflow-y-auto p-5">
-          <div class="flex flex-col items-center justify-center h-full text-gray-400">
-            <svg class="empty-state-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
-              <path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/>
-              <line x1="12" y1="8" x2="12" y2="14"/>
-              <line x1="9" y1="11" x2="15" y2="11"/>
-            </svg>
-            <div class="text-sm font-medium text-gray-400">Select a store from the sidebar</div>
-            <div class="text-xs text-gray-400 mt-1">to load pending reviews</div>
-          </div>
-        </div>
+        <div id="reviews-panel" class="flex-1 overflow-y-auto p-5"></div>
       </main>
     </div>
 
-    <!-- Activity log footer -->
-    <div id="activity-section" class="bg-white border-t border-gray-200/80 shrink-0">
-      <div class="flex items-center justify-between px-5 py-2 cursor-pointer" onclick="document.getElementById('activity-body').classList.toggle('hidden')">
-        <span class="text-xs font-bold text-gray-500 uppercase tracking-wider flex items-center gap-2">
-          <span id="activity-toggle" class="text-gray-300 text-xs">▼</span>
-          Activity
-        </span>
-        <button onclick="event.stopPropagation(); document.getElementById('activity-log').innerHTML = ''" class="text-xs text-gray-400 hover:text-gray-600 transition-colors">Clear</button>
-      </div>
-      <div id="activity-body" class="px-5 pb-2">
-        <div id="activity-log" class="max-h-28 overflow-y-auto space-y-0.5"></div>
-      </div>
-    </div>
   </div>
 
   <script src="/js/auth.js"></script>
-  <script src="/js/api.js"></script>
-  <script src="/js/app.js"></script>
+  <script>
+  (function() {
+    const $ = id => document.getElementById(id);
+    const esc = s => { const d = document.createElement('div'); d.textContent = s || ''; return d.innerHTML; };
+
+    let allStores = [];
+    let allReviews = [];
+    let currentStore = null;
+    let starFilter = 'all';
+    let statusFilter = 'all';
+    let searchQuery = '';
+
+    async function loadData() {
+      const panel = $('reviews-panel');
+      panel.innerHTML = '<div class="flex items-center justify-center h-full text-gray-400 text-sm"><div class="flex flex-col items-center gap-2"><svg class="animate-spin h-6 w-6 text-royal-400" viewBox="0 0 24 24" fill="none"><circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"/><path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4z"/></svg><span>Loading reviews...</span></div></div>';
+      try {
+        const [storesRes, reviewsRes] = await Promise.all([
+          fetch('/api/stores-sheet.json'),
+          fetch('/api/reviews-data.json'),
+        ]);
+        allStores = await storesRes.json();
+        if (!Array.isArray(allStores)) throw new Error('Invalid stores data');
+        const revs = await reviewsRes.json();
+        if (!Array.isArray(revs)) throw new Error('Invalid reviews data');
+        allReviews = revs;
+        $('store-count').textContent = allStores.length + ' stores';
+        renderStoreList();
+        if (allStores.length > 0) {
+          currentStore = allStores[0].name;
+          renderStoreList();
+          renderReviews();
+        }
+      } catch (err) {
+        panel.innerHTML = `<div class="text-red-500 text-sm py-12 text-center">❌ ${esc(err.message)}</div>`;
+      }
+    }
+
+    function getReviewsForStore(storeName) {
+      const revs = allReviews.filter(r => (r.store_name || '') === storeName);
+      return revs.filter(r => {
+        if (starFilter !== 'all') {
+          const sv = parseInt(r.stars || r.Stars) || 0;
+          if (sv !== parseInt(starFilter)) return false;
+        }
+        if (statusFilter === 'replied' && !(r.response || '').trim()) return false;
+        if (statusFilter === 'pending' && (r.response || '').trim()) return false;
+        if (searchQuery) {
+          const q = searchQuery.toLowerCase();
+          const name = (r.customer_name || '').toLowerCase();
+          const comment = (r.review_comments || '').toLowerCase();
+          if (!name.includes(q) && !comment.includes(q)) return false;
+        }
+        return true;
+      }).sort((a, b) => {
+        const da = a.date_posted || a.review_create_time || '';
+        const db = b.date_posted || b.review_create_time || '';
+        return db.localeCompare(da);
+      });
+    }
+
+    function getStoreStats(storeName) {
+      const revs = allReviews.filter(r => (r.store_name || '') === storeName);
+      const total = revs.length;
+      const pending = revs.filter(r => !(r.response || '').trim()).length;
+      const avg = revs.reduce((s, r) => {
+        const v = parseInt(r.stars || r.Stars) || 0;
+        return s + (v >= 1 && v <= 5 ? v : 0);
+      }, 0) / (revs.length || 1);
+      return { total, pending, avg: avg.toFixed(1) };
+    }
+
+    function renderStoreList() {
+      const el = $('store-list');
+      const totalPending = allStores.reduce((sum, s) => {
+        const stats = getStoreStats(s.name);
+        return sum + stats.pending;
+      }, 0);
+      const countEl = $('total-pending-count');
+      if (totalPending > 0) { countEl.textContent = totalPending + ' pending'; countEl.classList.remove('hidden'); }
+      else countEl.classList.add('hidden');
+
+      el.innerHTML = allStores.map(s => {
+        const stats = getStoreStats(s.name);
+        const active = currentStore === s.name;
+        const badgeClass = stats.pending > 0 ? 'store-badge has-pending' : 'store-badge';
+        return `<div class="store-item flex items-center gap-2 px-3 py-2 text-sm ${active ? 'active' : 'text-gray-600'}" data-store="${esc(s.name)}">
+          <span class="${badgeClass}">${stats.pending > 0 ? stats.pending : stats.total}</span>
+          <span class="flex-1 truncate"><span class="font-medium">${esc(s.id)}</span><span class="text-gray-400 ml-1">${esc(s.name)}</span></span>
+        </div>`;
+      }).join('');
+
+      el.querySelectorAll('.store-item').forEach(el => {
+        el.addEventListener('click', () => {
+          currentStore = el.dataset.store;
+          renderStoreList();
+          renderReviews();
+        });
+      });
+    }
+
+    function renderReviews() {
+      const panel = $('reviews-panel');
+      if (!currentStore) {
+        panel.innerHTML = `<div class="flex flex-col items-center justify-center h-full text-gray-400">
+          <svg class="empty-state-icon w-14 h-14 text-gray-300 mb-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/><line x1="12" y1="8" x2="12" y2="14"/><line x1="9" y1="11" x2="15" y2="11"/>
+          </svg>
+          <div class="text-sm font-medium text-gray-400">Select a store from the sidebar</div>
+          <div class="text-xs text-gray-400 mt-1">to view reviews</div>
+        </div>`;
+        return;
+      }
+
+      const stats = getStoreStats(currentStore);
+      const reviews = getReviewsForStore(currentStore);
+      const store = allStores.find(s => s.name === currentStore);
+
+      panel.innerHTML = `
+        <div class="flex items-center justify-between mb-4">
+          <div>
+            <h3 class="text-sm font-bold text-gray-800">${esc(currentStore)}</h3>
+            <p class="text-xs text-gray-400 mt-0.5">${stats.total} total · ${stats.pending} pending · Avg ⭐ ${stats.avg}</p>
+          </div>
+          <div class="flex items-center gap-2">
+            <select id="star-filter" class="text-xs border border-gray-200 rounded-lg px-2 py-1.5 bg-white text-gray-600">
+              <option value="all">All stars</option>
+              <option value="5">5 ⭐</option>
+              <option value="4">4 ⭐</option>
+              <option value="3">3 ⭐</option>
+              <option value="2">2 ⭐</option>
+              <option value="1">1 ⭐</option>
+            </select>
+            <select id="status-filter" class="text-xs border border-gray-200 rounded-lg px-2 py-1.5 bg-white text-gray-600">
+              <option value="all">All status</option>
+              <option value="pending">Pending</option>
+              <option value="replied">Replied</option>
+            </select>
+            <input id="search-input" type="text" placeholder="Search name or comment..." class="text-xs border border-gray-200 rounded-lg px-2 py-1.5 bg-white text-gray-600 w-48">
+            <span class="text-xs text-gray-400">${reviews.length} review${reviews.length !== 1 ? 's' : ''}</span>
+          </div>
+        </div>
+        ${reviews.length === 0 ? `<div class="flex flex-col items-center justify-center py-16 text-gray-400">
+          <svg class="w-12 h-12 mb-4 text-gray-300" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M9 11l3 3L22 4"/><path d="M21 12v7a2 2 0 01-2 2H5a2 2 0 01-2-2V5a2 2 0 012-2h11"/>
+          </svg>
+          <div class="text-sm font-medium text-gray-400">No reviews match your filters</div>
+        </div>` : `<div class="space-y-3">${reviews.map(r => renderReviewCard(r)).join('')}</div>`}
+      `;
+
+      $('star-filter').value = starFilter;
+      $('status-filter').value = statusFilter;
+      $('search-input').value = searchQuery;
+
+      $('star-filter').onchange = function() { starFilter = this.value; renderReviews(); };
+      $('status-filter').onchange = function() { statusFilter = this.value; renderReviews(); };
+      $('search-input').oninput = function() { searchQuery = this.value; renderReviews(); };
+    }
+
+    function parseStar(val) {
+      if (!val) return 5;
+      if (typeof val === 'number') return val;
+      const s = String(val).trim().toUpperCase();
+      const map = { 'ONE': 1, 'TWO': 2, 'THREE': 3, 'FOUR': 4, 'FIVE': 5 };
+      if (map[s]) return map[s];
+      const n = parseInt(s);
+      return (n >= 1 && n <= 5) ? n : 5;
+    }
+
+    function renderReviewCard(r) {
+      const stars = parseStar(r.stars);
+      const hasReply = !!(r.response || r.reply_text || '').trim();
+      const comment = (r.review_comments || '').substring(0, 350);
+      const replyText = (r.response || r.reply_text || '').substring(0, 250);
+      const date = r.date_posted || r.review_create_time || '';
+      return `<div class="review-card">
+        <div class="px-4 py-3 bg-gray-50/80 flex items-center justify-between">
+          <div class="flex items-center gap-3">
+            <div class="review-avatar">${(r.customer_name || '?')[0]}</div>
+            <div>
+              <span class="font-medium text-sm text-gray-800">${esc(r.customer_name || 'Anonymous')}</span>
+              <span class="ml-2 text-sm">${'⭐'.repeat(stars)}${'☆'.repeat(5 - stars)}</span>
+              ${date ? `<span class="ml-2 text-xs text-gray-400">${date}</span>` : ''}
+              ${hasReply ? '<span class="ml-2 text-xs font-medium text-green-600">✅ Replied</span>' : '<span class="ml-2 text-xs font-medium text-amber-600">⏳ Pending</span>'}
+            </div>
+          </div>
+          <button onclick="navigator.clipboard.writeText('${esc(r.customer_name || 'Anonymous')}\\n${'⭐'.repeat(stars)}\\n${esc(r.review_comments || '')}').catch(()=>{})" class="text-xs px-2.5 py-1.5 border border-gray-200 rounded-lg hover:bg-gray-50 text-gray-400 hover:text-royal-600 transition-colors" title="Copy review">📋 Copy</button>
+        </div>
+        <div class="px-4 py-3 text-sm text-gray-600 bg-white leading-relaxed">${esc(comment) || '<span class="text-gray-300 italic">No comment</span>'}</div>
+        ${hasReply ? `<div class="px-4 pb-3 bg-white border-t border-gray-50 pt-3">
+          <div class="text-xs text-green-700 font-semibold mb-1">💬 Reply:</div>
+          <div class="text-xs text-gray-500 leading-relaxed">${esc(replyText)}${(r.response || '').length > 250 ? '...' : ''}</div>
+        </div>` : ''}
+      </div>`;
+    }
+
+    loadData();
+  })();
+  </script>
   <script>Auth.protect('auth-container');</script>
 </body>
 </html>
