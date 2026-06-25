@@ -1167,16 +1167,16 @@ margin-bottom:24px; /* ← FIX: was 0 */
 .offer-details.clamp{display:-webkit-box;-webkit-line-clamp:1;-webkit-box-orient:vertical;overflow:hidden;}
 .offer-valid{font-size:11px;color:var(--green-soft);font-weight:800;white-space:nowrap;margin-top:auto;padding-top:12px;border-top:1px solid rgba(0,0,0,0.06);}
 
-/* ── IMAGE MODAL ── */
-#img-modal-overlay{position:fixed;inset:0;background:rgba(0,0,0,0.75);backdrop-filter:blur(6px);z-index:13000;display:none;}
-#img-modal{position:fixed;inset:0;z-index:13001;display:none;align-items:center;justify-content:center;padding:18px;}
-#img-modal-inner{position:relative;max-width:min(980px, 96vw);max-height:86vh;background:#000;border-radius:14px;overflow:hidden;box-shadow:0 24px 90px rgba(0,0,0,0.55);}
-#img-modal-inner img{width:100%;height:100%;max-height:86vh;object-fit:contain;background:#000;}
-#img-close{position:absolute;top:10px;right:10px;width:40px;height:40px;border-radius:10px;background:rgba(255,255,255,0.12);border:1px solid rgba(255,255,255,0.22);color:#fff;font-size:20px;cursor:pointer;}
-#img-close:hover{background:rgba(255,255,255,0.22);}
-#img-prev,#img-next{position:absolute;top:50%;transform:translateY(-50%);width:44px;height:44px;border-radius:12px;background:rgba(255,255,255,0.12);border:1px solid rgba(255,255,255,0.22);color:#fff;font-size:18px;cursor:pointer;display:flex;align-items:center;justify-content:center;}
-#img-prev{left:10px;}#img-next{right:10px;}
-#img-prev:hover,#img-next:hover{background:rgba(255,255,255,0.22);}
+<style>
+#gallery-overlay{position:fixed;inset:0;background:rgba(0,0,0,0.75);backdrop-filter:blur(6px);z-index:12000;display:none;}
+#gallery-modal{position:fixed;inset:0;z-index:12001;display:none;align-items:center;justify-content:center;padding:18px;}
+#gallery-inner{position:relative;max-width:min(980px,96vw);max-height:86vh;background:#000;border-radius:14px;overflow:hidden;}
+#gallery-inner img{width:100%;height:100%;max-height:86vh;object-fit:contain;background:#000;}
+#gallery-close{position:absolute;top:10px;right:10px;width:40px;height:40px;border-radius:10px;background:rgba(255,255,255,0.12);border:1px solid rgba(255,255,255,0.22);color:#fff;font-size:20px;cursor:pointer;display:flex;align-items:center;justify-content:center;transition:background 0.2s;}
+#gallery-prev,#gallery-next{position:absolute;top:50%;transform:translateY(-50%);width:44px;height:44px;border-radius:12px;background:rgba(255,255,255,0.12);border:1px solid rgba(255,255,255,0.22);color:#fff;font-size:18px;cursor:pointer;display:flex;align-items:center;justify-content:center;transition:background 0.2s;}
+#gallery-prev{left:10px;}#gallery-next{right:10px;}
+#gallery-prev:hover,#gallery-next:hover,#gallery-close:hover{background:rgba(255,255,255,0.22);}
+</style>
 
 /* ── STYLISTS ──
 FIX: Added border-radius and consistent spacing.
@@ -2778,6 +2778,7 @@ alt="Thyagaraj" width="300" height="400" loading="lazy">
 <img src="/images/store-interior/nagavara.png" alt="Nagavara Salon Interior — Elegant beauty salon ambiance" loading="lazy" width="400" height="300">
 </div>
 </div>
+
 <div class="photo-category-label" style="margin-top:20px;">Exteriors</div>
 <div class="hscroll-track" data-hscroll-track="exterior-nagavara"> <div class="photo-card" data-hscroll-card>
 <img src="/images/store-exterior/nagavara-01.jpg" alt="Nagavara Salon Exterior — Premium salon storefront" loading="lazy" width="400" height="300">
@@ -2786,6 +2787,11 @@ alt="Thyagaraj" width="300" height="400" loading="lazy">
 <img src="/images/store-exterior/nagavara.png" alt="Nagavara Salon Exterior — Premium salon storefront" loading="lazy" width="400" height="300">
 </div>
 </div>
+<div class="hscroll-actions" aria-label="exterior-nagavara carousel controls">
+<button class="hscroll-btn" type="button" aria-label="Previous" onclick="hscroll('exterior-nagavara', -1, this)">&#8249;</button>
+<button class="hscroll-btn" type="button" aria-label="Next" onclick="hscroll('exterior-nagavara', 1, this)">&#8250;</button>
+</div>
+
 </div>
 
 
@@ -3857,13 +3863,13 @@ if (m && m.classList.contains('active')) closeReviewsModal();
 window.openReviewsModal = openReviewModal;
 </script>
 
-<div id="img-modal-overlay" onclick="closeImgModal()"></div>
-<div id="img-modal" role="dialog" aria-modal="true" aria-label="Campaign image gallery">
-<div id="img-modal-inner">
-<button id="img-close" onclick="closeImgModal()" aria-label="Close">×</button>
-<button id="img-prev" onclick="prevImg()" aria-label="Previous">‹</button>
-<button id="img-next" onclick="nextImg()" aria-label="Next">›</button>
-<img id="img-modal-src" alt="Campaign image">
+<div id="gallery-overlay" onclick="Gallery.close()"></div>
+<div id="gallery-modal" role="dialog" aria-modal="true" aria-label="Image gallery" onclick="Gallery.close()">
+<div id="gallery-inner" onclick="event.stopPropagation()">
+<button id="gallery-close" onclick="Gallery.close()" aria-label="Close">&times;</button>
+<button id="gallery-prev" onclick="Gallery.prev()" aria-label="Previous">&lsaquo;</button>
+<img id="gallery-src" src="" alt="Gallery image">
+<button id="gallery-next" onclick="Gallery.next()" aria-label="Next">&rsaquo;</button>
 </div>
 </div>
 
@@ -4131,35 +4137,91 @@ else if(isNew){ rib.style.display='inline-flex'; rib.className='ribbon new'; rib
 </script>
 
 <script>
-var galleryImgs=[]; var galleryIndex=0;
-function getStoreCampaignMediaItems(){
-return Array.from(document.querySelectorAll('.offer-media img, .offer-media .campaign-poster-fallback'))
-.filter(function(item){ return isCampaignPosterFallback(item) ? isVisibleCampaignPosterFallback(item) : !!item.src; });
+var Gallery = (function(){
+var items = [], index = 0;
+
+function rebuild() {
+var sel = '.offer-media img, .photo-card img';
+if ('.offer-media .campaign-poster-fallback') sel += ', .offer-media .campaign-poster-fallback';
+items = Array.from(document.querySelectorAll(sel))
+.filter(function(item) {
+return isCampaignPosterFallback(item) ? isVisibleCampaignPosterFallback(item) : !!item.src;
+});
 }
-function rebuildGallerySet(){ galleryImgs=getStoreCampaignMediaItems(); }
-function setStoreModalMedia(item){
-if(isCampaignPosterFallback(item)){
-showCampaignModalPoster('#img-modal-inner', '#img-modal-src', item);
+
+function setMedia(item) {
+if (isCampaignPosterFallback(item)) {
+showCampaignModalPoster('#gallery-inner', '#gallery-src', item);
 } else {
-showCampaignModalImage('#img-modal-inner', '#img-modal-src', item.src);
+showCampaignModalImage('#gallery-inner', '#gallery-src', item.src);
 }
 }
-function openImgModal(item){ rebuildGallerySet(); if(!item || !galleryImgs.length) return; galleryIndex=Math.max(0,galleryImgs.indexOf(item)); setStoreModalMedia(galleryImgs[galleryIndex]); document.getElementById('img-modal-overlay').style.display='block'; document.getElementById('img-modal').style.display='flex'; document.body.style.overflow='hidden'; if(!window._imgModalHistoryPushed){ history.pushState({ imgModalOpen: true }, ''); window._imgModalHistoryPushed=true; } }
-function closeImgModal(){ document.getElementById('img-modal-overlay').style.display='none'; document.getElementById('img-modal').style.display='none'; clearCampaignModalMedia('#img-modal-inner', '#img-modal-src'); document.body.style.overflow=''; window._imgModalHistoryPushed=false; }
-function nextImg(){ if(!galleryImgs.length) return; galleryIndex=(galleryIndex+1)%galleryImgs.length; setStoreModalMedia(galleryImgs[galleryIndex]); }
-function prevImg(){ if(!galleryImgs.length) return; galleryIndex=(galleryIndex-1+galleryImgs.length)%galleryImgs.length; setStoreModalMedia(galleryImgs[galleryIndex]); }
-document.addEventListener('DOMContentLoaded',function(){
-Array.from(document.querySelectorAll('.offer-media img')).forEach(function(img){ img.addEventListener('click',function(){ openImgModal(img); }); });
-bindCampaignPosterFallbacks('.offer-media .campaign-poster-fallback', openImgModal);
+
+return {
+open: function(el) {
+rebuild();
+if (!items.length) return;
+index = Math.max(0, items.indexOf(el));
+if (index < 0) index = 0;
+setMedia(items[index]);
+document.getElementById('gallery-overlay').style.display = 'block';
+document.getElementById('gallery-modal').style.display = 'flex';
+document.body.style.overflow = 'hidden';
+if (!window._galleryHistoryPushed) {
+history.pushState({ galleryOpen: true }, '');
+window._galleryHistoryPushed = true;
+}
+},
+close: function() {
+document.getElementById('gallery-overlay').style.display = 'none';
+document.getElementById('gallery-modal').style.display = 'none';
+clearCampaignModalMedia('#gallery-inner', '#gallery-src');
+document.body.style.overflow = '';
+window._galleryHistoryPushed = false;
+},
+next: function() {
+if (!items.length) return;
+index = (index + 1) % items.length;
+setMedia(items[index]);
+},
+prev: function() {
+if (!items.length) return;
+index = (index - 1 + items.length) % items.length;
+setMedia(items[index]);
+}
+};
+})();
+
+document.addEventListener('keydown', function(e) {
+var m = document.getElementById('gallery-modal');
+if (m && m.style.display === 'flex') {
+if (e.key === 'Escape') Gallery.close();
+if (e.key === 'ArrowRight') Gallery.next();
+if (e.key === 'ArrowLeft') Gallery.prev();
+}
 });
-document.addEventListener('keydown',function(e){
-if(e.key==='Escape') closeImgModal();
-if(document.getElementById('img-modal').style.display==='flex'){ if(e.key==='ArrowRight') nextImg(); if(e.key==='ArrowLeft') prevImg(); }
+
+window.addEventListener('popstate', function(e) {
+var m = document.getElementById('gallery-modal');
+if (m && m.style.display === 'flex') {
+window._galleryHistoryPushed = false;
+Gallery.close();
+}
 });
-window.addEventListener('popstate',function(e){
-var modal=document.getElementById('img-modal');
-if(modal && modal.style.display==='flex'){ window._imgModalHistoryPushed=false; closeImgModal(); }
+
+document.addEventListener('DOMContentLoaded', function() {
+if ('.offer-media img, .photo-card img') {
+document.querySelectorAll('.offer-media img, .photo-card img').forEach(function(el) {
+el.addEventListener('click', function() { Gallery.open(el); });
 });
+}
+if ('.offer-media .campaign-poster-fallback' && typeof bindCampaignPosterFallbacks === 'function') {
+bindCampaignPosterFallbacks('.offer-media .campaign-poster-fallback', function(el) { Gallery.open(el); });
+}
+});
+</script>
+
+<script>
 var io=new IntersectionObserver(function(entries){ entries.forEach(function(e,i){ if(e.isIntersecting){ setTimeout(function(){ e.target.classList.add('visible'); },i*80); io.unobserve(e.target); } }); },{threshold:0});
 document.querySelectorAll('.reveal').forEach(function(el){ io.observe(el); });
 

@@ -410,22 +410,16 @@ transition:all 0.2s;border-radius:10px;background:#fff;text-decoration:none;
 .media-icon{font-size:24px;color:var(--gold);margin-bottom:8px;}
 .media-no-image .media-title{font-family:'Cormorant Garamond',serif;font-size:18px;color:#fff;font-weight:300;margin-bottom:4px;text-align:center;}
 
-/* IMAGE-ONLY MODAL (gallery for homepage campaigns) */
-#ho-img-overlay{position:fixed;inset:0;background:rgba(0,0,0,0.75);backdrop-filter:blur(6px);z-index:15000;display:none;}
-#ho-img-modal{position:fixed;inset:0;z-index:15001;display:none;align-items:center;justify-content:center;padding:18px;}
-#ho-img-inner{position:relative;max-width:min(980px,96vw);max-height:86vh;background:#000;border-radius:14px;overflow:hidden;box-shadow:0 24px 90px rgba(0,0,0,0.55);}
-#ho-img-inner img{width:100%;height:100%;max-height:86vh;object-fit:contain;background:#000;}
-.ho-x{position:absolute;top:10px;right:10px;width:40px;height:40px;border-radius:10px;background:rgba(255,255,255,0.12);border:1px solid rgba(255,255,255,0.22);color:#fff;font-size:20px;cursor:pointer;}
-.ho-x:hover{background:rgba(255,255,255,0.22);}
-.ho-nav{
-position:absolute;top:50%;transform:translateY(-50%);
-width:44px;height:44px;border-radius:12px;
-background:rgba(255,255,255,0.12);border:1px solid rgba(255,255,255,0.22);
-color:#fff;font-size:18px;cursor:pointer;
-display:flex;align-items:center;justify-content:center;
-}
-.ho-prev{left:10px;} .ho-next{right:10px;}
-.ho-nav:hover{background:rgba(255,255,255,0.22);}
+<style>
+#gallery-overlay{position:fixed;inset:0;background:rgba(0,0,0,0.75);backdrop-filter:blur(6px);z-index:12000;display:none;}
+#gallery-modal{position:fixed;inset:0;z-index:12001;display:none;align-items:center;justify-content:center;padding:18px;}
+#gallery-inner{position:relative;max-width:min(980px,96vw);max-height:86vh;background:#000;border-radius:14px;overflow:hidden;}
+#gallery-inner img{width:100%;height:100%;max-height:86vh;object-fit:contain;background:#000;}
+#gallery-close{position:absolute;top:10px;right:10px;width:40px;height:40px;border-radius:10px;background:rgba(255,255,255,0.12);border:1px solid rgba(255,255,255,0.22);color:#fff;font-size:20px;cursor:pointer;display:flex;align-items:center;justify-content:center;transition:background 0.2s;}
+#gallery-prev,#gallery-next{position:absolute;top:50%;transform:translateY(-50%);width:44px;height:44px;border-radius:12px;background:rgba(255,255,255,0.12);border:1px solid rgba(255,255,255,0.22);color:#fff;font-size:18px;cursor:pointer;display:flex;align-items:center;justify-content:center;transition:background 0.2s;}
+#gallery-prev{left:10px;}#gallery-next{right:10px;}
+#gallery-prev:hover,#gallery-next:hover,#gallery-close:hover{background:rgba(255,255,255,0.22);}
+</style>
 
 </style>
 <style>
@@ -3613,13 +3607,13 @@ bar.classList.add('is-visible'); /* Legacy fallback */
 })();
 </script>
 
-<div id="ho-img-overlay" onclick="closeHomeOfferModal()"></div>
-<div id="ho-img-modal" role="dialog" aria-modal="true" aria-label="Campaign image gallery">
-<div id="ho-img-inner">
-<button class="ho-x" onclick="closeHomeOfferModal()" aria-label="Close">×</button>
-<button class="ho-nav ho-prev" onclick="prevHomeOffer()" aria-label="Previous">‹</button>
-<button class="ho-nav ho-next" onclick="nextHomeOffer()" aria-label="Next">›</button>
-<img id="ho-img-src" alt="Campaign image">
+<div id="gallery-overlay" onclick="Gallery.close()"></div>
+<div id="gallery-modal" role="dialog" aria-modal="true" aria-label="Image gallery" onclick="Gallery.close()">
+<div id="gallery-inner" onclick="event.stopPropagation()">
+<button id="gallery-close" onclick="Gallery.close()" aria-label="Close">&times;</button>
+<button id="gallery-prev" onclick="Gallery.prev()" aria-label="Previous">&lsaquo;</button>
+<img id="gallery-src" src="" alt="Gallery image">
+<button id="gallery-next" onclick="Gallery.next()" aria-label="Next">&rsaquo;</button>
 </div>
 </div>
 
@@ -3801,75 +3795,95 @@ document.addEventListener('DOMContentLoaded', initCampaignTabs);
 </script>
 
 <script>
-/* Image-only gallery for homepage offers and non-offer campaigns */
-var homeOfferItems = [];
-var homeOfferIndex = 0;
+var Gallery = (function(){
+var items = [], index = 0;
 
-function getHomeCampaignMediaItems(){
-return Array.from(document.querySelectorAll('img.home-offer-img, img.media-img, .hoc-media .campaign-poster-fallback, .media-media .campaign-poster-fallback'))
+function rebuild() {
+var sel = 'img.home-offer-img, img.media-img';
+if ('.hoc-media .campaign-poster-fallback, .media-media .campaign-poster-fallback') sel += ', .hoc-media .campaign-poster-fallback, .media-media .campaign-poster-fallback';
+items = Array.from(document.querySelectorAll(sel))
 .filter(function(item) {
 return isCampaignPosterFallback(item) ? isVisibleCampaignPosterFallback(item) : !!item.src;
 });
 }
 
-function collectHomeOfferItems(){
-homeOfferItems = getHomeCampaignMediaItems();
+function setMedia(item) {
+if (isCampaignPosterFallback(item)) {
+showCampaignModalPoster('#gallery-inner', '#gallery-src', item);
+} else {
+showCampaignModalImage('#gallery-inner', '#gallery-src', item.src);
+}
 }
 
-function setHomeOfferModalMedia(item){
-if(isCampaignPosterFallback(item)){
-showCampaignModalPoster('#ho-img-inner', '#ho-img-src', item);
-} else {
-showCampaignModalImage('#ho-img-inner', '#ho-img-src', item.src);
+return {
+open: function(el) {
+rebuild();
+if (!items.length) return;
+index = Math.max(0, items.indexOf(el));
+if (index < 0) index = 0;
+setMedia(items[index]);
+document.getElementById('gallery-overlay').style.display = 'block';
+document.getElementById('gallery-modal').style.display = 'flex';
+document.body.style.overflow = 'hidden';
+if (!window._galleryHistoryPushed) {
+history.pushState({ galleryOpen: true }, '');
+window._galleryHistoryPushed = true;
 }
+},
+close: function() {
+document.getElementById('gallery-overlay').style.display = 'none';
+document.getElementById('gallery-modal').style.display = 'none';
+clearCampaignModalMedia('#gallery-inner', '#gallery-src');
+document.body.style.overflow = '';
+window._galleryHistoryPushed = false;
+},
+next: function() {
+if (!items.length) return;
+index = (index + 1) % items.length;
+setMedia(items[index]);
+},
+prev: function() {
+if (!items.length) return;
+index = (index - 1 + items.length) % items.length;
+setMedia(items[index]);
 }
-function openHomeOfferModalAt(itemOrIndex){
-collectHomeOfferItems();
-if(!homeOfferItems.length) return;
-if(typeof itemOrIndex === 'number'){
-homeOfferIndex = Math.max(0, Math.min(itemOrIndex, homeOfferItems.length-1));
-} else {
-homeOfferIndex = Math.max(0, homeOfferItems.indexOf(itemOrIndex));
-}
-setHomeOfferModalMedia(homeOfferItems[homeOfferIndex]);
-document.getElementById('ho-img-overlay').style.display='block';
-document.getElementById('ho-img-modal').style.display='flex';
-document.body.style.overflow='hidden';
-if(!window._hoImgModalHistoryPushed){
-history.pushState({ hoImgModalOpen: true }, '');
-window._hoImgModalHistoryPushed = true;
-}
-}
-function closeHomeOfferModal(){
-document.getElementById('ho-img-overlay').style.display='none';
-document.getElementById('ho-img-modal').style.display='none';
-clearCampaignModalMedia('#ho-img-inner', '#ho-img-src');
-document.body.style.overflow='';
-window._hoImgModalHistoryPushed = false;
-}
-function nextHomeOffer(){
-if(!homeOfferItems.length) return;
-homeOfferIndex = (homeOfferIndex + 1) % homeOfferItems.length;
-setHomeOfferModalMedia(homeOfferItems[homeOfferIndex]);
-}
-function prevHomeOffer(){
-if(!homeOfferItems.length) return;
-homeOfferIndex = (homeOfferIndex - 1 + homeOfferItems.length) % homeOfferItems.length;
-setHomeOfferModalMedia(homeOfferItems[homeOfferIndex]);
-}
+};
+})();
 
-/* click handlers */
-document.addEventListener('DOMContentLoaded', function(){
-var imgs = Array.from(document.querySelectorAll('img.home-offer-img, img.media-img'));
-imgs.forEach(function(img){
-img.addEventListener('click', function(){ openHomeOfferModalAt(img); });
+document.addEventListener('keydown', function(e) {
+var m = document.getElementById('gallery-modal');
+if (m && m.style.display === 'flex') {
+if (e.key === 'Escape') Gallery.close();
+if (e.key === 'ArrowRight') Gallery.next();
+if (e.key === 'ArrowLeft') Gallery.prev();
+}
 });
-bindCampaignPosterFallbacks('.hoc-media .campaign-poster-fallback, .media-media .campaign-poster-fallback', openHomeOfferModalAt);
 
-// swipe support (mobile)
+window.addEventListener('popstate', function(e) {
+var m = document.getElementById('gallery-modal');
+if (m && m.style.display === 'flex') {
+window._galleryHistoryPushed = false;
+Gallery.close();
+}
+});
+
+document.addEventListener('DOMContentLoaded', function() {
+if ('img.home-offer-img, img.media-img') {
+document.querySelectorAll('img.home-offer-img, img.media-img').forEach(function(el) {
+el.addEventListener('click', function() { Gallery.open(el); });
+});
+}
+if ('.hoc-media .campaign-poster-fallback, .media-media .campaign-poster-fallback' && typeof bindCampaignPosterFallbacks === 'function') {
+bindCampaignPosterFallbacks('.hoc-media .campaign-poster-fallback, .media-media .campaign-poster-fallback', function(el) { Gallery.open(el); });
+}
+});
+</script>
+
+<script>
+(function(){
 var startX = null;
-var modal = document.getElementById('ho-img-inner');
-if(modal){
+var modal = document.getElementById('gallery-inner');
+if(!modal) return;
 modal.addEventListener('touchstart', function(e){ startX = e.touches[0].clientX; }, {passive:true});
 modal.addEventListener('touchend', function(e){
 if(startX === null) return;
@@ -3877,10 +3891,9 @@ var endX = e.changedTouches[0].clientX;
 var dx = endX - startX;
 startX = null;
 if(Math.abs(dx) < 40) return;
-if(dx < 0) nextHomeOffer(); else prevHomeOffer();
+if(dx < 0) Gallery.next(); else Gallery.prev();
 }, {passive:true});
-}
-});
+})();
 
 /* Open Now Status Checker */
 window.store_open_status = {}; // Global object to store status for all stores
@@ -4001,23 +4014,6 @@ setUnknownStatus(el);
 checkOpenNowStatus();
 initDistanceHints();
 setInterval(checkOpenNowStatus, 60000); // Update every minute
-});
-
-document.addEventListener('keydown', function(e){
-if(e.key === 'Escape') closeHomeOfferModal();
-if(document.getElementById('ho-img-modal').style.display === 'flex'){
-if(e.key === 'ArrowRight') nextHomeOffer();
-if(e.key === 'ArrowLeft') prevHomeOffer();
-}
-});
-
-// Handle mobile back button - close home offer image modal instead of navigating back
-window.addEventListener('popstate', function(e){
-var modal = document.getElementById('ho-img-modal');
-if(modal && modal.style.display === 'flex'){
-window._hoImgModalHistoryPushed = false;
-closeHomeOfferModal();
-}
 });
 
 </script>
