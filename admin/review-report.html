@@ -1,0 +1,669 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Review Report — Local Console</title>
+  <script src="/admin/config.js"></script>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.7/dist/chart.umd.min.js"></script>
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            royal: { 50: '#f3f0ff', 100: '#e9e0ff', 200: '#d4c0ff', 300: '#b794ff', 400: '#9b6aff', 500: '#7C3AED', 600: '#6d28d9', 700: '#5b21b6', 800: '#4c1d95', 900: '#3b0f7a' },
+            gold:   { 50: '#fffdf0', 100: '#fff9d4', 200: '#fce88c', 300: '#f5d742', 400: '#e5c838', 500: '#D4AF37', 600: '#b8922e', 700: '#9a7826', 800: '#7d601f', 900: '#604a17' },
+          },
+          fontFamily: { sans: ['Inter', '-apple-system', 'BlinkMacSystemFont', 'Segoe UI', 'Roboto', 'sans-serif'], mono: ['JetBrains Mono', 'monospace'] },
+        }
+      }
+    }
+  </script>
+  <style>
+    body { font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif; }
+    .stat-card { border: 1px solid #eaeaea; transition: transform 0.2s ease, box-shadow 0.2s ease; }
+    .stat-card:hover { transform: translateY(-2px); box-shadow: 0 8px 20px rgba(124,58,237,0.06); }
+    .period-btn { border: 1px solid #d1d5db; transition: all 0.15s ease; }
+    .period-btn.active { background: #7C3AED; color: white; border-color: #7C3AED; }
+    .period-btn:hover:not(.active) { border-color: #7C3AED; color: #7C3AED; }
+  </style>
+</head>
+<body class="bg-gray-50 text-gray-800 antialiased min-h-screen font-sans">
+<div id="auth-container"></div>
+  <div class="max-w-5xl mx-auto px-4 py-8">
+
+    <!-- Header -->
+    <div class="flex items-center justify-between mb-6">
+      <div>
+        <a href="./" class="inline-flex items-center gap-1 text-sm text-royal-600 hover:text-royal-700 mb-2 transition-colors">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="19" y1="12" x2="5" y2="12"/><polyline points="12 19 5 12 12 5"/></svg>
+          Back to Dashboard
+        </a>
+        <h1 class="text-2xl font-bold text-royal-700 tracking-tight">Review Report</h1>
+        <p class="text-sm text-gray-400 mt-0.5">Customer feedback analytics across all stores</p>
+      </div>
+      <button id="btn-refresh" class="inline-flex items-center gap-1.5 px-3 py-1.5 text-sm font-medium text-royal-600 bg-royal-50 border border-royal-200 rounded-lg hover:bg-royal-100 transition-colors">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="23 4 23 10 17 10"/><polyline points="1 20 1 14 7 14"/><path d="M3.51 9a9 9 0 0 1 14.85-3.36L23 10M1 14l4.64 4.36A9 9 0 0 0 20.49 15"/></svg>
+        Refresh
+      </button>
+    </div>
+
+    <!-- Store + Period filter -->
+    <div class="bg-white rounded-xl border border-gray-200 p-4 mb-6 space-y-3">
+      <div class="flex items-center gap-2 flex-wrap">
+        <span class="text-xs font-semibold text-gray-400 uppercase tracking-wider mr-1">Store</span>
+        <select id="store-filter" class="text-xs border border-gray-200 rounded-lg px-2 py-1.5 bg-white text-gray-600 focus:outline-none focus:ring-1 focus:ring-royal-300 max-w-[220px]"></select>
+      </div>
+      <div class="flex items-center gap-2 flex-wrap">
+        <span class="text-xs font-semibold text-gray-400 uppercase tracking-wider mr-1">Period</span>
+        <button class="period-btn px-3 py-1.5 text-xs font-medium rounded-lg" data-period="all">All</button>
+        <button class="period-btn active px-3 py-1.5 text-xs font-medium rounded-lg" data-period="7">7 days</button>
+        <button class="period-btn px-3 py-1.5 text-xs font-medium rounded-lg" data-period="30">30 days</button>
+        <button class="period-btn px-3 py-1.5 text-xs font-medium rounded-lg" data-period="90">90 days</button>
+        <button class="period-btn px-3 py-1.5 text-xs font-medium rounded-lg" data-period="custom">Custom</button>
+        <span class="text-gray-300 mx-1">|</span>
+        <input type="date" id="date-from" class="text-xs border border-gray-200 rounded-lg px-2 py-1.5 bg-white text-gray-600 focus:outline-none focus:ring-1 focus:ring-royal-300" disabled>
+        <span class="text-xs text-gray-400">—</span>
+        <input type="date" id="date-to" class="text-xs border border-gray-200 rounded-lg px-2 py-1.5 bg-white text-gray-600 focus:outline-none focus:ring-1 focus:ring-royal-300" disabled>
+        <span id="period-label" class="text-xs text-gray-400 ml-2"></span>
+      </div>
+    </div>
+
+    <!-- Reputation Alert Banner -->
+    <div id="reputation-alert" class="hidden mb-6">
+      <div class="bg-[#FFF5F5] border border-red-200 rounded-xl p-4 shadow-sm">
+        <div class="flex items-start gap-3">
+          <span class="text-xl leading-none mt-0.5" aria-hidden="true">🚨</span>
+          <div class="flex-1 min-w-0">
+            <h3 class="font-semibold text-red-800 text-sm">Critical Attention Required</h3>
+            <p id="alert-text" class="text-sm text-red-700 mt-1"></p>
+            <a id="alert-link" href="./" class="inline-flex items-center gap-1 mt-2 text-sm font-semibold text-red-600 hover:text-red-800 transition-colors">
+              Go Fix This on Reply Module <span aria-hidden="true">&rarr;</span>
+            </a>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Summary stats -->
+    <div class="grid grid-cols-2 sm:grid-cols-5 gap-4 mb-8" id="summary-stats">
+      <div class="stat-card bg-white rounded-xl p-5 text-center">
+        <p class="text-xs font-semibold text-gray-400 uppercase tracking-wider mb-1">Total Reviews</p>
+        <p id="stat-total" class="text-3xl font-bold text-gray-800">—</p>
+        <div id="trends-total" class="mt-2 flex items-center justify-center gap-1.5 min-h-[22px]"></div>
+      </div>
+      <div class="stat-card bg-white rounded-xl p-5 text-center">
+        <p class="text-xs font-semibold text-gray-400 uppercase tracking-wider mb-1">Unreplied</p>
+        <p id="stat-unreplied" class="text-3xl font-bold text-amber-600">—</p>
+      </div>
+      <div class="stat-card bg-white rounded-xl p-5 text-center">
+        <p class="text-xs font-semibold text-gray-400 uppercase tracking-wider mb-1">Replied</p>
+        <p id="stat-replied" class="text-3xl font-bold text-green-600">—</p>
+      </div>
+      <div class="stat-card bg-white rounded-xl p-5 text-center">
+        <p class="text-xs font-semibold text-gray-400 uppercase tracking-wider mb-1">Avg Rating</p>
+        <p id="stat-avg" class="text-3xl font-bold text-royal-600">—</p>
+        <div id="trends-avg" class="mt-2 flex items-center justify-center gap-1.5 min-h-[22px]"></div>
+      </div>
+      <div class="stat-card bg-white rounded-xl p-5 text-center">
+        <p class="text-xs font-semibold text-gray-400 uppercase tracking-wider mb-1">Prior Period</p>
+        <p id="stat-prior" class="text-3xl font-bold text-gray-800">—</p>
+        <p id="stat-prior-avg" class="text-xs text-gray-400 mt-1"></p>
+      </div>
+    </div>
+
+    <!-- Per-store breakdown -->
+    <div class="bg-white rounded-xl border border-gray-200 p-5 mb-6">
+      <h2 class="font-semibold text-sm text-gray-600 mb-4 flex items-center gap-2">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#7C3AED" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="7" height="7"/><rect x="14" y="3" width="7" height="7"/><rect x="3" y="14" width="7" height="7"/><rect x="14" y="14" width="7" height="7"/></svg>
+        Per-Store Breakdown
+      </h2>
+      <div class="overflow-x-auto">
+        <table class="w-full text-sm" id="store-table">
+          <thead>
+            <tr class="text-left text-xs font-semibold text-gray-400 uppercase tracking-wider border-b border-gray-200 cursor-pointer">
+              <th class="pb-2 pr-4 hover:text-gray-600 transition-colors" data-sort="name" scope="col">Store</th>
+              <th class="pb-2 pr-4 text-right hover:text-gray-600 transition-colors" data-sort="total" scope="col">Total</th>
+              <th class="pb-2 pr-4 text-right hover:text-gray-600 transition-colors" data-sort="unreplied" scope="col">Unreplied</th>
+              <th class="pb-2 pr-4 text-right hover:text-gray-600 transition-colors" data-sort="avg" scope="col">Avg ⭐</th>
+              <th class="pb-2 pr-4 text-right hover:text-gray-600 transition-colors" data-sort="mom" scope="col">Vol Velocity</th>
+              <th class="pb-2 text-right hover:text-gray-600 transition-colors" data-sort="contrib" scope="col">Brand Contribution</th>
+            </tr>
+          </thead>
+          <tbody id="store-table-body"></tbody>
+        </table>
+      </div>
+    </div>
+
+    <!-- Trend charts -->
+    <div class="grid grid-cols-1 md:grid-cols-2 gap-4 mb-6">
+      <div class="bg-white rounded-xl border border-gray-200 p-5">
+        <h2 class="font-semibold text-sm text-gray-600 mb-1 flex items-center gap-2">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#7C3AED" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="10" width="4" height="11" rx="1"/><rect x="10" y="6" width="4" height="15" rx="1"/><rect x="17" y="2" width="4" height="19" rx="1"/></svg>
+          Weekly Review Volume
+        </h2>
+        <p class="text-xs text-gray-400 mb-4">Last 4 weeks — per store</p>
+        <div class="relative" style="height:250px"><canvas id="chart-weekly"></canvas></div>
+      </div>
+      <div class="bg-white rounded-xl border border-gray-200 p-5">
+        <h2 class="font-semibold text-sm text-gray-600 mb-1 flex items-center gap-2">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#D4AF37" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="22 12 18 12 14 17 10 7 6 12 2 12"/></svg>
+          Monthly Avg Rating
+        </h2>
+        <p class="text-xs text-gray-400 mb-4">Last 12 months — per store</p>
+        <div class="relative" style="height:250px"><canvas id="chart-monthly"></canvas></div>
+      </div>
+    </div>
+
+    <!-- Recent reviews -->
+    <div class="bg-white rounded-xl border border-gray-200 p-5">
+      <h2 class="font-semibold text-sm text-gray-600 mb-4 flex items-center gap-2">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#D4AF37" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>
+        Reviews
+      </h2>
+      <div id="reviews-container" class="space-y-2">
+        <div class="text-center text-gray-400 py-8 text-sm">Loading reviews...</div>
+      </div>
+    </div>
+
+  </div>
+
+  <script>
+  (function() {
+    const $ = id => document.getElementById(id);
+    let allReviews = [];
+    let storeOrder = [];
+    let currentPeriod = '7';
+    let dateFrom = (() => { const d = new Date(); d.setDate(d.getDate() - 7); return d.toISOString().split('T')[0]; })();
+    let dateTo = null;
+    let chartReviews = [];
+    let analyticsData = null;
+    let selectedStore = '';
+    let sortBy = 'name';
+    let sortDir = 'asc';
+    let weeklyChart = null;
+    let monthlyChart = null;
+    const CHART_COLORS = ['#7C3AED', '#D4AF37', '#0EA5E9', '#10B981', '#F59E0B', '#EF4444'];
+
+    async function loadData() {
+      $('summary-stats').classList.add('opacity-50');
+      $('reviews-container').innerHTML = '<div class="text-center text-gray-400 py-8 text-sm">Loading reviews...</div>';
+      try {
+        const params = new URLSearchParams();
+        if (dateFrom) params.set('from', dateFrom);
+        if (dateTo) params.set('to', dateTo);
+
+        const chartFrom = new Date(); chartFrom.setDate(chartFrom.getDate() - 365);
+        const chartParams = new URLSearchParams();
+        chartParams.set('from', chartFrom.toISOString().split('T')[0]);
+
+        const fetches = [
+          fetch('/api/stores-sheet'),
+          fetch('/api/reviews-data?' + params.toString()),
+          fetch('/api/reviews-data?' + chartParams.toString()),
+        ];
+
+        let analyticsPromise = null;
+        if (dateFrom) {
+          const aTo = dateTo || new Date().toISOString().split('T')[0];
+          analyticsPromise = fetch('/api/reviews-analytics?from=' + encodeURIComponent(dateFrom) + '&to=' + encodeURIComponent(aTo));
+          fetches.push(analyticsPromise);
+        }
+
+        const responses = await Promise.all(fetches);
+        const storesRes = responses[0];
+        const reviewsRes = responses[1];
+        const chartRes = responses[2];
+        const analyticsRes = analyticsPromise ? responses[3] : null;
+
+        const storesJson = await storesRes.json();
+        const reviewsJson = await reviewsRes.json();
+        const chartJson = await chartRes.json();
+
+        if (!storesJson.ok) throw new Error(storesJson.error || 'Failed to load stores');
+        if (!reviewsJson.ok) throw new Error(reviewsJson.error || 'Failed to load reviews');
+
+        storeOrder = storesJson.data || [];
+        allReviews = reviewsJson.data || [];
+        if (chartJson.ok) chartReviews = chartJson.data || [];
+
+        analyticsData = null;
+        if (analyticsRes && analyticsRes.ok) {
+          const aJson = await analyticsRes.json();
+          if (aJson.ok) analyticsData = aJson.data;
+        }
+
+        populateStoreFilter();
+        refreshDisplay();
+      } catch (err) {
+        $('reviews-container').innerHTML = `<div class="text-center text-red-500 py-8 text-sm">\u274C ${escHtml(err.message)}</div>`;
+      }
+      $('summary-stats').classList.remove('opacity-50');
+    }
+
+    function getFilteredReviews(reviews) {
+      if (!selectedStore) return reviews;
+      return reviews.filter(r => (r.store_name || 'Unknown') === selectedStore);
+    }
+
+    function refreshDisplay() {
+      const filtered = getFilteredReviews(allReviews);
+      const chartFiltered = getFilteredReviews(chartReviews);
+      applyPeriodLabel();
+      renderTrendBadges();
+      renderReputationAlert(filtered);
+      computeSummary(filtered);
+      computePriorPeriod();
+      renderStoreTable(filtered, analyticsData);
+      renderReviews(filtered);
+      renderCharts(chartFiltered);
+    }
+
+    function applyPeriodLabel() {
+      const label = $('period-label');
+      if (currentPeriod === 'all') {
+        label.textContent = 'Showing all reviews';
+      } else if (currentPeriod === 'custom') {
+        label.textContent = `From ${dateFrom || '...'} to ${dateTo || '...'}`;
+      } else {
+        label.textContent = `Last ${currentPeriod} days`;
+      }
+    }
+
+    function renderTrendBadges() {
+      const totalEl = $('trends-total');
+      const avgEl = $('trends-avg');
+      if (!analyticsData) { totalEl.innerHTML = ''; avgEl.innerHTML = ''; return; }
+
+      let momCount, yoyCount, momRating, yoyRating;
+      if (selectedStore && analyticsData.stores) {
+        const sa = analyticsData.stores.find(s => s.branch_name === selectedStore);
+        if (sa) { momCount = sa.mom_count_delta_pct; yoyCount = sa.yoy_count_delta_pct; momRating = sa.mom_rating_delta_val; yoyRating = sa.yoy_rating_delta_val; }
+      }
+      if (momCount == null && analyticsData.summary) {
+        const s = analyticsData.summary;
+        momCount = s.mom_count_delta_pct; yoyCount = s.yoy_count_delta_pct; momRating = s.mom_rating_delta_val; yoyRating = s.yoy_rating_delta_val;
+      }
+
+      function badge(value, label, isPct) {
+        if (value == null) return '';
+        const pos = value >= 0;
+        const arrow = pos ? '\u25B2' : '\u25BC';
+        const abs = isPct ? Math.abs(value).toFixed(1) + '%' : (value >= 0 ? '+' : '') + value.toFixed(1);
+        return `<span class="inline-flex items-center gap-0.5 px-1.5 py-0.5 rounded-md text-[10px] font-semibold leading-tight ${pos ? 'bg-green-100 text-green-800' : 'bg-red-100 text-red-700'}">${arrow} ${abs} ${label}</span>`;
+      }
+      totalEl.innerHTML = (momCount != null ? badge(momCount, 'MoM', true) + ' ' : '') + (yoyCount != null ? badge(yoyCount, 'YoY', true) : '');
+      avgEl.innerHTML = (momRating != null ? badge(momRating, 'MoM', false) + ' ' : '') + (yoyRating != null ? badge(yoyRating, 'YoY', false) : '');
+    }
+
+    function computePriorPeriod() {
+      const el = $('stat-prior');
+      const avgEl = $('stat-prior-avg');
+      if (!analyticsData || !analyticsData.summary) {
+        el.textContent = '\u2014'; avgEl.textContent = '';
+        return;
+      }
+      let priorCount, priorAvg;
+      if (selectedStore && analyticsData.stores) {
+        const sa = analyticsData.stores.find(s => s.branch_name === selectedStore);
+        if (sa) { priorCount = sa.prior_count; priorAvg = sa.prior_avg_rating; }
+      }
+      if (priorCount == null) {
+        priorCount = analyticsData.summary.prior_count;
+        priorAvg = analyticsData.summary.prior_avg_rating;
+      }
+      el.textContent = priorCount != null ? priorCount.toLocaleString() : '\u2014';
+      avgEl.textContent = priorAvg != null ? 'Avg \u2605 ' + priorAvg.toFixed(1) : '';
+    }
+
+    function renderReputationAlert(reviews) {
+      const el = $('reputation-alert');
+      const textEl = $('alert-text');
+      if (!el || !textEl) return;
+
+      const critical = reviews.filter(r => {
+        const stars = parseStar(r.stars);
+        const hasReply = !!(r.response || r.reply_text || '').trim();
+        return stars <= 2 && !hasReply;
+      });
+
+      if (critical.length === 0) { el.classList.add('hidden'); return; }
+
+      critical.sort((a, b) => (getReviewDate(b) || '').localeCompare(getReviewDate(a) || ''));
+
+      if (critical.length === 1) {
+        const r = critical[0];
+        textEl.innerHTML = `<span class="font-semibold">${escHtml(r.store_name || 'Unknown')}</span> &mdash; "${escHtml((r.review_comments || '').substring(0, 120))}${(r.review_comments || '').length > 120 ? '...' : ''}"`;
+      } else {
+        const stores = [...new Set(critical.map(r => r.store_name || 'Unknown'))];
+        textEl.innerHTML = `<span class="font-semibold">${critical.length} unreplied low-star reviews</span> across ${stores.length} store${stores.length > 1 ? 's' : ''}: ${stores.map(s => escHtml(s)).join(', ')}`;
+      }
+      el.classList.remove('hidden');
+    }
+
+    function parseStar(val) {
+      if (!val) return 5;
+      if (typeof val === 'number') return val;
+      const s = String(val).trim().toUpperCase();
+      const map = { 'ONE': 1, 'TWO': 2, 'THREE': 3, 'FOUR': 4, 'FIVE': 5 };
+      if (map[s]) return map[s];
+      const n = parseInt(s);
+      return (n >= 1 && n <= 5) ? n : 5;
+    }
+
+    function getReviewDate(r) {
+      return r.review_create_time || r.date_posted || '';
+    }
+
+    function computeSummary(reviews) {
+      let total = 0, replied = 0, starSum = 0, starCount = 0;
+      for (const r of reviews) { total++; if ((r.response || r.reply_text || '').trim()) replied++; const sv = parseStar(r.stars); if (sv > 0) { starSum += sv; starCount++; } }
+      $('stat-total').textContent = total.toLocaleString();
+      $('stat-unreplied').textContent = (total - replied).toLocaleString();
+      $('stat-replied').textContent = replied.toLocaleString();
+      $('stat-avg').textContent = starCount ? (starSum / starCount).toFixed(1) : '\u2014';
+    }
+
+    function renderStoreTable(reviews, analytics) {
+      const storeMap = {};
+      for (const r of reviews) {
+        const name = r.store_name || 'Unknown';
+        if (!storeMap[name]) storeMap[name] = { total: 0, replied: 0, starSum: 0, starCount: 0, critical: 0 };
+        storeMap[name].total++;
+        const resp = r.response || r.reply_text || '';
+        if (resp.trim()) storeMap[name].replied++;
+        const sv = parseStar(r.stars);
+        if (sv > 0) { storeMap[name].starSum += sv; storeMap[name].starCount++; }
+        if (sv <= 2) storeMap[name].critical++;
+      }
+
+      const seen = new Set();
+      const ordered = [];
+      for (const s of storeOrder) { if (storeMap[s.name]) { ordered.push(s.name); seen.add(s.name); } }
+      for (const name of Object.keys(storeMap)) { if (!seen.has(name)) ordered.push(name); }
+
+      const storesAnalytics = analytics && analytics.stores ? analytics.stores : null;
+
+      // Build sortable rows
+      const rows = ordered.map(name => {
+        const d = storeMap[name];
+        const unreplied = d.total - d.replied;
+        const avg = d.starCount ? (d.starSum / d.starCount) : null;
+        const sa = storesAnalytics ? storesAnalytics.find(s => s.branch_name === name) : null;
+        return { name, d, unreplied, avg, sa };
+      });
+
+      rows.sort((a, b) => {
+        let va, vb;
+        switch (sortBy) {
+          case 'name': va = a.name.toLowerCase(); vb = b.name.toLowerCase(); return sortDir === 'asc' ? va.localeCompare(vb) : vb.localeCompare(va);
+          case 'total': va = a.d.total; vb = b.d.total; break;
+          case 'unreplied': va = a.unreplied; vb = b.unreplied; break;
+          case 'avg': va = a.avg; vb = b.avg; break;
+          case 'mom': va = a.sa ? a.sa.mom_count_delta_pct : -999; vb = b.sa ? b.sa.mom_count_delta_pct : -999; break;
+          case 'contrib': va = a.sa ? a.sa.brand_contribution_pct : -1; vb = b.sa ? b.sa.brand_contribution_pct : -1; break;
+          default: return 0;
+        }
+        if (va == null) va = -Infinity;
+        if (vb == null) vb = -Infinity;
+        return sortDir === 'asc' ? va - vb : vb - va;
+      });
+
+      // Update sort indicators
+      document.querySelectorAll('#store-table th').forEach(th => {
+        const key = th.dataset.sort;
+        th.innerHTML = th.innerHTML.replace(/ [\u25B2\u25BC]/, '');
+        if (key === sortBy) th.innerHTML += ' ' + (sortDir === 'asc' ? '\u25B2' : '\u25BC');
+      });
+
+      const tbody = $('store-table-body');
+      tbody.innerHTML = rows.map(r => {
+        const d = r.d;
+        const unreplied = r.unreplied;
+        const avgStr = r.avg != null ? r.avg.toFixed(1) : '\u2014';
+
+        let momCell = '<td class="py-2.5 pr-4 text-right text-gray-400 text-xs">\u2014</td>';
+        let contribCell = '<td class="py-2.5 text-right text-gray-400 text-xs">\u2014</td>';
+        if (r.sa) {
+          const mom = r.sa.mom_count_delta_pct;
+          const arrow = mom >= 0 ? '\u25B2' : '\u25BC';
+          const cls = mom >= 0 ? 'text-green-600' : 'text-red-500';
+          momCell = `<td class="py-2.5 pr-4 text-right font-medium ${cls} text-xs">${arrow} ${mom >= 0 ? '+' : ''}${mom.toFixed(1)}%</td>`;
+          const cp = r.sa.brand_contribution_pct;
+          contribCell = `<td class="py-2.5 text-right"><div class="flex items-center gap-1.5 justify-end"><div class="w-16 bg-gray-100 rounded-full h-1.5 overflow-hidden"><div class="h-full rounded-full bg-royal-500" style="width:${Math.min(cp, 100)}%"></div></div><span class="text-xs font-medium text-gray-500 w-8 text-right">${cp}%</span></div></td>`;
+        }
+
+        return `<tr class="border-b border-gray-100 hover:bg-royal-50/50 transition-colors">
+          <td class="py-2.5 pr-4 font-medium text-gray-800">${escHtml(r.name)}</td>
+          <td class="py-2.5 pr-4 text-right font-medium">${d.total}</td>
+          <td class="py-2.5 pr-4 text-right text-amber-600 font-medium">${unreplied}</td>
+          <td class="py-2.5 pr-4 text-right font-medium text-royal-600">${avgStr}${d.critical > 0 ? `<span class="ml-1.5 text-xs font-semibold text-red-400">[${d.critical} Critical]</span>` : ''}</td>
+          ${momCell}
+          ${contribCell}
+        </tr>`;
+      }).join('');
+    }
+
+    function renderReviews(reviews) {
+      const container = $('reviews-container');
+      const sorted = [...reviews].sort((a, b) => (getReviewDate(b) || '').localeCompare(getReviewDate(a) || ''));
+      if (sorted.length === 0) { container.innerHTML = '<div class="text-center text-gray-400 py-8 text-sm">No reviews found for this period.</div>'; return; }
+      container.innerHTML = sorted.map(r => {
+        const stars = parseStar(r.stars);
+        const hasResponse = !!(r.response || r.reply_text || '').trim();
+        const comment = (r.review_comments || '').substring(0, 250);
+        const replyText = (r.response || r.reply_text || '').substring(0, 120);
+        const safeName = escHtml(r.customer_name || 'Anonymous');
+        const safeComment = escHtml(r.review_comments || '');
+        return `<div class="review-item flex items-start gap-3 p-3 rounded-lg border border-gray-100 hover:border-royal-100 transition-colors ${hasResponse ? 'bg-green-50/30' : ''}" data-store="${escHtml(r.store_name)}">
+          <div class="flex-shrink-0 w-9 h-9 rounded-full bg-royal-100 flex items-center justify-center text-xs font-bold text-royal-600">${escHtml((r.customer_name || '?')[0])}</div>
+          <div class="flex-1 min-w-0">
+            <div class="flex items-center gap-2 flex-wrap">
+              <span class="font-medium text-sm text-gray-800">${safeName}</span>
+              <span class="text-xs">${'\u2B50'.repeat(stars)}</span>
+              <span class="text-xs text-gray-400">${escHtml(r.date_posted || '')}</span>
+              ${hasResponse ? '<span class="text-xs text-green-600 font-medium">\u2705 Replied</span>' : '<span class="text-xs text-amber-600 font-medium">\u23F3 Pending</span>'}
+              <button onclick="copyReview(this)" data-copy-name="${escAttr(r.customer_name || 'Anonymous')}" data-copy-stars="${stars}" data-copy-comment="${escAttr(r.review_comments || '')}" class="ml-auto flex-shrink-0 p-1 rounded-md text-gray-300 hover:text-royal-600 hover:bg-royal-50 transition-colors" title="Copy review">
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg>
+              </button>
+            </div>
+            ${r.store_name ? `<div class="text-xs text-gray-400 mt-0.5">${escHtml(r.store_name)}</div>` : ''}
+            <p class="text-sm text-gray-500 mt-1 line-clamp-2">${escHtml(comment)}</p>
+            ${hasResponse ? `<p class="text-xs text-gray-400 mt-1 italic truncate">Reply: ${escHtml(replyText)}</p>` : ''}
+          </div>
+        </div>`;
+      }).join('');
+    }
+
+    function populateStoreFilter() {
+      const sel = $('store-filter');
+      sel.innerHTML = '<option value="">All Stores</option>';
+      for (const s of storeOrder) sel.innerHTML += `<option value="${escHtml(s.name)}">${escHtml(s.name)}</option>`;
+      sel.value = selectedStore;
+    }
+
+    function parseDate(s) {
+      if (!s) return null;
+      const d = new Date(s);
+      return isNaN(d.getTime()) ? null : d;
+    }
+
+    function renderCharts(chartData) {
+      const reviews = chartData || chartReviews;
+      const names = selectedStore ? [selectedStore] : storeOrder.map(s => s.name);
+      if (reviews.length === 0 || names.length === 0) {
+        showEmptyChart('chart-weekly', 'chart-weekly-empty');
+        showEmptyChart('chart-monthly', 'chart-monthly-empty');
+        return;
+      }
+      renderWeeklyChart(reviews, names);
+      renderMonthlyChart(reviews, names);
+    }
+
+    function showEmptyChart(canvasId, emptyId) {
+      const canvas = $(canvasId);
+      if (!canvas) return;
+      let empty = $(emptyId);
+      if (!empty) {
+        empty = document.createElement('div');
+        empty.id = emptyId;
+        empty.className = 'absolute inset-0 flex items-center justify-center text-xs text-gray-400';
+        empty.textContent = 'Insufficient data for this period';
+        canvas.parentElement.appendChild(empty);
+      }
+      canvas.classList.add('hidden');
+      empty.classList.remove('hidden');
+      if (canvasId === 'chart-weekly' && weeklyChart) { weeklyChart.destroy(); weeklyChart = null; }
+      if (canvasId === 'chart-monthly' && monthlyChart) { monthlyChart.destroy(); monthlyChart = null; }
+    }
+
+    function showCanvas(canvasId, emptyId) {
+      const canvas = $(canvasId);
+      const empty = $(emptyId);
+      if (canvas) canvas.classList.remove('hidden');
+      if (empty) empty.classList.add('hidden');
+    }
+
+    function renderWeeklyChart(reviews, storeNames) {
+      const now = new Date();
+      const minDate = new Date(now); minDate.setDate(minDate.getDate() - 28);
+      const recent = reviews.filter(r => { const d = parseDate(getReviewDate(r)); return d && d >= minDate && d <= now; });
+      const buckets = [];
+      for (let w = 0; w < 4; w++) {
+        const end = new Date(now); end.setDate(end.getDate() - (w * 7));
+        const start = new Date(end); start.setDate(start.getDate() - 7);
+        buckets.push({ label: start.toLocaleDateString('en-US', { month: 'short', day: 'numeric' }), start, end });
+      }
+      const datasets = storeNames.map((name, i) => ({
+        label: name,
+        data: buckets.map(b => recent.filter(r => (r.store_name || 'Unknown') === name && parseDate(getReviewDate(r)) >= b.start && parseDate(getReviewDate(r)) < b.end).length),
+        backgroundColor: CHART_COLORS[i % CHART_COLORS.length], borderRadius: 4,
+      }));
+      const totalData = datasets.reduce((s, ds) => s + ds.data.reduce((a, b) => a + b, 0), 0);
+      if (totalData === 0) { showEmptyChart('chart-weekly', 'chart-weekly-empty'); return; }
+      showCanvas('chart-weekly', 'chart-weekly-empty');
+      if (weeklyChart) weeklyChart.destroy();
+      const ctx = $('chart-weekly');
+      if (!ctx) return;
+      weeklyChart = new Chart(ctx, {
+        type: 'bar',
+        data: { labels: buckets.map(b => b.label), datasets },
+        options: {
+          responsive: true, maintainAspectRatio: false,
+          interaction: { mode: 'index', intersect: false },
+          plugins: {
+            legend: { position: 'bottom', labels: { boxWidth: 12, padding: 16, font: { size: 11 } } },
+            tooltip: { backgroundColor: '#1e1b4b', titleFont: { size: 12 }, bodyFont: { size: 12 }, callbacks: { label: ctx => ctx.dataset.label + ': ' + ctx.parsed.y + ' reviews' } },
+          },
+          scales: { y: { beginAtZero: true, ticks: { stepSize: 1, font: { size: 11 } }, grid: { color: '#f3f4f6' } }, x: { ticks: { font: { size: 11 } }, grid: { display: false } } },
+        },
+      });
+    }
+
+    function renderMonthlyChart(reviews, storeNames) {
+      const now = new Date();
+      const months = [];
+      for (let m = 11; m >= 0; m--) months.push(new Date(now.getFullYear(), now.getMonth() - m, 1));
+      const monthLabels = months.map(d => d.toLocaleDateString('en-US', { month: 'short', year: '2-digit' }));
+      const datasets = storeNames.map((name, i) => ({
+        label: name,
+        data: months.map(ms => {
+          const me = new Date(ms.getFullYear(), ms.getMonth() + 1, 0, 23, 59, 59);
+          const f = reviews.filter(r => (r.store_name || 'Unknown') === name && parseDate(getReviewDate(r)) >= ms && parseDate(getReviewDate(r)) <= me);
+          return f.length ? +(f.reduce((s, r) => s + parseStar(r.stars), 0) / f.length).toFixed(2) : null;
+        }),
+        borderColor: CHART_COLORS[i % CHART_COLORS.length], backgroundColor: CHART_COLORS[i % CHART_COLORS.length] + '18',
+        pointBackgroundColor: CHART_COLORS[i % CHART_COLORS.length], pointRadius: 3, pointHoverRadius: 5, borderWidth: 2, tension: 0.3, spanGaps: true,
+      }));
+      const hasData = datasets.some(ds => ds.data.some(v => v !== null));
+      if (!hasData) { showEmptyChart('chart-monthly', 'chart-monthly-empty'); return; }
+      showCanvas('chart-monthly', 'chart-monthly-empty');
+      if (monthlyChart) monthlyChart.destroy();
+      const ctx = $('chart-monthly');
+      if (!ctx) return;
+      monthlyChart = new Chart(ctx, {
+        type: 'line',
+        data: { labels: monthLabels, datasets },
+        options: {
+          responsive: true, maintainAspectRatio: false,
+          interaction: { mode: 'index', intersect: false },
+          plugins: {
+            legend: { position: 'bottom', labels: { boxWidth: 12, padding: 16, font: { size: 11 } } },
+            tooltip: { backgroundColor: '#1e1b4b', titleFont: { size: 12 }, bodyFont: { size: 12 }, callbacks: { label: ctx => ctx.parsed.y === null ? ctx.dataset.label + ': No data' : ctx.dataset.label + ': ' + '\u2B50'.repeat(Math.round(ctx.parsed.y)) + ' ' + ctx.parsed.y.toFixed(1) } },
+          },
+          scales: { y: { min: 1, max: 5, ticks: { stepSize: 1, font: { size: 11 } }, grid: { color: '#f3f4f6' } }, x: { ticks: { font: { size: 10 } }, grid: { display: false } } },
+        },
+      });
+    }
+
+    function escHtml(s) {
+      if (!s) return '';
+      return String(s).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;');
+    }
+
+    function escAttr(s) {
+      if (!s) return '';
+      return String(s).replace(/&/g,'&amp;').replace(/"/g,'&quot;').replace(/'/g,'&#39;').replace(/</g,'&lt;').replace(/>/g,'&gt;');
+    }
+
+    function copyReview(btn) {
+      const name = btn.dataset.copyName;
+      const stars = '\u2B50'.repeat(parseInt(btn.dataset.copyStars) || 0);
+      const comment = btn.dataset.copyComment || '';
+      const text = name + '\n' + stars + '\n' + comment;
+      navigator.clipboard.writeText(text).then(() => {
+        const orig = btn.innerHTML;
+        btn.innerHTML = '<span class="text-xs">\u2705</span>';
+        setTimeout(() => btn.innerHTML = orig, 1200);
+      }).catch(() => {});
+    }
+    window.copyReview = copyReview;
+
+    // ── Period filter ──
+    document.querySelectorAll('.period-btn').forEach(btn => {
+      btn.onclick = function() {
+        document.querySelectorAll('.period-btn').forEach(b => b.classList.remove('active'));
+        this.classList.add('active');
+        currentPeriod = this.dataset.period;
+        const fromInput = $('date-from');
+        const toInput = $('date-to');
+        const now = new Date();
+        if (currentPeriod === 'all') { dateFrom = null; dateTo = null; fromInput.disabled = true; toInput.disabled = true; }
+        else if (currentPeriod === 'custom') { fromInput.disabled = false; toInput.disabled = false; dateFrom = fromInput.value || null; dateTo = toInput.value || null; }
+        else { fromInput.disabled = true; toInput.disabled = true; const from = new Date(now); from.setDate(from.getDate() - parseInt(currentPeriod)); dateFrom = from.toISOString().split('T')[0]; dateTo = null; }
+        loadData();
+      };
+    });
+
+    $('date-from').onchange = function() { if (currentPeriod === 'custom') { dateFrom = this.value || null; dateTo = $('date-to').value || null; loadData(); } };
+    $('date-to').onchange = function() { if (currentPeriod === 'custom') { dateTo = this.value || null; dateFrom = $('date-from').value || null; loadData(); } };
+
+    // ── Store filter — filters every section ──
+    $('store-filter').onchange = function() {
+      selectedStore = this.value;
+      refreshDisplay();
+    };
+
+    // ── Sortable table headers ──
+    $('store-table').querySelector('thead').addEventListener('click', function(e) {
+      const th = e.target.closest('th');
+      if (!th || !th.dataset.sort) return;
+      const field = th.dataset.sort;
+      if (sortBy === field) sortDir = sortDir === 'asc' ? 'desc' : 'asc';
+      else { sortBy = field; sortDir = 'asc'; }
+      renderStoreTable(getFilteredReviews(allReviews), analyticsData);
+    });
+
+    $('btn-refresh').onclick = loadData;
+
+    loadData();
+  })();
+  </script>
+  <script src="/js/auth.js"></script>
+  <script>Auth.protect('auth-container');</script>
+</body>
+</html>

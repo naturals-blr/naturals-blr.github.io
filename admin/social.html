@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Social Publishing — Naturals Admin</title>
+  <script src="/admin/config.js"></script>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <style>
+    body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif; }
+    #activity-log > div:first-child { animation: fadeIn 0.2s ease-out; }
+    @keyframes fadeIn { from { opacity: 0; transform: translateY(-4px); } to { opacity: 1; transform: translateY(0); } }
+    .badge-dot { width: 8px; height: 8px; border-radius: 50%; display: inline-block; }
+    .campaign-row { transition: background 0.15s; }
+    .campaign-row:hover { background: #f9fafb; }
+  </style>
+</head>
+<body class="bg-gray-50 text-gray-800 antialiased">
+<div id="auth-container"></div>
+  <div class="flex flex-col h-screen">
+
+    <!-- Header -->
+    <header class="bg-white border-b border-gray-200 px-5 py-3 shrink-0">
+      <div class="flex items-center justify-between">
+        <div class="flex items-center gap-4">
+          <a href="./" class="text-lg hover:opacity-70">←</a>
+          <h1 class="text-lg font-bold text-green-800 tracking-tight">📱 Publish to Social</h1>
+          <div id="status-badges" class="flex items-center gap-2"></div>
+        </div>
+        <button onclick="location.href='/'" class="text-xs px-3 py-1.5 border border-gray-300 rounded hover:bg-gray-50 text-gray-600">Home</button>
+      </div>
+    </header>
+
+    <!-- Controls bar -->
+    <div class="bg-white border-b border-gray-200 px-5 py-3 shrink-0 flex items-center justify-between">
+      <div class="flex items-center gap-4">
+        <label class="flex items-center gap-2 text-sm text-gray-600 cursor-pointer">
+          <input type="checkbox" id="select-all" checked class="rounded border-gray-300 text-green-600 focus:ring-green-500">
+          Select All
+        </label>
+        <span id="selected-count" class="text-xs text-gray-400">0 selected</span>
+      </div>
+      <div class="flex items-center gap-4">
+        <span class="text-xs text-gray-400">Post to:</span>
+        <label class="flex items-center gap-1.5 text-xs cursor-pointer">
+          <input type="checkbox" id="platform-fb" checked class="rounded border-gray-300 text-blue-600 focus:ring-blue-500">
+          <span>Facebook</span>
+        </label>
+        <label class="flex items-center gap-1.5 text-xs cursor-pointer">
+          <input type="checkbox" id="platform-ig" checked class="rounded border-gray-300 text-pink-600 focus:ring-pink-500">
+          <span>Instagram</span>
+        </label>
+        <label class="flex items-center gap-1.5 text-xs cursor-pointer">
+          <input type="checkbox" id="platform-gp" checked class="rounded border-gray-300 text-red-600 focus:ring-red-500">
+          <span>Google</span>
+        </label>
+      </div>
+    </div>
+
+    <!-- Stores bar -->
+    <div class="bg-white border-b border-gray-200 px-5 py-2.5 shrink-0 flex items-center gap-5">
+      <span class="text-xs font-semibold text-gray-500 uppercase tracking-wider">Stores</span>
+      <label class="flex items-center gap-1.5 text-xs cursor-pointer"><input type="checkbox" class="store-cb rounded border-gray-300 text-green-600 focus:ring-green-500" data-store="N78" checked> <span>N78 — JP Nagar</span></label>
+      <label class="flex items-center gap-1.5 text-xs cursor-pointer"><input type="checkbox" class="store-cb rounded border-gray-300 text-green-600 focus:ring-green-500" data-store="N45" checked> <span>N45 — Nagavara</span></label>
+      <label class="flex items-center gap-1.5 text-xs cursor-pointer"><input type="checkbox" class="store-cb rounded border-gray-300 text-green-600 focus:ring-green-500" data-store="N36" checked> <span>N36 — Ayyappa Nagar</span></label>
+      <label class="flex items-center gap-1.5 text-xs cursor-pointer"><input type="checkbox" class="store-cb rounded border-gray-300 text-green-600 focus:ring-green-500" data-store="N05" checked> <span>N05 — Frazer Town</span></label>
+      <label class="flex items-center gap-1.5 text-xs cursor-pointer"><input type="checkbox" class="store-cb rounded border-gray-300 text-green-600 focus:ring-green-500" data-store="N43" checked> <span>N43 — Hennur</span></label>
+    </div>
+
+    <!-- Campaign table -->
+    <div class="flex-1 overflow-y-auto">
+      <div id="campaign-table" class="p-4">
+        <div class="text-center text-gray-400 text-sm py-12">Loading campaigns...</div>
+      </div>
+    </div>
+
+    <!-- Publish bar -->
+    <div class="bg-white border-t border-gray-200 px-5 py-3 shrink-0 flex items-center justify-between">
+      <div>
+        <span id="publish-status" class="text-sm text-gray-500"></span>
+      </div>
+      <button id="btn-publish" class="px-5 py-2 bg-purple-600 text-white text-sm font-semibold rounded-lg hover:bg-purple-700 disabled:opacity-40 disabled:cursor-not-allowed transition-colors">
+        📤 Publish Selected
+      </button>
+    </div>
+
+    <!-- Result section -->
+    <div id="result-section" class="bg-white border-t border-gray-200 px-5 py-3 hidden shrink-0">
+      <div class="flex items-center justify-between mb-2">
+        <p class="text-xs font-semibold text-gray-500 uppercase tracking-wider">📋 Results</p>
+        <span id="result-summary" class="text-xs font-medium"></span>
+      </div>
+      <div id="result-table" class="overflow-x-auto"></div>
+      <div class="flex gap-2 mt-2">
+        <button id="btn-retry-all" class="hidden text-xs px-3 py-1.5 bg-yellow-500 text-white rounded hover:bg-yellow-600 font-medium transition-colors">Retry All Failed</button>
+      </div>
+    </div>
+
+    <!-- Activity log -->
+    <div class="bg-white border-t border-gray-200 px-5 py-2 shrink-0">
+      <div class="flex items-center justify-between">
+        <span class="text-xs font-semibold text-gray-500 uppercase">Activity</span>
+        <button onclick="document.getElementById('activity-log').innerHTML = ''" class="text-xs text-gray-400 hover:text-gray-600">Clear</button>
+      </div>
+      <div id="activity-log" class="font-mono text-xs space-y-0.5 max-h-24 overflow-y-auto"></div>
+    </div>
+  </div>
+
+  <script src="/js/auth.js"></script>
+  <script src="/js/api.js"></script>
+  <script src="/js/social.js"></script>
+  <script>Auth.protect('auth-container');</script>
+</body>
+</html>

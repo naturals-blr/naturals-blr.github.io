@@ -1,0 +1,485 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Auto Campaign — Naturals Admin</title>
+  <script src="/admin/config.js"></script>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            royal: { 50: '#f3f0ff', 100: '#e9e0ff', 200: '#d4c0ff', 300: '#b794ff', 400: '#9b6aff', 500: '#7C3AED', 600: '#6d28d9', 700: '#5b21b6', 800: '#4c1d95', 900: '#3b0f7a' },
+            gold:   { 50: '#fffdf0', 100: '#fff9d4', 200: '#fce88c', 300: '#f5d742', 400: '#e5c838', 500: '#D4AF37', 600: '#b8922e', 700: '#9a7826', 800: '#7d601f', 900: '#604a17' },
+          },
+        }
+      }
+    }
+  </script>
+  <style>
+    body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif; }
+    #activity-log > div:first-child { animation: fadeIn 0.2s ease-out; }
+    @keyframes fadeIn { from { opacity: 0; transform: translateY(-4px); } to { opacity: 1; transform: translateY(0); } }
+    .card { border: 1px solid #e5e7eb; border-radius: 0.75rem; transition: all 0.15s; }
+    .card:hover { box-shadow: 0 2px 8px rgba(0,0,0,0.05); }
+    .step-indicator { display: flex; gap: 8px; margin-bottom: 24px; }
+    .step { flex: 1; padding: 8px 12px; border-radius: 8px; font-size: 0.75rem; font-weight: 600; text-align: center; text-transform: uppercase; background: #f3f4f6; color: #9ca3af; transition: all 0.2s; }
+    .step.active { background: #7C3AED; color: #fff; }
+    .step.done { background: #D1FAE5; color: #065F46; }
+    .result-cell { font-size: 0.75rem; padding: 0.25rem 0.5rem; border-radius: 4px; }
+    .badge-dot { width: 8px; height: 8px; border-radius: 50%; display: inline-block; }
+  </style>
+</head>
+<body class="bg-gray-50 text-gray-800 antialiased">
+<div id="auth-container"></div>
+  <div class="flex flex-col h-screen">
+
+    <!-- Header -->
+    <header class="bg-white border-b border-gray-200 px-5 py-3 shrink-0">
+      <div class="flex items-center justify-between">
+        <div class="flex items-center gap-4">
+          <a href="./" class="text-lg hover:opacity-70">&larr;</a>
+          <h1 class="text-lg font-bold text-royal-700 tracking-tight">Auto Campaign</h1>
+          <span class="text-xs text-gray-400 bg-gray-100 px-2 py-0.5 rounded">AI-powered</span>
+        </div>
+        <button onclick="location.href='/'" class="text-xs px-3 py-1.5 border border-gray-300 rounded hover:bg-gray-50 text-gray-600">Home</button>
+      </div>
+    </header>
+
+    <!-- Step indicator -->
+    <div class="bg-white border-b border-gray-200 px-5 py-3 shrink-0">
+      <div class="step-indicator max-w-2xl">
+        <div class="step active" id="step-1">1. Input Offer</div>
+        <div class="step" id="step-2">2. Review &amp; Confirm</div>
+        <div class="step" id="step-3">3. Generate Images</div>
+        <div class="step" id="step-4">4. Publish</div>
+      </div>
+    </div>
+
+    <!-- Main content -->
+    <div class="flex-1 overflow-y-auto p-5">
+      <div class="max-w-4xl mx-auto space-y-5">
+
+        <!-- Step 1: Input -->
+        <div id="step-1-content" class="card bg-white p-6">
+          <h2 class="text-lg font-bold text-gray-800 mb-1">Enter Your Offer Text</h2>
+          <p class="text-sm text-gray-400 mb-4">Paste any promotional text — AI will extract title, description, dates, and stores automatically.</p>
+          <textarea id="raw-text" rows="5" class="w-full border border-gray-300 rounded-lg px-3 py-2.5 text-sm focus:outline-none focus:ring-2 focus:ring-royal-500 focus:border-royal-500" placeholder="Paste your offer text here...&#10;&#10;Example: 30% off on all hair coloring services at JP Nagar this weekend only! Valid until Sunday."></textarea>
+          <div class="flex gap-3 mt-4">
+            <button id="btn-extract" class="px-5 py-2.5 bg-royal-600 text-white text-sm font-semibold rounded-lg hover:bg-royal-700 disabled:opacity-40 disabled:cursor-not-allowed transition-colors flex items-center gap-2">
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/></svg>
+              Generate Campaign
+            </button>
+            <button id="btn-fill-sample" class="px-4 py-2.5 border border-gray-300 text-gray-600 text-sm font-medium rounded-lg hover:bg-gray-50 transition-colors">Use Sample</button>
+          </div>
+          <div id="extract-status" class="mt-3 text-sm"></div>
+        </div>
+
+        <!-- Step 2: Preview extracted data -->
+        <div id="step-2-content" class="hidden card bg-white p-6">
+          <div class="flex items-center justify-between mb-4">
+            <h2 class="text-lg font-bold text-gray-800">Campaign Preview</h2>
+            <span id="extract-source" class="text-xs px-2 py-0.5 rounded-full bg-royal-100 text-royal-700 font-medium"></span>
+          </div>
+
+          <div class="grid grid-cols-1 md:grid-cols-2 gap-4 mb-4">
+            <div>
+              <label class="block text-xs font-semibold text-gray-500 uppercase mb-1">Title</label>
+              <input type="text" id="preview-title" class="w-full border border-gray-300 rounded-lg px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-royal-500">
+            </div>
+            <div>
+              <label class="block text-xs font-semibold text-gray-500 uppercase mb-1">Campaign Type</label>
+              <select id="preview-type" class="w-full border border-gray-300 rounded-lg px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-royal-500">
+                <option value="offer">Offer</option>
+                <option value="festival">Festival</option>
+                <option value="greeting">Greeting</option>
+                <option value="update">Update</option>
+                <option value="announcement">Announcement</option>
+                <option value="testimonial">Testimonial</option>
+              </select>
+            </div>
+          </div>
+
+          <div class="mb-4">
+            <label class="block text-xs font-semibold text-gray-500 uppercase mb-1">Body / Description</label>
+            <textarea id="preview-body" rows="3" class="w-full border border-gray-300 rounded-lg px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-royal-500"></textarea>
+          </div>
+
+          <div class="grid grid-cols-1 md:grid-cols-2 gap-4 mb-4">
+            <div>
+              <label class="block text-xs font-semibold text-gray-500 uppercase mb-1">Start Date</label>
+              <input type="date" id="preview-start" class="w-full border border-gray-300 rounded-lg px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-royal-500">
+            </div>
+            <div>
+              <label class="block text-xs font-semibold text-gray-500 uppercase mb-1">End Date</label>
+              <input type="date" id="preview-end" class="w-full border border-gray-300 rounded-lg px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-royal-500">
+            </div>
+          </div>
+
+          <div class="grid grid-cols-1 md:grid-cols-2 gap-4 mb-4">
+            <div>
+              <label class="block text-xs font-semibold text-gray-500 uppercase mb-2">Platforms</label>
+              <div class="flex gap-4">
+                <label class="flex items-center gap-1.5 text-sm cursor-pointer"><input type="checkbox" id="plat-fb" checked class="rounded border-gray-300 text-blue-600 focus:ring-blue-500"> <span>Facebook</span></label>
+                <label class="flex items-center gap-1.5 text-sm cursor-pointer"><input type="checkbox" id="plat-ig" checked class="rounded border-gray-300 text-pink-600 focus:ring-pink-500"> <span>Instagram</span></label>
+                <label class="flex items-center gap-1.5 text-sm cursor-pointer"><input type="checkbox" id="plat-gp" checked class="rounded border-gray-300 text-red-600 focus:ring-red-500"> <span>Google</span></label>
+              </div>
+            </div>
+            <div>
+              <label class="block text-xs font-semibold text-gray-500 uppercase mb-2">Stores</label>
+              <div class="flex flex-wrap gap-3">
+                <label class="flex items-center gap-1.5 text-sm cursor-pointer"><input type="checkbox" class="store-cb rounded border-gray-300 text-green-600 focus:ring-green-500" data-store="N78"> <span>N78 &mdash; JP Nagar</span></label>
+                <label class="flex items-center gap-1.5 text-sm cursor-pointer"><input type="checkbox" class="store-cb rounded border-gray-300 text-green-600 focus:ring-green-500" data-store="N45"> <span>N45 &mdash; Nagavara</span></label>
+                <label class="flex items-center gap-1.5 text-sm cursor-pointer"><input type="checkbox" class="store-cb rounded border-gray-300 text-green-600 focus:ring-green-500" data-store="N36"> <span>N36 &mdash; Ayyappa Nagar</span></label>
+                <label class="flex items-center gap-1.5 text-sm cursor-pointer"><input type="checkbox" class="store-cb rounded border-gray-300 text-green-600 focus:ring-green-500" data-store="N05"> <span>N05 &mdash; Frazer Town</span></label>
+                <label class="flex items-center gap-1.5 text-sm cursor-pointer"><input type="checkbox" class="store-cb rounded border-gray-300 text-green-600 focus:ring-green-500" data-store="N43"> <span>N43 &mdash; Hennur</span></label>
+              </div>
+            </div>
+          </div>
+
+          <button id="btn-generate-images" class="px-5 py-2.5 bg-cyan-600 text-white text-sm font-semibold rounded-lg hover:bg-cyan-700 disabled:opacity-40 disabled:cursor-not-allowed transition-colors flex items-center gap-2">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><polyline points="21 15 16 10 5 21"/></svg>
+            Generate Images &amp; Publish
+          </button>
+          <div id="preview-status" class="mt-3 text-sm"></div>
+        </div>
+
+        <!-- Step 3: Image previews -->
+        <div id="step-3-content" class="hidden card bg-white p-6">
+          <div class="flex items-center justify-between mb-4">
+            <h2 class="text-lg font-bold text-gray-800">Generated Images</h2>
+            <span id="image-count" class="text-xs text-gray-500 font-mono"></span>
+          </div>
+          <div id="image-grid" class="grid grid-cols-1 md:grid-cols-3 gap-4 mb-4"></div>
+          <button id="btn-publish-all" class="px-5 py-2.5 bg-green-600 text-white text-sm font-semibold rounded-lg hover:bg-green-700 disabled:opacity-40 disabled:cursor-not-allowed transition-colors flex items-center gap-2">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="22" y1="2" x2="11" y2="13"/><polygon points="22 2 15 22 11 13 2 9 22 2"/></svg>
+            Publish to All Platforms
+          </button>
+          <div id="publish-status" class="mt-3 text-sm"></div>
+        </div>
+
+        <!-- Step 4: Result table -->
+        <div id="step-4-content" class="hidden card bg-white p-6">
+          <div class="flex items-center justify-between mb-4">
+            <h2 class="text-lg font-bold text-gray-800">Publish Results</h2>
+            <span id="result-summary" class="text-xs font-medium"></span>
+          </div>
+          <div id="result-table" class="overflow-x-auto"></div>
+          <div class="flex gap-2 mt-3">
+            <button id="btn-retry-all" class="hidden text-xs px-3 py-1.5 bg-yellow-500 text-white rounded hover:bg-yellow-600 font-medium transition-colors">Retry All Failed</button>
+          </div>
+          <div class="mt-4 pt-4 border-t border-gray-200">
+            <a href="/auto-campaign.html" class="text-sm text-royal-600 hover:text-royal-800 font-medium">&larr; Start a new campaign</a>
+          </div>
+        </div>
+
+      </div>
+    </div>
+
+    <!-- Activity log -->
+    <div class="bg-white border-t border-gray-200 px-5 py-2 shrink-0">
+      <div class="flex items-center justify-between">
+        <span class="text-xs font-semibold text-gray-500 uppercase">Activity</span>
+        <button onclick="document.getElementById('activity-log').innerHTML = ''" class="text-xs text-gray-400 hover:text-gray-600">Clear</button>
+      </div>
+      <div id="activity-log" class="font-mono text-xs space-y-0.5 max-h-24 overflow-y-auto"></div>
+    </div>
+  </div>
+
+  <script src="/js/api.js"></script>
+  <script>
+    const $ = id => document.getElementById(id);
+    const STORE_NAMES = { N78: 'JP Nagar 5th Phase', N45: 'Nagavara', N36: 'Ayyappa Nagar', N05: 'Frazer Town', N43: 'Hennur' };
+
+    function log(msg, level) {
+      const el = $('activity-log');
+      const d = new Date();
+      const ts = d.toLocaleTimeString('en-IN', { hour12: false });
+      const color = level === 'error' ? 'text-red-600' : level === 'success' ? 'text-green-600' : 'text-gray-700';
+      el.innerHTML = `<div class="${color}">${ts} ${msg}</div>` + el.innerHTML;
+    }
+
+    function escHtml(s) {
+      const d = document.createElement('div');
+      d.textContent = s;
+      return d.innerHTML;
+    }
+
+    function setStep(n) {
+      for (let i = 1; i <= 4; i++) {
+        const el = $('step-' + i);
+        el.className = 'step';
+        if (i < n) el.classList.add('done');
+        if (i === n) el.classList.add('active');
+        const content = $('step-' + i + '-content');
+        if (content) content.classList.toggle('hidden', i !== n);
+      }
+    }
+
+    function getFormState() {
+      const storeIds = [...document.querySelectorAll('.store-cb:checked')].map(cb => cb.dataset.store);
+      return {
+        title: $('preview-title').value.trim(),
+        body: $('preview-body').value.trim(),
+        campaign_type: $('preview-type').value,
+        start_date: $('preview-start').value,
+        end_date: $('preview-end').value,
+        platforms: { facebook: $('plat-fb').checked, instagram: $('plat-ig').checked, google: $('plat-gp').checked },
+        store_ids: storeIds,
+      };
+    }
+
+    // ── Sample text → auto-trigger extraction ────────────────────
+    $('btn-fill-sample').onclick = () => {
+      $('raw-text').value = '30% off on all hair coloring services at JP Nagar this weekend only! Get the perfect summer look with our expert colorists. Offer valid until Sunday.';
+      log('Sample text loaded — extracting...', 'info');
+      setTimeout(() => $('btn-extract').click(), 100);
+    };
+
+    // ── Step 1: Extract ──────────────────────────────────────────
+    $('btn-extract').onclick = async () => {
+      const text = $('raw-text').value.trim();
+      if (!text) { log('Enter some promotional text first', 'error'); return; }
+
+      const btn = $('btn-extract');
+      btn.disabled = true;
+      btn.innerHTML = '<svg class="animate-spin h-4 w-4" viewBox="0 0 24 24"><circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"/><path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4z"/></svg> Extracting...';
+      $('extract-status').textContent = '';
+
+      try {
+        const res = await fetch('/api/auto-campaign/extract', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ text }),
+        });
+        const data = await res.json();
+        if (!data.ok) throw new Error(data.error || 'Extraction failed');
+
+        const result = data.data;
+        log(`AI extracted: "${result.title}" (${result.source})`, 'success');
+
+        // Populate preview form
+        $('preview-title').value = result.title || '';
+        $('preview-body').value = result.body || '';
+        $('preview-type').value = result.campaign_type || 'offer';
+        $('preview-start').value = result.start_date || '';
+        $('preview-end').value = result.end_date || '';
+        $('extract-source').textContent = 'Source: ' + (result.source || 'regex').toUpperCase();
+
+        // Check stores
+        const storeIds = result.store_ids || [];
+        document.querySelectorAll('.store-cb').forEach(cb => {
+          cb.checked = storeIds.length === 0 || storeIds.includes(cb.dataset.store);
+        });
+
+        // Set platforms
+        if (result.platforms) {
+          $('plat-fb').checked = result.platforms.facebook !== false;
+          $('plat-ig').checked = result.platforms.instagram !== false;
+          $('plat-gp').checked = result.platforms.google !== false;
+        }
+
+        setStep(2);
+        $('extract-status').textContent = '✅ Campaign data extracted. Review and click "Generate Images & Publish" to proceed.';
+        $('extract-status').className = 'mt-3 text-sm text-green-700';
+      } catch (e) {
+        log('Extraction failed: ' + e.message, 'error');
+        $('extract-status').textContent = '❌ ' + e.message;
+        $('extract-status').className = 'mt-3 text-sm text-red-600';
+      }
+
+      btn.disabled = false;
+      btn.innerHTML = '<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/></svg> Generate Campaign';
+    };
+
+    // ── Step 2 → 3: Generate Images + Publish ────────────────────
+    $('btn-generate-images').onclick = async () => {
+      const state = getFormState();
+      if (!state.title || !state.body) { log('Title and body are required', 'error'); return; }
+      if (state.store_ids.length === 0) { log('Select at least one store', 'error'); return; }
+
+      const btn = $('btn-generate-images');
+      btn.disabled = true;
+      btn.innerHTML = '<svg class="animate-spin h-4 w-4" viewBox="0 0 24 24"><circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"/><path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4z"/></svg> Generating...';
+      $('preview-status').textContent = '';
+
+      try {
+        // Step A: Generate images via PIL
+        log('Generating per-platform images...', 'info');
+        const imgRes = await fetch('/api/auto-campaign/generate-images', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify(state),
+        });
+        const imgData = await imgRes.json();
+        if (!imgData.ok) throw new Error(imgData.error || 'Image generation failed');
+
+        const images = imgData.data.images || {};
+        log(`Images generated: ${Object.keys(images).length} platform(s)`, 'success');
+
+        // Show image previews
+        const grid = $('image-grid');
+        grid.innerHTML = '';
+        let imgCount = 0;
+        for (const [platform, info] of Object.entries(images)) {
+          imgCount++;
+          const label = { facebook: 'Facebook 1200×630', instagram: 'Instagram 1080×1080', google: 'Google 720×540' }[platform] || platform;
+          const localUrl = info.url.replace('https://naturalsprime.in', window.location.origin);
+          grid.innerHTML += `
+            <div class="border border-gray-200 rounded-lg overflow-hidden bg-gray-50">
+              <div class="p-2 bg-gray-100 text-xs font-semibold text-gray-600 uppercase text-center">${label}</div>
+              <a href="${escHtml(localUrl)}" target="_blank" title="Open full size">
+              <img src="${escHtml(localUrl)}" class="w-full h-auto cursor-pointer hover:opacity-90 transition-opacity" alt="${platform}" onerror="this.outerHTML='<span class=\'text-xs text-red-400 p-4 block text-center\'>Image not available</span>'">
+            </a>
+              <div class="p-2 text-xs text-gray-400 truncate">${escHtml(info.filename)}</div>
+            </div>
+          `;
+        }
+        $('image-count').textContent = `${imgCount} image(s)`;
+        setStep(3);
+        $('preview-status').textContent = '✅ Images generated. Click "Publish to All Platforms" to post.';
+        $('preview-status').className = 'mt-3 text-sm text-green-700';
+      } catch (e) {
+        log('Generation failed: ' + e.message, 'error');
+        $('preview-status').textContent = '❌ ' + e.message;
+        $('preview-status').className = 'mt-3 text-sm text-red-600';
+      }
+
+      btn.disabled = false;
+      btn.innerHTML = '<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><polyline points="21 15 16 10 5 21"/></svg> Generate Images & Publish';
+    };
+
+    // ── Step 3 → 4: Publish ──────────────────────────────────────
+    $('btn-publish-all').onclick = async () => {
+      const state = getFormState();
+      if (!state.title || !state.body) { log('No campaign data to publish', 'error'); return; }
+
+      const btn = $('btn-publish-all');
+      btn.disabled = true;
+      btn.innerHTML = '<svg class="animate-spin h-4 w-4" viewBox="0 0 24 24"><circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"/><path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4z"/></svg> Publishing...';
+      $('publish-status').textContent = '';
+
+      try {
+        log(`Publishing to ${state.store_ids.length} store(s)...`, 'info');
+        const pubRes = await fetch('/api/auto-campaign/publish', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify(state),
+        });
+        const pubData = await pubRes.json();
+
+        const output = pubData.ok ? pubData.data : pubData;
+        const outputText = output.output || output.message || JSON.stringify(output);
+
+        // Parse structured result lines from Python output
+        const lines = (outputText || '').split('\n');
+        let okCount = 0, totalCount = 0;
+
+        const storeResults = {};
+        state.store_ids.forEach(s => { storeResults[s] = {}; Object.keys(state.platforms).forEach(p => { storeResults[s][p] = null; }); });
+
+        let currentStore = null;
+        lines.forEach(line => {
+          const storeMatch = line.match(/^📌 (.+?) \(Store_(\w+)\)/);
+          if (storeMatch) currentStore = storeMatch[2];
+          if (line.includes('Results:') && currentStore) {
+            const resultsMatch = line.match(/\{.*\}/);
+            if (resultsMatch) {
+              try {
+                const parsed = JSON.parse(resultsMatch[0].replace(/'/g, '"'));
+                Object.entries(parsed).forEach(([k, v]) => { if (storeResults[currentStore]) storeResults[currentStore][k] = v; });
+              } catch (_) {}
+            }
+          }
+        });
+
+        // Render result table
+        const tbl = $('result-table');
+        const activePlatforms = Object.keys(state.platforms).filter(p => state.platforms[p]);
+        let html = '<table class="w-full text-xs border-collapse"><thead><tr class="bg-gray-100">';
+        html += '<th class="px-2 py-1.5 text-left font-semibold text-gray-600">Store</th>';
+        activePlatforms.forEach(p => { html += `<th class="px-2 py-1.5 text-center font-semibold text-gray-600 capitalize">${p}</th>`; });
+        html += '<th class="px-2 py-1.5 text-center font-semibold text-gray-600">Retry</th></tr></thead><tbody>';
+
+        state.store_ids.forEach(s => {
+          const name = STORE_NAMES[s] || s;
+          html += `<tr class="border-t border-gray-100"><td class="px-2 py-1.5 font-medium">${name}</td>`;
+          activePlatforms.forEach(p => {
+            const v = storeResults[s]?.[p];
+            const ok = v === 'OK';
+            if (ok) okCount++;
+            totalCount++;
+            html += `<td class="px-2 py-1.5 text-center"><span class="result-cell ${ok ? 'bg-green-100 text-green-700' : v === null ? 'bg-gray-100 text-gray-400' : 'bg-red-100 text-red-600'}">${ok ? '\u2705' : v === null ? '\u2014' : '\u274C'}</span></td>`;
+          });
+          const hasFailures = activePlatforms.some(p => storeResults[s]?.[p] && storeResults[s][p] !== 'OK');
+          html += `<td class="px-2 py-1.5 text-center">${hasFailures ? `<button class="retry-store text-xs px-2 py-0.5 bg-yellow-100 text-yellow-700 rounded hover:bg-yellow-200 font-medium" data-store="${s}">Retry</button>` : '\u2014'}</td>`;
+          html += '</tr>';
+        });
+        html += '</tbody></table>';
+        tbl.innerHTML = html;
+
+        $('result-summary').textContent = `${okCount}/${totalCount} succeeded`;
+        log(`Publish complete: ${okCount}/${totalCount} succeeded`, okCount === totalCount ? 'success' : 'error');
+
+        // Retry handlers
+        document.querySelectorAll('.retry-store').forEach(btn => {
+          btn.onclick = async () => {
+            btn.disabled = true;
+            btn.textContent = '...';
+            const retryState = { ...state, store_ids: [btn.dataset.store] };
+            try {
+              const r = await fetch('/api/auto-campaign/publish', {
+                method: 'POST', headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify(retryState),
+              });
+              const rd = await r.json();
+              log(`Retry ${btn.dataset.store}: ${rd.ok ? 'done' : 'failed'}`, rd.ok ? 'success' : 'error');
+            } catch (e) { log(`Retry error: ${e.message}`, 'error'); }
+            btn.disabled = false;
+            btn.textContent = 'Retry';
+          };
+        });
+
+        // Retry All button
+        const failedStores = state.store_ids.filter(s => activePlatforms.some(p => storeResults[s]?.[p] && storeResults[s][p] !== 'OK'));
+        const retryAll = $('btn-retry-all');
+        if (failedStores.length > 0 && failedStores.length < state.store_ids.length) {
+          retryAll.classList.remove('hidden');
+          retryAll.onclick = async () => {
+            retryAll.disabled = true;
+            retryAll.textContent = '...';
+            const retryState = { ...state, store_ids: failedStores };
+            try {
+              const r = await fetch('/api/auto-campaign/publish', {
+                method: 'POST', headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify(retryState),
+              });
+              const rd = await r.json();
+              log(`Retry all failed: ${rd.ok ? 'done' : 'failed'}`, rd.ok ? 'success' : 'error');
+            } catch (e) { log(`Retry error: ${e.message}`, 'error'); }
+            retryAll.disabled = false;
+            retryAll.textContent = 'Retry All Failed';
+          };
+        } else {
+          retryAll.classList.add('hidden');
+        }
+
+        setStep(4);
+        $('publish-status').textContent = okCount === totalCount ? '✅ All campaigns published successfully!' : '⚠️ Some publishes failed. Check the table and retry.';
+        $('publish-status').className = `mt-3 text-sm ${okCount === totalCount ? 'text-green-700' : 'text-yellow-700'}`;
+      } catch (e) {
+        log('Publish failed: ' + e.message, 'error');
+        $('publish-status').textContent = '❌ ' + e.message;
+        $('publish-status').className = 'mt-3 text-sm text-red-600';
+      }
+
+      btn.disabled = false;
+      btn.innerHTML = '<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="22" y1="2" x2="11" y2="13"/><polygon points="22 2 15 22 11 13 2 9 22 2"/></svg> Publish to All Platforms';
+    };
+  </script>
+  <script src="/js/auth.js"></script>
+  <script>Auth.protect('auth-container');</script>
+</body>
+</html>

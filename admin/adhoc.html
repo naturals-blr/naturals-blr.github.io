@@ -1,0 +1,752 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Ad-hoc Post — Naturals Admin</title>
+  <script src="/admin/config.js"></script>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <style>
+    body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif; }
+    #activity-log > div:first-child { animation: fadeIn 0.2s ease-out; }
+    @keyframes fadeIn { from { opacity: 0; transform: translateY(-4px); } to { opacity: 1; transform: translateY(0); } }
+    .drop-zone { border: 2px dashed #d1d5db; transition: all 0.2s; }
+    .drop-zone.drag-over { border-color: #16a34a; background: #f0fdf4; }
+    .preview-card { border: 1px solid #e5e7eb; border-radius: 0.5rem; padding: 0.75rem; transition: background 0.15s; }
+    .preview-card:hover { background: #f9fafb; }
+    .result-cell { font-size: 0.75rem; padding: 0.25rem 0.5rem; border-radius: 4px; }
+    .history-item { border-left: 3px solid #16a34a; }
+    .badge-dot { width: 8px; height: 8px; border-radius: 50%; display: inline-block; }
+  </style>
+</head>
+<body class="bg-gray-50 text-gray-800 antialiased">
+<div id="auth-container"></div>
+  <div class="flex flex-col h-screen">
+
+    <!-- Header -->
+    <header class="bg-white border-b border-gray-200 px-5 py-3 shrink-0">
+      <div class="flex items-center justify-between">
+        <div class="flex items-center gap-4">
+          <a href="./" class="text-lg hover:opacity-70">&larr;</a>
+          <h1 class="text-lg font-bold text-green-800 tracking-tight">&#x1F4E3; Ad-hoc Social Post</h1>
+          <div id="status-badges" class="flex items-center gap-2"></div>
+        </div>
+        <button onclick="location.href='/'" class="text-xs px-3 py-1.5 border border-gray-300 rounded hover:bg-gray-50 text-gray-600">Home</button>
+      </div>
+    </header>
+
+    <!-- Form -->
+    <div class="flex-1 overflow-y-auto p-5">
+      <div class="max-w-3xl mx-auto space-y-5">
+
+        <!-- Title + AI generate -->
+        <div>
+          <label class="block text-sm font-semibold text-gray-700 mb-1">Title *</label>
+          <div class="flex gap-2">
+            <input type="text" id="post-title" class="flex-1 border border-gray-300 rounded-lg px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-green-500 focus:border-green-500" placeholder="e.g. Weekend Special: 20% Off">
+            <button id="btn-generate-ai" class="px-3 py-2 text-xs font-medium border border-purple-300 text-purple-700 rounded-lg hover:bg-purple-50 disabled:opacity-40 whitespace-nowrap transition-colors" title="Generate body from title using AI">&zigrarr; Generate</button>
+          </div>
+        </div>
+
+        <!-- Body + char count -->
+        <div>
+          <div class="flex items-center justify-between mb-1">
+            <label class="block text-sm font-semibold text-gray-700">Body *</label>
+            <span id="char-count" class="text-xs text-gray-400 font-mono">0 chars</span>
+          </div>
+          <textarea id="post-body" rows="4" class="w-full border border-gray-300 rounded-lg px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-green-500 focus:border-green-500" placeholder="Describe the offer or announcement..."></textarea>
+          <div id="platform-limits" class="flex gap-3 mt-1 text-xs text-gray-400"></div>
+        </div>
+
+        <!-- Dates -->
+        <div class="grid grid-cols-2 gap-4">
+          <div>
+            <label class="block text-sm font-semibold text-gray-700 mb-1">Start Date</label>
+            <input type="date" id="post-start" class="w-full border border-gray-300 rounded-lg px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-green-500 focus:border-green-500">
+          </div>
+          <div>
+            <label class="block text-sm font-semibold text-gray-700 mb-1">End Date</label>
+            <input type="date" id="post-end" class="w-full border border-gray-300 rounded-lg px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-green-500 focus:border-green-500">
+          </div>
+        </div>
+
+        <!-- Image upload + URL -->
+        <div>
+          <label class="block text-sm font-semibold text-gray-700 mb-1">Image</label>
+          <div class="flex gap-3 items-start">
+            <div class="flex-1 space-y-2">
+              <input type="url" id="post-image" class="w-full border border-gray-300 rounded-lg px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-green-500 focus:border-green-500" placeholder="https://naturalsprime.in/campaigns/adhoc/03_published/... or upload below">
+              <!-- Drop zone -->
+              <div id="drop-zone" class="drop-zone rounded-lg p-4 text-center cursor-pointer text-xs text-gray-400 hover:border-green-400 transition-colors">
+                <p>&#x1F4C2; Drop image or video here or click to upload</p>
+                <p class="mt-0.5">PNG, JPG, WebP, MP4, MOV &mdash; max 50MB</p>
+              </div>
+              <input type="file" id="file-input" accept="image/png,image/jpeg,image/webp,image/gif,video/mp4,video/quicktime" class="hidden">
+            </div>
+            <!-- Image/video preview -->
+            <div id="image-preview" class="hidden shrink-0 w-28 h-28 rounded-lg border border-gray-200 overflow-hidden bg-white">
+              <img id="preview-img" class="w-full h-full object-cover" alt="preview">
+              <video id="preview-video" class="w-full h-full object-cover hidden" controls><source></video>
+            </div>
+          </div>
+          <div class="flex gap-2 mt-1.5">
+            <button id="btn-generate-image" class="px-3 py-1.5 text-xs font-medium border border-purple-300 text-purple-700 rounded-lg hover:bg-purple-50 disabled:opacity-40 transition-colors" title="Generate branded image from title using AI">&zigrarr; Generate Image</button>
+          </div>
+          <p class="text-xs text-gray-400 mt-1">Facebook supports direct upload. Instagram/Google get a temporary CDN URL via Facebook. Videos supported for all platforms.</p>
+        </div>
+
+        <!-- Schedule -->
+        <div class="bg-gray-50 rounded-lg p-3 border border-gray-200">
+          <label class="flex items-center gap-2 text-sm font-semibold text-gray-700 mb-2 cursor-pointer">
+            <input type="checkbox" id="schedule-toggle" class="rounded border-gray-300">
+            <span>Schedule for later</span>
+          </label>
+          <div id="schedule-fields" class="hidden">
+            <input type="datetime-local" id="schedule-datetime" class="w-full border border-gray-300 rounded-lg px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-green-500 focus:border-green-500">
+          </div>
+        </div>
+
+        <!-- Platforms -->
+        <div>
+          <label class="block text-sm font-semibold text-gray-700 mb-2">Platforms</label>
+          <div class="flex items-center gap-5">
+            <label class="flex items-center gap-1.5 text-sm cursor-pointer">
+              <input type="checkbox" id="platform-fb" checked class="rounded border-gray-300 text-blue-600 focus:ring-blue-500">
+              <span>Facebook</span>
+            </label>
+            <label class="flex items-center gap-1.5 text-sm cursor-pointer">
+              <input type="checkbox" id="platform-ig" checked class="rounded border-gray-300 text-pink-600 focus:ring-pink-500">
+              <span>Instagram</span>
+            </label>
+            <label class="flex items-center gap-1.5 text-sm cursor-pointer">
+              <input type="checkbox" id="platform-gp" checked class="rounded border-gray-300 text-red-600 focus:ring-red-500">
+              <span>Google</span>
+            </label>
+          </div>
+        </div>
+
+        <!-- Stores -->
+        <div>
+          <div class="flex items-center justify-between mb-2">
+            <label class="block text-sm font-semibold text-gray-700">Stores</label>
+            <div class="flex gap-2">
+              <button id="btn-select-all-stores" class="text-xs px-2 py-1 border border-gray-300 rounded hover:bg-gray-50">Select All</button>
+              <button id="btn-deselect-all-stores" class="text-xs px-2 py-1 border border-gray-300 rounded hover:bg-gray-50">None</button>
+            </div>
+          </div>
+          <div id="stores-bar" class="flex flex-wrap items-center gap-4">
+            <label class="flex items-center gap-1.5 text-xs cursor-pointer"><input type="checkbox" class="store-cb rounded border-gray-300 text-green-600 focus:ring-green-500" data-store="N78" checked> <span>N78 &mdash; JP Nagar</span></label>
+            <label class="flex items-center gap-1.5 text-xs cursor-pointer"><input type="checkbox" class="store-cb rounded border-gray-300 text-green-600 focus:ring-green-500" data-store="N45" checked> <span>N45 &mdash; Nagavara</span></label>
+            <label class="flex items-center gap-1.5 text-xs cursor-pointer"><input type="checkbox" class="store-cb rounded border-gray-300 text-green-600 focus:ring-green-500" data-store="N36" checked> <span>N36 &mdash; Ayyappa Nagar</span></label>
+            <label class="flex items-center gap-1.5 text-xs cursor-pointer"><input type="checkbox" class="store-cb rounded border-gray-300 text-green-600 focus:ring-green-500" data-store="N05" checked> <span>N05 &mdash; Frazer Town</span></label>
+            <label class="flex items-center gap-1.5 text-xs cursor-pointer"><input type="checkbox" class="store-cb rounded border-gray-300 text-green-600 focus:ring-green-500" data-store="N43" checked> <span>N43 &mdash; Hennur</span></label>
+          </div>
+        </div>
+
+        <!-- Live per-store preview -->
+        <div id="live-preview-section" class="hidden">
+          <hr class="border-gray-200">
+          <p class="text-xs font-semibold text-gray-500 uppercase tracking-wider mb-2">&#x1F50D; Live Preview</p>
+          <div id="store-previews" class="grid grid-cols-1 sm:grid-cols-2 gap-3"></div>
+        </div>
+
+        <!-- Publish buttons -->
+        <div class="pt-2 flex gap-3 items-center">
+          <button id="btn-publish" class="px-6 py-2.5 bg-green-600 text-white text-sm font-semibold rounded-lg hover:bg-green-700 disabled:opacity-40 disabled:cursor-not-allowed transition-colors">&#x1F4E4; Publish Now</button>
+          <button id="btn-schedule" class="px-4 py-2.5 border border-green-600 text-green-700 text-sm font-semibold rounded-lg hover:bg-green-50 disabled:opacity-40 disabled:cursor-not-allowed transition-colors">&#x23F0; Schedule</button>
+          <span id="publish-status" class="text-sm text-gray-500 ml-1"></span>
+        </div>
+
+        <!-- Result table (appears after publish) -->
+        <div id="result-section" class="hidden">
+          <hr class="border-gray-200">
+          <div class="flex items-center justify-between mb-2">
+            <p class="text-xs font-semibold text-gray-500 uppercase tracking-wider">&#x1F4CB; Results</p>
+            <span id="result-summary" class="text-xs font-medium"></span>
+          </div>
+          <div id="result-table" class="overflow-x-auto"></div>
+          <div class="flex gap-2 mt-2">
+            <button id="btn-retry-all" class="hidden text-xs px-3 py-1.5 bg-yellow-500 text-white rounded hover:bg-yellow-600 font-medium transition-colors">Retry All Failed</button>
+          </div>
+        </div>
+
+        <!-- History -->
+        <div>
+          <hr class="border-gray-200">
+          <div class="flex items-center justify-between">
+            <button id="btn-toggle-history" class="text-xs font-semibold text-gray-500 uppercase tracking-wider py-2 hover:text-gray-700 transition-colors">&#x1F4C4; Post History</button>
+            <span id="history-count" class="text-xs text-gray-400"></span>
+          </div>
+          <div id="history-list" class="hidden space-y-2 mt-2"></div>
+        </div>
+
+        <!-- Scheduled queue -->
+        <div>
+          <hr class="border-gray-200">
+          <div class="flex items-center justify-between">
+            <button id="btn-toggle-queue" class="text-xs font-semibold text-gray-500 uppercase tracking-wider py-2 hover:text-gray-700 transition-colors">&#x23F0; Scheduled Queue</button>
+            <span id="queue-count" class="text-xs text-gray-400"></span>
+          </div>
+          <div id="queue-list" class="hidden space-y-2 mt-2"></div>
+        </div>
+
+      </div>
+    </div>
+
+    <!-- Activity log -->
+    <div class="bg-white border-t border-gray-200 px-5 py-2 shrink-0">
+      <div class="flex items-center justify-between">
+        <span class="text-xs font-semibold text-gray-500 uppercase">Activity</span>
+        <button onclick="document.getElementById('activity-log').innerHTML = ''" class="text-xs text-gray-400 hover:text-gray-600">Clear</button>
+      </div>
+      <div id="activity-log" class="font-mono text-xs space-y-0.5 max-h-24 overflow-y-auto"></div>
+    </div>
+  </div>
+
+  <script src="/js/auth.js"></script>
+  <script src="/js/api.js"></script>
+  <script>
+    const $ = id => document.getElementById(id);
+
+    function log(msg, level) {
+      const el = document.getElementById('activity-log');
+      const d = new Date();
+      const ts = d.toLocaleTimeString('en-IN', { hour12: false });
+      const color = level === 'error' ? 'text-red-600' : level === 'success' ? 'text-green-600' : 'text-gray-700';
+      el.innerHTML = `<div class="${color}">${ts} ${msg}</div>` + el.innerHTML;
+    }
+
+    // ── Helpers ────────────────────────────────────────────────────
+    const STORE_NAMES = { N78: 'JP Nagar 5th Phase', N45: 'Nagavara', N36: 'Ayyappa Nagar', N05: 'Frazer Town', N43: 'Hennur' };
+    const LIMITS = { facebook: 63206, instagram: 2200, google: 1500 };
+
+    function getStoreSlug(name) {
+      const s = name.toLowerCase().replace(/[^a-z0-9 ]/g, '').replace(/\s+/g, '');
+      if (s.includes('jpnagar') || (s.includes('jp') && s.includes('nagar'))) return 'jpnagar5thphase';
+      if (s.includes('nagavara') || s.includes('elements')) return 'nagavara';
+      if (s.includes('ayyappanagar')) return 'ayyappanagar';
+      if (s.includes('frazer')) return 'frazertown';
+      if (s.includes('hennur')) return 'hennur';
+      return s;
+    }
+
+    // ── Status badges ──────────────────────────────────────────────
+    getStatus().then(s => {
+      const badges = document.getElementById('status-badges');
+      badges.innerHTML = s.dryRun
+        ? '<span class="text-xs px-2 py-0.5 rounded-full bg-yellow-100 text-yellow-800 font-medium">&#x1F534; DRY RUN</span>'
+        : '<span class="text-xs px-2 py-0.5 rounded-full bg-green-100 text-green-800 font-medium">&#x1F7E2; LIVE</span>';
+    });
+
+    // ── Default dates ──────────────────────────────────────────────
+    const today = new Date();
+    const todayStr = today.toISOString().slice(0, 10);
+    const weekLater = new Date(today);
+    weekLater.setDate(weekLater.getDate() + 7);
+    if (!$('post-start').value) $('post-start').value = todayStr;
+    if (!$('post-end').value) $('post-end').value = weekLater.toISOString().slice(0, 10);
+
+    // ── Form state persistence (sessionStorage) ────────────────────
+    const FORM_KEY = 'adhoc_form_state';
+
+    function saveFormState() {
+      const state = {
+        title: $('post-title').value,
+        body: $('post-body').value,
+        startDate: $('post-start').value,
+        endDate: $('post-end').value,
+        imageUrl: $('post-image').value,
+        platforms: { fb: $('platform-fb').checked, ig: $('platform-ig').checked, gp: $('platform-gp').checked },
+        stores: [...document.querySelectorAll('.store-cb')].map(cb => ({ id: cb.dataset.store, checked: cb.checked })),
+      };
+      try { sessionStorage.setItem(FORM_KEY, JSON.stringify(state)); } catch (_) {}
+    }
+
+    function restoreFormState() {
+      try {
+        const raw = sessionStorage.getItem(FORM_KEY);
+        if (!raw) return;
+        const state = JSON.parse(raw);
+        if (state.title) $('post-title').value = state.title;
+        if (state.body) $('post-body').value = state.body;
+        if (state.startDate) $('post-start').value = state.startDate;
+        if (state.endDate) $('post-end').value = state.endDate;
+        if (state.imageUrl) $('post-image').value = state.imageUrl;
+        if (state.platforms) {
+          $('platform-fb').checked = state.platforms.fb !== false;
+          $('platform-ig').checked = state.platforms.ig !== false;
+          $('platform-gp').checked = state.platforms.gp !== false;
+        }
+        if (state.stores) {
+          document.querySelectorAll('.store-cb').forEach(cb => {
+            const found = state.stores.find(s => s.id === cb.dataset.store);
+            if (found) cb.checked = found.checked;
+          });
+        }
+      } catch (_) {}
+    }
+    restoreFormState();
+
+    // ── Character counts ──────────────────────────────────────────
+    function updateCharCount() {
+      const len = $('post-body').value.length;
+      $('char-count').textContent = `${len} chars`;
+
+      const activePlatforms = [];
+      if ($('platform-fb').checked) activePlatforms.push('facebook');
+      if ($('platform-ig').checked) activePlatforms.push('instagram');
+      if ($('platform-gp').checked) activePlatforms.push('google');
+
+      const el = $('platform-limits');
+      if (activePlatforms.length === 0) { el.innerHTML = ''; return; }
+      el.innerHTML = activePlatforms.map(p => {
+        const limit = LIMITS[p];
+        const over = len > limit;
+        return `<span class="${over ? 'text-red-500 font-semibold' : ''}">${p}: ${len}/${limit}${over ? ' &#x26A0;' : ''}</span>`;
+      }).join(' &middot; ');
+    }
+
+    // ── Live per-store preview ─────────────────────────────────────
+    function isVideoUrl(url) { return /\.(mp4|mov)(\?|$)/i.test(url); }
+
+    function localPreviewUrl(url) {
+      if (!url) return '';
+      const filename = url.split('/').pop();
+      return `/campaigns/adhoc/03_published/${filename}`;
+    }
+
+    function updatePreview() {
+      const title = $('post-title').value.trim();
+      const body = $('post-body').value.trim();
+      const imgUrl = $('post-image').value.trim();
+      const storeCbs = [...document.querySelectorAll('.store-cb:checked')];
+      const previewSection = $('live-preview-section');
+      const container = $('store-previews');
+
+      if (!title && !body) { previewSection.classList.add('hidden'); return; }
+
+      previewSection.classList.remove('hidden');
+      container.innerHTML = storeCbs.map(cb => {
+        const sid = cb.dataset.store;
+        const name = STORE_NAMES[sid] || sid;
+        const slug = getStoreSlug(name);
+        const brandedTitle = `Naturals Unisex Salon ${name} - ${title || '(no title)'}`;
+        const offersUrl = `https://naturalsprime.in/${slug}/offers/`;
+        const brandedBody = `${body || '(no body)'}\n\n\u{1F4CD} Visit: ${offersUrl}`;
+        return `<div class="preview-card">
+          <div class="flex items-center gap-2 mb-1">
+            <span class="text-xs font-bold text-green-700">${sid}</span>
+            <span class="text-xs text-gray-400 truncate">${name}</span>
+          </div>
+          <p class="text-xs font-semibold text-gray-800 break-words">${escHtml(brandedTitle)}</p>
+          <p class="text-xs text-gray-600 mt-0.5 whitespace-pre-wrap break-words line-clamp-3">${escHtml(brandedBody)}</p>
+          <a href="${offersUrl}" target="_blank" class="text-xs text-green-600 hover:underline mt-0.5 inline-block">${offersUrl}</a>
+          ${imgUrl ? (() => {
+            const displaySrc = localPreviewUrl(imgUrl);
+            return isVideoUrl(imgUrl)
+              ? `<video class="mt-1.5 h-16 w-auto rounded border border-gray-100" controls><source src="${escHtml(displaySrc)}"></video>`
+              : `<img src="${escHtml(displaySrc)}" class="mt-1.5 h-16 w-auto rounded border border-gray-100 object-cover" onerror="this.style.display='none'">`;
+          })() : ''}
+        </div>`;
+      }).join('');
+      updateCharCount();
+      saveFormState();
+    }
+
+    function escHtml(s) {
+      const d = document.createElement('div');
+      d.textContent = s;
+      return d.innerHTML;
+    }
+
+    // ── Image/video preview ────────────────────────────────────────
+    function updateImagePreview(url) {
+      const preview = $('image-preview');
+      const img = $('preview-img');
+      const vid = $('preview-video');
+      const displayUrl = localPreviewUrl(url) || url;
+      if (url) {
+        preview.classList.remove('hidden');
+        if (isVideoUrl(url)) {
+          img.classList.add('hidden');
+          vid.classList.remove('hidden');
+          vid.querySelector('source').src = displayUrl;
+          vid.load();
+        } else {
+          img.classList.remove('hidden');
+          img.src = displayUrl;
+          vid.classList.add('hidden');
+        }
+      } else {
+        preview.classList.add('hidden');
+        img.src = '';
+        img.classList.remove('hidden');
+        vid.classList.add('hidden');
+      }
+    }
+
+    // ── Image drag-and-drop upload ─────────────────────────────────
+    const dropZone = $('drop-zone');
+    const fileInput = $('file-input');
+
+    dropZone.addEventListener('click', () => fileInput.click());
+
+    dropZone.addEventListener('dragover', e => { e.preventDefault(); dropZone.classList.add('drag-over'); });
+    dropZone.addEventListener('dragleave', () => dropZone.classList.remove('drag-over'));
+    dropZone.addEventListener('drop', e => { e.preventDefault(); dropZone.classList.remove('drag-over'); if (e.dataTransfer.files.length) handleImageFile(e.dataTransfer.files[0]); });
+    fileInput.addEventListener('change', () => { if (fileInput.files.length) handleImageFile(fileInput.files[0]); });
+
+    async function handleImageFile(file) {
+      log(`Uploading ${file.name}...`);
+      const fd = new FormData();
+      fd.append('image', file);
+      try {
+        const res = await fetch('/api/adhoc/upload-image', { method: 'POST', body: fd });
+        const data = await res.json();
+        if (data.ok) {
+          $('post-image').value = data.data.imageUrl;
+          updateImagePreview(data.data.imageUrl);
+          updatePreview();
+          log(`Image uploaded: ${data.data.filename}`, 'success');
+        } else {
+          log(`Upload failed: ${data.error}`, 'error');
+        }
+      } catch (e) {
+        log(`Upload error: ${e.message}`, 'error');
+      }
+    }
+
+    // ── AI generate ────────────────────────────────────────────────
+    $('btn-generate-ai').addEventListener('click', async () => {
+      const title = $('post-title').value.trim();
+      if (!title) { log('Enter a title first', 'error'); return; }
+      $('btn-generate-ai').disabled = true;
+      $('btn-generate-ai').textContent = '...';
+      try {
+        const res = await fetch('/api/adhoc/generate', { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ title }) });
+        const data = await res.json();
+        if (data.ok) {
+          $('post-body').value = data.data.body;
+          updatePreview();
+          log('Body generated by AI', 'success');
+        } else {
+          log(`AI generation failed: ${data.error}`, 'error');
+        }
+      } catch (e) {
+        log(`AI error: ${e.message}`, 'error');
+      }
+      $('btn-generate-ai').disabled = false;
+      $('btn-generate-ai').textContent = '\u{2B06} Generate';
+    });
+
+    // ── AI generate image ──────────────────────────────────────────
+    $('btn-generate-image').addEventListener('click', async () => {
+      const title = $('post-title').value.trim();
+      if (!title) { log('Enter a title first', 'error'); return; }
+      const body = $('post-body').value.trim();
+      $('btn-generate-image').disabled = true;
+      $('btn-generate-image').textContent = '...';
+      try {
+        const res = await fetch('/api/adhoc/generate-image', { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ title, body }) });
+        const data = await res.json();
+        if (data.ok) {
+          $('post-image').value = data.data.imageUrl;
+          updateImagePreview(data.data.imageUrl);
+          updatePreview();
+          log(`Image generated: saved to campaigns/adhoc/03_published/${data.data.filename}`, 'success');
+        } else {
+          log(`Image gen failed: ${data.error}`, 'error');
+        }
+      } catch (e) {
+        log(`Image gen error: ${e.message}`, 'error');
+      }
+      $('btn-generate-image').disabled = false;
+      $('btn-generate-image').textContent = '\u{2B06} Generate Image';
+    });
+
+    // ── Schedule toggle ────────────────────────────────────────────
+    $('schedule-toggle').addEventListener('change', () => {
+      $('schedule-fields').classList.toggle('hidden', !$('schedule-toggle').checked);
+    });
+
+    // ── Store select all/none ──────────────────────────────────────
+    $('btn-select-all-stores').addEventListener('click', () => {
+      document.querySelectorAll('.store-cb').forEach(cb => cb.checked = true);
+      updatePreview();
+    });
+    $('btn-deselect-all-stores').addEventListener('click', () => {
+      document.querySelectorAll('.store-cb').forEach(cb => cb.checked = false);
+      updatePreview();
+    });
+
+    // ── Events that trigger preview update ─────────────────────────
+    ['post-title', 'post-body', 'post-image'].forEach(id => {
+      $(id).addEventListener('input', updatePreview);
+    });
+    ['post-start', 'post-end'].forEach(id => {
+      $(id).addEventListener('input', saveFormState);
+    });
+    $('post-image').addEventListener('input', () => {
+      updateImagePreview($('post-image').value.trim());
+    });
+    document.querySelectorAll('.store-cb, #platform-fb, #platform-ig, #platform-gp').forEach(el => {
+      el.addEventListener('change', updatePreview);
+    });
+
+    // ── Publish ────────────────────────────────────────────────────
+    async function doPublish(storeIdsOverride, retryId) {
+      const title = $('post-title').value.trim();
+      const body = $('post-body').value.trim();
+      if (!title || !body) { log('Title and body are required', 'error'); return null; }
+
+      const platforms = { facebook: $('platform-fb').checked, instagram: $('platform-ig').checked, google: $('platform-gp').checked };
+      const storeIds = storeIdsOverride || [...document.querySelectorAll('.store-cb:checked')].map(cb => cb.dataset.store);
+      const imageUrl = $('post-image').value.trim();
+      const startDate = $('post-start').value;
+      const endDate = $('post-end').value;
+
+      if (!platforms.facebook && !platforms.instagram && !platforms.google) { log('Select at least one platform', 'error'); return null; }
+      if (storeIds.length === 0) { log('Select at least one store', 'error'); return null; }
+
+      log(`${retryId ? 'Retrying' : 'Publishing'}: "${title}" (${storeIds.join(', ')})`);
+
+      try {
+        const data = await api('/publish-adhoc', {
+          method: 'POST',
+          body: JSON.stringify({ title, body, imageUrl, startDate, endDate, platforms, storeIds }),
+        });
+        log(`Done: ${data.message}`, 'success');
+        if (data.output) data.output.split('\n').filter(l => l.trim()).forEach(l => log(`  ${l}`));
+        return { title, body, imageUrl, startDate, endDate, platforms, storeIds, output: data.output || '' };
+      } catch (err) {
+        log(`Failed: ${err.message}`, 'error');
+        if (err.output) err.output.split('\n').filter(l => l.trim()).forEach(l => log(`  ${l}`, 'error'));
+        return { title, body, imageUrl, startDate, endDate, platforms, storeIds, output: err.output || err.message, error: true };
+      }
+    }
+
+    $('btn-publish').addEventListener('click', async () => {
+      $('btn-publish').disabled = true;
+      $('btn-publish').textContent = '\u23F3 Publishing...';
+      $('publish-status').textContent = '';
+      $('result-section').classList.add('hidden');
+
+      const result = await doPublish();
+      if (result) {
+        saveToHistory(result);
+        showResultTable(result);
+        loadHistory();
+        if (!result.error) $('publish-status').textContent = '\u2705 Done';
+      }
+
+      $('btn-publish').disabled = false;
+      $('btn-publish').textContent = '\u{1F4E4} Publish Now';
+    });
+
+    // ── Schedule ───────────────────────────────────────────────────
+    $('btn-schedule').addEventListener('click', async () => {
+      const dt = $('schedule-datetime').value;
+      if (!dt) { log('Set a date/time for scheduling', 'error'); return; }
+      const title = $('post-title').value.trim();
+      const body = $('post-body').value.trim();
+      if (!title || !body) { log('Title and body are required', 'error'); return; }
+
+      $('btn-schedule').disabled = true;
+      try {
+        const res = await fetch('/api/adhoc/schedule', {
+          method: 'POST', headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ title, body, imageUrl: $('post-image').value.trim(), startDate: $('post-start').value, endDate: $('post-end').value, platforms: { facebook: $('platform-fb').checked, instagram: $('platform-ig').checked, google: $('platform-gp').checked }, storeIds: [...document.querySelectorAll('.store-cb:checked')].map(cb => cb.dataset.store), scheduledAt: dt }),
+        });
+        const data = await res.json();
+        if (data.ok) {
+          log(`Scheduled for ${dt}`, 'success');
+          loadQueue();
+        } else {
+          log(`Schedule failed: ${data.error}`, 'error');
+        }
+      } catch (e) { log(`Schedule error: ${e.message}`, 'error'); }
+      $('btn-schedule').disabled = false;
+    });
+
+    // ── Result table ───────────────────────────────────────────────
+    function showResultTable(result) {
+      const section = $('result-section');
+      section.classList.remove('hidden');
+
+      const stores = result.storeIds;
+      const platforms = ['facebook', 'instagram', 'google'];
+      const activePlatforms = platforms.filter(p => result.platforms[p]);
+
+      // Parse output for per-store results
+      const storeResults = {};
+      stores.forEach(s => { storeResults[s] = {}; activePlatforms.forEach(p => { storeResults[s][p] = null; }); });
+
+      const outputLines = (result.output || '').split('\n');
+      let currentStore = null;
+      outputLines.forEach(line => {
+        const storeMatch = line.match(/^📌 (.+?) \(Store_(\w+)\)/);
+        if (storeMatch) currentStore = storeMatch[2];
+        if (line.includes('Results:') && currentStore) {
+          try {
+            const resultsMatch = line.match(/\{.*\}/);
+            if (resultsMatch) {
+              const parsed = JSON.parse(resultsMatch[0].replace(/'/g, '"'));
+              Object.entries(parsed).forEach(([k, v]) => { if (storeResults[currentStore]) storeResults[currentStore][k] = v; });
+            }
+          } catch (_) {}
+        }
+      });
+
+      let html = '<table class="w-full text-xs border-collapse"><thead><tr class="bg-gray-100">';
+      html += '<th class="px-2 py-1.5 text-left font-semibold text-gray-600">Store</th>';
+      activePlatforms.forEach(p => { html += `<th class="px-2 py-1.5 text-center font-semibold text-gray-600 capitalize">${p}</th>`; });
+      html += '<th class="px-2 py-1.5 text-center font-semibold text-gray-600">Retry</th></tr></thead><tbody>';
+
+      let okCount = 0, totalCount = 0;
+      stores.forEach(s => {
+        html += `<tr class="border-t border-gray-100"><td class="px-2 py-1.5 font-medium">${s}</td>`;
+        activePlatforms.forEach(p => {
+          const v = storeResults[s]?.[p];
+          const ok = v === 'OK';
+          if (ok) okCount++;
+          totalCount++;
+          html += `<td class="px-2 py-1.5 text-center"><span class="result-cell ${ok ? 'bg-green-100 text-green-700' : v === null ? 'bg-gray-100 text-gray-400' : 'bg-red-100 text-red-600'}">${ok ? '\u2705' : v === null ? '\u2014' : '\u274C'}</span></td>`;
+        });
+        const hasFailures = activePlatforms.some(p => storeResults[s]?.[p] && storeResults[s][p] !== 'OK');
+        html += `<td class="px-2 py-1.5 text-center">${hasFailures ? `<button class="text-xs px-2 py-0.5 bg-yellow-100 text-yellow-700 rounded hover:bg-yellow-200 font-medium retry-store-btn" data-store="${s}">Retry</button>` : '\u2014'}</td>`;
+        html += '</tr>';
+      });
+      html += '</tbody></table>';
+
+      $('result-table').innerHTML = html;
+      $('result-summary').textContent = `${okCount}/${totalCount} succeeded`;
+
+      // Retry individual store
+      document.querySelectorAll('.retry-store-btn').forEach(btn => {
+        btn.addEventListener('click', async () => {
+          btn.disabled = true;
+          btn.textContent = '...';
+          const retryResult = await doPublish([btn.dataset.store]);
+          if (retryResult) { showResultTable(retryResult); saveToHistory(retryResult); loadHistory(); }
+        });
+      });
+
+      // Retry all failed
+      const failedStores = stores.filter(s => activePlatforms.some(p => storeResults[s]?.[p] && storeResults[s][p] !== 'OK'));
+      const retryAllBtn = $('btn-retry-all');
+      if (failedStores.length > 0 && failedStores.length < stores.length) {
+        retryAllBtn.classList.remove('hidden');
+        retryAllBtn.onclick = async () => {
+          retryAllBtn.disabled = true;
+          retryAllBtn.textContent = '...';
+          const retryResult = await doPublish(failedStores);
+          if (retryResult) { showResultTable(retryResult); saveToHistory(retryResult); loadHistory(); }
+        };
+      } else {
+        retryAllBtn.classList.add('hidden');
+      }
+    }
+
+    // ── History ────────────────────────────────────────────────────
+    function saveToHistory(result) {
+      const history = JSON.parse(sessionStorage.getItem('adhoc_history') || '[]');
+      history.unshift({ ...result, timestamp: new Date().toISOString() });
+      if (history.length > 50) history.length = 50;
+      sessionStorage.setItem('adhoc_history', JSON.stringify(history));
+    }
+
+    async function loadHistory() {
+      try {
+        const res = await fetch('/api/adhoc/history');
+        const data = await res.json();
+        if (!data.ok) return;
+        const entries = data.data || [];
+        $('history-count').textContent = `${entries.length} post(s)`;
+        if (entries.length === 0) { $('history-list').innerHTML = '<p class="text-xs text-gray-400 italic">No posts yet</p>'; return; }
+        $('history-list').innerHTML = entries.slice(0, 20).map(e => {
+          const d = new Date(e.timestamp);
+          const ts = d.toLocaleString('en-IN');
+          const stores = (e.storeIds || []).join(', ');
+          const platforms = Object.entries(e.platforms || {}).filter(([,v]) => v).map(([k]) => k).join(', ');
+          return `<div class="history-item pl-3 py-2 bg-white rounded border border-gray-100">
+            <div class="flex items-start justify-between gap-2">
+              <div class="min-w-0">
+                <p class="text-xs font-semibold text-gray-800 truncate">${escHtml(e.title || '')}</p>
+                <p class="text-xs text-gray-400">${ts} &middot; ${platforms} &middot; ${stores}</p>
+              </div>
+              <button class="text-xs px-2 py-0.5 bg-green-100 text-green-700 rounded hover:bg-green-200 font-medium shrink-0 reprint-btn" data-title="${escHtml(e.title)}" data-body="${escHtml(e.body)}" data-img="${escHtml(e.imageUrl || '')}" data-sd="${e.startDate || ''}" data-ed="${e.endDate || ''}" data-fb="${e.platforms?.facebook || false}" data-ig="${e.platforms?.instagram || false}" data-gp="${e.platforms?.google || false}" data-stores="${(e.storeIds || []).join(',')}">Re-publish</button>
+            </div>
+          </div>`;
+        }).join('');
+
+        document.querySelectorAll('.reprint-btn').forEach(btn => {
+          btn.addEventListener('click', () => {
+            $('post-title').value = btn.dataset.title;
+            $('post-body').value = btn.dataset.body;
+            $('post-image').value = btn.dataset.img;
+            if (btn.dataset.sd) $('post-start').value = btn.dataset.sd;
+            if (btn.dataset.ed) $('post-end').value = btn.dataset.ed;
+            $('platform-fb').checked = btn.dataset.fb === 'true';
+            $('platform-ig').checked = btn.dataset.ig === 'true';
+            $('platform-gp').checked = btn.dataset.gp === 'true';
+            document.querySelectorAll('.store-cb').forEach(cb => { cb.checked = btn.dataset.stores.split(',').includes(cb.dataset.store); });
+            updateImagePreview(btn.dataset.img);
+            updatePreview();
+            log('Form restored from history', 'info');
+            $('live-preview-section').scrollIntoView({ behavior: 'smooth' });
+          });
+        });
+      } catch (_) {}
+    }
+
+    // ── Queue ──────────────────────────────────────────────────────
+    async function loadQueue() {
+      try {
+        const res = await fetch('/api/adhoc/queue');
+        const data = await res.json();
+        if (!data.ok) return;
+        const entries = data.data || [];
+        $('queue-count').textContent = `${entries.length} queued`;
+        if (entries.length === 0) { $('queue-list').innerHTML = '<p class="text-xs text-gray-400 italic">No scheduled posts</p>'; return; }
+        $('queue-list').innerHTML = entries.map(e => {
+          const stores = (e.storeIds || []).join(', ');
+          const platforms = Object.entries(e.platforms || {}).filter(([,v]) => v).map(([k]) => k).join(', ');
+          return `<div class="pl-3 py-2 bg-white rounded border border-gray-100 flex items-start justify-between gap-2">
+            <div class="min-w-0">
+              <p class="text-xs font-semibold text-gray-800 truncate">${escHtml(e.title || '')}</p>
+              <p class="text-xs text-gray-400">Scheduled: ${e.scheduledAt || '?'} &middot; ${platforms} &middot; ${stores}</p>
+            </div>
+            <button class="text-xs px-2 py-0.5 bg-red-100 text-red-700 rounded hover:bg-red-200 font-medium shrink-0 cancel-btn" data-id="${e.id}">Cancel</button>
+          </div>`;
+        }).join('');
+
+        document.querySelectorAll('.cancel-btn').forEach(btn => {
+          btn.addEventListener('click', async () => {
+            try {
+              const r = await fetch('/api/adhoc/cancel-schedule', { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ id: btn.dataset.id }) });
+              const d = await r.json();
+              if (d.ok) { log('Scheduled post cancelled', 'info'); loadQueue(); }
+            } catch (_) {}
+          });
+        });
+      } catch (_) {}
+    }
+
+    // ── Toggle history/queue ───────────────────────────────────────
+    $('btn-toggle-history').addEventListener('click', () => {
+      $('history-list').classList.toggle('hidden');
+    });
+    $('btn-toggle-queue').addEventListener('click', () => {
+      $('queue-list').classList.toggle('hidden');
+    });
+
+    // ── Initial load ───────────────────────────────────────────────
+    updatePreview();
+    // Restore image preview from saved URL
+    if ($('post-image').value.trim()) updateImagePreview($('post-image').value.trim());
+    loadHistory();
+    loadQueue();
+  </script>
+  <script>Auth.protect('auth-container');</script>
+</body>
+</html>

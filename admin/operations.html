@@ -1,0 +1,688 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Operations — Naturals Admin</title>
+  <script src="/admin/config.js"></script>
+  <link rel="stylesheet" href="css/style.css">
+<style>
+  body { padding: 2rem; max-width: 960px; margin: 0 auto; }
+  h1 { margin-bottom: 0.25rem; }
+  .subtitle { color: #6b7280; margin-bottom: 2rem; }
+  section { margin-bottom: 2.5rem; }
+  h2 { border-bottom: 2px solid #e5e7eb; padding-bottom: 0.5rem; margin-bottom: 1rem; }
+  table { width: 100%; border-collapse: collapse; margin-bottom: 1rem; }
+  th, td { text-align: left; padding: 0.5rem 0.75rem; border: 1px solid #e5e7eb; font-size: 0.875rem; }
+  th { background: #f3f4f6; font-weight: 600; }
+  td:first-child { font-weight: 500; white-space: nowrap; }
+  code { background: #f3f4f6; padding: 0.125rem 0.375rem; border-radius: 3px; font-size: 0.8125rem; }
+  .badge { display: inline-block; padding: 0.125rem 0.5rem; border-radius: 999px; font-size: 0.75rem; font-weight: 600; }
+  .badge-green { background: #d1fae5; color: #065f46; }
+  .badge-blue { background: #dbeafe; color: #1e40af; }
+  .badge-amber { background: #fef3c7; color: #92400e; }
+  .badge-gray { background: #f3f4f6; color: #374151; }
+  .badge-red { background: #fee2e2; color: #991b1b; }
+  .dep-box { background: #f9fafb; border: 1px solid #e5e7eb; border-radius: 6px; padding: 0.75rem 1rem; margin-top: 0.5rem; }
+  .dep-box strong { display: block; margin-bottom: 0.25rem; font-size: 0.8125rem; color: #374151; }
+  .dep-box ul { margin: 0; padding-left: 1.25rem; font-size: 0.8125rem; color: #6b7280; }
+  h4 { font-size: 0.875rem; margin: 1rem 0 0.5rem; color: #374151; }
+  h3 { font-size: 1rem; margin: 1.5rem 0 0.75rem; }
+  .back-link { display: inline-block; margin-bottom: 1.5rem; color: #3b82f6; text-decoration: none; font-size: 0.875rem; }
+  .back-link:hover { text-decoration: underline; }
+</style>
+</head>
+<body>
+<div id="auth-container"></div>
+
+<a href="./" class="back-link">&larr; Back to Home</a>
+<h1>Operations Guide</h1>
+<p class="subtitle">All features, schedules, and run instructions for Naturals Bangalore</p>
+
+<section>
+<h2>Production (GitHub Actions)</h2>
+<p style="font-size:0.875rem;color:#6b7280;margin-bottom:1rem">These jobs run automatically on schedule. All times are IST. Credentials are configured in GitHub Secrets.</p>
+<p style="font-size:0.875rem;color:#dc2626;margin-bottom:1rem;background:#fef2f2;border:1px solid #fecaca;border-radius:6px;padding:0.5rem 0.75rem">⚠️ The manual run commands below work ONLY when executed inside GitHub Actions CI (via workflow_dispatch). They will NOT work from your laptop unless you have the same credentials in your local <code>.env</code> file.</p>
+
+<table>
+<thead>
+<tr><th>Job</th><th>Schedule</th><th>What it does</th><th>Manual run</th></tr>
+</thead>
+<tbody>
+<tr>
+  <td>Review Sync</td>
+  <td><span class="badge badge-blue">11AM, 4PM, 6PM</span></td>
+  <td>Fetches new reviews from Google Business Profile for all 5 stores</td>
+  <td><code>npm run sync</code></td>
+</tr>
+<tr>
+  <td>Review Reply</td>
+  <td><span class="badge badge-blue">After each sync</span></td>
+  <td>Auto-replies to reviews per store using templates (positive) or LLM (low-star if enabled); controlled by <code>no_of_reviews_to_respond_at_time</code> in settings</td>
+  <td><code>npm run reply</code> / <code>npm run dry:reply</code></td>
+</tr>
+<tr>
+  <td>Negative Alerts</td>
+  <td><span class="badge badge-blue">After each sync</span></td>
+  <td>Emails store managers + C-level about 1-3 star reviews; follow-ups after 3 days</td>
+  <td><code>npm run alerts</code></td>
+</tr>
+<tr>
+  <td>Weekly Reports</td>
+  <td><span class="badge badge-blue">Mon 8AM</span></td>
+  <td>Store-manager + C-level review reports (previous week vs prior week)</td>
+  <td><code>npm run report</code></td>
+</tr>
+<tr>
+  <td>Monthly Reports</td>
+  <td><span class="badge badge-blue">1st 6:30AM</span></td>
+  <td>C-level monthly portfolio review (vs previous month + same month last year)</td>
+  <td><code>npm run report:monthly</code></td>
+</tr>
+<tr>
+  <td>Website Build</td>
+  <td><span class="badge badge-blue">12AM</span></td>
+  <td>Builds static site, deploys to GitHub Pages</td>
+  <td><code>python3 build/build.py</code></td>
+</tr>
+</tbody>
+</table>
+</section>
+
+<section>
+<h2>Local / Admin Console</h2>
+<p style="font-size:0.875rem;color:#6b7280;margin-bottom:1rem">These run from your laptop or the admin console at <code>http://localhost:3456</code>.</p>
+
+<table>
+<thead>
+<tr><th>Feature</th><th>Command / URL</th><th>Dependencies</th></tr>
+</thead>
+<tbody>
+<tr>
+  <td>Review Hub</td>
+  <td><code>http://localhost:3456/reviews.html</code></td>
+  <td>
+    <div class="dep-box">
+      <strong>Required</strong>
+      <ul>
+        <li>Google OAuth credentials</li>
+      </ul>
+      <strong>LLM mode</strong>
+      <ul>
+        <li>Ollama running (<code>http://localhost:11434</code>)</li>
+        <li>Model: <code>qwen2.5-coder:14b</code></li>
+      </ul>
+    </div>
+  </td>
+</tr>
+<tr>
+  <td>Historical Review Sweep</td>
+  <td><code>node scripts/steps/oneTimeHistoricalSweep.js</code><br><code>DRY_RUN=false node scripts/steps/oneTimeHistoricalSweep.js</code></td>
+  <td>
+    <div class="dep-box">
+      <strong>Required</strong>
+      <ul>
+        <li>Ollama running (<code>http://localhost:11434</code>)</li>
+        <li>Model: <code>qwen2.5-coder:14b</code></li>
+        <li>Google OAuth credentials</li>
+        <li>Cache file: <code>build/data/legacyReviewsCache.json</code></li>
+      </ul>
+    </div>
+  </td>
+</tr>
+<tr>
+  <td>Publish New</td>
+  <td><code>http://localhost:3456/adhoc.html</code></td>
+  <td>
+    <div class="dep-box">
+      <strong>Required</strong>
+      <ul>
+        <li><code>build/data/stores.json</code></li>
+        <li>Google OAuth credentials</li>
+      </ul>
+    </div>
+  </td>
+</tr>
+<tr>
+  <td>Republish Existing ones</td>
+  <td><code>http://localhost:3456/social.html</code></td>
+  <td>
+    <div class="dep-box">
+      <strong>Required</strong>
+      <ul>
+        <li><code>build/data/campaigns.json</code></li>
+        <li><code>build/data/stores.json</code></li>
+        <li>Google OAuth credentials</li>
+        <li>Google Drive access (image lookup)</li>
+        <li>Images deployed to <code>naturals-blr.github.io</code></li>
+      </ul>
+      <strong>Optional</strong>
+      <ul>
+        <li>Facebook Page Access Token (<code>pages_manage_posts</code>)</li>
+      </ul>
+    </div>
+  </td>
+</tr>
+<tr>
+  <td>ACE — Autopilot</td>
+  <td><code>npm run ace</code> / <code>npm run ace:dry</code><br><code>http://localhost:3456/ace.html</code></td>
+  <td>
+    <div class="dep-box">
+      <strong>Required</strong>
+      <ul>
+        <li>Ollama running (<code>http://localhost:11434</code>)</li>
+        <li>Model: <code>qwen2.5-coder:14b</code> (copywriting)</li>
+      </ul>
+      <strong>Image gen</strong>
+      <ul>
+        <li>Default: Ollama image model <code>x/z-image-turbo:fp8</code></li>
+        <li>Alt: SD WebUI at <code>http://127.0.0.1:7860</code> (<code>IMAGE_GEN_ENGINE=sd</code>)</li>
+        <li>Skip: <code>SKIP_IMAGE_GEN=true</code></li>
+      </ul>
+      <strong>Publishing</strong>
+      <ul>
+        <li><code>build/data/stores.json</code></li>
+        <li><code>build/social_publish_adhoc.py</code></li>
+        <li>Google/Facebook OAuth tokens</li>
+      </ul>
+    </div>
+  </td>
+</tr>
+<tr>
+  <td>Data Sync</td>
+  <td><code>http://localhost:3456/</code> (Sync card)<br><code>npm run sync:all</code></td>
+  <td>
+    <div class="dep-box">
+      <strong>Required</strong>
+      <ul>
+        <li><code>SHEET_ID</code> env var</li>
+        <li>Google service account JSON</li>
+      </ul>
+    </div>
+  </td>
+</tr>
+<tr>
+  <td>Build Website</td>
+  <td><code>python3 build/build.py</code><br><code>npm run export:build-data</code></td>
+  <td>
+    <div class="dep-box">
+      <strong>Required</strong>
+      <ul>
+        <li><code>build/data/*.json</code> (from sync)</li>
+        <li>Jinja2 templates in <code>build/templates/</code></li>
+      </ul>
+    </div>
+  </td>
+</tr>
+<tr>
+  <td>LLM Review Reply</td>
+  <td><code>LOCAL_LLM_ENABLED=true npm run reply</code><br><code>LOCAL_LLM_ENABLED=true npm run dry:reply</code></td>
+  <td>
+    <div class="dep-box">
+      <strong>Required</strong>
+      <ul>
+        <li>Ollama running (<code>http://localhost:11434</code>)</li>
+        <li>Model: <code>qwen2.5-coder:14b</code></li>
+        <li>Google OAuth credentials</li>
+      </ul>
+    </div>
+  </td>
+</tr>
+</tbody>
+</table>
+</section>
+
+<section>
+<h2>Quick Reference — Common Commands</h2>
+<table>
+<thead><tr><th>Command</th><th>Purpose</th></tr></thead>
+<tbody>
+<tr><td><code>npm run sync:all</code></td><td>Full sync: sheets → YAML → build data</td></tr>
+<tr><td><code>npm run export:build-data</code></td><td>Export build data from YAML to JSON</td></tr>
+<tr><td><code>npm run reply</code></td><td>Live review reply (1/store)</td></tr>
+<tr><td><code>npm run dry:reply</code></td><td>Dry-run review reply (no posting)</td></tr>
+<tr><td><code>npm run alerts</code></td><td>Negative review alerts</td></tr>
+<tr><td><code>npm run report</code></td><td>Weekly report generation</td></tr>
+<tr><td><code>npm run ace</code></td><td>Full ACE pipeline (live)</td></tr>
+<tr><td><code>npm run ace:dry</code></td><td>ACE pipeline (no git push / social)</td></tr>
+<tr><td><code>npm start</code> (in tools/admin-server)</td><td>Start admin console (port 3456)</td></tr>
+<tr><td><code>DRY_RUN=false node scripts/steps/oneTimeHistoricalSweep.js</code></td><td>Live historical sweep</td></tr>
+</tbody>
+</table>
+</section>
+
+<section>
+<h2>Local Dev Setup — Making &amp; Pushing Changes</h2>
+<p style="font-size:0.875rem;color:#6b7280;margin-bottom:1rem">Steps to clone, edit, and push code changes to the <code>naturals-blr/naturals-ops</code> repository.</p>
+
+<h4>1. Clone the repo</h4>
+<pre style="background:#f3f4f6;padding:0.75rem;border-radius:6px;font-size:0.8125rem;overflow-x:auto;">git clone https://github.com/naturals-blr/naturals-ops.git
+cd naturals-ops</pre>
+
+<h4>2. Create a GitHub PAT (classic)</h4>
+<ol style="font-size:0.875rem;color:#374151;line-height:1.7;padding-left:1.5rem;">
+  <li>Go to <a href="https://github.com/settings/tokens" target="_blank" style="color:#3b82f6;">GitHub Settings → Developer Settings → Personal Access Tokens → Tokens (classic)</a></li>
+  <li>Generate a new classic token with scope <code>repo</code> (full control of private repositories)</li>
+  <li>Copy the token — it looks like <code>github_pat_11B6YBCYQ...</code></li>
+  <li>Save it somewhere safe (you won't see it again)</li>
+</ol>
+
+<h4>3. Set remote URL with PAT</h4>
+<p style="font-size:0.875rem;color:#374151;margin-bottom:0.5rem;">Replace <code>YOUR_PAT_HERE</code> with your actual PAT and run:</p>
+<pre style="background:#f3f4f6;padding:0.75rem;border-radius:6px;font-size:0.8125rem;overflow-x:auto;">git remote set-url origin https://YOUR_PAT_HERE@github.com/naturals-blr/naturals-ops.git</pre>
+<p style="font-size:0.875rem;color:#6b7280;margin-bottom:0.5rem;">Example (with a sample PAT):</p>
+<pre style="background:#f3f4f6;padding:0.75rem;border-radius:6px;font-size:0.8125rem;overflow-x:auto;"># Replace with your own PAT
+git remote set-url origin https://YOUR_GITHUB_PAT@github.com/naturals-blr/naturals-ops.git</pre>
+
+<h4>4. Make changes &amp; push</h4>
+<ol style="font-size:0.875rem;color:#374151;line-height:1.7;padding-left:1.5rem;">
+  <li>Edit files with your editor of choice</li>
+  <li>Stage and commit: <code>git add . && git commit -m "your message"</code></li>
+  <li>Push: <code>git push</code> (authenticates via the PAT in the remote URL)</li>
+  <li>Push triggers <code>naturals-ops.yml</code> — build + deploy to Netlify and GitHub Pages</li>
+</ol>
+
+<div class="dep-box" style="margin-top:0.75rem;background:#eff6ff;border-color:#bfdbfe;">
+<strong style="color:#1e40af;">💡 Local Dev Tips</strong>
+<ul style="color:#1e40af;font-size:0.8125rem;">
+  <li>Always pull latest before editing: <code>git pull</code></li>
+  <li>Run <code>npm run sync:all</code> before building locally to get latest data</li>
+  <li>Test admin changes locally: <code>npm start</code> in <code>tools/local-console/</code>, open <code>http://localhost:3456</code></li>
+  <li>If you create a new GitHub Secret, add it to <code>.env</code> locally and reference it in <code>naturals-ops.yml</code></li>
+  <li>The PAT in the remote URL can be rotated anytime — just re-run <code>git remote set-url origin</code></li>
+</ul>
+</div>
+</section>
+
+<section>
+<h2>Token Management</h2>
+<p style="font-size:0.875rem;color:#6b7280;margin-bottom:1rem">The application uses multiple tokens for different services. Below is the complete reference for obtaining, configuring, and rotating each token.</p>
+
+<!-- ─── 1. Facebook / Meta Page Access Tokens ─── -->
+<h3 style="font-size:1rem;margin:1.5rem 0 0.75rem;display:flex;align-items:center;gap:0.5rem;">
+  <span class="badge badge-blue" style="font-size:0.7rem;">1</span> Facebook / Meta Page Access Tokens
+</h3>
+<p style="font-size:0.875rem;color:#374151;margin-bottom:0.75rem;">Per-store tokens stored in Google Sheet (<code>fb_page_token</code> column), synced to <code>build/data/stores.json</code>. Used for Facebook &amp; Instagram publishing. <strong>Never expire</strong> unless Facebook password changes.</p>
+
+<h4 style="font-size:0.875rem;margin:1rem 0 0.5rem;color:#374151;">Generate Short-Lived User Token</h4>
+<ol style="font-size:0.875rem;color:#374151;line-height:1.7;padding-left:1.5rem;">
+  <li>Open <a href="https://developers.facebook.com/tools/explorer" target="_blank" style="color:#3b82f6;">Meta Graph API Explorer</a></li>
+  <li><strong>Meta App</strong> dropdown (top-right): select <code>Naturals Social Automation</code></li>
+  <li><strong>User or Page</strong> dropdown: set to <strong>User Token</strong></li>
+  <li>Add permissions: <code>pages_show_list</code>, <code>pages_manage_posts</code>, <code>pages_read_engagement</code>, <code>business_management</code></li>
+  <li>Generate token, approve all 5 salon locations</li>
+</ol>
+
+<h4 style="font-size:0.875rem;margin:1rem 0 0.5rem;color:#374151;">Extend &amp; Extract Permanent Tokens</h4>
+<ol style="font-size:0.875rem;color:#374151;line-height:1.7;padding-left:1.5rem;">
+  <li>Copy user token → paste into <a href="https://developers.facebook.com/tools/debug" target="_blank" style="color:#3b82f6;">Access Token Debugger</a> → click <strong>Extend Access Token</strong></li>
+  <li>Paste the 60-day token back into Graph API Explorer</li>
+  <li>Query: <code>me/accounts?fields=name,access_token,id</code></li>
+  <li>Extract 5 permanent page tokens (Expires: <strong>Never</strong>) from JSON response</li>
+  <li>Save as <code>fb_page_tokens_backup.json</code> in a secure location (not in repo)</li>
+</ol>
+
+<h4 style="font-size:0.875rem;margin:1rem 0 0.5rem;color:#374151;">Update &amp; Verify</h4>
+<ol style="font-size:0.875rem;color:#374151;line-height:1.7;padding-left:1.5rem;">
+  <li>Open the master <strong>Stores Configuration Google Sheet</strong></li>
+  <li>Paste each token into its store's <code>fb_page_token</code> column</li>
+</ol>
+<table style="margin:0.5rem 0 1rem;width:100%;font-size:0.8125rem;">
+<thead><tr><th>Store</th><th>Sheet Row</th></tr></thead>
+<tbody>
+<tr><td>JP Nagar 5th Phase (Store_N78)</td><td>Paste JP Nagar token</td></tr>
+<tr><td>Nagavara (Store_N45)</td><td>Paste Nagavara token</td></tr>
+<tr><td>Ayyappa Nagar (Store_N36)</td><td>Paste Ayyappa Nagar token</td></tr>
+<tr><td>Frazer Town (Store_N05)</td><td>Paste Frazer Town token</td></tr>
+<tr><td>Hennur (Store_N43)</td><td>Paste Hennur token</td></tr>
+</tbody>
+</table>
+<ol style="font-size:0.875rem;color:#374151;line-height:1.7;padding-left:1.5rem;" start="3">
+  <li>Run <code>npm run sync:all</code> to sync into <code>build/data/stores.json</code></li>
+  <li>Verify in admin: <strong>Admin Home → Token Check</strong> card (<code>GET /api/tokens/test</code>)</li>
+</ol>
+
+<div class="dep-box" style="margin-top:0.75rem;background:#fffbeb;border-color:#fde68a;">
+<strong style="color:#92400e;">💡 Facebook Token Tips</strong>
+<ul style="color:#92400e;font-size:0.8125rem;">
+  <li>Permanent tokens are revoked when Facebook password changes — re-run steps above</li>
+  <li>Each store has its own token; scripts read per-store, no global fallback</li>
+  <li>Same tokens work for Instagram (linked Instagram Business Accounts)</li>
+  <li>Refresh when logs show <code>(#200) access token</code> errors or <code>Missing fb_page_token</code></li>
+</ul>
+</div>
+
+<!-- ─── 2. Google OAuth ─── -->
+<h3 style="font-size:1rem;margin:2rem 0 0.75rem;display:flex;align-items:center;gap:0.5rem;">
+  <span class="badge badge-blue" style="font-size:0.7rem;">2</span> Google OAuth (Refresh Token + Client ID/Secret)
+</h3>
+<p style="font-size:0.875rem;color:#374151;margin-bottom:0.75rem;">Used for Google Business Profile API (reviews), Google Sheets API (data sync), and social publishing to Google. Tokens expire every ~7 days and need re-authorization via the discovery script.</p>
+
+<h4 style="font-size:0.875rem;margin:1rem 0 0.5rem;color:#374151;">Setup</h4>
+<ol style="font-size:0.875rem;color:#374151;line-height:1.7;padding-left:1.5rem;">
+  <li>Go to <a href="https://console.cloud.google.com/" target="_blank" style="color:#3b82f6;">Google Cloud Console</a> → APIs &amp; Services → Credentials</li>
+  <li>Create OAuth 2.0 Client ID (Desktop app type)</li>
+  <li>Download as <code>google_oauth_credentials.json</code> or <code>client_secret_*.json</code></li>
+  <li>Run: <code>DISPLAY_AUTH_URL=true node scripts/test/discoverGoogleAccounts.js</code></li>
+  <li>Visit the printed auth URL, authorize, copy the refresh token from <code>oauth-tokens.json</code></li>
+</ol>
+
+<h4 style="font-size:0.875rem;margin:1rem 0 0.5rem;color:#374151;">Store Locations</h4>
+<table style="margin:0.5rem 0 1rem;width:100%;font-size:0.8125rem;">
+<thead><tr><th>Variable</th><th>Local <code>.env</code></th><th>GitHub Secret</th></tr></thead>
+<tbody>
+<tr><td>Refresh Token</td><td><code>GOOGLE_REFRESH_TOKEN</code></td><td><code>GOOGLE_REFRESH_TOKEN</code></td></tr>
+<tr><td>Client ID</td><td><code>GOOGLE_CLIENT_ID</code></td><td><code>GOOGLE_CLIENT_ID</code></td></tr>
+<tr><td>Client Secret</td><td><code>GOOGLE_CLIENT_SECRET</code></td><td><code>GOOGLE_CLIENT_SECRET</code></td></tr>
+<tr><td>Full Credentials JSON</td><td><code>google_oauth_credentials.json</code></td><td><code>GOOGLE_OAUTH_CREDENTIALS</code></td></tr>
+</tbody>
+</table>
+
+<div class="dep-box" style="margin-top:0.75rem;background:#fffbeb;border-color:#fde68a;">
+<strong style="color:#92400e;">💡 Google OAuth Tips</strong>
+<ul style="color:#92400e;font-size:0.8125rem;">
+  <li>Refresh token expires after ~7 days of inactivity — re-run discovery script if API calls return auth errors</li>
+  <li>If <code>DISPLAY_AUTH_URL=true</code> flag is not set, script auto-opens browser</li>
+  <li>Ensure the OAuth consent screen includes the Google Business Profile API and Google Sheets API scopes</li>
+</ul>
+</div>
+
+<!-- ─── 3. Google Service Account ─── -->
+<h3 style="font-size:1rem;margin:2rem 0 0.75rem;display:flex;align-items:center;gap:0.5rem;">
+  <span class="badge badge-blue" style="font-size:0.7rem;">3</span> Google Service Account
+</h3>
+<p style="font-size:0.875rem;color:#374151;margin-bottom:0.75rem;">Alternative to OAuth for Google Sheets API access. Used as fallback when OAuth credentials are unavailable.</p>
+
+<h4 style="font-size:0.875rem;margin:1rem 0 0.5rem;color:#374151;">Setup</h4>
+<ol style="font-size:0.875rem;color:#374151;line-height:1.7;padding-left:1.5rem;">
+  <li>Google Cloud Console → IAM &amp; Admin → Service Accounts → Create</li>
+  <li>Download JSON key file</li>
+  <li>For local: save as <code>service-account.json</code> in project root</li>
+  <li>For CI: save entire JSON content as GitHub secret <code>SERVICE_ACCOUNT_JSON</code></li>
+  <li>Share the Google Sheet with the service account email (Viewer permission)</li>
+</ol>
+
+<!-- ─── 4. GitHub PAT (PUBLIC_REPO_PAT) ─── -->
+<h3 style="font-size:1rem;margin:2rem 0 0.75rem;display:flex;align-items:center;gap:0.5rem;">
+  <span class="badge badge-blue" style="font-size:0.7rem;">4</span> GitHub Personal Access Token (<code>PUBLIC_REPO_PAT</code>)
+</h3>
+<p style="font-size:0.875rem;color:#374151;margin-bottom:0.75rem;">Used by GitHub Actions to deploy the built website to <code>naturals-blr/naturals-blr.github.io</code>.</p>
+
+<h4 style="font-size:0.875rem;margin:1rem 0 0.5rem;color:#374151;">Setup</h4>
+<ol style="font-size:0.875rem;color:#374151;line-height:1.7;padding-left:1.5rem;">
+  <li>Go to <a href="https://github.com/settings/tokens" target="_blank" style="color:#3b82f6;">GitHub Settings → Developer Settings → Personal Access Tokens</a></li>
+  <li>Create a fine-grained token with <code>contents: write</code> on <code>naturals-blr/naturals-blr.github.io</code></li>
+  <li>Save as GitHub secret: <code>PUBLIC_REPO_PAT</code></li>
+</ol>
+
+<!-- ─── 5. Groq API Key ─── -->
+<h3 style="font-size:1rem;margin:2rem 0 0.75rem;display:flex;align-items:center;gap:0.5rem;">
+  <span class="badge badge-blue" style="font-size:0.7rem;">5</span> Groq API Key (Tier 1 AI)
+</h3>
+<p style="font-size:0.875rem;color:#374151;margin-bottom:0.75rem;">Used for AI-generated review replies via Llama-3.3-70b. Tier 1 of the AI fallback chain.</p>
+<h4 style="font-size:0.875rem;margin:1rem 0 0.5rem;color:#374151;">Setup</h4>
+<ol style="font-size:0.875rem;color:#374151;line-height:1.7;padding-left:1.5rem;">
+  <li>Sign up at <a href="https://console.groq.com" target="_blank" style="color:#3b82f6;">console.groq.com</a></li>
+  <li>Generate an API key (free tier available)</li>
+  <li>Save as local env: <code>GROQ_API_KEY</code></li>
+  <li>Save as GitHub secret: <code>GROQ_API_KEY</code></li>
+</ol>
+
+<!-- ─── 6. Google Gemini API Key ─── -->
+<h3 style="font-size:1rem;margin:2rem 0 0.75rem;display:flex;align-items:center;gap:0.5rem;">
+  <span class="badge badge-blue" style="font-size:0.7rem;">6</span> Google Gemini API Key (Tier 2 AI)
+</h3>
+<p style="font-size:0.875rem;color:#374151;margin-bottom:0.75rem;">Used for AI-generated review replies via Gemini 2.5 Flash. Tier 2 of the AI fallback chain (runs if Groq fails).</p>
+<h4 style="font-size:0.875rem;margin:1rem 0 0.5rem;color:#374151;">Setup</h4>
+<ol style="font-size:0.875rem;color:#374151;line-height:1.7;padding-left:1.5rem;">
+  <li>Go to <a href="https://aistudio.google.com/apikey" target="_blank" style="color:#3b82f6;">Google AI Studio</a></li>
+  <li>Generate an API key (free tier available)</li>
+  <li>Save as local env: <code>GEMINI_API_KEY</code></li>
+  <li>Save as GitHub secret: <code>GEMINI_API_KEY_FOR_NATURALS_OPS_REVIEWS</code></li>
+</ol>
+
+<!-- ─── 7. Gmail App Password ─── -->
+<h3 style="font-size:1rem;margin:2rem 0 0.75rem;display:flex;align-items:center;gap:0.5rem;">
+  <span class="badge badge-blue" style="font-size:0.7rem;">7</span> Gmail App Password
+</h3>
+<p style="font-size:0.875rem;color:#374151;margin-bottom:0.75rem;">Used for sending all email notifications: failure alerts, weekly/monthly reports, negative review alerts, campaign reports.</p>
+<h4 style="font-size:0.875rem;margin:1rem 0 0.5rem;color:#374151;">Setup</h4>
+<ol style="font-size:0.875rem;color:#374151;line-height:1.7;padding-left:1.5rem;">
+  <li>Use the Gmail account <code>iris.digihelp@gmail.com</code> with 2FA enabled</li>
+  <li>Go to <a href="https://myaccount.google.com/apppasswords" target="_blank" style="color:#3b82f6;">Google Account → Security → App Passwords</a></li>
+  <li>Generate an app password for "Mail"</li>
+  <li>Save as local env: <code>GMAIL_APP_PASSWORD</code></li>
+  <li>Set <code>GMAIL_SENDER</code> to <code>Aris Digital &lt;iris.digihelp@gmail.com&gt;</code></li>
+  <li>Save both as GitHub secrets: <code>GMAIL_APP_PASSWORD</code>, <code>GMAIL_SENDER</code></li>
+</ol>
+
+<!-- ─── 8. GAS Webhook URL ─── -->
+<h3 style="font-size:1rem;margin:2rem 0 0.75rem;display:flex;align-items:center;gap:0.5rem;">
+  <span class="badge badge-blue" style="font-size:0.7rem;">8</span> Google Apps Script Webhook URL
+</h3>
+<p style="font-size:0.875rem;color:#374151;margin-bottom:0.75rem;">Used by the admin panel "Publish via Google" path. A Google Apps Script Web App that receives campaign payloads, stores images in Drive, and fires a <code>repository_dispatch</code> to trigger the publish workflow.</p>
+<h4 style="font-size:0.875rem;margin:1rem 0 0.5rem;color:#374151;">Setup</h4>
+<ol style="font-size:0.875rem;color:#374151;line-height:1.7;padding-left:1.5rem;">
+  <li>Go to <a href="https://script.google.com/home" target="_blank" style="color:#3b82f6;">script.google.com</a> → New Project</li>
+  <li>Paste <code>scripts/gas_relay.gs</code> as <code>Code.gs</code></li>
+  <li>Set Script Properties: <code>GITHUB_PAT</code> (PAT with repo scope), <code>GITHUB_OWNER</code> (<code>naturals-blr</code>), <code>GITHUB_REPO</code> (<code>naturals-ops</code>), <code>DRIVE_FOLDER_ID</code></li>
+  <li>Deploy → Web App (Execute as: Me, Who has access: Anyone)</li>
+  <li>Copy the Web App URL → save as GitHub secret: <code>GAS_WEBHOOK_URL</code></li>
+</ol>
+
+<div class="dep-box" style="margin-top:0.75rem;background:#fffbeb;border-color:#fde68a;">
+<strong style="color:#92400e;">💡 GAS Script Tips</strong>
+<ul style="color:#92400e;font-size:0.8125rem;">
+  <li>The PAT stored in Script Properties (<code>GITHUB_PAT</code>) must have <code>repo</code> scope to fire <code>repository_dispatch</code></li>
+  <li>Deploy as new version whenever the script is updated</li>
+  <li>Test with a GET to the Web App URL — should return <code>{"ok":true,"message":"GAS Relay is running"}</code></li>
+</ul>
+</div>
+
+</section>
+
+<!-- ══════════════════════════════════════════════════════ -->
+<!-- GitHub Secrets Reference -->
+<!-- ══════════════════════════════════════════════════════ -->
+<section>
+<h2>GitHub Secrets Reference</h2>
+<p style="font-size:0.875rem;color:#6b7280;margin-bottom:1rem">All GitHub Secrets configured in the <code>naturals-ops</code> repository, organized by function.</p>
+
+<table>
+<thead><tr><th>Secret Name</th><th>Category</th><th>Used By (Jobs)</th><th>Purpose</th></tr></thead>
+<tbody>
+
+<tr>
+  <td><code>GMAIL_APP_PASSWORD</code></td>
+  <td><span class="badge badge-gray">Email</span></td>
+  <td>Build &amp; Deploy, Scheduled Build, all notification jobs</td>
+  <td>Gmail SMTP app password for sending failure alerts, reports, and notifications</td>
+</tr>
+<tr>
+  <td><code>GMAIL_SENDER</code></td>
+  <td><span class="badge badge-gray">Email</span></td>
+  <td>Build &amp; Deploy, Scheduled Build, all notification jobs</td>
+  <td>Sender name &amp; email address for outgoing emails (format: <code>Name &lt;email&gt;</code>)</td>
+</tr>
+
+<tr>
+  <td><code>GOOGLE_CLIENT_ID</code></td>
+  <td><span class="badge badge-green">Google</span></td>
+  <td>Build &amp; Deploy, Scheduled Build, Review Reply, Manager Publish</td>
+  <td>Google OAuth client ID for GBP API, Sheets API, and admin config injection</td>
+</tr>
+<tr>
+  <td><code>GOOGLE_CLIENT_SECRET</code></td>
+  <td><span class="badge badge-green">Google</span></td>
+  <td>Build &amp; Deploy, Scheduled Build, Manager Publish</td>
+  <td>Google OAuth client secret (paired with <code>GOOGLE_CLIENT_ID</code>)</td>
+</tr>
+<tr>
+  <td><code>GOOGLE_REFRESH_TOKEN</code></td>
+  <td><span class="badge badge-green">Google</span></td>
+  <td>Scheduled Build, Review Sync, Review Reply, Negative Alerts</td>
+  <td>Google OAuth refresh token for auto-renewing API access to GBP + Sheets</td>
+</tr>
+<tr>
+  <td><code>GOOGLE_OAUTH_CREDENTIALS</code></td>
+  <td><span class="badge badge-green">Google</span></td>
+  <td>All jobs (global env)</td>
+  <td>Full Google OAuth credentials JSON (client_id + client_secret) for service initialization</td>
+</tr>
+<tr>
+  <td><code>GOOGLE_DRIVE_PARENT_FOLDER_ID</code></td>
+  <td><span class="badge badge-green">Google</span></td>
+  <td>All jobs (global env)</td>
+  <td>Google Drive folder ID where offer/campaign images are stored</td>
+</tr>
+<tr>
+  <td><code>SHEET_ID</code></td>
+  <td><span class="badge badge-green">Google</span></td>
+  <td>All jobs (global env)</td>
+  <td>Google Sheets spreadsheet ID for master store/campaign/template configuration</td>
+</tr>
+
+<tr>
+  <td><code>GROQ_API_KEY</code></td>
+  <td><span class="badge badge-amber">AI</span></td>
+  <td>Review Reply job</td>
+  <td>Groq Cloud API key for Llama-3.3-70b AI review replies (Tier 1)</td>
+</tr>
+<tr>
+  <td><code>GEMINI_API_KEY_FOR_NATURALS_OPS_REVIEWS</code></td>
+  <td><span class="badge badge-amber">AI</span></td>
+  <td>Review Reply job</td>
+  <td>Google Gemini API key for Gemini 2.5 Flash AI review replies (Tier 2)</td>
+</tr>
+
+<tr>
+  <td><code>PUBLIC_REPO_PAT</code></td>
+  <td><span class="badge" style="background:#e5e7eb;color:#374151;">GitHub</span></td>
+  <td>Build &amp; Deploy, Scheduled Build (deploy steps)</td>
+  <td>GitHub PAT with <code>contents: write</code> on <code>naturals-blr.github.io</code> for website deployment</td>
+</tr>
+<tr>
+  <td><code>WEBSITE_BASE_URL</code></td>
+  <td><span class="badge" style="background:#e5e7eb;color:#374151;">GitHub</span></td>
+  <td>Build &amp; Deploy, Scheduled Build, Manager Publish (env)</td>
+  <td>Production website base URL (e.g. <code>https://naturalsprime.in</code>)</td>
+</tr>
+
+<tr>
+  <td><code>GAS_WEBHOOK_URL</code></td>
+  <td><span class="badge badge-blue">Infra</span></td>
+  <td>Build &amp; Deploy, Scheduled Build (config injection)</td>
+  <td>Google Apps Script Web App URL for the admin relay publish path</td>
+</tr>
+<tr>
+  <td><code>GTM_ID</code></td>
+  <td><span class="badge badge-blue">Infra</span></td>
+  <td>All jobs (global env)</td>
+  <td>Google Tag Manager container ID for website analytics</td>
+</tr>
+<tr>
+  <td><code>PIXEL_ID</code></td>
+  <td><span class="badge badge-blue">Infra</span></td>
+  <td>All jobs (global env)</td>
+  <td>Facebook Pixel ID for website conversion tracking</td>
+</tr>
+<tr>
+  <td><code>WHATSAPP_API_TOKEN</code></td>
+  <td><span class="badge badge-blue">Infra</span></td>
+  <td>All jobs (global env)</td>
+  <td>WhatsApp Business API token (reserved for future solicitation features)</td>
+</tr>
+<tr>
+  <td><code>INTERNAL_GATEKEEPER_KEY</code></td>
+  <td><span class="badge" style="background:#991b1b;color:#fff;">Critical</span></td>
+  <td><code>manager_publish.yml</code>, <code>gatekeeper.yml</code></td>
+  <td>Shared cryptographic secret that authenticates <code>repository_dispatch</code> events. Required by both GitHub workflows and the Google Apps Script relay.</td>
+</tr>
+
+</tbody>
+</table>
+
+<div class="dep-box" style="margin-top:0.75rem;background:#eff6ff;border-color:#bfdbfe;">
+<strong style="color:#1e40af;">🔐 How Secrets Flow</strong>
+<ul style="color:#1e40af;font-size:0.8125rem;">
+  <li><strong>Global env</strong> block in <code>.github/workflows/naturals-ops.yml</code> — available to all 12 jobs</li>
+  <li><strong>Per-job env</strong> blocks — override or extend for specific jobs (e.g. <code>GOOGLE_REFRESH_TOKEN</code> only where needed)</li>
+  <li><strong>Admin config injection</strong> — <code>https://script.google.com/macros/s/AKfycbwqtspGIuXR5uTs1roJlYRjysm1i4421f41ygDch7WGWatVCp1lXl0a7FrAOMCxl_cfDA/exec</code>, <code>816755094343-1ibdm0ecuhg90b50090rjoohkrlr9pd5.apps.googleusercontent.com</code>, <code>https://naturalsprime.in</code> replaced at build time via sed + <code>build.py</code></li>
+  <li><strong>Local dev</strong> — secrets read from project root <code>.env</code> file (not in git)</li>
+  <li>To add a new secret: GitHub → Settings → Secrets and variables → Actions → New repository secret → reference as <code>${{ secrets.NAME }}</code> in workflow</li>
+</ul>
+</div>
+
+<section>
+<h2>🔒 Security Gate: INTERNAL_GATEKEEPER_KEY</h2>
+
+<p style="font-size:0.875rem;color:#6b7280;margin-bottom:1rem">
+This is a shared cryptographic password (a long string of random numbers and letters)
+that acts like a private secure handshake between your Google Apps Script relay and your
+GitHub repository.
+</p>
+
+<p style="font-size:0.875rem;color:#6b7280;margin-bottom:1rem">
+Because the GitHub workflows are locked down to block outsiders, GitHub will instantly
+reject any <code>repository_dispatch</code> command unless it arrives containing this
+exact secret string in the <code>auth_token</code> field of the <code>client_payload</code>.
+If the token is missing or wrong, the workflow exits immediately with
+<code style="color:#dc2626;">UNAUTHORIZED DISPATCH ATTEMPT DETECTED</code>.
+</p>
+
+<h3>Step 1: Generate a Secure Key</h3>
+
+<p style="font-size:0.875rem;color:#6b7280;margin-bottom:.5rem">
+Create a completely random 32-character secure key by running this terminal command:
+</p>
+
+<pre style="background:#1f2937;color:#e5e7eb;padding:.75rem 1rem;border-radius:.5rem;font-size:.8125rem;overflow-x:auto;margin-bottom:1rem">openssl rand -hex 32</pre>
+
+<p style="font-size:0.875rem;color:#6b7280;margin-bottom:1rem">
+Alternatively, use a secure password generator to create a strong, random 32-character
+string. It will look something like:
+</p>
+
+<pre style="background:#1f2937;color:#e5e7eb;padding:.75rem 1rem;border-radius:.5rem;font-size:.8125rem;overflow-x:auto;margin-bottom:1rem">f3bc7a12d98e4c5b6a7f8e9102c3d4e5</pre>
+
+<h3>Step 2: Paste it into GitHub Secrets</h3>
+
+<p style="font-size:0.875rem;color:#6b7280;margin-bottom:.5rem">
+This tells GitHub what password to expect when a <code>repository_dispatch</code> arrives.
+</p>
+
+<ol style="font-size:0.875rem;color:#6b7280;line-height:2">
+  <li>Go to your GitHub repository <strong>naturals-ops</strong>.</li>
+  <li>Click <strong>Settings</strong> &rarr; <strong>Secrets and variables</strong> (left menu) &rarr; <strong>Actions</strong>.</li>
+  <li>Click the green <strong>New repository secret</strong> button.</li>
+  <li>Set the <strong>Name</strong> to exactly: <code>INTERNAL_GATEKEEPER_KEY</code></li>
+  <li>Paste your generated random string into the <strong>Value</strong> box.</li>
+  <li>Click <strong>Add secret</strong>.</li>
+</ol>
+
+<h3>Step 3: Paste it into Google Apps Script</h3>
+
+<p style="font-size:0.875rem;color:#6b7280;margin-bottom:.5rem">
+This tells your automated relay script to send that password along with every campaign payload.
+</p>
+
+<ol style="font-size:0.875rem;color:#6b7280;line-height:2">
+  <li>Open your Google Apps Script project.</li>
+  <li>Click the gear icon (<strong>Project Settings</strong>) on the left side panel.</li>
+  <li>Scroll down to <strong>Script Properties</strong> and click <strong>Edit Script Properties</strong>.</li>
+  <li>Click <strong>Add property</strong>.</li>
+  <li>Set the <strong>Property name</strong> to exactly: <code>INTERNAL_GATEKEEPER_KEY</code></li>
+  <li>Paste the exact same random string into the <strong>Value</strong> box.</li>
+  <li>Click <strong>Save script properties</strong>.</li>
+</ol>
+
+<p style="font-size:0.875rem;color:#16a34a;font-weight:600;margin-bottom:1rem">
+Once both systems are saving the exact same key string, your Apps Script relay can seamlessly
+pass through the GitHub security gate without any manual intervention.
+</p>
+</section>
+
+<script src="/js/auth.js"></script>
+<script>Auth.protect('auth-container');</script>
+</body>
+</html>

@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>ACE - Naturals Admin Console</title>
+  <script src="/admin/config.js"></script>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <style>
+    body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif; }
+    #output { white-space: pre-wrap; word-break: break-word; line-height: 1.5; }
+    #output .phase { color: #0891b2; font-weight: 600; }
+    #output .ok    { color: #16a34a; }
+    #output .fail  { color: #dc2626; }
+    #output .warn  { color: #d97706; }
+    #output .info  { color: #6b7280; }
+    @keyframes pulse-dot { 0%,100% { opacity: 1; } 50% { opacity: 0.3; } }
+    .pulsing { animation: pulse-dot 1s ease-in-out infinite; }
+  </style>
+</head>
+<body class="bg-gray-50 text-gray-800 antialiased min-h-screen">
+<div id="auth-container"></div>
+  <div class="max-w-4xl mx-auto px-4 py-8">
+
+    <!-- Header -->
+    <div class="flex items-center gap-3 mb-6">
+      <a href="./" class="text-gray-400 hover:text-gray-600 text-xl no-underline">&larr;</a>
+      <div>
+        <h1 class="text-2xl font-bold text-cyan-800 tracking-tight">🤖 Autopilot Campaign Engine</h1>
+        <p class="text-sm text-gray-500 mt-0.5">LLM copywriting → AI image gen → Git host → Social publish</p>
+      </div>
+    </div>
+
+    <!-- Status bar -->
+    <div id="status-bar" class="flex flex-wrap gap-3 mb-4 text-xs font-medium">
+      <span id="s-ollama" class="px-2.5 py-1 rounded-full bg-gray-200 text-gray-500">Ollama ...</span>
+      <span id="s-sd" class="px-2.5 py-1 rounded-full bg-gray-200 text-gray-500">Image Gen ...</span>
+      <span id="s-stores" class="px-2.5 py-1 rounded-full bg-gray-200 text-gray-500">stores.json ...</span>
+      <span id="s-adhoc" class="px-2.5 py-1 rounded-full bg-gray-200 text-gray-500">adhoc script ...</span>
+      <span id="s-git" class="px-2.5 py-1 rounded-full bg-gray-200 text-gray-500">git ...</span>
+    </div>
+
+    <!-- Controls -->
+    <div class="bg-white rounded-xl border border-gray-200 p-5 mb-4">
+      <div class="flex items-center gap-4 flex-wrap">
+        <button id="btn-run"
+                class="px-6 py-2.5 bg-cyan-600 text-white font-medium rounded-lg hover:bg-cyan-700 disabled:opacity-40 disabled:cursor-not-allowed transition-colors"
+                onclick="onRun()">
+          ▶ Run ACE
+        </button>
+        <label class="flex items-center gap-2 text-sm text-gray-600 cursor-pointer">
+          <input type="checkbox" id="dry-run" checked class="rounded border-gray-300 text-cyan-600 focus:ring-cyan-500">
+          Dry run (no push, no publish)
+        </label>
+        <button id="btn-clear" class="text-sm text-gray-400 hover:text-gray-600" onclick="clearOutput()">Clear log</button>
+      </div>
+    </div>
+
+    <!-- Output -->
+    <div class="bg-gray-900 rounded-xl border border-gray-700 p-5 min-h-[200px] max-h-[600px] overflow-y-auto font-mono text-sm" id="output-container">
+      <div id="output" class="text-gray-400">Ready. Click <span class="text-cyan-400">Run ACE</span> to start.</div>
+    </div>
+
+    <!-- Result (shown on completion) -->
+    <div id="result-card" class="hidden bg-white rounded-xl border border-green-200 p-5 mt-4">
+      <h3 class="font-semibold text-green-800 mb-2">✅ Campaign Generated</h3>
+      <div class="text-sm space-y-1">
+        <p><span class="text-gray-500">Title:</span> <span id="r-title" class="font-medium"></span></p>
+        <p><span class="text-gray-500">Image URL:</span> <a id="r-url" href="#" target="_blank" class="text-cyan-600 hover:underline break-all"></a></p>
+      </div>
+    </div>
+
+  </div>
+
+  <script src="/js/auth.js"></script>
+  <script src="/js/api.js"></script>
+  <script src="/js/ace.js"></script>
+  <script>Auth.protect('auth-container');</script>
+</body>
+</html>
