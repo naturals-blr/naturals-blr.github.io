@@ -51,6 +51,16 @@ function restoreSession() {
   return false;
 }
 
+function loadGSIScript(callback) {
+  if (window.google && window.google.accounts) { if (callback) callback(); return; }
+  var s = document.createElement('script');
+  s.src = 'https://accounts.google.com/gsi/client';
+  s.async = true;
+  s.defer = true;
+  s.onload = callback;
+  document.head.appendChild(s);
+}
+
 function showAuthScreen(containerId, onAuth) {
   var c = document.getElementById(containerId);
   if (!c) return;
@@ -61,6 +71,10 @@ function showAuthScreen(containerId, onAuth) {
   c.style.height = '100%';
   c.style.zIndex = '9999';
   c.innerHTML = '<div style="display:flex;align-items:center;justify-content:center;min-height:100vh;background:#f3f4f6"><div style="background:#fff;border-radius:1rem;padding:3rem 2.5rem;text-align:center;box-shadow:0 4px 24px rgba(0,0,0,.08);max-width:400px;width:100%"><div style="font-size:2.5rem;margin-bottom:.5rem">&#x1F33F;</div><h1 style="font-size:1.5rem;font-weight:700;color:#166534;margin-bottom:.25rem">Naturals Admin</h1><p style="font-size:.875rem;color:#6b7280;margin-bottom:.25rem">Sign in with your Google account</p><p style="font-size:.75rem;color:#9ca3af;margin-bottom:1.5rem" id="auth-status">Loading sign-in...</p><div id="g_id_onload" data-client_id="816755094343-1ibdm0ecuhg90b50090rjoohkrlr9pd5.apps.googleusercontent.com" data-context="signin" data-callback="__naturalsAuthCallback" data-auto_select="false"></div><div class="g_id_signin" data-type="standard" data-shape="rectangular" data-theme="outline" data-text="signin_with" data-size="large"></div><p style="font-size:.75rem;color:#dc2626;margin-top:.75rem;min-height:1.25rem" id="auth-error-msg"></p></div></div>';
+  loadGSIScript(function() {
+    var statusEl = document.getElementById('auth-status');
+    if (statusEl) statusEl.textContent = 'Sign in with your Google account';
+  });
 
   window.__naturalsAuthCallback = function(response) {
     var token = response.credential;
