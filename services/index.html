@@ -699,8 +699,8 @@ h3, .h3{font-family:'Cormorant Garamond',serif;font-size:clamp(20px,2.5vw,24px);
 }
 
 *{margin:0;padding:0;box-sizing:border-box;}
-html{scroll-behavior:smooth;}
-body{font-family:'Jost',sans-serif;background:var(--cream);color:var(--text);}
+html{scroll-behavior:smooth;width:100%;max-width:100%;overflow-x:hidden;}
+body{font-family:'Jost',sans-serif;background:var(--cream);color:var(--text);overflow-x:hidden;width:100%;max-width:100%;}
 a{text-decoration:none;color:inherit;}
 img{display:block;width:100%;object-fit:cover;}
 
@@ -1061,11 +1061,8 @@ padding:24px var(--content-padding);
 /* Empty State Gap Removal */
 .empty-state{margin-top:0;padding:60px 20px;}
 
-/* Store Pills Container - Fixed for no unnecessary scroll */
-.store-pills-container{display:flex;gap:10px;flex-wrap:wrap;padding-bottom:4px;}
-.store-pill{padding:8px 16px;border:1px solid rgba(255,255,255,0.2);border-radius:50px;background:rgba(255,255,255,0.05);color:rgba(255,255,255,0.8);font-size:13px;font-weight:500;cursor:pointer;transition:all 0.2s;white-space:nowrap;}
-.store-pill:hover{background:rgba(255,255,255,0.1);border-color:rgba(255,255,255,0.3);color:#fff;}
-.store-pill.active{background:var(--gold);border-color:var(--gold);color:var(--dark);font-weight:600;}
+/* Store Select Container */
+.store-select-wrap{display:flex;align-items:center;}
 
 /* Luxury Pill Filter Styling */
 .filter-pill{
@@ -1544,12 +1541,8 @@ min-width:60px;justify-content:center;
 #svc-search:focus{border-color:var(--gold);}
 #svc-search::placeholder{color:var(--text-light);}
 
-/* STORE PILLS */
-.store-pills-wrap{display:flex;align-items:center;gap:6px;flex-wrap:wrap;}
-.store-pill-lbl{font-size:9px;letter-spacing:0.5px;text-transform:uppercase;font-weight:600;color:var(--text-light);white-space:nowrap;}
-.store-pill{font-family:'Jost',sans-serif;font-size:10px;font-weight:500;padding:4px 10px;border:1px solid rgba(0,0,0,0.1);border-radius:999px;background:rgba(0,0,0,0.03);color:var(--text-mid);cursor:pointer;transition:all 0.2s;white-space:nowrap;}
-.store-pill:hover{border-color:var(--gold);color:var(--gold);}
-.store-pill.active{background:var(--gold);border-color:var(--gold);color:var(--dark);font-weight:600;}
+/* STORE SELECT */
+.store-select-wrap{display:flex;align-items:center;}
 
 /* MAIN */
 .services-main{}
@@ -1638,9 +1631,9 @@ padding:10px max(20px,calc((100vw - 760px) / 2));
 #svc-search{background:rgba(255,255,255,0.06);border-color:rgba(255,255,255,0.15);color:#f5f5f7;}
 #svc-search::placeholder{color:rgba(255,255,255,0.4);}
 #svc-search:focus{border-color:var(--gold);}
-.store-pill{background:rgba(255,255,255,0.04);border-color:rgba(255,255,255,0.12);color:rgba(255,255,255,0.6);}
-.store-pill:hover{border-color:var(--gold);color:var(--gold);}
-.store-pill.active{background:var(--gold);border-color:var(--gold);color:var(--dark);}
+#store-select{background:rgba(255,255,255,0.06);border-color:rgba(255,255,255,0.15);color:rgba(247,247,251,0.8);}
+#store-select:focus{border-color:var(--gold);}
+
 .services-main{
 max-width:none;
 background:#0f1117;
@@ -1854,7 +1847,6 @@ padding-top:10px;
 .filter-group.sort-group{min-width:50px;}
 #store-select, #cat-select{min-width:120px;}
 .svc-grid{grid-template-columns:1fr;}
-.store-pill{padding:6px 12px;font-size:12px;}
 }
 @media(max-width:600px){
 .filters-wrap{padding:10px 16px;top:60px;gap:12px;}
@@ -1878,7 +1870,6 @@ padding:12px 14px;
 .svc-title{font-size:18px;}
 .svc-meta-bar{font-size:14px;gap:5px;}
 .svc-price{font-size:17px;}
-.store-pill{padding:6px 10px;font-size:11px;}
 }
 @media(max-width:480px){
 .filters-wrap{padding:8px 12px;top:60px;gap:10px;}
@@ -1902,7 +1893,6 @@ border-radius:14px;
 .svc-title{font-size:16px;}
 .svc-meta-bar{gap:4px;font-size:13px;}
 .svc-price{font-size:16px;}
-.store-pill{padding:5px 8px;font-size:10px;}
 }
 </style>
 <script>(function(){var t=localStorage.getItem('naturals-theme')||'luxury';document.documentElement.setAttribute('data-theme',t);})();</script>
@@ -3096,7 +3086,11 @@ serviceElement.textContent = filterValue;
 </div>
 
 
-<div class="store-pills-wrap" id="store-pills"></div>
+<div class="store-select-wrap">
+<select id="store-select" onchange="setStore(this.value)">
+<option value="all">All Stores</option>
+</select>
+</div>
 
 
 <div id="category-trigger" role="button" tabindex="0" style="cursor: pointer; padding: 8px 12px; display: flex; align-items: center; gap: 6px; border:1px solid rgba(201,162,39,0.25); border-radius:8px;" onclick="openCategoryDrawer()" onkeydown="if(event.key==='Enter'||event.key===' ')event.preventDefault();openCategoryDrawer()">
@@ -3570,23 +3564,22 @@ renderServices();
 }, 200);
 };
 
-// Build store filter pills from ACTIVE_STORES
-function buildStorePills() {
-const container = document.getElementById('store-pills');
-if (!container || !ACTIVE_STORES.length) return;
-let html = '<span class="store-pill-lbl">Store</span>';
-html += `<button class="store-pill active" data-store="all" onclick="setStore('all')">All</button>`;
+// Build store filter select from ACTIVE_STORES
+function buildStoreSelect() {
+const sel = document.getElementById('store-select');
+if (!sel || !ACTIVE_STORES.length) return;
 ACTIVE_STORES.forEach(s => {
 const storeId = (s.store_id_short || s.Store_ID_short || '').toLowerCase();
 const name = s.store_display_name || s.brand_store_name || storeId;
-html += `<button class="store-pill" data-store="${storeId}" onclick="setStore('${storeId}')">${name}</button>`;
+const opt = document.createElement('option');
+opt.value = storeId;
+opt.textContent = name;
+sel.appendChild(opt);
 });
-container.innerHTML = html;
 }
 
 window.setStore = function(storeId) {
 currentFilters.store = storeId;
-document.querySelectorAll('.store-pill').forEach(b => b.classList.toggle('active', b.dataset.store === storeId));
 syncUrl();
 renderServices();
 };
@@ -3597,10 +3590,8 @@ currentFilters = { gender: 'all', category: 'all', sort: 'asc', store: 'all', se
 document.querySelectorAll('[data-filter-type="gender"]').forEach(el => {
 el.classList.toggle('active', el.dataset.filterValue === 'all');
 });
-// Reset store pills
-document.querySelectorAll('.store-pill').forEach(el => {
-el.classList.toggle('active', el.dataset.store === 'all');
-});
+// Reset store select
+document.getElementById('store-select').value = 'all';
 // Reset sort buttons
 document.querySelectorAll('.sort-btn').forEach(el => {
 el.classList.toggle('active', el.dataset.sort === 'asc');
@@ -4058,14 +4049,10 @@ el.classList.toggle('active', el.dataset.filterValue === genderVal);
 });
 
 populateCategoryDrawer();
-buildStorePills();
+buildStoreSelect();
 
-// Apply store filter active state from URL/default
-if (currentFilters.store !== 'all') {
-document.querySelectorAll('.store-pill').forEach(el => {
-el.classList.toggle('active', el.dataset.store === currentFilters.store);
-});
-}
+// Apply store filter value from URL/default
+document.getElementById('store-select').value = currentFilters.store;
 
 // Apply sort button active state
 document.querySelectorAll('.sort-btn').forEach(el => {
