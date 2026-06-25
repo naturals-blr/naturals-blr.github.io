@@ -41,7 +41,7 @@ gtag('config', 'G-6H5YGVGG1Q');
 "description": "Enjoy high-end spa rituals, luxury facial deals, and premium styling packages available exclusively at our Hennur salon and spa destination.",
 "url": "https://naturalsprime.in/hennur/offers/",
 "category": "Beauty and Grooming Promotions",
-"datePosted": "2026-06-25 18:13:22.460627T09:00:00+05:30",
+"datePosted": "2026-06-25 22:53:20.453383T09:00:00+05:30",
 "provider": {
 "@type": "HairSalon",
 "name": "Naturals Salon & Spa Hennur",
@@ -2783,7 +2783,7 @@ update();
 <script>
 /* Campaign image resolver: .jpg, .jpeg, .png, .webp */
 (function(){
-var EXT=['.jpg','.jpeg','.png','.webp'];
+var EXT=['.jpg','.JPG','.jpeg','.JPEG','.png','.PNG','.webp'];
 function hasExt(path){ return /\.[a-zA-Z0-9]{2,5}(\?.*)?$/.test(path||''); }
 function attach(){
 document.querySelectorAll('img[data-img-base]').forEach(function(img){
@@ -3504,12 +3504,14 @@ window.open('https://wa.me/?text=' + encodeURIComponent(window.location.href), '
 
 <script>
 (function(){
-var EXT=['.jpg','.jpeg','.png'];
+var EXT=['.jpg','.JPG','.jpeg','.JPEG','.png','.PNG','.webp'];
 document.querySelectorAll('img.hero-resolver-img').forEach(function(img){
 var slug = img.getAttribute('data-slug');
 var fallback = img.getAttribute('data-fallback');
 if(!slug) return;
 
+// Strip hyphens from store slug portion (but keep 'offers-' prefix's hyphen)
+slug = slug.replace(/^offers-(.+)/, function(_, s){ return 'offers-' + s.replace(/-/g,''); });
 var i=0;
 var base = '/images/heroes/' + slug;
 img.src = base + EXT[i];

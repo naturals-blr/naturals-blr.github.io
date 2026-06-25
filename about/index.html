@@ -1990,12 +1990,14 @@ bar.classList.add('is-visible'); /* Legacy fallback */
 
 <script>
 (function(){
-var EXT=['.jpg','.jpeg','.png'];
+var EXT=['.jpg','.JPG','.jpeg','.JPEG','.png','.PNG','.webp'];
 document.querySelectorAll('img.hero-resolver-img').forEach(function(img){
 var slug = img.getAttribute('data-slug');
 var fallback = img.getAttribute('data-fallback');
 if(!slug) return;
 
+// Strip hyphens from store slug portion (but keep 'offers-' prefix's hyphen)
+slug = slug.replace(/^offers-(.+)/, function(_, s){ return 'offers-' + s.replace(/-/g,''); });
 var i=0;
 var base = '/images/heroes/' + slug;
 img.src = base + EXT[i];

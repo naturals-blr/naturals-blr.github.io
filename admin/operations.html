@@ -202,13 +202,26 @@
   </td>
 </tr>
 <tr>
+  <td>Export Build Data</td>
+  <td><code>npm run export:build-data</code></td>
+  <td>
+    <div class="dep-box">
+      <strong>Description</strong>
+      <ul>
+        <li>Exports 2 review datasets: <code>testimonials.json</code> (curated, from Google Sheets <code>testimonials</code> tab, ~2,100 rows) and <code>reviews.json</code> (full CSV database, ~7,700 rows from GBP)</li>
+        <li>Config key <code>reviews</code> maps to sheet tab <code>testimonials</code> via <code>masterLoader.js</code> SHEET_NAME_MAP</li>
+      </ul>
+    </div>
+  </td>
+</tr>
+<tr>
   <td>Build Website</td>
   <td><code>python3 build/build.py</code><br><code>npm run export:build-data</code></td>
   <td>
     <div class="dep-box">
       <strong>Required</strong>
       <ul>
-        <li><code>build/data/*.json</code> (from sync)</li>
+        <li><code>build/data/*.json</code> (from sync or export)</li>
         <li>Jinja2 templates in <code>build/templates/</code></li>
       </ul>
     </div>
@@ -245,7 +258,7 @@
 <tr><td><code>npm run report</code></td><td>Weekly report generation</td></tr>
 <tr><td><code>npm run ace</code></td><td>Full ACE pipeline (live)</td></tr>
 <tr><td><code>npm run ace:dry</code></td><td>ACE pipeline (no git push / social)</td></tr>
-<tr><td><code>npm start</code> (in tools/admin-server)</td><td>Start admin console (port 3456)</td></tr>
+<tr><td><code>npm start</code></td><td>Start admin console (port 3456) from <code>tools/local-console/server.js</code></td></tr>
 <tr><td><code>DRY_RUN=false node scripts/steps/oneTimeHistoricalSweep.js</code></td><td>Live historical sweep</td></tr>
 </tbody>
 </table>
@@ -286,8 +299,8 @@ git remote set-url origin https://YOUR_GITHUB_PAT@github.com/naturals-blr/natura
 <strong style="color:#1e40af;">💡 Local Dev Tips</strong>
 <ul style="color:#1e40af;font-size:0.8125rem;">
   <li>Always pull latest before editing: <code>git pull</code></li>
-  <li>Run <code>npm run sync:all</code> before building locally to get latest data</li>
-  <li>Test admin changes locally: <code>npm start</code> in <code>tools/local-console/</code>, open <code>http://localhost:3456</code></li>
+  <li>Run <code>npm run export:build-data && python3 build/build.py</code> before testing locally to get latest data</li>
+  <li>Test admin changes locally: <code>npm start</code>, open <code>http://localhost:3456</code></li>
   <li>If you create a new GitHub Secret, add it to <code>.env</code> locally and reference it in <code>naturals-ops.yml</code></li>
   <li>The PAT in the remote URL can be rotated anytime — just re-run <code>git remote set-url origin</code></li>
 </ul>
