@@ -100,7 +100,7 @@
 <tbody>
 <tr>
   <td>Review Hub</td>
-  <td><code>http://localhost:3456/reviews.html</code></td>
+  <td><code>http://localhost:3456/review-replies.html</code></td>
   <td>
     <div class="dep-box">
       <strong>Required</strong>
@@ -113,6 +113,19 @@
         <li>Model: <code>qwen2.5-coder:14b</code></li>
       </ul>
     </div>
+  </td>
+</tr>
+<tr>
+  <td>Review Reader</td>
+  <td><code>http://localhost:3456/reviews.html</code></td>
+  <td>
+    <div class="dep-box">
+      <strong>Required</strong>
+      <ul>
+        <li>Google OAuth credentials</li>
+      </ul>
+    </div>
+    <div style="font-size:0.75rem;color:#6b7280;margin-top:0.25rem;">Read-only — no AI or reply functionality</div>
   </td>
 </tr>
 <tr>
@@ -131,7 +144,7 @@
   </td>
 </tr>
 <tr>
-  <td>Publish New</td>
+  <td>Publish New (One Image)</td>
   <td><code>http://localhost:3456/adhoc.html</code></td>
   <td>
     <div class="dep-box">
@@ -139,6 +152,25 @@
       <ul>
         <li><code>build/data/stores.json</code></li>
         <li>Google OAuth credentials</li>
+      </ul>
+    </div>
+  </td>
+</tr>
+<tr>
+  <td>Publish New (Store Images)</td>
+  <td><code>http://localhost:3456/adhoc-per-store.html</code></td>
+  <td>
+    <div class="dep-box">
+      <strong>Required</strong>
+      <ul>
+        <li><code>build/data/stores.json</code></li>
+        <li>Google OAuth credentials</li>
+      </ul>
+    </div>
+    <div class="dep-box" style="margin-top:.25rem">
+      <strong>Script</strong>
+      <ul>
+        <li><code>build/social_publish_adhoc_per_store.py</code></li>
       </ul>
     </div>
   </td>
@@ -371,6 +403,23 @@ git remote set-url origin https://YOUR_GITHUB_PAT@github.com/naturals-blr/natura
 </h3>
 <p style="font-size:0.875rem;color:#374151;margin-bottom:0.75rem;">Used for Google Business Profile API (reviews), Google Sheets API (data sync), and social publishing to Google. Tokens expire every ~7 days and need re-authorization via the discovery script.</p>
 
+<div class="dep-box" style="margin-top:0.5rem;background:#f0fdf4;border-color:#86efac;">
+<strong style="color:#166534;">&#x1F517; Jobs that require these credentials</strong>
+<table style="margin:0.25rem 0 0;width:100%;font-size:0.75rem;">
+<thead><tr><th>Job</th><th>Workflow</th><th>Requires</th><th>Why</th></tr></thead>
+<tbody>
+<tr><td>Sync Reviews</td><td><code>sync-reviews-from-gmb</code></td><td><code>GOOGLE_OAUTH_CREDENTIALS</code> + <code>GOOGLE_REFRESH_TOKEN</code></td><td>Fetches reviews from GBP API, writes to Sheets</td></tr>
+<tr><td>Review Reply</td><td><code>reply-to-reviews</code></td><td><code>GOOGLE_OAUTH_CREDENTIALS</code> + <code>GOOGLE_REFRESH_TOKEN</code></td><td>Posts AI replies to GBP</td></tr>
+<tr><td>Negative Alerts</td><td><code>negative-alerts</code></td><td><code>GOOGLE_OAUTH_CREDENTIALS</code> + <code>GOOGLE_REFRESH_TOKEN</code></td><td>Reads reviews from GBP, sends email alerts</td></tr>
+<tr><td>Weekly Reports</td><td><code>weekly-store-reports</code></td><td><code>GOOGLE_OAUTH_CREDENTIALS</code> + <code>GOOGLE_REFRESH_TOKEN</code></td><td>Generates reports from Sheets data</td></tr>
+<tr><td>Monthly Reports</td><td><code>monthly-reports</code></td><td><code>GOOGLE_OAUTH_CREDENTIALS</code> + <code>GOOGLE_REFRESH_TOKEN</code></td><td>Generates reports from Sheets data</td></tr>
+<tr><td>Build &amp; Deploy</td><td><code>build-and-deploy</code></td><td><code>GOOGLE_OAUTH_CREDENTIALS</code></td><td>Injects config, exports build data from Sheets</td></tr>
+<tr><td>Scheduled Build</td><td><code>scheduled-build-and-deploy</code></td><td><code>GOOGLE_OAUTH_CREDENTIALS</code> + <code>GOOGLE_REFRESH_TOKEN</code></td><td>Builds + exports data + syncs reviews</td></tr>
+<tr><td>Manager Publish</td><td><code>manager_publish.yml</code></td><td><code>GOOGLE_CLIENT_ID</code> + <code>GOOGLE_CLIENT_SECRET</code></td><td>Social publishing via Google Business Profile</td></tr>
+</tbody>
+</table>
+</div>
+
 <h4 style="font-size:0.875rem;margin:1rem 0 0.5rem;color:#374151;">Setup</h4>
 <ol style="font-size:0.875rem;color:#374151;line-height:1.7;padding-left:1.5rem;">
   <li>Go to <a href="https://console.cloud.google.com/" target="_blank" style="color:#3b82f6;">Google Cloud Console</a> → APIs &amp; Services → Credentials</li>
@@ -533,14 +582,14 @@ git remote set-url origin https://YOUR_GITHUB_PAT@github.com/naturals-blr/natura
 <tr>
   <td><code>GOOGLE_REFRESH_TOKEN</code></td>
   <td><span class="badge badge-green">Google</span></td>
-  <td>Scheduled Build, Review Sync, Review Reply, Negative Alerts</td>
-  <td>Google OAuth refresh token for auto-renewing API access to GBP + Sheets</td>
+  <td>Review Sync, Review Reply, Negative Alerts, Weekly/Monthly Reports, Scheduled Build</td>
+  <td>Google OAuth refresh token for auto-renewing API access to GBP + Sheets. <strong>Must be paired with <code>GOOGLE_OAUTH_CREDENTIALS</code> or auth will fail.</strong></td>
 </tr>
 <tr>
   <td><code>GOOGLE_OAUTH_CREDENTIALS</code></td>
   <td><span class="badge badge-green">Google</span></td>
   <td>All jobs (global env)</td>
-  <td>Full Google OAuth credentials JSON (client_id + client_secret) for service initialization</td>
+  <td>Full Google OAuth credentials JSON (client_id + client_secret) for service initialization. <strong>Without this, every Google-dependent job errors: <code>Credentials not found!</code></strong></td>
 </tr>
 <tr>
   <td><code>GOOGLE_DRIVE_PARENT_FOLDER_ID</code></td>
@@ -620,7 +669,7 @@ git remote set-url origin https://YOUR_GITHUB_PAT@github.com/naturals-blr/natura
 <ul style="color:#1e40af;font-size:0.8125rem;">
   <li><strong>Global env</strong> block in <code>.github/workflows/naturals-ops.yml</code> — available to all 12 jobs</li>
   <li><strong>Per-job env</strong> blocks — override or extend for specific jobs (e.g. <code>GOOGLE_REFRESH_TOKEN</code> only where needed)</li>
-  <li><strong>Admin config injection</strong> — <code>https://script.google.com/macros/s/AKfycbwqtspGIuXR5uTs1roJlYRjysm1i4421f41ygDch7WGWatVCp1lXl0a7FrAOMCxl_cfDA/exec</code>, <code>816755094343-1ibdm0ecuhg90b50090rjoohkrlr9pd5.apps.googleusercontent.com</code>, <code>https://naturalsprime.in</code> replaced at build time via sed + <code>build.py</code></li>
+  <li><strong>Admin config injection</strong> — <code>__GAS_WEBHOOK_URL__</code>, <code>__GOOGLE_CLIENT_ID__</code>, <code>__PRODUCTION_BASE_URL__</code> replaced at build time via sed + <code>build.py</code></li>
   <li><strong>Local dev</strong> — secrets read from project root <code>.env</code> file (not in git)</li>
   <li>To add a new secret: GitHub → Settings → Secrets and variables → Actions → New repository secret → reference as <code>${{ secrets.NAME }}</code> in workflow</li>
 </ul>
