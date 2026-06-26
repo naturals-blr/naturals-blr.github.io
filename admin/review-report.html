@@ -198,11 +198,13 @@
           fetch('/api/reviews-data.json'),
         ]);
 
-        const storesJson = await storesRes.json();
+        let storesJson = await storesRes.json();
+        if (storesJson.data) storesJson = storesJson.data;
         if (!Array.isArray(storesJson)) throw new Error('Failed to load stores');
         storeOrder = storesJson;
 
-        const reviewsJson = await reviewsRes.json();
+        let reviewsJson = await reviewsRes.json();
+        if (reviewsJson.data) reviewsJson = reviewsJson.data;
         if (!Array.isArray(reviewsJson)) throw new Error('Failed to load reviews');
         allReviews = reviewsJson;
         chartReviews = reviewsJson;

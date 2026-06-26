@@ -96,11 +96,14 @@
           fetch('/api/stores-sheet.json'),
           fetch('/api/reviews-data.json'),
         ]);
-        allStores = await storesRes.json();
-        if (!Array.isArray(allStores)) throw new Error('Invalid stores data');
-        const revs = await reviewsRes.json();
-        if (!Array.isArray(revs)) throw new Error('Invalid reviews data');
-        allReviews = revs;
+        let storesData = await storesRes.json();
+        if (storesData.data) storesData = storesData.data;
+        if (!Array.isArray(storesData)) throw new Error('Invalid stores data');
+        allStores = storesData;
+        let revsData = await reviewsRes.json();
+        if (revsData.data) revsData = revsData.data;
+        if (!Array.isArray(revsData)) throw new Error('Invalid reviews data');
+        allReviews = revsData;
         $('store-count').textContent = allStores.length + ' stores';
         renderStoreList();
         if (allStores.length > 0) {
