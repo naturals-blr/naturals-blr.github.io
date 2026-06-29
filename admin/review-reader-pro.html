@@ -90,8 +90,8 @@
     let starFilter = 'all';
     let statusFilter = 'all';
     let searchQuery = '';
-    let currentPeriod = 'all';
-    let dateFrom = null;
+    let currentPeriod = '7';
+    let dateFrom = (() => { const d = new Date(); d.setDate(d.getDate() - 7); return d.toISOString().split('T')[0]; })();
     let dateTo = null;
     let aiProvider = 'auto';
     const isLocal = location.hostname === 'localhost' || location.hostname === '127.0.0.1';
@@ -118,7 +118,6 @@
         if (revsData.data) revsData = revsData.data;
         if (!Array.isArray(revsData)) throw new Error('Invalid reviews data');
         allReviews = revsData;
-        currentStore = allStores.length > 0 ? allStores[0].name : null;
         renderReviews();
       } catch (err) {
         panel.innerHTML = `<div class="text-red-500 text-sm py-12 text-center">\u274C ${esc(err.message)}</div>`;
