@@ -187,11 +187,13 @@ function renderReviews(storeShortName) {
     return;
   }
 
+  const repliedCount = reviews.filter(r => r.reviewReply).length;
+  const pendingCount = reviews.length - repliedCount;
   el.innerHTML = `
     <div class="flex items-center justify-between mb-4">
       <div>
         <h3 class="text-sm font-bold text-gray-800">${esc(storeName)}</h3>
-        <p class="text-xs text-gray-400 mt-0.5">${reviews.length} review(s) pending</p>
+        <p class="text-xs text-gray-400 mt-0.5">${pendingCount} pending · ${reviews.length} total</p>
       </div>
       <div class="flex gap-2">
         <button onclick="loadReviews('${storeShortName}')" class="text-xs px-3 py-1.5 border border-gray-200 rounded-lg hover:bg-gray-50 text-gray-500 transition-colors">↻ Refresh</button>
@@ -211,9 +213,12 @@ function renderReviewCard(review, storeShortName) {
   const starHtml = '⭐'.repeat(stars) + '☆'.repeat(5 - stars);
   const id = (review.name || review.reviewId || '').replace(/[^a-zA-Z0-9]/g, '_');
   const date = review.createTime ? new Date(review.createTime).toLocaleDateString() : '';
+  const hasReply = !!review.reviewReply;
+  const hasReplyBadge = hasReply ? '<span class="ml-2 inline-block text-xs font-medium text-green-600 bg-green-50 border border-green-200 rounded-full px-2 py-0.5">Replied</span>' : '';
+  const cardOpacity = hasReply ? 'opacity-60' : '';
 
   return `
-    <div class="review-card" data-review-id="${id}">
+    <div class="review-card ${cardOpacity}" data-review-id="${id}">
       <div class="px-4 py-3 bg-gray-50/80 flex items-center justify-between">
         <div class="flex items-center gap-3">
           <div class="review-avatar">${reviewer.charAt(0).toUpperCase()}</div>
@@ -221,10 +226,11 @@ function renderReviewCard(review, storeShortName) {
             <span class="font-medium text-sm text-gray-800">${esc(reviewer)}</span>
             <span class="ml-2 text-sm">${starHtml}</span>
             ${date ? `<span class="ml-2 text-xs text-gray-400">${date}</span>` : ''}
+            ${hasReplyBadge}
           </div>
         </div>
         <div class="flex gap-1.5">
-          <button onclick="onGenerate(this)" data-store="${storeShortName}" class="text-xs px-3 py-1.5 bg-royal-600 text-white rounded-lg hover:bg-royal-700 transition-colors font-medium">Generate Reply</button>
+          ${hasReply ? '' : `<button onclick="onGenerate(this)" data-store="${storeShortName}" class="text-xs px-3 py-1.5 bg-royal-600 text-white rounded-lg hover:bg-royal-700 transition-colors font-medium">Generate Reply</button>`}
         </div>
       </div>
       <div class="px-4 py-3 text-sm text-gray-600 bg-white leading-relaxed">${esc(comment.substring(0, 300))}</div>
