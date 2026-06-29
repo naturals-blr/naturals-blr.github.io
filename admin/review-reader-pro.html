@@ -1,0 +1,585 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Review Reader Pro — Naturals Admin</title>
+  <script src="/admin/config.js"></script>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            royal: { 50: '#F5F3FF', 100: '#EDE9FE', 200: '#DDD6FE', 300: '#C4B5FD', 400: '#A78BFA', 500: '#8B5CF6', 600: '#7C3AED', 700: '#6D28D9', 800: '#5B21B6', 900: '#4C1D95' },
+            gold:   { 50: '#FFFBEB', 100: '#FEF3C7', 200: '#FDE68A', 300: '#FCD34D', 400: '#FBBF24', 500: '#D4AF37', 600: '#B8860B' },
+          },
+          fontFamily: { sans: ['Inter', 'system-ui', 'sans-serif'], mono: ['JetBrains Mono', 'SF Mono', 'monospace'] },
+        }
+      }
+    }
+  </script>
+  <style>
+    body { background: #F9F9FB; color: #1F2937; }
+    .store-pill { border: 1px solid #E5E7EB; transition: all 0.15s; cursor: pointer; border-radius: 999px; padding: 4px 14px; font-size: 0.8125rem; font-weight: 500; background: white; color: #374151; white-space: nowrap; }
+    .store-pill:hover { border-color: #7C3AED; color: #7C3AED; background: #F5F3FF; }
+    .store-pill.active { background: #7C3AED; color: white; border-color: #7C3AED; }
+    .store-pill .badge { display: inline-flex; align-items: center; justify-content: center; min-width: 18px; height: 18px; padding: 0 5px; border-radius: 999px; font-size: 0.625rem; font-weight: 600; background: #F0F0F4; color: #6B7280; margin-left: 6px; }
+    .store-pill.active .badge { background: rgba(255,255,255,0.25); color: white; }
+    .store-pill .badge.has-pending { background: #D1FAE5; color: #065F46; }
+    .store-pill.active .badge.has-pending { background: rgba(255,255,255,0.25); color: white; }
+    .review-card { border-radius: 12px; box-shadow: 0 1px 3px rgba(0,0,0,0.04); border: 1px solid #E5E7EB; overflow: hidden; transition: box-shadow 0.15s; }
+    .review-card:hover { box-shadow: 0 2px 8px rgba(0,0,0,0.06); }
+    .review-avatar { width: 36px; height: 36px; border-radius: 50%; background: linear-gradient(135deg, #EDE9FE, #DDD6FE); display: flex; align-items: center; justify-content: center; font-weight: 700; font-size: 0.875rem; color: #6D28D9; flex-shrink: 0; }
+    .stat-card { border: 1px solid #eaeaea; transition: transform 0.2s ease, box-shadow 0.2s ease; }
+    .stat-card:hover { transform: translateY(-2px); box-shadow: 0 8px 20px rgba(124,58,237,0.06); }
+    .period-btn { border: 1px solid #d1d5db; transition: all 0.15s ease; }
+    .period-btn.active { background: #7C3AED; color: white; border-color: #7C3AED; }
+    .period-btn:hover:not(.active) { border-color: #7C3AED; color: #7C3AED; }
+  </style>
+</head>
+<body class="font-sans antialiased">
+<div id="auth-container"></div>
+  <div class="flex flex-col h-screen">
+
+    <!-- Header -->
+    <header class="bg-white border-b border-gray-200/80 px-5 py-3 shrink-0">
+      <div class="flex items-center justify-between gap-4">
+        <div class="flex items-center gap-3 shrink-0">
+          <a href="./" class="text-lg text-royal-600 hover:text-royal-800 transition-colors leading-none">&larr;</a>
+          <h1 class="text-lg font-bold text-royal-800 tracking-tight">Review Reader Pro</h1>
+          <span id="total-pending-count" class="px-3 py-0.5 text-xs font-semibold rounded-full bg-royal-100 text-royal-700 hidden"></span>
+        </div>
+        <div class="flex items-center gap-2">
+          <div id="ai-section" class="flex items-center gap-1.5 text-xs bg-gray-50 border border-gray-200 rounded-lg px-2.5 py-1">
+            <span class="text-gray-400 font-medium">AI:</span>
+            <label class="flex items-center gap-0.5 cursor-pointer text-gray-600 hover:text-royal-700"><input type="radio" name="ai-provider" value="auto" checked class="accent-royal-600"> Auto</label>
+            <label class="flex items-center gap-0.5 cursor-pointer text-gray-600 hover:text-royal-700"><input type="radio" name="ai-provider" value="groq" class="accent-royal-600"> Groq</label>
+            <label class="flex items-center gap-0.5 cursor-pointer text-gray-600 hover:text-royal-700"><input type="radio" name="ai-provider" value="gemini" class="accent-royal-600"> Gemini</label>
+          </div>
+          <button onclick="location.href='/'" class="text-xs px-3 py-1.5 border border-gray-200 rounded-lg hover:bg-gray-50 text-gray-500 hover:text-gray-700 transition-colors">Home</button>
+        </div>
+      </div>
+    </header>
+
+    <!-- Local-only banner -->
+    <div id="local-banner" class="hidden px-5 py-2 bg-amber-50 border-b border-amber-200 text-xs text-amber-700">
+      &#x26A0;&#xFE0F; Generate and Post to Google require the <a href="http://localhost:3456/review-reader-pro.html" class="underline font-medium hover:text-amber-900">Local Admin Console</a> (<code class="font-mono text-amber-800">npm start</code>)
+    </div>
+
+    <!-- Main content (full width, no sidebar) -->
+    <main class="flex-1 overflow-y-auto bg-[#F9F9FB]">
+      <div id="reviews-panel" class="p-5 max-w-6xl mx-auto"></div>
+    </main>
+
+  </div>
+
+  <script src="/js/auth.js"></script>
+  <script>
+  (function() {
+    const $ = id => document.getElementById(id);
+    const esc = s => { const d = document.createElement('div'); d.textContent = s || ''; return d.innerHTML; };
+    const escAttr = s => { if (!s) return ''; return String(s).replace(/&/g,'&amp;').replace(/"/g,'&quot;').replace(/'/g,'&#39;').replace(/</g,'&lt;').replace(/>/g,'&gt;'); };
+
+    let allStores = [];
+    let allReviews = [];
+    let currentStore = null;
+    let starFilter = 'all';
+    let statusFilter = 'all';
+    let searchQuery = '';
+    let currentPeriod = 'all';
+    let dateFrom = null;
+    let dateTo = null;
+    let aiProvider = 'auto';
+    const isLocal = location.hostname === 'localhost' || location.hostname === '127.0.0.1';
+    if (!isLocal) {
+      const banner = document.getElementById('local-banner');
+      if (banner) banner.classList.remove('hidden');
+      const aiSection = document.getElementById('ai-section');
+      if (aiSection) aiSection.innerHTML = '<span class="text-gray-400">AI features require Local Admin Console</span>';
+    }
+
+    async function loadData() {
+      const panel = $('reviews-panel');
+      panel.innerHTML = '<div class="flex items-center justify-center h-full text-gray-400 text-sm"><div class="flex flex-col items-center gap-2"><svg class="animate-spin h-6 w-6 text-royal-400" viewBox="0 0 24 24" fill="none"><circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"/><path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4z"/></svg><span>Loading reviews...</span></div></div>';
+      try {
+        const [storesRes, reviewsRes] = await Promise.all([
+          fetch('/api/stores-sheet.json'),
+          fetch('/api/reviews-data.json'),
+        ]);
+        let storesData = await storesRes.json();
+        if (storesData.data) storesData = storesData.data;
+        if (!Array.isArray(storesData)) throw new Error('Invalid stores data');
+        allStores = storesData;
+        let revsData = await reviewsRes.json();
+        if (revsData.data) revsData = revsData.data;
+        if (!Array.isArray(revsData)) throw new Error('Invalid reviews data');
+        allReviews = revsData;
+        currentStore = allStores.length > 0 ? allStores[0].name : null;
+        renderReviews();
+      } catch (err) {
+        panel.innerHTML = `<div class="text-red-500 text-sm py-12 text-center">\u274C ${esc(err.message)}</div>`;
+      }
+    }
+
+    function getFilteredReviews() {
+      let revs = allReviews;
+      if (currentStore) {
+        revs = revs.filter(r => (r.store_name || '') === currentStore);
+      }
+      revs = filterByDate(revs, dateFrom, dateTo);
+      return revs.filter(r => {
+        if (starFilter !== 'all') {
+          const sv = parseInt(r.stars || r.Stars) || 0;
+          if (sv !== parseInt(starFilter)) return false;
+        }
+        if (statusFilter === 'replied' && !(r.response || r.reply_text || '').trim()) return false;
+        if (statusFilter === 'pending' && (r.response || r.reply_text || '').trim()) return false;
+        if (searchQuery) {
+          const q = searchQuery.toLowerCase();
+          const name = (r.reviewer || r.customer_name || '').toLowerCase();
+          const comment = (r.review_comments || r.comment || '').toLowerCase();
+          if (!name.includes(q) && !comment.includes(q)) return false;
+        }
+        return true;
+      }).sort((a, b) => {
+        const da = a.date_posted || a.review_create_time || '';
+        const db = b.date_posted || b.review_create_time || '';
+        return db.localeCompare(da);
+      });
+    }
+
+    function filterByDate(reviews, from, to) {
+      if (!from && !to) return reviews;
+      const fromMs = from ? new Date(from).getTime() : 0;
+      const toMs = to ? new Date(to).getTime() + 86400000 : Infinity;
+      return reviews.filter(r => {
+        const d = r.review_create_time || r.date_posted || '';
+        const t = new Date(d).getTime();
+        return !isNaN(t) && t >= fromMs && t < toMs;
+      });
+    }
+
+    function getStoreStats(storeName) {
+      const revs = allReviews.filter(r => (r.store_name || '') === storeName);
+      const total = revs.length;
+      const pending = revs.filter(r => !(r.response || r.reply_text || '').trim()).length;
+      const avg = revs.reduce((s, r) => {
+        const v = parseInt(r.stars || r.Stars) || 0;
+        return s + (v >= 1 && v <= 5 ? v : 0);
+      }, 0) / (revs.length || 1);
+      return { total, pending, avg: avg.toFixed(1) };
+    }
+
+    function computeSummary(reviews) {
+      let total = 0, replied = 0, starSum = 0, starCount = 0;
+      for (const r of reviews) { total++; if ((r.response || r.reply_text || '').trim()) replied++; const sv = parseStar(r.stars); if (sv > 0) { starSum += sv; starCount++; } }
+      return { total, unreplied: total - replied, replied, avg: starCount ? (starSum / starCount).toFixed(1) : '\u2014' };
+    }
+
+    function renderStorePills() {
+      const totalPending = allStores.reduce((sum, s) => sum + getStoreStats(s.name).pending, 0);
+      const countEl = $('total-pending-count');
+      if (totalPending > 0) { countEl.textContent = totalPending + ' pending'; countEl.classList.remove('hidden'); }
+      else countEl.classList.add('hidden');
+
+      return `<div class="flex items-center gap-2 flex-wrap">
+        <span class="text-xs font-semibold text-gray-400 uppercase tracking-wider mr-1">Store</span>
+        <span class="store-pill ${!currentStore ? 'active' : ''}" data-store="">All Stores</span>
+        ${allStores.map(s => {
+          const stats = getStoreStats(s.name);
+          const active = currentStore === s.name;
+          const badgeClass = stats.pending > 0 ? 'badge has-pending' : 'badge';
+          return `<span class="store-pill ${active ? 'active' : ''}" data-store="${esc(s.name)}">
+            ${esc(s.name.split(' ')[0])}
+            <span class="${badgeClass}">${stats.pending > 0 ? stats.pending : stats.total}</span>
+          </span>`;
+        }).join('')}
+      </div>`;
+    }
+
+    function renderReputationAlert(reviews) {
+      const critical = reviews.filter(r => {
+        const stars = parseStar(r.stars);
+        const hasReply = !!(r.response || r.reply_text || '').trim();
+        return stars <= 2 && !hasReply;
+      });
+      if (critical.length === 0) return '';
+      critical.sort((a, b) => (getReviewDate(b) || '').localeCompare(getReviewDate(a) || ''));
+      let text;
+      if (critical.length === 1) {
+        const r = critical[0];
+        text = `<span class="font-semibold">${esc(r.store_name || 'Unknown')}</span> &mdash; "${esc((r.review_comments || '').substring(0, 120))}${(r.review_comments || '').length > 120 ? '...' : ''}"`;
+      } else {
+        const stores = [...new Set(critical.map(r => r.store_name || 'Unknown'))];
+        text = `<span class="font-semibold">${critical.length} unreplied low-star reviews</span> across ${stores.length} store${stores.length > 1 ? 's' : ''}: ${stores.map(s => esc(s)).join(', ')}`;
+      }
+      return `<div class="bg-[#FFF5F5] border border-red-200 rounded-xl p-4 shadow-sm mb-4">
+        <div class="flex items-start gap-3">
+          <span class="text-xl leading-none mt-0.5">\uD83D\uDEA8</span>
+          <div class="flex-1 min-w-0">
+            <h3 class="font-semibold text-red-800 text-sm">Critical Attention Required</h3>
+            <p class="text-sm text-red-700 mt-1">${text}</p>
+          </div>
+        </div>
+      </div>`;
+    }
+
+    function applyPeriodLabel() {
+      const label = $('period-label');
+      if (!label) return;
+      if (currentPeriod === 'all') label.textContent = 'Showing all reviews';
+      else if (currentPeriod === 'custom') label.textContent = `From ${dateFrom || '...'} to ${dateTo || '...'}`;
+      else label.textContent = `Last ${currentPeriod} days`;
+    }
+
+    function renderReviews() {
+      const panel = $('reviews-panel');
+      const reviews = getFilteredReviews();
+      const summary = computeSummary(reviews);
+
+      panel.innerHTML = `
+        <!-- Store pills + Period filter -->
+        <div class="bg-white rounded-xl border border-gray-200 p-4 mb-4 space-y-3">
+          <div class="flex items-center gap-2 flex-wrap" id="store-pills-container">
+            ${renderStorePills()}
+          </div>
+          <div class="flex items-center gap-2 flex-wrap">
+            <span class="text-xs font-semibold text-gray-400 uppercase tracking-wider mr-1">Period</span>
+            <button class="period-btn px-3 py-1.5 text-xs font-medium rounded-lg ${currentPeriod === 'all' ? 'active' : ''}" data-period="all">All</button>
+            <button class="period-btn px-3 py-1.5 text-xs font-medium rounded-lg ${currentPeriod === '7' ? 'active' : ''}" data-period="7">7 days</button>
+            <button class="period-btn px-3 py-1.5 text-xs font-medium rounded-lg ${currentPeriod === '30' ? 'active' : ''}" data-period="30">30 days</button>
+            <button class="period-btn px-3 py-1.5 text-xs font-medium rounded-lg ${currentPeriod === '90' ? 'active' : ''}" data-period="90">90 days</button>
+            <button class="period-btn px-3 py-1.5 text-xs font-medium rounded-lg ${currentPeriod === 'custom' ? 'active' : ''}" data-period="custom">Custom</button>
+            <span class="text-gray-300 mx-1">|</span>
+            <input type="date" id="date-from" class="text-xs border border-gray-200 rounded-lg px-2 py-1.5 bg-white text-gray-600 focus:outline-none focus:ring-1 focus:ring-royal-300" ${currentPeriod !== 'custom' ? 'disabled' : ''}>
+            <span class="text-xs text-gray-400">—</span>
+            <input type="date" id="date-to" class="text-xs border border-gray-200 rounded-lg px-2 py-1.5 bg-white text-gray-600 focus:outline-none focus:ring-1 focus:ring-royal-300" ${currentPeriod !== 'custom' ? 'disabled' : ''}>
+            <span id="period-label" class="text-xs text-gray-400 ml-2"></span>
+          </div>
+        </div>
+
+        ${renderReputationAlert(reviews)}
+
+        <!-- Summary stats -->
+        <div class="grid grid-cols-5 gap-4 mb-4">
+          <div class="stat-card bg-white rounded-xl p-4 text-center">
+            <p class="text-xs font-semibold text-gray-400 uppercase tracking-wider mb-1">Total Reviews</p>
+            <p class="text-3xl font-bold text-gray-800">${summary.total.toLocaleString()}</p>
+          </div>
+          <div class="stat-card bg-white rounded-xl p-4 text-center">
+            <p class="text-xs font-semibold text-gray-400 uppercase tracking-wider mb-1">Unreplied</p>
+            <p class="text-3xl font-bold text-amber-600">${summary.unreplied.toLocaleString()}</p>
+          </div>
+          <div class="stat-card bg-white rounded-xl p-4 text-center">
+            <p class="text-xs font-semibold text-gray-400 uppercase tracking-wider mb-1">Replied</p>
+            <p class="text-3xl font-bold text-green-600">${summary.replied.toLocaleString()}</p>
+          </div>
+          <div class="stat-card bg-white rounded-xl p-4 text-center">
+            <p class="text-xs font-semibold text-gray-400 uppercase tracking-wider mb-1">Avg Rating</p>
+            <p class="text-3xl font-bold text-royal-600">${summary.avg}</p>
+          </div>
+          <div class="stat-card bg-white rounded-xl p-4 text-center">
+            <p class="text-xs font-semibold text-gray-400 uppercase tracking-wider mb-1">Filters</p>
+            <p class="text-3xl font-bold text-gray-800">${reviews.length}</p>
+            <p class="text-xs text-gray-400 mt-1">matched reviews</p>
+          </div>
+        </div>
+
+        <!-- Quick filters -->
+        <div class="flex items-center justify-between mb-4 flex-wrap gap-2">
+          <div class="flex items-center gap-2">
+            <select id="star-filter" class="text-xs border border-gray-200 rounded-lg px-2 py-1.5 bg-white text-gray-600">
+              <option value="all">All stars</option>
+              <option value="5">5 \u2B50</option>
+              <option value="4">4 \u2B50</option>
+              <option value="3">3 \u2B50</option>
+              <option value="2">2 \u2B50</option>
+              <option value="1">1 \u2B50</option>
+            </select>
+            <select id="status-filter" class="text-xs border border-gray-200 rounded-lg px-2 py-1.5 bg-white text-gray-600">
+              <option value="all">All status</option>
+              <option value="pending">Pending</option>
+              <option value="replied">Replied</option>
+            </select>
+            <input id="search-input" type="text" placeholder="Search name or comment..." class="text-xs border border-gray-200 rounded-lg px-2 py-1.5 bg-white text-gray-600 w-48">
+          </div>
+          <span class="text-xs text-gray-400">${reviews.length} review${reviews.length !== 1 ? 's' : ''}</span>
+        </div>
+
+        <!-- Reviews list -->
+        ${reviews.length === 0 ? `<div class="flex flex-col items-center justify-center py-16 text-gray-400">
+          <svg class="w-12 h-12 mb-4 text-gray-300" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M9 11l3 3L22 4"/><path d="M21 12v7a2 2 0 01-2 2H5a2 2 0 01-2-2V5a2 2 0 012-2h11"/>
+          </svg>
+          <div class="text-sm font-medium text-gray-400">No reviews match your filters</div>
+        </div>` : `<div class="space-y-3">${reviews.map(r => renderReviewCard(r)).join('')}</div>`}
+      `;
+
+      // Wire up store pill clicks
+      panel.querySelectorAll('.store-pill').forEach(el => {
+        el.addEventListener('click', () => {
+          currentStore = el.dataset.store || null;
+          renderReviews();
+        });
+      });
+
+      // Wire up filters
+      $('star-filter').value = starFilter;
+      $('status-filter').value = statusFilter;
+      $('search-input').value = searchQuery;
+
+      $('star-filter').onchange = function() { starFilter = this.value; renderReviews(); };
+      $('status-filter').onchange = function() { statusFilter = this.value; renderReviews(); };
+      $('search-input').oninput = function() { searchQuery = this.value; renderReviews(); };
+
+      // Period buttons
+      document.querySelectorAll('.period-btn').forEach(btn => {
+        btn.onclick = function() {
+          document.querySelectorAll('.period-btn').forEach(b => b.classList.remove('active'));
+          this.classList.add('active');
+          currentPeriod = this.dataset.period;
+          applyPeriod();
+        };
+      });
+
+      $('date-from').onchange = function() {
+        if (currentPeriod === 'custom') { dateFrom = this.value || null; dateTo = $('date-to').value || null; applyPeriodLabel(); renderReviews(); }
+      };
+      $('date-to').onchange = function() {
+        if (currentPeriod === 'custom') { dateTo = this.value || null; dateFrom = $('date-from').value || null; applyPeriodLabel(); renderReviews(); }
+      };
+
+      // Wire up AI provider radio
+      document.querySelectorAll('input[name="ai-provider"]').forEach(el => {
+        el.onchange = function() { if (this.checked) aiProvider = this.value; };
+      });
+
+      applyPeriodLabel();
+    }
+
+    function applyPeriod() {
+      const fromInput = $('date-from');
+      const toInput = $('date-to');
+      const now = new Date();
+      if (currentPeriod === 'all') { dateFrom = null; dateTo = null; fromInput.disabled = true; toInput.disabled = true; }
+      else if (currentPeriod === 'custom') { fromInput.disabled = false; toInput.disabled = false; dateFrom = fromInput.value || null; dateTo = toInput.value || null; }
+      else { fromInput.disabled = true; toInput.disabled = true; const from = new Date(now); from.setDate(from.getDate() - parseInt(currentPeriod)); dateFrom = from.toISOString().split('T')[0]; dateTo = null; }
+      renderReviews();
+    }
+
+    function parseStar(val) {
+      if (!val) return 5;
+      if (typeof val === 'number') return val;
+      const s = String(val).trim().toUpperCase();
+      const map = { 'ONE': 1, 'TWO': 2, 'THREE': 3, 'FOUR': 4, 'FIVE': 5 };
+      if (map[s]) return map[s];
+      const n = parseInt(s);
+      return (n >= 1 && n <= 5) ? n : 5;
+    }
+
+    function getReviewDate(r) {
+      return r.review_create_time || r.date_posted || '';
+    }
+
+    function getStoreShortName(storeName) {
+      const store = allStores.find(s => s.name === storeName);
+      if (!store) return null;
+      return store.id.replace(/^Store_/i, '');
+    }
+
+    async function generateReply(btn, reviewId) {
+      const card = btn.closest('.review-card');
+      const area = card.querySelector('.gen-reply-area');
+      const textarea = area && area.querySelector('textarea');
+      const statusEl = card.querySelector('.gen-status');
+      if (!area || !textarea || !statusEl) return;
+
+      const r = window._reviewData && window._reviewData[reviewId];
+      if (!r) { statusEl.textContent = 'Error: review data not found'; return; }
+
+      const storeShortName = getStoreShortName(r.store_name || '');
+      if (!storeShortName) { statusEl.textContent = 'Error: store not found'; return; }
+
+      btn.disabled = true;
+      statusEl.textContent = 'Generating...';
+      area.classList.remove('hidden');
+
+      try {
+        const res = await fetch('/api/replies/generate', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({
+            store: storeShortName,
+            review: {
+              reviewer: { displayName: r.customer_name || r.reviewer || 'Valued Customer' },
+              starRating: r.stars || 'FIVE',
+              comment: r.review_comments || r.comment || '',
+              reviewId: r.review_id || reviewId,
+            },
+            aiProvider: aiProvider,
+          }),
+        });
+        const ct = res.headers.get('content-type') || '';
+        if (!ct.includes('json')) {
+          statusEl.textContent = 'API not available — use Local Admin Console (npm start)';
+          return;
+        }
+        const data = await res.json();
+        if (data.ok && data.data && data.data.reply) {
+          textarea.value = data.data.reply;
+          statusEl.textContent = '';
+        } else {
+          statusEl.textContent = 'Error: ' + (data.error || 'empty response');
+        }
+      } catch (err) {
+        statusEl.textContent = 'Error: ' + err.message;
+      }
+      btn.disabled = false;
+    }
+    window.generateReply = generateReply;
+
+    async function postReply(btn, reviewId) {
+      const card = btn.closest('.review-card');
+      const area = card.querySelector('.gen-reply-area textarea');
+      const statusEl = card.querySelector('.gen-status');
+      const replyText = area ? area.value.trim() : '';
+      if (!replyText) { statusEl.textContent = 'Please generate a reply first'; return; }
+
+      const r = window._reviewData && window._reviewData[reviewId];
+      if (!r) { statusEl.textContent = 'Error: review data not found'; return; }
+
+      const storeShortName = getStoreShortName(r.store_name || '');
+      if (!storeShortName) { statusEl.textContent = 'Error: store not found'; return; }
+
+      btn.disabled = true;
+      statusEl.textContent = 'Posting...';
+
+      try {
+        const res = await fetch('/api/replies/post', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({
+            store: storeShortName,
+            review: {
+              reviewer: { displayName: r.customer_name || r.reviewer || 'Valued Customer' },
+              starRating: r.stars || 'FIVE',
+              comment: r.review_comments || r.comment || '',
+              reviewId: r.review_id || reviewId,
+            },
+            reply: replyText,
+          }),
+        });
+        const ct = res.headers.get('content-type') || '';
+        if (!ct.includes('json')) {
+          statusEl.textContent = 'API not available — use Local Admin Console (npm start)';
+          statusEl.className = 'gen-status text-xs text-red-500';
+          return;
+        }
+        const data = await res.json();
+        if (data.ok && data.data && data.data.success) {
+          statusEl.textContent = '\u2705 Posted to Google' + (data.data.dryRun ? ' (DRY RUN)' : '');
+          statusEl.className = 'gen-status text-xs text-green-600 font-medium';
+        } else {
+          statusEl.textContent = 'Error: ' + (data.error || 'post failed');
+          statusEl.className = 'gen-status text-xs text-red-500';
+        }
+      } catch (err) {
+        statusEl.textContent = 'Error: ' + err.message;
+        statusEl.className = 'gen-status text-xs text-red-500';
+      }
+      btn.disabled = false;
+    }
+
+    function renderReviewCard(r) {
+      const stars = parseStar(r.stars);
+      const hasReply = !!(r.response || r.reply_text || '').trim();
+      const comment = (r.review_comments || r.comment || '').substring(0, 350);
+      const replyText = (r.response || r.reply_text || '').substring(0, 250);
+      const date = r.date_posted || r.review_create_time || '';
+      const safeName = esc(r.reviewer || r.customer_name || 'Anonymous');
+      const safeComment = esc(r.review_comments || r.comment || '');
+      const reviewId = r.review_id || r.id || 'r' + Math.random().toString(36).slice(2);
+      if (!window._reviewData) window._reviewData = {};
+      window._reviewData[reviewId] = r;
+      return `<div class="review-card" data-review-id="${escAttr(reviewId)}">
+        <div class="px-4 py-3 bg-gray-50/80 flex items-center justify-between">
+          <div class="flex items-center gap-3">
+            <div class="review-avatar">${(r.reviewer || r.customer_name || '?')[0]}</div>
+            <div>
+              <span class="font-medium text-sm text-gray-800">${safeName}</span>
+              <span class="ml-2 text-sm">${'\u2B50'.repeat(stars)}${'\u2606'.repeat(5 - stars)}</span>
+              ${date ? `<span class="ml-2 text-xs text-gray-400">${date}</span>` : ''}
+              ${hasReply ? '<span class="ml-2 text-xs font-medium text-green-600">\u2705 Replied</span>' : '<span class="ml-2 text-xs font-medium text-amber-600">\u23F3 Pending</span>'}
+            </div>
+          </div>
+          <div class="flex items-center gap-1.5">
+            ${isLocal ? `<button onclick="generateReply(this, '${escAttr(reviewId)}')" class="text-xs px-2.5 py-1.5 border border-gray-200 rounded-lg hover:bg-royal-50 hover:text-royal-600 hover:border-royal-200 text-gray-500 transition-colors" title="Generate AI reply">\uD83E\uDD16 Regenerate</button>` : ''}
+            <button onclick="copyReview(this)" data-copy-name="${escAttr(r.reviewer || r.customer_name || 'Anonymous')}" data-copy-stars="${stars}" data-copy-comment="${escAttr(r.review_comments || r.comment || '')}" class="p-1.5 rounded-md text-gray-300 hover:text-royal-600 hover:bg-royal-50 transition-colors" title="Copy review">
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg>
+            </button>
+          </div>
+        </div>
+        <div class="px-4 py-3 text-sm text-gray-600 bg-white leading-relaxed">${esc(comment) || '<span class="text-gray-300 italic">No comment</span>'}</div>
+        ${hasReply ? `<div class="px-4 pb-3 bg-white border-t border-gray-50 pt-3">
+          <div class="flex items-center justify-between mb-1">
+            <span class="text-xs text-green-700 font-semibold">\uD83D\uDCAC Reply:</span>
+            ${isLocal ? `<button onclick="editReply(this, '${escAttr(reviewId)}')" class="text-xs px-2 py-0.5 border border-gray-200 rounded-md hover:bg-royal-50 hover:text-royal-600 hover:border-royal-200 text-gray-400 transition-colors">\u270F\uFE0F Edit</button>` : ''}
+          </div>
+          <div class="text-xs text-gray-500 leading-relaxed">${esc(replyText)}${(r.response || '').length > 250 ? '...' : ''}</div>
+        </div>` : ''}
+        <div class="gen-reply-area hidden px-4 pb-3 bg-white border-t border-gray-50 pt-3">
+          <div class="flex items-center justify-between mb-1.5">
+            <span class="gen-label text-xs text-royal-700 font-semibold">\uD83E\uDD16 AI Generated Reply</span>
+            <span class="gen-status text-xs text-gray-400"></span>
+          </div>
+          <textarea rows="4" class="w-full text-xs border border-gray-200 rounded-lg p-2 bg-white text-gray-700 focus:outline-none focus:ring-1 focus:ring-royal-300 resize-vertical"></textarea>
+          ${isLocal ? `<div class="flex items-center gap-2 mt-2">
+            <button onclick="generateReply(this, '${escAttr(reviewId)}')" class="text-xs px-3 py-1.5 border border-gray-200 rounded-lg hover:bg-gray-50 text-gray-500 hover:text-gray-700 transition-colors">\uD83E\uDD16 Regenerate</button>
+            <button onclick="postReply(this, '${escAttr(reviewId)}')" class="text-xs px-3 py-1.5 bg-royal-600 text-white rounded-lg hover:bg-royal-700 transition-colors font-medium">\uD83D\uDCE4 Post to Google</button>
+          </div>` : ''}
+        </div>
+      </div>`;
+    }
+
+    function copyReview(btn) {
+      const name = btn.dataset.copyName;
+      const stars = '\u2B50'.repeat(parseInt(btn.dataset.copyStars) || 0);
+      const comment = btn.dataset.copyComment || '';
+      const text = name + '\n' + stars + '\n' + comment;
+      navigator.clipboard.writeText(text).then(() => {
+        const orig = btn.innerHTML;
+        btn.innerHTML = '<span class="text-xs">\u2705</span>';
+        setTimeout(() => btn.innerHTML = orig, 1200);
+      }).catch(() => {});
+    }
+    window.postReply = postReply;
+
+    async function editReply(btn, reviewId) {
+      const r = window._reviewData && window._reviewData[reviewId];
+      if (!r) return;
+      const card = btn.closest('.review-card');
+      const area = card.querySelector('.gen-reply-area');
+      const textarea = area && area.querySelector('textarea');
+      const label = area && area.querySelector('.gen-label');
+      const statusEl = card.querySelector('.gen-status');
+      if (!area || !textarea) return;
+      const fullReply = r.response || r.reply_text || '';
+      textarea.value = fullReply;
+      if (label) label.textContent = '\u270F\uFE0F Edit Reply';
+      if (statusEl) statusEl.textContent = '';
+      area.classList.remove('hidden');
+      textarea.focus();
+    }
+    window.editReply = editReply;
+    window.copyReview = copyReview;
+
+    loadData();
+  })();
+  </script>
+  <script>Auth.protect('auth-container');</script>
+</body>
+</html>
