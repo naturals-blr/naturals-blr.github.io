@@ -90,6 +90,104 @@
 </section>
 
 <section>
+<h2>Review Data Storage &amp; Workflow</h2>
+<p style="font-size:0.875rem;color:#6b7280;margin-bottom:1rem">How reviews flow from Google Business Profile through the system, and which files hold what data.</p>
+
+<h3 style="font-size:1rem;margin:1.5rem 0 0.75rem;">Data Flow</h3>
+<pre style="background:#f3f4f6;padding:0.75rem;border-radius:6px;font-size:0.8125rem;overflow-x:auto;line-height:1.6;">
+GBP API
+  │
+  ▼
+syncReviewsFromGMB.js     ← fetches live reviews (stale entries pruned)
+  │
+  ▼
+reviews_database.csv      ← canonical operational DB (~174 current reviews)
+  │
+  ▼
+exportToJson()            ← called during export/build
+  │
+  ├──▶ reviews.json       ← snapshot of current CSV (overwritten each run)
+  │
+  └──▶ mergeIntoArchive() ← upserts into append-only archive
+        │
+        ▼
+      reviews.archive.json ← full historical record (7,700+, never pruned)
+        │
+        ├──▶ local server  ← /api/reviews-data serves from archive
+        └──▶ build.py      ← copies archive → out/api/reviews-data.json for static site
+</pre>
+
+<h3 style="font-size:1rem;margin:1.5rem 0 0.75rem;">Key Files</h3>
+<table>
+<thead><tr><th>File</th><th>Role</th><th>Rows</th><th>Behavior</th></tr></thead>
+<tbody>
+<tr>
+  <td><code>scripts/data/reviews_database.csv</code></td>
+  <td>Canonical operational DB</td>
+  <td>~174</td>
+  <td>Overwritten each sync — stale entries removed via <code>removeStaleEntries()</code></td>
+</tr>
+<tr>
+  <td><code>build/data/reviews.json</code></td>
+  <td>Snapshot</td>
+  <td>~174</td>
+  <td>Exported from CSV, overwritten each export. Used by auto-responder.</td>
+</tr>
+<tr>
+  <td><code>build/data/reviews.archive.json</code></td>
+  <td>Historical archive</td>
+  <td>~7,733</td>
+  <td><strong>Append-only</strong> — upserts by <code>review_id</code>, never deletes. Primary data source for reports.</td>
+</tr>
+<tr>
+  <td><code>out/api/reviews-data.json</code></td>
+  <td>Static site copy</td>
+  <td>~7,733</td>
+  <td>Copied from archive during <code>build.py</code>. Served to static admin pages.</td>
+</tr>
+<tr>
+  <td><code>scripts/data/negative_review_status.json</code></td>
+  <td>Alert state ledger</td>
+  <td>~20</td>
+  <td>Tracks escalation status (<code>open</code> / <code>google_replied</code>), never pruned automatically.</td>
+</tr>
+</tbody>
+</table>
+
+<h3 style="font-size:1rem;margin:1.5rem 0 0.75rem;">How it works</h3>
+<ol style="font-size:0.875rem;color:#374151;line-height:1.7;padding-left:1.5rem;">
+  <li><strong>Sync</strong> — <code>syncReviewsFromGMB.js</code> (or <code>npm run sync</code>) fetches current reviews from GBP, saves to <code>reviews_database.csv</code>, removes stale IDs</li>
+  <li><strong>Export</strong> — <code>exportToJson()</code> reads the CSV and writes <code>reviews.json</code> (fresh snapshot)</li>
+  <li><strong>Archive</strong> — <code>mergeIntoArchive()</code> is called automatically inside <code>exportToJson()</code>. It reads the existing archive, upserts every CSV entry (adds new reviews, updates reply status), and writes back — <strong>never deletes anything</strong></li>
+  <li><strong>Serve</strong> — The local console server (<code>/api/reviews-data</code>) serves <code>reviews.archive.json</code> with fallback to <code>reviews.json</code></li>
+  <li><strong>Build</strong> — <code>build.py</code> copies <code>reviews.archive.json</code> → <code>out/api/reviews-data.json</code> for the static site</li>
+</ol>
+
+<h3 style="font-size:1rem;margin:1.5rem 0 0.75rem;">Key scripts that touch review data</h3>
+<table>
+<thead><tr><th>Script</th><th>What it does</th></tr></thead>
+<tbody>
+<tr><td><code>scripts/steps/syncReviewsFromGMB.js</code></td><td>Fetches from GBP → writes CSV → exports JSON → merges archive</td></tr>
+<tr><td><code>scripts/steps/syncAndReplyReviews.js</code></td><td>Syncs + auto-replies + exports → merge</td></tr>
+<tr><td><code>tools/sync-reviews.js</code></td><td>Standalone sync + export + archive merge</td></tr>
+<tr><td><code>tools/local-console/server.js</code></td><td>Serves archive via <code>/api/reviews-data</code></td></tr>
+<tr><td><code>build/exportDataForBuild.js</code></td><td>Build-time export: CSV → JSON + archive merge</td></tr>
+<tr><td><code>build/build.py</code></td><td>Copies archive → <code>out/api/reviews-data.json</code></td></tr>
+<tr><td><code>scripts/steps/negativeAlerts.js</code></td><td>Reads CSV + <code>negative_review_status.json</code> for alerts</td></tr>
+</tbody>
+</table>
+
+<div class="dep-box" style="margin-top:0.75rem;background:#fffbeb;border-color:#fde68a;">
+<strong style="color:#92400e;">⚠️ Never manually delete reviews.archive.json</strong>
+<ul style="color:#92400e;font-size:0.8125rem;">
+  <li>The archive is the only copy of historical reviews older than the current GBP window</li>
+  <li>If deleted, next export will create a fresh archive with only the current CSV data (~174 reviews)</li>
+  <li>To recover, copy <code>out/api/reviews-data.json</code> (from last build) back to <code>build/data/reviews.archive.json</code></li>
+</ul>
+</div>
+</section>
+
+<section>
 <h2>Local / Admin Console</h2>
 <p style="font-size:0.875rem;color:#6b7280;margin-bottom:1rem">These run from your laptop or the admin console at <code>http://localhost:3456</code>.</p>
 

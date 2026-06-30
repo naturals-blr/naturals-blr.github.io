@@ -86,6 +86,8 @@
     const $ = id => document.getElementById(id);
     const esc = s => { const d = document.createElement('div'); d.textContent = s || ''; return d.innerHTML; };
     const escAttr = s => { if (!s) return ''; return String(s).replace(/&/g,'&amp;').replace(/"/g,'&quot;').replace(/'/g,'&#39;').replace(/</g,'&lt;').replace(/>/g,'&gt;'); };
+    const hasReplyText = r => { const v = (r.response || r.reply_text || '').trim(); return v && v !== 'false' && v !== 'False'; };
+    const replyTextOf = r => { const v = (r.response || r.reply_text || '').trim(); return v && v !== 'false' && v !== 'False' ? v : ''; };
 
     let allStores = [];
     let allReviews = [];
@@ -155,8 +157,8 @@
           const sv = parseInt(r.stars || r.Stars) || 0;
           if (sv !== parseInt(starFilter)) return false;
         }
-        if (statusFilter === 'replied' && !(r.response || r.reply_text || '').trim()) return false;
-        if (statusFilter === 'pending' && (r.response || r.reply_text || '').trim()) return false;
+        if (statusFilter === 'replied' && !hasReplyText(r)) return false;
+        if (statusFilter === 'pending' && hasReplyText(r)) return false;
         if (searchQuery) {
           const q = searchQuery.toLowerCase();
           const name = (r.reviewer || r.customer_name || '').toLowerCase();
@@ -185,7 +187,7 @@
     function getStoreStats(storeName) {
       const revs = allReviews.filter(r => (r.store_name || '') === storeName);
       const total = revs.length;
-      const pending = revs.filter(r => !(r.response || r.reply_text || '').trim()).length;
+      const pending = revs.filter(r => !hasReplyText(r)).length;
       const avg = revs.reduce((s, r) => {
         const v = parseInt(r.stars || r.Stars) || 0;
         return s + (v >= 1 && v <= 5 ? v : 0);
@@ -195,7 +197,7 @@
 
     function computeSummary(reviews) {
       let total = 0, replied = 0, starSum = 0, starCount = 0;
-      for (const r of reviews) { total++; if ((r.response || r.reply_text || '').trim()) replied++; const sv = parseStar(r.stars); if (sv > 0) { starSum += sv; starCount++; } }
+      for (const r of reviews) { total++; if (hasReplyText(r)) replied++; const sv = parseStar(r.stars); if (sv > 0) { starSum += sv; starCount++; } }
       return { total, unreplied: total - replied, replied, avg: starCount ? (starSum / starCount).toFixed(1) : '\u2014' };
     }
 
@@ -223,7 +225,7 @@
     function renderReputationAlert(reviews) {
       const critical = reviews.filter(r => {
         const stars = parseStar(r.stars);
-        const hasReply = !!(r.response || r.reply_text || '').trim();
+        const hasReply = hasReplyText(r);
         return stars <= 2 && !hasReply;
       });
       if (critical.length === 0) return '';
@@ -544,9 +546,9 @@
 
     function renderReviewCard(r) {
       const stars = parseStar(r.stars);
-      const hasReply = !!(r.response || r.reply_text || '').trim();
+      const hasReply = hasReplyText(r);
       const comment = (r.review_comments || r.comment || '').substring(0, 350);
-      const replyText = (r.response || r.reply_text || '').substring(0, 250);
+      const replyText = replyTextOf(r).substring(0, 250);
       const date = r.date_posted || r.review_create_time || '';
       const safeName = esc(r.reviewer || r.customer_name || 'Anonymous');
       const safeComment = esc(r.review_comments || r.comment || '');
@@ -618,7 +620,7 @@
       const label = area && area.querySelector('.gen-label');
       const statusEl = card.querySelector('.gen-status');
       if (!area || !textarea) return;
-      const fullReply = r.response || r.reply_text || '';
+      const fullReply = replyTextOf(r);
       textarea.value = fullReply;
       if (label) label.textContent = '\u270F\uFE0F Edit Reply';
       if (statusEl) statusEl.textContent = '';

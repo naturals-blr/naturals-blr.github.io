@@ -312,7 +312,8 @@
 
       const critical = reviews.filter(r => {
         const stars = parseStar(r.stars);
-        const hasReply = !!(r.response || r.reply_text || '').trim();
+        const replyVal = (r.response || r.reply_text || '').trim();
+        const hasReply = replyVal && replyVal !== 'false' && replyVal !== 'False';
         return stars <= 2 && !hasReply;
       });
 
@@ -346,7 +347,7 @@
 
     function computeSummary(reviews) {
       let total = 0, replied = 0, starSum = 0, starCount = 0;
-      for (const r of reviews) { total++; if ((r.response || r.reply_text || '').trim()) replied++; const sv = parseStar(r.stars); if (sv > 0) { starSum += sv; starCount++; } }
+      for (const r of reviews) { total++; const rv = (r.response || r.reply_text || '').trim(); if (rv && rv !== 'false' && rv !== 'False') replied++; const sv = parseStar(r.stars); if (sv > 0) { starSum += sv; starCount++; } }
       $('stat-total').textContent = total.toLocaleString();
       $('stat-unreplied').textContent = (total - replied).toLocaleString();
       $('stat-replied').textContent = replied.toLocaleString();
@@ -359,8 +360,8 @@
         const name = r.store_name || 'Unknown';
         if (!storeMap[name]) storeMap[name] = { total: 0, replied: 0, starSum: 0, starCount: 0, critical: 0 };
         storeMap[name].total++;
-        const resp = r.response || r.reply_text || '';
-        if (resp.trim()) storeMap[name].replied++;
+        const resp = (r.response || r.reply_text || '').trim();
+        if (resp && resp !== 'false' && resp !== 'False') storeMap[name].replied++;
         const sv = parseStar(r.stars);
         if (sv > 0) { storeMap[name].starSum += sv; storeMap[name].starCount++; }
         if (sv <= 2) storeMap[name].critical++;
@@ -439,9 +440,10 @@
       if (sorted.length === 0) { container.innerHTML = '<div class="text-center text-gray-400 py-8 text-sm">No reviews found for this period.</div>'; return; }
       container.innerHTML = sorted.map(r => {
         const stars = parseStar(r.stars);
-        const hasResponse = !!(r.response || r.reply_text || '').trim();
+        const replyVal = (r.response || r.reply_text || '').trim();
+        const hasResponse = replyVal && replyVal !== 'false' && replyVal !== 'False';
         const comment = (r.review_comments || '').substring(0, 250);
-        const replyText = (r.response || r.reply_text || '').substring(0, 120);
+        const replyText = hasResponse ? replyVal.substring(0, 120) : '';
         const safeName = escHtml(r.customer_name || 'Anonymous');
         const safeComment = escHtml(r.review_comments || '');
         return `<div class="review-item flex items-start gap-3 p-3 rounded-lg border border-gray-100 hover:border-royal-100 transition-colors ${hasResponse ? 'bg-green-50/30' : ''}" data-store="${escHtml(r.store_name)}">

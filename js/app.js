@@ -206,9 +206,11 @@ function renderReviews(storeShortName) {
   `;
 }
 
+const STAR_MAP = { ONE: 1, TWO: 2, THREE: 3, FOUR: 4, FIVE: 5 };
+
 function renderReviewCard(review, storeShortName) {
   const reviewer = review.reviewer?.displayName || 'Anonymous';
-  const stars = parseInt(review.starRating) || 0;
+  const stars = STAR_MAP[review.starRating] || parseInt(review.starRating) || 0;
   const comment = review.comment || '(no text)';
   const starHtml = '⭐'.repeat(stars) + '☆'.repeat(5 - stars);
   const id = (review.name || review.reviewId || '').replace(/[^a-zA-Z0-9]/g, '_');
