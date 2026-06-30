@@ -53,7 +53,7 @@
   <td>Review Sync</td>
   <td><span class="badge badge-blue">11AM, 4PM, 6PM</span></td>
   <td>Fetches new reviews from Google Business Profile for all 5 stores</td>
-  <td><code>npm run sync</code></td>
+  <td><code>node scripts/steps/syncReviewsFromGMB.js</code></td>
 </tr>
 <tr>
   <td>Review Reply</td>
@@ -75,9 +75,9 @@
 </tr>
 <tr>
   <td>Monthly Reports</td>
-  <td><span class="badge badge-blue">1st 6:30AM</span></td>
+  <td><span class="badge badge-blue">1st 7:00AM</span></td>
   <td>C-level monthly portfolio review (vs previous month + same month last year)</td>
-  <td><code>npm run report:monthly</code></td>
+  <td><code>node scripts/steps/monthlyReport.js</code></td>
 </tr>
 <tr>
   <td>Website Build</td>
@@ -87,6 +87,16 @@
 </tr>
 </tbody>
 </table>
+
+<div class="dep-box" style="background:#f0fdf4;border-color:#86efac;">
+<strong style="color:#166534;">All Workflows</strong>
+<ul style="color:#166534;font-size:0.8125rem;">
+  <li><strong><code>naturals-ops.yml</code></strong> — Master ops workflow (12 jobs). Scheduled build, review sync, reply, alerts, reports, and failure notifications. All times are IST.</li>
+  <li><strong><code>manager_publish.yml</code></strong> — Campaign publishing. Two paths: <br>   • <em>Option A (Relay):</em> <code>repository_dispatch</code> from GAS webhook (primary) <br>   • <em>Option B (Issues):</em> GitHub Issue with <code>[Campaign]</code> title (fallback)</li>
+  <li><strong><code>gatekeeper.yml</code></strong> — Ad-hoc social publishing. Triggered by <code>repository_dispatch</code> from the admin UI (adhoc.html). Supports image upload + commit.</li>
+  <li><strong><code>verify_and_dispatch.yml</code></strong> — Manual campaign dispatch via <code>workflow_dispatch</code>. Authenticates via Google OAuth ID token before publishing.</li>
+</ul>
+</div>
 </section>
 
 <section>
@@ -101,7 +111,7 @@ GBP API
 syncReviewsFromGMB.js     ← fetches live reviews (stale entries pruned)
   │
   ▼
-reviews_database.csv      ← canonical operational DB (~174 current reviews)
+reviews_database.csv      ← canonical operational DB (~254 current reviews)
   │
   ▼
 exportToJson()            ← called during export/build
@@ -124,13 +134,13 @@ exportToJson()            ← called during export/build
 <tr>
   <td><code>scripts/data/reviews_database.csv</code></td>
   <td>Canonical operational DB</td>
-  <td>~174</td>
+  <td>~254</td>
   <td>Overwritten each sync — stale entries removed via <code>removeStaleEntries()</code></td>
 </tr>
 <tr>
   <td><code>build/data/reviews.json</code></td>
   <td>Snapshot</td>
-  <td>~174</td>
+  <td>~254</td>
   <td>Exported from CSV, overwritten each export. Used by auto-responder.</td>
 </tr>
 <tr>
@@ -148,7 +158,7 @@ exportToJson()            ← called during export/build
 <tr>
   <td><code>scripts/data/negative_review_status.json</code></td>
   <td>Alert state ledger</td>
-  <td>~20</td>
+  <td>~21</td>
   <td>Tracks escalation status (<code>open</code> / <code>google_replied</code>), never pruned automatically.</td>
 </tr>
 </tbody>
@@ -156,7 +166,7 @@ exportToJson()            ← called during export/build
 
 <h3 style="font-size:1rem;margin:1.5rem 0 0.75rem;">How it works</h3>
 <ol style="font-size:0.875rem;color:#374151;line-height:1.7;padding-left:1.5rem;">
-  <li><strong>Sync</strong> — <code>syncReviewsFromGMB.js</code> (or <code>npm run sync</code>) fetches current reviews from GBP, saves to <code>reviews_database.csv</code>, removes stale IDs</li>
+  <li><strong>Sync</strong> — <code>syncReviewsFromGMB.js</code> fetches current reviews from GBP, saves to <code>reviews_database.csv</code>, removes stale IDs</li>
   <li><strong>Export</strong> — <code>exportToJson()</code> reads the CSV and writes <code>reviews.json</code> (fresh snapshot)</li>
   <li><strong>Archive</strong> — <code>mergeIntoArchive()</code> is called automatically inside <code>exportToJson()</code>. It reads the existing archive, upserts every CSV entry (adds new reviews, updates reply status), and writes back — <strong>never deletes anything</strong></li>
   <li><strong>Serve</strong> — The local console server (<code>/api/reviews-data</code>) serves <code>reviews.archive.json</code> with fallback to <code>reviews.json</code></li>
@@ -181,10 +191,28 @@ exportToJson()            ← called during export/build
 <strong style="color:#92400e;">⚠️ Never manually delete reviews.archive.json</strong>
 <ul style="color:#92400e;font-size:0.8125rem;">
   <li>The archive is the only copy of historical reviews older than the current GBP window</li>
-  <li>If deleted, next export will create a fresh archive with only the current CSV data (~174 reviews)</li>
+  <li>If deleted, next export will create a fresh archive with only the current CSV data (~254 reviews)</li>
   <li>To recover, copy <code>out/api/reviews-data.json</code> (from last build) back to <code>build/data/reviews.archive.json</code></li>
 </ul>
 </div>
+
+<h3 style="font-size:1rem;margin:1.5rem 0 0.75rem;">Build Data Files</h3>
+<p style="font-size:0.875rem;color:#6b7280;margin-bottom:1rem">All JSON files in <code>build/data/</code> — generated by <code>npm run export:build-data</code> (via <code>build/exportDataForBuild.js</code> + <code>config/masterLoader.js</code>). Each file maps to a Google Sheets tab and a YAML config file.</p>
+<table>
+<thead><tr><th>File</th><th>Source (Sheet Tab)</th><th>Rows</th><th>Used By</th></tr></thead>
+<tbody>
+<tr><td><code>stores.json</code></td><td><code>stores</code></td><td>5</td><td>All workflows — store metadata, OAuth tokens, social IDs</td></tr>
+<tr><td><code>services.json</code></td><td><code>services</code></td><td>285</td><td>Website service listings</td></tr>
+<tr><td><code>campaigns.json</code></td><td><code>campaigns</code></td><td>30</td><td>Scheduled social publishing, website offers</td></tr>
+<tr><td><code>stylists.json</code></td><td><code>stylists</code></td><td>24</td><td>Website team page</td></tr>
+<tr><td><code>testimonials.json</code></td><td><code>testimonials</code></td><td>2,210</td><td>Website testimonials carousel (curated from Google Sheets)</td></tr>
+<tr><td><code>careers.json</code></td><td><code>careers</code></td><td>4</td><td>Website careers page</td></tr>
+<tr><td><code>trainings.json</code></td><td><code>trainings</code></td><td>5</td><td>Website training / certifications</td></tr>
+<tr><td><code>page_seo_config.json</code></td><td><code>page_seo_config</code></td><td>23</td><td>Per-page SEO meta tags</td></tr>
+<tr><td><code>review_response_templates.json</code></td><td><code>review_response_templates</code></td><td>5 cats</td><td>Auto-responder template library</td></tr>
+<tr><td><code>aris_global_settings.json</code></td><td><code>aris_global_settings</code></td><td>20</td><td>Brand settings, admin access control, C-level emails</td></tr>
+</tbody>
+</table>
 </section>
 
 <section>
@@ -295,7 +323,7 @@ exportToJson()            ← called during export/build
 </tr>
 <tr>
   <td>ACE — Autopilot</td>
-  <td><code>npm run ace</code> / <code>npm run ace:dry</code><br><code>http://localhost:3456/ace.html</code></td>
+  <td><code>http://localhost:3456/ace.html</code></td>
   <td>
     <div class="dep-box">
       <strong>Required</strong>
@@ -380,15 +408,22 @@ exportToJson()            ← called during export/build
 <table>
 <thead><tr><th>Command</th><th>Purpose</th></tr></thead>
 <tbody>
-<tr><td><code>npm run sync:all</code></td><td>Full sync: sheets → YAML → build data</td></tr>
+<tr><td><code>npm run sync:all</code></td><td>Full sync: sheets → YAML → build data + static site</td></tr>
 <tr><td><code>npm run export:build-data</code></td><td>Export build data from YAML to JSON</td></tr>
+<tr><td><code>npm run build:website</code></td><td>Export data + build static site</td></tr>
+<tr><td><code>npm run campaign:publish</code></td><td>Export data + build + social publish</td></tr>
 <tr><td><code>npm run reply</code></td><td>Live review reply (1/store)</td></tr>
 <tr><td><code>npm run dry:reply</code></td><td>Dry-run review reply (no posting)</td></tr>
 <tr><td><code>npm run alerts</code></td><td>Negative review alerts</td></tr>
 <tr><td><code>npm run report</code></td><td>Weekly report generation</td></tr>
-<tr><td><code>npm run ace</code></td><td>Full ACE pipeline (live)</td></tr>
-<tr><td><code>npm run ace:dry</code></td><td>ACE pipeline (no git push / social)</td></tr>
+<tr><td><code>npm run social</code></td><td>Social amplification / republish</td></tr>
+<tr><td><code>npm run social:publish</code></td><td>Build + social publish</td></tr>
+<tr><td><code>npm run sync:yaml</code></td><td>Sync Google Sheets → YAML config files</td></tr>
+<tr><td><code>npm run oauth:refresh</code></td><td>Refresh Google OAuth token</td></tr>
+<tr><td><code>npm run cache:status</code></td><td>Show cache state for all data sources</td></tr>
+<tr><td><code>npm run cache:clear</code></td><td>Clear all caches (forces fresh sheet fetch)</td></tr>
 <tr><td><code>npm start</code></td><td>Start admin console (port 3456) from <code>tools/local-console/server.js</code></td></tr>
+<tr><td><code>npm run start:dev</code></td><td>Start admin console in dry-run mode</td></tr>
 <tr><td><code>DRY_RUN=false node scripts/steps/oneTimeHistoricalSweep.js</code></td><td>Live historical sweep</td></tr>
 </tbody>
 </table>
@@ -435,6 +470,81 @@ git remote set-url origin https://YOUR_GITHUB_PAT@github.com/naturals-blr/natura
   <li>The PAT in the remote URL can be rotated anytime — just re-run <code>git remote set-url origin</code></li>
 </ul>
 </div>
+</section>
+
+<section>
+<h2>Campaign Publish Pipeline</h2>
+<p style="font-size:0.875rem;color:#6b7280;margin-bottom:1rem">How social campaigns flow from creation to publishing on Facebook, Instagram, and Google Business Profile.</p>
+
+<h3 style="font-size:1rem;margin:1.5rem 0 0.75rem;">Architecture</h3>
+<pre style="background:#f3f4f6;padding:0.75rem;border-radius:6px;font-size:0.8125rem;overflow-x:auto;line-height:1.6;">
+Admin UI (adhoc.html / ace.html)
+  │
+  ├──▶ Google Apps Script Relay (gas_relay.gs)
+  │       │  Image → Google Drive
+  │       │  repository_dispatch → GitHub
+  │       ▼
+  │   manager_publish.yml (dispatch-publish job)
+  │       │  Authenticates via INTERNAL_GATEKEEPER_KEY
+  │       │  Authorises via stores.json email match
+  │       │  Runs social_publish_adhoc.py
+  │       ▼
+  │   Facebook / Instagram / GBP
+  │
+  └──▶ verify_andispatch.yml (manual workflow_dispatch)
+          │  Authenticates via Google OAuth ID token
+          │  Authorises via stores.json email match
+          │  Runs social_publish_adhoc.py
+          ▼
+      Facebook / Instagram / GBP
+
+GitHub Issues (fallback path)
+  └──▶ manager_publish.yml (verify-and-publish job)
+          Authorises via GitHub username → stores.json
+</pre>
+
+<h3 style="font-size:1rem;margin:1.5rem 0 0.75rem;">Workflows</h3>
+<table>
+<thead><tr><th>Workflow</th><th>Trigger</th><th>Auth Method</th><th>Use Case</th></tr></thead>
+<tbody>
+<tr>
+  <td><code>manager_publish.yml</code> (Option A: Relay)</td>
+  <td><code>repository_dispatch</code> from GAS</td>
+  <td><code>INTERNAL_GATEKEEPER_KEY</code> + stores.json email</td>
+  <td>Primary path — admin UI → GAS → GitHub → publish</td>
+</tr>
+<tr>
+  <td><code>manager_publish.yml</code> (Option B: Issues)</td>
+  <td>GitHub Issue with <code>[Campaign]</code> title</td>
+  <td>GitHub username → stores.json <code>github_user</code></td>
+  <td>Fallback / diagnostic — manager opens issue</td>
+</tr>
+<tr>
+  <td><code>gatekeeper.yml</code></td>
+  <td><code>repository_dispatch</code> from GAS</td>
+  <td><code>INTERNAL_GATEKEEPER_KEY</code></td>
+  <td>Ad-hoc single-image publishing from admin</td>
+</tr>
+<tr>
+  <td><code>verify_and_dispatch.yml</code></td>
+  <td><code>workflow_dispatch</code> (manual)</td>
+  <td>Google OAuth ID token + stores.json</td>
+  <td>Manual campaign dispatch with server-side auth</td>
+</tr>
+</tbody>
+</table>
+
+<h3 style="font-size:1rem;margin:1.5rem 0 0.75rem;">Key scripts</h3>
+<table>
+<thead><tr><th>Script</th><th>Role</th></tr></thead>
+<tbody>
+<tr><td><code>build/social_publish_adhoc.py</code></td><td>Single campaign publish to Facebook/Instagram/GBP; invoked by all 4 workflows</td></tr>
+<tr><td><code>build/social_publish_adhoc_per_store.py</code></td><td>Per-store image + caption publish (used by admin adhoc-per-store.html)</td></tr>
+<tr><td><code>build/social_publish_only.py</code></td><td>Scheduled social media refresh from campaign library; run by <code>scheduled-build-and-deploy</code></td></tr>
+<tr><td><code>scripts/gas_relay.gs</code></td><td>Google Apps Script: receives payload from admin, stores image in Drive, fires <code>repository_dispatch</code></td></tr>
+<tr><td><code>build/data/adhoc_history.json</code></td><td>Append-only log of every publish attempt; committed back to repo after each run</td></tr>
+</tbody>
+</table>
 </section>
 
 <section>
@@ -856,6 +966,66 @@ pass through the GitHub security gate without any manual intervention.
   <li><a href="https://leonardo.ai/" target="_blank" style="color:#3b82f6;">Leonardo AI</a> — AI image generation and asset creation</li>
   <li><a href="https://meta.ai/" target="_blank" style="color:#3b82f6;">Meta AI</a> — Meta's AI image generation (Imagine)</li>
 </ul>
+</section>
+
+<section>
+<h2>Troubleshooting — Common Errors &amp; Fixes</h2>
+
+<table>
+<thead><tr><th>Error / Symptom</th><th>Likely Cause</th><th>Fix</th></tr></thead>
+<tbody>
+<tr>
+  <td><code>Credentials not found!</code></td>
+  <td><code>GOOGLE_OAUTH_CREDENTIALS</code> missing from env / workflow</td>
+  <td>Add secret to GitHub or <code>.env</code>; verify JSON is valid</td>
+</tr>
+<tr>
+  <td><code>(#200) access token</code> or <code>Missing fb_page_token</code></td>
+  <td>Facebook page token expired / password changed</td>
+  <td>Re-run token generation steps in Token Management §1</td>
+</tr>
+<tr>
+  <td>OAuth refresh token expired</td>
+  <td>7-day inactivity on Google OAuth</td>
+  <td>Run <code>DISPLAY_AUTH_URL=true node scripts/test/discoverGoogleAccounts.js</code> to re-authorize</td>
+</tr>
+<tr>
+  <td><code>UNAUTHORIZED DISPATCH ATTEMPT DETECTED</code></td>
+  <td><code>INTERNAL_GATEKEEPER_KEY</code> mismatch between GitHub and GAS</td>
+  <td>Verify key matches in GitHub Secrets and GAS Script Properties</td>
+</tr>
+<tr>
+  <td>No reviews fetched (sync succeeds with 0)</td>
+  <td>GBP API window shifted; stale entries pruned</td>
+  <td>Run <code>node scripts/steps/oneTimeHistoricalSweep.js</code> to backfill</td>
+</tr>
+<tr>
+  <td>Email alerts not sending</td>
+  <td><code>GMAIL_APP_PASSWORD</code> wrong or <code>GMAIL_SENDER</code> malformed</td>
+  <td>Regenerate app password; format: <code>Name &amp;lt;email@example.com&amp;gt;</code></td>
+</tr>
+<tr>
+  <td>Admin page shows stale data</td>
+  <td>Local server serving old <code>reviews.archive.json</code></td>
+  <td>Run <code>npm run export:build-data</code> then restart <code>npm start</code></td>
+</tr>
+<tr>
+  <td>Build fails: <code>Jinja2</code> / template errors</td>
+  <td>Missing or malformed build data JSON</td>
+  <td>Check <code>build/data/*.json</code> exists; run <code>npm run export:build-data</code></td>
+</tr>
+<tr>
+  <td>LLM reply: empty / gibberish</td>
+  <td>Groq/Gemini API key invalid or quota exhausted</td>
+  <td>Check <code>GROQ_API_KEY</code> / <code>GEMINI_API_KEY_FOR_NATURALS_OPS_REVIEWS</code>; verify tier fallback</td>
+</tr>
+<tr>
+  <td><code>repository_dispatch</code> not triggering</td>
+  <td>GAS Webhook URL changed or GITHUB_PAT in Script Properties missing <code>repo</code> scope</td>
+  <td>Update <code>GAS_WEBHOOK_URL</code> secret; verify PAT in GAS Project Settings</td>
+</tr>
+</tbody>
+</table>
 </section>
 
 <script src="/js/auth.js"></script>
