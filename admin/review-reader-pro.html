@@ -39,6 +39,9 @@
     .period-btn { border: 1px solid #d1d5db; transition: all 0.15s ease; }
     .period-btn.active { background: #7C3AED; color: white; border-color: #7C3AED; }
     .period-btn:hover:not(.active) { border-color: #7C3AED; color: #7C3AED; }
+    .modal-overlay { background: rgba(0,0,0,0.5); backdrop-filter: blur(4px); }
+    .modal-content { max-height: 90vh; }
+    @media (max-width: 640px) { .modal-body { flex-direction: column; } }
   </style>
 </head>
 <body class="font-sans antialiased">
@@ -101,6 +104,23 @@
       const aiSection = document.getElementById('ai-section');
       if (aiSection) aiSection.innerHTML = '<span class="text-gray-400">AI features require Local Admin Console</span>';
     }
+
+    // Preload brand logo for testimonial card
+    let logoImage = null;
+    (function preloadLogo() {
+      const img = new Image();
+      img.onload = function() { logoImage = this; };
+      img.src = '/images/logo/naturals_header_logo.png';
+    })();
+
+    // Preload premium background image
+    let bgImage = null;
+    (function preloadBg() {
+      const img = new Image();
+      img.crossOrigin = 'anonymous';
+      img.onload = function() { bgImage = this; };
+      img.src = '/build/data/testimonial-bg.png';
+    })();
 
     async function loadData() {
       const panel = $('reviews-panel');
@@ -390,6 +410,35 @@
       return store.id.replace(/^Store_/i, '');
     }
 
+    function getStoreDomain(storeName) {
+      const store = allStores.find(s => s.name === storeName);
+      if (!store || !store.website) return 'naturalsprime.in';
+      return store.website.replace(/^https?:\/\//, '').replace(/\/$/, '');
+    }
+
+    function getStorePhone(storeName) {
+      const store = allStores.find(s => s.name === storeName);
+      if (!store || !store.phone) return '';
+      return store.phone.replace(/^\+91/, '');
+    }
+
+    function getStoreSocialHandle(storeName) {
+      const store = allStores.find(s => s.name === storeName);
+      if (!store || !store.facebook) return '';
+      const parts = store.facebook.split('/');
+      return parts[parts.length - 1] || '';
+    }
+
+    function getStoreFBID(storeName) {
+      const store = allStores.find(s => s.name === storeName);
+      return store?.facebook_id || '';
+    }
+
+    function getStoreIGID(storeName) {
+      const store = allStores.find(s => s.name === storeName);
+      return store?.instagram_id || '';
+    }
+
     async function generateReply(btn, reviewId) {
       const card = btn.closest('.review-card');
       const area = card.querySelector('.gen-reply-area');
@@ -520,6 +569,9 @@
             <button onclick="copyReview(this)" data-copy-name="${escAttr(r.reviewer || r.customer_name || 'Anonymous')}" data-copy-stars="${stars}" data-copy-comment="${escAttr(r.review_comments || r.comment || '')}" class="p-1.5 rounded-md text-gray-300 hover:text-royal-600 hover:bg-royal-50 transition-colors" title="Copy review">
               <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg>
             </button>
+            ${isLocal ? `<button onclick="openShareModal('${escAttr(reviewId)}')" class="p-1.5 rounded-md text-gray-300 hover:text-gold-500 hover:bg-gold-50 transition-colors" title="Share as image">
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="18" height="18" rx="2" ry="2"/><circle cx="8.5" cy="8.5" r="1.5"/><polyline points="21 15 16 10 5 21"/></svg>
+            </button>` : ''}
           </div>
         </div>
         <div class="px-4 py-3 text-sm text-gray-600 bg-white leading-relaxed">${esc(comment) || '<span class="text-gray-300 italic">No comment</span>'}</div>
@@ -576,9 +628,446 @@
     window.editReply = editReply;
     window.copyReview = copyReview;
 
+    function maskName(name) {
+      if (!name) return 'Valued Customer';
+      const parts = name.trim().split(/\s+/);
+      if (parts.length <= 1) return name;
+      return parts[0] + ' ' + parts[parts.length - 1][0] + '.***';
+    }
+
+    // ── Share as Testimonial Image ──────────────────────────────────
+    let shareReviewData = null;
+
+    function openShareModal(reviewId) {
+      const r = window._reviewData && window._reviewData[reviewId];
+      if (!r) return;
+      shareReviewData = r;
+      const modal = document.getElementById('share-modal');
+      if (!modal) return;
+      modal.classList.remove('hidden');
+
+      // Render preview canvas
+      renderTestimonialImage(document.getElementById('share-canvas'), r);
+
+      // Pre-fill caption
+      const name = maskName(r.reviewer || r.customer_name || '');
+      const comment = (r.review_comments || r.comment || '');
+      const storeName = r.store_name || '';
+      document.getElementById('share-caption').value = `${name} says: "${comment}"\n\nThank you for choosing Naturals ${storeName}!`;
+
+      // Build store checkboxes
+      const storeShort = getStoreShortName(r.store_name || '');
+      const list = document.getElementById('share-stores-list');
+      list.innerHTML = allStores.map(s => {
+        const sid = s.id.replace(/^Store_/i, '');
+        const checked = sid === storeShort ? 'checked' : '';
+        return `<label class="flex items-center gap-1.5 text-xs cursor-pointer"><input type="checkbox" class="share-store-cb rounded border-gray-300 text-royal-600" data-store="${sid}" ${checked}> <span>${esc(s.name)}</span></label>`;
+      }).join('');
+
+      document.getElementById('share-status').textContent = '';
+    }
+    window.openShareModal = openShareModal;
+
+    function closeShareModal() {
+      const modal = document.getElementById('share-modal');
+      if (modal) modal.classList.add('hidden');
+      shareReviewData = null;
+    }
+    window.closeShareModal = closeShareModal;
+
+    function renderTestimonialImage(canvas, r) {
+      if (!canvas || !r) return;
+      const W = 1080, H = 1080;
+      canvas.width = W;
+      canvas.height = H;
+      const ctx = canvas.getContext('2d');
+
+      const ROYAL_DARK = '#2D1B4E';
+      const ROYAL_MID = '#3D2064';
+      const GOLD = '#D4AF37';
+      const STAR_GOLD = '#FCD34D';
+      const WHITE = '#FFFFFF';
+
+      // ── 1. ASSET LAYER (Background) ───────────────────────────────
+      if (bgImage && bgImage.complete && bgImage.naturalWidth > 0) {
+        ctx.drawImage(bgImage, 0, 0, W, H);
+      } else {
+        const grad = ctx.createLinearGradient(0, 0, 0, H);
+        grad.addColorStop(0, ROYAL_DARK);
+        grad.addColorStop(0.5, ROYAL_MID);
+        grad.addColorStop(1, '#4A2578');
+        ctx.fillStyle = grad;
+        ctx.fillRect(0, 0, W, H);
+      }
+
+      // ── 7. CORNER ACCENTS ──────────────────────────────────────────
+      const cGap = 28, cLen = 35;
+      ctx.strokeStyle = GOLD;
+      ctx.lineWidth = 2.5;
+      ctx.beginPath(); ctx.moveTo(cGap, cGap + cLen); ctx.lineTo(cGap, cGap); ctx.lineTo(cGap + cLen, cGap); ctx.stroke();
+      ctx.beginPath(); ctx.moveTo(W - cGap - cLen, cGap); ctx.lineTo(W - cGap, cGap); ctx.lineTo(W - cGap, cGap + cLen); ctx.stroke();
+      ctx.beginPath(); ctx.moveTo(cGap, H - cGap - cLen); ctx.lineTo(cGap, H - cGap); ctx.lineTo(cGap + cLen, H - cGap); ctx.stroke();
+      ctx.beginPath(); ctx.moveTo(W - cGap - cLen, H - cGap); ctx.lineTo(W - cGap, H - cGap); ctx.lineTo(W - cGap, H - cGap - cLen); ctx.stroke();
+
+      // ── 2. HEADER & HEADER DIVIDER ─────────────────────────────────
+      // Top gold line
+      ctx.strokeStyle = GOLD;
+      ctx.lineWidth = 2.5;
+      ctx.beginPath(); ctx.moveTo(W * 0.12, H * 0.055); ctx.lineTo(W * 0.88, H * 0.055); ctx.stroke();
+
+      // "OUR GUESTS." in white sans-serif
+      ctx.fillStyle = WHITE;
+      ctx.font = '600 20px Inter, "Helvetica Neue", Arial, sans-serif';
+      ctx.textAlign = 'center';
+      ctx.textBaseline = 'middle';
+      ctx.letterSpacing = '4px';
+      ctx.fillText('OUR GUESTS.', W * 0.5, H * 0.09);
+      ctx.letterSpacing = '0px';
+
+      // "OUR PRIDE." in gold serif
+      ctx.fillStyle = GOLD;
+      ctx.font = 'bold 32px "Playfair Display", Georgia, serif';
+      ctx.textAlign = 'center';
+      ctx.textBaseline = 'middle';
+      ctx.fillText('OUR PRIDE.', W * 0.5, H * 0.125);
+
+      // Ornament divider: gold line with diamond center emblem
+      const ornY = H * 0.155;
+      ctx.strokeStyle = GOLD;
+      ctx.lineWidth = 1.2;
+      ctx.beginPath(); ctx.moveTo(W * 0.25, ornY); ctx.lineTo(W * 0.5 - 14, ornY); ctx.stroke();
+      ctx.beginPath(); ctx.moveTo(W * 0.5 + 14, ornY); ctx.lineTo(W * 0.75, ornY); ctx.stroke();
+      // Diamond emblem
+      const dS = 7;
+      ctx.fillStyle = GOLD;
+      ctx.beginPath(); ctx.moveTo(W * 0.5, ornY - dS); ctx.lineTo(W * 0.5 + dS, ornY); ctx.lineTo(W * 0.5, ornY + dS); ctx.lineTo(W * 0.5 - dS, ornY); ctx.closePath(); ctx.fill();
+
+      // ── 3. AVATAR & STARS ──────────────────────────────────────────
+      const ax = W * 0.5, ay = H * 0.205, ar = 44;
+      ctx.beginPath(); ctx.arc(ax, ay, ar, 0, Math.PI * 2);
+      ctx.fillStyle = 'rgba(255,255,255,0.12)'; ctx.fill();
+      ctx.strokeStyle = GOLD; ctx.lineWidth = 2.5; ctx.stroke();
+      const initial = (r.reviewer || r.customer_name || '?')[0].toUpperCase();
+      ctx.fillStyle = WHITE;
+      ctx.font = 'bold 38px Inter, "Helvetica Neue", Arial, sans-serif';
+      ctx.textAlign = 'center';
+      ctx.textBaseline = 'middle';
+      ctx.fillText(initial, ax, ay);
+
+      // Gold stars
+      const stars = parseStar(r.stars);
+      ctx.font = '34px sans-serif';
+      ctx.fillStyle = STAR_GOLD;
+      ctx.textAlign = 'center';
+      ctx.textBaseline = 'middle';
+      ctx.fillText('\u2605'.repeat(stars) + '\u2606'.repeat(5 - stars), W * 0.5, H * 0.27);
+
+      // ── 4. HERO TESTIMONIAL BOX ────────────────────────────────────
+      const comment = (r.review_comments || r.comment || '').trim();
+      const boxX = W * 0.12;
+      const boxW = W * 0.76;
+      const boxY = H * 0.305;
+      const boxH = H * 0.305;
+      const radius = 14;
+
+      // Rounded rect with gold stroke
+      ctx.beginPath();
+      ctx.roundRect(boxX, boxY, boxW, boxH, radius);
+      ctx.strokeStyle = GOLD;
+      ctx.lineWidth = 1.2;
+      ctx.stroke();
+
+      // Integrated quote marks
+      if (comment) {
+        // Opening quote on top-left border line
+        ctx.fillStyle = GOLD;
+        ctx.font = 'bold 44px "Playfair Display", Georgia, serif';
+        ctx.textAlign = 'center';
+        ctx.textBaseline = 'bottom';
+        // White patch to clear border line underneath opening quote
+        ctx.fillStyle = (bgImage && bgImage.complete && bgImage.naturalWidth > 0) ? 'transparent' : ROYAL_MID;
+        ctx.fillRect(boxX + 8, boxY - 6, 40, 20);
+        ctx.fillStyle = GOLD;
+        ctx.fillText('\u201C', boxX + 28, boxY + 2);
+
+        // Closing quote on bottom-right border line
+        ctx.fillStyle = GOLD;
+        ctx.textBaseline = 'top';
+        ctx.fillText('\u201D', boxX + boxW - 28, boxY + boxH - 2);
+
+        // Quote text inside box — dynamic font scaling to fit all text
+        const maxQuoteW = boxW * 0.86;
+        const innerPad = 18;
+        const maxTextH = boxH - innerPad * 2;
+
+        let fontSize = 42;
+        let lines;
+        for (; fontSize >= 24; fontSize -= 2) {
+          ctx.font = fontSize + 'px "Playfair Display", Georgia, serif';
+          lines = wrapCanvasText(ctx, comment, maxQuoteW);
+          const neededH = lines.length * Math.round(fontSize * 1.35);
+          if (neededH <= maxTextH) break;
+        }
+        fontSize = Math.max(fontSize, 24);
+        ctx.font = fontSize + 'px "Playfair Display", Georgia, serif';
+        lines = wrapCanvasText(ctx, comment, maxQuoteW);
+
+        const lh = Math.round(fontSize * 1.35);
+        const textStartY = boxY + innerPad;
+
+        ctx.fillStyle = WHITE;
+        ctx.textAlign = 'center';
+        ctx.textBaseline = 'top';
+        lines.forEach((line, i) => ctx.fillText(line, W * 0.5, textStartY + i * lh));
+      }
+
+      // ── 5. SIGNATURE & LOWER DIVIDER ──────────────────────────────
+      const name = maskName(r.reviewer || r.customer_name || '');
+      ctx.fillStyle = WHITE;
+      ctx.font = '600 28px Inter, "Helvetica Neue", Arial, sans-serif';
+      ctx.textAlign = 'center';
+      ctx.textBaseline = 'middle';
+      ctx.fillText(name.toUpperCase(), W * 0.5, H * 0.67);
+
+      const storeLabel = r.store_name || '';
+      if (storeLabel) {
+        ctx.fillStyle = 'rgba(255,255,255,0.55)';
+        ctx.font = '19px Inter, "Helvetica Neue", Arial, sans-serif';
+        ctx.textAlign = 'center';
+        ctx.fillText(storeLabel, W * 0.5, H * 0.71);
+      }
+
+      // Lower divider with center dot
+      const lowDivY = H * 0.745;
+      ctx.strokeStyle = GOLD;
+      ctx.lineWidth = 1.2;
+      ctx.beginPath(); ctx.moveTo(W * 0.25, lowDivY); ctx.lineTo(W * 0.5 - 12, lowDivY); ctx.stroke();
+      ctx.beginPath(); ctx.moveTo(W * 0.5 + 12, lowDivY); ctx.lineTo(W * 0.75, lowDivY); ctx.stroke();
+      ctx.fillStyle = GOLD;
+      ctx.beginPath(); ctx.arc(W * 0.5, lowDivY, 4, 0, Math.PI * 2); ctx.fill();
+
+      // ── 6. BRAND FOOTER ────────────────────────────────────────────
+      let brandBottom;
+      if (logoImage && logoImage.complete && logoImage.naturalWidth > 0) {
+        const logoMaxW = 170;
+        const scale = logoMaxW / logoImage.naturalWidth;
+        const logoW = logoMaxW;
+        const logoH = logoImage.naturalHeight * scale;
+        const logoY = H * 0.775;
+        ctx.drawImage(logoImage, (W - logoW) / 2, logoY, logoW, logoH);
+        brandBottom = logoY + logoH;
+      } else {
+        ctx.fillStyle = WHITE;
+        ctx.font = 'bold 32px Inter, "Helvetica Neue", Arial, sans-serif';
+        ctx.textAlign = 'center';
+        ctx.textBaseline = 'middle';
+        const textY = H * 0.80;
+        ctx.fillText('NATURALS', W * 0.5, textY);
+        brandBottom = textY + 18;
+      }
+
+      // Store location in gold caps
+      if (storeLabel) {
+        ctx.fillStyle = GOLD;
+        ctx.font = 'bold 18px Inter, "Helvetica Neue", Arial, sans-serif';
+        ctx.textAlign = 'center';
+        ctx.letterSpacing = '2px';
+        ctx.fillText(storeLabel.toUpperCase(), W * 0.5, brandBottom + 10);
+        ctx.letterSpacing = '0px';
+      }
+
+      // Phone number (centered) — more visible
+      const storePhone = getStorePhone(storeLabel);
+      if (storePhone) {
+        ctx.fillStyle = 'rgba(255,255,255,0.7)';
+        ctx.font = '20px Inter, "Helvetica Neue", Arial, sans-serif';
+        ctx.textAlign = 'center';
+        ctx.textBaseline = 'middle';
+        ctx.fillText(storePhone, W * 0.5, brandBottom + (storeLabel ? 38 : 46));
+      }
+
+      // Bottom bar: website left, FB + IG IDs with icons right
+      const barY = brandBottom + (storeLabel ? 62 : 72);
+      const barX = W * 0.14;
+      const barXRight = W * 0.86;
+
+      // Website (left aligned)
+      ctx.fillStyle = 'rgba(255,255,255,0.4)';
+      ctx.font = '14px Inter, "Helvetica Neue", Arial, sans-serif';
+      ctx.textAlign = 'left';
+      ctx.textBaseline = 'middle';
+      ctx.fillText(getStoreDomain(storeLabel), barX, barY);
+
+      // Social ID with FB + IG icon pills (right aligned, ID shared)
+      const socialId = getStoreIGID(storeLabel) || getStoreFBID(storeLabel);
+      if (socialId) {
+        ctx.textBaseline = 'middle';
+        const iconR = 11;
+        let cursorX = barXRight;
+
+        // Shared ID text
+        ctx.font = '12px Inter, "Helvetica Neue", Arial, sans-serif';
+        ctx.fillStyle = 'rgba(255,255,255,0.5)';
+        ctx.textAlign = 'right';
+        const idW = ctx.measureText(socialId).width;
+        ctx.fillText(socialId, cursorX, barY);
+        cursorX -= idW + 5;
+
+        // IG pill
+        const igX = cursorX - iconR;
+        ctx.beginPath(); ctx.arc(igX, barY, iconR, 0, Math.PI * 2);
+        ctx.strokeStyle = 'rgba(255,255,255,0.3)';
+        ctx.lineWidth = 1;
+        ctx.stroke();
+        ctx.fillStyle = 'rgba(255,255,255,0.45)';
+        ctx.font = 'bold 9px Inter, "Helvetica Neue", Arial, sans-serif';
+        ctx.textAlign = 'center';
+        ctx.fillText('IG', igX, barY + 0.5);
+        cursorX = igX - iconR - 6;
+
+        // FB pill
+        const fbX = cursorX - iconR;
+        ctx.beginPath(); ctx.arc(fbX, barY, iconR, 0, Math.PI * 2);
+        ctx.strokeStyle = 'rgba(255,255,255,0.3)';
+        ctx.lineWidth = 1;
+        ctx.stroke();
+        ctx.fillStyle = 'rgba(255,255,255,0.45)';
+        ctx.font = 'bold 11px Inter, "Helvetica Neue", Arial, sans-serif';
+        ctx.textAlign = 'center';
+        ctx.fillText('f', fbX, barY + 0.5);
+      }
+    }
+
+    function wrapCanvasText(ctx, text, maxWidth) {
+      const words = text.split(' ');
+      const lines = [];
+      let current = '';
+      for (const word of words) {
+        const test = current ? current + ' ' + word : word;
+        if (ctx.measureText(test).width > maxWidth && current) {
+          lines.push(current);
+          current = word;
+        } else {
+          current = test;
+        }
+      }
+      if (current) lines.push(current);
+      return lines;
+    }
+
+    async function publishShare() {
+      const btn = document.getElementById('btn-share-publish');
+      const status = document.getElementById('share-status');
+      if (!btn || !status || !shareReviewData) return;
+      btn.disabled = true;
+      status.textContent = 'Preparing image...';
+
+      try {
+        // Render full-res canvas for export
+        const exportCanvas = document.createElement('canvas');
+        renderTestimonialImage(exportCanvas, shareReviewData);
+
+        const blob = await new Promise(resolve => exportCanvas.toBlob(resolve, 'image/png'));
+        if (!blob) throw new Error('Failed to render image');
+
+        // Upload
+        status.textContent = 'Uploading image...';
+        const fd = new FormData();
+        fd.append('image', blob, 'testimonial_' + Date.now() + '.png');
+        const uploadRes = await fetch('/api/adhoc/upload-image', { method: 'POST', body: fd });
+        if (!uploadRes.ok) throw new Error('Upload endpoint returned ' + uploadRes.status);
+        const uploadData = await uploadRes.json();
+        if (!uploadData.ok) throw new Error(uploadData.error || 'Upload failed');
+
+        // Publish
+        status.textContent = 'Publishing to social...';
+        const platforms = {
+          facebook: document.getElementById('share-platform-fb').checked,
+          instagram: document.getElementById('share-platform-ig').checked,
+          google: document.getElementById('share-platform-gp').checked,
+        };
+        const storeIds = [...document.querySelectorAll('.share-store-cb:checked')].map(cb => cb.dataset.store);
+        const caption = document.getElementById('share-caption').value.trim();
+        const title = 'Testimonial \u2014 ' + maskName(shareReviewData.reviewer || shareReviewData.customer_name || '');
+
+        const publishRes = await fetch('/api/publish-adhoc', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({
+            title,
+            body: caption || maskName(shareReviewData.reviewer || shareReviewData.customer_name || '') + ' loves Naturals!',
+            imageUrl: uploadData.data.imageUrl,
+            startDate: '', endDate: '',
+            platforms, storeIds,
+          }),
+        });
+        const publishData = await publishRes.json();
+        if (publishData.ok) {
+          status.innerHTML = '\u2705 Published successfully!';
+          setTimeout(closeShareModal, 2000);
+        } else {
+          throw new Error(publishData.error || 'Publish failed');
+        }
+      } catch (err) {
+        status.textContent = '\u274C ' + err.message;
+      }
+      btn.disabled = false;
+    }
+    window.publishShare = publishShare;
+
     loadData();
   })();
   </script>
   <script>Auth.protect('auth-container');</script>
+
+  <!-- Share Testimonial Modal -->
+  <div id="share-modal" class="fixed inset-0 z-50 hidden modal-overlay" onclick="if (event.target === this) closeShareModal()">
+    <div class="flex items-center justify-center min-h-screen p-3 sm:p-4">
+      <div class="bg-white rounded-2xl shadow-2xl w-full max-w-lg modal-content overflow-y-auto p-5 sm:p-6" onclick="event.stopPropagation()">
+        <div class="flex items-center justify-between mb-4">
+          <h2 class="text-base sm:text-lg font-bold text-royal-800">Share as Social Post</h2>
+          <button onclick="closeShareModal()" class="p-1 text-gray-400 hover:text-gray-600 transition-colors text-xl leading-none">&times;</button>
+        </div>
+
+        <!-- Canvas preview -->
+        <div class="flex justify-center mb-4 bg-gray-50 rounded-xl p-2">
+          <canvas id="share-canvas" class="rounded-lg max-w-full" style="width:100%;max-width:480px;height:auto;aspect-ratio:1/1;"></canvas>
+        </div>
+
+        <!-- Caption -->
+        <div class="mb-3">
+          <label class="text-xs font-semibold text-gray-400 uppercase tracking-wider mb-1 block">Caption</label>
+          <textarea id="share-caption" rows="3" class="w-full text-sm border border-gray-200 rounded-lg p-2 focus:outline-none focus:ring-1 focus:ring-royal-300 resize-vertical"></textarea>
+        </div>
+
+        <!-- Platforms -->
+        <div class="mb-3">
+          <label class="text-xs font-semibold text-gray-400 uppercase tracking-wider mb-1 block">Platforms</label>
+          <div class="flex gap-4">
+            <label class="flex items-center gap-1.5 text-sm cursor-pointer"><input type="checkbox" id="share-platform-fb" checked class="rounded border-gray-300 text-royal-600"> Facebook</label>
+            <label class="flex items-center gap-1.5 text-sm cursor-pointer"><input type="checkbox" id="share-platform-ig" checked class="rounded border-gray-300 text-royal-600"> Instagram</label>
+            <label class="flex items-center gap-1.5 text-sm cursor-pointer"><input type="checkbox" id="share-platform-gp" checked class="rounded border-gray-300 text-royal-600"> Google</label>
+          </div>
+        </div>
+
+        <!-- Stores -->
+        <div class="mb-4">
+          <label class="text-xs font-semibold text-gray-400 uppercase tracking-wider mb-1 block">Stores</label>
+          <div id="share-stores-list" class="flex gap-2 flex-wrap"></div>
+        </div>
+
+        <!-- Actions -->
+        <div class="flex gap-2 justify-end items-center">
+          <span id="share-status" class="text-xs text-gray-400 flex-1"></span>
+          <button onclick="closeShareModal()" class="text-sm px-4 py-2 border border-gray-200 rounded-lg hover:bg-gray-50 text-gray-500 transition-colors">Cancel</button>
+          <button id="btn-share-publish" onclick="publishShare()" class="text-sm px-4 py-2 bg-royal-600 text-white rounded-lg hover:bg-royal-700 transition-colors font-medium flex items-center gap-1.5 whitespace-nowrap">
+            <svg class="w-4 h-4 shrink-0" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 12v8a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2v-8"/><polyline points="16 6 12 2 8 6"/><line x1="12" y1="2" x2="12" y2="15"/></svg>
+            Publish
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+
 </body>
 </html>
