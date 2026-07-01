@@ -595,10 +595,10 @@
             <button onclick="copyReview(this)" data-copy-name="${escAttr(r.reviewer || r.customer_name || 'Anonymous')}" data-copy-stars="${stars}" data-copy-comment="${escAttr(r.review_comments || r.comment || '')}" class="p-1.5 rounded-md text-gray-300 hover:text-royal-600 hover:bg-royal-50 transition-colors" title="Copy review text">
               <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/><polyline points="9 14 11 16 15 12"/></svg>
             </button>
-            ${isLocal ? `<button onclick="openShareModal('${escAttr(reviewId)}')" class="p-1.5 rounded-md text-gray-300 hover:text-gold-500 hover:bg-gold-50 transition-colors" title="Share as social post">
+            ${isLocal ? `<button onclick="openShareModal('${escAttr(reviewId)}')" class="p-1.5 rounded-md text-gray-300 hover:text-gold-500 hover:bg-gold-50 transition-colors" title="Create Brand Testimony Post">
               <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><line x1="21" y1="15" x2="15" y2="9"/><polyline points="21 9 15 9 15 15"/></svg>
             </button>` : ''}
-            ${isLocal ? `<button onclick="generateIdeogramImage('${escAttr(reviewId)}')" class="p-1.5 rounded-md text-gray-300 hover:text-purple-500 hover:bg-purple-50 transition-colors" title="Create testimonial card">
+            ${isLocal ? `<button onclick="generateIdeogramImage('${escAttr(reviewId)}')" class="p-1.5 rounded-md text-gray-300 hover:text-purple-500 hover:bg-purple-50 transition-colors" title="Create Photo Testimony Post">
               <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="18" height="18" rx="2"/><line x1="3" y1="9" x2="21" y2="9"/><line x1="9" y1="21" x2="9" y2="9"/><polyline points="7 13 9 11 11 13"/></svg>
             </button>` : ''}
             ${isLocal ? `<button disabled class="p-1.5 rounded-md text-gray-200 cursor-not-allowed opacity-50" title="AI image gen (coming soon)">
@@ -719,12 +719,15 @@ ${webLine}
 
 #NaturalsSalon #${storeLabel.replace(/\s+/g, '')} #CustomerReview #BangaloreSalon #HairAndBeauty #SalonTestimonial #5StarService`;
 
-      // Build store checkboxes
+      // Build store checkboxes — only the review's store is enabled
       const list = document.getElementById('share-stores-list');
       list.innerHTML = allStores.map(s => {
         const sid = s.id.replace(/^Store_/i, '');
-        const checked = sid === storeShort ? 'checked' : '';
-        return `<label class="flex items-center gap-1.5 text-xs cursor-pointer"><input type="checkbox" class="share-store-cb rounded border-gray-300 text-royal-600" data-store="${sid}" ${checked}> <span>${esc(s.name)}</span></label>`;
+        const isMatch = sid === storeShort;
+        const checked = isMatch ? 'checked' : '';
+        const disabled = isMatch ? '' : 'disabled';
+        const opacity = isMatch ? '' : 'opacity-40';
+        return `<label class="flex items-center gap-1.5 text-xs ${opacity}" style="cursor:${isMatch ? 'pointer' : 'not-allowed'}"><input type="checkbox" class="share-store-cb rounded border-gray-300 text-royal-600" data-store="${sid}" ${checked} ${disabled}> <span>${esc(s.name)}</span></label>`;
       }).join('');
 
       document.getElementById('share-status').textContent = '';
@@ -1085,8 +1088,24 @@ ${webLine}
         });
         const publishData = await publishRes.json();
         if (publishData.ok) {
-          status.innerHTML = '\u2705 Published successfully!';
-          setTimeout(closeShareModal, 2000);
+          // Parse per-platform results from script output
+          const output = publishData.data?.output || '';
+          const resultsMatch = output.match(/Results:\s*(\{[^}]+\})/);
+          let statusHtml = '';
+          if (resultsMatch) {
+            try {
+              const perPlatform = JSON.parse(resultsMatch[1].replace(/'/g, '"'));
+              const labels = { facebook: 'Facebook', instagram: 'Instagram', google: 'Google' };
+              const icons = { facebook: '📘', instagram: '📸', google: '⭐' };
+              statusHtml = Object.entries(perPlatform)
+                .filter(([_, v]) => v !== 'N/A' && v !== 'SKIPPED')
+                .map(([p, v]) => `${icons[p] || '•'} ${labels[p] || p}: ${v === 'OK' ? '✅' : '❌'}`)
+                .join(' | ');
+            } catch {}
+          }
+          status.innerHTML = statusHtml || '\u2705 Published successfully!';
+          if (statusHtml) setTimeout(closeShareModal, 3000);
+          else setTimeout(closeShareModal, 2000);
         } else {
           throw new Error(publishData.error || 'Publish failed');
         }
