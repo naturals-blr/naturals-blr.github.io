@@ -441,6 +441,22 @@
       return store?.instagram_id || '';
     }
 
+    function getStoreDisplayName(storeName) {
+      const store = allStores.find(s => s.name === storeName);
+      return store?.name || null;
+    }
+
+    function getStoreBrandName(storeName) {
+      const store = allStores.find(s => s.name === storeName);
+      return store?.brand_name || storeName;
+    }
+
+    function getStoreWebsiteUrl(storeName) {
+      const store = allStores.find(s => s.name === storeName);
+      if (!store?.website) return null;
+      return store.website.replace(/^https?:\/\//, '').replace(/\/$/, '');
+    }
+
     async function generateReply(btn, reviewId) {
       const card = btn.closest('.review-card');
       const area = card.querySelector('.gen-reply-area');
@@ -553,6 +569,13 @@
       const safeName = esc(r.reviewer || r.customer_name || 'Anonymous');
       const safeComment = esc(r.review_comments || r.comment || '');
       const reviewId = r.review_id || r.id || 'r' + Math.random().toString(36).slice(2);
+      // Day-7 badge: review is >= 7 days old but < 8 days old (drops out of 7-day filter tomorrow)
+      const DAY_MS = 86400000;
+      let day7badge = '';
+      if (r.review_create_time) {
+        const age = Date.now() - new Date(r.review_create_time).getTime();
+        if (age >= 7 * DAY_MS && age < 8 * DAY_MS) day7badge = '<span class="ml-2 text-xs font-medium text-amber-700 bg-amber-100 px-1.5 py-0.5 rounded">Day 7</span>';
+      }
       if (!window._reviewData) window._reviewData = {};
       window._reviewData[reviewId] = r;
       return `<div class="review-card" data-review-id="${escAttr(reviewId)}">
@@ -564,15 +587,22 @@
               <span class="ml-2 text-sm">${'\u2B50'.repeat(stars)}${'\u2606'.repeat(5 - stars)}</span>
               ${date ? `<span class="ml-2 text-xs text-gray-400">${date}</span>` : ''}
               ${hasReply ? '<span class="ml-2 text-xs font-medium text-green-600">\u2705 Replied</span>' : '<span class="ml-2 text-xs font-medium text-amber-600">\u23F3 Pending</span>'}
+              ${day7badge}
             </div>
           </div>
           <div class="flex items-center gap-1.5">
             ${isLocal ? `<button onclick="generateReply(this, '${escAttr(reviewId)}')" class="text-xs px-2.5 py-1.5 border border-gray-200 rounded-lg hover:bg-royal-50 hover:text-royal-600 hover:border-royal-200 text-gray-500 transition-colors" title="Generate AI reply">\uD83E\uDD16 Regenerate</button>` : ''}
-            <button onclick="copyReview(this)" data-copy-name="${escAttr(r.reviewer || r.customer_name || 'Anonymous')}" data-copy-stars="${stars}" data-copy-comment="${escAttr(r.review_comments || r.comment || '')}" class="p-1.5 rounded-md text-gray-300 hover:text-royal-600 hover:bg-royal-50 transition-colors" title="Copy review">
-              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg>
+            <button onclick="copyReview(this)" data-copy-name="${escAttr(r.reviewer || r.customer_name || 'Anonymous')}" data-copy-stars="${stars}" data-copy-comment="${escAttr(r.review_comments || r.comment || '')}" class="p-1.5 rounded-md text-gray-300 hover:text-royal-600 hover:bg-royal-50 transition-colors" title="Copy review text">
+              <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/><polyline points="9 14 11 16 15 12"/></svg>
             </button>
-            ${isLocal ? `<button onclick="openShareModal('${escAttr(reviewId)}')" class="p-1.5 rounded-md text-gray-300 hover:text-gold-500 hover:bg-gold-50 transition-colors" title="Share as image">
-              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="18" height="18" rx="2" ry="2"/><circle cx="8.5" cy="8.5" r="1.5"/><polyline points="21 15 16 10 5 21"/></svg>
+            ${isLocal ? `<button onclick="openShareModal('${escAttr(reviewId)}')" class="p-1.5 rounded-md text-gray-300 hover:text-gold-500 hover:bg-gold-50 transition-colors" title="Share as social post">
+              <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><line x1="21" y1="15" x2="15" y2="9"/><polyline points="21 9 15 9 15 15"/></svg>
+            </button>` : ''}
+            ${isLocal ? `<button onclick="generateIdeogramImage('${escAttr(reviewId)}')" class="p-1.5 rounded-md text-gray-300 hover:text-purple-500 hover:bg-purple-50 transition-colors" title="Create testimonial card">
+              <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="18" height="18" rx="2"/><line x1="3" y1="9" x2="21" y2="9"/><line x1="9" y1="21" x2="9" y2="9"/><polyline points="7 13 9 11 11 13"/></svg>
+            </button>` : ''}
+            ${isLocal ? `<button disabled class="p-1.5 rounded-md text-gray-200 cursor-not-allowed opacity-50" title="AI image gen (coming soon)">
+              <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2l2.4 7.2L22 12l-7.6 2.8L12 22l-2.4-7.2L2 12l7.6-2.8z"/></svg>
             </button>` : ''}
           </div>
         </div>
@@ -634,31 +664,62 @@
       if (!name) return 'Valued Customer';
       const parts = name.trim().split(/\s+/);
       if (parts.length <= 1) return name;
-      return parts[0] + ' ' + parts[parts.length - 1][0] + '.***';
+      return parts[0] + ' ' + parts[parts.length - 1][0] + '***';
     }
 
     // ── Share as Testimonial Image ──────────────────────────────────
     let shareReviewData = null;
+    let _preGenImageUrl = null;
 
-    function openShareModal(reviewId) {
+    function openShareModal(reviewId, preGenImageUrl) {
       const r = window._reviewData && window._reviewData[reviewId];
       if (!r) return;
       shareReviewData = r;
+      _preGenImageUrl = preGenImageUrl || null;
       const modal = document.getElementById('share-modal');
       if (!modal) return;
       modal.classList.remove('hidden');
 
-      // Render preview canvas
-      renderTestimonialImage(document.getElementById('share-canvas'), r);
+      const canvas = document.getElementById('share-canvas');
+      const img = document.getElementById('share-testimonial-img');
+      if (preGenImageUrl) {
+        canvas.classList.add('hidden');
+        img.classList.remove('hidden');
+        img.src = preGenImageUrl;
+      } else {
+        canvas.classList.remove('hidden');
+        img.classList.add('hidden');
+        renderTestimonialImage(canvas, r);
+      }
 
       // Pre-fill caption
       const name = maskName(r.reviewer || r.customer_name || '');
       const comment = (r.review_comments || r.comment || '');
       const storeName = r.store_name || '';
-      document.getElementById('share-caption').value = `${name} says: "${comment}"\n\nThank you for choosing Naturals ${storeName}!`;
+      const storeBrand = getStoreBrandName(storeName);
+      const storeShort = getStoreShortName(storeName);
+      const storeDisplay = getStoreDisplayName(storeName);
+      const storeLabel = storeDisplay ? `Naturals ${storeDisplay}` : storeName;
+      const storePhone = getStorePhone(storeName);
+      const phoneLine = storePhone ? `📞 Call to book: ${storePhone}` : '';
+      const storeWebUrl = getStoreWebsiteUrl(storeName);
+      const webLine = storeWebUrl ? `🌐 ${storeWebUrl}` : '';
+      document.getElementById('share-caption').value =
+`✨ Our Guests, Our Pride. ✨
+
+There is nothing we love more than making your day! A huge thank you to ${name} for sharing such wonderful feedback about ${storeLabel}. 💜
+
+Our talented team is dedicated to delivering that 5-star experience every single time! 💇‍♀️💅
+
+Ready for your own transformation? Tap the link in our bio or call us to book your weekend pampering session.
+
+📍 ${storeBrand}
+${phoneLine}
+${webLine}
+
+#NaturalsSalon #${storeLabel.replace(/\s+/g, '')} #CustomerReview #BangaloreSalon #HairAndBeauty #SalonTestimonial #5StarService`;
 
       // Build store checkboxes
-      const storeShort = getStoreShortName(r.store_name || '');
       const list = document.getElementById('share-stores-list');
       list.innerHTML = allStores.map(s => {
         const sid = s.id.replace(/^Store_/i, '');
@@ -674,6 +735,7 @@
       const modal = document.getElementById('share-modal');
       if (modal) modal.classList.add('hidden');
       shareReviewData = null;
+      _preGenImageUrl = null;
     }
     window.closeShareModal = closeShareModal;
 
@@ -965,21 +1027,39 @@
       status.textContent = 'Preparing image...';
 
       try {
-        // Render full-res canvas for export
-        const exportCanvas = document.createElement('canvas');
-        renderTestimonialImage(exportCanvas, shareReviewData);
+        let imageUrl = _preGenImageUrl;
+        if (imageUrl) {
+          if (imageUrl.startsWith('/')) {
+            status.textContent = 'Uploading generated image...';
+            const blobResp = await fetch(imageUrl);
+            if (!blobResp.ok) throw new Error('Failed to fetch generated image');
+            const blob = await blobResp.blob();
+            const fd = new FormData();
+            fd.append('image', blob, 'testimonial_' + Date.now() + '.png');
+            const uploadRes = await fetch('/api/adhoc/upload-image', { method: 'POST', body: fd });
+            if (!uploadRes.ok) throw new Error('Upload failed');
+            const uploadData = await uploadRes.json();
+            if (!uploadData.ok) throw new Error(uploadData.error || 'Upload failed');
+            imageUrl = uploadData.data.imageUrl;
+          }
+        } else {
+          // Render full-res canvas for export
+          const exportCanvas = document.createElement('canvas');
+          renderTestimonialImage(exportCanvas, shareReviewData);
 
-        const blob = await new Promise(resolve => exportCanvas.toBlob(resolve, 'image/png'));
-        if (!blob) throw new Error('Failed to render image');
+          const blob = await new Promise(resolve => exportCanvas.toBlob(resolve, 'image/png'));
+          if (!blob) throw new Error('Failed to render image');
 
-        // Upload
-        status.textContent = 'Uploading image...';
-        const fd = new FormData();
-        fd.append('image', blob, 'testimonial_' + Date.now() + '.png');
-        const uploadRes = await fetch('/api/adhoc/upload-image', { method: 'POST', body: fd });
-        if (!uploadRes.ok) throw new Error('Upload endpoint returned ' + uploadRes.status);
-        const uploadData = await uploadRes.json();
-        if (!uploadData.ok) throw new Error(uploadData.error || 'Upload failed');
+          // Upload
+          status.textContent = 'Uploading image...';
+          const fd = new FormData();
+          fd.append('image', blob, 'testimonial_' + Date.now() + '.png');
+          const uploadRes = await fetch('/api/adhoc/upload-image', { method: 'POST', body: fd });
+          if (!uploadRes.ok) throw new Error('Upload endpoint returned ' + uploadRes.status);
+          const uploadData = await uploadRes.json();
+          if (!uploadData.ok) throw new Error(uploadData.error || 'Upload failed');
+          imageUrl = uploadData.data.imageUrl;
+        }
 
         // Publish
         status.textContent = 'Publishing to social...';
@@ -998,7 +1078,7 @@
           body: JSON.stringify({
             title,
             body: caption || maskName(shareReviewData.reviewer || shareReviewData.customer_name || '') + ' loves Naturals!',
-            imageUrl: uploadData.data.imageUrl,
+            imageUrl,
             startDate: '', endDate: '',
             platforms, storeIds,
           }),
@@ -1017,10 +1097,123 @@
     }
     window.publishShare = publishShare;
 
+    // ── Ideogram Image Generation (SSE streaming) ──────────────────
+    async function generateIdeogramImage(reviewId) {
+      const r = window._reviewData && window._reviewData[reviewId];
+      if (!r) return;
+      const modal = document.getElementById('ideogram-modal');
+      if (!modal) return;
+      modal.classList.remove('hidden');
+      const imgEl = document.getElementById('ideogram-result-img');
+      const statusEl = document.getElementById('ideogram-status');
+      const btn = document.getElementById('btn-ideogram-close');
+      if (imgEl) imgEl.classList.add('hidden');
+      if (btn) btn.disabled = true;
+      if (statusEl) {
+        statusEl.classList.remove('text-red-500', 'text-green-500');
+        statusEl.classList.add('text-gray-500');
+        statusEl.textContent = 'Starting...';
+      }
+      try {
+        const comment = r.review_comments || r.comment || '';
+        const reviewerName = r.reviewer || r.customer_name || '';
+        const resp = await fetch('/api/review/generate-ideogram-image', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify(r),
+        });
+        const contentType = resp.headers.get('content-type') || '';
+        if (!contentType.includes('text/event-stream')) {
+          const json = await resp.json();
+          throw new Error(json.error || 'Generation failed');
+        }
+        const reader = resp.body.getReader();
+        const decoder = new TextDecoder();
+        let buffer = '';
+        let currentEvent = '';
+        let done = false;
+        let generatedUrl = null;
+        while (!done) {
+          const { done: streamDone, value } = await reader.read();
+          done = streamDone;
+          buffer += decoder.decode(value, { stream: true });
+          const lines = buffer.split('\n');
+          buffer = lines.pop() || '';
+          for (const line of lines) {
+            if (line.startsWith('event: ')) {
+              currentEvent = line.slice(7).trim();
+            } else if (line.startsWith('data: ')) {
+              const dataStr = line.slice(6);
+              try {
+                const data = JSON.parse(dataStr);
+                if (currentEvent === 'progress' && statusEl) {
+                  statusEl.textContent = data.message;
+                } else if (currentEvent === 'complete') {
+                  generatedUrl = data.imageUrl;
+                  if (statusEl) {
+                    statusEl.textContent = 'Card ready — opening share dialog...';
+                    statusEl.classList.remove('text-gray-500');
+                    statusEl.classList.add('text-green-500');
+                  }
+                } else if (currentEvent === 'error') {
+                  throw new Error(data.message);
+                }
+              } catch (e) {
+                if (e.message !== dataStr) throw e;
+              }
+            }
+          }
+        }
+        if (!generatedUrl) throw new Error('No image URL from generator');
+        modal.classList.add('hidden');
+        openShareModal(reviewId, generatedUrl);
+      } catch (err) {
+        if (statusEl) {
+          statusEl.textContent = 'Error: ' + err.message;
+          statusEl.classList.remove('text-gray-500');
+          statusEl.classList.add('text-red-500');
+        }
+        if (btn) btn.disabled = false;
+      }
+    }
+    window.generateIdeogramImage = generateIdeogramImage;
+
+    function closeIdeogramModal() {
+      const modal = document.getElementById('ideogram-modal');
+      if (modal) modal.classList.add('hidden');
+    }
+    window.closeIdeogramModal = closeIdeogramModal;
+
+    document.addEventListener('keydown', function(e) {
+      if (e.key === 'Escape') {
+        closeIdeogramModal();
+        closeShareModal();
+      }
+    });
+
     loadData();
   })();
   </script>
   <script>Auth.protect('auth-container');</script>
+
+  <!-- Ideogram Image Gen Modal -->
+  <div id="ideogram-modal" class="fixed inset-0 z-50 hidden modal-overlay" onclick="if (event.target === this) closeIdeogramModal()">
+    <div class="flex items-center justify-center min-h-screen p-3 sm:p-4">
+      <div class="bg-white rounded-2xl shadow-2xl w-full max-w-lg modal-content overflow-y-auto p-5 sm:p-6" onclick="event.stopPropagation()">
+        <div class="flex items-center justify-between mb-4">
+          <h2 class="text-base sm:text-lg font-bold text-purple-800">Testimonial Card</h2>
+          <button onclick="closeIdeogramModal()" class="p-1 text-gray-400 hover:text-gray-600 transition-colors text-xl leading-none">&times;</button>
+        </div>
+        <div class="flex justify-center mb-4 bg-gray-50 rounded-xl p-2 min-h-[200px] items-center">
+          <img id="ideogram-result-img" class="rounded-lg max-w-full hidden" style="width:100%;max-width:480px;" alt="AI generated image">
+          <span id="ideogram-status" class="text-sm text-gray-500">Click the sparkle icon to start</span>
+        </div>
+        <div class="flex gap-2 justify-end items-center">
+          <button id="btn-ideogram-close" onclick="closeIdeogramModal()" class="text-sm px-4 py-2 border border-gray-200 rounded-lg hover:bg-gray-50 text-gray-500 transition-colors">Close</button>
+        </div>
+      </div>
+    </div>
+  </div>
 
   <!-- Share Testimonial Modal -->
   <div id="share-modal" class="fixed inset-0 z-50 hidden modal-overlay" onclick="if (event.target === this) closeShareModal()">
@@ -1031,9 +1224,10 @@
           <button onclick="closeShareModal()" class="p-1 text-gray-400 hover:text-gray-600 transition-colors text-xl leading-none">&times;</button>
         </div>
 
-        <!-- Canvas preview -->
+        <!-- Preview -->
         <div class="flex justify-center mb-4 bg-gray-50 rounded-xl p-2">
           <canvas id="share-canvas" class="rounded-lg max-w-full" style="width:100%;max-width:480px;height:auto;aspect-ratio:1/1;"></canvas>
+          <img id="share-testimonial-img" class="rounded-lg max-w-full hidden" style="width:100%;max-width:480px;aspect-ratio:1/1;object-fit:cover;" alt="Testimonial card">
         </div>
 
         <!-- Caption -->

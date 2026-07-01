@@ -333,7 +333,8 @@ exportToJson()            ← called during export/build
       </ul>
       <strong>Image gen</strong>
       <ul>
-        <li>Default: Ollama image model <code>x/z-image-turbo:fp8</code></li>
+        <li>Default: Ideogram 4 (local) — falls back to Ollama → SD WebUI</li>
+        <li>Alt: Ollama <code>x/z-image-turbo:fp8</code> (<code>IMAGE_GEN_ENGINE=ollama</code>)</li>
         <li>Alt: SD WebUI at <code>http://127.0.0.1:7860</code> (<code>IMAGE_GEN_ENGINE=sd</code>)</li>
         <li>Skip: <code>SKIP_IMAGE_GEN=true</code></li>
       </ul>
