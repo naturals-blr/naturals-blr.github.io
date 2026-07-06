@@ -737,8 +737,16 @@ ${webLine}
     function closeShareModal() {
       const modal = document.getElementById('share-modal');
       if (modal) modal.classList.add('hidden');
+      if (_preGenImageUrl) {
+        const url = _preGenImageUrl;
+        _preGenImageUrl = null;
+        fetch('/api/cleanup-pending', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ files: [url] }),
+        }).catch(function(){});
+      }
       shareReviewData = null;
-      _preGenImageUrl = null;
     }
     window.closeShareModal = closeShareModal;
 
@@ -1102,6 +1110,17 @@ ${webLine}
                 .map(([p, v]) => `${icons[p] || '•'} ${labels[p] || p}: ${v === 'OK' ? '✅' : '❌'}`)
                 .join(' | ');
             } catch {}
+          }
+          // Clean up original pending pre-gen image (publish endpoint
+          // finalises the re-uploaded copy, but the original is separate)
+          if (_preGenImageUrl) {
+            var _cleanupUrl = _preGenImageUrl;
+            _preGenImageUrl = null;
+            fetch('/api/cleanup-pending', {
+              method: 'POST',
+              headers: { 'Content-Type': 'application/json' },
+              body: JSON.stringify({ files: [_cleanupUrl] }),
+            }).catch(function(){});
           }
           status.innerHTML = statusHtml || '\u2705 Published successfully!';
           if (statusHtml) setTimeout(closeShareModal, 3000);
