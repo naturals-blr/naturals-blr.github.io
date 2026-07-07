@@ -235,7 +235,7 @@ function renderReviewCard(review, storeShortName) {
           ${hasReply ? '' : `<button onclick="onGenerate(this)" data-store="${storeShortName}" class="text-xs px-3 py-1.5 bg-royal-600 text-white rounded-lg hover:bg-royal-700 transition-colors font-medium">Generate Reply</button>`}
         </div>
       </div>
-      <div class="px-4 py-3 text-sm text-gray-600 bg-white leading-relaxed">${esc(comment.substring(0, 300))}</div>
+      <div class="px-4 py-3 text-sm text-gray-600 bg-white leading-relaxed">${esc(comment)}</div>
       <div class="reply-area px-4 pb-3 bg-white hidden"></div>
     </div>
   `;

@@ -563,8 +563,8 @@
     function renderReviewCard(r) {
       const stars = parseStar(r.stars);
       const hasReply = hasReplyText(r);
-      const comment = (r.review_comments || r.comment || '').substring(0, 350);
-      const replyText = replyTextOf(r).substring(0, 250);
+      const comment = (r.review_comments || r.comment || '');
+      const replyText = replyTextOf(r);
       const date = r.date_posted || r.review_create_time || '';
       const safeName = esc(r.reviewer || r.customer_name || 'Anonymous');
       const safeComment = esc(r.review_comments || r.comment || '');
@@ -612,7 +612,7 @@
             <span class="text-xs text-green-700 font-semibold">\uD83D\uDCAC Reply:</span>
             ${isLocal ? `<button onclick="editReply(this, '${escAttr(reviewId)}')" class="text-xs px-2 py-0.5 border border-gray-200 rounded-md hover:bg-royal-50 hover:text-royal-600 hover:border-royal-200 text-gray-400 transition-colors">\u270F\uFE0F Edit</button>` : ''}
           </div>
-          <div class="text-xs text-gray-500 leading-relaxed">${esc(replyText)}${(r.response || '').length > 250 ? '...' : ''}</div>
+          <div class="text-xs text-gray-500 leading-relaxed">${esc(replyText)}</div>
         </div>` : ''}
         <div class="gen-reply-area hidden px-4 pb-3 bg-white border-t border-gray-50 pt-3">
           <div class="flex items-center justify-between mb-1.5">
