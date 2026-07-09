@@ -1,0 +1,591 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Quick Post (Create Customized Flyer) — Naturals Admin</title>
+  <script src="/admin/config.js"></script>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <style>
+    body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif; }
+    #activity-log > div:first-child { animation: fadeIn 0.2s ease-out; }
+    @keyframes fadeIn { from { opacity: 0; transform: translateY(-4px); } to { opacity: 1; transform: translateY(0); } }
+    .drop-zone { border: 2px dashed #d1d5db; transition: all 0.2s; }
+    .drop-zone.drag-over { border-color: #d97706; background: #fffbeb; }
+    .preview-card { border: 1px solid #e5e7eb; border-radius: 0.5rem; padding: 0.75rem; transition: background 0.15s; }
+    .preview-card:hover { background: #f9fafb; }
+    .result-cell { font-size: 0.75rem; padding: 0.25rem 0.5rem; border-radius: 4px; }
+    .badge-dot { width: 8px; height: 8px; border-radius: 50%; display: inline-block; }
+  </style>
+</head>
+<body class="bg-gray-50 text-gray-800 antialiased">
+<div id="auth-container"></div>
+  <div class="bg-amber-50 border-b border-amber-200 px-5 py-2 text-xs text-amber-800 flex items-center gap-2 shrink-0">
+    <span>&#x26A1;</span>
+    <span>This page requires the local console. Run <code class="bg-amber-100 px-1.5 rounded font-mono">npm start</code> and access at <code class="bg-amber-100 px-1.5 rounded font-mono">http://localhost:3456/admin/adhoc-flyer.html</code></span>
+  </div>
+  <div class="flex flex-col h-screen">
+
+    <!-- Header -->
+    <header class="bg-white border-b border-gray-200 px-5 py-3 shrink-0">
+      <div class="flex items-center justify-between">
+        <div class="flex items-center gap-4">
+          <a href="./" class="text-lg hover:opacity-70">&larr;</a>
+          <h1 class="text-lg font-bold text-amber-800 tracking-tight">&#x1F4E3; Quick Post (Create Customized Flyer)</h1>
+          <div id="status-badges" class="flex items-center gap-2"></div>
+        </div>
+        <button onclick="location.href='/'" class="text-xs px-3 py-1.5 border border-gray-300 rounded hover:bg-gray-50 text-gray-600">Home</button>
+      </div>
+    </header>
+
+    <!-- Form -->
+    <div class="flex-1 overflow-y-auto p-5">
+      <div class="max-w-3xl mx-auto space-y-5">
+
+        <!-- Title + AI generate -->
+        <div>
+          <label class="block text-sm font-semibold text-gray-700 mb-1">Title *</label>
+          <div class="flex gap-2">
+            <input type="text" id="post-title" class="flex-1 border border-gray-300 rounded-lg px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-amber-500 focus:border-amber-500" placeholder="e.g. Weekend Special: 20% Off">
+            <button id="btn-generate-ai" class="px-3 py-2 text-xs font-medium border border-purple-300 text-purple-700 rounded-lg hover:bg-purple-50 disabled:opacity-40 whitespace-nowrap transition-colors" title="Generate body from title using AI">&zigrarr; Generate</button>
+          </div>
+        </div>
+
+        <!-- Body + char count -->
+        <div>
+          <div class="flex items-center justify-between mb-1">
+            <label class="block text-sm font-semibold text-gray-700">Body *</label>
+            <span id="char-count" class="text-xs text-gray-400 font-mono">0 chars</span>
+          </div>
+          <textarea id="post-body" rows="4" class="w-full border border-gray-300 rounded-lg px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-amber-500 focus:border-amber-500" placeholder="Describe the offer or announcement..."></textarea>
+          <div id="platform-limits" class="flex gap-3 mt-1 text-xs text-gray-400"></div>
+        </div>
+
+        <!-- Dates -->
+        <div class="grid grid-cols-2 gap-4">
+          <div>
+            <label class="block text-sm font-semibold text-gray-700 mb-1">Start Date</label>
+            <input type="date" id="post-start" class="w-full border border-gray-300 rounded-lg px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-amber-500 focus:border-amber-500">
+          </div>
+          <div>
+            <label class="block text-sm font-semibold text-gray-700 mb-1">End Date</label>
+            <input type="date" id="post-end" class="w-full border border-gray-300 rounded-lg px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-amber-500 focus:border-amber-500">
+          </div>
+        </div>
+
+        <!-- Flyer image upload -->
+        <div>
+          <label class="block text-sm font-semibold text-gray-700 mb-1">Your Flyer Image <span class="text-xs font-normal text-gray-400">(with store name, phone, footer baked in)</span></label>
+          <div class="flex gap-3 items-start">
+            <div class="flex-1 space-y-2">
+              <input type="url" id="post-image" class="w-full border border-gray-300 rounded-lg px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-amber-500 focus:border-amber-500" placeholder="Upload your flyer image below">
+              <div id="drop-zone" class="drop-zone rounded-lg p-4 text-center cursor-pointer text-xs text-gray-400 hover:border-amber-400 transition-colors">
+                <p>&#x1F4C2; Drop your flyer image here or click to upload</p>
+                <p class="mt-0.5">PNG, JPG, WebP &mdash; max 50MB</p>
+              </div>
+              <input type="file" id="file-input" accept="image/png,image/jpeg,image/webp" class="hidden">
+            </div>
+            <div id="image-preview" class="hidden shrink-0 w-28 h-28 rounded-lg border border-gray-200 overflow-hidden bg-white">
+              <img id="preview-img" class="w-full h-full object-cover" alt="preview">
+            </div>
+          </div>
+        </div>
+
+        <!-- Flyer position & scale -->
+        <div>
+          <details class="group" open>
+            <summary class="text-sm font-semibold text-gray-700 cursor-pointer select-none">Flyer Position &amp; Scale <span class="text-xs font-normal text-gray-400">(optional adjustments)</span></summary>
+            <div class="mt-3 space-y-4 pl-1">
+              <div>
+                <div class="flex justify-between text-xs text-gray-600 mb-1">
+                  <span>Top margin</span>
+                  <span id="top-margin-value" class="font-mono">5%</span>
+                </div>
+                <input type="range" id="top-margin" min="0" max="50" value="5" class="w-full accent-amber-600">
+              </div>
+              <div>
+                <div class="flex justify-between text-xs text-gray-600 mb-1">
+                  <span>Bottom margin</span>
+                  <span id="bottom-margin-value" class="font-mono">15%</span>
+                </div>
+                <input type="range" id="bottom-margin" min="0" max="50" value="15" class="w-full accent-amber-600">
+              </div>
+              <div>
+                <div class="flex justify-between text-xs text-gray-600 mb-1">
+                  <span>Overlay scale</span>
+                  <span id="scale-value" class="font-mono">100%</span>
+                </div>
+                <input type="range" id="scale" min="10" max="100" value="100" class="w-full accent-amber-600">
+              </div>
+            </div>
+          </details>
+        </div>
+
+        <!-- Background template selector -->
+        <div>
+          <label class="block text-sm font-semibold text-gray-700 mb-2">Background Template</label>
+          <div id="bg-variant-selector" class="flex gap-4"></div>
+        </div>
+
+        <!-- Stores -->
+        <div>
+          <div class="flex items-center justify-between mb-2">
+            <label class="block text-sm font-semibold text-gray-700">Stores <span class="text-xs font-normal text-gray-400">(5 flyers will be generated, one per selected store)</span></label>
+            <div class="flex gap-2">
+              <button id="btn-select-all-stores" class="text-xs px-2 py-1 border border-gray-300 rounded hover:bg-gray-50">Select All</button>
+              <button id="btn-deselect-all-stores" class="text-xs px-2 py-1 border border-gray-300 rounded hover:bg-gray-50">None</button>
+            </div>
+          </div>
+          <div id="stores-bar" class="flex flex-wrap items-center gap-4">
+            <label class="flex items-center gap-1.5 text-xs cursor-pointer"><input type="checkbox" class="store-cb rounded border-gray-300 text-amber-600 focus:ring-amber-500" data-store="N78" checked> <span>N78 &mdash; JP Nagar</span></label>
+            <label class="flex items-center gap-1.5 text-xs cursor-pointer"><input type="checkbox" class="store-cb rounded border-gray-300 text-amber-600 focus:ring-amber-500" data-store="N45" checked> <span>N45 &mdash; Nagavara</span></label>
+            <label class="flex items-center gap-1.5 text-xs cursor-pointer"><input type="checkbox" class="store-cb rounded border-gray-300 text-amber-600 focus:ring-amber-500" data-store="N36" checked> <span>N36 &mdash; Ayyappa Nagar</span></label>
+            <label class="flex items-center gap-1.5 text-xs cursor-pointer"><input type="checkbox" class="store-cb rounded border-gray-300 text-amber-600 focus:ring-amber-500" data-store="N05" checked> <span>N05 &mdash; Frazer Town</span></label>
+            <label class="flex items-center gap-1.5 text-xs cursor-pointer"><input type="checkbox" class="store-cb rounded border-gray-300 text-amber-600 focus:ring-amber-500" data-store="N43" checked> <span>N43 &mdash; Hennur</span></label>
+          </div>
+        </div>
+
+        <!-- Generate flyers button -->
+        <div class="flex items-center gap-3">
+          <button id="btn-generate-flyers" class="px-6 py-2.5 bg-amber-600 text-white text-sm font-semibold rounded-lg hover:bg-amber-700 disabled:opacity-40 disabled:cursor-not-allowed transition-colors">&#x1F5BC; Generate Flyers</button>
+          <span id="generate-status" class="text-sm text-gray-500"></span>
+        </div>
+
+        <!-- Generated flyers preview -->
+        <div id="flyer-preview-section" class="hidden">
+          <hr class="border-gray-200">
+          <div class="flex items-center justify-between mb-2">
+            <p class="text-xs font-semibold text-gray-500 uppercase tracking-wider">&#x1F50D; Generated Flyers</p>
+            <span id="flyer-count" class="text-xs text-gray-400"></span>
+          </div>
+          <div id="flyer-previews" class="grid grid-cols-1 sm:grid-cols-2 gap-3"></div>
+        </div>
+
+        <!-- Platforms -->
+        <div id="publish-section" class="hidden">
+          <hr class="border-gray-200">
+          <div>
+            <label class="block text-sm font-semibold text-gray-700 mb-2">Platforms</label>
+            <div class="flex items-center gap-5">
+              <label class="flex items-center gap-1.5 text-sm cursor-pointer">
+                <input type="checkbox" id="platform-fb" checked class="rounded border-gray-300 text-blue-600 focus:ring-blue-500">
+                <span>Facebook</span>
+              </label>
+              <label class="flex items-center gap-1.5 text-sm cursor-pointer">
+                <input type="checkbox" id="platform-ig" checked class="rounded border-gray-300 text-pink-600 focus:ring-pink-500">
+                <span>Instagram</span>
+              </label>
+              <label class="flex items-center gap-1.5 text-sm cursor-pointer">
+                <input type="checkbox" id="platform-gp" checked class="rounded border-gray-300 text-red-600 focus:ring-red-500">
+                <span>Google</span>
+              </label>
+            </div>
+          </div>
+
+          <!-- Publish -->
+          <div class="pt-2 flex gap-3 items-center">
+            <button id="btn-publish" class="px-6 py-2.5 bg-green-600 text-white text-sm font-semibold rounded-lg hover:bg-green-700 disabled:opacity-40 disabled:cursor-not-allowed transition-colors">&#x1F4E4; Publish Flyers</button>
+            <span id="publish-status" class="text-sm text-gray-500 ml-1"></span>
+          </div>
+
+          <!-- Result table -->
+          <div id="result-section" class="hidden">
+            <hr class="border-gray-200">
+            <div class="flex items-center justify-between mb-2">
+              <p class="text-xs font-semibold text-gray-500 uppercase tracking-wider">&#x1F4CB; Results</p>
+              <span id="result-summary" class="text-xs font-medium"></span>
+            </div>
+            <div id="result-table" class="overflow-x-auto"></div>
+            <div class="flex gap-2 mt-2">
+              <button id="btn-retry-all" class="hidden text-xs px-3 py-1.5 bg-yellow-500 text-white rounded hover:bg-yellow-600 font-medium transition-colors">Retry All Failed</button>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+
+    <!-- Activity log -->
+    <div class="bg-white border-t border-gray-200 px-5 py-2 shrink-0">
+      <div class="flex items-center justify-between">
+        <span class="text-xs font-semibold text-gray-500 uppercase">Activity</span>
+        <button onclick="document.getElementById('activity-log').innerHTML = ''" class="text-xs text-gray-400 hover:text-gray-600">Clear</button>
+      </div>
+      <div id="activity-log" class="font-mono text-xs space-y-0.5 max-h-24 overflow-y-auto"></div>
+    </div>
+  </div>
+
+  <script src="/js/auth.js"></script>
+  <script src="/js/api.js"></script>
+  <script>
+    const $ = id => document.getElementById(id);
+
+    function log(msg, level) {
+      const el = document.getElementById('activity-log');
+      const d = new Date();
+      const ts = d.toLocaleTimeString('en-IN', { hour12: false });
+      const color = level === 'error' ? 'text-red-600' : level === 'success' ? 'text-green-600' : 'text-gray-700';
+      el.innerHTML = `<div class="${color}">${ts} ${msg}</div>` + el.innerHTML;
+    }
+
+    const STORE_NAMES = { N78: 'JP Nagar 5th Phase', N45: 'Nagavara', N36: 'Ayyappa Nagar', N05: 'Frazer Town', N43: 'Hennur' };
+    const STORE_ORDER = ['N78', 'N45', 'N36', 'N05', 'N43'];
+    const LIMITS = { facebook: 63206, instagram: 2200, google: 1500 };
+    let FLYER_DATA = {};
+
+    function escHtml(s) {
+      const d = document.createElement('div');
+      d.textContent = s;
+      return d.innerHTML;
+    }
+
+    // ── Status badges ──────────────────────────────────────────────
+    getStatus().then(s => {
+      const badges = document.getElementById('status-badges');
+      badges.innerHTML = s.dryRun
+        ? '<span class="text-xs px-2 py-0.5 rounded-full bg-yellow-100 text-yellow-800 font-medium">&#x1F534; DRY RUN</span>'
+        : '<span class="text-xs px-2 py-0.5 rounded-full bg-green-100 text-green-800 font-medium">&#x1F7E2; LIVE</span>';
+    });
+
+    // ── Default dates ──────────────────────────────────────────────
+    const today = new Date();
+    const todayStr = today.toISOString().slice(0, 10);
+    const weekLater = new Date(today);
+    weekLater.setDate(weekLater.getDate() + 7);
+    if (!$('post-start').value) $('post-start').value = todayStr;
+    if (!$('post-end').value) $('post-end').value = weekLater.toISOString().slice(0, 10);
+
+    // ── Character counts ──────────────────────────────────────────
+    function updateCharCount() {
+      const len = $('post-body').value.length;
+      $('char-count').textContent = `${len} chars`;
+      const activePlatforms = [];
+      if ($('platform-fb').checked) activePlatforms.push('facebook');
+      if ($('platform-ig').checked) activePlatforms.push('instagram');
+      if ($('platform-gp').checked) activePlatforms.push('google');
+      const el = $('platform-limits');
+      if (activePlatforms.length === 0) { el.innerHTML = ''; return; }
+      el.innerHTML = activePlatforms.map(p => {
+        const limit = LIMITS[p];
+        const over = len > limit;
+        return `<span class="${over ? 'text-red-500 font-semibold' : ''}">${p}: ${len}/${limit}${over ? ' &#x26A0;' : ''}</span>`;
+      }).join(' &middot; ');
+    }
+
+    // ── Image upload ───────────────────────────────────────────────
+    function updateImagePreview(url) {
+      const preview = $('image-preview');
+      const img = $('preview-img');
+      if (url) {
+        preview.classList.remove('hidden');
+        img.src = url;
+      } else {
+        preview.classList.add('hidden');
+        img.src = '';
+      }
+    }
+
+    const dropZone = $('drop-zone');
+    const fileInput = $('file-input');
+
+    dropZone.addEventListener('click', () => fileInput.click());
+    dropZone.addEventListener('dragover', e => { e.preventDefault(); dropZone.classList.add('drag-over'); });
+    dropZone.addEventListener('dragleave', () => dropZone.classList.remove('drag-over'));
+    dropZone.addEventListener('drop', e => { e.preventDefault(); dropZone.classList.remove('drag-over'); if (e.dataTransfer.files.length) handleImageFile(e.dataTransfer.files[0]); });
+    fileInput.addEventListener('change', () => { if (fileInput.files.length) handleImageFile(fileInput.files[0]); });
+
+    async function handleImageFile(file) {
+      log(`Uploading flyer: ${file.name}...`);
+      const fd = new FormData();
+      fd.append('image', file);
+      try {
+        const res = await fetch('/api/adhoc/upload-image', { method: 'POST', body: fd });
+        const data = await res.json();
+        if (data.ok) {
+          $('post-image').value = data.data.imageUrl;
+          updateImagePreview(data.data.imageUrl);
+          log(`Flyer uploaded: ${data.data.filename}`, 'success');
+        } else {
+          log(`Upload failed: ${data.error}`, 'error');
+        }
+      } catch (e) {
+        log(`Upload error: ${e.message}`, 'error');
+      }
+    }
+
+    // ── AI generate ────────────────────────────────────────────────
+    $('btn-generate-ai').addEventListener('click', async () => {
+      const title = $('post-title').value.trim();
+      if (!title) { log('Enter a title first', 'error'); return; }
+      $('btn-generate-ai').disabled = true;
+      $('btn-generate-ai').textContent = '...';
+      try {
+        const res = await fetch('/api/adhoc/generate', { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ title }) });
+        const data = await res.json();
+        if (data.ok) {
+          $('post-body').value = data.data.body;
+          updateCharCount();
+          log('Body generated by AI', 'success');
+        } else {
+          log(`AI generation failed: ${data.error}`, 'error');
+        }
+      } catch (e) {
+        log(`AI error: ${e.message}`, 'error');
+      }
+      $('btn-generate-ai').disabled = false;
+      $('btn-generate-ai').textContent = '\u{2B06} Generate';
+    });
+
+    // ── Generate flyers ────────────────────────────────────────────
+    $('btn-generate-flyers').addEventListener('click', async () => {
+      const imageUrl = $('post-image').value.trim();
+      if (!imageUrl) { log('Upload a flyer image first', 'error'); return; }
+      const storeIds = [...document.querySelectorAll('.store-cb:checked')].map(cb => cb.dataset.store);
+      if (storeIds.length === 0) { log('Select at least one store', 'error'); return; }
+
+      $('btn-generate-flyers').disabled = true;
+      $('btn-generate-flyers').textContent = '\u23F3 Generating...';
+      $('generate-status').textContent = '';
+      $('flyer-preview-section').classList.add('hidden');
+      $('publish-section').classList.add('hidden');
+
+      const topMargin = parseInt($('top-margin').value);
+      const bottomMargin = parseInt($('bottom-margin').value);
+      const scalePercent = parseInt($('scale').value);
+
+      try {
+        const res = await fetch('/api/flyer/generate', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ imageUrl, storeIds, topMargin, bottomMargin, scalePercent, backgroundVariant: selectedBgVariant }),
+        });
+        const data = await res.json();
+        if (data.ok) {
+          FLYER_DATA = {};
+          data.data.flyers.forEach(f => { FLYER_DATA[f.storeId] = f; });
+          renderFlyerPreviews(data.data.flyers);
+          log(`${data.data.flyers.length} flyers generated`, 'success');
+        } else {
+          log(`Generation failed: ${data.error}`, 'error');
+        }
+      } catch (e) {
+        log(`Generation error: ${e.message}`, 'error');
+      }
+      $('btn-generate-flyers').disabled = false;
+      $('btn-generate-flyers').textContent = '\u{1F5BC} Generate Flyers';
+    });
+
+    function renderFlyerPreviews(flyers) {
+      const section = $('flyer-preview-section');
+      const container = $('flyer-previews');
+      section.classList.remove('hidden');
+      $('flyer-count').textContent = `${flyers.length} flyer(s)`;
+      container.innerHTML = flyers.map(f => {
+        const name = STORE_NAMES[f.storeId] || f.storeId;
+        const displaySrc = f.imageUrl || `/campaigns/_pending/${f.filename}`;
+        return `<div class="preview-card">
+          <div class="flex items-center gap-2 mb-1">
+            <span class="text-xs font-bold text-amber-700">${f.storeId}</span>
+            <span class="text-xs text-gray-400 truncate">${name}</span>
+            <span class="text-xs text-green-600">&#x2705; Generated</span>
+          </div>
+          <img src="${escHtml(displaySrc)}" class="w-full rounded border border-gray-100" alt="Flyer for ${name}" onerror="this.outerHTML='<span style=color:red;font-size:12px>Failed to load</span>'">
+        </div>`;
+      }).join('');
+      $('publish-section').classList.remove('hidden');
+    }
+
+    // ── Position & scale slider live values ─────────────────────────
+    ['top-margin', 'bottom-margin', 'scale'].forEach(id => {
+      $(id).addEventListener('input', () => {
+        $(`${id}-value`).textContent = $(id).value + '%';
+      });
+    });
+
+    // ── Background variant selector ─────────────────────────────────
+    const BG_VARIANTS = [
+      { id: '1', label: 'Variant 1', thumbUrl: '/images/bg-flyer-1/bg-flyer-jpnagar5thphase.png' },
+      { id: '2', label: 'Variant 2', thumbUrl: '/images/bg-flyer-2/bg-flyer-jpnagar5thphase.png' },
+    ];
+    let selectedBgVariant = '1';
+
+    function renderBgVariants() {
+      const container = $('bg-variant-selector');
+      container.innerHTML = BG_VARIANTS.map(v => {
+        const checked = v.id === selectedBgVariant;
+        return `<label class="relative cursor-pointer rounded-lg border-2 p-1.5 ${checked ? 'border-amber-500 bg-amber-50' : 'border-gray-200 hover:border-gray-300'} transition-all">
+          <input type="radio" name="bg-variant" value="${v.id}" ${checked ? 'checked' : ''} class="sr-only">
+          <img src="${escHtml(v.thumbUrl)}" class="w-28 h-28 object-cover rounded" alt="${v.label}" onerror="this.outerHTML='<div class=w-28 h-28 flex items-center justify-center text-xs text-gray-400 bg-gray-100 rounded>${escHtml(v.label)}</div>'">
+          <span class="block text-center text-xs font-medium text-gray-600 mt-1">${v.label}</span>
+        </label>`;
+      }).join('');
+
+      container.querySelectorAll('input[type="radio"]').forEach(r => {
+        r.addEventListener('change', () => {
+          if (r.checked) {
+            selectedBgVariant = r.value;
+            renderBgVariants();
+          }
+        });
+      });
+    }
+    renderBgVariants();
+
+    // ── Store select all/none ──────────────────────────────────────
+    $('btn-select-all-stores').addEventListener('click', () => {
+      document.querySelectorAll('.store-cb').forEach(cb => cb.checked = true);
+    });
+    $('btn-deselect-all-stores').addEventListener('click', () => {
+      document.querySelectorAll('.store-cb').forEach(cb => cb.checked = false);
+    });
+
+    // ── Events ─────────────────────────────────────────────────────
+    ['post-title', 'post-body'].forEach(id => {
+      $(id).addEventListener('input', updateCharCount);
+    });
+    $('post-image').addEventListener('input', () => {
+      updateImagePreview($('post-image').value.trim());
+    });
+
+    // ── Publish ────────────────────────────────────────────────────
+    async function doPublish(storeIdsOverride) {
+      const title = $('post-title').value.trim();
+      const body = $('post-body').value.trim();
+      if (!title || !body) { log('Title and body are required', 'error'); return null; }
+
+      const platforms = { facebook: $('platform-fb').checked, instagram: $('platform-ig').checked, google: $('platform-gp').checked };
+      let storeIds = storeIdsOverride || [...document.querySelectorAll('.store-cb:checked')].map(cb => cb.dataset.store);
+      const storeImages = {};
+      storeIds.forEach(sid => {
+        if (FLYER_DATA[sid]) {
+          storeImages[sid] = FLYER_DATA[sid];
+        }
+      });
+
+      const storesWithImages = Object.keys(storeImages);
+      if (storesWithImages.length === 0) {
+        log('Generate flyers first before publishing', 'error');
+        return null;
+      }
+      if (!platforms.facebook && !platforms.instagram && !platforms.google) {
+        log('Select at least one platform', 'error'); return null;
+      }
+
+      const startDate = $('post-start').value;
+      const endDate = $('post-end').value;
+
+      log(`Publishing: "${title}" (${storesWithImages.join(', ')})`);
+
+      try {
+        const data = await api('/publish-adhoc-per-store', {
+          method: 'POST',
+          body: JSON.stringify({ title, body, startDate, endDate, platforms, storeIds: storesWithImages, storeImages }),
+        });
+        log(`Done: ${data.message}`, 'success');
+        if (data.output) data.output.split('\n').filter(l => l.trim()).forEach(l => log(`  ${l}`));
+        return { title, body, startDate, endDate, platforms, storeIds: storesWithImages, storeImages, output: data.output || '' };
+      } catch (err) {
+        log(`Failed: ${err.message}`, 'error');
+        if (err.output) err.output.split('\n').filter(l => l.trim()).forEach(l => log(`  ${l}`, 'error'));
+        return { title, body, startDate, endDate, platforms, storeIds: storesWithImages, storeImages, output: err.output || err.message, error: true };
+      }
+    }
+
+    $('btn-publish').addEventListener('click', async () => {
+      $('btn-publish').disabled = true;
+      $('btn-publish').textContent = '\u23F3 Publishing...';
+      $('publish-status').textContent = '';
+      $('result-section').classList.add('hidden');
+
+      const result = await doPublish();
+      if (result) {
+        showResultTable(result);
+        if (!result.error) $('publish-status').textContent = '\u2705 Done';
+      }
+      $('btn-publish').disabled = false;
+      $('btn-publish').textContent = '\u{1F4E4} Publish Flyers';
+    });
+
+    // ── Result table ───────────────────────────────────────────────
+    function showResultTable(result) {
+      const section = $('result-section');
+      section.classList.remove('hidden');
+
+      const stores = result.storeIds;
+      const platforms = ['facebook', 'instagram', 'google'];
+      const activePlatforms = platforms.filter(p => result.platforms[p]);
+
+      const storeResults = {};
+      stores.forEach(s => { storeResults[s] = {}; activePlatforms.forEach(p => { storeResults[s][p] = null; }); });
+
+      const outputLines = (result.output || '').split('\n');
+      let currentStore = null;
+      outputLines.forEach(line => {
+        const storeMatch = line.match(/^📌 (.+?) \(Store_(\w+)\)/);
+        if (storeMatch) currentStore = storeMatch[2];
+        if (line.includes('Results:') && currentStore) {
+          try {
+            const resultsMatch = line.match(/\{.*\}/);
+            if (resultsMatch) {
+              const parsed = JSON.parse(resultsMatch[0].replace(/'/g, '"'));
+              Object.entries(parsed).forEach(([k, v]) => { if (storeResults[currentStore]) storeResults[currentStore][k] = v; });
+            }
+          } catch (_) {}
+        }
+      });
+
+      let html = '<table class="w-full text-xs border-collapse"><thead><tr class="bg-gray-100">';
+      html += '<th class="px-2 py-1.5 text-left font-semibold text-gray-600">Store</th>';
+      html += '<th class="px-2 py-1.5 text-left font-semibold text-gray-600">Image</th>';
+      activePlatforms.forEach(p => { html += `<th class="px-2 py-1.5 text-center font-semibold text-gray-600 capitalize">${p}</th>`; });
+      html += '<th class="px-2 py-1.5 text-center font-semibold text-gray-600">Retry</th></tr></thead><tbody>';
+
+      let okCount = 0, totalCount = 0;
+      stores.forEach(s => {
+        const hasImg = result.storeImages && result.storeImages[s];
+        html += `<tr class="border-t border-gray-100">
+          <td class="px-2 py-1.5 font-medium">${s}</td>
+          <td class="px-2 py-1.5 text-center">${hasImg ? '<span class="text-green-600">&#x2705;</span>' : '<span class="text-gray-300">&#x2014;</span>'}</td>`;
+        activePlatforms.forEach(p => {
+          const v = storeResults[s]?.[p];
+          const ok = v === 'OK';
+          if (ok) okCount++;
+          totalCount++;
+          html += `<td class="px-2 py-1.5 text-center"><span class="result-cell ${ok ? 'bg-green-100 text-green-700' : v === null ? 'bg-gray-100 text-gray-400' : 'bg-red-100 text-red-600'}">${ok ? '\u2705' : v === null ? '\u2014' : '\u274C'}</span></td>`;
+        });
+        const hasFailures = activePlatforms.some(p => storeResults[s]?.[p] && storeResults[s][p] !== 'OK');
+        html += `<td class="px-2 py-1.5 text-center">${hasFailures ? `<button class="text-xs px-2 py-0.5 bg-yellow-100 text-yellow-700 rounded hover:bg-yellow-200 font-medium retry-store-btn" data-store="${s}">Retry</button>` : '\u2014'}</td>`;
+        html += '</tr>';
+      });
+      html += '</tbody></table>';
+
+      $('result-table').innerHTML = html;
+      $('result-summary').textContent = `${okCount}/${totalCount} succeeded`;
+
+      document.querySelectorAll('.retry-store-btn').forEach(btn => {
+        btn.addEventListener('click', async () => {
+          btn.disabled = true;
+          btn.textContent = '...';
+          const retryResult = await doPublish([btn.dataset.store]);
+          if (retryResult) showResultTable(retryResult);
+        });
+      });
+
+      const failedStores = stores.filter(s => activePlatforms.some(p => storeResults[s]?.[p] && storeResults[s][p] !== 'OK'));
+      const retryAllBtn = $('btn-retry-all');
+      if (failedStores.length > 0 && failedStores.length < stores.length) {
+        retryAllBtn.classList.remove('hidden');
+        retryAllBtn.onclick = async () => {
+          retryAllBtn.disabled = true;
+          retryAllBtn.textContent = '...';
+          const retryResult = await doPublish(failedStores);
+          if (retryResult) showResultTable(retryResult);
+        };
+      } else {
+        retryAllBtn.classList.add('hidden');
+      }
+    }
+  </script>
+  <script>Auth.protect('auth-container');</script>
+</body>
+</html>
