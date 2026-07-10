@@ -89,7 +89,7 @@
             </div>
             <!-- Image/video preview -->
             <div id="image-preview" class="hidden shrink-0 w-28 h-28 rounded-lg border border-gray-200 overflow-hidden bg-white">
-              <img id="preview-img" class="w-full h-full object-cover" alt="preview">
+              <img id="preview-img" class="w-full h-full object-cover cursor-pointer" alt="preview" onclick="openImageModal(this.src)">
               <video id="preview-video" class="w-full h-full object-cover hidden" controls><source></video>
             </div>
           </div>
@@ -113,7 +113,7 @@
         <!-- Platforms -->
         <div>
           <label class="block text-sm font-semibold text-gray-700 mb-2">Platforms</label>
-          <div class="flex items-center gap-5">
+          <div class="flex items-center gap-5 flex-wrap">
             <label class="flex items-center gap-1.5 text-sm cursor-pointer">
               <input type="checkbox" id="platform-fb" checked class="rounded border-gray-300 text-blue-600 focus:ring-blue-500">
               <span>Facebook</span>
@@ -125,6 +125,30 @@
             <label class="flex items-center gap-1.5 text-sm cursor-pointer">
               <input type="checkbox" id="platform-gp" checked class="rounded border-gray-300 text-red-600 focus:ring-red-500">
               <span>Google</span>
+            </label>
+            <span class="text-gray-300 select-none">|</span>
+            <label class="flex items-center gap-1.5 text-xs text-gray-600 cursor-pointer select-none">
+              <input type="checkbox" id="chk-post-website" class="rounded border-gray-300 text-green-600 focus:ring-green-500">
+              <span>Website</span>
+            </label>
+            <label class="flex items-center gap-1 text-xs text-gray-600">
+              <span class="font-medium">Type:</span>
+              <select id="content-type" class="text-xs border border-gray-300 rounded px-2 py-1 focus:outline-none focus:ring-1 focus:ring-green-500" onchange="updateGooglePostType()">
+                <option value="offer">Offer</option>
+                <option value="festival">Festival</option>
+                <option value="greeting">Greeting</option>
+                <option value="update">Update</option>
+                <option value="announcement">Announcement</option>
+                <option value="testimonial">Testimonial</option>
+              </select>
+            </label>
+            <label class="flex items-center gap-1 text-xs text-gray-600">
+              <span class="font-medium">Google:</span>
+              <select id="google-post-type" class="text-xs border border-gray-300 rounded px-2 py-1 focus:outline-none focus:ring-1 focus:ring-blue-500">
+                <option value="OFFER">Offer Post</option>
+                <option value="STANDARD">Update Post</option>
+                <option value="EVENT">Event Post</option>
+              </select>
             </label>
           </div>
         </div>
@@ -155,7 +179,7 @@
         </div>
 
         <!-- Publish buttons -->
-        <div class="pt-2 flex gap-3 items-center">
+        <div class="pt-2 flex gap-3 items-center flex-wrap">
           <button id="btn-publish" class="px-6 py-2.5 bg-green-600 text-white text-sm font-semibold rounded-lg hover:bg-green-700 disabled:opacity-40 disabled:cursor-not-allowed transition-colors">&#x1F4E4; Publish Now</button>
           <button id="btn-schedule" class="px-4 py-2.5 border border-green-600 text-green-700 text-sm font-semibold rounded-lg hover:bg-green-50 disabled:opacity-40 disabled:cursor-not-allowed transition-colors">&#x23F0; Schedule</button>
           <span id="publish-status" class="text-sm text-gray-500 ml-1"></span>
@@ -223,6 +247,14 @@
     // ── Helpers ────────────────────────────────────────────────────
     const STORE_NAMES = { N78: 'JP Nagar 5th Phase', N45: 'Nagavara', N36: 'Ayyappa Nagar', N05: 'Frazer Town', N43: 'Hennur' };
     const LIMITS = { facebook: 63206, instagram: 2200, google: 1500 };
+
+    // Auto-set Google Post Type based on Campaign Type
+    function updateGooglePostType() {
+      const ct = $('content-type')?.value || 'offer';
+      const gpDefault = { offer: 'OFFER', festival: 'OFFER', greeting: 'STANDARD', update: 'STANDARD', announcement: 'STANDARD', testimonial: 'STANDARD' };
+      $('google-post-type').value = gpDefault[ct] || 'STANDARD';
+    }
+    document.addEventListener('DOMContentLoaded', updateGooglePostType);
 
     function getStoreSlug(name) {
       const s = name.toLowerCase().replace(/[^a-z0-9 ]/g, '').replace(/\s+/g, '');
@@ -349,10 +381,11 @@
             const displaySrc = localPreviewUrl(imgUrl);
             return isVideoUrl(imgUrl)
               ? `<video class="mt-1.5 h-16 w-auto rounded border border-gray-100" controls><source src="${escHtml(displaySrc)}"></video>`
-              : `<img src="${escHtml(displaySrc)}" class="mt-1.5 h-16 w-auto rounded border border-gray-100 object-cover" onerror="this.style.display='none'">`;
+              : `<img src="${escHtml(displaySrc)}" class="mt-1.5 h-16 w-auto rounded border border-gray-100 object-cover cursor-pointer" onerror="this.style.display='none'">`;
           })() : ''}
         </div>`;
       }).join('');
+      enableImageModals(container);
       updateCharCount();
       saveFormState();
     }
@@ -512,20 +545,24 @@
       if (!platforms.facebook && !platforms.instagram && !platforms.google) { log('Select at least one platform', 'error'); return null; }
       if (storeIds.length === 0) { log('Select at least one store', 'error'); return null; }
 
+      const postToWebsite = $('chk-post-website').checked;
+      const contentType = $('content-type')?.value || 'offer';
+      const googlePostType = $('google-post-type')?.value || 'STANDARD';
+
       log(`${retryId ? 'Retrying' : 'Publishing'}: "${title}" (${storeIds.join(', ')})`);
 
       try {
         const data = await api('/publish-adhoc', {
           method: 'POST',
-          body: JSON.stringify({ title, body, imageUrl, startDate, endDate, platforms, storeIds }),
+          body: JSON.stringify({ title, body, imageUrl, startDate, endDate, platforms, storeIds, postToWebsite, contentType, googlePostType }),
         });
         log(`Done: ${data.message}`, 'success');
         if (data.output) data.output.split('\n').filter(l => l.trim()).forEach(l => log(`  ${l}`));
-        return { title, body, imageUrl, startDate, endDate, platforms, storeIds, output: data.output || '' };
+        return { title, body, imageUrl, startDate, endDate, platforms, storeIds, postToWebsite, output: data.output || '' };
       } catch (err) {
         log(`Failed: ${err.message}`, 'error');
         if (err.output) err.output.split('\n').filter(l => l.trim()).forEach(l => log(`  ${l}`, 'error'));
-        return { title, body, imageUrl, startDate, endDate, platforms, storeIds, output: err.output || err.message, error: true };
+        return { title, body, imageUrl, startDate, endDate, platforms, storeIds, postToWebsite, output: err.output || err.message, error: true };
       }
     }
 

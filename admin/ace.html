@@ -58,6 +58,28 @@
         </label>
         <button id="btn-clear" class="text-sm text-gray-400 hover:text-gray-600" onclick="clearOutput()">Clear log</button>
       </div>
+      <div class="flex items-center gap-3 mt-3 text-xs text-gray-500 border-t border-gray-100 pt-3">
+        <span class="text-gray-400">Categorization for website:</span>
+        <label class="flex items-center gap-1">
+          <span class="font-medium text-gray-600">Type:</span>
+          <select id="content-type" class="text-xs border border-gray-300 rounded px-2 py-1 focus:outline-none focus:ring-1 focus:ring-cyan-500" onchange="updateGooglePostType()">
+            <option value="offer">Offer</option>
+            <option value="festival">Festival</option>
+            <option value="greeting">Greeting</option>
+            <option value="update">Update</option>
+            <option value="announcement">Announcement</option>
+            <option value="testimonial">Testimonial</option>
+          </select>
+        </label>
+        <label class="flex items-center gap-1">
+          <span class="font-medium text-gray-600">Google:</span>
+          <select id="google-post-type" class="text-xs border border-gray-300 rounded px-2 py-1 focus:outline-none focus:ring-1 focus:ring-blue-500">
+            <option value="OFFER">Offer Post</option>
+            <option value="STANDARD">Update Post</option>
+            <option value="EVENT">Event Post</option>
+          </select>
+        </label>
+      </div>
     </div>
 
     <!-- Output -->

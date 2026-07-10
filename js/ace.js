@@ -6,6 +6,16 @@ const resultCard = document.getElementById('result-card');
 const rTitle = document.getElementById('r-title');
 const rUrl = document.getElementById('r-url');
 
+function updateGooglePostType() {
+  const el = document.getElementById('content-type');
+  if (!el) return;
+  const ct = el.value || 'offer';
+  const gpDefault = { offer: 'OFFER', festival: 'OFFER', greeting: 'STANDARD', update: 'STANDARD', announcement: 'STANDARD', testimonial: 'STANDARD' };
+  const gp = document.getElementById('google-post-type');
+  if (gp) gp.value = gpDefault[ct] || 'STANDARD';
+}
+document.addEventListener('DOMContentLoaded', updateGooglePostType);
+
 let running = false;
 
 function esc(s) {

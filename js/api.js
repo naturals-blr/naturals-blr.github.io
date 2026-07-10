@@ -36,3 +36,87 @@ async function testTokens() {
   if (!body.ok) throw new Error(body.error || 'Token test failed');
   return body.data;
 }
+
+// ── Image Modal (Lightbox) ──
+let _modalEl = null;
+
+function _initModal() {
+  if (_modalEl) return;
+  _modalEl = document.createElement('div');
+  _modalEl.id = 'image-modal';
+  _modalEl.innerHTML = [
+    '<div class="modal-overlay" id="modal-overlay">',
+    '  <button class="modal-close" id="modal-close-btn">&times;</button>',
+    '  <img class="modal-image" id="modal-image" src="" alt="Preview">',
+    '</div>'
+  ].join('');
+  document.body.appendChild(_modalEl);
+
+  document.getElementById('modal-overlay').addEventListener('click', function(e) {
+    if (e.target === this) closeImageModal();
+  });
+  document.getElementById('modal-close-btn').addEventListener('click', closeImageModal);
+  document.addEventListener('keydown', function(e) {
+    if (e.key === 'Escape') closeImageModal();
+  });
+
+  if (!document.getElementById('modal-style')) {
+    const style = document.createElement('style');
+    style.id = 'modal-style';
+    style.textContent = [
+      '#image-modal { display: none; }',
+      '#image-modal.active { display: block; }',
+      '#image-modal .modal-overlay {',
+      '  position: fixed; inset: 0; z-index: 9999;',
+      '  background: rgba(0,0,0,0.85);',
+      '  display: flex; align-items: center; justify-content: center;',
+      '  padding: 2rem;',
+      '}',
+      '#image-modal .modal-close {',
+      '  position: fixed; top: 1rem; right: 1.5rem; z-index: 10000;',
+      '  background: none; border: none; color: #fff;',
+      '  font-size: 2.5rem; cursor: pointer; line-height: 1;',
+      '  opacity: 0.8; font-family: inherit;',
+      '}',
+      '#image-modal .modal-close:hover { opacity: 1; }',
+      '#image-modal .modal-image {',
+      '  max-width: 95vw; max-height: 90vh;',
+      '  border-radius: 8px; box-shadow: 0 8px 32px rgba(0,0,0,0.5);',
+      '  object-fit: contain;',
+      '}',
+    ].join('\n');
+    document.head.appendChild(style);
+  }
+}
+
+function openImageModal(src) {
+  _initModal();
+  const img = document.getElementById('modal-image');
+  img.src = src;
+  img.onerror = function() { this.alt = 'Failed to load image'; };
+  _modalEl.classList.add('active');
+  document.body.style.overflow = 'hidden';
+}
+
+function closeImageModal() {
+  if (!_modalEl) return;
+  _modalEl.classList.remove('active');
+  document.body.style.overflow = '';
+}
+
+function enableImageModals(containerOrSelector) {
+  const container = typeof containerOrSelector === 'string'
+    ? document.querySelector(containerOrSelector)
+    : containerOrSelector;
+  if (!container) return;
+  container.addEventListener('click', function(e) {
+    const img = e.target.closest('img');
+    if (!img) return;
+    if (img.closest('.no-modal')) return;
+    const src = img.getAttribute('src');
+    if (!src) return;
+    e.preventDefault();
+    e.stopPropagation();
+    openImageModal(src);
+  });
+}

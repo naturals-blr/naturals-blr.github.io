@@ -86,7 +86,7 @@
               <input type="file" id="file-input" accept="image/png,image/jpeg,image/webp" class="hidden">
             </div>
             <div id="image-preview" class="hidden shrink-0 w-28 h-28 rounded-lg border border-gray-200 overflow-hidden bg-white">
-              <img id="preview-img" class="w-full h-full object-cover" alt="preview">
+              <img id="preview-img" class="w-full h-full object-cover cursor-pointer" alt="preview" onclick="openImageModal(this.src)">
             </div>
           </div>
         </div>
@@ -145,6 +145,52 @@
           </div>
         </div>
 
+        <!-- Platforms (always visible) -->
+        <div>
+          <hr class="border-gray-200">
+          <div>
+            <label class="block text-sm font-semibold text-gray-700 mb-2">Platforms</label>
+            <div class="flex items-center gap-5 flex-wrap">
+              <label class="flex items-center gap-1.5 text-sm cursor-pointer">
+                <input type="checkbox" id="platform-fb" checked class="rounded border-gray-300 text-blue-600 focus:ring-blue-500">
+                <span>Facebook</span>
+              </label>
+              <label class="flex items-center gap-1.5 text-sm cursor-pointer">
+                <input type="checkbox" id="platform-ig" checked class="rounded border-gray-300 text-pink-600 focus:ring-pink-500">
+                <span>Instagram</span>
+              </label>
+              <label class="flex items-center gap-1.5 text-sm cursor-pointer">
+                <input type="checkbox" id="platform-gp" checked class="rounded border-gray-300 text-red-600 focus:ring-red-500">
+                <span>Google</span>
+              </label>
+              <span class="text-gray-300 select-none">|</span>
+              <label class="flex items-center gap-1.5 text-xs text-gray-600 cursor-pointer select-none">
+                <input type="checkbox" id="chk-post-website" class="rounded border-gray-300 text-green-600 focus:ring-green-500">
+                <span>Website</span>
+              </label>
+              <label class="flex items-center gap-1 text-xs text-gray-600">
+                <span class="font-medium">Type:</span>
+                <select id="content-type" class="text-xs border border-gray-300 rounded px-2 py-1 focus:outline-none focus:ring-1 focus:ring-green-500" onchange="updateGooglePostType()">
+                  <option value="offer">Offer</option>
+                  <option value="festival">Festival</option>
+                  <option value="greeting">Greeting</option>
+                  <option value="update">Update</option>
+                  <option value="announcement">Announcement</option>
+                  <option value="testimonial">Testimonial</option>
+                </select>
+              </label>
+              <label class="flex items-center gap-1 text-xs text-gray-600">
+                <span class="font-medium">Google:</span>
+                <select id="google-post-type" class="text-xs border border-gray-300 rounded px-2 py-1 focus:outline-none focus:ring-1 focus:ring-blue-500">
+                  <option value="OFFER">Offer Post</option>
+                  <option value="STANDARD">Update Post</option>
+                  <option value="EVENT">Event Post</option>
+                </select>
+              </label>
+            </div>
+          </div>
+        </div>
+
         <!-- Generate flyers button -->
         <div class="flex items-center gap-3">
           <button id="btn-generate-flyers" class="px-6 py-2.5 bg-amber-600 text-white text-sm font-semibold rounded-lg hover:bg-amber-700 disabled:opacity-40 disabled:cursor-not-allowed transition-colors">&#x1F5BC; Generate Flyers</button>
@@ -161,29 +207,10 @@
           <div id="flyer-previews" class="grid grid-cols-1 sm:grid-cols-2 gap-3"></div>
         </div>
 
-        <!-- Platforms -->
+        <!-- Publish section (shown after flyer generation) -->
         <div id="publish-section" class="hidden">
           <hr class="border-gray-200">
-          <div>
-            <label class="block text-sm font-semibold text-gray-700 mb-2">Platforms</label>
-            <div class="flex items-center gap-5">
-              <label class="flex items-center gap-1.5 text-sm cursor-pointer">
-                <input type="checkbox" id="platform-fb" checked class="rounded border-gray-300 text-blue-600 focus:ring-blue-500">
-                <span>Facebook</span>
-              </label>
-              <label class="flex items-center gap-1.5 text-sm cursor-pointer">
-                <input type="checkbox" id="platform-ig" checked class="rounded border-gray-300 text-pink-600 focus:ring-pink-500">
-                <span>Instagram</span>
-              </label>
-              <label class="flex items-center gap-1.5 text-sm cursor-pointer">
-                <input type="checkbox" id="platform-gp" checked class="rounded border-gray-300 text-red-600 focus:ring-red-500">
-                <span>Google</span>
-              </label>
-            </div>
-          </div>
-
-          <!-- Publish -->
-          <div class="pt-2 flex gap-3 items-center">
+          <div class="pt-2 flex gap-3 items-center flex-wrap">
             <button id="btn-publish" class="px-6 py-2.5 bg-green-600 text-white text-sm font-semibold rounded-lg hover:bg-green-700 disabled:opacity-40 disabled:cursor-not-allowed transition-colors">&#x1F4E4; Publish Flyers</button>
             <span id="publish-status" class="text-sm text-gray-500 ml-1"></span>
           </div>
@@ -230,6 +257,14 @@
 
     const STORE_NAMES = { N78: 'JP Nagar 5th Phase', N45: 'Nagavara', N36: 'Ayyappa Nagar', N05: 'Frazer Town', N43: 'Hennur' };
     const STORE_ORDER = ['N78', 'N45', 'N36', 'N05', 'N43'];
+
+    // Auto-set Google Post Type based on Campaign Type
+    function updateGooglePostType() {
+      const ct = $('content-type')?.value || 'offer';
+      const gpDefault = { offer: 'OFFER', festival: 'OFFER', greeting: 'STANDARD', update: 'STANDARD', announcement: 'STANDARD', testimonial: 'STANDARD' };
+      $('google-post-type').value = gpDefault[ct] || 'STANDARD';
+    }
+    document.addEventListener('DOMContentLoaded', updateGooglePostType);
     const LIMITS = { facebook: 63206, instagram: 2200, google: 1500 };
     let FLYER_DATA = {};
 
@@ -389,9 +424,10 @@
             <span class="text-xs text-gray-400 truncate">${name}</span>
             <span class="text-xs text-green-600">&#x2705; Generated</span>
           </div>
-          <img src="${escHtml(displaySrc)}" class="w-full rounded border border-gray-100" alt="Flyer for ${name}" onerror="this.outerHTML='<span style=color:red;font-size:12px>Failed to load</span>'">
+          <img src="${escHtml(displaySrc)}" class="w-full rounded border border-gray-100 cursor-pointer" alt="Flyer for ${name}" onerror="this.outerHTML='<span style=color:red;font-size:12px>Failed to load</span>'">
         </div>`;
       }).join('');
+      enableImageModals(container);
       $('publish-section').classList.remove('hidden');
     }
 
@@ -415,10 +451,11 @@
         const checked = v.id === selectedBgVariant;
         return `<label class="relative cursor-pointer rounded-lg border-2 p-1.5 ${checked ? 'border-amber-500 bg-amber-50' : 'border-gray-200 hover:border-gray-300'} transition-all">
           <input type="radio" name="bg-variant" value="${v.id}" ${checked ? 'checked' : ''} class="sr-only">
-          <img src="${escHtml(v.thumbUrl)}" class="w-28 h-28 object-cover rounded" alt="${v.label}" onerror="this.outerHTML='<div class=w-28 h-28 flex items-center justify-center text-xs text-gray-400 bg-gray-100 rounded>${escHtml(v.label)}</div>'">
+          <img src="${escHtml(v.thumbUrl)}" class="w-28 h-28 object-cover rounded cursor-pointer" alt="${v.label}" onerror="this.outerHTML='<div class=w-28 h-28 flex items-center justify-center text-xs text-gray-400 bg-gray-100 rounded>${escHtml(v.label)}</div>'">
           <span class="block text-center text-xs font-medium text-gray-600 mt-1">${v.label}</span>
         </label>`;
       }).join('');
+      enableImageModals(container);
 
       container.querySelectorAll('input[type="radio"]').forEach(r => {
         r.addEventListener('change', () => {
@@ -474,20 +511,24 @@
       const startDate = $('post-start').value;
       const endDate = $('post-end').value;
 
+      const postToWebsite = $('chk-post-website').checked;
+      const contentType = $('content-type')?.value || 'offer';
+      const googlePostType = $('google-post-type')?.value || 'STANDARD';
+
       log(`Publishing: "${title}" (${storesWithImages.join(', ')})`);
 
       try {
         const data = await api('/publish-adhoc-per-store', {
           method: 'POST',
-          body: JSON.stringify({ title, body, startDate, endDate, platforms, storeIds: storesWithImages, storeImages }),
+          body: JSON.stringify({ title, body, startDate, endDate, platforms, storeIds: storesWithImages, storeImages, postToWebsite, contentType, googlePostType }),
         });
         log(`Done: ${data.message}`, 'success');
         if (data.output) data.output.split('\n').filter(l => l.trim()).forEach(l => log(`  ${l}`));
-        return { title, body, startDate, endDate, platforms, storeIds: storesWithImages, storeImages, output: data.output || '' };
+        return { title, body, startDate, endDate, platforms, storeIds: storesWithImages, storeImages, postToWebsite, output: data.output || '' };
       } catch (err) {
         log(`Failed: ${err.message}`, 'error');
         if (err.output) err.output.split('\n').filter(l => l.trim()).forEach(l => log(`  ${l}`, 'error'));
-        return { title, body, startDate, endDate, platforms, storeIds: storesWithImages, storeImages, output: err.output || err.message, error: true };
+        return { title, body, startDate, endDate, platforms, storeIds: storesWithImages, storeImages, postToWebsite, output: err.output || err.message, error: true };
       }
     }
 

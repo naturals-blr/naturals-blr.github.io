@@ -9,10 +9,20 @@ const $ = (s, p) => (p || document).querySelector(s);
 const $$ = (s, p) => [...(p || document).querySelectorAll(s)];
 const esc = s => { const d = document.createElement('div'); d.textContent = s || ''; return d.innerHTML; };
 
+function updateGooglePostType() {
+  const el = document.getElementById('content-type');
+  if (!el) return;
+  const ct = el.value || 'offer';
+  const gpDefault = { offer: 'OFFER', festival: 'OFFER', greeting: 'STANDARD', update: 'STANDARD', announcement: 'STANDARD', testimonial: 'STANDARD' };
+  const gp = document.getElementById('google-post-type');
+  if (gp) gp.value = gpDefault[ct] || 'STANDARD';
+}
+
 // ── Init ─────────────────────────────────────────────────────────
 async function init() {
   renderBadges();
   await loadCampaigns();
+  updateGooglePostType();
 
   $('#select-all').addEventListener('change', e => {
     const checked = e.target.checked;

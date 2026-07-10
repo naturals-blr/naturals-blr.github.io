@@ -44,7 +44,7 @@
         </label>
         <span id="selected-count" class="text-xs text-gray-400">0 selected</span>
       </div>
-      <div class="flex items-center gap-4">
+      <div class="flex items-center gap-4 flex-wrap">
         <span class="text-xs text-gray-400">Post to:</span>
         <label class="flex items-center gap-1.5 text-xs cursor-pointer">
           <input type="checkbox" id="platform-fb" checked class="rounded border-gray-300 text-blue-600 focus:ring-blue-500">
@@ -57,6 +57,30 @@
         <label class="flex items-center gap-1.5 text-xs cursor-pointer">
           <input type="checkbox" id="platform-gp" checked class="rounded border-gray-300 text-red-600 focus:ring-red-500">
           <span>Google</span>
+        </label>
+        <span class="text-gray-300 select-none">|</span>
+        <label class="flex items-center gap-1.5 text-xs text-gray-600 cursor-pointer select-none">
+          <input type="checkbox" id="chk-post-website" class="rounded border-gray-300 text-green-600 focus:ring-green-500">
+          <span>Website</span>
+        </label>
+        <label class="flex items-center gap-1 text-xs text-gray-600">
+          <span class="font-medium">Type:</span>
+          <select id="content-type" class="text-xs border border-gray-300 rounded px-2 py-1 focus:outline-none focus:ring-1 focus:ring-green-500" onchange="updateGooglePostType()">
+            <option value="offer">Offer</option>
+            <option value="festival">Festival</option>
+            <option value="greeting">Greeting</option>
+            <option value="update">Update</option>
+            <option value="announcement">Announcement</option>
+            <option value="testimonial">Testimonial</option>
+          </select>
+        </label>
+        <label class="flex items-center gap-1 text-xs text-gray-600">
+          <span class="font-medium">Google:</span>
+          <select id="google-post-type" class="text-xs border border-gray-300 rounded px-2 py-1 focus:outline-none focus:ring-1 focus:ring-blue-500">
+            <option value="OFFER">Offer Post</option>
+            <option value="STANDARD">Update Post</option>
+            <option value="EVENT">Event Post</option>
+          </select>
         </label>
       </div>
     </div>
@@ -79,13 +103,16 @@
     </div>
 
     <!-- Publish bar -->
-    <div class="bg-white border-t border-gray-200 px-5 py-3 shrink-0 flex items-center justify-between">
-      <div>
-        <span id="publish-status" class="text-sm text-gray-500"></span>
+    <div class="bg-white border-t border-gray-200 px-5 py-3 shrink-0">
+      <div class="flex items-center justify-between mb-2">
+        <div>
+          <span id="publish-status" class="text-sm text-gray-500"></span>
+        </div>
+        <button id="btn-publish" class="px-5 py-2 bg-purple-600 text-white text-sm font-semibold rounded-lg hover:bg-purple-700 disabled:opacity-40 disabled:cursor-not-allowed transition-colors">
+          📤 Publish Selected
+        </button>
       </div>
-      <button id="btn-publish" class="px-5 py-2 bg-purple-600 text-white text-sm font-semibold rounded-lg hover:bg-purple-700 disabled:opacity-40 disabled:cursor-not-allowed transition-colors">
-        📤 Publish Selected
-      </button>
+
     </div>
 
     <!-- Result section -->
