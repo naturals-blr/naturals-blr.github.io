@@ -458,11 +458,11 @@
         });
         log(`Done: ${data.message}`, 'success');
         if (data.output) data.output.split('\n').filter(l => l.trim()).forEach(l => log(`  ${l}`));
-        return { title, body, startDate, endDate, platforms, storeIds: storesWithImages, storeImages, postToWebsite, output: data.output || '' };
+        return { title, body, startDate, endDate, platforms: { ...platforms, website: postToWebsite }, storeIds: storesWithImages, storeImages, postToWebsite, output: data.output || '' };
       } catch (err) {
         log(`Failed: ${err.message}`, 'error');
         if (err.output) err.output.split('\n').filter(l => l.trim()).forEach(l => log(`  ${l}`, 'error'));
-        return { title, body, startDate, endDate, platforms, storeIds: storesWithImages, storeImages, postToWebsite, output: err.output || err.message, error: true };
+        return { title, body, startDate, endDate, platforms: { ...platforms, website: postToWebsite }, storeIds: storesWithImages, storeImages, postToWebsite, output: err.output || err.message, error: true };
       }
     }
 
@@ -488,7 +488,7 @@
       section.classList.remove('hidden');
 
       const stores = result.storeIds;
-      const platforms = ['facebook', 'instagram', 'google'];
+      const platforms = ['facebook', 'instagram', 'google', 'website'];
       const activePlatforms = platforms.filter(p => result.platforms[p]);
 
       const storeResults = {};
