@@ -88,6 +88,16 @@
     const escAttr = s => { if (!s) return ''; return String(s).replace(/&/g,'&amp;').replace(/"/g,'&quot;').replace(/'/g,'&#39;').replace(/</g,'&lt;').replace(/>/g,'&gt;'); };
     const hasReplyText = r => { const v = (r.response || r.reply_text || '').trim(); return v && v !== 'false' && v !== 'False'; };
     const replyTextOf = r => { const v = (r.response || r.reply_text || '').trim(); return v && v !== 'false' && v !== 'False' ? v : ''; };
+    const isRoboticReply = text => {
+      if (!text || text.length < 20) return false;
+      const core = text
+        .replace(/[\r\n]+/g, ' ')
+        .replace(/\s{2,}/g, ' ')
+        .replace(/^(dear\s+\w+\s*[,!.]?\s*|hi\s+\w+\s*[,!.]?\s*|hello\s+\w+\s*[,!.]?\s*)/i, '')
+        .replace(/\s*(warm\s*regards\s*,?\s*\w*\s*|thanks?\s*,?\s*\w*\s*|team\s+[\w\s]+|regards\s*,?\s*\w*\s*)/i, '')
+        .replace(/[.,!]+/g, '').trim().toLowerCase();
+      return /thank\s*you\s*for\s*your\s*support\s*have\s*a\s*wonderful\s*day\s*and\s*we\s*hope\s*to\s*see\s*you\s*again\s*soon/.test(core);
+    };
 
     let allStores = [];
     let allReviews = [];
@@ -629,7 +639,11 @@
         ${hasReply ? `<div class="px-4 pb-3 bg-white border-t border-gray-50 pt-3">
           <div class="flex items-center justify-between mb-1">
             <span class="text-xs text-green-700 font-semibold">\uD83D\uDCAC Reply:</span>
-            ${isLocal ? `<button onclick="editReply(this, '${escAttr(reviewId)}')" class="text-xs px-2 py-0.5 border border-gray-200 rounded-md hover:bg-royal-50 hover:text-royal-600 hover:border-royal-200 text-gray-400 transition-colors">\u270F\uFE0F Edit</button>` : ''}
+            <div class="flex items-center gap-1.5">
+              ${isRoboticReply(replyText) ? `<span class="text-xs text-amber-600 bg-amber-50 px-1.5 py-0.5 rounded font-medium">\u26A0\uFE0F Looks generic</span>` : ''}
+              ${isLocal && isRoboticReply(replyText) ? `<button onclick="rewriteReply(this, '${escAttr(reviewId)}')" class="text-xs px-2 py-0.5 border border-amber-300 rounded-md hover:bg-amber-50 text-amber-600 hover:text-amber-700 transition-colors font-medium">\u270D\uFE0F Rewrite with AI</button>` : ''}
+              ${isLocal ? `<button onclick="editReply(this, '${escAttr(reviewId)}')" class="text-xs px-2 py-0.5 border border-gray-200 rounded-md hover:bg-royal-50 hover:text-royal-600 hover:border-royal-200 text-gray-400 transition-colors">\u270F\uFE0F Edit</button>` : ''}
+            </div>
           </div>
           <div class="text-xs text-gray-500 leading-relaxed">${esc(replyText)}</div>
         </div>` : ''}
@@ -676,6 +690,49 @@
       area.classList.remove('hidden');
       textarea.focus();
     }
+    async function rewriteReply(btn, reviewId) {
+      const r = window._reviewData && window._reviewData[reviewId];
+      if (!r) return;
+      const oldReply = replyTextOf(r);
+      const storeShortName = getStoreShortName(r.store_name || '');
+      if (!storeShortName) return;
+      const card = btn.closest('.review-card');
+      const area = card.querySelector('.gen-reply-area');
+      const textarea = area && area.querySelector('textarea');
+      if (!area || !textarea) return;
+      area.classList.remove('hidden');
+      const statusEl = card.querySelector('.gen-status');
+      if (statusEl) statusEl.textContent = 'Rewriting...';
+      btn.disabled = true;
+      try {
+        const res = await fetch('/api/replies/generate', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({
+            store: storeShortName,
+            review: {
+              reviewer: { displayName: r.customer_name || r.reviewer || 'Valued Customer' },
+              starRating: r.stars || 'FIVE',
+              comment: r.review_comments || r.comment || '',
+              reviewId: r.review_id || reviewId,
+            },
+            aiProvider: aiProvider,
+            oldReplyText: oldReply,
+          }),
+        });
+        const data = await res.json();
+        if (data.ok && data.data && data.data.reply) {
+          textarea.value = data.data.reply;
+          if (statusEl) statusEl.textContent = '';
+        } else {
+          if (statusEl) statusEl.textContent = 'Error: ' + (data.error || 'empty response');
+        }
+      } catch (err) {
+        if (statusEl) statusEl.textContent = 'Error: ' + err.message;
+      }
+      btn.disabled = false;
+    }
+    window.rewriteReply = rewriteReply;
     window.editReply = editReply;
     window.copyReview = copyReview;
 
