@@ -438,15 +438,16 @@
       });
     });
 
-    // ── Background variant selector ─────────────────────────────────
-    const BG_VARIANTS = [
-      { id: '1', label: 'Variant 1', thumbUrl: '/images/bg-flyer-1/bg-flyer-jpnagar5thphase.png' },
-      { id: '2', label: 'Variant 2', thumbUrl: '/images/bg-flyer-2/bg-flyer-jpnagar5thphase.png' },
-    ];
+    // ── Background variant selector (auto-discovered from server) ───
+    let BG_VARIANTS = [];
     let selectedBgVariant = '1';
 
     function renderBgVariants() {
       const container = $('bg-variant-selector');
+      if (!BG_VARIANTS.length) {
+        container.innerHTML = '<span class="text-xs text-gray-400 py-2">Loading variants...</span>';
+        return;
+      }
       container.innerHTML = BG_VARIANTS.map(v => {
         const checked = v.id === selectedBgVariant;
         return `<label class="relative cursor-pointer rounded-lg border-2 p-1.5 ${checked ? 'border-amber-500 bg-amber-50' : 'border-gray-200 hover:border-gray-300'} transition-all">
@@ -466,7 +467,14 @@
         });
       });
     }
-    renderBgVariants();
+
+    fetch('/api/flyer/variants').then(r => r.json()).then(d => {
+      if (d.ok && d.data.length) {
+        BG_VARIANTS = d.data;
+        if (!BG_VARIANTS.find(v => v.id === selectedBgVariant)) selectedBgVariant = BG_VARIANTS[0].id;
+        renderBgVariants();
+      }
+    }).catch(() => {});
 
     // ── Store select all/none ──────────────────────────────────────
     $('btn-select-all-stores').addEventListener('click', () => {
