@@ -1232,6 +1232,30 @@ box-shadow:0 4px 16px rgba(0,0,0,0.04);
 .photo-card img{height:200px;object-fit:cover;width:100%;transition:transform 0.6s ease;}
 .photo-card:hover img{transform:scale(1.05);}
 
+/* ── EMBEDDED MAP ── */
+.map-block{margin-bottom:24px;border-radius:14px;overflow:hidden;box-shadow:0 4px 16px rgba(0,0,0,0.06);}
+.map-wrap{position:relative;width:100%;padding-bottom:40%;}
+.map-wrap iframe{position:absolute;top:0;left:0;width:100%;height:100%;border:0;}
+@media(max-width:600px){.map-wrap{padding-bottom:55%;}}
+
+/* ── PRICE PILLARS ACCORDION ── */
+.price-pillars-block{background:#fff;padding:36px;margin-bottom:24px;border-radius:14px;border:1px solid rgba(0,0,0,0.06);box-shadow:0 4px 16px rgba(0,0,0,0.04);}
+.price-pillars{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-top:20px;}
+@media(max-width:700px){.price-pillars{grid-template-columns:1fr;}}
+.pillar-card{border:1px solid rgba(0,0,0,0.06);border-radius:12px;padding:16px;cursor:pointer;transition:box-shadow .2s, border-color .2s;}
+.pillar-card:hover{box-shadow:0 4px 16px rgba(0,0,0,0.06);border-color:var(--gold);}
+.pillar-card-header{display:flex;justify-content:space-between;align-items:center;gap:12px;}
+.pillar-card-title{font-family:'Cormorant Garamond',serif;font-size:16px;color:var(--text);flex:1;}
+.pillar-card-price{font-size:13px;font-weight:600;color:var(--gold);white-space:nowrap;display:flex;align-items:center;gap:6px;}
+.pillar-card-toggle{font-size:10px;color:var(--text-light);transition:transform .2s;}
+.pillar-card.open .pillar-card-toggle{transform:rotate(180deg);}
+.pillar-card-body{max-height:0;overflow:hidden;transition:max-height .3s ease,margin .2s;}
+.pillar-card.open .pillar-card-body{max-height:600px;margin-top:10px;}
+.pillar-card-body ul{list-style:none;padding:0;margin:0;}
+.pillar-card-body li{font-size:12px;color:var(--text-mid);padding:5px 0;border-bottom:1px solid rgba(0,0,0,0.04);display:flex;justify-content:space-between;gap:12px;}
+.pillar-card-body li .price{color:var(--gold);font-weight:500;white-space:nowrap;flex-shrink:0;}
+.pillar-card-body li:last-child{border-bottom:none;}
+
 /* ── REVIEWS ──
 FIX: Added border-radius and consistent spacing.
 ── */
@@ -2544,6 +2568,17 @@ txt.style.color = '#dc3545';
 })();
 </script>
 
+<div class="map-block reveal">
+<div class="map-wrap">
+<iframe
+src="https://maps.google.com/maps?q=13.00437,77.71657&z=15&output=embed"
+title="Map of Ayyappa Nagar" loading="lazy"
+referrerpolicy="no-referrer-when-downgrade"
+allowfullscreen>
+</iframe>
+</div>
+</div>
+
 <div class="section-tabs">
 <button class="section-tab active" data-section="offers" onclick="switchSection('offers')">Offers</button>
 <button class="section-tab" data-section="gallery" onclick="switchSection('gallery')">Salon Tour</button>
@@ -2607,6 +2642,122 @@ txt.style.color = '#dc3545';
 </li>
 </ul>
 <a href="/services/" class="btn-secondary">View Full Menu &amp; Pricing &#8594;</a>
+</div>
+
+
+<div class="price-pillars-block reveal">
+<div class="lbl">Transparent Pricing</div>
+<h2 class="sec-title">Starting prices <em>by category</em></h2>
+<div class="price-pillars">
+<div class="pillar-card" onclick="this.classList.toggle('open')">
+<div class="pillar-card-header">
+<span class="pillar-card-title">Hair Transformations & Styling</span>
+<span class="pillar-card-price">
+from &#8377;150 <span class="pillar-card-toggle">&#9660;</span>
+</span>
+</div>
+<div class="pillar-card-body">
+<ul>
+<li><span>Shave</span><span class="price">&#8377;150</span></li>
+<li><span>Hair Wash(Includes Wash and Blast Dry)</span><span class="price">&#8377;150</span></li>
+<li><span>Streak(Per Streak)</span><span class="price">&#8377;200</span></li>
+<li><span>Moustache Color</span><span class="price">&#8377;200</span></li>
+<li><span>Kids Cut</span><span class="price">&#8377;250</span></li>
+<li><span>Hair Cut(Includes Wash and Blast Dry)</span><span class="price">&#8377;300</span></li>
+<li><span>Fringe | Bangs</span><span class="price">&#8377;350</span></li>
+<li><span>Highlights - Per Streak (Short)</span><span class="price">&#8377;350</span></li>
+<li><span>Change of Style</span><span class="price">&#8377;400</span></li>
+<li><span>Advances Hair Wash(Includes Wash / Conditioning / Hair Setting)</span><span class="price">&#8377;400</span></li>
+<li><span>Head Shave</span><span class="price">&#8377;400</span></li>
+<li><span>Beard Styling</span><span class="price">&#8377;400</span></li>
+<li><span>Kids Cut (Not Including Wash)</span><span class="price">&#8377;400</span></li>
+<li><span>Head Massage - Coconut/Almond(Includes Hair Wash)</span><span class="price">&#8377;450</span></li>
+<li><span>Highlights - Per Streak (Medium )</span><span class="price">&#8377;450</span></li>
+<li><span>Beard Coloring</span><span class="price">&#8377;500</span></li>
+<li><span>Classic Cut - Basic Cuts | U-Cut | V-Cut | Straight Cut (Not Including Wash) (Short )</span><span class="price">&#8377;500</span></li>
+<li><span>Basic Hair Wash - Blast Dry (Short)</span><span class="price">&#8377;500</span></li>
+<li><span>Highlights - Per Streak (Long)</span><span class="price">&#8377;550</span></li>
+<li><span>Beard + Moustache Coloring</span><span class="price">&#8377;600</span></li>
+</ul>
+</div>
+</div>
+<div class="pillar-card" onclick="this.classList.toggle('open')">
+<div class="pillar-card-header">
+<span class="pillar-card-title">Advanced Skin Rituals & Facials</span>
+<span class="pillar-card-price">
+from &#8377;40 <span class="pillar-card-toggle">&#9660;</span>
+</span>
+</div>
+<div class="pillar-card-body">
+<ul>
+<li><span>Face Sides</span><span class="price">&#8377;40</span></li>
+<li><span>Eyebrow</span><span class="price">&#8377;50</span></li>
+<li><span>Upperlip</span><span class="price">&#8377;50</span></li>
+<li><span>Lowerlip</span><span class="price">&#8377;50</span></li>
+<li><span>Chin</span><span class="price">&#8377;50</span></li>
+<li><span>Forehead</span><span class="price">&#8377;50</span></li>
+<li><span>Eyebrow</span><span class="price">&#8377;50</span></li>
+<li><span>Upperlip</span><span class="price">&#8377;50</span></li>
+<li><span>Lowerlip</span><span class="price">&#8377;50</span></li>
+<li><span>Chin</span><span class="price">&#8377;50</span></li>
+<li><span>Forehead</span><span class="price">&#8377;50</span></li>
+<li><span>Upper Lip</span><span class="price">&#8377;100</span></li>
+<li><span>Face Sides</span><span class="price">&#8377;150</span></li>
+<li><span>Chin</span><span class="price">&#8377;150</span></li>
+<li><span>Neck</span><span class="price">&#8377;150</span></li>
+<li><span>Face Sides</span><span class="price">&#8377;150</span></li>
+<li><span>Upper Lip</span><span class="price">&#8377;150</span></li>
+<li><span>Full Face</span><span class="price">&#8377;200</span></li>
+<li><span>Underarm</span><span class="price">&#8377;250</span></li>
+<li><span>Under Arm</span><span class="price">&#8377;250</span></li>
+</ul>
+</div>
+</div>
+<div class="pillar-card" onclick="this.classList.toggle('open')">
+<div class="pillar-card-header">
+<span class="pillar-card-title">Restorative Spa Therapies</span>
+<span class="pillar-card-price">
+from &#8377;150 <span class="pillar-card-toggle">&#9660;</span>
+</span>
+</div>
+<div class="pillar-card-body">
+<ul>
+<li><span>Change of Nail Colour</span><span class="price">&#8377;150</span></li>
+<li><span>Underarm</span><span class="price">&#8377;250</span></li>
+<li><span>Cut, File & Polish</span><span class="price">&#8377;250</span></li>
+<li><span>French Polish (Fingers | Toes)</span><span class="price">&#8377;300</span></li>
+<li><span>French Polish (Fingers | Toes)</span><span class="price">&#8377;300</span></li>
+<li><span>Hand</span><span class="price">&#8377;400</span></li>
+<li><span>Hand</span><span class="price">&#8377;400</span></li>
+<li><span>Head Massage - Coconut/Almond(Includes Hair Wash)</span><span class="price">&#8377;450</span></li>
+<li><span>Cocoa Butter - Mani</span><span class="price">&#8377;500</span></li>
+<li><span>Underarm</span><span class="price">&#8377;500</span></li>
+<li><span>Neck | Elbow</span><span class="price">&#8377;500</span></li>
+<li><span>Coffee & Crème - Mani</span><span class="price">&#8377;600</span></li>
+<li><span>Cocoa Butter - Mani</span><span class="price">&#8377;650</span></li>
+<li><span>Under Eye</span><span class="price">&#8377;700</span></li>
+<li><span>Feet</span><span class="price">&#8377;700</span></li>
+<li><span>Cocoa Butter - Pedi</span><span class="price">&#8377;700</span></li>
+<li><span>Fruit Refreshment</span><span class="price">&#8377;700</span></li>
+<li><span>Under Eye</span><span class="price">&#8377;700</span></li>
+<li><span>Feet</span><span class="price">&#8377;700</span></li>
+<li><span>Moisturising</span><span class="price">&#8377;800</span></li>
+</ul>
+</div>
+</div>
+<div class="pillar-card" onclick="this.classList.toggle('open')">
+<div class="pillar-card-header">
+<span class="pillar-card-title">Bridal & Grooming Packages</span>
+<span class="pillar-card-price">
+<span class="pillar-card-toggle">&#9660;</span>
+</span>
+</div>
+<div class="pillar-card-body">
+<ul>
+</ul>
+</div>
+</div>
+</div>
 </div>
 
 
