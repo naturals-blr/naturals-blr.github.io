@@ -1468,8 +1468,8 @@ border-top:1px solid rgba(255,255,255,0.06);
 .reviews-snippet .rev-grid{grid-template-columns:1fr;gap:16px;}
 
 /* Customer reviews modal */
-.modal-overlay{position:fixed;inset:0;background:rgba(0,0,0,0.6);display:flex;align-items:center;justify-content:center;z-index:99999;opacity:0;visibility:hidden;transition:all 0.3s ease;padding:20px;}
-.modal-overlay.active{opacity:1;visibility:visible;}
+.modal-overlay{position:fixed;inset:0;background:rgba(0,0,0,0.6);display:none;align-items:center;justify-content:center;z-index:99999;padding:20px;}
+.modal-overlay.active{display:flex;}
 .modal-content{background:#fff;border-radius:20px;max-width:1000px;width:100%;max-height:90vh;height:100%;display:flex;flex-direction:column;transform:scale(0.9);transition:all 0.3s ease;overflow-y:auto;}
 .modal-overlay.active .modal-content{transform:scale(1);}
 .modal-header{padding:16px 24px 12px;border-bottom:1px solid #f0f0f0;position:sticky;top:0;z-index:10;background:#fff;}
@@ -4293,7 +4293,10 @@ showCampaignTab(tab);
 var hash = (window.location.hash || '').replace('#', '').toLowerCase();
 if(hash === 'offers') hash = 'offer';
 var initial = hash || 'offer';
-if(!document.querySelector('[data-campaign-tab="' + initial + '"]')) initial = 'offer';
+if(!document.querySelector('[data-campaign-tab="' + initial + '"]')){
+var firstTab = document.querySelector('[data-campaign-tab]');
+initial = firstTab ? firstTab.getAttribute('data-campaign-tab') : 'offer';
+}
 showCampaignTab(initial);
 }
 

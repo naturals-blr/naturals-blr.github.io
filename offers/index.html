@@ -4174,7 +4174,10 @@ showCampaignTab(tab);
 var hash = (window.location.hash || '').replace('#', '').toLowerCase();
 if(hash === 'offers') hash = 'offer';
 var initial = hash || 'offer';
-if(!document.querySelector('[data-campaign-tab="' + initial + '"]')) initial = 'offer';
+if(!document.querySelector('[data-campaign-tab="' + initial + '"]')){
+var firstTab = document.querySelector('[data-campaign-tab]');
+initial = firstTab ? firstTab.getAttribute('data-campaign-tab') : 'offer';
+}
 showCampaignTab(initial);
 }
 

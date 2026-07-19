@@ -384,16 +384,23 @@ transition:all 0.2s;border-radius:10px;background:#fff;text-decoration:none;
 .hoc-valid{font-size:11px;color:var(--green-soft);font-weight:700;}
 .offers-view-all{text-align:center;}
 
-/* MEDIA SECTION - All Campaign Types */
-.media-sec{background:var(--dark);}
-.media-sec .sec-hdr h2{color:#fff;}
-.media-sec .sec-hdr h2 em{color:var(--gold);}
-.media-sec .sec-hdr p{color:rgba(255,255,255,0.4);}
-.media-sec .btn-secondary{background:transparent;color:#fff;border-color:rgba(255,255,255,0.4);}
-.media-sec .btn-secondary:hover{border-color:#fff;background:rgba(255,255,255,0.1);}
+/* UPDATES SECTION - All Campaign Types Except Offers */
+.updates-sec{background:var(--dark);}
+.updates-sec .sec-hdr h2{color:#fff;}
+.updates-sec .sec-hdr h2 em{color:var(--gold);}
+.updates-sec .sec-hdr p{color:rgba(255,255,255,0.4);}
+.updates-sec .btn-secondary{background:transparent;color:#fff;border-color:rgba(255,255,255,0.4);}
+.updates-sec .btn-secondary:hover{border-color:#fff;background:rgba(255,255,255,0.1);}
+.updates-sec .campaign-tabs{display:flex;gap:10px;max-width:1120px;margin:0 auto 20px;flex-wrap:wrap;}
+.updates-sec .campaign-tab{font-size:11px;letter-spacing:1px;text-transform:uppercase;font-weight:600;color:rgba(255,255,255,0.35);background:transparent;border:1px solid rgba(255,255,255,0.10);border-radius:999px;padding:6px 14px;cursor:pointer;transition:all 0.2s;white-space:nowrap;}
+.updates-sec .campaign-tab:hover{color:#fff;border-color:rgba(255,255,255,0.25);}
+.updates-sec .campaign-tab.is-active{color:#fff;background:rgba(255,255,255,0.10);border-color:var(--gold);}
+.updates-sec .campaign-count{display:inline-block;margin-left:5px;font-size:10px;color:rgba(255,255,255,0.30);font-weight:400;}
+.updates-sec .campaign-tab.is-active .campaign-count{color:var(--gold);}
 .media-grid{margin-bottom:0;align-items:start;}
 .media-card{background:rgba(255,255,255,0.04);border:1px solid rgba(255,255,255,0.08);border-radius:14px;overflow:hidden;transition:all 0.25s;display:flex;flex-direction:column;min-height:332px;flex:0 0 clamp(230px, 30vw, 316px);scroll-snap-align:start;}
 .media-card:hover{background:rgba(255,255,255,0.07);border-color:var(--gold);transform:translateY(-2px);}
+.media-card.is-hidden{display:none;}
 .media-media{height:160px;background:linear-gradient(135deg,var(--dark) 0%,var(--green) 100%);position:relative;overflow:hidden;}
 .media-media img{width:100%;height:100%;object-fit:cover;cursor:zoom-in;transition:transform 0.7s ease;}
 .media-card:hover .media-media img{transform:scale(1.04);}
@@ -409,6 +416,7 @@ transition:all 0.2s;border-radius:10px;background:#fff;text-decoration:none;
 .media-no-image{height:100%;display:flex;flex-direction:column;align-items:center;justify-content:center;padding:20px;background:rgba(255,255,255,0.02);}
 .media-icon{font-size:24px;color:var(--gold);margin-bottom:8px;}
 .media-no-image .media-title{font-family:'Cormorant Garamond',serif;font-size:18px;color:#fff;font-weight:300;margin-bottom:4px;text-align:center;}
+.updates-empty{text-align:center;padding:40px;color:rgba(255,255,255,0.30);font-size:14px;}
 </style>
 
 <style>
@@ -1004,8 +1012,8 @@ footer{background:#080f0b;}
 .reviews-snippet .rev-grid{grid-template-columns:1fr;gap:16px;}
 
 /* Customer reviews modal */
-.modal-overlay{position:fixed;inset:0;background:rgba(0,0,0,0.6);display:flex;align-items:center;justify-content:center;z-index:99999;opacity:0;visibility:hidden;transition:all 0.3s ease;padding:20px;}
-.modal-overlay.active{opacity:1;visibility:visible;}
+.modal-overlay{position:fixed;inset:0;background:rgba(0,0,0,0.6);display:none;align-items:center;justify-content:center;z-index:99999;padding:20px;}
+.modal-overlay.active{display:flex;}
 .modal-content{background:#fff;border-radius:20px;max-width:1000px;width:100%;max-height:90vh;height:100%;display:flex;flex-direction:column;transform:scale(0.9);transition:all 0.3s ease;overflow-y:auto;}
 .modal-overlay.active .modal-content{transform:scale(1);}
 .modal-header{padding:16px 24px 12px;border-bottom:1px solid #f0f0f0;position:sticky;top:0;z-index:10;background:#fff;}
@@ -1228,6 +1236,33 @@ readMoreLink.textContent = textElement.classList.contains('expanded') ? 'Read Le
 .trust-card-desc{font-size:12px;color:rgba(255,255,255,0.45);line-height:1.65;font-weight:300;}
 @media(max-width:768px){.trust-sec{padding:64px 20px 56px;}.trust-stats{grid-template-columns:repeat(3,1fr);gap:12px;}.trust-stat{padding:20px 10px 16px;}.trust-stat-num{font-size:30px;}.trust-stat-lbl{font-size:9px;letter-spacing:1px;}.trust-grid{grid-template-columns:1fr;gap:14px;max-width:340px;}}
 @media(max-width:480px){.trust-stats{grid-template-columns:1fr;gap:10px;max-width:220px;}}
+
+/* TESTIMONIALS (website-published via local console) */
+.testimonial-sec{background:var(--cream);padding:92px 60px;position:relative;overflow:hidden;}
+.testimonial-sec::before{content:'';position:absolute;inset:0;background:radial-gradient(circle at 82% 12%,rgba(201,168,76,0.10),transparent 34%),radial-gradient(circle at 14% 88%,rgba(79,141,98,0.08),transparent 30%);pointer-events:none;}
+.testimonial-sec > *{position:relative;z-index:1;}
+.testimonial-sec .sec-hdr h2{color:var(--text);}
+.testimonial-sec .sec-hdr h2 em{color:var(--gold);}
+.testimonial-sec .sec-hdr p{color:var(--text-mid);}
+.testimonial-sec .home-carousel-wrap{max-width:1120px;margin:0 auto 28px;}
+.testimonial-sec .home-carousel-head{display:flex;justify-content:flex-end;margin:-18px 0 12px;}
+.testimonial-sec .hscroll-track{gap:16px;padding:2px 2px 14px;}
+.testimonial-card{background:#fff;border:1px solid rgba(0,0,0,0.06);border-radius:16px;padding:22px 20px 18px;position:relative;transition:transform 0.25s,box-shadow 0.25s;flex:0 0 clamp(240px, 32vw, 340px);display:flex;flex-direction:column;scroll-snap-align:start;}
+.testimonial-card:hover{transform:translateY(-2px);box-shadow:0 14px 30px rgba(21,31,26,0.08);}
+.testimonial-card::before{content:'“';position:absolute;right:16px;top:6px;font-family:'Cormorant Garamond',serif;font-size:52px;color:rgba(201,168,76,0.18);line-height:1;}
+.testimonial-stars{display:flex;gap:2px;margin-bottom:10px;flex-shrink:0;}
+.testimonial-stars svg{width:14px;height:14px;fill:#c9a84c;}
+.testimonial-text{font-family:'Jost',sans-serif;font-size:13px;line-height:1.65;color:var(--text-mid);margin-bottom:14px;display:-webkit-box;-webkit-line-clamp:6;-webkit-box-orient:vertical;overflow:hidden;flex:1;}
+.testimonial-author{font-size:12px;font-weight:600;color:var(--text);margin-bottom:2px;flex-shrink:0;}
+.testimonial-store{font-size:10px;color:var(--green-soft);font-weight:700;letter-spacing:1px;text-transform:uppercase;flex-shrink:0;}
+.testimonial-date{font-size:9px;color:rgba(0,0,0,0.30);margin-top:8px;flex-shrink:0;}
+@media(max-width:992px){
+.testimonial-sec{padding:70px 20px;}
+.testimonial-sec .hscroll-track{gap:14px;}
+}
+@media(max-width:600px){
+.testimonial-card{flex-basis:min(78vw, 286px);}
+}
 
 /* REVIEWS */
 .reviews-sec{padding:92px 60px;background:linear-gradient(180deg,#fff 0%,var(--cream) 100%);position:relative;overflow:hidden;}
@@ -2950,6 +2985,189 @@ data-poster-date-prefix="Valid till">
 </div>
 </section>
 
+<section class="testimonial-sec" id="website-testimonials" aria-label="Customer testimonials">
+<div class="sec-hdr reveal">
+<div class="lbl">Real Reviews</div>
+<h2>What our customers <em>are saying.</em></h2>
+<p>Testimonials shared by customers across our Bangalore stores.</p>
+</div>
+<div class="home-carousel-wrap">
+<div class="home-carousel-head reveal">
+<div class="hscroll-actions" aria-label="testimonials carousel controls">
+<button class="hscroll-btn" type="button" aria-label="Previous" onclick="hscroll('testimonials', -1, this)">&#8249;</button>
+<button class="hscroll-btn" type="button" aria-label="Next" onclick="hscroll('testimonials', 1, this)">&#8250;</button>
+</div>
+
+</div>
+<div class="hscroll-track" data-hscroll-track="testimonials"> <div class="testimonial-card" data-hscroll-card>
+<div class="testimonial-stars">
+<svg viewBox="0 0 20 20"><path d="M10 1l2.39 4.84L17.6 6.7l-3.8 3.7.9 5.26L10 13l-4.7 2.66.9-5.26-3.8-3.7 5.21-.86L10 1z"/></svg>
+<svg viewBox="0 0 20 20"><path d="M10 1l2.39 4.84L17.6 6.7l-3.8 3.7.9 5.26L10 13l-4.7 2.66.9-5.26-3.8-3.7 5.21-.86L10 1z"/></svg>
+<svg viewBox="0 0 20 20"><path d="M10 1l2.39 4.84L17.6 6.7l-3.8 3.7.9 5.26L10 13l-4.7 2.66.9-5.26-3.8-3.7 5.21-.86L10 1z"/></svg>
+<svg viewBox="0 0 20 20"><path d="M10 1l2.39 4.84L17.6 6.7l-3.8 3.7.9 5.26L10 13l-4.7 2.66.9-5.26-3.8-3.7 5.21-.86L10 1z"/></svg>
+</div>
+<div class="testimonial-text">I had an amazing experience at Naturals Salon! I went in for a hair colour service and they did an incredible job. They took the time to understand exactly what shade I wanted and gave great advice. The dark brown shade turned out absolutely beautiful and matches my style perfectly. The staff was very professional, polite, and skilled. My hair feels incredibly soft and looks so shiny. Highly recommend visiting this branch and asking for Stella !!</div>
+<div class="testimonial-author">Uma Murugan</div>
+<div class="testimonial-store">Hennur</div>
+<div class="testimonial-date">2026-07-18</div>
+</div>
+<div class="testimonial-card" data-hscroll-card>
+<div class="testimonial-stars">
+<svg viewBox="0 0 20 20"><path d="M10 1l2.39 4.84L17.6 6.7l-3.8 3.7.9 5.26L10 13l-4.7 2.66.9-5.26-3.8-3.7 5.21-.86L10 1z"/></svg>
+<svg viewBox="0 0 20 20"><path d="M10 1l2.39 4.84L17.6 6.7l-3.8 3.7.9 5.26L10 13l-4.7 2.66.9-5.26-3.8-3.7 5.21-.86L10 1z"/></svg>
+<svg viewBox="0 0 20 20"><path d="M10 1l2.39 4.84L17.6 6.7l-3.8 3.7.9 5.26L10 13l-4.7 2.66.9-5.26-3.8-3.7 5.21-.86L10 1z"/></svg>
+<svg viewBox="0 0 20 20"><path d="M10 1l2.39 4.84L17.6 6.7l-3.8 3.7.9 5.26L10 13l-4.7 2.66.9-5.26-3.8-3.7 5.21-.86L10 1z"/></svg>
+<svg viewBox="0 0 20 20"><path d="M10 1l2.39 4.84L17.6 6.7l-3.8 3.7.9 5.26L10 13l-4.7 2.66.9-5.26-3.8-3.7 5.21-.86L10 1z"/></svg>
+</div>
+<div class="testimonial-text">I came in for a clean-up and threading, and Poornima did an excellent job. She was highly skilled, professional, and made the entire experience very comfortable. Thank you, Poornima! I'll definitely be coming back again.</div>
+<div class="testimonial-author">Megha Saha</div>
+<div class="testimonial-store">Frazer Town</div>
+<div class="testimonial-date">2026-07-18</div>
+</div>
+<div class="testimonial-card" data-hscroll-card>
+<div class="testimonial-stars">
+<svg viewBox="0 0 20 20"><path d="M10 1l2.39 4.84L17.6 6.7l-3.8 3.7.9 5.26L10 13l-4.7 2.66.9-5.26-3.8-3.7 5.21-.86L10 1z"/></svg>
+<svg viewBox="0 0 20 20"><path d="M10 1l2.39 4.84L17.6 6.7l-3.8 3.7.9 5.26L10 13l-4.7 2.66.9-5.26-3.8-3.7 5.21-.86L10 1z"/></svg>
+<svg viewBox="0 0 20 20"><path d="M10 1l2.39 4.84L17.6 6.7l-3.8 3.7.9 5.26L10 13l-4.7 2.66.9-5.26-3.8-3.7 5.21-.86L10 1z"/></svg>
+<svg viewBox="0 0 20 20"><path d="M10 1l2.39 4.84L17.6 6.7l-3.8 3.7.9 5.26L10 13l-4.7 2.66.9-5.26-3.8-3.7 5.21-.86L10 1z"/></svg>
+<svg viewBox="0 0 20 20"><path d="M10 1l2.39 4.84L17.6 6.7l-3.8 3.7.9 5.26L10 13l-4.7 2.66.9-5.26-3.8-3.7 5.21-.86L10 1z"/></svg>
+</div>
+<div class="testimonial-text">I had a haircut done by Aarif, he actually listened to what I wanted and offered great styling advice. The layers are perfectly blended, and he didn't take off more length than I asked for. A fantastic experience!!! Bhagyalakshmi is patient and very skilled, she listened to my needs and has done the attended services very well. Overall it's a very great experience for me.</div>
+<div class="testimonial-author">Vasudha Ghantasala</div>
+<div class="testimonial-store">Ayyappa Nagar</div>
+<div class="testimonial-date">2026-07-18</div>
+</div>
+<div class="testimonial-card" data-hscroll-card>
+<div class="testimonial-stars">
+<svg viewBox="0 0 20 20"><path d="M10 1l2.39 4.84L17.6 6.7l-3.8 3.7.9 5.26L10 13l-4.7 2.66.9-5.26-3.8-3.7 5.21-.86L10 1z"/></svg>
+<svg viewBox="0 0 20 20"><path d="M10 1l2.39 4.84L17.6 6.7l-3.8 3.7.9 5.26L10 13l-4.7 2.66.9-5.26-3.8-3.7 5.21-.86L10 1z"/></svg>
+<svg viewBox="0 0 20 20"><path d="M10 1l2.39 4.84L17.6 6.7l-3.8 3.7.9 5.26L10 13l-4.7 2.66.9-5.26-3.8-3.7 5.21-.86L10 1z"/></svg>
+<svg viewBox="0 0 20 20"><path d="M10 1l2.39 4.84L17.6 6.7l-3.8 3.7.9 5.26L10 13l-4.7 2.66.9-5.26-3.8-3.7 5.21-.86L10 1z"/></svg>
+<svg viewBox="0 0 20 20"><path d="M10 1l2.39 4.84L17.6 6.7l-3.8 3.7.9 5.26L10 13l-4.7 2.66.9-5.26-3.8-3.7 5.21-.86L10 1z"/></svg>
+</div>
+<div class="testimonial-text">I had an excellent experience at this salon. I got a hair treatment along with a haircut, and I was extremely satisfied with the service. Ms. Lalitha, who assisted me, was very polite, friendly, and professional. She explained every step of the process clearly and made sure I was comfortable throughout the appointment. I am very happy with the results and truly appreciate her excellent service. Highly recommended!</div>
+<div class="testimonial-author">Jismy George</div>
+<div class="testimonial-store">Nagavara</div>
+<div class="testimonial-date">2026-07-18</div>
+</div>
+<div class="testimonial-card" data-hscroll-card>
+<div class="testimonial-stars">
+<svg viewBox="0 0 20 20"><path d="M10 1l2.39 4.84L17.6 6.7l-3.8 3.7.9 5.26L10 13l-4.7 2.66.9-5.26-3.8-3.7 5.21-.86L10 1z"/></svg>
+<svg viewBox="0 0 20 20"><path d="M10 1l2.39 4.84L17.6 6.7l-3.8 3.7.9 5.26L10 13l-4.7 2.66.9-5.26-3.8-3.7 5.21-.86L10 1z"/></svg>
+<svg viewBox="0 0 20 20"><path d="M10 1l2.39 4.84L17.6 6.7l-3.8 3.7.9 5.26L10 13l-4.7 2.66.9-5.26-3.8-3.7 5.21-.86L10 1z"/></svg>
+<svg viewBox="0 0 20 20"><path d="M10 1l2.39 4.84L17.6 6.7l-3.8 3.7.9 5.26L10 13l-4.7 2.66.9-5.26-3.8-3.7 5.21-.86L10 1z"/></svg>
+<svg viewBox="0 0 20 20"><path d="M10 1l2.39 4.84L17.6 6.7l-3.8 3.7.9 5.26L10 13l-4.7 2.66.9-5.26-3.8-3.7 5.21-.86L10 1z"/></svg>
+</div>
+<div class="testimonial-text">Sara did my haircut eyebrow threading very well and according to my expectations. Most friendly staff and very professional Sonam literally gave the best pedicure.restored my dry skin . Very friendly staff.</div>
+<div class="testimonial-author">Samrutha</div>
+<div class="testimonial-store">JP Nagar 5th Phase</div>
+<div class="testimonial-date">2026-07-18</div>
+</div>
+<div class="testimonial-card" data-hscroll-card>
+<div class="testimonial-stars">
+<svg viewBox="0 0 20 20"><path d="M10 1l2.39 4.84L17.6 6.7l-3.8 3.7.9 5.26L10 13l-4.7 2.66.9-5.26-3.8-3.7 5.21-.86L10 1z"/></svg>
+<svg viewBox="0 0 20 20"><path d="M10 1l2.39 4.84L17.6 6.7l-3.8 3.7.9 5.26L10 13l-4.7 2.66.9-5.26-3.8-3.7 5.21-.86L10 1z"/></svg>
+<svg viewBox="0 0 20 20"><path d="M10 1l2.39 4.84L17.6 6.7l-3.8 3.7.9 5.26L10 13l-4.7 2.66.9-5.26-3.8-3.7 5.21-.86L10 1z"/></svg>
+<svg viewBox="0 0 20 20"><path d="M10 1l2.39 4.84L17.6 6.7l-3.8 3.7.9 5.26L10 13l-4.7 2.66.9-5.26-3.8-3.7 5.21-.86L10 1z"/></svg>
+<svg viewBox="0 0 20 20"><path d="M10 1l2.39 4.84L17.6 6.7l-3.8 3.7.9 5.26L10 13l-4.7 2.66.9-5.26-3.8-3.7 5.21-.86L10 1z"/></svg>
+</div>
+<div class="testimonial-text">Me and my husband both took a haircut and head massage. It was a very nice experience and for me Stella who did my haircut and massage is very friendly and the service was very nice.</div>
+<div class="testimonial-author">pooja satheesh</div>
+<div class="testimonial-store">Hennur</div>
+<div class="testimonial-date">2026-07-16</div>
+</div>
+<div class="testimonial-card" data-hscroll-card>
+<div class="testimonial-stars">
+<svg viewBox="0 0 20 20"><path d="M10 1l2.39 4.84L17.6 6.7l-3.8 3.7.9 5.26L10 13l-4.7 2.66.9-5.26-3.8-3.7 5.21-.86L10 1z"/></svg>
+<svg viewBox="0 0 20 20"><path d="M10 1l2.39 4.84L17.6 6.7l-3.8 3.7.9 5.26L10 13l-4.7 2.66.9-5.26-3.8-3.7 5.21-.86L10 1z"/></svg>
+<svg viewBox="0 0 20 20"><path d="M10 1l2.39 4.84L17.6 6.7l-3.8 3.7.9 5.26L10 13l-4.7 2.66.9-5.26-3.8-3.7 5.21-.86L10 1z"/></svg>
+<svg viewBox="0 0 20 20"><path d="M10 1l2.39 4.84L17.6 6.7l-3.8 3.7.9 5.26L10 13l-4.7 2.66.9-5.26-3.8-3.7 5.21-.86L10 1z"/></svg>
+<svg viewBox="0 0 20 20"><path d="M10 1l2.39 4.84L17.6 6.7l-3.8 3.7.9 5.26L10 13l-4.7 2.66.9-5.26-3.8-3.7 5.21-.86L10 1z"/></svg>
+</div>
+<div class="testimonial-text">Took my 2 year old son for haircut today. Haircut was done by Gufran. He was very patient and handled my son very well and did a good hair cut</div>
+<div class="testimonial-author">Varshini Manivannan</div>
+<div class="testimonial-store">Frazer Town</div>
+<div class="testimonial-date">2026-07-16</div>
+</div>
+<div class="testimonial-card" data-hscroll-card>
+<div class="testimonial-stars">
+<svg viewBox="0 0 20 20"><path d="M10 1l2.39 4.84L17.6 6.7l-3.8 3.7.9 5.26L10 13l-4.7 2.66.9-5.26-3.8-3.7 5.21-.86L10 1z"/></svg>
+<svg viewBox="0 0 20 20"><path d="M10 1l2.39 4.84L17.6 6.7l-3.8 3.7.9 5.26L10 13l-4.7 2.66.9-5.26-3.8-3.7 5.21-.86L10 1z"/></svg>
+<svg viewBox="0 0 20 20"><path d="M10 1l2.39 4.84L17.6 6.7l-3.8 3.7.9 5.26L10 13l-4.7 2.66.9-5.26-3.8-3.7 5.21-.86L10 1z"/></svg>
+<svg viewBox="0 0 20 20"><path d="M10 1l2.39 4.84L17.6 6.7l-3.8 3.7.9 5.26L10 13l-4.7 2.66.9-5.26-3.8-3.7 5.21-.86L10 1z"/></svg>
+<svg viewBox="0 0 20 20"><path d="M10 1l2.39 4.84L17.6 6.7l-3.8 3.7.9 5.26L10 13l-4.7 2.66.9-5.26-3.8-3.7 5.21-.86L10 1z"/></svg>
+</div>
+<div class="testimonial-text">Had a fantastic layer cut at Naturals Salon! My stylist, Lalita, was wonderful, and the haircut turned out amazing. Quick, professional, and highly impressive work.</div>
+<div class="testimonial-author">Afrin Kommaddi</div>
+<div class="testimonial-store">Nagavara</div>
+<div class="testimonial-date">2026-07-16</div>
+</div>
+<div class="testimonial-card" data-hscroll-card>
+<div class="testimonial-stars">
+<svg viewBox="0 0 20 20"><path d="M10 1l2.39 4.84L17.6 6.7l-3.8 3.7.9 5.26L10 13l-4.7 2.66.9-5.26-3.8-3.7 5.21-.86L10 1z"/></svg>
+<svg viewBox="0 0 20 20"><path d="M10 1l2.39 4.84L17.6 6.7l-3.8 3.7.9 5.26L10 13l-4.7 2.66.9-5.26-3.8-3.7 5.21-.86L10 1z"/></svg>
+<svg viewBox="0 0 20 20"><path d="M10 1l2.39 4.84L17.6 6.7l-3.8 3.7.9 5.26L10 13l-4.7 2.66.9-5.26-3.8-3.7 5.21-.86L10 1z"/></svg>
+<svg viewBox="0 0 20 20"><path d="M10 1l2.39 4.84L17.6 6.7l-3.8 3.7.9 5.26L10 13l-4.7 2.66.9-5.26-3.8-3.7 5.21-.86L10 1z"/></svg>
+<svg viewBox="0 0 20 20"><path d="M10 1l2.39 4.84L17.6 6.7l-3.8 3.7.9 5.26L10 13l-4.7 2.66.9-5.26-3.8-3.7 5.21-.86L10 1z"/></svg>
+</div>
+<div class="testimonial-text">Had a wonderful experience at this salon! The staff were friendly and professional, the salon was clean and well-maintained, and the service exceeded my expectations. I'm very happy with the results and will definitely visit again. Highly recommended! Bhagya lakshmi, Ariff for hair cut</div>
+<div class="testimonial-author">Mounika Yadav</div>
+<div class="testimonial-store">Ayyappa Nagar</div>
+<div class="testimonial-date">2026-07-14</div>
+</div>
+<div class="testimonial-card" data-hscroll-card>
+<div class="testimonial-stars">
+<svg viewBox="0 0 20 20"><path d="M10 1l2.39 4.84L17.6 6.7l-3.8 3.7.9 5.26L10 13l-4.7 2.66.9-5.26-3.8-3.7 5.21-.86L10 1z"/></svg>
+<svg viewBox="0 0 20 20"><path d="M10 1l2.39 4.84L17.6 6.7l-3.8 3.7.9 5.26L10 13l-4.7 2.66.9-5.26-3.8-3.7 5.21-.86L10 1z"/></svg>
+<svg viewBox="0 0 20 20"><path d="M10 1l2.39 4.84L17.6 6.7l-3.8 3.7.9 5.26L10 13l-4.7 2.66.9-5.26-3.8-3.7 5.21-.86L10 1z"/></svg>
+<svg viewBox="0 0 20 20"><path d="M10 1l2.39 4.84L17.6 6.7l-3.8 3.7.9 5.26L10 13l-4.7 2.66.9-5.26-3.8-3.7 5.21-.86L10 1z"/></svg>
+<svg viewBox="0 0 20 20"><path d="M10 1l2.39 4.84L17.6 6.7l-3.8 3.7.9 5.26L10 13l-4.7 2.66.9-5.26-3.8-3.7 5.21-.86L10 1z"/></svg>
+</div>
+<div class="testimonial-text"></div>
+<div class="testimonial-author">Nandana Ajith</div>
+<div class="testimonial-store">JP Nagar 5th Phase</div>
+<div class="testimonial-date">2026-07-14</div>
+</div>
+<div class="testimonial-card" data-hscroll-card>
+<div class="testimonial-stars">
+<svg viewBox="0 0 20 20"><path d="M10 1l2.39 4.84L17.6 6.7l-3.8 3.7.9 5.26L10 13l-4.7 2.66.9-5.26-3.8-3.7 5.21-.86L10 1z"/></svg>
+<svg viewBox="0 0 20 20"><path d="M10 1l2.39 4.84L17.6 6.7l-3.8 3.7.9 5.26L10 13l-4.7 2.66.9-5.26-3.8-3.7 5.21-.86L10 1z"/></svg>
+<svg viewBox="0 0 20 20"><path d="M10 1l2.39 4.84L17.6 6.7l-3.8 3.7.9 5.26L10 13l-4.7 2.66.9-5.26-3.8-3.7 5.21-.86L10 1z"/></svg>
+<svg viewBox="0 0 20 20"><path d="M10 1l2.39 4.84L17.6 6.7l-3.8 3.7.9 5.26L10 13l-4.7 2.66.9-5.26-3.8-3.7 5.21-.86L10 1z"/></svg>
+<svg viewBox="0 0 20 20"><path d="M10 1l2.39 4.84L17.6 6.7l-3.8 3.7.9 5.26L10 13l-4.7 2.66.9-5.26-3.8-3.7 5.21-.86L10 1z"/></svg>
+</div>
+<div class="testimonial-text">Sahil is professional and friendly. Recommended him</div>
+<div class="testimonial-author">Aravind Kumar Krishna Bharathy</div>
+<div class="testimonial-store">JP Nagar 5th Phase</div>
+<div class="testimonial-date">2026-07-14</div>
+</div>
+<div class="testimonial-card" data-hscroll-card>
+<div class="testimonial-stars">
+<svg viewBox="0 0 20 20"><path d="M10 1l2.39 4.84L17.6 6.7l-3.8 3.7.9 5.26L10 13l-4.7 2.66.9-5.26-3.8-3.7 5.21-.86L10 1z"/></svg>
+<svg viewBox="0 0 20 20"><path d="M10 1l2.39 4.84L17.6 6.7l-3.8 3.7.9 5.26L10 13l-4.7 2.66.9-5.26-3.8-3.7 5.21-.86L10 1z"/></svg>
+<svg viewBox="0 0 20 20"><path d="M10 1l2.39 4.84L17.6 6.7l-3.8 3.7.9 5.26L10 13l-4.7 2.66.9-5.26-3.8-3.7 5.21-.86L10 1z"/></svg>
+<svg viewBox="0 0 20 20"><path d="M10 1l2.39 4.84L17.6 6.7l-3.8 3.7.9 5.26L10 13l-4.7 2.66.9-5.26-3.8-3.7 5.21-.86L10 1z"/></svg>
+<svg viewBox="0 0 20 20"><path d="M10 1l2.39 4.84L17.6 6.7l-3.8 3.7.9 5.26L10 13l-4.7 2.66.9-5.26-3.8-3.7 5.21-.86L10 1z"/></svg>
+</div>
+<div class="testimonial-text">Arif service was good.personal suggestion was very helpful for my styling and colouring.</div>
+<div class="testimonial-author">Jeni L</div>
+<div class="testimonial-store">JP Nagar 5th Phase</div>
+<div class="testimonial-date">2026-07-14</div>
+</div>
+</div>
+</div>
+</section>
+
+<section class="updates-sec" id="updates" aria-label="Updates">
+<div class="sec-hdr reveal">
+<div class="lbl">Updates</div>
+<h2>Latest <em>updates</em></h2>
+<p>Announcements, media, and store updates across our Bangalore locations.</p>
+</div>
+
+<div class="updates-empty reveal">No updates at the moment. Check back soon!</div>
+</section>
+
 <section class="trust-sec" id="why-naturals" aria-label="Why Naturals">
 <div class="sec-hdr reveal">
 <div class="lbl">Why Naturals</div>
@@ -3793,7 +4011,10 @@ showCampaignTab(tab);
 var hash = (window.location.hash || '').replace('#', '').toLowerCase();
 if(hash === 'offers') hash = 'offer';
 var initial = hash || 'offer';
-if(!document.querySelector('[data-campaign-tab="' + initial + '"]')) initial = 'offer';
+if(!document.querySelector('[data-campaign-tab="' + initial + '"]')){
+var firstTab = document.querySelector('[data-campaign-tab]');
+initial = firstTab ? firstTab.getAttribute('data-campaign-tab') : 'offer';
+}
 showCampaignTab(initial);
 }
 

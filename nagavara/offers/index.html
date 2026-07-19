@@ -41,7 +41,7 @@ gtag('config', 'G-6H5YGVGG1Q');
 "description": "Discover exclusive flagship beauty packages and premium spa offers curated specifically for our state-of-the-art Nagavara salon hub.",
 "url": "https://naturalsprime.in/nagavara/offers/",
 "category": "Beauty and Grooming Promotions",
-"datePosted": "2026-07-20 04:45:26.869823T09:00:00+05:30",
+"datePosted": "2026-07-20 05:13:02.370088T09:00:00+05:30",
 "provider": {
 "@type": "HairSalon",
 "name": "Naturals Salon & Spa Nagavara",
@@ -304,6 +304,17 @@ a{text-decoration:none;color:inherit;}img{display:block;width:100%;object-fit:co
 .expired-title{font-family:'Cormorant Garamond',serif;font-size:18px;font-weight:400;color:#555;margin-bottom:6px;line-height:1.2;}
 .expired-details{font-size:11px;color:#999;line-height:1.6;margin-bottom:10px;}
 .expired-date{font-size:10px;color:#bbb;font-weight:600;margin-top:auto;padding-top:10px;border-top:1px solid rgba(0,0,0,0.06);}
+/* TESTIMONIALS (store-specific, published via local console) */
+.testimonial-card{background:#fff;border:1px solid rgba(0,0,0,0.06);border-radius:16px;padding:22px 20px 18px;position:relative;transition:transform 0.25s,box-shadow 0.25s;display:flex;flex-direction:column;}
+.testimonial-card.is-hidden{display:none;}
+.testimonial-card:hover{transform:translateY(-2px);box-shadow:0 14px 30px rgba(21,31,26,0.08);}
+.testimonial-card::before{content:'"';position:absolute;right:16px;top:6px;font-family:'Cormorant Garamond',serif;font-size:52px;color:rgba(201,168,76,0.18);line-height:1;}
+.testimonial-stars{display:flex;gap:2px;margin-bottom:10px;flex-shrink:0;}
+.testimonial-stars svg{width:14px;height:14px;fill:#c9a84c;}
+.testimonial-text{font-family:'Jost',sans-serif;font-size:13px;line-height:1.65;color:var(--text-mid);margin-bottom:14px;flex:1;}
+.testimonial-author{font-size:12px;font-weight:600;color:var(--text);margin-bottom:2px;}
+.testimonial-date{font-size:9px;color:rgba(0,0,0,0.30);margin-top:8px;}
+@media(max-width:600px){.testimonial-card{padding:18px 16px 14px;}}
 </style>
 <style>
 .btn-book{background:#1A73E8;color:#fff;padding:13px 22px;min-height:48px;font-size:11px;letter-spacing:1.5px;text-transform:uppercase;font-weight:600;display:inline-flex;align-items:center;gap:8px;transition:all 0.3s;border-radius:6px;white-space:nowrap;text-decoration:none;}
@@ -1744,6 +1755,9 @@ All <span class="campaign-count">6</span>
 <button class="campaign-tab" type="button" data-campaign-tab="past">
 Past <span class="campaign-count">22</span>
 </button>
+<button class="campaign-tab" type="button" data-campaign-tab="testimonial">
+Testimonials <span class="campaign-count">2</span>
+</button>
 </div>
 
 <div id="offers-grid-all" class="offers-grid">
@@ -2928,6 +2942,30 @@ data-poster-date-prefix="Ended">
 </div>
 </article>
 
+<div class="testimonial-card campaign-panel-card" data-campaign-types="testimonial">
+<div class="testimonial-stars">
+<svg viewBox="0 0 20 20"><path d="M10 1l2.39 4.84L17.6 6.7l-3.8 3.7.9 5.26L10 13l-4.7 2.66.9-5.26-3.8-3.7 5.21-.86L10 1z"/></svg>
+<svg viewBox="0 0 20 20"><path d="M10 1l2.39 4.84L17.6 6.7l-3.8 3.7.9 5.26L10 13l-4.7 2.66.9-5.26-3.8-3.7 5.21-.86L10 1z"/></svg>
+<svg viewBox="0 0 20 20"><path d="M10 1l2.39 4.84L17.6 6.7l-3.8 3.7.9 5.26L10 13l-4.7 2.66.9-5.26-3.8-3.7 5.21-.86L10 1z"/></svg>
+<svg viewBox="0 0 20 20"><path d="M10 1l2.39 4.84L17.6 6.7l-3.8 3.7.9 5.26L10 13l-4.7 2.66.9-5.26-3.8-3.7 5.21-.86L10 1z"/></svg>
+<svg viewBox="0 0 20 20"><path d="M10 1l2.39 4.84L17.6 6.7l-3.8 3.7.9 5.26L10 13l-4.7 2.66.9-5.26-3.8-3.7 5.21-.86L10 1z"/></svg>
+</div>
+<div class="testimonial-text">I had an excellent experience at this salon. I got a hair treatment along with a haircut, and I was extremely satisfied with the service. Ms. Lalitha, who assisted me, was very polite, friendly, and professional. She explained every step of the process clearly and made sure I was comfortable throughout the appointment. I am very happy with the results and truly appreciate her excellent service. Highly recommended!</div>
+<div class="testimonial-author">Jismy George</div>
+<div class="testimonial-date">2026-07-18</div>
+</div>
+<div class="testimonial-card campaign-panel-card" data-campaign-types="testimonial">
+<div class="testimonial-stars">
+<svg viewBox="0 0 20 20"><path d="M10 1l2.39 4.84L17.6 6.7l-3.8 3.7.9 5.26L10 13l-4.7 2.66.9-5.26-3.8-3.7 5.21-.86L10 1z"/></svg>
+<svg viewBox="0 0 20 20"><path d="M10 1l2.39 4.84L17.6 6.7l-3.8 3.7.9 5.26L10 13l-4.7 2.66.9-5.26-3.8-3.7 5.21-.86L10 1z"/></svg>
+<svg viewBox="0 0 20 20"><path d="M10 1l2.39 4.84L17.6 6.7l-3.8 3.7.9 5.26L10 13l-4.7 2.66.9-5.26-3.8-3.7 5.21-.86L10 1z"/></svg>
+<svg viewBox="0 0 20 20"><path d="M10 1l2.39 4.84L17.6 6.7l-3.8 3.7.9 5.26L10 13l-4.7 2.66.9-5.26-3.8-3.7 5.21-.86L10 1z"/></svg>
+<svg viewBox="0 0 20 20"><path d="M10 1l2.39 4.84L17.6 6.7l-3.8 3.7.9 5.26L10 13l-4.7 2.66.9-5.26-3.8-3.7 5.21-.86L10 1z"/></svg>
+</div>
+<div class="testimonial-text">Had a fantastic layer cut at Naturals Salon! My stylist, Lalita, was wonderful, and the haircut turned out amazing. Quick, professional, and highly impressive work.</div>
+<div class="testimonial-author">Afrin Kommaddi</div>
+<div class="testimonial-date">2026-07-16</div>
+</div>
 <div class="campaign-card-empty is-hidden" data-campaign-empty>No campaigns in this view.</div>
 </div>
 </section>
@@ -3338,7 +3376,10 @@ showCampaignTab(tab);
 var hash = (window.location.hash || '').replace('#', '').toLowerCase();
 if(hash === 'offers') hash = 'offer';
 var initial = hash || 'offer';
-if(!document.querySelector('[data-campaign-tab="' + initial + '"]')) initial = 'offer';
+if(!document.querySelector('[data-campaign-tab="' + initial + '"]')){
+var firstTab = document.querySelector('[data-campaign-tab]');
+initial = firstTab ? firstTab.getAttribute('data-campaign-tab') : 'offer';
+}
 showCampaignTab(initial);
 }
 
