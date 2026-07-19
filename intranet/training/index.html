@@ -575,8 +575,8 @@ const filteredModules = currentCategory === 'all'
 
 // Sort by featured status and date added
 filteredModules.sort((a, b) => {
-const aFeatured = a.is_featured === "Yes" || a.is_featured === true;
-const bFeatured = b.is_featured === "Yes" || b.is_featured === true;
+const aFeatured = (a.is_featured || '').toLowerCase() === 'yes' || a.is_featured === true;
+const bFeatured = (b.is_featured || '').toLowerCase() === 'yes' || b.is_featured === true;
 if (aFeatured && !bFeatured) return -1;
 if (!aFeatured && bFeatured) return 1;
 return new Date(b.training_date_added) - new Date(a.training_date_added);
@@ -585,7 +585,7 @@ return new Date(b.training_date_added) - new Date(a.training_date_added);
 filteredModules.forEach(module => {
 const card = document.createElement('div');
 card.className = 'training-card';
-const isFeatured = module.is_featured === "Yes" || module.is_featured === true;
+const isFeatured = (module.is_featured || '').toLowerCase() === 'yes' || module.is_featured === true;
 if (isFeatured) {
 card.style.border = '2px solid var(--gold)';
 }
