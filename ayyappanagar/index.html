@@ -1288,6 +1288,16 @@ box-shadow:0 4px 16px rgba(0,0,0,0.04);
 .stylist-book{display:flex;align-items:center;justify-content:center;gap:6px;margin-top:10px;padding:8px 14px;font-size:12px;font-weight:600;color:#fff;background:#25D366;border-radius:20px;text-decoration:none;transition:opacity .15s;}
 .stylist-book:hover{opacity:.85;color:#fff;}
 
+/* ── STYLIST MODAL ── */
+#stylist-overlay{position:fixed;inset:0;background:rgba(0,0,0,0.65);backdrop-filter:blur(6px);z-index:13000;display:none;}
+#stylist-modal{position:fixed;inset:0;z-index:13001;display:none;align-items:center;justify-content:center;padding:18px;}
+#stylist-inner{position:relative;max-width:340px;width:100%;background:#fff;border-radius:16px;overflow:hidden;box-shadow:0 12px 48px rgba(0,0,0,0.18);}
+#stylist-inner .stylist-card{flex:none !important;width:100% !important;box-shadow:none !important;border:none !important;border-radius:0 !important;}
+#stylist-inner .stylist-photo{width:85%;aspect-ratio:1;height:auto;margin:24px auto 0;border-radius:50%;border:4px solid var(--gold);}
+#stylist-inner .stylist-photo img{border-radius:50%;}
+#stylist-close{position:absolute;top:10px;right:10px;width:36px;height:36px;border-radius:50%;background:rgba(0,0,0,0.08);border:none;font-size:20px;cursor:pointer;display:flex;align-items:center;justify-content:center;transition:background 0.2s;z-index:1;color:var(--text);}
+#stylist-close:hover{background:rgba(0,0,0,0.15);}
+
 /* ── STORE PHOTO GALLERY ── */
 .store-photos-block{background:#fff;padding:36px;margin-bottom:24px;border-radius:14px;border:1px solid rgba(0,0,0,0.06);box-shadow:0 4px 16px rgba(0,0,0,0.04);}
 .photo-category-label{font-size:9px;letter-spacing:3px;text-transform:uppercase;color:var(--text-light);font-weight:600;margin-bottom:10px;}
@@ -3016,6 +3026,15 @@ Book via WhatsApp
 </div>
 
 
+<div id="stylist-overlay" onclick="StylistModal.close()"></div>
+<div id="stylist-modal" role="dialog" aria-modal="true" aria-label="Stylist details" onclick="StylistModal.close()">
+<div id="stylist-inner" onclick="event.stopPropagation()">
+<button id="stylist-close" onclick="StylistModal.close()" aria-label="Close">&times;</button>
+<div id="stylist-content"></div>
+</div>
+</div>
+
+
 <div class="store-photos-block reveal" data-section="gallery">
 <div class="lbl">Gallery</div>
 <h2 class="sec-title">Step inside our <em>salon.</em></h2>
@@ -4282,6 +4301,59 @@ document.addEventListener('DOMContentLoaded', initCampaignTabs);
 </script>
 
 <script>
+/* ── STYLIST MODAL ── */
+var StylistModal = (function(){
+return {
+open: function(el) {
+var card = el.closest('.stylist-card') || el;
+var clone = card.cloneNode(true);
+var container = document.getElementById('stylist-content');
+container.innerHTML = '';
+container.appendChild(clone);
+clone.querySelector('.stylist-book').setAttribute('target', '_blank');
+document.getElementById('stylist-overlay').style.display = 'block';
+document.getElementById('stylist-modal').style.display = 'flex';
+document.body.style.overflow = 'hidden';
+if (!window._stylistHistoryPushed) {
+history.pushState({ stylistOpen: true }, '');
+window._stylistHistoryPushed = true;
+}
+},
+close: function() {
+document.getElementById('stylist-overlay').style.display = 'none';
+document.getElementById('stylist-modal').style.display = 'none';
+document.getElementById('stylist-content').innerHTML = '';
+document.body.style.overflow = '';
+window._stylistHistoryPushed = false;
+}
+};
+})();
+
+document.addEventListener('keydown', function(e) {
+var m = document.getElementById('stylist-modal');
+if (m && m.style.display === 'flex' && e.key === 'Escape') {
+StylistModal.close();
+}
+});
+
+window.addEventListener('popstate', function(e) {
+var m = document.getElementById('stylist-modal');
+if (m && m.style.display === 'flex') {
+window._stylistHistoryPushed = false;
+StylistModal.close();
+}
+});
+
+document.addEventListener('DOMContentLoaded', function() {
+document.querySelectorAll('.stylist-card').forEach(function(card) {
+card.style.cursor = 'pointer';
+card.addEventListener('click', function(e) {
+if (e.target.closest('.stylist-book')) return;
+StylistModal.open(card);
+});
+});
+});
+
 /* Store Open Status System - Global timezone-aware status tracking */
 window.store_open_status = {}; // Global object to store status for all stores
 
