@@ -1,5 +1,31 @@
 [
   {
+    "store_id": "N45",
+    "store_name": "Nagavara",
+    "stars": "5",
+    "customer_name": "Prasanthi G.",
+    "review_comments": "I had a really great experience with Lalitha! She did my haircut and eyebrows, and I absolutely loved the overall look. I was very happy with the final output. She was also very friendly and gave me some really good tips and suggestions for hair care and styling. I truly appreciate her work and would definitely recommend her! 😊",
+    "show_it_in_website": "Yes",
+    "date_posted": "2026-09-10",
+    "review_id": "AbFvOqkq6ASVkhC-NuJZQxlnNIJVzn2OENp1Jtjlz_v_DeAd3fZlRanr79Q_wnyMFQMQBcsmY8mzQw",
+    "Stars": 5,
+    "response": "Thank you so much for your wonderful review, Prasanthi! We’re thrilled to hear that Lalitha provided you with a great haircut and eyebrows, and that you loved the final look. Your kind words about her tips and friendly service mean a lot to us. We appreciate your recommendation and look forward to seeing you again at Naturals Salon! 😊",
+    "response_date": "2026-09-10"
+  },
+  {
+    "store_id": "N36",
+    "store_name": "Ayyappa Nagar",
+    "stars": "5",
+    "customer_name": "Suprabha Acharya",
+    "review_comments": "Radha did a wonderful haircut. Thank you so much! The service was really good, and I’m very happy with the result. 😊",
+    "show_it_in_website": "Yes",
+    "date_posted": "2026-09-10",
+    "review_id": "AbFvOqmZdM_uBNxK5rD4Jrh5qLyX9ktP-_3UoJyz0zhAX442pRwCf_dJU8abK7_IyxMW6z2VUjS2zg",
+    "Stars": 5,
+    "response": "Dear Suprabha, It brings us immense joy to know you had such a wonderful experience with Radha and are delighted with your haircut! We are dedicated to providing expert hair styling, ensuring every visit leaves you feeling absolutely radiant. 😊 The Wellness & Beauty Team, Naturals Ayyappa Nagar",
+    "response_date": "2026-09-10"
+  },
+  {
     "store_id": "N36",
     "store_name": "Ayyappa Nagar",
     "stars": "5",
