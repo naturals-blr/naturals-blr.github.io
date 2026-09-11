@@ -1,5 +1,18 @@
 [
   {
+    "store_id": "N05",
+    "store_name": "Frazer Town",
+    "stars": "5",
+    "customer_name": "Prem Rose",
+    "review_comments": "I had a fantastic experience. I visited around 8 p.m., and there was only one staff member on duty. Even though three other customers arrived after me, the staff member, \"Mohd Suheb\"",
+    "show_it_in_website": "Yes",
+    "date_posted": "Invalid Da",
+    "review_id": "AbFvOqnp6tHX3dXFsiNwCE7mYIdGaOgfGNHsO11-QxhzeHZJ3rjBvlywM2AnxxPpBEFGEjZpTZ-I8g",
+    "Stars": 5,
+    "response": "2026-09-09T15:53:04.498Z",
+    "response_date": "Invalid Da"
+  },
+  {
     "store_id": "N45",
     "store_name": "Nagavara",
     "stars": "5",
@@ -399,8 +412,8 @@
     "date_posted": "2026-09-05",
     "review_id": "AbFvOqnLmXSp1LPRS-3VPF8YyzR6_xF_rbK2ifeAL1FQsGgJzS1NqqFPNH__jTFw2dMIyOgHxMlm",
     "Stars": 1,
-    "response": "",
-    "response_date": ""
+    "response": "Dear SN, thank you for sharing your feedback. We sincerely apologize that your experience did not meet your expectations. We would like to clarify that our standard service inclusions follow a fixed menu price list where specific blowout styling services are listed separately. We never intend for any pricing to feel unclear or unexpected. Our management team tried reaching out to you directly to discuss your visit and address your concerns, but we haven't been able to connect yet. Please feel free to reply to our message or call us at your convenience so we can clear up any misunderstanding. Your Hair & Beauty Crew at Naturals Ayyappa Nagar",
+    "response_date": "2026-09-10"
   },
   {
     "store_id": "N36",
@@ -1608,8 +1621,8 @@
     "date_posted": "2026-08-18",
     "review_id": "AbFvOqlm0ba53wKTnX5LyY7AeRUfsBO7SWdQx_URrOVIJOcVhLofWzCZJZZboUlHWQv6VgXlYgTW",
     "Stars": 5,
-    "response": "Thank you, Vijay Krishna, for your kind words! We're thrilled to hear you enjoyed your experience with Thyagaraju at Naturals Salon. We look forward to welcoming you back soon!",
-    "response_date": "2026-09-08"
+    "response": "",
+    "response_date": ""
   },
   {
     "store_id": "N45",
@@ -107105,18 +107118,5 @@
     "Stars": 1,
     "response": "2019-10-02T14:22:22.431Z",
     "response_date": "2019-10-02"
-  },
-  {
-    "store_id": "N05",
-    "store_name": "Frazer Town",
-    "stars": "5",
-    "customer_name": "Prem Rose",
-    "review_comments": "I had a fantastic experience. I visited around 8 p.m., and there was only one staff member on duty. Even though three other customers arrived after me, the staff member, \"Mohd Suheb\"",
-    "show_it_in_website": "Yes",
-    "date_posted": "",
-    "review_id": "AbFvOqnp6tHX3dXFsiNwCE7mYIdGaOgfGNHsO11-QxhzeHZJ3rjBvlywM2AnxxPpBEFGEjZpTZ-I8g",
-    "Stars": 5,
-    "response": "2026-09-09T15:53:04.498Z",
-    "response_date": ""
   }
 ]
