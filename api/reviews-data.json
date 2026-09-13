@@ -3,6 +3,19 @@
     "store_id": "N05",
     "store_name": "Frazer Town",
     "stars": "5",
+    "customer_name": "Prem Rose",
+    "review_comments": "I had a fantastic experience. I visited around 8 p.m., and there was only one staff member on duty. Even though three other customers arrived after me, the staff member, \"Mohd Suheb\"",
+    "show_it_in_website": "Yes",
+    "date_posted": "Invalid Da",
+    "review_id": "AbFvOqnp6tHX3dXFsiNwCE7mYIdGaOgfGNHsO11-QxhzeHZJ3rjBvlywM2AnxxPpBEFGEjZpTZ-I8g",
+    "Stars": 5,
+    "response": "2026-09-09T15:53:04.498Z",
+    "response_date": "Invalid Da"
+  },
+  {
+    "store_id": "N05",
+    "store_name": "Frazer Town",
+    "stars": "5",
     "customer_name": "harish shravan",
     "review_comments": "Good service from Sameer. Will recommend",
     "show_it_in_website": "Yes",
@@ -3155,8 +3168,8 @@
     "date_posted": "2026-08-05",
     "review_id": "AbFvOqmZDHVJ03uc_DVgUf1LE-Dg4T8YxpZ2t36u6NTL8KQJ1-SjhYGM-zm0k4F9bXZ9W6PfUxJ8yQ",
     "Stars": 5,
-    "response": "Hi Nisha VJ, thank you for your wonderful review! We're thrilled to hear that you enjoyed your experience at Naturals Salon. Stella will be delighted to know her service made such a positive impact. We look forward to welcoming you back soon!",
-    "response_date": "2026-09-08"
+    "response": "Dear Nisha, we are thrilled to hear that our team, particularly Stella, exceeded your expectations with your recent hair coloring, global highlights, and haircut experience at our premium hair salon in Hennur. Our stylists were delighted to have you and your daughter visit us, and Stella expertise in ensuring a smooth process and outstanding results is a testament to our commitment to excellence. We look forward to welcoming you again, and for the latest offers and updates, please visit us at https://naturalsprime.in/hennur/  Your Pampering Team at Naturals Hennur",
+    "response_date": "2026-08-05"
   },
   {
     "store_id": "N45",
@@ -107222,18 +107235,5 @@
     "Stars": 1,
     "response": "2019-10-02T14:22:22.431Z",
     "response_date": "2019-10-02"
-  },
-  {
-    "store_id": "N05",
-    "store_name": "Frazer Town",
-    "stars": "5",
-    "customer_name": "Prem Rose",
-    "review_comments": "I had a fantastic experience. I visited around 8 p.m., and there was only one staff member on duty. Even though three other customers arrived after me, the staff member, \"Mohd Suheb\"",
-    "show_it_in_website": "Yes",
-    "date_posted": "",
-    "review_id": "AbFvOqnp6tHX3dXFsiNwCE7mYIdGaOgfGNHsO11-QxhzeHZJ3rjBvlywM2AnxxPpBEFGEjZpTZ-I8g",
-    "Stars": 5,
-    "response": "2026-09-09T15:53:04.498Z",
-    "response_date": ""
   }
 ]
