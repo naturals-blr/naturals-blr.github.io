@@ -1,5 +1,18 @@
 [
   {
+    "store_id": "N05",
+    "store_name": "Frazer Town",
+    "stars": "5",
+    "customer_name": "Prem Rose",
+    "review_comments": "I had a fantastic experience. I visited around 8 p.m., and there was only one staff member on duty. Even though three other customers arrived after me, the staff member, \"Mohd Suheb\"",
+    "show_it_in_website": "Yes",
+    "date_posted": "Invalid Da",
+    "review_id": "AbFvOqnp6tHX3dXFsiNwCE7mYIdGaOgfGNHsO11-QxhzeHZJ3rjBvlywM2AnxxPpBEFGEjZpTZ-I8g",
+    "Stars": 5,
+    "response": "2026-09-09T15:53:04.498Z",
+    "response_date": "Invalid Da"
+  },
+  {
     "store_id": "N78",
     "store_name": "JP Nagar 5th Phase",
     "stars": "1",
@@ -114,6 +127,71 @@
     "review_id": "AbFvOqn8vw6KpLFhcrNCx7n2vIGzsNcOpKcW_5P492a-7e_OpnRtQtfu0vpUmDb4G5vKpV4xuiGDVg",
     "Stars": 5,
     "response": "Thank you, Pragathi, for your wonderful review! We're thrilled to hear that you and your husband had such a great experience at Naturals Salon. Our team, especially Mr. Mohin and Ms. Anusha, will be delighted to know they made a positive impact. We look forward to welcoming you back for more excellent services! 🥰",
+    "response_date": "2026-09-13"
+  },
+  {
+    "store_id": "N78",
+    "store_name": "JP Nagar 5th Phase",
+    "stars": "5",
+    "customer_name": "Rio Akash",
+    "review_comments": "good service by anusha",
+    "show_it_in_website": "Yes",
+    "date_posted": "2026-09-13",
+    "review_id": "AbFvOqlPMwKXWfltGV4J52bAp2TszizUy7fSfp9SPpYG5CzPUV7qtLF5vwWxNgf0UKiHeAPxOb4Adg",
+    "Stars": 5,
+    "response": "Thank you, Rio Akash, for your wonderful review! We're thrilled to hear that you received great service from Anusha. We appreciate your support and look forward to seeing you again at Naturals Salon!",
+    "response_date": "2026-09-13"
+  },
+  {
+    "store_id": "N78",
+    "store_name": "JP Nagar 5th Phase",
+    "stars": "5",
+    "customer_name": "Harshitha Singh",
+    "review_comments": "Had a really good experience at the salon! I got a pedicure and waxing done by Anusha, and she did an amazing job. The service was neat and well done, and I’m really happy with the results. Definitely recommend Anusha and the salon.",
+    "show_it_in_website": "Yes",
+    "date_posted": "2026-09-13",
+    "review_id": "AbFvOqnBkbIDT6aT4CEdn2bd2OoFdJIUHfVrhU5qIw35vIVcs6k9WJ_rTvG_6FSgeU4aH788kuYmyQ",
+    "Stars": 5,
+    "response": "Hi Harshitha! Thank you so much for your wonderful review! We're thrilled to hear that you had a great experience with Anusha and loved your pedicure and waxing. Your recommendation means a lot to us. We can't wait to welcome you back to Naturals Salon!",
+    "response_date": "2026-09-13"
+  },
+  {
+    "store_id": "N78",
+    "store_name": "JP Nagar 5th Phase",
+    "stars": "5",
+    "customer_name": "Rahul Kumar",
+    "review_comments": "Moin did my haircut exactly how I wanted and also hairspa was great. Very relaxing",
+    "show_it_in_website": "Yes",
+    "date_posted": "2026-09-13",
+    "review_id": "AbFvOqlC4FCIq45exyoqQZ-lbCTX68g3xdbctE-YaDHSaoZ4oa4PLWBkEDVL8tZ6I9bxbkXJrvvgSQ",
+    "Stars": 5,
+    "response": "Hi Rahul! Thank you for the fantastic review! We're thrilled to hear that Moin delivered the perfect haircut and that you enjoyed the relaxing hair spa experience. We hope to see you again soon at Naturals Salon!",
+    "response_date": "2026-09-13"
+  },
+  {
+    "store_id": "N78",
+    "store_name": "JP Nagar 5th Phase",
+    "stars": "5",
+    "customer_name": "Shakku 1976",
+    "review_comments": "",
+    "show_it_in_website": "Yes",
+    "date_posted": "2026-09-13",
+    "review_id": "AbFvOqmKR4HhBAaNdWiqKC6cB90DQuGuT-JJZATPANXOhCOHC79rf_SQQWa0PXba7VWky8i9Z0C2",
+    "Stars": 5,
+    "response": "Thank you, Shakku 1976, for your fantastic 5-star rating! We're thrilled to hear you had a great experience at Naturals Salon. We look forward to welcoming you back soon!",
+    "response_date": "2026-09-13"
+  },
+  {
+    "store_id": "N78",
+    "store_name": "JP Nagar 5th Phase",
+    "stars": "5",
+    "customer_name": "Rajalakshmi 7605",
+    "review_comments": "Visited naturals jpnagar for the first time and loved the service here got my facial done from sonam she was super good at it.",
+    "show_it_in_website": "Yes",
+    "date_posted": "2026-09-13",
+    "review_id": "AbFvOqmZxadUDRNM1MZ4kM2cwNWPjBx0MT8wNwnJJfjESPLWB-Io8bw_IGZr4SktPEtq4fOWXXtmpQ",
+    "Stars": 5,
+    "response": "Thank you, Rajalakshmi, for your wonderful review! We're thrilled to hear that you loved your first visit to Naturals Salon in JPNagar and that Sonam provided you with excellent service. We look forward to welcoming you back for more pampering soon!",
     "response_date": "2026-09-13"
   },
   {
@@ -1586,19 +1664,6 @@
     "response_date": "2026-08-23"
   },
   {
-    "store_id": "N36",
-    "store_name": "Ayyappa Nagar",
-    "stars": "5",
-    "customer_name": "Ramireddy Thushara Bharathi",
-    "review_comments": "Radha service was good",
-    "show_it_in_website": "Yes",
-    "date_posted": "2026-08-23",
-    "review_id": "AbFvOqlPA9MUh_srVY0ZW3lccv9sZ5jC9325PeoKPOWQacs5etA5tHyKMGmg2P_mz6KpxBaYnIjCnQ",
-    "Stars": 5,
-    "response": "Dear Ramireddy, We are delighted to hear that Radha Parvathi you with such good service! It's wonderful to know our team at Naturals Ayyappa Nagar is ensuring every visit is a truly pleasant experience. Your Everyday Beauty Partners, Naturals Ayyappa Nagar",
-    "response_date": "2026-08-23"
-  },
-  {
     "store_id": "N05",
     "store_name": "Frazer Town",
     "stars": "5",
@@ -1701,45 +1766,6 @@
     "Stars": 5,
     "response": "Thank you, Nikhita V, for your kind words! We're thrilled to hear you enjoyed your experience with Sheika at Naturals Salon. Your appreciation means a lot to us. We look forward to welcoming you back soon!",
     "response_date": "2026-09-08"
-  },
-  {
-    "store_id": "N36",
-    "store_name": "Ayyappa Nagar",
-    "stars": "5",
-    "customer_name": "komala pelleti",
-    "review_comments": "Paul was my hair stylist,he did a fantastic job and the place is good and attractive overall I would come here all the time for my haircut",
-    "show_it_in_website": "Yes",
-    "date_posted": "2026-08-22",
-    "review_id": "AbFvOqlDcViyqo0h5Acr49ur9jWG5j3L_C5choD0DfZ9KNg1PU6-woc1pU2_fHlpuC87V2L96usK",
-    "Stars": 5,
-    "response": "Dear Komala, It brings us immense joy to know Paul Parvathi you with such a fantastic hair experience, and we are delighted you appreciate the inviting ambiance of Naturals Ayyappa Nagar. We eagerly await your next visit for expert hair styling! Your Personal Glow Team, Naturals Ayyappa Nagar",
-    "response_date": "2026-08-22"
-  },
-  {
-    "store_id": "N36",
-    "store_name": "Ayyappa Nagar",
-    "stars": "5",
-    "customer_name": "kancherla deepthi",
-    "review_comments": "",
-    "show_it_in_website": "Yes",
-    "date_posted": "2026-08-22",
-    "review_id": "AbFvOqknnVklBMmpVahCdddZ2SmEr0d_WyrwnOCaMPqttfGl8BhDnntRVD74hex6MSGeVE_0bKGtXw",
-    "Stars": 5,
-    "response": "Dear Kancherla, We are absolutely delighted to receive your 5-star rating for Naturals Ayyappa Nagar! It brings us immense joy to know that your experience with us was nothing short of exceptional, reflecting our commitment to being the best unisex salon in Ayyappa Nagar. We eagerly await your next visit for another pampering session. Your Personal Glow Team, Naturals Ayyappa Nagar",
-    "response_date": "2026-08-22"
-  },
-  {
-    "store_id": "N36",
-    "store_name": "Ayyappa Nagar",
-    "stars": "5",
-    "customer_name": "Prabhash Thakur",
-    "review_comments": "Arif did a really good job with hair color and hair cutting",
-    "show_it_in_website": "Yes",
-    "date_posted": "2026-08-21",
-    "review_id": "AbFvOqnS0S5V1zRyQqm39I_GcJspVAn1NQGQ3g9Du4Gw90H1EQizaj7GHb0N8BSNECTw7ECCiZEsCQ",
-    "Stars": 5,
-    "response": "Dear Prabhash, We are absolutely delighted to hear that Arif provided you with such a wonderful experience with your hair color and cut; our team of expert hair styling professionals always strives for perfection. It’s always our pleasure to ensure every visit leaves you feeling your best. Team Naturals Ayyappa Nagar (Looking forward to your next visit!)",
-    "response_date": "2026-08-22"
   },
   {
     "store_id": "N36",
@@ -1868,8 +1894,8 @@
     "date_posted": "2026-08-18",
     "review_id": "AbFvOqnH9nMGKH3wUczhfhF-vDmqHgp-dNURZUkaUzFzZ1FDcFSqubWxc_iDwVIDmMt254wvr15Ajw",
     "Stars": 4,
-    "response": "Thank you, Nishitha, for your kind words! We're thrilled to hear you enjoyed your haircut service with Keerthi at Naturals Salon. We look forward to welcoming you back soon!",
-    "response_date": "2026-09-08"
+    "response": "",
+    "response_date": ""
   },
   {
     "store_id": "N05",
@@ -107326,19 +107352,6 @@
     "Stars": 3,
     "response": "Dear Mr. Reddy,  Thank you for sharing your experience at Naturals Unisex Salon - Frazer Town. We sincerely apologize for the delay in our response and appreciate you taking the time to provide feedback.  We are currently auditing older reviews to ensure every guest is heard. Since then, we have made significant improvements in our services and now feature highly skilled, top-tier stylists.   We warmly invite you to revisit us soon and experience the enhanced service we offer. Please follow our Facebook and Instagram pages for updates and best offers.  Looking forward to pampering you again at Naturals Unisex Salon - Frazer Town 😊✨  Best regards, [Your Name] Store Manager",
     "response_date": "2026-05-26"
-  },
-  {
-    "store_id": "N05",
-    "store_name": "Frazer Town",
-    "stars": "5",
-    "customer_name": "Prem Rose",
-    "review_comments": "I had a fantastic experience. I visited around 8 p.m., and there was only one staff member on duty. Even though three other customers arrived after me, the staff member, \"Mohd Suheb\"",
-    "show_it_in_website": "Yes",
-    "date_posted": "",
-    "review_id": "AbFvOqnp6tHX3dXFsiNwCE7mYIdGaOgfGNHsO11-QxhzeHZJ3rjBvlywM2AnxxPpBEFGEjZpTZ-I8g",
-    "Stars": 5,
-    "response": "2026-09-09T15:53:04.498Z",
-    "response_date": ""
   },
   {
     "store_id": "N36",
