@@ -13,6 +13,45 @@
     "response_date": "Invalid Da"
   },
   {
+    "store_id": "N36",
+    "store_name": "Ayyappa Nagar",
+    "stars": "5",
+    "customer_name": "anjali goyal",
+    "review_comments": "",
+    "show_it_in_website": "Yes",
+    "date_posted": "2026-09-18",
+    "review_id": "AbFvOqm0khNua4SD0d2WGk1Qo-LjRUE5qKYBUp-ILrqjEyKjA7i7iCC1Ku_sBWHeFwuhmGtJJrKM",
+    "Stars": 5,
+    "response": "Dear Anjali, Thank you for your wonderful 5-star rating! We are so pleased to know you had an excellent experience with us at Naturals Ayyappa Nagar, striving to be the best unisex salon in Ayyappa Nagar. We eagerly await your next visit for another touch of luxury. With love and style, Team Naturals Ayyappa Nagar",
+    "response_date": "2026-09-18"
+  },
+  {
+    "store_id": "N45",
+    "store_name": "Nagavara",
+    "stars": "5",
+    "customer_name": "Meritta Jijis",
+    "review_comments": "Had good service from shika",
+    "show_it_in_website": "Yes",
+    "date_posted": "2026-09-18",
+    "review_id": "AbFvOqlei_Q4IQgAWTmKBpUftm_orKMfffHHPBbQCvTz2GYZei_us03cFVvJCk_RCX-K_tHE2qHo",
+    "Stars": 5,
+    "response": "Thank you, Meritta Jijis! We're thrilled to hear you had a great experience with Shika at Naturals Salon. Your kind words mean a lot to us! We look forward to welcoming you back soon.",
+    "response_date": "2026-09-18"
+  },
+  {
+    "store_id": "N36",
+    "store_name": "Ayyappa Nagar",
+    "stars": "5",
+    "customer_name": "Suganthi Balajy",
+    "review_comments": "Nice work done by RAdha ..thank u",
+    "show_it_in_website": "Yes",
+    "date_posted": "2026-09-18",
+    "review_id": "AbFvOqkJbLfvskXpAAmINx7vPlYvY9RHNVVkPUKR2pmHtODf_gGfnkb8p8b-MwycoWLF9nF2EoAXNg",
+    "Stars": 5,
+    "response": "Dear Suganthi, It warms our hearts to know Radha Parvathi you with such a wonderful experience! We are dedicated to ensuring every visit to Naturals Ayyappa Nagar leaves you feeling perfectly pampered. Your Pampering Partners @ Naturals Ayyappa Nagar",
+    "response_date": "2026-09-18"
+  },
+  {
     "store_id": "N05",
     "store_name": "Frazer Town",
     "stars": "5",
