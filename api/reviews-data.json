@@ -1,5 +1,18 @@
 [
   {
+    "store_id": "N05",
+    "store_name": "Frazer Town",
+    "stars": "5",
+    "customer_name": "Prem Rose",
+    "review_comments": "I had a fantastic experience. I visited around 8 p.m., and there was only one staff member on duty. Even though three other customers arrived after me, the staff member, \"Mohd Suheb\"",
+    "show_it_in_website": "Yes",
+    "date_posted": "Invalid Da",
+    "review_id": "AbFvOqnp6tHX3dXFsiNwCE7mYIdGaOgfGNHsO11-QxhzeHZJ3rjBvlywM2AnxxPpBEFGEjZpTZ-I8g",
+    "Stars": 5,
+    "response": "2026-09-09T15:53:04.498Z",
+    "response_date": "Invalid Da"
+  },
+  {
     "store_id": "N36",
     "store_name": "Ayyappa Nagar",
     "stars": "4",
@@ -491,19 +504,6 @@
     "review_id": "AbFvOqlC4FCIq45exyoqQZ-lbCTX68g3xdbctE-YaDHSaoZ4oa4PLWBkEDVL8tZ6I9bxbkXJrvvgSQ",
     "Stars": 5,
     "response": "Hi Rahul! Thank you for the fantastic review! We're thrilled to hear that Moin delivered the perfect haircut and that you enjoyed the relaxing hair spa experience. We hope to see you again soon at Naturals Salon!",
-    "response_date": "2026-09-13"
-  },
-  {
-    "store_id": "N78",
-    "store_name": "JP Nagar 5th Phase",
-    "stars": "5",
-    "customer_name": "Shakku 1976",
-    "review_comments": "",
-    "show_it_in_website": "Yes",
-    "date_posted": "2026-09-13",
-    "review_id": "AbFvOqmKR4HhBAaNdWiqKC6cB90DQuGuT-JJZATPANXOhCOHC79rf_SQQWa0PXba7VWky8i9Z0C2",
-    "Stars": 5,
-    "response": "Thank you, Shakku 1976, for your fantastic 5-star rating! We're thrilled to hear you had a great experience at Naturals Salon. We look forward to welcoming you back soon!",
     "response_date": "2026-09-13"
   },
   {
@@ -3662,8 +3662,8 @@
     "date_posted": "2026-08-05",
     "review_id": "AbFvOqkcNl-qcaHSyYRYXO4X6S7tmocASJrAilRMtI1s3BJmwBcSDAubuRKXVKs5kvlacF4ZcCofSg",
     "Stars": 4,
-    "response": "Thank you for your feedback, Simeon! We're glad you enjoyed your haircut at Naturals Salon. We appreciate your kind words about Rasid. Looking forward to seeing you again!",
-    "response_date": "2026-09-08"
+    "response": "Dear Simeon, we appreciate your kind words about your recent visit to our premium hair salon in Hennur, and our stylist Rashid is delighted to have been able to provide you with a good haircut. We strive for perfection in every aspect of our service, and while we're glad you had a positive experience, we hope to exceed your expectations and earn that fifth star on your next visit.  Naturals Hennur Team",
+    "response_date": "2026-08-05"
   },
   {
     "store_id": "N43",
@@ -107729,19 +107729,6 @@
     "Stars": 3,
     "response": "Dear Mr. Reddy,  Thank you for sharing your experience at Naturals Unisex Salon - Frazer Town. We sincerely apologize for the delay in our response and appreciate you taking the time to provide feedback.  We are currently auditing older reviews to ensure every guest is heard. Since then, we have made significant improvements in our services and now feature highly skilled, top-tier stylists.   We warmly invite you to revisit us soon and experience the enhanced service we offer. Please follow our Facebook and Instagram pages for updates and best offers.  Looking forward to pampering you again at Naturals Unisex Salon - Frazer Town 😊✨  Best regards, [Your Name] Store Manager",
     "response_date": "2026-05-26"
-  },
-  {
-    "store_id": "N05",
-    "store_name": "Frazer Town",
-    "stars": "5",
-    "customer_name": "Prem Rose",
-    "review_comments": "I had a fantastic experience. I visited around 8 p.m., and there was only one staff member on duty. Even though three other customers arrived after me, the staff member, \"Mohd Suheb\"",
-    "show_it_in_website": "Yes",
-    "date_posted": "",
-    "review_id": "AbFvOqnp6tHX3dXFsiNwCE7mYIdGaOgfGNHsO11-QxhzeHZJ3rjBvlywM2AnxxPpBEFGEjZpTZ-I8g",
-    "Stars": 5,
-    "response": "2026-09-09T15:53:04.498Z",
-    "response_date": ""
   },
   {
     "store_id": "N36",
