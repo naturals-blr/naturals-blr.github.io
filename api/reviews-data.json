@@ -13,6 +13,45 @@
     "response_date": "Invalid Da"
   },
   {
+    "store_id": "N05",
+    "store_name": "Frazer Town",
+    "stars": "4",
+    "customer_name": "Dr. Bi Bi Ameena Ameena",
+    "review_comments": "Staff did nice job especially jyoti and poornima, I liked it",
+    "show_it_in_website": "Yes",
+    "date_posted": "2026-09-21",
+    "review_id": "AbFvOqkMRyaF5rOMmbId-ceiDg9-f8DW_RHaNsOqt6__n9wCFECli6qSbNiKaXTsvDdqi9MtEtfjHA",
+    "Stars": 4,
+    "response": "Thank you, Dr. Bi Bi Ameena Ameena, for your kind words! We're thrilled to hear that Jyoti and Poornima made your experience enjoyable. Your feedback means a lot to us, and we hope to see you again soon at Naturals Salon!",
+    "response_date": "2026-09-21"
+  },
+  {
+    "store_id": "N78",
+    "store_name": "JP Nagar 5th Phase",
+    "stars": "5",
+    "customer_name": "Ratna Biswakarma",
+    "review_comments": "I recently had a wonderful experience at natural, I've done hydrafacial and balayage hair colour and  the all over experience was amazing , the hydrafacial treatment was amazing and it felt my skin  hydrate and my skin get smoth, and they were vry polite  ,friendly and professional, They're expertise in their work, I love the services 😘😘 Who are loking for good services you must visit natural salon jp nagar , I'd recommend natural to whom who wants to experience amazing services Special sonam , and sara thnku so 😊,",
+    "show_it_in_website": "Yes",
+    "date_posted": "2026-09-21",
+    "review_id": "AbFvOqmr3ftaqwraeA6JGFp6JcBLpPTI4xrHjl3cB1Y4qjV7ZvKwx4EIx7AsOXR4PV6DQKMlO-rMfg",
+    "Stars": 5,
+    "response": "Hi Ratna Biswakarma! Thank you so much for your wonderful review! We're thrilled to hear that you had an amazing experience with our hydrafacial and balayage services. Our team, especially Sonam and Sara, will be delighted to know they made a positive impact. We appreciate your recommendation and look forward to welcoming you back to Naturals Salon soon! 😊",
+    "response_date": "2026-09-21"
+  },
+  {
+    "store_id": "N78",
+    "store_name": "JP Nagar 5th Phase",
+    "stars": "5",
+    "customer_name": "ARSH",
+    "review_comments": "I like how they do hairstyle and haircut professionaly. Good manners",
+    "show_it_in_website": "Yes",
+    "date_posted": "2026-09-21",
+    "review_id": "AbFvOqk6MczXYWh2qbDrhKtxsc4pNfjn_p93XMW6vUVrYPAHUHvVxvAZPVrA7MyREaKbvXDCKiktbA",
+    "Stars": 5,
+    "response": "Thank you, ARSH! We're thrilled to hear that you enjoyed your experience at Naturals Salon. Our team takes pride in providing professional hairstyles and haircuts with great manners. We appreciate your kind words and look forward to seeing you again!",
+    "response_date": "2026-09-21"
+  },
+  {
     "store_id": "N36",
     "store_name": "Ayyappa Nagar",
     "stars": "5",
@@ -10868,6 +10907,19 @@
     "response_date": "2026-05-22"
   },
   {
+    "store_id": "N45",
+    "store_name": "Nagavara",
+    "stars": "5",
+    "customer_name": "Swati Patnaik",
+    "review_comments": "Very excellent service, got haircut done over here. The person Thyagaraju who did my haircut was very friendly and did an excellent job. Thank you Thyagaraju and Naturals Salon for the wonderful service.",
+    "show_it_in_website": "Yes",
+    "date_posted": "2026-05-22",
+    "review_id": "AbFvOqnFq9enNRF3wHCcBnzm8lGWjTIBF_0Ds4zkS7sy9e85Cl6RG8_GdsigYsU6Zhr5Q1jeEmAcgw",
+    "Stars": 5,
+    "response": "Hey Swati! Thanks for the support and for sharing your thoughts. Your support means a lot to us. We look forward to welcoming you again. Thank you!  Warm wishes, Naturals Nagavara",
+    "response_date": "2026-05-22"
+  },
+  {
     "store_id": "N43",
     "store_name": "Hennur",
     "stars": "5",
@@ -14389,6 +14441,19 @@
     "Stars": 5,
     "response": "Really appreciate you taking the time to share this. Your support means a lot to us. We look forward to welcoming you again. Thank you!",
     "response_date": "2026-04-08"
+  },
+  {
+    "store_id": "N78",
+    "store_name": "JP Nagar 5th Phase",
+    "stars": "5",
+    "customer_name": "Moris Ahmed",
+    "review_comments": "I like perfection of Mohd Moin. How he cut my hair and specially fade part . I love it",
+    "show_it_in_website": "Yes",
+    "date_posted": "2026-03-26",
+    "review_id": "AbFvOqlrE4Nuq0n9jwQKdhtk2V4QMV3Mpoxxtf_JL2QUYWGloazMQFd2OVzU9Xsp1HG_hHbaZI_vDw",
+    "Stars": 5,
+    "response": "Hello Moris! We’re delighted you had a great experience. We’re glad it felt premium and well taken care of. We’ll be happy to have you back soon. Thank you!  Thank you, Team Naturals JP Nagar 5th Phase",
+    "response_date": "2026-03-27"
   },
   {
     "store_id": "N43",
