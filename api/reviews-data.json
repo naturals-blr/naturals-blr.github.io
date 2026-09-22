@@ -13,6 +13,32 @@
     "response_date": "Invalid Da"
   },
   {
+    "store_id": "N78",
+    "store_name": "JP Nagar 5th Phase",
+    "stars": "5",
+    "customer_name": "Bharat Jan Seva",
+    "review_comments": "Nice work. Mohd moin",
+    "show_it_in_website": "Yes",
+    "date_posted": "2026-09-22",
+    "review_id": "AbFvOqmpSI_V2yNFlRwwxHFyIPe3y4dmAKa0XXg1rVJmZqidZzv5MC0FgzFQWCW63Mv5qcmSEw8DWA",
+    "Stars": 5,
+    "response": "Thank you, Bharat Jan Seva! We're thrilled to hear you enjoyed your experience with us. Your kind words about Mohd Moin mean a lot to our team at Naturals Salon. We look forward to seeing you again soon!",
+    "response_date": "2026-09-22"
+  },
+  {
+    "store_id": "N45",
+    "store_name": "Nagavara",
+    "stars": "5",
+    "customer_name": "BHUVANESWARI BATHULA",
+    "review_comments": "Had Good experience with haircut , great Job Thyagaraju gaaru",
+    "show_it_in_website": "Yes",
+    "date_posted": "2026-09-22",
+    "review_id": "AbFvOqmEw4iVOy14DQIT496-ss03aRc7EUxSIXTNKJu9zYwOUKTublvDVKxwUepYrnJxkKKkx9SPOw",
+    "Stars": 5,
+    "response": "Thank you, Bhuvaneswari Bathula, for your wonderful review! We're thrilled to hear you had a great experience with your haircut and that Thyagaraju did a fantastic job. We look forward to seeing you again at Naturals Salon!",
+    "response_date": "2026-09-22"
+  },
+  {
     "store_id": "N05",
     "store_name": "Frazer Town",
     "stars": "4",
