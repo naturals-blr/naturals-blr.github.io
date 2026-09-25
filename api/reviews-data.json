@@ -3,6 +3,19 @@
     "store_id": "N05",
     "store_name": "Frazer Town",
     "stars": "5",
+    "customer_name": "Prem Rose",
+    "review_comments": "I had a fantastic experience. I visited around 8 p.m., and there was only one staff member on duty. Even though three other customers arrived after me, the staff member, \"Mohd Suheb\"",
+    "show_it_in_website": "Yes",
+    "date_posted": "Invalid Da",
+    "review_id": "AbFvOqnp6tHX3dXFsiNwCE7mYIdGaOgfGNHsO11-QxhzeHZJ3rjBvlywM2AnxxPpBEFGEjZpTZ-I8g",
+    "Stars": 5,
+    "response": "2026-09-09T15:53:04.498Z",
+    "response_date": "Invalid Da"
+  },
+  {
+    "store_id": "N05",
+    "store_name": "Frazer Town",
+    "stars": "5",
     "customer_name": "mrunal dev Mahadevan",
     "review_comments": "Amazing service by ANAS. Macha Diya.",
     "show_it_in_website": "Yes",
@@ -725,19 +738,6 @@
     "review_id": "AbFvOqlPMwKXWfltGV4J52bAp2TszizUy7fSfp9SPpYG5CzPUV7qtLF5vwWxNgf0UKiHeAPxOb4Adg",
     "Stars": 5,
     "response": "Thank you, Rio Akash, for your wonderful review! We're thrilled to hear that you received great service from Anusha. We appreciate your support and look forward to seeing you again at Naturals Salon!",
-    "response_date": "2026-09-13"
-  },
-  {
-    "store_id": "N78",
-    "store_name": "JP Nagar 5th Phase",
-    "stars": "5",
-    "customer_name": "Harshitha Singh",
-    "review_comments": "Had a really good experience at the salon! I got a pedicure and waxing done by Anusha, and she did an amazing job. The service was neat and well done, and I’m really happy with the results. Definitely recommend Anusha and the salon.",
-    "show_it_in_website": "Yes",
-    "date_posted": "2026-09-13",
-    "review_id": "AbFvOqnBkbIDT6aT4CEdn2bd2OoFdJIUHfVrhU5qIw35vIVcs6k9WJ_rTvG_6FSgeU4aH788kuYmyQ",
-    "Stars": 5,
-    "response": "Hi Harshitha! Thank you so much for your wonderful review! We're thrilled to hear that you had a great experience with Anusha and loved your pedicure and waxing. Your recommendation means a lot to us. We can't wait to welcome you back to Naturals Salon!",
     "response_date": "2026-09-13"
   },
   {
@@ -2076,8 +2076,8 @@
     "date_posted": "2026-08-24",
     "review_id": "AbFvOqmPNMjfkgIt_iZhRPsayRlEHjdsLT8cJf2QiwT969kwb__lnBQapiodyO1uJVoY04klp6fV",
     "Stars": 5,
-    "response": "Thank you, git git, for your wonderful review! We're thrilled to hear that you had a great experience with Thyagaraju at Naturals Salon. It's fantastic that he could help you find the perfect style. We look forward to welcoming you back soon!",
-    "response_date": "2026-09-08"
+    "response": "Dear Git, We are absolutely delighted to hear about your wonderful experience with Thyagaraj, who truly embodies our commitment to expert hair styling and personalized consultations. It brings us immense joy to know he crafted a look that perfectly suited you. Naturals Nagavara Guest Relations Team",
+    "response_date": "2026-08-24"
   },
   {
     "store_id": "N36",
@@ -107989,19 +107989,6 @@
     "Stars": 3,
     "response": "Dear Mr. Reddy,  Thank you for sharing your experience at Naturals Unisex Salon - Frazer Town. We sincerely apologize for the delay in our response and appreciate you taking the time to provide feedback.  We are currently auditing older reviews to ensure every guest is heard. Since then, we have made significant improvements in our services and now feature highly skilled, top-tier stylists.   We warmly invite you to revisit us soon and experience the enhanced service we offer. Please follow our Facebook and Instagram pages for updates and best offers.  Looking forward to pampering you again at Naturals Unisex Salon - Frazer Town 😊✨  Best regards, [Your Name] Store Manager",
     "response_date": "2026-05-26"
-  },
-  {
-    "store_id": "N05",
-    "store_name": "Frazer Town",
-    "stars": "5",
-    "customer_name": "Prem Rose",
-    "review_comments": "I had a fantastic experience. I visited around 8 p.m., and there was only one staff member on duty. Even though three other customers arrived after me, the staff member, \"Mohd Suheb\"",
-    "show_it_in_website": "Yes",
-    "date_posted": "",
-    "review_id": "AbFvOqnp6tHX3dXFsiNwCE7mYIdGaOgfGNHsO11-QxhzeHZJ3rjBvlywM2AnxxPpBEFGEjZpTZ-I8g",
-    "Stars": 5,
-    "response": "2026-09-09T15:53:04.498Z",
-    "response_date": ""
   },
   {
     "store_id": "N36",
