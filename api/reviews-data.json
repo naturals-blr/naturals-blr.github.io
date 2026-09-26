@@ -39,6 +39,19 @@
     "response_date": "2026-09-25"
   },
   {
+    "store_id": "N45",
+    "store_name": "Nagavara",
+    "stars": "5",
+    "customer_name": "Sailee Khaparde",
+    "review_comments": "Great service by shikha!!",
+    "show_it_in_website": "Yes",
+    "date_posted": "2026-09-25",
+    "review_id": "AbFvOqmFA1z5BWGvbVzsxP78Pvu5baFSDOZJKfIbHpBRXNpraIhvKxsB9UBqGARJXPkd1zXB8kEX",
+    "Stars": 5,
+    "response": "Dear Sailee, We are absolutely delighted to hear you had a wonderful experience with Shikha! Providing the best unisex salon in Nagavara with exceptional service is always our highest priority. Naturals Nagavara Management & Stylists",
+    "response_date": "2026-09-25"
+  },
+  {
     "store_id": "N05",
     "store_name": "Frazer Town",
     "stars": "5",
@@ -169,6 +182,19 @@
     "response_date": "2026-09-22"
   },
   {
+    "store_id": "N78",
+    "store_name": "JP Nagar 5th Phase",
+    "stars": "5",
+    "customer_name": "BHARAT JAN SEVA",
+    "review_comments": "nice haircut by moin. i like services",
+    "show_it_in_website": "Yes",
+    "date_posted": "2026-09-22",
+    "review_id": "AbFvOqmn4RSIaZ55pvfInluuXMssmJy0DSrvPaqzCPmHZqDvm1nD0jqBeRXJeOxjS8GeyvXNO3_hIg",
+    "Stars": 5,
+    "response": "Thank you, Bharat Jan Seva, for your wonderful review! We're thrilled to hear that you enjoyed your haircut by Moin and appreciated our services. We look forward to welcoming you back to Naturals Salon soon!",
+    "response_date": "2026-09-25"
+  },
+  {
     "store_id": "N36",
     "store_name": "Ayyappa Nagar",
     "stars": "5",
@@ -185,6 +211,19 @@
     "store_id": "N05",
     "store_name": "Frazer Town",
     "stars": "5",
+    "customer_name": "Sri Vathsan",
+    "review_comments": "Great experience. Thanks to Soyab",
+    "show_it_in_website": "Yes",
+    "date_posted": "2026-09-22",
+    "review_id": "AbFvOqmbsO3Qhd4B-qAQkuS15afL7Px0PhI-lOGPkpFn3FYYzs0Mj353S6lbFvmFF50dQMEzIfqMtw",
+    "Stars": 5,
+    "response": "Dear Sri, We are absolutely delighted you had a great experience with us, and Soyab was thrilled to receive your kind mention. It is always our pleasure to provide a truly 5-star experience at Naturals Frazer Town, the best Anas salon in Frazer Town. The Creative Hands at Naturals Frazer Town",
+    "response_date": "2026-09-25"
+  },
+  {
+    "store_id": "N05",
+    "store_name": "Frazer Town",
+    "stars": "5",
     "customer_name": "Netala Vinay",
     "review_comments": "Good service by anas",
     "show_it_in_website": "Yes",
@@ -192,6 +231,19 @@
     "review_id": "AbFvOqkbdhlUqrR12KNoJWELCLIBKku6JB35BVqjmDO9BnzXSDUB349tkhdQFJH8vC3cQehrdXzVEg",
     "Stars": 5,
     "response": "Thank you, Netala Vinay! We're thrilled to hear that you had a great experience with Anas. Your kind words motivate us to keep delivering excellent service at Naturals Salon. We look forward to welcoming you back soon!",
+    "response_date": "2026-09-25"
+  },
+  {
+    "store_id": "N05",
+    "store_name": "Frazer Town",
+    "stars": "5",
+    "customer_name": "Puli Jaya varshini",
+    "review_comments": "Good experience and satisfied with eye brow service done by Poornima ji",
+    "show_it_in_website": "Yes",
+    "date_posted": "2026-09-22",
+    "review_id": "AbFvOqmFzBudiGMZVS2Ebpwj7cO7genWM0prTO0jOw3lDJ6s5JT9YqN0niK43rEN6neoMOiX_kv1zA",
+    "Stars": 5,
+    "response": "Thank you, Puli Jaya Varshini! We're thrilled to hear that you had a great experience with the eyebrow service by Poornima. Your satisfaction means a lot to us at Naturals Salon. We look forward to welcoming you back soon!",
     "response_date": "2026-09-25"
   },
   {
@@ -286,6 +338,32 @@
     "response_date": "2026-09-20"
   },
   {
+    "store_id": "N78",
+    "store_name": "JP Nagar 5th Phase",
+    "stars": "5",
+    "customer_name": "Dhana Sri",
+    "review_comments": "Sara did a nice haircut as per my requirments",
+    "show_it_in_website": "Yes",
+    "date_posted": "2026-09-20",
+    "review_id": "AbFvOqmH1RN7IayH3jhSX2DtBo1BexUYP3OwNsnQtn85idcDFalvnHuG_rM3YAne_gbJ8DuQ4--bCg",
+    "Stars": 5,
+    "response": "Thank you, Dhana Sri! We're thrilled to hear that you loved your haircut by Sara. Your satisfaction means a lot to us at Naturals Salon. We look forward to seeing you again soon!",
+    "response_date": "2026-09-25"
+  },
+  {
+    "store_id": "N45",
+    "store_name": "Nagavara",
+    "stars": "5",
+    "customer_name": "namitha mangalasseri",
+    "review_comments": "Overall nice soothing experience, staff lalitha mam took good care of the hair and carefully managed.Great experience.",
+    "show_it_in_website": "Yes",
+    "date_posted": "2026-09-20",
+    "review_id": "AbFvOql5e4xmoBjSPhiKfRWQsigJHMK2W9JfJk6aGKo_txeFvkhJYlbm3RYmxBrd_nhDjLMVUOJ8",
+    "Stars": 5,
+    "response": "Thank you so much for your wonderful review, Namitha! We're thrilled to hear that you had a soothing experience and that Lalitha took great care of your hair. Your satisfaction means a lot to us at Naturals Salon. We look forward to welcoming you back soon!",
+    "response_date": "2026-09-25"
+  },
+  {
     "store_id": "N45",
     "store_name": "Nagavara",
     "stars": "5",
@@ -297,6 +375,19 @@
     "Stars": 5,
     "response": "Thank you, AEDLA NAIMISHA, for your 5-star rating! We're thrilled to hear you had a great experience at Naturals Salon. We look forward to welcoming you back soon!",
     "response_date": "2026-09-20"
+  },
+  {
+    "store_id": "N36",
+    "store_name": "Ayyappa Nagar",
+    "stars": "5",
+    "customer_name": "Shakthi Hariharan Menon",
+    "review_comments": "Radha, the hair spa and hair cut was very good and eyebrows looked exactly the way I wanted the service was also very awesome just loved it thank you",
+    "show_it_in_website": "Yes",
+    "date_posted": "2026-09-20",
+    "review_id": "AbFvOqnvXODRTF9ktFDXDQn_xIt4YZtDhjjvM2606a8QOtUz5CJywn8hkEg_0XbYZvrKoliqeO6hgg",
+    "Stars": 5,
+    "response": "Dear Shakthi, We are absolutely delighted to hear you loved your hair spa, haircut, and eyebrow service with Radha! It brings us immense joy to know we delivered the precise look you desired, upholding our commitment to expert hair styling. The Creative Hands at Naturals Ayyappa Nagar",
+    "response_date": "2026-09-25"
   },
   {
     "store_id": "N36",
@@ -336,45 +427,6 @@
     "Stars": 5,
     "response": "Thank you, bgkrupa, for your 5-star rating! We're thrilled to hear you had a great experience at Naturals Salon. We look forward to welcoming you back soon!",
     "response_date": "2026-09-20"
-  },
-  {
-    "store_id": "N78",
-    "store_name": "JP Nagar 5th Phase",
-    "stars": "5",
-    "customer_name": "Dhana Sri",
-    "review_comments": "Sara did a nice haircut as per my requirments",
-    "show_it_in_website": "Yes",
-    "date_posted": "2026-09-20",
-    "review_id": "AbFvOqmH1RN7IayH3jhSX2DtBo1BexUYP3OwNsnQtn85idcDFalvnHuG_rM3YAne_gbJ8DuQ4--bCg",
-    "Stars": 5,
-    "response": "Thank you, Dhana Sri! We're thrilled to hear that you loved your haircut by Sara. Your satisfaction means a lot to us at Naturals Salon. We look forward to seeing you again soon!",
-    "response_date": "2026-09-25"
-  },
-  {
-    "store_id": "N45",
-    "store_name": "Nagavara",
-    "stars": "5",
-    "customer_name": "namitha mangalasseri",
-    "review_comments": "Overall nice soothing experience, staff lalitha mam took good care of the hair and carefully managed.Great experience.",
-    "show_it_in_website": "Yes",
-    "date_posted": "2026-09-20",
-    "review_id": "AbFvOql5e4xmoBjSPhiKfRWQsigJHMK2W9JfJk6aGKo_txeFvkhJYlbm3RYmxBrd_nhDjLMVUOJ8",
-    "Stars": 5,
-    "response": "Thank you so much for your wonderful review, Namitha! We're thrilled to hear that you had a soothing experience and that Lalitha took great care of your hair. Your satisfaction means a lot to us at Naturals Salon. We look forward to welcoming you back soon!",
-    "response_date": "2026-09-25"
-  },
-  {
-    "store_id": "N36",
-    "store_name": "Ayyappa Nagar",
-    "stars": "5",
-    "customer_name": "Shakthi Hariharan Menon",
-    "review_comments": "Radha, the hair spa and hair cut was very good and eyebrows looked exactly the way I wanted the service was also very awesome just loved it thank you",
-    "show_it_in_website": "Yes",
-    "date_posted": "2026-09-20",
-    "review_id": "AbFvOqnvXODRTF9ktFDXDQn_xIt4YZtDhjjvM2606a8QOtUz5CJywn8hkEg_0XbYZvrKoliqeO6hgg",
-    "Stars": 5,
-    "response": "Dear Shakthi, We are absolutely delighted to hear you loved your hair spa, haircut, and eyebrow service with Radha! It brings us immense joy to know we delivered the precise look you desired, upholding our commitment to expert hair styling. The Creative Hands at Naturals Ayyappa Nagar",
-    "response_date": "2026-09-25"
   },
   {
     "store_id": "N36",
@@ -507,6 +559,19 @@
     "response_date": "2026-09-25"
   },
   {
+    "store_id": "N05",
+    "store_name": "Frazer Town",
+    "stars": "5",
+    "customer_name": "Aqib Javeed",
+    "review_comments": "Visit here with the professional named Anas, his services and skills and experience was top notch, firstly I had been for hair cut grooming and facial, services were so good that I had to visit them with even other options available for me, true skills and professionalism and service at the best, must recommended.",
+    "show_it_in_website": "Yes",
+    "date_posted": "2026-09-19",
+    "review_id": "AbFvOqnYIpOuYOCz0p_1nDqci8CQln5iRxsCOlTURqNKMnAVLHy7RwN2U0-cE64DAfoCihtROvJAPQ",
+    "Stars": 5,
+    "response": "Dear Aqib, It brings us immense joy to hear of your exceptional experience with Anas, whose top-notch skills truly embody our dedication to perfection in expert hair styling. We are so pleased that our professionalism and service excellence made such an impression. The Relaxation Experts at Naturals Frazer Town",
+    "response_date": "2026-09-25"
+  },
+  {
     "store_id": "N43",
     "store_name": "Hennur",
     "stars": "5",
@@ -557,6 +622,19 @@
     "Stars": 5,
     "response": "Dear Suganthi, It warms our hearts to know Radha Parvathi you with such a wonderful experience! We are dedicated to ensuring every visit to Naturals Ayyappa Nagar leaves you feeling perfectly pampered. Your Pampering Partners @ Naturals Ayyappa Nagar",
     "response_date": "2026-09-18"
+  },
+  {
+    "store_id": "N05",
+    "store_name": "Frazer Town",
+    "stars": "5",
+    "customer_name": "Sameer Ahmed",
+    "review_comments": "Amazing service and Suhaib did a great work on haircut and shave.",
+    "show_it_in_website": "Yes",
+    "date_posted": "2026-09-18",
+    "review_id": "AbFvOqnWOUyXLMzpHsaGLtrBlzSFiYbUsgEKNHgaqkgC3ckkEiCDUyJ-2fBn0tZHhIlgVSxbPESB1A",
+    "Stars": 5,
+    "response": "",
+    "response_date": ""
   },
   {
     "store_id": "N05",
@@ -1972,8 +2050,8 @@
     "date_posted": "2026-08-28",
     "review_id": "AbFvOqnnFSSky1nW8ULiyyReSjhFlqcCkpIxP47XrTpSygrbz8hxSmOQ_gF2rPxpq9yjxUGMwo7M",
     "Stars": 5,
-    "response": "Thank you, Athira Sabu, for your wonderful review! We're thrilled to hear that you had a relaxing and comfortable experience with Shikha at Naturals Salon. We look forward to welcoming you back soon!",
-    "response_date": "2026-09-08"
+    "response": "Dear Athira, We are delighted to hear you had such a relaxing and comfortable experience with Shikha for your facial and pedicure. Providing professional skin care and moments of pure bliss is always our aim. Naturals Nagavara — Your Dedicated Luxury Stylists",
+    "response_date": "2026-08-28"
   },
   {
     "store_id": "N45",
@@ -1985,8 +2063,8 @@
     "date_posted": "2026-08-28",
     "review_id": "AbFvOqnjqAGGRJu1G4-yDTpKn748AyuPQGyxHutVQdTp693zg9otRDoQkF72BmyrzNqQbPmtNkTD5A",
     "Stars": 5,
-    "response": "Thank you, Anowar Hussain, for your wonderful review! We're thrilled to hear you had a great experience at Naturals Salon, and we'll be sure to pass your kind words on to Samir. We look forward to welcoming you back soon!",
-    "response_date": "2026-09-08"
+    "response": "Dear Anowar, We are absolutely delighted to hear such wonderful feedback about your experience at Naturals Nagavara, and Sameer was thrilled to receive your special mention! It is our constant endeavor to be the best unisex salon in Nagavara, ensuring every visit is nothing short of five-star perfection. Team Naturals Nagavara (Looking forward to your next visit!)",
+    "response_date": "2026-08-28"
   },
   {
     "store_id": "N36",
@@ -2024,8 +2102,8 @@
     "date_posted": "2026-08-27",
     "review_id": "AbFvOqk2N_fOENV86NlEoAAP9dZllg5owyGajSQx_2uUBN4S9iiJ93v1I5eGxj7684A792nV3XFgyA",
     "Stars": 5,
-    "response": "Thank you, Bhumika, for your kind words! We're thrilled to hear you enjoyed the service from Shikha at Naturals Salon. We look forward to welcoming you back soon!",
-    "response_date": "2026-09-08"
+    "response": "Dear Bhumika, We are delighted to hear that Shikha ma'am provided you with such a nice service! Our entire team at Naturals Nagavara is dedicated to ensuring every visit is a truly 5-star experience, making us a top-rated salon near Nagavara. The Stylists & Care Team at Naturals Nagavara",
+    "response_date": "2026-08-27"
   },
   {
     "store_id": "N36",
@@ -2986,8 +3064,8 @@
     "date_posted": "2026-08-15",
     "review_id": "AbFvOqk8JsLhJiyfJjKvB0PLl9q0DB0QCgE0g2YiopMIlRUUcI7zyL1ME1t32Ml5E2GeuyHHlmsc4g",
     "Stars": 2,
-    "response": "Hi Thangaraj R, we're sorry to hear about your recent experience at Naturals Salon. We appreciate your feedback and understand your concerns about consistency. Your loyalty since 2019 means a lot to us, and we regret any disappointment caused. Thank you for sharing your thoughts.",
-    "response_date": "2026-09-08"
+    "response": "Dear Thangaraj,  Thank you for bringing this to our attention. We sincerely apologize that your recent haircut did not meet the high standards you've experienced with us in the past. We understand how frustrating inconsistent quality can be, especially for a valued client who has been visiting us since 2019. We are addressing this directly with our styling team to ensure consistent precision for every service. We would welcome the opportunity to make this right for you personally. Please contact our Store Manager  so we can resolve this with you. Thank you.",
+    "response_date": "2026-08-21"
   },
   {
     "store_id": "N78",
@@ -4000,8 +4078,8 @@
     "date_posted": "2026-08-06",
     "review_id": "AbFvOqkp8Kdo_ay4ixF7IdTFuGgbpcSbFcqDNxwzu3EpHERIAvdk4_Y5KePIT-nIfKzfWtLPgs4nUg",
     "Stars": 5,
-    "response": "Thank you, Athiq Yacoob, for your wonderful review! We're thrilled to hear about your excellent experience with Armaan at Naturals Salon. It's great to know he provided such attentive and professional service. We appreciate your recommendation and look forward to welcoming you back soon!",
-    "response_date": "2026-09-08"
+    "response": "Dear Athiq,  We are delighted to hear that Armaan provided you with an exceptional experience at Naturals Hennur, showcasing his skill and dedication to delivering outstanding haircuts as one of the expert hair styling specialists in the area. Our team, including Armaan, is committed to ensuring every visit exceeds expectations, and we appreciate your kind words about his professionalism and passion for his work.  Naturals Hennur Beauty Desk",
+    "response_date": "2026-08-07"
   },
   {
     "store_id": "N05",
@@ -108121,19 +108199,6 @@
     "response_date": "2026-05-26"
   },
   {
-    "store_id": "N05",
-    "store_name": "Frazer Town",
-    "stars": "5",
-    "customer_name": "Prem Rose",
-    "review_comments": "I had a fantastic experience. I visited around 8 p.m., and there was only one staff member on duty. Even though three other customers arrived after me, the staff member, \"Mohd Suheb\"",
-    "show_it_in_website": "Yes",
-    "date_posted": "",
-    "review_id": "AbFvOqnp6tHX3dXFsiNwCE7mYIdGaOgfGNHsO11-QxhzeHZJ3rjBvlywM2AnxxPpBEFGEjZpTZ-I8g",
-    "Stars": 5,
-    "response": "2026-09-09T15:53:04.498Z",
-    "response_date": ""
-  },
-  {
     "store_id": "N36",
     "store_name": "Ayyappa Nagar",
     "stars": "1",
@@ -108145,5 +108210,18 @@
     "Stars": 1,
     "response": "2019-10-02T14:22:22.431Z",
     "response_date": "2019-10-02"
+  },
+  {
+    "store_id": "N05",
+    "store_name": "Frazer Town",
+    "stars": "5",
+    "customer_name": "Prem Rose",
+    "review_comments": "I had a fantastic experience. I visited around 8 p.m., and there was only one staff member on duty. Even though three other customers arrived after me, the staff member, \"Mohd Suheb\"",
+    "show_it_in_website": "Yes",
+    "date_posted": "",
+    "review_id": "AbFvOqnp6tHX3dXFsiNwCE7mYIdGaOgfGNHsO11-QxhzeHZJ3rjBvlywM2AnxxPpBEFGEjZpTZ-I8g",
+    "Stars": 5,
+    "response": "2026-09-09T15:53:04.498Z",
+    "response_date": ""
   }
 ]
