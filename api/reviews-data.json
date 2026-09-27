@@ -39,6 +39,19 @@
     "response_date": "2026-09-26"
   },
   {
+    "store_id": "N05",
+    "store_name": "Frazer Town",
+    "stars": "5",
+    "customer_name": "Κένρικ Άνταμ",
+    "review_comments": "Amazing service. Loved this guy anas, very helpful and went out of his way to provide good service",
+    "show_it_in_website": "Yes",
+    "date_posted": "2026-09-26",
+    "review_id": "AbFvOqlV3nQhHWzrURYXZQdzrrpxShS8ZTwHYDkIGa1gUdE54wOhBb31YRJ9EqYYezGa5xcfK1nofg",
+    "Stars": 5,
+    "response": "Thank you, Κένρικ Άνταμ, for your wonderful review! We're thrilled to hear that Anas provided you with amazing service and went above and beyond to help you. Your satisfaction means a lot to us at Naturals Salon! We look forward to seeing you again soon!",
+    "response_date": "2026-09-26"
+  },
+  {
     "store_id": "N36",
     "store_name": "Ayyappa Nagar",
     "stars": "5",
@@ -2869,8 +2882,8 @@
     "date_posted": "2026-08-17",
     "review_id": "AbFvOqkL7X1Jj6xJv7teXdfiYQKqT3Zm6Nd13oEulBN2TFNc-t6X_ecNNiQqliUMn80jihQjJVVh2A",
     "Stars": 1,
-    "response": "Hi Leela Sami,  We're truly sorry to hear about your experience at Naturals Salon. Your feedback is important, and we apologize for any inconvenience you faced. We strive to provide excellent service and will address these concerns with our team. Thank you for bringing this to our attention.  Best,   Naturals Salon Team",
-    "response_date": "2026-09-08"
+    "response": "Dear Leela,  Thank you for sharing your feedback. While every salon occasionally faces operational challenges, leaving a client unattended, displaying confusion over our menu, and serving cold water fall far below the standards we hold ourselves to. We are deeply sorry and embarrassed by your experience. We are addressing this lapse directly with our staff to ensure immediate corrective training and smoother operations. We would truly appreciate the opportunity to speak with you personally, apologize properly, and invite you back for the seamless, high-quality experience you originally expected. Please reach out to our Store Manager directly at our store number. Thank you.",
+    "response_date": "2026-08-21"
   },
   {
     "store_id": "N43",
