@@ -13,6 +13,32 @@
     "response_date": "Invalid Da"
   },
   {
+    "store_id": "N45",
+    "store_name": "Nagavara",
+    "stars": "5",
+    "customer_name": "Nandana Sunil",
+    "review_comments": "Great services by Lalitha!! Will be out for one more visit 😃",
+    "show_it_in_website": "Yes",
+    "date_posted": "2026-09-28",
+    "review_id": "AbFvOqnxNUtPhZAhllEJ5p9WxxRsQ0hLQXijiOyGdzqT5Y5aEe16HN5a47fHb-p5-73TXezcj2Ltdw",
+    "Stars": 5,
+    "response": "Thank you so much for your wonderful review, Nandana! We're thrilled to hear that you had a great experience with Lalitha. We can't wait to welcome you back for your next visit! 😊",
+    "response_date": "2026-09-28"
+  },
+  {
+    "store_id": "N45",
+    "store_name": "Nagavara",
+    "stars": "5",
+    "customer_name": "Harsha",
+    "review_comments": "Hands down the best service I've received at Naturals! Big shoutout to Thangaraj for an exceptional haircut and styling. Super professional and polite",
+    "show_it_in_website": "Yes",
+    "date_posted": "2026-09-28",
+    "review_id": "AbFvOqnQBNOZ46gQbE9wnYTKcP8hIs937cJQw0KTK8dmulsVejJsxv9TQKU5OdbwaHVEcadsnizEUQ",
+    "Stars": 5,
+    "response": "Hi Harsha! Thank you so much for your wonderful review! We're thrilled to hear that you had the best service at Naturals and that Thangaraj made such a positive impression with his exceptional haircut and styling. We appreciate your kind words and look forward to welcoming you back soon!",
+    "response_date": "2026-09-28"
+  },
+  {
     "store_id": "N36",
     "store_name": "Ayyappa Nagar",
     "stars": "5",
