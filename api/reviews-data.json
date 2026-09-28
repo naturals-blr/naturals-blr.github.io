@@ -1,5 +1,18 @@
 [
   {
+    "store_id": "N05",
+    "store_name": "Frazer Town",
+    "stars": "5",
+    "customer_name": "Prem Rose",
+    "review_comments": "I had a fantastic experience. I visited around 8 p.m., and there was only one staff member on duty. Even though three other customers arrived after me, the staff member, \"Mohd Suheb\"",
+    "show_it_in_website": "Yes",
+    "date_posted": "Invalid Da",
+    "review_id": "AbFvOqnp6tHX3dXFsiNwCE7mYIdGaOgfGNHsO11-QxhzeHZJ3rjBvlywM2AnxxPpBEFGEjZpTZ-I8g",
+    "Stars": 5,
+    "response": "2026-09-09T15:53:04.498Z",
+    "response_date": "Invalid Da"
+  },
+  {
     "store_id": "N36",
     "store_name": "Ayyappa Nagar",
     "stars": "5",
@@ -100,7 +113,7 @@
     "date_posted": "2026-09-27",
     "review_id": "AbFvOqk2sPAHDl5fMhk8eNW-N0sW56QqTkRkEK7HitxsgIY585yHP7Fd-jgmEWKuZ1-gyjrPWL6HrQ",
     "Stars": 5,
-    "response": "Dear Pushpa, We are delighted to hear that Kerthana provided you with such a wonderful and engaging experience at Naturals Nagavara; our team strives to be the best unisex salon in Nagavara, and your feedback truly inspires us. We look forward to welcoming you back for another exceptional visit soon! Naturals Nagavara Management & Stylists",
+    "response": "Thank you, Pushpa Kalla, for your wonderful review! We're thrilled to hear that you had a great experience with Keerthi. Her interactive approach truly makes a difference. We look forward to welcoming you back to Naturals Salon soon!",
     "response_date": "2026-09-27"
   },
   {
@@ -452,32 +465,6 @@
     "review_id": "AbFvOqkMRyaF5rOMmbId-ceiDg9-f8DW_RHaNsOqt6__n9wCFECli6qSbNiKaXTsvDdqi9MtEtfjHA",
     "Stars": 4,
     "response": "Thank you, Dr. Bi Bi Ameena Ameena, for your kind words! We're thrilled to hear that Jyoti and Poornima made your experience enjoyable. Your feedback means a lot to us, and we hope to see you again soon at Naturals Salon!",
-    "response_date": "2026-09-21"
-  },
-  {
-    "store_id": "N78",
-    "store_name": "JP Nagar 5th Phase",
-    "stars": "5",
-    "customer_name": "Ratna Biswakarma",
-    "review_comments": "I recently had a wonderful experience at natural, I've done hydrafacial and balayage hair colour and  the all over experience was amazing , the hydrafacial treatment was amazing and it felt my skin  hydrate and my skin get smoth, and they were vry polite  ,friendly and professional, They're expertise in their work, I love the services 😘😘 Who are loking for good services you must visit natural salon jp nagar , I'd recommend natural to whom who wants to experience amazing services Special sonam , and sara thnku so 😊,",
-    "show_it_in_website": "Yes",
-    "date_posted": "2026-09-21",
-    "review_id": "AbFvOqmr3ftaqwraeA6JGFp6JcBLpPTI4xrHjl3cB1Y4qjV7ZvKwx4EIx7AsOXR4PV6DQKMlO-rMfg",
-    "Stars": 5,
-    "response": "Hi Ratna Biswakarma! Thank you so much for your wonderful review! We're thrilled to hear that you had an amazing experience with our hydrafacial and balayage services. Our team, especially Sonam and Sara, will be delighted to know they made a positive impact. We appreciate your recommendation and look forward to welcoming you back to Naturals Salon soon! 😊",
-    "response_date": "2026-09-21"
-  },
-  {
-    "store_id": "N78",
-    "store_name": "JP Nagar 5th Phase",
-    "stars": "5",
-    "customer_name": "ARSH",
-    "review_comments": "I like how they do hairstyle and haircut professionaly. Good manners",
-    "show_it_in_website": "Yes",
-    "date_posted": "2026-09-21",
-    "review_id": "AbFvOqk6MczXYWh2qbDrhKtxsc4pNfjn_p93XMW6vUVrYPAHUHvVxvAZPVrA7MyREaKbvXDCKiktbA",
-    "Stars": 5,
-    "response": "Thank you, ARSH! We're thrilled to hear that you enjoyed your experience at Naturals Salon. Our team takes pride in providing professional hairstyles and haircuts with great manners. We appreciate your kind words and look forward to seeing you again!",
     "response_date": "2026-09-21"
   },
   {
@@ -1128,45 +1115,6 @@
     "review_id": "AbFvOqn8vw6KpLFhcrNCx7n2vIGzsNcOpKcW_5P492a-7e_OpnRtQtfu0vpUmDb4G5vKpV4xuiGDVg",
     "Stars": 5,
     "response": "Thank you, Pragathi, for your wonderful review! We're thrilled to hear that you and your husband had such a great experience at Naturals Salon. Our team, especially Mr. Mohin and Ms. Anusha, will be delighted to know they made a positive impact. We look forward to welcoming you back for more excellent services! 🥰",
-    "response_date": "2026-09-13"
-  },
-  {
-    "store_id": "N78",
-    "store_name": "JP Nagar 5th Phase",
-    "stars": "5",
-    "customer_name": "Rio Akash",
-    "review_comments": "good service by anusha",
-    "show_it_in_website": "Yes",
-    "date_posted": "2026-09-13",
-    "review_id": "AbFvOqlPMwKXWfltGV4J52bAp2TszizUy7fSfp9SPpYG5CzPUV7qtLF5vwWxNgf0UKiHeAPxOb4Adg",
-    "Stars": 5,
-    "response": "Thank you, Rio Akash, for your wonderful review! We're thrilled to hear that you received great service from Anusha. We appreciate your support and look forward to seeing you again at Naturals Salon!",
-    "response_date": "2026-09-13"
-  },
-  {
-    "store_id": "N78",
-    "store_name": "JP Nagar 5th Phase",
-    "stars": "5",
-    "customer_name": "Rahul Kumar",
-    "review_comments": "Moin did my haircut exactly how I wanted and also hairspa was great. Very relaxing",
-    "show_it_in_website": "Yes",
-    "date_posted": "2026-09-13",
-    "review_id": "AbFvOqlC4FCIq45exyoqQZ-lbCTX68g3xdbctE-YaDHSaoZ4oa4PLWBkEDVL8tZ6I9bxbkXJrvvgSQ",
-    "Stars": 5,
-    "response": "Hi Rahul! Thank you for the fantastic review! We're thrilled to hear that Moin delivered the perfect haircut and that you enjoyed the relaxing hair spa experience. We hope to see you again soon at Naturals Salon!",
-    "response_date": "2026-09-13"
-  },
-  {
-    "store_id": "N78",
-    "store_name": "JP Nagar 5th Phase",
-    "stars": "5",
-    "customer_name": "Rajalakshmi 7605",
-    "review_comments": "Visited naturals jpnagar for the first time and loved the service here got my facial done from sonam she was super good at it.",
-    "show_it_in_website": "Yes",
-    "date_posted": "2026-09-13",
-    "review_id": "AbFvOqmZxadUDRNM1MZ4kM2cwNWPjBx0MT8wNwnJJfjESPLWB-Io8bw_IGZr4SktPEtq4fOWXXtmpQ",
-    "Stars": 5,
-    "response": "Thank you, Rajalakshmi, for your wonderful review! We're thrilled to hear that you loved your first visit to Naturals Salon in JPNagar and that Sonam provided you with excellent service. We look forward to welcoming you back for more pampering soon!",
     "response_date": "2026-09-13"
   },
   {
@@ -108405,19 +108353,6 @@
     "Stars": 3,
     "response": "Dear Mr. Reddy,  Thank you for sharing your experience at Naturals Unisex Salon - Frazer Town. We sincerely apologize for the delay in our response and appreciate you taking the time to provide feedback.  We are currently auditing older reviews to ensure every guest is heard. Since then, we have made significant improvements in our services and now feature highly skilled, top-tier stylists.   We warmly invite you to revisit us soon and experience the enhanced service we offer. Please follow our Facebook and Instagram pages for updates and best offers.  Looking forward to pampering you again at Naturals Unisex Salon - Frazer Town 😊✨  Best regards, [Your Name] Store Manager",
     "response_date": "2026-05-26"
-  },
-  {
-    "store_id": "N05",
-    "store_name": "Frazer Town",
-    "stars": "5",
-    "customer_name": "Prem Rose",
-    "review_comments": "I had a fantastic experience. I visited around 8 p.m., and there was only one staff member on duty. Even though three other customers arrived after me, the staff member, \"Mohd Suheb\"",
-    "show_it_in_website": "Yes",
-    "date_posted": "",
-    "review_id": "AbFvOqnp6tHX3dXFsiNwCE7mYIdGaOgfGNHsO11-QxhzeHZJ3rjBvlywM2AnxxPpBEFGEjZpTZ-I8g",
-    "Stars": 5,
-    "response": "2026-09-09T15:53:04.498Z",
-    "response_date": ""
   },
   {
     "store_id": "N36",
