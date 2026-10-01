@@ -1,16 +1,55 @@
 [
   {
-    "store_id": "N05",
-    "store_name": "Frazer Town",
+    "store_id": "N36",
+    "store_name": "Ayyappa Nagar",
     "stars": "5",
-    "customer_name": "Prem Rose",
-    "review_comments": "I had a fantastic experience. I visited around 8 p.m., and there was only one staff member on duty. Even though three other customers arrived after me, the staff member, \"Mohd Suheb\"",
+    "customer_name": "Vishnu Vandhana R",
+    "review_comments": "Hi  Thank you for the service radha . Exceptionally good . Neatly done facial",
     "show_it_in_website": "Yes",
-    "date_posted": "Invalid Da",
-    "review_id": "AbFvOqnp6tHX3dXFsiNwCE7mYIdGaOgfGNHsO11-QxhzeHZJ3rjBvlywM2AnxxPpBEFGEjZpTZ-I8g",
+    "date_posted": "2026-10-01",
+    "review_id": "AbFvOqlNZDA5HLP2cT1VV_83r7tNafTbo4DsonFVpQtLv86JcjZrWEGBfcluhvB_I224dreIsApOgQ",
     "Stars": 5,
-    "response": "2026-09-09T15:53:04.498Z",
-    "response_date": "Invalid Da"
+    "response": "Dear Vishnu, It warms our hearts to know Radha Parvathi you with an exceptionally good and neatly done facial; our team is dedicated to offering professional skin care that leaves you feeling rejuvenated. We eagerly await your next visit for another pampering experience. Your Premium Grooming Experts @ Naturals Ayyappa Nagar",
+    "response_date": "2026-10-01"
+  },
+  {
+    "store_id": "N45",
+    "store_name": "Nagavara",
+    "stars": "5",
+    "customer_name": "Rakshita Nk",
+    "review_comments": "",
+    "show_it_in_website": "Yes",
+    "date_posted": "2026-10-01",
+    "review_id": "AbFvOqkcqVhchR8SpSQwHIL3ehtPBKJ8QLyYwxIzycs8UY364FcCNwSWn5YkvyZeN9a5BGqMEOM2",
+    "Stars": 5,
+    "response": "Dear Rakshita, We are absolutely delighted to receive your 5-star rating for Naturals Nagavara! It's always our pleasure to provide the best unisex salon experience in Nagavara. Your Personal Stylists @ Naturals Nagavara",
+    "response_date": "2026-10-01"
+  },
+  {
+    "store_id": "N36",
+    "store_name": "Ayyappa Nagar",
+    "stars": "5",
+    "customer_name": "Jessie Ann",
+    "review_comments": "I got a bunch of services done - full arms, full legs, underarms, upper lip waxing, pedicure and manicure. Bhagya was very gentle and the experience was very calming.",
+    "show_it_in_website": "Yes",
+    "date_posted": "2026-10-01",
+    "review_id": "AbFvOqk0HNuKt0fcRK2l3vQ9nHj_quBxWU4IhQ8qFbWIWDisZj2FQ-Js4Adpae89jS-Ef3gysTW4WQ",
+    "Stars": 5,
+    "response": "Dear Jessie, We are absolutely delighted to hear that Bhagya Parvathi you with such a calming and gentle experience across your services. It’s always our pleasure to ensure every visit leaves you feeling refreshed and pampered, reflecting our dedication to professional skin care. Naturals Ayyappa Nagar — Your Salon Family",
+    "response_date": "2026-10-01"
+  },
+  {
+    "store_id": "N78",
+    "store_name": "JP Nagar 5th Phase",
+    "stars": "5",
+    "customer_name": "Sukriti",
+    "review_comments": "Sara is exceptional with her services! I got layered haircut with curtain bangs and she guided me a lot!",
+    "show_it_in_website": "Yes",
+    "date_posted": "2026-10-01",
+    "review_id": "AbFvOqm3mMsqaAYJe39TcTV_X3oIWFgaUmqLtFLKWf2WxKTp92oA4BezgK73eVvYgLQXhJF0UoSjZw",
+    "Stars": 5,
+    "response": "Dear Sukriti, We are absolutely delighted to hear that Sarah provided you with such an exceptional experience for your layered haircut and curtain bangs. Our team strives to offer expert hair styling, ensuring every client feels perfectly guided and pampered. The Elite Style Team, Naturals JP Nagar 5th Phase",
+    "response_date": "2026-10-01"
   },
   {
     "store_id": "N78",
@@ -219,6 +258,19 @@
     "Stars": 5,
     "response": "Thank you so much for your kind words, Aman Raj! We're thrilled to hear that Rashid made a positive impression with his hard work. We appreciate your feedback and look forward to seeing you again soon!",
     "response_date": "2026-09-27"
+  },
+  {
+    "store_id": "N36",
+    "store_name": "Ayyappa Nagar",
+    "stars": "1",
+    "customer_name": "Revanthi Bojjireddi",
+    "review_comments": "I had my haircut done by Paul and the haircut was really extraordinary. He did a great job and I was genuinely happy with the result. However I was very disappointed with the pricing. The charges were extremely high and not worth the price compared to other salons offering the same kind of service. The haircut was good but the pricing was too costly and honestly I would not recommend it because of the high prices. I hope they reconsider their pricing in the future.",
+    "show_it_in_website": "Yes",
+    "date_posted": "2026-09-27",
+    "review_id": "AbFvOqm5aOI_GHWwtHYJPOO_p5Wmfi28-MF7R2FmqmxJqPAj0JTHQzYochxlgt8axEKR8yjhKd5mCQ",
+    "Stars": 1,
+    "response": "",
+    "response_date": ""
   },
   {
     "store_id": "N45",
@@ -21207,12 +21259,12 @@
     "store_name": "Nagavara",
     "stars": "5",
     "customer_name": "Vaishnavi Cns",
-    "review_comments": "I came with a badly done haircut from outside & Mr. Gufran did a very wonderful job in fixing my hair.",
+    "review_comments": "I had gotten a back massage from Ms Shikha which was really amazing & relaxing. Highly recommend the salon",
     "show_it_in_website": "Yes",
     "date_posted": "2025-10-22",
     "review_id": "AbFvOqniTWgOps3LlAyZSg-TYIWZUsJkIAhObKWoEqdvx3YvWIdN7rYgf5X8lOIyiguemuqs7bJxmg",
     "Stars": 5,
-    "response": "Dear  Vaishnavi Cns Thanks for taking time to share your rating , Appreciated. It is a good encouragement to receive such a response from our customers. Please do like us on Facebook to receive regular offers and latest updates @ http://facebook.com/Naturals.Salon.Nagavara//  Regards, Naturals Salon Elements Mall, Shop #26, 3rd Floor || Thanisandra Main Road || Near Manyata Tech Park || Bangalore || +91 9901000017",
+    "response": "Dear  Vaishnavi Cns Thanks for taking time to share your rating , Appreciated. It is a good encouragement to receive such a response from our customers. Please do like us on Facebook to receive regular offers and latest updates @ http://facebook.com/Naturals.Salon.Nagavara//  Regards, Naturals Salon Elements Mall, Shop #26, 3rd Floor || Thanisandra Main Road || Near Manyata Tech Park || Bangalore || +91 9901000017 ",
     "response_date": "2025-10-27"
   },
   {
@@ -32023,7 +32075,7 @@
     "store_name": "JP Nagar 5th Phase",
     "stars": "5",
     "customer_name": "MD AAMIR",
-    "review_comments": "Pavan great massage and great haircut by akash",
+    "review_comments": "Got done a hair cut and beard it soo good moin bahi next level precise in work just excellent work 🔥🔥❤️",
     "show_it_in_website": "Yes",
     "date_posted": "2024-12-19",
     "review_id": "AbFvOqlAPLiBQASM3mN_QiO3KYGtdOQGg_OSv_Uu9_zlcU4kpBWrH4ox71U74J2EvgQjCDC0eBfXWA",
@@ -108444,6 +108496,19 @@
     "Stars": 3,
     "response": "Dear Mr. Reddy,  Thank you for sharing your experience at Naturals Unisex Salon - Frazer Town. We sincerely apologize for the delay in our response and appreciate you taking the time to provide feedback.  We are currently auditing older reviews to ensure every guest is heard. Since then, we have made significant improvements in our services and now feature highly skilled, top-tier stylists.   We warmly invite you to revisit us soon and experience the enhanced service we offer. Please follow our Facebook and Instagram pages for updates and best offers.  Looking forward to pampering you again at Naturals Unisex Salon - Frazer Town 😊✨  Best regards, [Your Name] Store Manager",
     "response_date": "2026-05-26"
+  },
+  {
+    "store_id": "N05",
+    "store_name": "Frazer Town",
+    "stars": "5",
+    "customer_name": "Prem Rose",
+    "review_comments": "I had a fantastic experience. I visited around 8 p.m., and there was only one staff member on duty. Even though three other customers arrived after me, the staff member, \"Mohd Suheb\"",
+    "show_it_in_website": "Yes",
+    "date_posted": "",
+    "review_id": "AbFvOqnp6tHX3dXFsiNwCE7mYIdGaOgfGNHsO11-QxhzeHZJ3rjBvlywM2AnxxPpBEFGEjZpTZ-I8g",
+    "Stars": 5,
+    "response": "2026-09-09T15:53:04.498Z",
+    "response_date": ""
   },
   {
     "store_id": "N36",
