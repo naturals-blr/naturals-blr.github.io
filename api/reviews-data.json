@@ -1,5 +1,18 @@
 [
   {
+    "store_id": "N05",
+    "store_name": "Frazer Town",
+    "stars": "5",
+    "customer_name": "Prem Rose",
+    "review_comments": "I had a fantastic experience. I visited around 8 p.m., and there was only one staff member on duty. Even though three other customers arrived after me, the staff member, \"Mohd Suheb\"",
+    "show_it_in_website": "Yes",
+    "date_posted": "Invalid Da",
+    "review_id": "AbFvOqnp6tHX3dXFsiNwCE7mYIdGaOgfGNHsO11-QxhzeHZJ3rjBvlywM2AnxxPpBEFGEjZpTZ-I8g",
+    "Stars": 5,
+    "response": "2026-09-09T15:53:04.498Z",
+    "response_date": "Invalid Da"
+  },
+  {
     "store_id": "N36",
     "store_name": "Ayyappa Nagar",
     "stars": "5",
@@ -1920,8 +1933,8 @@
     "date_posted": "2026-09-03",
     "review_id": "AbFvOqmim8G7h0Z5biNMdMbRe4TVFK8gcplPPK8Frn4hlBhrHuBSGBmfjlKuYlKCdQSGT676iWTX9g",
     "Stars": 5,
-    "response": "Thank you, Shruthi R, for your kind words! We're thrilled to hear you loved your haircut by Lalita. We look forward to welcoming you back to Naturals Salon soon!",
-    "response_date": "2026-09-08"
+    "response": "Dear Shruthi, We are absolutely delighted to hear that Lalitha provided you with a great haircut! Our team of expert hair stylists at Naturals Nagavara is dedicated to ensuring every client leaves feeling perfectly pampered. The Stylists & Care Team at Naturals Nagavara",
+    "response_date": "2026-09-03"
   },
   {
     "store_id": "N45",
@@ -1972,8 +1985,8 @@
     "date_posted": "2026-09-03",
     "review_id": "AbFvOql09nOGp9YueLuYooBybfBGuhBXfRGfYdhEarvdvXOhx8LrDQQ0Hm1JkpemfkN4Z5jc2AnQ0Q",
     "Stars": 5,
-    "response": "Thank you, Arif Pasha C, for your wonderful review! We're thrilled to hear that Mr. Thyagaraj provided you with amazing service at Naturals Salon. We look forward to welcoming you back soon!",
-    "response_date": "2026-09-08"
+    "response": "Dear Arif, We are absolutely delighted to hear that Thyagaraj provided you with such an amazing and professional experience at Naturals Nagavara. It is always our pleasure to offer the best unisex salon in Nagavara, ensuring every visit is a 5-star one. Naturals Nagavara Guest Relations Team",
+    "response_date": "2026-09-03"
   },
   {
     "store_id": "N36",
@@ -108496,19 +108509,6 @@
     "Stars": 3,
     "response": "Dear Mr. Reddy,  Thank you for sharing your experience at Naturals Unisex Salon - Frazer Town. We sincerely apologize for the delay in our response and appreciate you taking the time to provide feedback.  We are currently auditing older reviews to ensure every guest is heard. Since then, we have made significant improvements in our services and now feature highly skilled, top-tier stylists.   We warmly invite you to revisit us soon and experience the enhanced service we offer. Please follow our Facebook and Instagram pages for updates and best offers.  Looking forward to pampering you again at Naturals Unisex Salon - Frazer Town 😊✨  Best regards, [Your Name] Store Manager",
     "response_date": "2026-05-26"
-  },
-  {
-    "store_id": "N05",
-    "store_name": "Frazer Town",
-    "stars": "5",
-    "customer_name": "Prem Rose",
-    "review_comments": "I had a fantastic experience. I visited around 8 p.m., and there was only one staff member on duty. Even though three other customers arrived after me, the staff member, \"Mohd Suheb\"",
-    "show_it_in_website": "Yes",
-    "date_posted": "",
-    "review_id": "AbFvOqnp6tHX3dXFsiNwCE7mYIdGaOgfGNHsO11-QxhzeHZJ3rjBvlywM2AnxxPpBEFGEjZpTZ-I8g",
-    "Stars": 5,
-    "response": "2026-09-09T15:53:04.498Z",
-    "response_date": ""
   },
   {
     "store_id": "N36",
