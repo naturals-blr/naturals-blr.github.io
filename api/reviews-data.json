@@ -13,6 +13,32 @@
     "response_date": "Invalid Da"
   },
   {
+    "store_id": "N05",
+    "store_name": "Frazer Town",
+    "stars": "5",
+    "customer_name": "SHAIK MUBARAK",
+    "review_comments": "Good haircut and service given by anas",
+    "show_it_in_website": "Yes",
+    "date_posted": "2026-10-03",
+    "review_id": "AbFvOqniSZbJUxjp5X8wKXcT2NVqf9KF-goldE_Juo38GXhhQ7u6gOzUnrU_8EZGus_d2liLeKCn",
+    "Stars": 5,
+    "response": "Dear Soheb We are absolutely delighted to hear that Anas provided you with a good haircut and excellent service! Our team, dedicated to expert hair styling, always strives to deliver perfection. The Self-Care Crew at Naturals Frazer Town",
+    "response_date": "2026-10-03"
+  },
+  {
+    "store_id": "N43",
+    "store_name": "Hennur",
+    "stars": "5",
+    "customer_name": "Soumya G",
+    "review_comments": "Good service. Thanks to Nisha..🫶🏻",
+    "show_it_in_website": "Yes",
+    "date_posted": "2026-10-03",
+    "review_id": "AbFvOqmafaFHIpwiekvvAj4E-3OOW6DZgWpDT9WJAggpM6jtzg3lzZMwJBrHPn6miHjScb813FU9",
+    "Stars": 5,
+    "response": "Dear Soumya, We are delighted to hear you enjoyed your experience with us, and Nisha was thrilled to receive your kind appreciation! We always strive to provide the best unisex salon in Hennur. The Master Stylists at Naturals Hennur",
+    "response_date": "2026-10-03"
+  },
+  {
     "store_id": "N45",
     "store_name": "Nagavara",
     "stars": "5",
