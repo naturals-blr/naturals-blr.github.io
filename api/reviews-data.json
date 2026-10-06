@@ -1,5 +1,57 @@
 [
   {
+    "store_id": "N45",
+    "store_name": "Nagavara",
+    "stars": "5",
+    "customer_name": "Mamata Patil",
+    "review_comments": "The service was good .Thank you Shikha .",
+    "show_it_in_website": "Yes",
+    "date_posted": "2026-10-05",
+    "review_id": "AbFvOqmQfTA5ZmITocNj012johSAeTe2vGl_uzkSNUanb6LhroUex-0UNxkc3XHsBz8OSgmc-1qG",
+    "Stars": 5,
+    "response": "Dear Mamata, We are absolutely delighted to hear you enjoyed your visit and that Shikha provided you with such good service! It brings us immense joy when our team delivers the exceptional experience you deserve at Naturals Nagavara, truly the best unisex salon in Nagavara. Naturals Nagavara — Your Dedicated Luxury Stylists",
+    "response_date": "2026-10-05"
+  },
+  {
+    "store_id": "N45",
+    "store_name": "Nagavara",
+    "stars": "5",
+    "customer_name": "Pawan Sanjiv",
+    "review_comments": "Great haircut and excellent service by Thyagaraj",
+    "show_it_in_website": "Yes",
+    "date_posted": "2026-10-05",
+    "review_id": "AbFvOqlxbL4RrVqIuoM7xFFFmSJi2ivhaAYnAJQ_XVe7kFH2L4u8PApFt7S4g66y4V6mqRTIvWUD_A",
+    "Stars": 5,
+    "response": "Dear Pawan, We are absolutely delighted to hear you had such a wonderful experience with Thyagaraj and enjoyed a great haircut! Our team strives to provide expert hair styling, ensuring every visit is nothing short of five-star perfection. Your Premium Grooming Experts @ Naturals Nagavara",
+    "response_date": "2026-10-05"
+  },
+  {
+    "store_id": "N45",
+    "store_name": "Nagavara",
+    "stars": "5",
+    "customer_name": "reena nethala",
+    "review_comments": "Thanks Keerthi for the nice service!",
+    "show_it_in_website": "Yes",
+    "date_posted": "2026-10-05",
+    "review_id": "AbFvOqnMyX8aKEs3lKz7IH41iuENYTTl2r-Fom9bzADnztILzF91gWWUBzoS_VZ-MfLvSA-F5_roYA",
+    "Stars": 5,
+    "response": "Reena, your kind words made our day! Thanks for choosing us and leaving a review Reena. Thanks for noticing the details—we care about them. We’ll be happy to have you back soon. Thank you! With gratitude, Your Naturals Nagavara family",
+    "response_date": "2026-10-05"
+  },
+  {
+    "store_id": "N36",
+    "store_name": "Ayyappa Nagar",
+    "stars": "4",
+    "customer_name": "Just Fun",
+    "review_comments": "Nice Service by \"Paul\" . His work is very good.  Ambiance felt vey clean.",
+    "show_it_in_website": "Yes",
+    "date_posted": "2026-10-05",
+    "review_id": "AbFvOqnioPmsrItPlJK84siV9BZUYfDzO9AMhB9v_w7Bep9dmrHrxzU5ljtGFVAiDxwkRn0_A-xoXA",
+    "Stars": 4,
+    "response": "Dear Just, We are delighted to hear you had a wonderful experience with Paul and appreciated the clean ambiance at Naturals Ayyappa Nagar. Our entire team strives to Parvathi the best unisex salon in Ayyappa Nagar, ensuring every visit is exceptional. Your Hair & Beauty Crew at Naturals Ayyappa Nagar",
+    "response_date": "2026-10-05"
+  },
+  {
     "store_id": "N36",
     "store_name": "Ayyappa Nagar",
     "stars": "5",
