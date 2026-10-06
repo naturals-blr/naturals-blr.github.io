@@ -1,5 +1,18 @@
 [
   {
+    "store_id": "N05",
+    "store_name": "Frazer Town",
+    "stars": "5",
+    "customer_name": "Prem Rose",
+    "review_comments": "I had a fantastic experience. I visited around 8 p.m., and there was only one staff member on duty. Even though three other customers arrived after me, the staff member, \"Mohd Suheb\"",
+    "show_it_in_website": "Yes",
+    "date_posted": "Invalid Da",
+    "review_id": "AbFvOqnp6tHX3dXFsiNwCE7mYIdGaOgfGNHsO11-QxhzeHZJ3rjBvlywM2AnxxPpBEFGEjZpTZ-I8g",
+    "Stars": 5,
+    "response": "2026-09-09T15:53:04.498Z",
+    "response_date": "Invalid Da"
+  },
+  {
     "store_id": "N45",
     "store_name": "Nagavara",
     "stars": "5",
@@ -1794,32 +1807,6 @@
     "response_date": "2026-09-08"
   },
   {
-    "store_id": "N45",
-    "store_name": "Nagavara",
-    "stars": "5",
-    "customer_name": "MADIRAJU VIDYA BHAVANA",
-    "review_comments": "Shika has done all the services very good",
-    "show_it_in_website": "Yes",
-    "date_posted": "2026-09-08",
-    "review_id": "AbFvOqnJC1UsTGjE1omreVG9wgTqKjg4Mn-mZOTgK9kQ_UlW-C63AqbTWLPIYFvlkxpkWLzPsp-cGA",
-    "Stars": 5,
-    "response": "Thank you, MADIRAJU VIDYA BHAVANA, for your wonderful review! We're thrilled to hear that Shika provided excellent service. Your satisfaction means a lot to us at Naturals Salon. We look forward to welcoming you back soon!",
-    "response_date": "2026-09-08"
-  },
-  {
-    "store_id": "N36",
-    "store_name": "Ayyappa Nagar",
-    "stars": "5",
-    "customer_name": "Supriya Palanisamy",
-    "review_comments": "I have taken hair cut service in Ayyappanagar branch. Paul has done it very nicely.",
-    "show_it_in_website": "Yes",
-    "date_posted": "2026-09-08",
-    "review_id": "AbFvOqk_O-M2yl2BMoq-wBWOfNlaKaNS3TwS15EWI_OEzPiOqWgEMseMPPMA37fxzLHiK0J_QJrA8g",
-    "Stars": 5,
-    "response": "Dear Supriya, We are absolutely delighted to hear that Paul Parvathi you with such a wonderful haircut experience at Naturals Ayyappa Nagar. It brings us immense joy to know our dedication to expert hair styling shines through. Your Personal Glow Team, Naturals Ayyappa Nagar",
-    "response_date": "2026-09-08"
-  },
-  {
     "store_id": "N05",
     "store_name": "Frazer Town",
     "stars": "5",
@@ -1842,8 +1829,8 @@
     "date_posted": "2026-09-07",
     "review_id": "AbFvOqnBVVGvukaqeeaC0SFaT5_4sohQ_jy3649R4Na7P90f9RMdTKhKjDj8fzyKxvwsO9CLShHp",
     "Stars": 5,
-    "response": "Thank you, Ramsai, for your wonderful review! We're thrilled to hear that you enjoyed your haircut and found our service worth the money. We'll be sure to pass your compliments on to Thyagaraj. Looking forward to seeing you again at Naturals Salon!",
-    "response_date": "2026-09-08"
+    "response": "It was a pleasure serving you, Ramsai! Thanks for the support and for sharing your thoughts. We’re glad it felt premium and well taken care of. We’ll be happy to have you back soon. Thank you! Sincerely, Team Naturals Nagavara",
+    "response_date": "2026-09-07"
   },
   {
     "store_id": "N43",
@@ -1959,8 +1946,8 @@
     "date_posted": "2026-09-06",
     "review_id": "AbFvOqmYhFMImg-3ApFfhR-4ALzVIZ1vBEZd8ZX3s-zOWbN1wxYMAurdTFbKuuBTuB6J07ZG7a0bkQ",
     "Stars": 5,
-    "response": "Thank you, Bodhisattwa Das, for your wonderful review! We're thrilled to hear that Mr. Thyagaraj provided you with excellent guidance and service. We look forward to welcoming you back to Naturals Salon soon!",
-    "response_date": "2026-09-08"
+    "response": "Dear Bodhisattwa, We are delighted to hear that Mr. Thyagaraj provided you with such excellent guidance and service for your hair spa decision. Our team at Naturals Nagavara prides itself on offering expert hair styling and personalized care to all our esteemed clients. Your Premium Grooming Experts @ Naturals Nagavara",
+    "response_date": "2026-09-06"
   },
   {
     "store_id": "N36",
@@ -13173,7 +13160,7 @@
     "store_name": "Hennur",
     "stars": "5",
     "customer_name": "irene shaji",
-    "review_comments": "Excellent waxing, threading and pedicure services provided by Nisha! Would definitely visit again",
+    "review_comments": "Excellent waxing, threading and hair oil massage services provided by Stella! Would definitely visit again",
     "show_it_in_website": "Yes",
     "date_posted": "2026-04-26",
     "review_id": "AbFvOqnu27foIOk5qvm-_pbiJC_VoOsGkbGkAbDq2KWaLo7OedH_VWsy6yQAadQWFIH4AcPCFqbC1g",
@@ -108795,18 +108782,5 @@
     "Stars": 1,
     "response": "2019-10-02T14:22:22.431Z",
     "response_date": "2019-10-02"
-  },
-  {
-    "store_id": "N05",
-    "store_name": "Frazer Town",
-    "stars": "5",
-    "customer_name": "Prem Rose",
-    "review_comments": "I had a fantastic experience. I visited around 8 p.m., and there was only one staff member on duty. Even though three other customers arrived after me, the staff member, \"Mohd Suheb\"",
-    "show_it_in_website": "Yes",
-    "date_posted": "",
-    "review_id": "AbFvOqnp6tHX3dXFsiNwCE7mYIdGaOgfGNHsO11-QxhzeHZJ3rjBvlywM2AnxxPpBEFGEjZpTZ-I8g",
-    "Stars": 5,
-    "response": "2026-09-09T15:53:04.498Z",
-    "response_date": ""
   }
 ]
