@@ -3,19 +3,6 @@
     "store_id": "N05",
     "store_name": "Frazer Town",
     "stars": "5",
-    "customer_name": "Prem Rose",
-    "review_comments": "I had a fantastic experience. I visited around 8 p.m., and there was only one staff member on duty. Even though three other customers arrived after me, the staff member, \"Mohd Suheb\"",
-    "show_it_in_website": "Yes",
-    "date_posted": "Invalid Da",
-    "review_id": "AbFvOqnp6tHX3dXFsiNwCE7mYIdGaOgfGNHsO11-QxhzeHZJ3rjBvlywM2AnxxPpBEFGEjZpTZ-I8g",
-    "Stars": 5,
-    "response": "2026-09-09T15:53:04.498Z",
-    "response_date": "Invalid Da"
-  },
-  {
-    "store_id": "N05",
-    "store_name": "Frazer Town",
-    "stars": "5",
     "customer_name": "SANOBER KHAN",
     "review_comments": "Poornima was very good her her work , happy with the services",
     "show_it_in_website": "Yes",
@@ -477,8 +464,8 @@
     "date_posted": "2026-09-30",
     "review_id": "AbFvOqmw3pOQlq0f_L5FMGF70LOz1DroyMNSKHaMCBKt9O4ghk6xvYpfBfGnBQHbX2SPjQp1zvS2ZQ",
     "Stars": 1,
-    "response": "",
-    "response_date": ""
+    "response": "Dear Tulasi, thank you for sharing your feedback. We would like to clarify the context of your visit while acknowledging where our team could have communicated better. Your original 10:30 AM appointment was rescheduled to 2:30 PM, and upon your arrival at 3:00 PM, our team adjusted our schedule to accommodate your primary haircut service. Because we operate on a strict appointment system, fitting in an unbooked add-on service after a late arrival can be challenging without impacting other clients who arrived on time for their scheduled slots. That said, we deeply regret that our team did not communicate the wait time for the eyebrow service clearly before your haircut was completed. Clear scheduling and transparent communication are top priorities for us, and we are addressing this internal coordination lapse with our Ayyappa Nagar team to ensure better clarity moving forward. We appreciate your feedback and hope to serve you better in the future",
+    "response_date": "2026-10-07"
   },
   {
     "store_id": "N36",
@@ -490,8 +477,8 @@
     "date_posted": "2026-09-30",
     "review_id": "AbFvOqnlyi9v6Od6cSVaogAnZdywGxzbwzH7aFjhFAc2FhzVKeWB4tMHZhNsIGOMn4Wrl9Hb_wf6nQ",
     "Stars": 1,
-    "response": "",
-    "response_date": ""
+    "response": "Since this is the duplicate of your previous review by Tulasi, Brahmini, we would like to convey the same response here:: Dear Tulasi, thank you for sharing your feedback. We would like to clarify the context of your visit while acknowledging where our team could have communicated better. Your original 10:30 AM appointment was rescheduled to 2:30 PM, and upon your arrival at 3:00 PM, our team adjusted our schedule to accommodate your primary haircut service. Because we operate on a strict appointment system, fitting in an unbooked add-on service after a late arrival can be challenging without impacting other clients who arrived on time for their scheduled slots. That said, we deeply regret that our team did not communicate the wait time for the eyebrow service clearly before your haircut was completed. Clear scheduling and transparent communication are top priorities for us, and we are addressing this internal coordination lapse with our Ayyappa Nagar team to ensure better clarity moving forward. We appreciate your feedback and hope to serve you better in the future",
+    "response_date": "2026-10-07"
   },
   {
     "store_id": "N36",
@@ -108782,6 +108769,19 @@
     "Stars": 3,
     "response": "Dear Mr. Reddy,  Thank you for sharing your experience at Naturals Unisex Salon - Frazer Town. We sincerely apologize for the delay in our response and appreciate you taking the time to provide feedback.  We are currently auditing older reviews to ensure every guest is heard. Since then, we have made significant improvements in our services and now feature highly skilled, top-tier stylists.   We warmly invite you to revisit us soon and experience the enhanced service we offer. Please follow our Facebook and Instagram pages for updates and best offers.  Looking forward to pampering you again at Naturals Unisex Salon - Frazer Town 😊✨  Best regards, [Your Name] Store Manager",
     "response_date": "2026-05-26"
+  },
+  {
+    "store_id": "N05",
+    "store_name": "Frazer Town",
+    "stars": "5",
+    "customer_name": "Prem Rose",
+    "review_comments": "I had a fantastic experience. I visited around 8 p.m., and there was only one staff member on duty. Even though three other customers arrived after me, the staff member, \"Mohd Suheb\"",
+    "show_it_in_website": "Yes",
+    "date_posted": "",
+    "review_id": "AbFvOqnp6tHX3dXFsiNwCE7mYIdGaOgfGNHsO11-QxhzeHZJ3rjBvlywM2AnxxPpBEFGEjZpTZ-I8g",
+    "Stars": 5,
+    "response": "2026-09-09T15:53:04.498Z",
+    "response_date": ""
   },
   {
     "store_id": "N36",
