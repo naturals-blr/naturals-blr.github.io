@@ -33,7 +33,7 @@ gtag('config', 'G-6H5YGVGG1Q');
 <script type="application/ld+json">
 {
 "@context": "https://schema.org",
-"@type": "",
+"@type": "Service",
 "serviceType": "Professional Beauty and Hair Services",
 "name": "Premium Hair, Skin & Luxury Spa Services Menu | Naturals Unisex Salon",
 "description": "Explore our elite service menu. From advanced hair transformations to luxury skin rituals and wellness therapies, enjoy world-class care at Naturals Unisex Salon.",
@@ -814,6 +814,24 @@ footer{background:#080f0b;}
 @media(max-width:600px){.ft-top{grid-template-columns:1fr;padding:28px 16px 20px;}}
 </style>
 
+/* SEO keyword heading + intro + FAQ block */
+.kw-hero h2{font-family:'Cormorant Garamond',serif;font-size:clamp(20px,2.6vw,30px);font-weight:400;color:#fff;margin:0 0 8px;line-height:1.2;}
+.kw-hero p{font-size:14px;color:rgba(255,255,255,0.72);font-weight:300;line-height:1.8;max-width:560px;}
+.light-theme .kw-hero h2{color:#000;}
+.light-theme .kw-hero p{color:rgba(0,0,0,0.8);}
+.kw-page{margin:0 auto;max-width:760px;padding:0 20px;}
+.kw-page h2{font-family:'Cormorant Garamond',serif;font-size:clamp(22px,3vw,32px);font-weight:400;color:var(--text);}
+.kw-page p{font-size:14px;line-height:1.8;color:rgba(0,0,0,0.65);}
+.faq-section{margin-bottom:48px;padding:0 20px;max-width:860px;margin-left:auto;margin-right:auto;}
+.faq-section h2{font-family:'Cormorant Garamond',serif;font-size:28px;font-weight:400;color:var(--text);margin-bottom:24px;text-align:center;}
+.faq-item{border-bottom:1px solid rgba(0,0,0,0.08);padding:16px 0;}
+.faq-q{font-size:16px;font-weight:500;color:var(--text);cursor:pointer;display:flex;justify-content:space-between;align-items:center;user-select:none;gap:12px;}
+.faq-q:hover{color:var(--gold);}
+.faq-q .icon{font-size:20px;transition:transform 0.2s;color:var(--gold);}
+.faq-q.open .icon{transform:rotate(45deg);}
+.faq-a{max-height:0;overflow:hidden;transition:max-height 0.3s ease, padding 0.3s ease;font-size:14px;line-height:1.7;color:rgba(0,0,0,0.65);}
+.faq-a.open{max-height:500px;padding-top:12px;}
+
 <style>
 .results-bar{
 max-width:none;
@@ -1077,6 +1095,71 @@ border-radius:14px;
 .svc-price{font-size:16px;}
 }
 </style>
+<script type="application/ld+json">
+{
+"@context": "https://schema.org",
+"@type": "FAQPage",
+"mainEntity": [
+{
+"@type": "Question",
+"name": "Where can I view the full price menu for Naturals services in Bangalore?",
+"acceptedAnswer": {
+"@type": "Answer",
+"text": "You can view our complete service menu and pricing structure directly on our Services page, with filters for store location, category, and gender."
+}
+}, {
+"@type": "Question",
+"name": "What hair treatments are available at Naturals?",
+"acceptedAnswer": {
+"@type": "Answer",
+"text": "We offer deep conditioning hair spa, keratin smoothing, hair botox, smoothening, straightening, scalp care, and custom hair coloring treatments."
+}
+}, {
+"@type": "Question",
+"name": "Does Naturals provide professional bridal and pre-bridal packages?",
+"acceptedAnswer": {
+"@type": "Answer",
+"text": "Yes, we offer comprehensive bridal packages including HD makeup, hair styling, saree draping, mehendi, and pre-bridal skin and hair care prep."
+}
+}, {
+"@type": "Question",
+"name": "Do you offer specialized men’s haircutting and beard styling?",
+"acceptedAnswer": {
+"@type": "Answer",
+"text": "Yes, Naturals is a full-service unisex salon providing men&#39;s haircutting, beard shaping, hair coloring, detan treatments, and skin care routines."
+}
+}, {
+"@type": "Question",
+"name": "Are organic or ammonia-free hair colors available?",
+"acceptedAnswer": {
+"@type": "Answer",
+"text": "Yes, we use premium, professional-grade hair colors and offer gentle, ammonia-free coloring options upon request."
+}
+}, {
+"@type": "Question",
+"name": "What is the hair spa price and facial cost at Naturals Salon?",
+"acceptedAnswer": {
+"@type": "Answer",
+"text": "Hair spa treatments and facial prices at Naturals vary based on hair length and skin type. View our complete price list and service menu on this page or WhatsApp your nearest branch for exact quotes."
+}
+}, {
+"@type": "Question",
+"name": "Does Naturals offer HydraFacial, Heel Peel pedicure, and dandruff treatments?",
+"acceptedAnswer": {
+"@type": "Answer",
+"text": "Yes, select Naturals branches offer advanced treatments including HydraFacial, Heel Peel pedicures, anti-dandruff scalp care, and L&#39;Oréal professional hair treatments."
+}
+}, {
+"@type": "Question",
+"name": "What is included in the Naturals groom package and pre-grooming menu?",
+"acceptedAnswer": {
+"@type": "Answer",
+"text": "Our men&#39;s groom packages include haircuts, beard styling, detan facials, hair spa, and complete pre-wedding grooming routines tailored for grooms."
+}
+} ]
+}
+</script>
+
 <script>(function(){var t=localStorage.getItem('naturals-theme')||'luxury';document.documentElement.setAttribute('data-theme',t);})();</script>
 
 </head>
@@ -2317,6 +2400,66 @@ serviceElement.textContent = filterValue;
 <p>Try adjusting your filters above.</p>
 </div>
 </main>
+
+<section class="faq-section">
+<h2>Frequently Asked Questions</h2>
+<div class="faq-item">
+<div class="faq-q" onclick="this.classList.toggle('open');this.nextElementSibling.classList.toggle('open')">
+<span>Where can I view the full price menu for Naturals services in Bangalore?</span>
+<span class="icon">+</span>
+</div>
+<div class="faq-a">You can view our complete service menu and pricing structure directly on our Services page, with filters for store location, category, and gender.</div>
+</div>
+<div class="faq-item">
+<div class="faq-q" onclick="this.classList.toggle('open');this.nextElementSibling.classList.toggle('open')">
+<span>What hair treatments are available at Naturals?</span>
+<span class="icon">+</span>
+</div>
+<div class="faq-a">We offer deep conditioning hair spa, keratin smoothing, hair botox, smoothening, straightening, scalp care, and custom hair coloring treatments.</div>
+</div>
+<div class="faq-item">
+<div class="faq-q" onclick="this.classList.toggle('open');this.nextElementSibling.classList.toggle('open')">
+<span>Does Naturals provide professional bridal and pre-bridal packages?</span>
+<span class="icon">+</span>
+</div>
+<div class="faq-a">Yes, we offer comprehensive bridal packages including HD makeup, hair styling, saree draping, mehendi, and pre-bridal skin and hair care prep.</div>
+</div>
+<div class="faq-item">
+<div class="faq-q" onclick="this.classList.toggle('open');this.nextElementSibling.classList.toggle('open')">
+<span>Do you offer specialized men’s haircutting and beard styling?</span>
+<span class="icon">+</span>
+</div>
+<div class="faq-a">Yes, Naturals is a full-service unisex salon providing men's haircutting, beard shaping, hair coloring, detan treatments, and skin care routines.</div>
+</div>
+<div class="faq-item">
+<div class="faq-q" onclick="this.classList.toggle('open');this.nextElementSibling.classList.toggle('open')">
+<span>Are organic or ammonia-free hair colors available?</span>
+<span class="icon">+</span>
+</div>
+<div class="faq-a">Yes, we use premium, professional-grade hair colors and offer gentle, ammonia-free coloring options upon request.</div>
+</div>
+<div class="faq-item">
+<div class="faq-q" onclick="this.classList.toggle('open');this.nextElementSibling.classList.toggle('open')">
+<span>What is the hair spa price and facial cost at Naturals Salon?</span>
+<span class="icon">+</span>
+</div>
+<div class="faq-a">Hair spa treatments and facial prices at Naturals vary based on hair length and skin type. View our complete price list and service menu on this page or WhatsApp your nearest branch for exact quotes.</div>
+</div>
+<div class="faq-item">
+<div class="faq-q" onclick="this.classList.toggle('open');this.nextElementSibling.classList.toggle('open')">
+<span>Does Naturals offer HydraFacial, Heel Peel pedicure, and dandruff treatments?</span>
+<span class="icon">+</span>
+</div>
+<div class="faq-a">Yes, select Naturals branches offer advanced treatments including HydraFacial, Heel Peel pedicures, anti-dandruff scalp care, and L'Oréal professional hair treatments.</div>
+</div>
+<div class="faq-item">
+<div class="faq-q" onclick="this.classList.toggle('open');this.nextElementSibling.classList.toggle('open')">
+<span>What is included in the Naturals groom package and pre-grooming menu?</span>
+<span class="icon">+</span>
+</div>
+<div class="faq-a">Our men's groom packages include haircuts, beard styling, detan facials, hair spa, and complete pre-wedding grooming routines tailored for grooms.</div>
+</div>
+</section>
 
 <footer>
 <div class="ft-top">
