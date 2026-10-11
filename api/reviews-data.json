@@ -100,8 +100,8 @@
     "date_posted": "2026-10-10",
     "review_id": "AbFvOqkA76i66cgiCMVascSJcWrhFO1IzJ8Fo4A_DBOWKi7LQptvgjZqYAVt9VbK-6XlAWWRHKc2eQ",
     "Stars": 5,
-    "response": "",
-    "response_date": ""
+    "response": "Dear Gaurav, We are absolutely thrilled you enjoyed your fresh look and that Arif and Ali Parvathi such excellent support in choosing a style that suited you perfectly! Our team at Naturals Ayyappa Nagar is dedicated to ensuring every visit is a 5-star experience, offering expert hair styling to all our cherished clients. We eagerly await your next visit! Your Hair & Beauty Crew at Naturals Ayyappa Nagar",
+    "response_date": "2026-10-10"
   },
   {
     "store_id": "N45",
@@ -109070,19 +109070,6 @@
     "response_date": "2026-05-26"
   },
   {
-    "store_id": "N05",
-    "store_name": "Frazer Town",
-    "stars": "5",
-    "customer_name": "Prem Rose",
-    "review_comments": "I had a fantastic experience. I visited around 8 p.m., and there was only one staff member on duty. Even though three other customers arrived after me, the staff member, \"Mohd Suheb\"",
-    "show_it_in_website": "Yes",
-    "date_posted": "",
-    "review_id": "AbFvOqnp6tHX3dXFsiNwCE7mYIdGaOgfGNHsO11-QxhzeHZJ3rjBvlywM2AnxxPpBEFGEjZpTZ-I8g",
-    "Stars": 5,
-    "response": "2026-09-09T15:53:04.498Z",
-    "response_date": ""
-  },
-  {
     "store_id": "N36",
     "store_name": "Ayyappa Nagar",
     "stars": "1",
@@ -109094,5 +109081,18 @@
     "Stars": 1,
     "response": "2019-10-02T14:22:22.431Z",
     "response_date": "2019-10-02"
+  },
+  {
+    "store_id": "N05",
+    "store_name": "Frazer Town",
+    "stars": "5",
+    "customer_name": "Prem Rose",
+    "review_comments": "I had a fantastic experience. I visited around 8 p.m., and there was only one staff member on duty. Even though three other customers arrived after me, the staff member, \"Mohd Suheb\"",
+    "show_it_in_website": "Yes",
+    "date_posted": "",
+    "review_id": "AbFvOqnp6tHX3dXFsiNwCE7mYIdGaOgfGNHsO11-QxhzeHZJ3rjBvlywM2AnxxPpBEFGEjZpTZ-I8g",
+    "Stars": 5,
+    "response": "2026-09-09T15:53:04.498Z",
+    "response_date": ""
   }
 ]
