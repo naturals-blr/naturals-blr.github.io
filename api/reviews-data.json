@@ -1,18 +1,5 @@
 [
   {
-    "store_id": "N05",
-    "store_name": "Frazer Town",
-    "stars": "5",
-    "customer_name": "Prem Rose",
-    "review_comments": "I had a fantastic experience. I visited around 8 p.m., and there was only one staff member on duty. Even though three other customers arrived after me, the staff member, \"Mohd Suheb\"",
-    "show_it_in_website": "Yes",
-    "date_posted": "Invalid Da",
-    "review_id": "AbFvOqnp6tHX3dXFsiNwCE7mYIdGaOgfGNHsO11-QxhzeHZJ3rjBvlywM2AnxxPpBEFGEjZpTZ-I8g",
-    "Stars": 5,
-    "response": "2026-09-09T15:53:04.498Z",
-    "response_date": "Invalid Da"
-  },
-  {
     "store_id": "N45",
     "store_name": "Nagavara",
     "stars": "5",
@@ -36,6 +23,19 @@
     "review_id": "AbFvOqmK-U33RN9QuCkLjMBhf05Eo589_M0k_YMsrKVmiMg9mxXKZeVzQBsRllutkhC7WckFYQqiXg",
     "Stars": 5,
     "response": "Dear Sahitya, We are absolutely delighted you enjoyed your rejuvenating session with us! It warms our hearts to know that Bhagya expertise in professional skin care and Arif talent as an expert hair stylist made such a wonderful impression. The Creative Hands at Naturals Ayyappa Nagar",
+    "response_date": "2026-10-15"
+  },
+  {
+    "store_id": "N05",
+    "store_name": "Frazer Town",
+    "stars": "5",
+    "customer_name": "ashwin jayakumar",
+    "review_comments": "If you are living anywhere near cooke town, cox town or frazer town.  I would definitely recommend coming here for a haircut or beard.  And you should definitely ask for Guffran - an amazing hair stylist with customer satisfaction as his best tool.",
+    "show_it_in_website": "Yes",
+    "date_posted": "2026-10-15",
+    "review_id": "AbFvOqm2iTUugJYlPb0WX5KLMA72H2xxfSVC-zl-TOOC9pDQaVEdgaR9nEOzw625AwS71wHfPnI1",
+    "Stars": 5,
+    "response": "Dear Ashwin, We are absolutely delighted to hear your wonderful recommendation for Naturals Frazer Town, especially your kind words about Gufran exceptional talent in expert hair styling. It truly warms our hearts to know we've earned your five-star approval and that our team delivered the perfection you deserve. With love and style, Team Naturals Frazer Town",
     "response_date": "2026-10-15"
   },
   {
@@ -109536,5 +109536,18 @@
     "Stars": 1,
     "response": "2019-10-02T14:22:22.431Z",
     "response_date": "2019-10-02"
+  },
+  {
+    "store_id": "N05",
+    "store_name": "Frazer Town",
+    "stars": "5",
+    "customer_name": "Prem Rose",
+    "review_comments": "I had a fantastic experience. I visited around 8 p.m., and there was only one staff member on duty. Even though three other customers arrived after me, the staff member, \"Mohd Suheb\"",
+    "show_it_in_website": "Yes",
+    "date_posted": "",
+    "review_id": "AbFvOqnp6tHX3dXFsiNwCE7mYIdGaOgfGNHsO11-QxhzeHZJ3rjBvlywM2AnxxPpBEFGEjZpTZ-I8g",
+    "Stars": 5,
+    "response": "2026-09-09T15:53:04.498Z",
+    "response_date": ""
   }
 ]
