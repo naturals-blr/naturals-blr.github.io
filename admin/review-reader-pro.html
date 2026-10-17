@@ -1117,6 +1117,26 @@ ${webLine}
       const btn = document.getElementById('btn-share-publish');
       const status = document.getElementById('share-status');
       if (!btn || !status || !shareReviewData) return;
+
+      // Validate BEFORE uploading so a rejected request never orphans an image.
+      const platforms = {
+        facebook: document.getElementById('share-platform-fb').checked,
+        instagram: document.getElementById('share-platform-ig').checked,
+        google: document.getElementById('share-platform-gp').checked,
+        website: document.getElementById('share-platform-website').checked,
+      };
+      const postToWebsite = document.getElementById('share-platform-website').checked;
+      const storeIds = [...document.querySelectorAll('.share-store-cb:checked')].map(cb => cb.dataset.store);
+      const socialSelected = ['facebook', 'instagram', 'google'].filter(p => platforms[p]);
+      if (socialSelected.length === 0 && !postToWebsite) {
+        status.textContent = '\u26A0\uFE0F Select at least one platform (Facebook, Instagram, Google, or Website).';
+        return;
+      }
+      if (socialSelected.length > 0 && storeIds.length === 0) {
+        status.textContent = '\u26A0\uFE0F Select at least one store for the social platform(s).';
+        return;
+      }
+
       btn.disabled = true;
       status.textContent = 'Preparing image...';
 
@@ -1157,14 +1177,6 @@ ${webLine}
 
         // Publish
         status.textContent = 'Publishing to social...';
-        const platforms = {
-          facebook: document.getElementById('share-platform-fb').checked,
-          instagram: document.getElementById('share-platform-ig').checked,
-          google: document.getElementById('share-platform-gp').checked,
-          website: document.getElementById('share-platform-website').checked,
-        };
-        const postToWebsite = document.getElementById('share-platform-website').checked;
-        const storeIds = [...document.querySelectorAll('.share-store-cb:checked')].map(cb => cb.dataset.store);
         const caption = document.getElementById('share-caption').value.trim();
         const title = 'Testimonial \u2014 ' + maskName(shareReviewData.reviewer || shareReviewData.customer_name || '');
 
@@ -1185,21 +1197,50 @@ ${webLine}
         });
         const publishData = await publishRes.json();
         if (publishData.ok) {
-          // Parse per-platform results from script output
-          const output = publishData.data?.output || '';
-          const resultsMatch = output.match(/Results:\s*(\{[^}]+\})/);
-          let statusHtml = '';
-          if (resultsMatch) {
-            try {
-              const perPlatform = JSON.parse(resultsMatch[1].replace(/'/g, '"'));
-              const labels = { facebook: 'Facebook', instagram: 'Instagram', google: 'Google' };
-              const icons = { facebook: '📘', instagram: '📸', google: '⭐' };
-              statusHtml = Object.entries(perPlatform)
-                .filter(([_, v]) => v !== 'N/A' && v !== 'SKIPPED')
-                .map(([p, v]) => `${icons[p] || '•'} ${labels[p] || p}: ${v === 'OK' ? '✅' : '❌'}`)
-                .join(' | ');
-            } catch {}
+          const d = publishData.data || {};
+          const output = d.output || '';
+          // Merge per-store structured results {storeId: {platform: 'OK'|'FAIL'}}
+          const merged = {};
+          const mergedErrs = {};
+          if (d.results) {
+            for (const sr of Object.values(d.results)) {
+              if (!sr || typeof sr !== 'object') continue;
+              for (const [p, v] of Object.entries(sr)) {
+                if (v === 'OK') merged[p] = 'OK';
+                else if (merged[p] !== 'OK') merged[p] = v;
+              }
+            }
           }
+          if (d.errors) {
+            for (const se of Object.values(d.errors)) {
+              if (!se || typeof se !== 'object') continue;
+              for (const [p, e] of Object.entries(se)) if (!mergedErrs[p]) mergedErrs[p] = e;
+            }
+          }
+          // Fallback: parse the legacy "Results: {...}" line from output
+          if (Object.keys(merged).length === 0) {
+            const resultsMatch = output.match(/Results:\s*(\{[^}]+\})/);
+            if (resultsMatch) {
+              try {
+                const perPlatform = JSON.parse(resultsMatch[1].replace(/'/g, '"'));
+                for (const [p, v] of Object.entries(perPlatform)) merged[p] = v;
+              } catch {}
+            }
+          }
+          const labels = { facebook: 'Facebook', instagram: 'Instagram', google: 'Google' };
+          const icons = { facebook: '\uD83D\uDCD8', instagram: '\uD83D\uDCF8', google: '\u2B50' };
+          const statusHtml = Object.entries(merged)
+            .filter(([_, v]) => v !== 'N/A' && v !== 'SKIPPED' && v !== 'skipped')
+            .map(([p, v]) => {
+              const ok = v === 'OK';
+              const err = ok ? '' : (mergedErrs[p] ? ` <span class="opacity-75">\u2014 ${escAttr(mergedErrs[p])}</span>` : '');
+              return `${icons[p] || '\u2022'} ${labels[p] || p}: ${ok ? '\u2705' : '\u274C'}${err}`;
+            })
+            .join('<br>');
+
+          // Real success = at least one social platform OK, or website pushed.
+          const anySuccess = (d.successes || 0) > 0 || !!d.websitePushed;
+
           // Clean up original pending pre-gen image (publish endpoint
           // finalises the re-uploaded copy, but the original is separate)
           if (_preGenImageUrl) {
@@ -1211,15 +1252,27 @@ ${webLine}
               body: JSON.stringify({ files: [_cleanupUrl] }),
             }).catch(function(){});
           }
-          if (_currentShareReviewId) {
-            _testimonialPublished[_currentShareReviewId] = true;
-            markReviewCardPublished(_currentShareReviewId);
+
+          if (anySuccess) {
+            if (_currentShareReviewId) {
+              _testimonialPublished[_currentShareReviewId] = true;
+              markReviewCardPublished(_currentShareReviewId);
+            }
+            status.innerHTML = statusHtml || '\u2705 Published successfully!';
+            setTimeout(closeShareModal, 3000);
+          } else {
+            // Nothing actually posted — keep the modal open so the reason is
+            // visible and the user can retry (nothing was marked published).
+            const fatal = output.split('\n').map(l => l.trim())
+              .filter(l => l.startsWith('\u274C') || l.startsWith('\u26A0')).pop();
+            status.innerHTML = (statusHtml ? statusHtml + '<br>' : '') +
+              `\u274C Nothing posted. ${escAttr(fatal || 'All selected platforms failed.')}`;
           }
-          status.innerHTML = statusHtml || '\u2705 Published successfully!';
-          if (statusHtml) setTimeout(closeShareModal, 3000);
-          else setTimeout(closeShareModal, 2000);
         } else {
-          throw new Error(publishData.error || 'Publish failed');
+          const out = publishData.output || '';
+          const actionable = out.split('\n').map(l => l.trim())
+            .filter(l => l.startsWith('\u274C') || l.startsWith('\u26A0')).pop();
+          throw new Error(actionable || publishData.error || 'Publish failed');
         }
       } catch (err) {
         status.textContent = '\u274C ' + err.message;
