@@ -1,18 +1,5 @@
 [
   {
-    "store_id": "N05",
-    "store_name": "Frazer Town",
-    "stars": "5",
-    "customer_name": "Prem Rose",
-    "review_comments": "I had a fantastic experience. I visited around 8 p.m., and there was only one staff member on duty. Even though three other customers arrived after me, the staff member, \"Mohd Suheb\"",
-    "show_it_in_website": "Yes",
-    "date_posted": "Invalid Da",
-    "review_id": "AbFvOqnp6tHX3dXFsiNwCE7mYIdGaOgfGNHsO11-QxhzeHZJ3rjBvlywM2AnxxPpBEFGEjZpTZ-I8g",
-    "Stars": 5,
-    "response": "2026-09-09T15:53:04.498Z",
-    "response_date": "Invalid Da"
-  },
-  {
     "store_id": "N36",
     "store_name": "Ayyappa Nagar",
     "stars": "5",
@@ -49,6 +36,32 @@
     "review_id": "AbFvOqmNTgq0XHfxH-DxFL3xrW_lZXe6eTtHjX3JmikfZvvpKQkg_oRMxFJ1oCYQge0yuOJXqJys7w",
     "Stars": 5,
     "response": "Dear Mohammed, We are absolutely delighted to hear such wonderful feedback about your recent experience with Anas at Naturals Frazer Town! It warms our hearts to know his expert hair styling and professional, friendly demeanor left you highly satisfied. Naturals Frazer Town — Your Dedicated Luxury Stylists",
+    "response_date": "2026-10-18"
+  },
+  {
+    "store_id": "N45",
+    "store_name": "Nagavara",
+    "stars": "5",
+    "customer_name": "Vineetha Maddipati",
+    "review_comments": "Excellent service by Shikha. She handled my long hair with patience :D",
+    "show_it_in_website": "Yes",
+    "date_posted": "2026-10-18",
+    "review_id": "AbFvOqnJCiicNzzNJhzgQKnKES3ntvA7QzA9CKYgDW9gp7namwST7UJT6CdF_KbLxixr2v8KXQafrA",
+    "Stars": 5,
+    "response": "Dear Vineetha, We are absolutely delighted to hear that Shikha provided you with such excellent service, especially with your beautiful long hair! Our team is dedicated to offering expert hair styling and the utmost care to every client. Your Premium Grooming Experts @ Naturals Nagavara",
+    "response_date": "2026-10-18"
+  },
+  {
+    "store_id": "N45",
+    "store_name": "Nagavara",
+    "stars": "5",
+    "customer_name": "Sriharsha Paluri",
+    "review_comments": "Good service by Mr Thyagaraj and Ms Keerthy. Very polite and helpful.",
+    "show_it_in_website": "Yes",
+    "date_posted": "2026-10-18",
+    "review_id": "AbFvOqmbMB4Yj5pk-aXdIkD4O_P8KVs-IkXY94gO5oqxxtTKANRRXTBilYxneHoiLGBE4yJILR_Z",
+    "Stars": 5,
+    "response": "Dear Sriharsha, We are absolutely delighted to hear that Mr. Thyagaraj and Ms. Kerthana provided you with such a wonderful experience at Naturals Nagavara. It is always our pleasure to ensure every visit is met with the highest standards of politeness and helpfulness, making us a truly top-rated salon near Nagavara. Your Premium Grooming Experts @ Naturals Nagavara",
     "response_date": "2026-10-18"
   },
   {
@@ -671,6 +684,32 @@
     "show_it_in_website": "Yes",
     "date_posted": "2026-10-11",
     "review_id": "AbFvOqlmEG35Ff44vN5hU2vQSfHT8kx32_H1WAJ3tbTAGV6g6jjv8Y-Xk5kSpq_upcxbg4RRkipAZA",
+    "Stars": 1,
+    "response": "",
+    "response_date": ""
+  },
+  {
+    "store_id": "N36",
+    "store_name": "Ayyappa Nagar",
+    "stars": "1",
+    "customer_name": "Sreeja Thota",
+    "review_comments": "",
+    "show_it_in_website": "Yes",
+    "date_posted": "2026-10-11",
+    "review_id": "AbFvOqnYFtetPGGiMNQFgW2q0q-WjaLSr_XbicrXepqizXqKGMEqbD3o0zCmERKdCI7BdhDnE8Xd",
+    "Stars": 1,
+    "response": "",
+    "response_date": ""
+  },
+  {
+    "store_id": "N36",
+    "store_name": "Ayyappa Nagar",
+    "stars": "1",
+    "customer_name": "sreeja Thota",
+    "review_comments": "",
+    "show_it_in_website": "Yes",
+    "date_posted": "2026-10-11",
+    "review_id": "AbFvOqkMXKThVq0xeNBJ7-ku5V-OiEupcEA-eStRc9Vcx3KMfca4JcIhivdCKoC6BWRrZ180XXcv",
     "Stars": 1,
     "response": "",
     "response_date": ""
@@ -109757,5 +109796,18 @@
     "Stars": 1,
     "response": "2019-10-02T14:22:22.431Z",
     "response_date": "2019-10-02"
+  },
+  {
+    "store_id": "N05",
+    "store_name": "Frazer Town",
+    "stars": "5",
+    "customer_name": "Prem Rose",
+    "review_comments": "I had a fantastic experience. I visited around 8 p.m., and there was only one staff member on duty. Even though three other customers arrived after me, the staff member, \"Mohd Suheb\"",
+    "show_it_in_website": "Yes",
+    "date_posted": "",
+    "review_id": "AbFvOqnp6tHX3dXFsiNwCE7mYIdGaOgfGNHsO11-QxhzeHZJ3rjBvlywM2AnxxPpBEFGEjZpTZ-I8g",
+    "Stars": 5,
+    "response": "2026-09-09T15:53:04.498Z",
+    "response_date": ""
   }
 ]
