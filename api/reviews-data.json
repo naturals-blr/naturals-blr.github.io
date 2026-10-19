@@ -1,5 +1,44 @@
 [
   {
+    "store_id": "N05",
+    "store_name": "Frazer Town",
+    "stars": "5",
+    "customer_name": "Prem Rose",
+    "review_comments": "I had a fantastic experience. I visited around 8 p.m., and there was only one staff member on duty. Even though three other customers arrived after me, the staff member, \"Mohd Suheb\"",
+    "show_it_in_website": "Yes",
+    "date_posted": "Invalid Da",
+    "review_id": "AbFvOqnp6tHX3dXFsiNwCE7mYIdGaOgfGNHsO11-QxhzeHZJ3rjBvlywM2AnxxPpBEFGEjZpTZ-I8g",
+    "Stars": 5,
+    "response": "2026-09-09T15:53:04.498Z",
+    "response_date": "Invalid Da"
+  },
+  {
+    "store_id": "N36",
+    "store_name": "Ayyappa Nagar",
+    "stars": "4",
+    "customer_name": "lok chand santosh kumar",
+    "review_comments": "Good service by Ali",
+    "show_it_in_website": "Yes",
+    "date_posted": "2026-10-19",
+    "review_id": "AbFvOqkgm40fJJ4BJJ2QzRUgbeMCzOSiyccT00xlS1VOK6YSH5v-NnWSZQKROWa4N5yMkQyOyWyDSQ",
+    "Stars": 4,
+    "response": "Dear Lok, We are delighted to hear you had a good experience with Ali and appreciate you recognizing the dedicated service from our team at Naturals Ayyappa Nagar. We strive to be the best unisex salon in Ayyappa Nagar, ensuring every visit is a moment of pure indulgence. The Self-Care Crew at Naturals Ayyappa Nagar",
+    "response_date": "2026-10-19"
+  },
+  {
+    "store_id": "N36",
+    "store_name": "Ayyappa Nagar",
+    "stars": "5",
+    "customer_name": "Priya Raj",
+    "review_comments": "Today I visited this place for pedicure and facial..the service was really good..and Bhagya did a fabulous job..very good service..",
+    "show_it_in_website": "Yes",
+    "date_posted": "2026-10-19",
+    "review_id": "AbFvOqnWLPvzTdV3e81lFsrO78RpBKj7fuodHBTqLNykA_UJPMTnGiDP0RPRB_wjH7-HVyvzagDO6w",
+    "Stars": 5,
+    "response": "Dear Priya, We are absolutely delighted to hear you enjoyed your pedicure and facial at Naturals Ayyappa Nagar, and Bhagya was thrilled to know her work was so appreciated! It's wonderful to know our dedication to professional skin care left you feeling refreshed. The Creative Hands at Naturals Ayyappa Nagar",
+    "response_date": "2026-10-19"
+  },
+  {
     "store_id": "N36",
     "store_name": "Ayyappa Nagar",
     "stars": "5",
@@ -9910,7 +9949,7 @@
     "store_name": "Nagavara",
     "stars": "5",
     "customer_name": "Tulasi Ram",
-    "review_comments": "Had a great experience with Thyagaraju at Naturals. He took the time to understand exactly what I wanted and suggested a style that suited my face shape, hair texture, and beard. He maintained the hair length while adding layers and texture, and the beard shaping was done very professionally. The haircut looks natural, stylish, and easy to manage. Really happy with the outcome and would definitely recommend him to anyone looking for a personalized grooming experience. Thanks, Thyagaraju!\"",
+    "review_comments": "Had a great experience with Thyagaraju at Naturals. He took the time to understand exactly what I wanted and suggested a style that suited my face shape, hair texture, and beard. He maintained the hair length while adding layers and texture, and the beard shaping was done very professionally. The haircut looks natural, stylish, and easy to manage. Really happy with the outcome and would definitely recommend him to anyone looking for a personalized grooming experience. Thanks, Thyagaraju!\"  Visited the store once again and got hair cut and beard services from Sameer who is very good listener and suggest you the best style that suits. Encourage you all to take services from him. Thank you once again  ⭐⭐⭐⭐⭐ A Truly Relaxing and Refreshing Experience at Naturals! Had an amazing experience at Naturals during my dandruff treatment! After a long and stressful day, the service was exactly what I needed to relax and unwind. The treatment was soothing, and the overall experience was incredibly refreshing. A special thanks to Thyagaraju for his excellent service and for patiently explaining the treatment and sharing helpful insights about hair care. His professionalism, knowledge, and friendly approach made the experience even better. I walked in feeling stressed and walked out feeling relaxed and refreshed. The service genuinely made my day! ❤️ Highly recommend Naturals to anyone looking for quality hair care and a relaxing salon experience. Definitely worth visiting!",
     "show_it_in_website": "Yes",
     "date_posted": "2026-06-19",
     "review_id": "AbFvOqn6qS1xQui6XaVtn5Fvpx1Xt3qfk2qdRrxkFLxZGZ2PXgzf5gc33P4q2rxcM-Iyxz4Phisepg",
@@ -14993,7 +15032,7 @@
     "store_name": "Hennur",
     "stars": "5",
     "customer_name": "Smitha Chander",
-    "review_comments": "Shika did a very good job I got a pedicure and detan Very happy with her sevice",
+    "review_comments": "Geetha  did a very good job I got a pedicure and detan Very happy with her sevice",
     "show_it_in_website": "Yes",
     "date_posted": "2026-04-15",
     "review_id": "AbFvOqmTNJJqRoMEUtHENlICdT_Mnm40aEl8zFhMvzHftvHIJMyS0iUse7V-pwmf2_NWUUFCxy_aqQ",
@@ -17112,7 +17151,7 @@
     "store_name": "Frazer Town",
     "stars": "5",
     "customer_name": "Joshua Daniel",
-    "review_comments": "I got my haircut done by Sameer, he is pretty good at what he does and is friendly. And also got my eye brows done by Ayesha and she is also good at it",
+    "review_comments": "Good and friendly service by soheb, he was professional and good at what he does. I am well satisfied 😊",
     "show_it_in_website": "Yes",
     "date_posted": "2026-03-14",
     "review_id": "AbFvOqljv7Xt_X9aadpk9up1EaB5HeVLK5MYTQPayFhjRjqNes1e9yh4QM9wxW8c2RYsB18HuHVa4Q",
@@ -72165,13 +72204,13 @@
   {
     "store_id": "N36",
     "store_name": "Ayyappa Nagar",
-    "stars": "3",
+    "stars": "5",
     "customer_name": "Bala Harish",
-    "review_comments": "The price is way too high. What is meant by this is, I came for a haircut 💈, but you've charged Rs. 475. This amount is for change of hairstyle and not for a normal haircut. Change of hairstyle means changing the entire style of the hair. For example, changing a curly hair to a straight hair with a box cut to it or vice versa. But if i already have a box  cut and I need to do a box cut , this is not a change of haircut.",
+    "review_comments": "Arif is a true expert at his craft! His professionalism, attention to detail, and understanding of exactly what suits me make every haircut a great experience. He consistently delivers excellent results and takes pride in his work. I've always been satisfied with his service, and he's definitely my go-to stylist. If you're looking for someone who truly knows his craft, I highly recommend Arif!",
     "show_it_in_website": "Yes",
     "date_posted": "2022-05-17",
     "review_id": "AbFvOql7HZ7SimcVndPgqj4G3ERhEmWWIRFppS7YkmeYreyBkJqioLMiG_TVBRG1AvCu19HwNV_NoQ",
-    "Stars": 3,
+    "Stars": 5,
     "response": "Dear Bala Harish, Thank you for your rating and sharing your experience , Appreciated it. About rate its pan India rates all over naturals in India. Your positive response is a great motivation for us , which will help us to achieve higher standards. Visit us again and please do like us on Facebook to receive regular updates and best offers: http://facebook.com/Naturals.Salon.Devasandra//  Regards, Naturals Unisex Salon (Naturals at 36) || No. 1,2,3, 1st Floor || Opp. Lulu's Bakery || Devasandra Main Road || Basavanapura || KRPuram || Bangalore 560036 ||",
     "response_date": "2022-05-17"
   },
@@ -109796,18 +109835,5 @@
     "Stars": 1,
     "response": "2019-10-02T14:22:22.431Z",
     "response_date": "2019-10-02"
-  },
-  {
-    "store_id": "N05",
-    "store_name": "Frazer Town",
-    "stars": "5",
-    "customer_name": "Prem Rose",
-    "review_comments": "I had a fantastic experience. I visited around 8 p.m., and there was only one staff member on duty. Even though three other customers arrived after me, the staff member, \"Mohd Suheb\"",
-    "show_it_in_website": "Yes",
-    "date_posted": "",
-    "review_id": "AbFvOqnp6tHX3dXFsiNwCE7mYIdGaOgfGNHsO11-QxhzeHZJ3rjBvlywM2AnxxPpBEFGEjZpTZ-I8g",
-    "Stars": 5,
-    "response": "2026-09-09T15:53:04.498Z",
-    "response_date": ""
   }
 ]
