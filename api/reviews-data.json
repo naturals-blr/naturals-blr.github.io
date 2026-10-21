@@ -13,6 +13,58 @@
     "response_date": "Invalid Da"
   },
   {
+    "store_id": "N05",
+    "store_name": "Frazer Town",
+    "stars": "5",
+    "customer_name": "Sarah",
+    "review_comments": "Services provided by Poornima was very good. Prefer naturals. Thanks",
+    "show_it_in_website": "Yes",
+    "date_posted": "2026-10-21",
+    "review_id": "AbFvOql2gjpJOIBVjImbutE1CvfqtagtGXnqHOilZpAirLktw0lH6kxVKnvTCFMgEB6G9B9FDxg2xA",
+    "Stars": 5,
+    "response": "Dear Sarah, It brings us immense joy to hear that Poornima provided you with such wonderful service at Naturals Frazer Town, reinforcing why we strive to be the best Anas salon in Frazer Town. We are truly delighted you prefer our salon and look forward to welcoming you back soon! Your Everyday Beauty Partners, Naturals Frazer Town",
+    "response_date": "2026-10-21"
+  },
+  {
+    "store_id": "N45",
+    "store_name": "Nagavara",
+    "stars": "5",
+    "customer_name": "JENITA KURIAKOSE 2427023",
+    "review_comments": "",
+    "show_it_in_website": "Yes",
+    "date_posted": "2026-10-21",
+    "review_id": "AbFvOqmeYr6aEQfgsGSiwQdQJ16fhVkx1RAB8oXf3LPzeDo68-utqp-D8_9-tfsLv3_KouXtPFnimg",
+    "Stars": 5,
+    "response": "Dear Jenita, We are absolutely thrilled to receive your 5-star rating! It is our greatest pleasure to provide an exceptional experience for every guest at our best unisex salon in Nagavara. The Stylists & Care Team at Naturals Nagavara",
+    "response_date": "2026-10-21"
+  },
+  {
+    "store_id": "N45",
+    "store_name": "Nagavara",
+    "stars": "4",
+    "customer_name": "Maria",
+    "review_comments": "I had a really good experience at Naturals Salon, Nagavara. The service was excellent. Thyagaraj, who did my facial was very gentle and made sure I was comfortable throughout the session. I’m really happy with the overall experience.",
+    "show_it_in_website": "Yes",
+    "date_posted": "2026-10-21",
+    "review_id": "AbFvOqlLtmSSqGv8MulBkeV2UHJ-3_UU7RZufhISUTtvSWt0XGuKsxFtntYXhYhrIGJ7tyQXpWog",
+    "Stars": 4,
+    "response": "Dear Maria, We are absolutely delighted to hear you had such a wonderful experience at Naturals Nagavara, and Thyagaraj will be thrilled to know his gentle touch made your facial so comfortable. We strive to provide professional skin care that leaves every client feeling rejuvenated and happy. Your Hair & Beauty Crew at Naturals Nagavara",
+    "response_date": "2026-10-21"
+  },
+  {
+    "store_id": "N36",
+    "store_name": "Ayyappa Nagar",
+    "stars": "5",
+    "customer_name": "prathish emilyrita",
+    "review_comments": "Very good service for first time",
+    "show_it_in_website": "Yes",
+    "date_posted": "2026-10-21",
+    "review_id": "AbFvOqkTXqYPByTSGJDitCA6sPWkh52ryHYY_rR2k8mfrAkC8861wTyVLjLKOyRfJH6B3Sz5LWam",
+    "Stars": 5,
+    "response": "Dear Prathish, We are absolutely delighted to hear you enjoyed your first experience with us and found our service to be very good! We always strive to be the best unisex salon in Ayyappa Nagar, and our team looks forward to welcoming you back for many more pampering visits. Naturals Ayyappa Nagar Management & Stylists",
+    "response_date": "2026-10-21"
+  },
+  {
     "store_id": "N43",
     "store_name": "Hennur",
     "stars": "5",
