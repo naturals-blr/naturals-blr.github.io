@@ -19,13 +19,13 @@ async function init() {
     renderHeader();
   } catch (e) { log(`Status load failed: ${e.message}`, 'error'); }
   try {
-    state.stores = await getStores();
+    state.stores = (await getStores()).filter(s => s.short_name && s.short_name !== '5');
     renderStoreList();
   } catch (e) { log(`Stores load failed: ${e.message}`, 'error'); }
 
   $('#btn-refresh-all')?.addEventListener('click', async () => {
     log('Refreshing stores...', 'info');
-    state.stores = await getStores();
+    state.stores = (await getStores()).filter(s => s.short_name && s.short_name !== '5');
     renderStoreList();
     if (state.currentStore) loadReviews(state.currentStore);
   });
@@ -208,6 +208,31 @@ function renderReviews(storeShortName) {
 
 const STAR_MAP = { ONE: 1, TWO: 2, THREE: 3, FOUR: 4, FIVE: 5 };
 
+function getGoogleReviewReplyUrl(review, store) {
+  // Prefer the google_review_link which is already in Google's correct format
+  // (stored as top-level key, not nested under google)
+  const reviewLink = store?.google_review_link
+    || store?.review_link
+    || (store?.google && store.google.review_link);
+
+  if (reviewLink) {
+    return reviewLink;
+  }
+
+  // Fallback: construct URL from place_id
+  const placeId = store?.google?.place_id
+    || store?.google_place_id
+    || store?.address?.google?.place_id
+    || review?.place_id
+    || '';
+
+  if (placeId) {
+    return `https://search.google.com/local/reviews?placeid=${placeId}`;
+  }
+
+  return 'https://search.google.com/local/reviews';
+}
+
 function renderReviewCard(review, storeShortName) {
   const reviewer = review.reviewer?.displayName || 'Anonymous';
   const stars = STAR_MAP[review.starRating] || parseInt(review.starRating) || 0;
@@ -218,6 +243,8 @@ function renderReviewCard(review, storeShortName) {
   const hasReply = !!review.reviewReply;
   const hasReplyBadge = hasReply ? '<span class="ml-2 inline-block text-xs font-medium text-green-600 bg-green-50 border border-green-200 rounded-full px-2 py-0.5">Replied</span>' : '';
   const cardOpacity = hasReply ? 'opacity-60' : '';
+  const storeData = state.stores.find(s => s.short_name === storeShortName);
+  const replyUrl = storeData ? getGoogleReviewReplyUrl(review, storeData) : 'https://search.google.com/local/reviews';
 
   return `
     <div class="review-card ${cardOpacity}" data-review-id="${id}">
@@ -233,6 +260,7 @@ function renderReviewCard(review, storeShortName) {
         </div>
         <div class="flex gap-1.5">
           ${hasReply ? '' : `<button onclick="onGenerate(this)" data-store="${storeShortName}" class="text-xs px-3 py-1.5 bg-royal-600 text-white rounded-lg hover:bg-royal-700 transition-colors font-medium">Generate Reply</button>`}
+          ${!hasReply ? `<a href="${replyUrl}" target="_blank" class="text-xs px-3 py-1.5 bg-emerald-600 text-white rounded-lg hover:bg-emerald-700 transition-colors font-medium">Reply</a>` : ''}
         </div>
       </div>
       <div class="px-4 py-3 text-sm text-gray-600 bg-white leading-relaxed">${esc(comment)}</div>
