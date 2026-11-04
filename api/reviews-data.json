@@ -295,8 +295,8 @@
     "date_posted": "2026-10-31",
     "review_id": "AbFvOqnA7BpzoIInAuTWAWSKNiQgjaAx2CQlwqPXZohX76njTkyByPKEDrHonhMuUz2nm2TAbsVxkA",
     "Stars": 1,
-    "response": "",
-    "response_date": ""
+    "response": "Dear Pranshul, We are truly sorry to hear that your recent experience with us fell short of the 5-star standard we strive for, especially concerning your haircut. Perfection in expert hair styling is our utmost priority, and we regret that we did not meet your expectations on this occasion. We are happy to fix/correct. Please call us to fix the appointment. Thanks",
+    "response_date": "2026-11-03"
   },
   {
     "store_id": "N45",
@@ -464,8 +464,8 @@
     "date_posted": "2026-10-29",
     "review_id": "AbFvOqkWUxgAmEEb4TLghboJz-HhHuL_eGQQUvhp6GLrsrUJ8xGBC-NBPLX1fY9QBIrj3nNfX8YPLg",
     "Stars": 1,
-    "response": "",
-    "response_date": ""
+    "response": "Hello, we take appointment timing and client satisfaction very seriously. However, upon thoroughly checking our store records, we have no record of an appointment, visit, or service under your name at our branch. It is possible you may have visited a different salon location or booked under a different name. If you did visit our branch, please contact our Store Manager directly with your invoice or booking confirmation so we can verify your appointment time and investigate this immediately.",
+    "response_date": "2026-11-03"
   },
   {
     "store_id": "N36",
@@ -1517,8 +1517,8 @@
     "date_posted": "2026-10-11",
     "review_id": "AbFvOqlmEG35Ff44vN5hU2vQSfHT8kx32_H1WAJ3tbTAGV6g6jjv8Y-Xk5kSpq_upcxbg4RRkipAZA",
     "Stars": 1,
-    "response": "",
-    "response_date": ""
+    "response": "Dear Ishika, We are truly sorry to hear that your recent haircut experience at Naturals Hennur did not meet your expectations, and we sincerely apologize for the disappointment regarding your curtain bangs. We pride ourselves on delivering expert hair styling and are concerned that our service fell short on this occasion. Please allow us to invite you back to the salon at your earliest convenience so our senior stylists can rectify this for you, ensuring you leave with the beautiful, perfectly layered look you desired. Your Everyday Beauty Partners,  Naturals Hennur",
+    "response_date": "2026-11-03"
   },
   {
     "store_id": "N36",
@@ -1530,8 +1530,8 @@
     "date_posted": "2026-10-11",
     "review_id": "AbFvOqnYFtetPGGiMNQFgW2q0q-WjaLSr_XbicrXepqizXqKGMEqbD3o0zCmERKdCI7BdhDnE8Xd",
     "Stars": 1,
-    "response": "",
-    "response_date": ""
+    "response": "Dear Sreeja Thota, as mentioned in our response to your earlier review, all service pricing was explicitly communicated and confirmed prior to your services. We kindly request that feedback for a single visit is not duplicated across multiple review entries. Thank you.",
+    "response_date": "2026-11-03"
   },
   {
     "store_id": "N36",
@@ -1543,8 +1543,8 @@
     "date_posted": "2026-10-11",
     "review_id": "AbFvOqkMXKThVq0xeNBJ7-ku5V-OiEupcEA-eStRc9Vcx3KMfca4JcIhivdCKoC6BWRrZ180XXcv",
     "Stars": 1,
-    "response": "",
-    "response_date": ""
+    "response": "Dear Sreeja Thota, as mentioned in our response to your earlier review, all service pricing was explicitly communicated and confirmed prior to your services. We kindly request that feedback for a single visit is not duplicated across multiple review entries. Thank you.",
+    "response_date": "2026-11-03"
   },
   {
     "store_id": "N45",
@@ -110653,19 +110653,6 @@
     "review_id": "AbFvOqnp6tHX3dXFsiNwCE7mYIdGaOgfGNHsO11-QxhzeHZJ3rjBvlywM2AnxxPpBEFGEjZpTZ-I8g",
     "Stars": 5,
     "response": "2026-09-09T15:53:04.498Z",
-    "response_date": ""
-  },
-  {
-    "store_id": "",
-    "store_name": "",
-    "stars": "",
-    "customer_name": "Anonymous",
-    "review_comments": "",
-    "show_it_in_website": "Yes",
-    "date_posted": "",
-    "review_id": "<<<<<<< HEAD",
-    "Stars": 0,
-    "response": "",
     "response_date": ""
   }
 ]
