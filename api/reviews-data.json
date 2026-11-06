@@ -1,5 +1,57 @@
 [
   {
+    "store_id": "N45",
+    "store_name": "Nagavara",
+    "stars": "5",
+    "customer_name": "Ashik Arul Clement",
+    "review_comments": "Thyagaraj cooked",
+    "show_it_in_website": "Yes",
+    "date_posted": "2026-11-06",
+    "review_id": "AbFvOqlDcPQ5_XLrg5cnKhh9kUSKeotb3pQLw6UifyMQH4lezy56IznFi0LVZuAb7dy6OttL7xn7qg",
+    "Stars": 5,
+    "response": "Dear Ashik, We are absolutely delighted to hear such wonderful feedback about Thyagaraj! It's truly rewarding to know our team at Naturals Nagavara delivered a 5-star experience, reinforcing our commitment to being the best unisex salon in Nagavara. Your Pampering Team at Naturals Nagavara",
+    "response_date": "2026-11-06"
+  },
+  {
+    "store_id": "N05",
+    "store_name": "Frazer Town",
+    "stars": "5",
+    "customer_name": "Aswin Selva",
+    "review_comments": "Sueb did a great service, suggested styles and was very interactive. The end result was good. I recommend him and this natural salon",
+    "show_it_in_website": "Yes",
+    "date_posted": "2026-11-06",
+    "review_id": "AbFvOqmnVIQIoIDm_b5RlXE_M4YzGXx1rKrqNGVWBwAEBxIHW9P1W9N_vziEQelThBWrAHl2U-75SQ",
+    "Stars": 5,
+    "response": "Dear Aswin, We are absolutely delighted to hear that Soheb provided you with such a wonderful and interactive experience, culminating in a fantastic result! It's truly rewarding when our team, known for their expert hair styling, can exceed expectations. The Elite Style Team, Naturals Frazer Town",
+    "response_date": "2026-11-06"
+  },
+  {
+    "store_id": "N05",
+    "store_name": "Frazer Town",
+    "stars": "5",
+    "customer_name": "Shweta Singh",
+    "review_comments": "Great hair service done by Gufran. Got hair blow dry done. Really impressed with the services plus experts are polite and humble",
+    "show_it_in_website": "Yes",
+    "date_posted": "2026-11-06",
+    "review_id": "AbFvOqkh6IBLTqbyF1xa_e3wDDCKJX78p6gMLN6UBIQWpZTf3o7Jk3DWteFQ8L9N-Yolaa9yJmx0ng",
+    "Stars": 5,
+    "response": "Dear Shweta, We are absolutely delighted to hear that Gufran provided you with such a wonderful hair blow dry experience at Naturals Frazer Town! Our team of expert hair styling professionals always strives for perfection and politeness, and we're so pleased you noticed. Your Everyday Beauty Partners,  Naturals Frazer Town",
+    "response_date": "2026-11-06"
+  },
+  {
+    "store_id": "N78",
+    "store_name": "JP Nagar 5th Phase",
+    "stars": "5",
+    "customer_name": "•JHONY•",
+    "review_comments": "Been Here Twice , Had A Great Experience , The Service And The Ambience Is Too Good , Special Thanks To Mr Sahil For The Good Service , I Go There From 8-9km Just For The Haircut. His Suggestions Shows His Professionalism . Thank You Naturals 👍",
+    "show_it_in_website": "Yes",
+    "date_posted": "2026-11-06",
+    "review_id": "AbFvOqnOMQHQ2D1KmZxH26bKNH8NV-LD9tBOrLLAxhLjJQVOplVdt_OdlASC2dP8bYj3GSQZa_B2bA",
+    "Stars": 5,
+    "response": "Dear •jhony•, We are absolutely delighted to hear you consistently have a great experience at Naturals JP Nagar 5th Phase, and it's wonderful to know our ambience and service excellence resonate with you. Our expert hair styling team, especially Sahil, truly appreciates your kind words and we're so pleased his professionalism makes your journey worthwhile! Your Personal Glow Team,  Naturals JP Nagar 5th Phase",
+    "response_date": "2026-11-06"
+  },
+  {
     "store_id": "N36",
     "store_name": "Ayyappa Nagar",
     "stars": "5",
