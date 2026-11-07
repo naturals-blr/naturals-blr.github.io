@@ -1,5 +1,44 @@
 [
   {
+    "store_id": "N05",
+    "store_name": "Frazer Town",
+    "stars": "5",
+    "customer_name": "Dinesh Babu",
+    "review_comments": "Got a haircut, beard trim and facial massage (plus de-tanning) at Naturals, Fraser Town. Gufran did a wonderful job. He asked exactly what kind of haircut I wanted and how I wanted it shaped, explained everything about the face pack, and was attentive throughout. Really nice and pleasant. Highly recommend!",
+    "show_it_in_website": "Yes",
+    "date_posted": "2026-11-07",
+    "review_id": "AbFvOqkPEQG3dZlnGZ6qPsxokeREnTN68XeIKKKGB_qEpltFye0X5A81EN2o2W6v6aZzDl3cMYGc",
+    "Stars": 5,
+    "response": "Dear Dinesh, We are absolutely delighted to hear such wonderful feedback about your recent visit to Naturals Frazer Town! It warms our hearts to know that Gufran provided you with such an attentive and exceptional experience, reflecting our dedication to expert hair styling and professional skin care. We eagerly await your next visit for another 5-star experience. Your Personal Glow Team, Naturals Frazer Town",
+    "response_date": "2026-11-07"
+  },
+  {
+    "store_id": "N36",
+    "store_name": "Ayyappa Nagar",
+    "stars": "5",
+    "customer_name": "Shree Nidhi",
+    "review_comments": "I had a wonderful experience at the salon! Radha did an amazing job with my waxing and face waxing. She was very professional, gentle, and made me feel comfortable throughout the service. Really happy with the results. Highly recommended! ❤️",
+    "show_it_in_website": "Yes",
+    "date_posted": "2026-11-07",
+    "review_id": "AbFvOqmRe1OgmN-A6o2gDVqC5pbir-YVfOf90dqkTqS00-YU4yOBMNOPwfz7Su8MitMWpcYeK0axiQ",
+    "Stars": 5,
+    "response": "Dear Shree, We are absolutely delighted to hear you had a wonderful experience with Radha and our professional skin care services! It brings us immense joy to know her gentle touch and expertise left you feeling comfortable and happy with your results. ❤️ Naturals Ayyappa Nagar — Your Dedicated Luxury Stylists",
+    "response_date": "2026-11-07"
+  },
+  {
+    "store_id": "N45",
+    "store_name": "Nagavara",
+    "stars": "4",
+    "customer_name": "Rashmitha Rawada",
+    "review_comments": "",
+    "show_it_in_website": "Yes",
+    "date_posted": "2026-11-07",
+    "review_id": "AbFvOqlcmQu2MzYTgetOJbIpvgh9CSIy8wQjguNoV9dC7n2IzoU1chRUypKGBw9bNxh1SPTmx96AOQ",
+    "Stars": 4,
+    "response": "Dear Rashmitha, We are delighted you chose Naturals Nagavara and appreciate your visit. We hope to welcome you back soon for another 5-star experience at the best unisex salon in Nagavara. Naturals Nagavara — Your Dedicated Luxury Stylists",
+    "response_date": "2026-11-07"
+  },
+  {
     "store_id": "N45",
     "store_name": "Nagavara",
     "stars": "5",
@@ -54201,7 +54240,7 @@
     "store_name": "Hennur",
     "stars": "5",
     "customer_name": "Manoj Swain",
-    "review_comments": "Really satisfied with the haircut and spa done by Armaan over here.",
+    "review_comments": "Really satisfied with the hair spa and face cleansing from Geeta ma'am.",
     "show_it_in_website": "Yes",
     "date_posted": "2023-07-28",
     "review_id": "AbFvOqlPFs-wA6_-EjfeVIl5nBBbRc6lLFQpxl34nOaZdJanyaTbABIuaKqgADVNF-GMgOFXyfE25w",
