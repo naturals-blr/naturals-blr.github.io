@@ -1,5 +1,31 @@
 [
   {
+    "store_id": "N36",
+    "store_name": "Ayyappa Nagar",
+    "stars": "5",
+    "customer_name": "Minu Sairam",
+    "review_comments": "Good service by Radha",
+    "show_it_in_website": "Yes",
+    "date_posted": "2026-11-10",
+    "review_id": "AbFvOqnquC7U4rNCPsgWAn6cyJDHk17IjcWVTq1utsTERnm8_c3_l3Egn4HDkbiW2Rd8Gbb2vVKr",
+    "Stars": 5,
+    "response": "Dear Minu, We are absolutely delighted to hear that Radha provided you with such good service! It is always our pleasure to ensure every visit to Naturals Ayyappa Nagar is a truly 5-star experience, reinforcing our commitment as the best unisex salon in Ayyappa Nagar. Team Naturals Ayyappa Nagar (Looking forward to your next visit!)",
+    "response_date": "2026-11-10"
+  },
+  {
+    "store_id": "N43",
+    "store_name": "Hennur",
+    "stars": "4",
+    "customer_name": "Leelavathy S",
+    "review_comments": "Excellent service by Geetha madam",
+    "show_it_in_website": "Yes",
+    "date_posted": "2026-11-10",
+    "review_id": "AbFvOqmRXhYtRWQBfm2Td9lW3ZSOu7iwFGiRFAq6JiGZK_UcBVawVwL9q-zDdy0e8ruL_n9NzxnN4w",
+    "Stars": 4,
+    "response": "Dear Leelavathy, We are delighted to hear you had an excellent experience with Geetha madam at Naturals Hennur. Our team strives to provide the finest service, making us a top-rated salon near Hennur. Naturals Hennur Beauty Desk",
+    "response_date": "2026-11-10"
+  },
+  {
     "store_id": "N43",
     "store_name": "Hennur",
     "stars": "5",
@@ -2708,7 +2734,7 @@
     "store_name": "Ayyappa Nagar",
     "stars": "5",
     "customer_name": "Meera Menon",
-    "review_comments": "Thanks Bhagya for the good services",
+    "review_comments": "Thanks Bhagya and Radha for the good services",
     "show_it_in_website": "Yes",
     "date_posted": "2026-09-26",
     "review_id": "AbFvOqm7PE8PvXFJiOFvGktXpqZRKQOQj5OfMNPNvHU9ynPo1vS2D0e3IuBuPug0dR2XQSawz9aG",
