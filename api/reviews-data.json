@@ -2,6 +2,32 @@
   {
     "store_id": "N36",
     "store_name": "Ayyappa Nagar",
+    "stars": "1",
+    "customer_name": "Sharanya M",
+    "review_comments": "I’d give zero stars if I could. I booked a haircut for my daughter and the bangs look awful. Even with a reference photo, they cut them way too short and now it’s ruined. I wouldn't recommend this place for kids at all.",
+    "show_it_in_website": "Yes",
+    "date_posted": "2026-11-13",
+    "review_id": "AbFvOqnU0X7aKcbT8k2VsQHgocevP3iS2yPI70Ywi0dFaHm-IU1eU9RQ0b3zPZfTlQ7ztT1sHTYsAA",
+    "Stars": 1,
+    "response": "",
+    "response_date": ""
+  },
+  {
+    "store_id": "N43",
+    "store_name": "Hennur",
+    "stars": "5",
+    "customer_name": "Swathi N S",
+    "review_comments": "Sony did my eyebrows and she did an amazing job. It was painless and quick",
+    "show_it_in_website": "Yes",
+    "date_posted": "2026-11-13",
+    "review_id": "AbFvOqkg_yZuRPCkwRDxWo8mzaNRqjs4VNss99ehiV9lHR31ZypkHCUiolwe9K37pTdts9ApYpeB1A",
+    "Stars": 5,
+    "response": "Dear Swathi, We are absolutely delighted to hear that Sony provided you with such a wonderful and painless grooming experience at Naturals Hennur! Our team is dedicated to ensuring every visit is nothing short of five-star perfection. The Elite Style Team, Naturals Hennur",
+    "response_date": "2026-11-13"
+  },
+  {
+    "store_id": "N36",
+    "store_name": "Ayyappa Nagar",
     "stars": "5",
     "customer_name": "Pooja Hali",
     "review_comments": "Very good service by Radha..highly recommended. I have sensitive skin and it was taken care well",
