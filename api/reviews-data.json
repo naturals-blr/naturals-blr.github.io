@@ -1,5 +1,44 @@
 [
   {
+    "store_id": "N45",
+    "store_name": "Nagavara",
+    "stars": "5",
+    "customer_name": "Sangeetha Naik",
+    "review_comments": "I recently got a HydraFacial done by Lalitha, and her service was wonderful. What I appreciated most about her is that she genuinely prioritizes client satisfaction over a money-making mindset. I highly recommend booking your service with her.",
+    "show_it_in_website": "Yes",
+    "date_posted": "2026-11-14",
+    "review_id": "AbFvOqn4qfstUne5pRTvdvuvSTCx4HCnW8nj8EpTulGoTNfLr_uZRXNkBf3I-NRs5adoAKCZVC1Y",
+    "Stars": 5,
+    "response": "Dear Sangeetha, We are absolutely delighted to hear about your wonderful HydraFacial experience with Lalitha at Naturals Nagavara! It warms our hearts to know her dedication to client satisfaction shone through, reflecting our commitment to professional skin care. Team Naturals Nagavara (Looking forward to your next visit!)",
+    "response_date": "2026-11-14"
+  },
+  {
+    "store_id": "N43",
+    "store_name": "Hennur",
+    "stars": "5",
+    "customer_name": "anisha nadar",
+    "review_comments": "Thank you for your comfort and excellent service",
+    "show_it_in_website": "Yes",
+    "date_posted": "2026-11-14",
+    "review_id": "AbFvOqlQ2IJNNCbwEOM5AD-CLaJUVhci_XAb9KFU14tkqZUt1geQFze7preeOE5kH1tXSM_IzLCylA",
+    "Stars": 5,
+    "response": "Dear Anisha, It brings us immense joy to know you experienced our dedication to comfort and excellent service here at Naturals Hennur. We are committed to ensuring every visit feels like a luxurious escape at the best unisex salon in Hennur. The Creative Hands at Naturals Hennur",
+    "response_date": "2026-11-14"
+  },
+  {
+    "store_id": "N43",
+    "store_name": "Hennur",
+    "stars": "4",
+    "customer_name": "Uttej Divakar",
+    "review_comments": "",
+    "show_it_in_website": "Yes",
+    "date_posted": "2026-11-14",
+    "review_id": "AbFvOqmViCje4G3dn70xOv-lbSA_Bn02QsiTFTRu3yAqmxzsMkwGO5BUy2ThQLEawbrz-Q5g0vFoqw",
+    "Stars": 4,
+    "response": "Dear Uttej, Thank you for your 4-star rating; we are delighted to know you had a positive experience at Naturals Hennur. We always strive to be the best unisex salon in Hennur and look forward to welcoming you back soon. Your Everyday Beauty Partners, Naturals Hennur",
+    "response_date": "2026-11-14"
+  },
+  {
     "store_id": "N36",
     "store_name": "Ayyappa Nagar",
     "stars": "1",
