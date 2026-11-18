@@ -1,5 +1,44 @@
 [
   {
+    "store_id": "N45",
+    "store_name": "Nagavara",
+    "stars": "5",
+    "customer_name": "Sakshi Shashank",
+    "review_comments": "Had a good experience with Keerthi!",
+    "show_it_in_website": "Yes",
+    "date_posted": "2026-11-17",
+    "review_id": "AbFvOqmdIpYJcMUIaiaIQfWfgH0qKKU-UWP4Sf2NhuZsXKn8hOyKG5VLyT8_yRfFAaQpPoe2NQRB",
+    "Stars": 5,
+    "response": "Dear Sakshi, We are absolutely delighted to hear you had such a wonderful experience with Keerthi! Our entire team at Naturals Nagavara strives to be the best unisex salon in Nagavara, and it’s always a pleasure to know we've succeeded. With love and style, Team Naturals Nagavara",
+    "response_date": "2026-11-17"
+  },
+  {
+    "store_id": "N43",
+    "store_name": "Hennur",
+    "stars": "5",
+    "customer_name": "Khatija Kubra",
+    "review_comments": "Pramila, did great service loved it",
+    "show_it_in_website": "Yes",
+    "date_posted": "2026-11-17",
+    "review_id": "AbFvOqmiYst-reh8vYrBtFT4303gdvVcdR0ftQ2hwlBOe3qZdTBu8pGaNcwqsR7gtNHrmvkPIEE0KA",
+    "Stars": 5,
+    "response": "Dear Khatija, We are absolutely delighted to hear that Pramila provided you with such wonderful service! Our team at Naturals Hennur always strives to offer the best unisex salon experience in Hennur, and we are thrilled you loved it. Your Everyday Beauty Partners, Naturals Hennur",
+    "response_date": "2026-11-17"
+  },
+  {
+    "store_id": "N43",
+    "store_name": "Hennur",
+    "stars": "5",
+    "customer_name": "Ramanathan V",
+    "review_comments": "Mrs. Geetha has done a wonderful facial.",
+    "show_it_in_website": "Yes",
+    "date_posted": "2026-11-17",
+    "review_id": "AbFvOqlvbZjrdVWFyn4FsvVdQ6AAmgG4YO5xruSBQh8eIrB-iiTKVuwkuDMGt3kgEe2jjbK5_pSMdw",
+    "Stars": 5,
+    "response": "Dear Ramanathan, We are absolutely delighted to hear that Mrs. Geetha provided you with such a wonderful facial experience, reflecting our dedication to professional skin care. It was our pleasure to ensure your visit was nothing short of 5-star perfection. The Self-Care Crew at Naturals Hennur",
+    "response_date": "2026-11-17"
+  },
+  {
     "store_id": "N05",
     "store_name": "Frazer Town",
     "stars": "5",
