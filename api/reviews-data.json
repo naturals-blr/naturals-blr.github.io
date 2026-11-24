@@ -3,6 +3,71 @@
     "store_id": "N45",
     "store_name": "Nagavara",
     "stars": "5",
+    "customer_name": "Neha Jagadish",
+    "review_comments": "Great service provided by keerthi",
+    "show_it_in_website": "Yes",
+    "date_posted": "2026-11-23",
+    "review_id": "AbFvOqlMuEmgzxrHy_EzlGbn-EHIRzG8rPLB7HBuKBzrfWwc4Y77RfkPibeJAk9GKXbni86We7zEWg",
+    "Stars": 5,
+    "response": "Dear Neha, We are absolutely delighted to hear that Keerthi provided you with such great service! It's always our pleasure to ensure every visit is a five-star experience at Naturals Nagavara, truly making us the best unisex salon in Nagavara. The Relaxation Experts at Naturals Nagavara",
+    "response_date": "2026-11-23"
+  },
+  {
+    "store_id": "N05",
+    "store_name": "Frazer Town",
+    "stars": "5",
+    "customer_name": "jasvant balachander",
+    "review_comments": "The staff here are Very nice and polite and also very experienced",
+    "show_it_in_website": "Yes",
+    "date_posted": "2026-11-23",
+    "review_id": "AbFvOqnbJIu0cSEz-pXfJbnCh3YRUpzvtcsSVLSGbuWC2JZP3nz1u-Q6MeegVmaM1DVrsFMJO3dbpQ",
+    "Stars": 5,
+    "response": "Dear Jasvant, We are absolutely delighted to hear that our team at Naturals Frazer Town provided you with such a wonderful experience, embodying the polite and experienced service we pride ourselves on as the best unisex salon in Frazer Town. It's truly rewarding to know our dedication to five-star excellence shines through. The Relaxation Experts at Naturals Frazer Town",
+    "response_date": "2026-11-23"
+  },
+  {
+    "store_id": "N05",
+    "store_name": "Frazer Town",
+    "stars": "5",
+    "customer_name": "Surya Narayana",
+    "review_comments": "Good experience. Especially Anas who did my haircut was very accommodating and good experience overall",
+    "show_it_in_website": "Yes",
+    "date_posted": "2026-11-23",
+    "review_id": "AbFvOqlnF1ydCj4eCIdPx-BNV2laKUvGnEOdDh2vYZeqPKmg5I5L5yo8m1gWPGZ-6UX-FHqtjzEKHg",
+    "Stars": 5,
+    "response": "Dear Surya, We are absolutely delighted to hear you had such a good experience, and it brings us immense joy that Anas provided you with expert hair styling that was so accommodating. We strive for perfection in every detail, ensuring each visit to our premium hair salon in Frazer Town is truly five-star. Naturals Frazer Town Guest Relations Team",
+    "response_date": "2026-11-23"
+  },
+  {
+    "store_id": "N78",
+    "store_name": "JP Nagar 5th Phase",
+    "stars": "5",
+    "customer_name": "Fardeen Khan",
+    "review_comments": "Nice Service",
+    "show_it_in_website": "Yes",
+    "date_posted": "2026-11-23",
+    "review_id": "AbFvOqnilsPC1ta1EsIaOQB5t1d6sOR5qgstqIBoKnFBy8FrAtEYfcC6MmcssJSu60JcgaJq6GW_gw",
+    "Stars": 5,
+    "response": "Dear Fardeen, We are absolutely delighted to hear you had a pleasant experience with us at Naturals JP Nagar 5th Phase. Our team strives to provide the best unisex salon in JP Nagar 5th Phase, and your kind words truly affirm our dedication to 5-star service. The Elite Style Team, Naturals JP Nagar 5th Phase",
+    "response_date": "2026-11-23"
+  },
+  {
+    "store_id": "N78",
+    "store_name": "JP Nagar 5th Phase",
+    "stars": "5",
+    "customer_name": "sathvik nayak",
+    "review_comments": "Shout out to Prashant , very patient and skilled person.",
+    "show_it_in_website": "Yes",
+    "date_posted": "2026-11-23",
+    "review_id": "AbFvOqkfS7HJz8DVEzDWQzf_DbYT5gyAbq9FCjalGdYtto4LtnKOsRBe9brZGxwrUTFlBzGTpCjnQQ",
+    "Stars": 5,
+    "response": "Dear Sathvik, It warms our hearts to hear such kind words about Prashanth's patience and skill; our team at Naturals JP Nagar 5th Phase strives to provide the very best experience for every client. We are delighted you enjoyed your visit to our top-rated salon near JP Nagar 5th Phase. The Wellness & Beauty Team, Naturals JP Nagar 5th Phase",
+    "response_date": "2026-11-23"
+  },
+  {
+    "store_id": "N45",
+    "store_name": "Nagavara",
+    "stars": "5",
     "customer_name": "Charitha Sree",
     "review_comments": "Keerthi has done a wonderful job i had a great experience and the haircut was fab ❤️❤️",
     "show_it_in_website": "Yes",
@@ -35,8 +100,8 @@
     "date_posted": "2026-11-22",
     "review_id": "AbFvOqnp-g7gyF0JNcSI6HUG-ONdpcxB0SXkK94Jy3SUMSCkCq13uQHxUvkiMd6JPZGcKQZ0D67rqQ",
     "Stars": 5,
-    "response": "",
-    "response_date": ""
+    "response": "Dear Vaishnavi, We are absolutely delighted to hear that Keerthi provided you with such a calming and great experience, truly reflecting our commitment to being the best unisex salon in Nagavara. Our team is dedicated to ensuring every visit is nothing short of five-star excellence. The Wellness & Beauty Team, Naturals Nagavara",
+    "response_date": "2026-11-23"
   },
   {
     "store_id": "N45",
@@ -48,8 +113,8 @@
     "date_posted": "2026-11-22",
     "review_id": "AbFvOqkHi0Q2BugBmkccf8toZLHFOrTtVtRRV1qlMcbzcQf5PUR1Ps_VcOL978GpxUD2h0xAElc",
     "Stars": 5,
-    "response": "",
-    "response_date": ""
+    "response": "Dear S., We are absolutely delighted to receive your 5-star rating! It is our pleasure to provide a truly exceptional experience at our top-rated salon near Nagavara, and we eagerly await your next visit. The Elite Style Team, Naturals Nagavara",
+    "response_date": "2026-11-23"
   },
   {
     "store_id": "N36",
@@ -18029,6 +18094,19 @@
     "Stars": 5,
     "response": "Really appreciate you taking the time to share this. Your support means a lot to us. We look forward to welcoming you again. Thank you!",
     "response_date": "2026-04-08"
+  },
+  {
+    "store_id": "N78",
+    "store_name": "JP Nagar 5th Phase",
+    "stars": "5",
+    "customer_name": "Moin Salmani",
+    "review_comments": "I like the professional experience and style of doing fade and style of hair. Mohd Moin",
+    "show_it_in_website": "Yes",
+    "date_posted": "2026-03-26",
+    "review_id": "AbFvOqnliLDvDjDq4cX4DjsXzriNmNpCXz3l-3rPclcuNIfkErk7n-MnCNvbglTfH6bBNhRfxPqjDQ",
+    "Stars": 5,
+    "response": "Hello Moin! Your feedback made our day. Our team will be thrilled to hear this. We’ll be happy to have you back soon. Thank you!  Warm wishes, Naturals JP Nagar 5th Phase",
+    "response_date": "2026-03-27"
   },
   {
     "store_id": "N43",
