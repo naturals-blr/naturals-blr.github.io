@@ -87,8 +87,8 @@
     "date_posted": "2026-11-26",
     "review_id": "AbFvOqlzkoMh9PSB4Pi93yd4oFf_kU7EsQdvscVJe8Cb3ButXbTbq88VYqS3x96KWKOPwHnQMthBOQ",
     "Stars": 5,
-    "response": "",
-    "response_date": ""
+    "response": "Dear Vanshika, We are absolutely delighted to hear you love your haircut and that Keerthi's professional styling left such a wonderful impression! Our team of expert hair styling professionals at Naturals Nagavara is dedicated to crafting perfection for every guest. The Creative Hands at Naturals Nagavara",
+    "response_date": "2026-11-27"
   },
   {
     "store_id": "N45",
@@ -100,8 +100,8 @@
     "date_posted": "2026-11-26",
     "review_id": "AbFvOqkdrW5ijNJesGDYjTDmFHdzYyixYLdbDR3g55vJHn-mdpYNv1h2mL5M-15vsSqG198knZm0yA",
     "Stars": 5,
-    "response": "",
-    "response_date": ""
+    "response": "Dear Uday, Thank you for your 5-star rating! We are delighted to know you had a wonderful experience at Naturals Nagavara, and we always strive to be the best unisex salon in Nagavara. We look forward to welcoming you back soon. Your Everyday Beauty Partners, Naturals Nagavara",
+    "response_date": "2026-11-27"
   },
   {
     "store_id": "N78",
@@ -507,19 +507,6 @@
     "response_date": "2026-11-22"
   },
   {
-    "store_id": "N05",
-    "store_name": "Frazer Town",
-    "stars": "5",
-    "customer_name": "Sanjuu Sanjana",
-    "review_comments": "Poornima did a amazing services and she is friendly to the client",
-    "show_it_in_website": "Yes",
-    "date_posted": "2026-11-22",
-    "review_id": "AbFvOqmBbb4BgRqhmuagVO-nG2QVwgq-fMOBDCie10IIfT0kV56DuDtIvhGsQlpIDN0aM5NSbvs2",
-    "Stars": 5,
-    "response": "Dear Sanjuu, We are absolutely delighted to hear that Poornima provided you with such amazing service and created a friendly atmosphere during your visit to Naturals Frazer Town. Our team, renowned as the best unisex salon in Frazer Town, always strives to deliver a truly 5-star experience. The Stylists & Care Team at Naturals Frazer Town",
-    "response_date": "2026-11-22"
-  },
-  {
     "store_id": "N45",
     "store_name": "Nagavara",
     "stars": "5",
@@ -559,6 +546,19 @@
     "response_date": "2026-11-22"
   },
   {
+    "store_id": "N05",
+    "store_name": "Frazer Town",
+    "stars": "5",
+    "customer_name": "Sanjuu Sanjana",
+    "review_comments": "Poornima did a amazing services and she is friendly to the client",
+    "show_it_in_website": "Yes",
+    "date_posted": "2026-11-22",
+    "review_id": "AbFvOqmBbb4BgRqhmuagVO-nG2QVwgq-fMOBDCie10IIfT0kV56DuDtIvhGsQlpIDN0aM5NSbvs2",
+    "Stars": 5,
+    "response": "Dear Sanjuu, We are absolutely delighted to hear that Poornima provided you with such amazing service and created a friendly atmosphere during your visit to Naturals Frazer Town. Our team, renowned as the best unisex salon in Frazer Town, always strives to deliver a truly 5-star experience. The Stylists & Care Team at Naturals Frazer Town",
+    "response_date": "2026-11-22"
+  },
+  {
     "store_id": "N45",
     "store_name": "Nagavara",
     "stars": "5",
@@ -585,19 +585,6 @@
     "response_date": "2026-11-21"
   },
   {
-    "store_id": "N05",
-    "store_name": "Frazer Town",
-    "stars": "5",
-    "customer_name": "Ria Ranjit",
-    "review_comments": "Excellent and professional service by stylist Subash. Great experience",
-    "show_it_in_website": "Yes",
-    "date_posted": "2026-11-21",
-    "review_id": "AbFvOqlwvGaeAL6AW-DYNhiN30eBcwBWS8370MrQlisdhSYSnvPi1JzgOoZGlKVEQWFi76lzM7fEew",
-    "Stars": 5,
-    "response": "Dear Ria, It brings us immense joy to hear you had such a great experience with our stylist Subash at Naturals Frazer Town. We are dedicated to providing excellent and professional service, making us a top-rated salon near Frazer Town. The Wellness & Beauty Team, Naturals Frazer Town",
-    "response_date": "2026-11-21"
-  },
-  {
     "store_id": "N45",
     "store_name": "Nagavara",
     "stars": "5",
@@ -608,6 +595,19 @@
     "review_id": "AbFvOqk8XBvtHodV3mjYDTotPo6Er4yiTQ84qCu29-A2Y7ZWcSAJ8VNklUTQKd8SoLPnObmz1ObGZA",
     "Stars": 5,
     "response": "Dear Fathima, We are absolutely delighted to hear you had such an amazing experience with Lalitha, who truly is one of our expert hair styling professionals, for your butterfly haircut, curtain bangs, and blow dry at Naturals Nagavara. It brings us immense joy to know you left feeling beautiful and would recommend us! The Stylists & Care Team at Naturals Nagavara",
+    "response_date": "2026-11-21"
+  },
+  {
+    "store_id": "N05",
+    "store_name": "Frazer Town",
+    "stars": "5",
+    "customer_name": "Ria Ranjit",
+    "review_comments": "Excellent and professional service by stylist Subash. Great experience",
+    "show_it_in_website": "Yes",
+    "date_posted": "2026-11-21",
+    "review_id": "AbFvOqlwvGaeAL6AW-DYNhiN30eBcwBWS8370MrQlisdhSYSnvPi1JzgOoZGlKVEQWFi76lzM7fEew",
+    "Stars": 5,
+    "response": "Dear Ria, It brings us immense joy to hear you had such a great experience with our stylist Subash at Naturals Frazer Town. We are dedicated to providing excellent and professional service, making us a top-rated salon near Frazer Town. The Wellness & Beauty Team, Naturals Frazer Town",
     "response_date": "2026-11-21"
   },
   {
